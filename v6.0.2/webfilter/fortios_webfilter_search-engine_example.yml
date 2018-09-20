@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure web filter search engines.
+    fortios_webfilter_search-engine:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      webfilter_search-engine:
+        state: "present"
+        charset: "utf-8"
+        hostname: "myhostname"
+        name: "default_name_5"
+        query: "<your_own_value>"
+        safesearch: "disable"
+        safesearch-str: "<your_own_value>"
+        url: "http://myurl.com"

@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 access lists.
+    fortios_router_access-list6:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_access-list6:
+        state: "present"
+        comments: "<your_own_value>"
+        name: "default_name_4"
+        rule:
+         -
+            action: "permit"
+            exact-match: "enable"
+            flags: "8"
+            id:  "9"
+            prefix6: "<your_own_value>"

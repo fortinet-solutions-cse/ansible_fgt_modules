@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FSSO groups.
+    fortios_user_adgrp:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_adgrp:
+        state: "present"
+        name: "default_name_3"
+        server-name: "<your_own_value> (source: user.fsso.name)"

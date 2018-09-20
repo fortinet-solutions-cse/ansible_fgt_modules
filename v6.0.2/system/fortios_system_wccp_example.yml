@@ -1,0 +1,37 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure WCCP.
+    fortios_system_wccp:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_wccp:
+        state: "present"
+        assignment-bucket-format: "wccp-v2"
+        assignment-dstaddr-mask: "<your_own_value>"
+        assignment-method: "HASH"
+        assignment-srcaddr-mask: "<your_own_value>"
+        assignment-weight: "7"
+        authentication: "enable"
+        cache-engine-method: "GRE"
+        cache-id: "<your_own_value>"
+        forward-method: "GRE"
+        group-address: "<your_own_value>"
+        password: "<your_own_value>"
+        ports: "<your_own_value>"
+        ports-defined: "source"
+        primary-hash: "src-ip"
+        priority: "17"
+        protocol: "18"
+        return-method: "GRE"
+        router-id: "<your_own_value>"
+        router-list: "<your_own_value>"
+        server-list: "<your_own_value>"
+        service-id: "<your_own_value>"
+        service-type: "auto"

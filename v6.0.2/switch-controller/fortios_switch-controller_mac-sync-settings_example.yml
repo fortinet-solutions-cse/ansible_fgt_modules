@@ -1,0 +1,16 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure global MAC synchronization settings.
+    fortios_switch-controller_mac-sync-settings:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      switch-controller_mac-sync-settings:
+        state: "present"
+        mac-sync-interval: "3"

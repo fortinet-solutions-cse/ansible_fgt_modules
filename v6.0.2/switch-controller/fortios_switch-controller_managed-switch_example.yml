@@ -1,0 +1,156 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch devices that are managed by this FortiGate.
+    fortios_switch-controller_managed-switch:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      switch-controller_managed-switch:
+        state: "present"
+        802-1X-settings:
+            link-down-auth: "set-unauth"
+            local-override: "enable"
+            max-reauth-attempt: "6"
+            reauth-period: "7"
+        connected: "8"
+        custom-command:
+         -
+            command-entry: "<your_own_value>"
+            command-name: "<your_own_value> (source: switch-controller.custom-command.command-name)"
+        delayed-restart-trigger: "12"
+        description: "<your_own_value>"
+        directly-connected: "14"
+        dynamic-capability: "15"
+        dynamically-discovered: "16"
+        fsw-wan1-admin: "discovered"
+        fsw-wan1-peer: "<your_own_value>"
+        fsw-wan2-admin: "discovered"
+        fsw-wan2-peer: "<your_own_value>"
+        igmp-snooping:
+            aging-time: "22"
+            flood-unknown-multicast: "enable"
+            local-override: "enable"
+        max-allowed-trunk-members: "25"
+        mirror:
+         -
+            dst: "<your_own_value>"
+            name: "default_name_28"
+            src-egress:
+             -
+                name: "default_name_30"
+            src-ingress:
+             -
+                name: "default_name_32"
+            status: "active"
+            switching-packet: "enable"
+        name: "default_name_35"
+        owner-vdom: "<your_own_value>"
+        poe-pre-standard-detection: "enable"
+        ports:
+         -
+            allowed-vlans:
+             -
+                vlan-name: "<your_own_value> (source: system.interface.name)"
+            allowed-vlans-all: "enable"
+            arp-inspection-trust: "untrusted"
+            bundle: "enable"
+            description: "<your_own_value>"
+            dhcp-snoop-option82-trust: "enable"
+            dhcp-snooping: "untrusted"
+            discard-mode: "none"
+            edge-port: "enable"
+            export-tags:
+             -
+                tag-name: "<your_own_value> (source: switch-controller.switch-interface-tag.name)"
+            export-to: "<your_own_value> (source: system.vdom.name)"
+            export-to-pool: "<your_own_value> (source: switch-controller.virtual-port-pool.name)"
+            export-to-pool_flag: "53"
+            fgt-peer-device-name: "<your_own_value>"
+            fgt-peer-port-name: "<your_own_value>"
+            fiber-port: "56"
+            flags: "57"
+            fortilink-port: "58"
+            igmp-snooping: "enable"
+            igmps-flood-reports: "enable"
+            igmps-flood-traffic: "enable"
+            isl-local-trunk-name: "<your_own_value>"
+            isl-peer-device-name: "<your_own_value>"
+            isl-peer-port-name: "<your_own_value>"
+            lacp-speed: "slow"
+            learning-limit: "66"
+            lldp-profile: "<your_own_value> (source: switch-controller.lldp-profile.name)"
+            lldp-status: "disable"
+            loop-guard: "enabled"
+            loop-guard-timeout: "70"
+            max-bundle: "71"
+            mclag: "enable"
+            member-withdrawal-behavior: "forward"
+            members:
+             -
+                member-name: "<your_own_value>"
+            min-bundle: "76"
+            mode: "static"
+            poe-capable: "78"
+            poe-pre-standard-detection: "enable"
+            poe-status: "enable"
+            port-name: "<your_own_value>"
+            port-number: "82"
+            port-owner: "<your_own_value>"
+            port-prefix-type: "84"
+            port-security-policy: "<your_own_value> (source: switch-controller.security-policy.802-1X.name switch-controller.security-policy.captive-portal.name)"
+            port-selection-criteria: "src-mac"
+            qos-policy: "<your_own_value> (source: switch-controller.qos.qos-policy.name)"
+            sample-direction: "tx"
+            sflow-counter-interval: "89"
+            sflow-sample-rate: "90"
+            sflow-sampler: "enabled"
+            speed: "10half"
+            speed-mask: "93"
+            stacking-port: "94"
+            status: "up"
+            stp-bpdu-guard: "enabled"
+            stp-bpdu-guard-timeout: "97"
+            stp-root-guard: "enabled"
+            stp-state: "enabled"
+            switch-id: "<your_own_value>"
+            type: "physical"
+            untagged-vlans:
+             -
+                vlan-name: "<your_own_value> (source: system.interface.name)"
+            virtual-port: "104"
+            vlan: "<your_own_value> (source: system.interface.name)"
+        pre-provisioned: "106"
+        staged-image-version: "<your_own_value>"
+        storm-control:
+            broadcast: "enable"
+            local-override: "enable"
+            rate: "111"
+            unknown-multicast: "enable"
+            unknown-unicast: "enable"
+        stp-settings:
+            forward-time: "115"
+            hello-time: "116"
+            local-override: "enable"
+            max-age: "118"
+            max-hops: "119"
+            name: "default_name_120"
+            pending-timer: "121"
+            revision: "122"
+            status: "enable"
+        switch-device-tag: "<your_own_value>"
+        switch-id: "<your_own_value>"
+        switch-log:
+            local-override: "enable"
+            severity: "emergency"
+            status: "enable"
+        switch-profile: "<your_own_value> (source: switch-controller.switch-profile.name)"
+        switch-stp-settings:
+            status: "enable"
+        type: "virtual"
+        version: "134"

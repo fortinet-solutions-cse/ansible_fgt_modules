@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IP to MAC binding settings.
+    fortios_firewall.ipmacbinding_setting:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      firewall.ipmacbinding_setting:
+        state: "present"
+        bindthroughfw: "enable"
+        bindtofw: "enable"
+        undefinedhost: "allow"

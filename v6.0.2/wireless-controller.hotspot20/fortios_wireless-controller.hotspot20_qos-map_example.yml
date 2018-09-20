@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure QoS map set.
+    fortios_wireless-controller.hotspot20_qos-map:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      wireless-controller.hotspot20_qos-map:
+        state: "present"
+        dscp-except:
+         -
+            dscp: "4"
+            index: "5"
+            up: "6"
+        dscp-range:
+         -
+            high: "8"
+            index: "9"
+            low: "10"
+            up: "11"
+        name: "default_name_12"

@@ -1,0 +1,37 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure local users.
+    fortios_user_local:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_local:
+        state: "present"
+        auth-concurrent-override: "enable"
+        auth-concurrent-value: "4"
+        authtimeout: "5"
+        email-to: "<your_own_value>"
+        fortitoken: "<your_own_value> (source: user.fortitoken.serial-number)"
+        id:  "8"
+        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        name: "default_name_10"
+        passwd: "<your_own_value>"
+        passwd-policy: "<your_own_value> (source: user.password-policy.name)"
+        passwd-time: "<your_own_value>"
+        ppk-identity: "<your_own_value>"
+        ppk-secret: "<your_own_value>"
+        radius-server: "<your_own_value> (source: user.radius.name)"
+        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        sms-phone: "<your_own_value>"
+        sms-server: "fortiguard"
+        status: "enable"
+        tacacs+-server: "<your_own_value> (source: user.tacacs+.name)"
+        two-factor: "disable"
+        type: "password"
+        workstation: "<your_own_value>"

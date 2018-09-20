@@ -1,0 +1,175 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Web application firewall configuration.
+    fortios_waf_profile:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      waf_profile:
+        state: "present"
+        address-list:
+            blocked-address:
+             -
+                name: "default_name_5 (source: firewall.address.name firewall.addrgrp.name)"
+            blocked-log: "enable"
+            severity: "high"
+            status: "enable"
+            trusted-address:
+             -
+                name: "default_name_10 (source: firewall.address.name firewall.addrgrp.name)"
+        comment: "Comment."
+        constraint:
+            content-length:
+                action: "allow"
+                length: "15"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            exception:
+             -
+                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                content-length: "enable"
+                header-length: "enable"
+                hostname: "enable"
+                id:  "24"
+                line-length: "enable"
+                malformed: "enable"
+                max-cookie: "enable"
+                max-header-line: "enable"
+                max-range-segment: "enable"
+                max-url-param: "enable"
+                method: "enable"
+                param-length: "enable"
+                pattern: "<your_own_value>"
+                regex: "enable"
+                url-param-length: "enable"
+                version: "enable"
+            header-length:
+                action: "allow"
+                length: "39"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            hostname:
+                action: "allow"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            line-length:
+                action: "allow"
+                length: "50"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            malformed:
+                action: "allow"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            max-cookie:
+                action: "allow"
+                log: "enable"
+                max-cookie: "62"
+                severity: "high"
+                status: "enable"
+            max-header-line:
+                action: "allow"
+                log: "enable"
+                max-header-line: "68"
+                severity: "high"
+                status: "enable"
+            max-range-segment:
+                action: "allow"
+                log: "enable"
+                max-range-segment: "74"
+                severity: "high"
+                status: "enable"
+            max-url-param:
+                action: "allow"
+                log: "enable"
+                max-url-param: "80"
+                severity: "high"
+                status: "enable"
+            method:
+                action: "allow"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            param-length:
+                action: "allow"
+                length: "90"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            url-param-length:
+                action: "allow"
+                length: "96"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+            version:
+                action: "allow"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+        extended-log: "enable"
+        external: "disable"
+        method:
+            default-allowed-methods: "get"
+            log: "enable"
+            method-policy:
+             -
+                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                allowed-methods: "get"
+                id:  "113"
+                pattern: "<your_own_value>"
+                regex: "enable"
+            severity: "high"
+            status: "enable"
+        name: "default_name_118"
+        signature:
+            credit-card-detection-threshold: "120"
+            custom-signature:
+             -
+                action: "allow"
+                case-sensitivity: "disable"
+                direction: "request"
+                log: "enable"
+                name: "default_name_126"
+                pattern: "<your_own_value>"
+                severity: "high"
+                status: "enable"
+                target: "arg"
+            disabled-signature:
+             -
+                id:  "132 (source: waf.signature.id)"
+            disabled-sub-class:
+             -
+                id:  "134 (source: waf.sub-class.id)"
+            main-class:
+             -
+                action: "allow"
+                id:  "137 (source: waf.main-class.id)"
+                log: "enable"
+                severity: "high"
+                status: "enable"
+        url-access:
+         -
+            access-pattern:
+             -
+                id:  "143"
+                negate: "enable"
+                pattern: "<your_own_value>"
+                regex: "enable"
+                srcaddr: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+            action: "bypass"
+            address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+            id:  "150"
+            log: "enable"
+            severity: "high"

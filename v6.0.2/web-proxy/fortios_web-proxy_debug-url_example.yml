@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure debug URL addresses.
+    fortios_web-proxy_debug-url:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      web-proxy_debug-url:
+        state: "present"
+        exact: "enable"
+        name: "default_name_4"
+        status: "enable"
+        url-pattern: "<your_own_value>"

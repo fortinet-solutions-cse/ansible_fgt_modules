@@ -1,0 +1,88 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Report layout configuration.
+    fortios_report_layout:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      report_layout:
+        state: "present"
+        body-item:
+         -
+            chart: "<your_own_value>"
+            chart-options: "include-no-data"
+            column: "6"
+            content: "<your_own_value>"
+            description: "<your_own_value>"
+            drill-down-items: "<your_own_value>"
+            drill-down-types: "<your_own_value>"
+            hide: "enable"
+            id:  "12"
+            img-src: "<your_own_value>"
+            list:
+             -
+                content: "<your_own_value>"
+                id:  "16"
+            list-component: "bullet"
+            misc-component: "hline"
+            parameters:
+             -
+                id:  "20"
+                name: "default_name_21"
+                value: "<your_own_value>"
+            style: "<your_own_value>"
+            table-caption-style: "<your_own_value>"
+            table-column-widths: "<your_own_value>"
+            table-even-row-style: "<your_own_value>"
+            table-head-style: "<your_own_value>"
+            table-odd-row-style: "<your_own_value>"
+            text-component: "text"
+            title: "<your_own_value>"
+            top-n: "31"
+            type: "text"
+        cutoff-option: "run-time"
+        cutoff-time: "<your_own_value>"
+        day: "sunday"
+        description: "<your_own_value>"
+        email-recipients: "<your_own_value>"
+        email-send: "enable"
+        format: "pdf"
+        max-pdf-report: "40"
+        name: "default_name_41"
+        options: "include-table-of-content"
+        page:
+            column-break-before: "heading1"
+            footer:
+                footer-item:
+                 -
+                    content: "<your_own_value>"
+                    description: "<your_own_value>"
+                    id:  "49"
+                    img-src: "<your_own_value>"
+                    style: "<your_own_value>"
+                    type: "text"
+                style: "<your_own_value>"
+            header:
+                header-item:
+                 -
+                    content: "<your_own_value>"
+                    description: "<your_own_value>"
+                    id:  "58"
+                    img-src: "<your_own_value>"
+                    style: "<your_own_value>"
+                    type: "text"
+                style: "<your_own_value>"
+            options: "header-on-first-page"
+            page-break-before: "heading1"
+            paper: "a4"
+        schedule-type: "demand"
+        style-theme: "<your_own_value>"
+        subtitle: "<your_own_value>"
+        time: "<your_own_value>"
+        title: "<your_own_value>"

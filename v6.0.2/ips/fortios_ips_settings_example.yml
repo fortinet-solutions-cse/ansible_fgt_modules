@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS VDOM parameter.
+    fortios_ips_settings:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      ips_settings:
+        state: "present"
+        ips-packet-quota: "3"
+        packet-log-history: "4"
+        packet-log-memory: "5"
+        packet-log-post-attack: "6"

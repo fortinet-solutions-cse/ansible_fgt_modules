@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure domain controller entries.
+    fortios_user_domain-controller:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_domain-controller:
+        state: "present"
+        domain-name: "<your_own_value>"
+        ip-address: "<your_own_value>"
+        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        name: "default_name_6"
+        port: "7"

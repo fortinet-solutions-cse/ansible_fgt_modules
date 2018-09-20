@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to send sFlow datagrams to an sFlow collector.
+    fortios_system_vdom-sflow:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_vdom-sflow:
+        state: "present"
+        collector-ip: "<your_own_value>"
+        collector-port: "4"
+        source-ip: "84.230.14.43"
+        vdom-sflow: "enable"

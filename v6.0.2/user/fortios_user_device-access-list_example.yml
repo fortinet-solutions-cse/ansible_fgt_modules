@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure device access control lists.
+    fortios_user_device-access-list:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_device-access-list:
+        state: "present"
+        default-action: "accept"
+        device-list:
+         -
+            action: "accept"
+            device: "<your_own_value> (source: user.device.alias user.device-group.name user.device-category.name)"
+            id:  "7"
+        name: "default_name_8"

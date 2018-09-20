@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure key-chain.
+    fortios_router_key-chain:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_key-chain:
+        state: "present"
+        key:
+         -
+            accept-lifetime: "<your_own_value>"
+            id:  "5"
+            key-string: "<your_own_value>"
+            send-lifetime: "<your_own_value>"
+        name: "default_name_8"

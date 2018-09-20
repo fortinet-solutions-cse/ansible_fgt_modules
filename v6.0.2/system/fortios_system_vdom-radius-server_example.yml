@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure a RADIUS server to use as a RADIUS Single Sign On (RSSO) server for this VDOM.
+    fortios_system_vdom-radius-server:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_vdom-radius-server:
+        state: "present"
+        name: "default_name_3 (source: system.vdom.name)"
+        radius-server-vdom: "<your_own_value> (source: system.vdom.name)"
+        status: "enable"

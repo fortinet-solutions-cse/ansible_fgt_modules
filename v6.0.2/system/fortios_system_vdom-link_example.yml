@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure VDOM links.
+    fortios_system_vdom-link:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_vdom-link:
+        state: "present"
+        name: "default_name_3"
+        type: "ppp"
+        vcluster: "vcluster1"

@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure operator friendly name.
+    fortios_wireless-controller.hotspot20_h2qp-operator-name:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      wireless-controller.hotspot20_h2qp-operator-name:
+        state: "present"
+        name: "default_name_3"
+        value-list:
+         -
+            index: "5"
+            lang: "<your_own_value>"
+            value: "<your_own_value>"

@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiGuard Web Filter local categories.
+    fortios_webfilter_ftgd-local-cat:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      webfilter_ftgd-local-cat:
+        state: "present"
+        desc: "<your_own_value>"
+        id:  "4"
+        status: "enable"

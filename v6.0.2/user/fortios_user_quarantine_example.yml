@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure quarantine support.
+    fortios_user_quarantine:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_quarantine:
+        state: "present"
+        quarantine: "enable"
+        targets:
+         -
+            description: "<your_own_value>"
+            entry: "<your_own_value>"
+            macs:
+             -
+                description: "<your_own_value>"
+                entry-id: "9"
+                mac: "<your_own_value>"
+                parent: "<your_own_value>"

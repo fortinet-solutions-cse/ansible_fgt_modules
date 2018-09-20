@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure per-IP traffic shaper.
+    fortios_firewall.shaper_per-ip-shaper:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      firewall.shaper_per-ip-shaper:
+        state: "present"
+        bandwidth-unit: "kbps"
+        diffserv-forward: "enable"
+        diffserv-reverse: "enable"
+        diffservcode-forward: "<your_own_value>"
+        diffservcode-rev: "<your_own_value>"
+        max-bandwidth: "8"
+        max-concurrent-session: "9"
+        name: "default_name_10"

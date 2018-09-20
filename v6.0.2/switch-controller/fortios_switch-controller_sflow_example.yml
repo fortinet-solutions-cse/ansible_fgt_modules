@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch sFlow.
+    fortios_switch-controller_sflow:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      switch-controller_sflow:
+        state: "present"
+        collector-ip: "<your_own_value>"
+        collector-port: "4"

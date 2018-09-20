@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure SMS server for sending SMS messages to support user authentication.
+    fortios_system_sms-server:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_sms-server:
+        state: "present"
+        mail-server: "<your_own_value>"
+        name: "default_name_4"

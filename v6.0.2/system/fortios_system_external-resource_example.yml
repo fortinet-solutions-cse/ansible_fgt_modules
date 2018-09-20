@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure external resource.
+    fortios_system_external-resource:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_external-resource:
+        state: "present"
+        category: "3"
+        comments: "<your_own_value>"
+        name: "default_name_5"
+        refresh-rate: "6"
+        resource: "<your_own_value>"
+        status: "enable"
+        type: "category"

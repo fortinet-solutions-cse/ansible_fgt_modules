@@ -1,0 +1,121 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure virtual IP for IPv4.
+    fortios_firewall_vip:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      firewall_vip:
+        state: "present"
+        arp-reply: "disable"
+        color: "4"
+        comment: "Comment."
+        dns-mapping-ttl: "6"
+        extaddr:
+         -
+            name: "default_name_8 (source: firewall.address.name firewall.addrgrp.name)"
+        extintf: "<your_own_value> (source: system.interface.name)"
+        extip: "<your_own_value>"
+        extport: "<your_own_value>"
+        gratuitous-arp-interval: "12"
+        http-cookie-age: "13"
+        http-cookie-domain: "<your_own_value>"
+        http-cookie-domain-from-host: "disable"
+        http-cookie-generation: "16"
+        http-cookie-path: "<your_own_value>"
+        http-cookie-share: "disable"
+        http-ip-header: "enable"
+        http-ip-header-name: "<your_own_value>"
+        http-multiplex: "enable"
+        https-cookie-secure: "disable"
+        id:  "23"
+        ldb-method: "static"
+        mapped-addr: "<your_own_value> (source: firewall.address.name)"
+        mappedip:
+         -
+            range: "<your_own_value>"
+        mappedport: "<your_own_value>"
+        max-embryonic-connections: "29"
+        monitor:
+         -
+            name: "default_name_31 (source: firewall.ldb-monitor.name)"
+        name: "default_name_32"
+        nat-source-vip: "disable"
+        outlook-web-access: "disable"
+        persistence: "none"
+        portforward: "disable"
+        portmapping-type: "1-to-1"
+        protocol: "tcp"
+        realservers:
+         -
+            client-ip: "<your_own_value>"
+            healthcheck: "disable"
+            holddown-interval: "42"
+            http-host: "myhostname"
+            id:  "44"
+            ip: "<your_own_value>"
+            max-connections: "46"
+            monitor: "<your_own_value> (source: firewall.ldb-monitor.name)"
+            port: "48"
+            status: "active"
+            weight: "50"
+        server-type: "http"
+        service:
+         -
+            name: "default_name_53 (source: firewall.service.custom.name firewall.service.group.name)"
+        src-filter:
+         -
+            range: "<your_own_value>"
+        srcintf-filter:
+         -
+            interface-name: "<your_own_value> (source: system.interface.name)"
+        ssl-algorithm: "high"
+        ssl-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+        ssl-cipher-suites:
+         -
+            cipher: "TLS-RSA-WITH-3DES-EDE-CBC-SHA"
+            priority: "62"
+            versions: "ssl-3.0"
+        ssl-client-fallback: "disable"
+        ssl-client-renegotiation: "allow"
+        ssl-client-session-state-max: "66"
+        ssl-client-session-state-timeout: "67"
+        ssl-client-session-state-type: "disable"
+        ssl-dh-bits: "768"
+        ssl-hpkp: "disable"
+        ssl-hpkp-age: "71"
+        ssl-hpkp-backup: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-include-subdomains: "disable"
+        ssl-hpkp-primary: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-report-uri: "<your_own_value>"
+        ssl-hsts: "disable"
+        ssl-hsts-age: "77"
+        ssl-hsts-include-subdomains: "disable"
+        ssl-http-location-conversion: "enable"
+        ssl-http-match-host: "enable"
+        ssl-max-version: "ssl-3.0"
+        ssl-min-version: "ssl-3.0"
+        ssl-mode: "half"
+        ssl-pfs: "require"
+        ssl-send-empty-frags: "enable"
+        ssl-server-algorithm: "high"
+        ssl-server-cipher-suites:
+         -
+            cipher: "TLS-RSA-WITH-3DES-EDE-CBC-SHA"
+            priority: "89"
+            versions: "ssl-3.0"
+        ssl-server-max-version: "ssl-3.0"
+        ssl-server-min-version: "ssl-3.0"
+        ssl-server-session-state-max: "93"
+        ssl-server-session-state-timeout: "94"
+        ssl-server-session-state-type: "disable"
+        type: "static-nat"
+        uuid: "<your_own_value>"
+        weblogic-server: "disable"
+        websphere-server: "disable"

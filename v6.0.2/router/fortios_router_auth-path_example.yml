@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure authentication based routing.
+    fortios_router_auth-path:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_auth-path:
+        state: "present"
+        device: "<your_own_value> (source: system.interface.name)"
+        gateway: "<your_own_value>"
+        name: "default_name_5"

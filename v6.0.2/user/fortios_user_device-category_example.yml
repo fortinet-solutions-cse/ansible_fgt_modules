@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure device categories.
+    fortios_user_device-category:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_device-category:
+        state: "present"
+        comment: "Comment."
+        desc: "<your_own_value>"
+        name: "default_name_5"

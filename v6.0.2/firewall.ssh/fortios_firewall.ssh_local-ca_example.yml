@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: SSH proxy local CA.
+    fortios_firewall.ssh_local-ca:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      firewall.ssh_local-ca:
+        state: "present"
+        name: "default_name_3"
+        password: "<your_own_value>"
+        private-key: "<your_own_value>"
+        public-key: "<your_own_value>"
+        source: "built-in"

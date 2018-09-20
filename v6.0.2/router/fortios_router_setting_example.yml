@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure router settings.
+    fortios_router_setting:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_setting:
+        state: "present"
+        hostname: "myhostname"
+        show-filter: "<your_own_value> (source: router.prefix-list.name)"

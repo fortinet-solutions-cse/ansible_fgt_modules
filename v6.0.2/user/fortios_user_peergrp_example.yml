@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure peer groups.
+    fortios_user_peergrp:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_peergrp:
+        state: "present"
+        member:
+         -
+            name: "default_name_4 (source: user.peer.name)"
+        name: "default_name_5"

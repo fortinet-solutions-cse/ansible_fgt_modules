@@ -1,0 +1,127 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiClient endpoint control profiles.
+    fortios_endpoint-control_profile:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      endpoint-control_profile:
+        state: "present"
+        description: "<your_own_value>"
+        device-groups:
+         -
+            name: "default_name_5 (source: user.device-group.name user.device-category.name)"
+        forticlient-android-settings:
+            disable-wf-when-protected: "enable"
+            forticlient-advanced-vpn: "enable"
+            forticlient-advanced-vpn-buffer: "<your_own_value>"
+            forticlient-vpn-provisioning: "enable"
+            forticlient-vpn-settings:
+             -
+                auth-method: "psk"
+                name: "default_name_13"
+                preshared-key: "<your_own_value>"
+                remote-gw: "<your_own_value>"
+                sslvpn-access-port: "16"
+                sslvpn-require-certificate: "enable"
+                type: "ipsec"
+            forticlient-wf: "enable"
+            forticlient-wf-profile: "<your_own_value> (source: webfilter.profile.name)"
+        forticlient-ios-settings:
+            client-vpn-provisioning: "enable"
+            client-vpn-settings:
+             -
+                auth-method: "psk"
+                name: "default_name_25"
+                preshared-key: "<your_own_value>"
+                remote-gw: "<your_own_value>"
+                sslvpn-access-port: "28"
+                sslvpn-require-certificate: "enable"
+                type: "ipsec"
+                vpn-configuration-content: "<your_own_value>"
+                vpn-configuration-name: "<your_own_value>"
+            configuration-content: "<your_own_value>"
+            configuration-name: "<your_own_value>"
+            disable-wf-when-protected: "enable"
+            distribute-configuration-profile: "enable"
+            forticlient-wf: "enable"
+            forticlient-wf-profile: "<your_own_value> (source: webfilter.profile.name)"
+        forticlient-winmac-settings:
+            av-realtime-protection: "enable"
+            av-signature-up-to-date: "enable"
+            forticlient-application-firewall: "enable"
+            forticlient-application-firewall-list: "<your_own_value> (source: application.list.name)"
+            forticlient-av: "enable"
+            forticlient-ems-compliance: "enable"
+            forticlient-ems-compliance-action: "block"
+            forticlient-ems-entries:
+             -
+                name: "default_name_48 (source: endpoint-control.forticlient-ems.name)"
+            forticlient-linux-ver: "<your_own_value>"
+            forticlient-log-upload: "enable"
+            forticlient-log-upload-level: "traffic"
+            forticlient-log-upload-server: "<your_own_value>"
+            forticlient-mac-ver: "<your_own_value>"
+            forticlient-minimum-software-version: "enable"
+            forticlient-operating-system:
+             -
+                id:  "56"
+                os-name: "<your_own_value>"
+                os-type: "custom"
+            forticlient-own-file:
+             -
+                file: "<your_own_value>"
+                id:  "61"
+            forticlient-registration-compliance-action: "block"
+            forticlient-registry-entry:
+             -
+                id:  "64"
+                registry-entry: "<your_own_value>"
+            forticlient-running-app:
+             -
+                app-name: "<your_own_value>"
+                app-sha256-signature: "<your_own_value>"
+                app-sha256-signature2: "<your_own_value>"
+                app-sha256-signature3: "<your_own_value>"
+                app-sha256-signature4: "<your_own_value>"
+                application-check-rule: "present"
+                id:  "73"
+                process-name: "<your_own_value>"
+                process-name2: "<your_own_value>"
+                process-name3: "<your_own_value>"
+                process-name4: "<your_own_value>"
+            forticlient-security-posture: "enable"
+            forticlient-security-posture-compliance-action: "block"
+            forticlient-system-compliance: "enable"
+            forticlient-system-compliance-action: "block"
+            forticlient-vuln-scan: "enable"
+            forticlient-vuln-scan-compliance-action: "block"
+            forticlient-vuln-scan-enforce: "critical"
+            forticlient-vuln-scan-enforce-grace: "85"
+            forticlient-vuln-scan-exempt: "enable"
+            forticlient-wf: "enable"
+            forticlient-wf-profile: "<your_own_value> (source: webfilter.profile.name)"
+            forticlient-win-ver: "<your_own_value>"
+            os-av-software-installed: "enable"
+            sandbox-address: "<your_own_value>"
+            sandbox-analysis: "enable"
+        on-net-addr:
+         -
+            name: "default_name_94 (source: firewall.address.name firewall.addrgrp.name)"
+        profile-name: "<your_own_value>"
+        replacemsg-override-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        src-addr:
+         -
+            name: "default_name_98 (source: firewall.address.name firewall.addrgrp.name)"
+        user-groups:
+         -
+            name: "default_name_100 (source: user.group.name)"
+        users:
+         -
+            name: "default_name_102 (source: user.local.name)"

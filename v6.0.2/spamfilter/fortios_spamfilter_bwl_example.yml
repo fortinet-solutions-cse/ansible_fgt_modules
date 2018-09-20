@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure anti-spam black/white list.
+    fortios_spamfilter_bwl:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      spamfilter_bwl:
+        state: "present"
+        comment: "Optional comments."
+        entries:
+         -
+            action: "reject"
+            addr-type: "ipv4"
+            email-pattern: "<your_own_value>"
+            id:  "8"
+            ip4-subnet: "<your_own_value>"
+            ip6-subnet: "<your_own_value>"
+            pattern-type: "wildcard"
+            status: "enable"
+            type: "ip"
+        id:  "14"
+        name: "default_name_15"

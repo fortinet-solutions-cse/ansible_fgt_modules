@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure access lists.
+    fortios_router_access-list:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_access-list:
+        state: "present"
+        comments: "<your_own_value>"
+        name: "default_name_4"
+        rule:
+         -
+            action: "permit"
+            exact-match: "enable"
+            flags: "8"
+            id:  "9"
+            prefix: "<your_own_value>"
+            wildcard: "<your_own_value>"

@@ -1,0 +1,86 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 OSPF.
+    fortios_router_ospf6:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_ospf6:
+        state: "present"
+        abr-type: "cisco"
+        area:
+         -
+            default-cost: "5"
+            id:  "6"
+            nssa-default-information-originate: "enable"
+            nssa-default-information-originate-metric: "8"
+            nssa-default-information-originate-metric-type: "1"
+            nssa-redistribution: "enable"
+            nssa-translator-role: "candidate"
+            range:
+             -
+                advertise: "disable"
+                id:  "14"
+                prefix6: "<your_own_value>"
+            stub-type: "no-summary"
+            type: "regular"
+            virtual-link:
+             -
+                dead-interval: "19"
+                hello-interval: "20"
+                name: "default_name_21"
+                peer: "<your_own_value>"
+                retransmit-interval: "23"
+                transmit-delay: "24"
+        auto-cost-ref-bandwidth: "25"
+        bfd: "enable"
+        default-information-metric: "27"
+        default-information-metric-type: "1"
+        default-information-originate: "enable"
+        default-information-route-map: "<your_own_value> (source: router.route-map.name)"
+        default-metric: "31"
+        log-neighbour-changes: "enable"
+        ospf6-interface:
+         -
+            area-id: "<your_own_value>"
+            bfd: "global"
+            cost: "36"
+            dead-interval: "37"
+            hello-interval: "38"
+            interface: "<your_own_value> (source: system.interface.name)"
+            name: "default_name_40"
+            neighbor:
+             -
+                cost: "42"
+                ip6: "<your_own_value>"
+                poll-interval: "44"
+                priority: "45"
+            network-type: "broadcast"
+            priority: "47"
+            retransmit-interval: "48"
+            status: "disable"
+            transmit-delay: "50"
+        passive-interface:
+         -
+            name: "default_name_52 (source: system.interface.name)"
+        redistribute:
+         -
+            metric: "54"
+            metric-type: "1"
+            name: "default_name_56"
+            routemap: "<your_own_value> (source: router.route-map.name)"
+            status: "enable"
+        router-id: "<your_own_value>"
+        spf-timers: "<your_own_value>"
+        summary-address:
+         -
+            advertise: "disable"
+            id:  "63"
+            prefix6: "<your_own_value>"
+            tag: "65"

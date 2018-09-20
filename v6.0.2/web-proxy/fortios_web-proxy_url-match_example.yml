@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Exempt URLs from web proxy forwarding and caching.
+    fortios_web-proxy_url-match:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      web-proxy_url-match:
+        state: "present"
+        cache-exemption: "enable"
+        comment: "Comment."
+        forward-server: "<your_own_value> (source: web-proxy.forward-server.name web-proxy.forward-server-group.name)"
+        name: "default_name_6"
+        status: "enable"
+        url-pattern: "<your_own_value>"

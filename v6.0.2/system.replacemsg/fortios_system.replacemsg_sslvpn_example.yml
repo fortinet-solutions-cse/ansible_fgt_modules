@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Replacement messages.
+    fortios_system.replacemsg_sslvpn:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system.replacemsg_sslvpn:
+        state: "present"
+        buffer: "<your_own_value>"
+        format: "none"
+        header: "none"
+        msg-type: "<your_own_value>"

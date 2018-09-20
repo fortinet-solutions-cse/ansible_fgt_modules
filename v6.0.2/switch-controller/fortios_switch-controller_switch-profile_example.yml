@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch switch profile.
+    fortios_switch-controller_switch-profile:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      switch-controller_switch-profile:
+        state: "present"
+        login-passwd: "<your_own_value>"
+        login-passwd-override: "enable"
+        name: "default_name_5"

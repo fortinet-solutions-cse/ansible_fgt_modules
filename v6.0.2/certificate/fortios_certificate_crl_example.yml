@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Certificate Revocation List as a PEM file.
+    fortios_certificate_crl:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      certificate_crl:
+        state: "present"
+        crl: "<your_own_value>"
+        http-url: "<your_own_value>"
+        last-updated: "5"
+        ldap-password: "<your_own_value>"
+        ldap-server: "<your_own_value>"
+        ldap-username: "<your_own_value>"
+        name: "default_name_9"
+        range: "global"
+        scep-cert: "<your_own_value> (source: certificate.local.name)"
+        scep-url: "<your_own_value>"
+        source: "factory"
+        source-ip: "84.230.14.43"
+        update-interval: "15"
+        update-vdom: "<your_own_value> (source: system.vdom.name)"

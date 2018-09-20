@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Designate cache-service for wan-optimization and webcache.
+    fortios_wanopt_cache-service:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      wanopt_cache-service:
+        state: "present"
+        acceptable-connections: "any"
+        collaboration: "enable"
+        device-id: "<your_own_value>"
+        dst-peer:
+         -
+            auth-type: "7"
+            device-id: "<your_own_value>"
+            encode-type: "9"
+            ip: "<your_own_value>"
+            priority: "11"
+        prefer-scenario: "balance"
+        src-peer:
+         -
+            auth-type: "14"
+            device-id: "<your_own_value>"
+            encode-type: "16"
+            ip: "<your_own_value>"
+            priority: "18"

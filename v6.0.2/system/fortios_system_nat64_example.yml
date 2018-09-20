@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure NAT64.
+    fortios_system_nat64:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_nat64:
+        state: "present"
+        always-synthesize-aaaa-record: "enable"
+        generate-ipv6-fragment-header: "enable"
+        nat64-prefix: "<your_own_value>"
+        secondary-prefix:
+         -
+            name: "default_name_7"
+            nat64-prefix: "<your_own_value>"
+        secondary-prefix-status: "enable"
+        status: "enable"

@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiManager.
+    fortios_system_fortimanager:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      system_fortimanager:
+        state: "present"
+        central-management: "enable"
+        central-mgmt-auto-backup: "enable"
+        central-mgmt-schedule-config-restore: "enable"
+        central-mgmt-schedule-script-restore: "enable"
+        ip: "<your_own_value>"
+        ipsec: "enable"
+        vdom: "<your_own_value> (source: system.vdom.name)"

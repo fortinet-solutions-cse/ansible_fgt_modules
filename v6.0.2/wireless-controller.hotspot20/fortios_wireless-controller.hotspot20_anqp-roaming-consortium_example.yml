@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure roaming consortium.
+    fortios_wireless-controller.hotspot20_anqp-roaming-consortium:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      wireless-controller.hotspot20_anqp-roaming-consortium:
+        state: "present"
+        name: "default_name_3"
+        oi-list:
+         -
+            comment: "Comment."
+            index: "6"
+            oi: "<your_own_value>"

@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure BFD.
+    fortios_router_bfd:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      router_bfd:
+        state: "present"
+        neighbor:
+         -
+            interface: "<your_own_value> (source: system.interface.name)"
+            ip: "<your_own_value>"

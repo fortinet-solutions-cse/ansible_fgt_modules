@@ -1,0 +1,38 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure DNS domain filter profiles.
+    fortios_dnsfilter_profile:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      dnsfilter_profile:
+        state: "present"
+        block-action: "block"
+        block-botnet: "disable"
+        comment: "Comment."
+        domain-filter:
+            domain-filter-table: "7 (source: dnsfilter.domain-filter.id)"
+        external-ip-blocklist:
+         -
+            name: "default_name_9 (source: system.external-resource.name)"
+        ftgd-dns:
+            filters:
+             -
+                action: "block"
+                category: "13"
+                id:  "14"
+                log: "enable"
+            options: "error-allow"
+        log-all-domain: "enable"
+        name: "default_name_18"
+        redirect-portal: "<your_own_value>"
+        safe-search: "disable"
+        sdns-domain-log: "enable"
+        sdns-ftgd-err-log: "enable"
+        youtube-restrict: "strict"

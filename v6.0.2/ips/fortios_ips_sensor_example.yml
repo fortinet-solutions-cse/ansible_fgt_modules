@@ -1,0 +1,78 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS sensor.
+    fortios_ips_sensor:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      ips_sensor:
+        state: "present"
+        block-malicious-url: "disable"
+        comment: "Comment."
+        entries:
+         -
+            action: "pass"
+            application: "<your_own_value>"
+            exempt-ip:
+             -
+                dst-ip: "<your_own_value>"
+                id:  "10"
+                src-ip: "<your_own_value>"
+            id:  "12"
+            location: "<your_own_value>"
+            log: "disable"
+            log-attack-context: "disable"
+            log-packet: "disable"
+            os: "<your_own_value>"
+            protocol: "<your_own_value>"
+            quarantine: "none"
+            quarantine-expiry: "<your_own_value>"
+            quarantine-log: "disable"
+            rate-count: "22"
+            rate-duration: "23"
+            rate-mode: "periodical"
+            rate-track: "none"
+            rule:
+             -
+                id:  "27"
+            severity: "<your_own_value>"
+            status: "disable"
+        extended-log: "enable"
+        filter:
+         -
+            action: "pass"
+            application: "<your_own_value>"
+            location: "<your_own_value>"
+            log: "disable"
+            log-packet: "disable"
+            name: "default_name_37"
+            os: "<your_own_value>"
+            protocol: "<your_own_value>"
+            quarantine: "none"
+            quarantine-expiry: "41"
+            quarantine-log: "disable"
+            severity: "<your_own_value>"
+            status: "disable"
+        name: "default_name_45"
+        override:
+         -
+            action: "pass"
+            exempt-ip:
+             -
+                dst-ip: "<your_own_value>"
+                id:  "50"
+                src-ip: "<your_own_value>"
+            log: "disable"
+            log-packet: "disable"
+            quarantine: "none"
+            quarantine-expiry: "55"
+            quarantine-log: "disable"
+            rule-id: "57"
+            status: "disable"
+        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"

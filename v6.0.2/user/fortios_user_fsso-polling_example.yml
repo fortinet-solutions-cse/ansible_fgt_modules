@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FSSO active directory servers for polling mode.
+    fortios_user_fsso-polling:
+      host:  "{{  host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{  vdom }}"
+      user_fsso-polling:
+        state: "present"
+        adgrp:
+         -
+            name: "default_name_4"
+        default-domain: "<your_own_value>"
+        id:  "6"
+        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        logon-history: "8"
+        password: "<your_own_value>"
+        polling-frequency: "10"
+        port: "11"
+        server: "192.168.100.40"
+        status: "enable"
+        user: "<your_own_value>"

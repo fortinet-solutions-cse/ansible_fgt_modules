@@ -7,22 +7,22 @@
   tasks:
   - name: Web application firewall configuration.
     fortios_waf_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       waf_profile:
         state: "present"
         address-list:
             blocked-address:
              -
-                name: "default_name_5 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_5 (source firewall.address.name firewall.addrgrp.name)"
             blocked-log: "enable"
             severity: "high"
             status: "enable"
             trusted-address:
              -
-                name: "default_name_10 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_10 (source firewall.address.name firewall.addrgrp.name)"
         comment: "Comment."
         constraint:
             content-length:
@@ -33,7 +33,7 @@
                 status: "enable"
             exception:
              -
-                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
                 content-length: "enable"
                 header-length: "enable"
                 hostname: "enable"
@@ -125,7 +125,7 @@
             log: "enable"
             method-policy:
              -
-                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
                 allowed-methods: "get"
                 id:  "113"
                 pattern: "<your_own_value>"
@@ -148,14 +148,14 @@
                 target: "arg"
             disabled-signature:
              -
-                id:  "132 (source: waf.signature.id)"
+                id:  "132 (source waf.signature.id)"
             disabled-sub-class:
              -
-                id:  "134 (source: waf.sub-class.id)"
+                id:  "134 (source waf.sub-class.id)"
             main-class:
              -
                 action: "allow"
-                id:  "137 (source: waf.main-class.id)"
+                id:  "137 (source waf.main-class.id)"
                 log: "enable"
                 severity: "high"
                 status: "enable"
@@ -167,9 +167,9 @@
                 negate: "enable"
                 pattern: "<your_own_value>"
                 regex: "enable"
-                srcaddr: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                srcaddr: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
             action: "bypass"
-            address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+            address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
             id:  "150"
             log: "enable"
             severity: "high"

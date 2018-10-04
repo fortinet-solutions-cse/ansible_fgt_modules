@@ -7,10 +7,10 @@
   tasks:
   - name: Configure FortiGuard Web Filter administrative overrides.
     fortios_webfilter_override:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_override:
         state: "present"
         expires: "<your_own_value>"
@@ -18,9 +18,9 @@
         initiator: "<your_own_value>"
         ip: "<your_own_value>"
         ip6: "<your_own_value>"
-        new-profile: "<your_own_value> (source: webfilter.profile.name)"
-        old-profile: "<your_own_value> (source: webfilter.profile.name)"
+        new-profile: "<your_own_value> (source webfilter.profile.name)"
+        old-profile: "<your_own_value> (source webfilter.profile.name)"
         scope: "user"
         status: "enable"
         user: "<your_own_value>"
-        user-group: "<your_own_value> (source: user.group.name)"
+        user-group: "<your_own_value> (source user.group.name)"

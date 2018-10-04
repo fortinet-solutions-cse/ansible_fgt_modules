@@ -7,12 +7,11 @@
   tasks:
   - name: Add this FortiGate to a Security Fabric or set up a new Security Fabric on this FortiGate.
     fortios_system_csf:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_csf:
-        state: "present"
         configuration-sync: "default"
         fabric-device:
          -

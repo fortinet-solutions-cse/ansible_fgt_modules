@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IPS sensor.
     fortios_ips_sensor:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_sensor:
         state: "present"
         block-malicious-url: "disable"
@@ -75,4 +75,4 @@
             quarantine-log: "disable"
             rule-id: "57"
             status: "disable"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"

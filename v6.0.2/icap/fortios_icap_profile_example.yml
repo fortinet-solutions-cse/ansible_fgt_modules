@@ -7,21 +7,21 @@
   tasks:
   - name: Configure ICAP profiles.
     fortios_icap_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       icap_profile:
         state: "present"
         methods: "delete"
         name: "default_name_4"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         request: "disable"
         request-failure: "error"
         request-path: "<your_own_value>"
-        request-server: "<your_own_value> (source: icap.server.name)"
+        request-server: "<your_own_value> (source icap.server.name)"
         response: "disable"
         response-failure: "error"
         response-path: "<your_own_value>"
-        response-server: "<your_own_value> (source: icap.server.name)"
+        response-server: "<your_own_value> (source icap.server.name)"
         streaming-content-bypass: "disable"

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.service feature and group category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.service_group:
         description:
             - Configure service groups.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             color:
                 description:
                     - Color of icon on the GUI.
@@ -83,7 +90,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.service.custom.name firewall.service.group.name.
+                            - Address name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
             name:
                 description:
@@ -107,17 +114,17 @@ EXAMPLES = '''
   tasks:
   - name: Configure service groups.
     fortios_firewall.service_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.service_group:
         state: "present"
         color: "3"
         comment: "Comment."
         member:
          -
-            name: "default_name_6 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_6 (source firewall.service.custom.name firewall.service.group.name)"
         name: "default_name_7"
         proxy: "enable"
 '''
@@ -181,6 +188,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -215,7 +224,6 @@ def firewall.service_group(data, fos):
     firewall.service_group_data = data['firewall.service_group']
     filtered_data = filter_firewall.service_group_data(
         firewall.service_group_data)
-
     if firewall.service_group_data['state'] == "present":
         return fos.set('firewall.service',
                        'group',
@@ -225,16 +233,12 @@ def firewall.service_group(data, fos):
     elif firewall.service_group_data['state'] == "absent":
         return fos.delete('firewall.service',
                           'group',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall.service(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.service_group']
     for method in methodlist:
@@ -252,11 +256,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.service_group": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "color": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
                 "member": {"required": False, "type": "list",
@@ -278,6 +283,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.service(

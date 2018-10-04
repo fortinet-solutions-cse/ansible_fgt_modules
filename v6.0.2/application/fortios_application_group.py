@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure application feature and group category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     application_group:
         description:
             - Configure firewall application groups.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             application:
                 description:
                     - Application ID list.
@@ -112,10 +119,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure firewall application groups.
     fortios_application_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_group:
         state: "present"
         application:
@@ -188,6 +195,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -221,7 +230,6 @@ def application_group(data, fos):
     vdom = data['vdom']
     application_group_data = data['application_group']
     filtered_data = filter_application_group_data(application_group_data)
-
     if application_group_data['state'] == "present":
         return fos.set('application',
                        'group',
@@ -231,16 +239,12 @@ def application_group(data, fos):
     elif application_group_data['state'] == "absent":
         return fos.delete('application',
                           'group',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_application(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['application_group']
     for method in methodlist:
@@ -258,11 +262,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "application_group": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "application": {"required": False, "type": "list",
                                 "options": {
                                     "id": {"required": True, "type": "int"}
@@ -287,6 +292,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_application(module.params, fos)

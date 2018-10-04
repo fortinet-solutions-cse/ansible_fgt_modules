@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     spamfilter_profile:
         description:
             - Configure AntiSpam profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Comment.
@@ -195,7 +202,7 @@ options:
                             - spaminfo
             replacemsg-group:
                 description:
-                    - Replacement message group. Source: system.replacemsg-group.name.
+                    - Replacement message group. Source system.replacemsg-group.name.
             smtp:
                 description:
                     - SMTP.
@@ -237,10 +244,10 @@ options:
                             - spaminfo
             spam-bwl-table:
                 description:
-                    - Anti-spam black/white list table ID. Source: spamfilter.bwl.id.
+                    - Anti-spam black/white list table ID. Source spamfilter.bwl.id.
             spam-bword-table:
                 description:
-                    - Anti-spam banned word table ID. Source: spamfilter.bword.id.
+                    - Anti-spam banned word table ID. Source spamfilter.bword.id.
             spam-bword-threshold:
                 description:
                     - Spam banned word threshold.
@@ -252,7 +259,7 @@ options:
                     - disable
             spam-iptrust-table:
                 description:
-                    - Anti-spam IP trust table ID. Source: spamfilter.iptrust.id.
+                    - Anti-spam IP trust table ID. Source spamfilter.iptrust.id.
             spam-log:
                 description:
                     - Enable/disable spam logging for email filtering.
@@ -267,10 +274,10 @@ options:
                     - enable
             spam-mheader-table:
                 description:
-                    - Anti-spam MIME header table ID. Source: spamfilter.mheader.id.
+                    - Anti-spam MIME header table ID. Source spamfilter.mheader.id.
             spam-rbl-table:
                 description:
-                    - Anti-spam DNSBL table ID. Source: spamfilter.dnsbl.id.
+                    - Anti-spam DNSBL table ID. Source spamfilter.dnsbl.id.
             yahoo-mail:
                 description:
                     - Yahoo! Mail.
@@ -293,10 +300,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure AntiSpam profiles.
     fortios_spamfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_profile:
         state: "present"
         comment: "Comment."
@@ -321,7 +328,7 @@ EXAMPLES = '''
             log: "enable"
             tag-msg: "<your_own_value>"
             tag-type: "subject"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         smtp:
             action: "pass"
             hdrip: "disable"
@@ -329,15 +336,15 @@ EXAMPLES = '''
             log: "enable"
             tag-msg: "<your_own_value>"
             tag-type: "subject"
-        spam-bwl-table: "33 (source: spamfilter.bwl.id)"
-        spam-bword-table: "34 (source: spamfilter.bword.id)"
+        spam-bwl-table: "33 (source spamfilter.bwl.id)"
+        spam-bword-table: "34 (source spamfilter.bword.id)"
         spam-bword-threshold: "35"
         spam-filtering: "enable"
-        spam-iptrust-table: "37 (source: spamfilter.iptrust.id)"
+        spam-iptrust-table: "37 (source spamfilter.iptrust.id)"
         spam-log: "disable"
         spam-log-fortiguard-response: "disable"
-        spam-mheader-table: "40 (source: spamfilter.mheader.id)"
-        spam-rbl-table: "41 (source: spamfilter.dnsbl.id)"
+        spam-mheader-table: "40 (source spamfilter.mheader.id)"
+        spam-rbl-table: "41 (source spamfilter.dnsbl.id)"
         yahoo-mail:
             log: "enable"
 '''
@@ -401,6 +408,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -440,7 +449,6 @@ def spamfilter_profile(data, fos):
     vdom = data['vdom']
     spamfilter_profile_data = data['spamfilter_profile']
     filtered_data = filter_spamfilter_profile_data(spamfilter_profile_data)
-
     if spamfilter_profile_data['state'] == "present":
         return fos.set('spamfilter',
                        'profile',
@@ -450,16 +458,12 @@ def spamfilter_profile(data, fos):
     elif spamfilter_profile_data['state'] == "absent":
         return fos.delete('spamfilter',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_spamfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['spamfilter_profile']
     for method in methodlist:
@@ -477,11 +481,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "spamfilter_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "external": {"required": False, "type": "str",
                              "choices": ["enable", "disable"]},
@@ -574,6 +579,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_spamfilter(module.params, fos)

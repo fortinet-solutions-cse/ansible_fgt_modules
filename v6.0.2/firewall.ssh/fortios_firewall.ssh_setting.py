@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ssh feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.ssh_setting:
         description:
             - SSH proxy settings.
@@ -73,7 +74,7 @@ options:
         suboptions:
             caname:
                 description:
-                    - CA certificate used by SSH Inspection. Source: firewall.ssh.local-ca.name.
+                    - CA certificate used by SSH Inspection. Source firewall.ssh.local-ca.name.
             host-trusted-checking:
                 description:
                     - Enable/disable host trusted checking.
@@ -82,25 +83,25 @@ options:
                     - disable
             hostkey-dsa1024:
                 description:
-                    - DSA certificate used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - DSA certificate used by SSH proxy. Source firewall.ssh.local-key.name.
             hostkey-ecdsa256:
                 description:
-                    - ECDSA nid256 certificate used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - ECDSA nid256 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
             hostkey-ecdsa384:
                 description:
-                    - ECDSA nid384 certificate used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - ECDSA nid384 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
             hostkey-ecdsa521:
                 description:
-                    - ECDSA nid384 certificate used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - ECDSA nid384 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
             hostkey-ed25519:
                 description:
-                    - ED25519 hostkey used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - ED25519 hostkey used by SSH proxy. Source firewall.ssh.local-key.name.
             hostkey-rsa2048:
                 description:
-                    - RSA certificate used by SSH proxy. Source: firewall.ssh.local-key.name.
+                    - RSA certificate used by SSH proxy. Source firewall.ssh.local-key.name.
             untrusted-caname:
                 description:
-                    - Untrusted CA certificate used by SSH Inspection. Source: firewall.ssh.local-ca.name.
+                    - Untrusted CA certificate used by SSH Inspection. Source firewall.ssh.local-ca.name.
 '''
 
 EXAMPLES = '''
@@ -113,21 +114,20 @@ EXAMPLES = '''
   tasks:
   - name: SSH proxy settings.
     fortios_firewall.ssh_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ssh_setting:
-        state: "present"
-        caname: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        caname: "<your_own_value> (source firewall.ssh.local-ca.name)"
         host-trusted-checking: "enable"
-        hostkey-dsa1024: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa256: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa384: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa521: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ed25519: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-rsa2048: "myhostname (source: firewall.ssh.local-key.name)"
-        untrusted-caname: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        hostkey-dsa1024: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa256: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa384: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa521: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ed25519: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-rsa2048: "myhostname (source firewall.ssh.local-key.name)"
+        untrusted-caname: "<your_own_value> (source firewall.ssh.local-ca.name)"
 '''
 
 RETURN = '''
@@ -189,6 +189,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -223,26 +225,14 @@ def firewall.ssh_setting(data, fos):
     vdom = data['vdom']
     firewall.ssh_setting_data = data['firewall.ssh_setting']
     filtered_data = filter_firewall.ssh_setting_data(firewall.ssh_setting_data)
-
-    if firewall.ssh_setting_data['state'] == "present":
-        return fos.set('firewall.ssh',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif firewall.ssh_setting_data['state'] == "absent":
-        return fos.delete('firewall.ssh',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('firewall.ssh',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_firewall.ssh(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.ssh_setting']
     for method in methodlist:
@@ -260,11 +250,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.ssh_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "caname": {"required": False, "type": "str"},
                 "host-trusted-checking": {"required": False, "type": "str",
                                           "choices": ["enable", "disable"]},
@@ -287,6 +276,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.ssh(module.params, fos)

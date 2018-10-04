@@ -7,10 +7,10 @@
   tasks:
   - name: Configure alias command.
     fortios_system_alias:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_alias:
         state: "present"
         command: "<your_own_value>"

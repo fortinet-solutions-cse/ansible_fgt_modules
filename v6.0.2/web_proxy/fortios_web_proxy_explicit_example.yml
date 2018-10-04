@@ -1,0 +1,56 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure explicit Web proxy settings.
+    fortios_web_proxy_explicit:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      web_proxy_explicit:
+        ftp-incoming-port: "<your_own_value>"
+        ftp-over-http: "enable"
+        http-incoming-port: "<your_own_value>"
+        https-incoming-port: "<your_own_value>"
+        https-replacement-message: "enable"
+        incoming-ip: "<your_own_value>"
+        incoming-ip6: "<your_own_value>"
+        ipv6-status: "enable"
+        message-upon-server-error: "enable"
+        outgoing-ip: "<your_own_value>"
+        outgoing-ip6: "<your_own_value>"
+        pac-file-data: "<your_own_value>"
+        pac-file-name: "<your_own_value>"
+        pac-file-server-port: "<your_own_value>"
+        pac-file-server-status: "enable"
+        pac-file-url: "<your_own_value>"
+        pac-policy:
+         -
+            comments: "<your_own_value>"
+            dstaddr:
+             -
+                name: "default_name_22 (source firewall.address.name firewall.addrgrp.name)"
+            pac-file-data: "<your_own_value>"
+            pac-file-name: "<your_own_value>"
+            policyid: "25"
+            srcaddr:
+             -
+                name: "default_name_27 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
+            srcaddr6:
+             -
+                name: "default_name_29 (source firewall.address6.name firewall.addrgrp6.name)"
+            status: "enable"
+        pref-dns-result: "ipv4"
+        realm: "<your_own_value>"
+        sec-default-action: "accept"
+        socks: "enable"
+        socks-incoming-port: "<your_own_value>"
+        ssl-algorithm: "low"
+        status: "enable"
+        strict-guest: "enable"
+        trace-auth-no-rsp: "enable"
+        unknown-http-version: "reject"

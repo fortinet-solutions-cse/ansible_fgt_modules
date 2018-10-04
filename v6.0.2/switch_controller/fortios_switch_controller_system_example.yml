@@ -1,0 +1,16 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure system-wide switch controller settings.
+    fortios_switch_controller_system:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      switch_controller_system:
+        parallel-process: "3"
+        parallel-process-override: "disable"

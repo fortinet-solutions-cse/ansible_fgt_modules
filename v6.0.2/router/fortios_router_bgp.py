@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and bgp category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_bgp:
         description:
             - Configure BGP.
@@ -87,7 +88,7 @@ options:
                             - Neighbor address prefix.
                     route-list:
                         description:
-                            - Access list of routes to apply new distance to. Source: router.access-list.name.
+                            - Access list of routes to apply new distance to. Source router.access-list.name.
             aggregate-address:
                 description:
                     - BGP aggregate address table.
@@ -192,6 +193,7 @@ options:
                     peer:
                         description:
                             - Peer ID.
+                        required: true
             dampening:
                 description:
                     - Enable/disable route-flap dampening.
@@ -209,7 +211,7 @@ options:
                     - Threshold to reuse routes.
             dampening-route-map:
                 description:
-                    - Criteria for dampening. Source: router.route-map.name.
+                    - Criteria for dampening. Source router.route-map.name.
             dampening-suppress:
                 description:
                     - Threshold to suppress routes.
@@ -424,10 +426,11 @@ options:
                         suboptions:
                             advertise-routemap:
                                 description:
-                                    - Name of advertising route map. Source: router.route-map.name.
+                                    - Name of advertising route map. Source router.route-map.name.
+                                required: true
                             condition-routemap:
                                 description:
-                                    - Name of condition route map. Source: router.route-map.name.
+                                    - Name of condition route map. Source router.route-map.name.
                             condition-type:
                                 description:
                                     - Type of condition.
@@ -439,25 +442,25 @@ options:
                             - Interval (sec) for connect timer.
                     default-originate-routemap:
                         description:
-                            - Route map to specify criteria to originate IPv4 default. Source: router.route-map.name.
+                            - Route map to specify criteria to originate IPv4 default. Source router.route-map.name.
                     default-originate-routemap6:
                         description:
-                            - Route map to specify criteria to originate IPv6 default. Source: router.route-map.name.
+                            - Route map to specify criteria to originate IPv6 default. Source router.route-map.name.
                     description:
                         description:
                             - Description.
                     distribute-list-in:
                         description:
-                            - Filter for IPv4 updates from this neighbor. Source: router.access-list.name.
+                            - Filter for IPv4 updates from this neighbor. Source router.access-list.name.
                     distribute-list-in6:
                         description:
-                            - Filter for IPv6 updates from this neighbor. Source: router.access-list6.name.
+                            - Filter for IPv6 updates from this neighbor. Source router.access-list6.name.
                     distribute-list-out:
                         description:
-                            - Filter for IPv4 updates to this neighbor. Source: router.access-list.name.
+                            - Filter for IPv4 updates to this neighbor. Source router.access-list.name.
                     distribute-list-out6:
                         description:
-                            - Filter for IPv6 updates to this neighbor. Source: router.access-list6.name.
+                            - Filter for IPv6 updates to this neighbor. Source router.access-list6.name.
                     dont-capability-negotiate:
                         description:
                             - Don't negotiate capabilities with this neighbor
@@ -475,25 +478,26 @@ options:
                             - EBGP multihop TTL for this peer.
                     filter-list-in:
                         description:
-                            - BGP filter for IPv4 inbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv4 inbound routes. Source router.aspath-list.name.
                     filter-list-in6:
                         description:
-                            - BGP filter for IPv6 inbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv6 inbound routes. Source router.aspath-list.name.
                     filter-list-out:
                         description:
-                            - BGP filter for IPv4 outbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv4 outbound routes. Source router.aspath-list.name.
                     filter-list-out6:
                         description:
-                            - BGP filter for IPv6 outbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv6 outbound routes. Source router.aspath-list.name.
                     holdtime-timer:
                         description:
                             - Interval (sec) before peer considered dead.
                     interface:
                         description:
-                            - Interface Source: system.interface.name.
+                            - Interface Source system.interface.name.
                     ip:
                         description:
                             - IP/IPv6 address of neighbor.
+                        required: true
                     keep-alive-timer:
                         description:
                             - Keep alive timer interval (sec).
@@ -571,16 +575,16 @@ options:
                             - Password used in MD5 authentication.
                     prefix-list-in:
                         description:
-                            - IPv4 Inbound filter for updates from this neighbor. Source: router.prefix-list.name.
+                            - IPv4 Inbound filter for updates from this neighbor. Source router.prefix-list.name.
                     prefix-list-in6:
                         description:
-                            - IPv6 Inbound filter for updates from this neighbor. Source: router.prefix-list6.name.
+                            - IPv6 Inbound filter for updates from this neighbor. Source router.prefix-list6.name.
                     prefix-list-out:
                         description:
-                            - IPv4 Outbound filter for updates to this neighbor. Source: router.prefix-list.name.
+                            - IPv4 Outbound filter for updates to this neighbor. Source router.prefix-list.name.
                     prefix-list-out6:
                         description:
-                            - IPv6 Outbound filter for updates to this neighbor. Source: router.prefix-list6.name.
+                            - IPv6 Outbound filter for updates to this neighbor. Source router.prefix-list6.name.
                     remote-as:
                         description:
                             - AS number of neighbor.
@@ -604,16 +608,16 @@ options:
                             - Time to retain stale routes.
                     route-map-in:
                         description:
-                            - IPv4 Inbound route map filter. Source: router.route-map.name.
+                            - IPv4 Inbound route map filter. Source router.route-map.name.
                     route-map-in6:
                         description:
-                            - IPv6 Inbound route map filter. Source: router.route-map.name.
+                            - IPv6 Inbound route map filter. Source router.route-map.name.
                     route-map-out:
                         description:
-                            - IPv4 Outbound route map filter. Source: router.route-map.name.
+                            - IPv4 Outbound route map filter. Source router.route-map.name.
                     route-map-out6:
                         description:
-                            - IPv6 Outbound route map filter. Source: router.route-map.name.
+                            - IPv6 Outbound route map filter. Source router.route-map.name.
                     route-reflector-client:
                         description:
                             - Enable/disable IPv4 AS route reflector client.
@@ -686,13 +690,13 @@ options:
                             - disable
                     unsuppress-map:
                         description:
-                            - IPv4 Route map to selectively unsuppress suppressed routes. Source: router.route-map.name.
+                            - IPv4 Route map to selectively unsuppress suppressed routes. Source router.route-map.name.
                     unsuppress-map6:
                         description:
-                            - IPv6 Route map to selectively unsuppress suppressed routes. Source: router.route-map.name.
+                            - IPv6 Route map to selectively unsuppress suppressed routes. Source router.route-map.name.
                     update-source:
                         description:
-                            - Interface to use as source IP/IPv6 address of TCP connections. Source: system.interface.name.
+                            - Interface to use as source IP/IPv6 address of TCP connections. Source system.interface.name.
                     weight:
                         description:
                             - Neighbor weight.
@@ -822,25 +826,25 @@ options:
                             - Interval (sec) for connect timer.
                     default-originate-routemap:
                         description:
-                            - Route map to specify criteria to originate IPv4 default. Source: router.route-map.name.
+                            - Route map to specify criteria to originate IPv4 default. Source router.route-map.name.
                     default-originate-routemap6:
                         description:
-                            - Route map to specify criteria to originate IPv6 default. Source: router.route-map.name.
+                            - Route map to specify criteria to originate IPv6 default. Source router.route-map.name.
                     description:
                         description:
                             - Description.
                     distribute-list-in:
                         description:
-                            - Filter for IPv4 updates from this neighbor. Source: router.access-list.name.
+                            - Filter for IPv4 updates from this neighbor. Source router.access-list.name.
                     distribute-list-in6:
                         description:
-                            - Filter for IPv6 updates from this neighbor. Source: router.access-list6.name.
+                            - Filter for IPv6 updates from this neighbor. Source router.access-list6.name.
                     distribute-list-out:
                         description:
-                            - Filter for IPv4 updates to this neighbor. Source: router.access-list.name.
+                            - Filter for IPv4 updates to this neighbor. Source router.access-list.name.
                     distribute-list-out6:
                         description:
-                            - Filter for IPv6 updates to this neighbor. Source: router.access-list6.name.
+                            - Filter for IPv6 updates to this neighbor. Source router.access-list6.name.
                     dont-capability-negotiate:
                         description:
                             - Don't negotiate capabilities with this neighbor
@@ -858,22 +862,22 @@ options:
                             - EBGP multihop TTL for this peer.
                     filter-list-in:
                         description:
-                            - BGP filter for IPv4 inbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv4 inbound routes. Source router.aspath-list.name.
                     filter-list-in6:
                         description:
-                            - BGP filter for IPv6 inbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv6 inbound routes. Source router.aspath-list.name.
                     filter-list-out:
                         description:
-                            - BGP filter for IPv4 outbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv4 outbound routes. Source router.aspath-list.name.
                     filter-list-out6:
                         description:
-                            - BGP filter for IPv6 outbound routes. Source: router.aspath-list.name.
+                            - BGP filter for IPv6 outbound routes. Source router.aspath-list.name.
                     holdtime-timer:
                         description:
                             - Interval (sec) before peer considered dead.
                     interface:
                         description:
-                            - Interface Source: system.interface.name.
+                            - Interface Source system.interface.name.
                     keep-alive-timer:
                         description:
                             - Keep alive timer interval (sec).
@@ -952,16 +956,16 @@ options:
                             - disable
                     prefix-list-in:
                         description:
-                            - IPv4 Inbound filter for updates from this neighbor. Source: router.prefix-list.name.
+                            - IPv4 Inbound filter for updates from this neighbor. Source router.prefix-list.name.
                     prefix-list-in6:
                         description:
-                            - IPv6 Inbound filter for updates from this neighbor. Source: router.prefix-list6.name.
+                            - IPv6 Inbound filter for updates from this neighbor. Source router.prefix-list6.name.
                     prefix-list-out:
                         description:
-                            - IPv4 Outbound filter for updates to this neighbor. Source: router.prefix-list.name.
+                            - IPv4 Outbound filter for updates to this neighbor. Source router.prefix-list.name.
                     prefix-list-out6:
                         description:
-                            - IPv6 Outbound filter for updates to this neighbor. Source: router.prefix-list6.name.
+                            - IPv6 Outbound filter for updates to this neighbor. Source router.prefix-list6.name.
                     remote-as:
                         description:
                             - AS number of neighbor.
@@ -985,16 +989,16 @@ options:
                             - Time to retain stale routes.
                     route-map-in:
                         description:
-                            - IPv4 Inbound route map filter. Source: router.route-map.name.
+                            - IPv4 Inbound route map filter. Source router.route-map.name.
                     route-map-in6:
                         description:
-                            - IPv6 Inbound route map filter. Source: router.route-map.name.
+                            - IPv6 Inbound route map filter. Source router.route-map.name.
                     route-map-out:
                         description:
-                            - IPv4 Outbound route map filter. Source: router.route-map.name.
+                            - IPv4 Outbound route map filter. Source router.route-map.name.
                     route-map-out6:
                         description:
-                            - IPv6 Outbound route map filter. Source: router.route-map.name.
+                            - IPv6 Outbound route map filter. Source router.route-map.name.
                     route-reflector-client:
                         description:
                             - Enable/disable IPv4 AS route reflector client.
@@ -1067,13 +1071,13 @@ options:
                             - disable
                     unsuppress-map:
                         description:
-                            - IPv4 Route map to selectively unsuppress suppressed routes. Source: router.route-map.name.
+                            - IPv4 Route map to selectively unsuppress suppressed routes. Source router.route-map.name.
                     unsuppress-map6:
                         description:
-                            - IPv6 Route map to selectively unsuppress suppressed routes. Source: router.route-map.name.
+                            - IPv6 Route map to selectively unsuppress suppressed routes. Source router.route-map.name.
                     update-source:
                         description:
-                            - Interface to use as source IP/IPv6 address of TCP connections. Source: system.interface.name.
+                            - Interface to use as source IP/IPv6 address of TCP connections. Source system.interface.name.
                     weight:
                         description:
                             - Neighbor weight.
@@ -1090,7 +1094,7 @@ options:
                             - Maximum number of neighbors.
                     neighbor-group:
                         description:
-                            - Neighbor group name. Source: router.bgp.neighbor-group.name.
+                            - Neighbor group name. Source router.bgp.neighbor-group.name.
                     prefix:
                         description:
                             - Neighbor range prefix.
@@ -1113,7 +1117,7 @@ options:
                             - Network prefix.
                     route-map:
                         description:
-                            - Route map to modify generated route. Source: router.route-map.name.
+                            - Route map to modify generated route. Source router.route-map.name.
             network-import-check:
                 description:
                     - Enable/disable ensure BGP network route exists in IGP.
@@ -1139,7 +1143,7 @@ options:
                             - Network IPv6 prefix.
                     route-map:
                         description:
-                            - Route map to modify generated route. Source: router.route-map.name.
+                            - Route map to modify generated route. Source router.route-map.name.
             redistribute:
                 description:
                     - BGP IPv4 redistribute table.
@@ -1150,7 +1154,7 @@ options:
                         required: true
                     route-map:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - Status
@@ -1167,7 +1171,7 @@ options:
                         required: true
                     route-map:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - Status
@@ -1198,18 +1202,17 @@ EXAMPLES = '''
   tasks:
   - name: Configure BGP.
     fortios_router_bgp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_bgp:
-        state: "present"
         admin-distance:
          -
             distance: "4"
             id:  "5"
             neighbour-prefix: "<your_own_value>"
-            route-list: "<your_own_value> (source: router.access-list.name)"
+            route-list: "<your_own_value> (source router.access-list.name)"
         aggregate-address:
          -
             as-set: "enable"
@@ -1239,7 +1242,7 @@ EXAMPLES = '''
         dampening-max-suppress-time: "31"
         dampening-reachability-half-life: "32"
         dampening-reuse: "33"
-        dampening-route-map: "<your_own_value> (source: router.route-map.name)"
+        dampening-route-map: "<your_own_value> (source router.route-map.name)"
         dampening-suppress: "35"
         dampening-unreachability-half-life: "36"
         default-local-preference: "37"
@@ -1284,26 +1287,26 @@ EXAMPLES = '''
             capability-route-refresh: "enable"
             conditional-advertise:
              -
-                advertise-routemap: "<your_own_value> (source: router.route-map.name)"
-                condition-routemap: "<your_own_value> (source: router.route-map.name)"
+                advertise-routemap: "<your_own_value> (source router.route-map.name)"
+                condition-routemap: "<your_own_value> (source router.route-map.name)"
                 condition-type: "exist"
             connect-timer: "80"
-            default-originate-routemap: "<your_own_value> (source: router.route-map.name)"
-            default-originate-routemap6: "<your_own_value> (source: router.route-map.name)"
+            default-originate-routemap: "<your_own_value> (source router.route-map.name)"
+            default-originate-routemap6: "<your_own_value> (source router.route-map.name)"
             description: "<your_own_value>"
-            distribute-list-in: "<your_own_value> (source: router.access-list.name)"
-            distribute-list-in6: "<your_own_value> (source: router.access-list6.name)"
-            distribute-list-out: "<your_own_value> (source: router.access-list.name)"
-            distribute-list-out6: "<your_own_value> (source: router.access-list6.name)"
+            distribute-list-in: "<your_own_value> (source router.access-list.name)"
+            distribute-list-in6: "<your_own_value> (source router.access-list6.name)"
+            distribute-list-out: "<your_own_value> (source router.access-list.name)"
+            distribute-list-out6: "<your_own_value> (source router.access-list6.name)"
             dont-capability-negotiate: "enable"
             ebgp-enforce-multihop: "enable"
             ebgp-multihop-ttl: "90"
-            filter-list-in: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-in6: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-out: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-out6: "<your_own_value> (source: router.aspath-list.name)"
+            filter-list-in: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-in6: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-out: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-out6: "<your_own_value> (source router.aspath-list.name)"
             holdtime-timer: "95"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             ip: "<your_own_value>"
             keep-alive-timer: "98"
             link-down-failover: "enable"
@@ -1321,19 +1324,19 @@ EXAMPLES = '''
             override-capability: "enable"
             passive: "enable"
             password: "<your_own_value>"
-            prefix-list-in: "<your_own_value> (source: router.prefix-list.name)"
-            prefix-list-in6: "<your_own_value> (source: router.prefix-list6.name)"
-            prefix-list-out: "<your_own_value> (source: router.prefix-list.name)"
-            prefix-list-out6: "<your_own_value> (source: router.prefix-list6.name)"
+            prefix-list-in: "<your_own_value> (source router.prefix-list.name)"
+            prefix-list-in6: "<your_own_value> (source router.prefix-list6.name)"
+            prefix-list-out: "<your_own_value> (source router.prefix-list.name)"
+            prefix-list-out6: "<your_own_value> (source router.prefix-list6.name)"
             remote-as: "118"
             remove-private-as: "enable"
             remove-private-as6: "enable"
             restart-time: "121"
             retain-stale-time: "122"
-            route-map-in: "<your_own_value> (source: router.route-map.name)"
-            route-map-in6: "<your_own_value> (source: router.route-map.name)"
-            route-map-out: "<your_own_value> (source: router.route-map.name)"
-            route-map-out6: "<your_own_value> (source: router.route-map.name)"
+            route-map-in: "<your_own_value> (source router.route-map.name)"
+            route-map-in6: "<your_own_value> (source router.route-map.name)"
+            route-map-out: "<your_own_value> (source router.route-map.name)"
+            route-map-out6: "<your_own_value> (source router.route-map.name)"
             route-reflector-client: "enable"
             route-reflector-client6: "enable"
             route-server-client: "enable"
@@ -1345,9 +1348,9 @@ EXAMPLES = '''
             soft-reconfiguration6: "enable"
             stale-route: "enable"
             strict-capability-match: "enable"
-            unsuppress-map: "<your_own_value> (source: router.route-map.name)"
-            unsuppress-map6: "<your_own_value> (source: router.route-map.name)"
-            update-source: "<your_own_value> (source: system.interface.name)"
+            unsuppress-map: "<your_own_value> (source router.route-map.name)"
+            unsuppress-map6: "<your_own_value> (source router.route-map.name)"
+            update-source: "<your_own_value> (source system.interface.name)"
             weight: "141"
         neighbor-group:
          -
@@ -1372,22 +1375,22 @@ EXAMPLES = '''
             capability-orf6: "none"
             capability-route-refresh: "enable"
             connect-timer: "163"
-            default-originate-routemap: "<your_own_value> (source: router.route-map.name)"
-            default-originate-routemap6: "<your_own_value> (source: router.route-map.name)"
+            default-originate-routemap: "<your_own_value> (source router.route-map.name)"
+            default-originate-routemap6: "<your_own_value> (source router.route-map.name)"
             description: "<your_own_value>"
-            distribute-list-in: "<your_own_value> (source: router.access-list.name)"
-            distribute-list-in6: "<your_own_value> (source: router.access-list6.name)"
-            distribute-list-out: "<your_own_value> (source: router.access-list.name)"
-            distribute-list-out6: "<your_own_value> (source: router.access-list6.name)"
+            distribute-list-in: "<your_own_value> (source router.access-list.name)"
+            distribute-list-in6: "<your_own_value> (source router.access-list6.name)"
+            distribute-list-out: "<your_own_value> (source router.access-list.name)"
+            distribute-list-out6: "<your_own_value> (source router.access-list6.name)"
             dont-capability-negotiate: "enable"
             ebgp-enforce-multihop: "enable"
             ebgp-multihop-ttl: "173"
-            filter-list-in: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-in6: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-out: "<your_own_value> (source: router.aspath-list.name)"
-            filter-list-out6: "<your_own_value> (source: router.aspath-list.name)"
+            filter-list-in: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-in6: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-out: "<your_own_value> (source router.aspath-list.name)"
+            filter-list-out6: "<your_own_value> (source router.aspath-list.name)"
             holdtime-timer: "178"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             keep-alive-timer: "180"
             link-down-failover: "enable"
             local-as: "182"
@@ -1404,19 +1407,19 @@ EXAMPLES = '''
             next-hop-self6: "enable"
             override-capability: "enable"
             passive: "enable"
-            prefix-list-in: "<your_own_value> (source: router.prefix-list.name)"
-            prefix-list-in6: "<your_own_value> (source: router.prefix-list6.name)"
-            prefix-list-out: "<your_own_value> (source: router.prefix-list.name)"
-            prefix-list-out6: "<your_own_value> (source: router.prefix-list6.name)"
+            prefix-list-in: "<your_own_value> (source router.prefix-list.name)"
+            prefix-list-in6: "<your_own_value> (source router.prefix-list6.name)"
+            prefix-list-out: "<your_own_value> (source router.prefix-list.name)"
+            prefix-list-out6: "<your_own_value> (source router.prefix-list6.name)"
             remote-as: "200"
             remove-private-as: "enable"
             remove-private-as6: "enable"
             restart-time: "203"
             retain-stale-time: "204"
-            route-map-in: "<your_own_value> (source: router.route-map.name)"
-            route-map-in6: "<your_own_value> (source: router.route-map.name)"
-            route-map-out: "<your_own_value> (source: router.route-map.name)"
-            route-map-out6: "<your_own_value> (source: router.route-map.name)"
+            route-map-in: "<your_own_value> (source router.route-map.name)"
+            route-map-in6: "<your_own_value> (source router.route-map.name)"
+            route-map-out: "<your_own_value> (source router.route-map.name)"
+            route-map-out6: "<your_own_value> (source router.route-map.name)"
             route-reflector-client: "enable"
             route-reflector-client6: "enable"
             route-server-client: "enable"
@@ -1428,38 +1431,38 @@ EXAMPLES = '''
             soft-reconfiguration6: "enable"
             stale-route: "enable"
             strict-capability-match: "enable"
-            unsuppress-map: "<your_own_value> (source: router.route-map.name)"
-            unsuppress-map6: "<your_own_value> (source: router.route-map.name)"
-            update-source: "<your_own_value> (source: system.interface.name)"
+            unsuppress-map: "<your_own_value> (source router.route-map.name)"
+            unsuppress-map6: "<your_own_value> (source router.route-map.name)"
+            update-source: "<your_own_value> (source system.interface.name)"
             weight: "223"
         neighbor-range:
          -
             id:  "225"
             max-neighbor-num: "226"
-            neighbor-group: "<your_own_value> (source: router.bgp.neighbor-group.name)"
+            neighbor-group: "<your_own_value> (source router.bgp.neighbor-group.name)"
             prefix: "<your_own_value>"
         network:
          -
             backdoor: "enable"
             id:  "231"
             prefix: "<your_own_value>"
-            route-map: "<your_own_value> (source: router.route-map.name)"
+            route-map: "<your_own_value> (source router.route-map.name)"
         network-import-check: "enable"
         network6:
          -
             backdoor: "enable"
             id:  "237"
             prefix6: "<your_own_value>"
-            route-map: "<your_own_value> (source: router.route-map.name)"
+            route-map: "<your_own_value> (source router.route-map.name)"
         redistribute:
          -
             name: "default_name_241"
-            route-map: "<your_own_value> (source: router.route-map.name)"
+            route-map: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         redistribute6:
          -
             name: "default_name_245"
-            route-map: "<your_own_value> (source: router.route-map.name)"
+            route-map: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         router-id: "<your_own_value>"
         scan-time: "249"
@@ -1525,6 +1528,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -1573,26 +1578,14 @@ def router_bgp(data, fos):
     vdom = data['vdom']
     router_bgp_data = data['router_bgp']
     filtered_data = filter_router_bgp_data(router_bgp_data)
-
-    if router_bgp_data['state'] == "present":
-        return fos.set('router',
-                       'bgp',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_bgp_data['state'] == "absent":
-        return fos.delete('router',
-                          'bgp',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'bgp',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_bgp']
     for method in methodlist:
@@ -1610,16 +1603,15 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_bgp": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "admin-distance": {"required": False, "type": "list",
                                    "options": {
                                        "distance": {"required": False, "type": "int"},
                                        "id": {"required": True, "type": "int"},
-                                       "neighbour-prefix": {"required": False, "type": "ipv4-classnet"},
+                                       "neighbour-prefix": {"required": False, "type": "str"},
                                        "route-list": {"required": False, "type": "str"}
                                    }},
                 "aggregate-address": {"required": False, "type": "list",
@@ -1627,7 +1619,7 @@ def main():
                                           "as-set": {"required": False, "type": "str",
                                                      "choices": ["enable", "disable"]},
                                           "id": {"required": True, "type": "int"},
-                                          "prefix": {"required": False, "type": "ipv4-classnet-any"},
+                                          "prefix": {"required": False, "type": "str"},
                                           "summary-only": {"required": False, "type": "str",
                                                            "choices": ["enable", "disable"]}
                                       }},
@@ -1636,7 +1628,7 @@ def main():
                                            "as-set": {"required": False, "type": "str",
                                                       "choices": ["enable", "disable"]},
                                            "id": {"required": True, "type": "int"},
-                                           "prefix6": {"required": False, "type": "ipv6-prefix"},
+                                           "prefix6": {"required": False, "type": "str"},
                                            "summary-only": {"required": False, "type": "str",
                                                             "choices": ["enable", "disable"]}
                                        }},
@@ -1655,11 +1647,11 @@ def main():
                                                   "choices": ["enable", "disable"]},
                 "client-to-client-reflection": {"required": False, "type": "str",
                                                 "choices": ["enable", "disable"]},
-                "cluster-id": {"required": False, "type": "ipv4-address-any"},
+                "cluster-id": {"required": False, "type": "str"},
                 "confederation-identifier": {"required": False, "type": "int"},
                 "confederation-peers": {"required": False, "type": "list",
                                         "options": {
-                                            "peer": {"required": False, "type": "str"}
+                                            "peer": {"required": True, "type": "str"}
                                         }},
                 "dampening": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]},
@@ -1739,7 +1731,7 @@ def main():
                                                               "choices": ["enable", "disable"]},
                                  "conditional-advertise": {"required": False, "type": "list",
                                                            "options": {
-                                                               "advertise-routemap": {"required": False, "type": "str"},
+                                                               "advertise-routemap": {"required": True, "type": "str"},
                                                                "condition-routemap": {"required": False, "type": "str"},
                                                                "condition-type": {"required": False, "type": "str",
                                                                                   "choices": ["exist", "non-exist"]}
@@ -1763,7 +1755,7 @@ def main():
                                  "filter-list-out6": {"required": False, "type": "str"},
                                  "holdtime-timer": {"required": False, "type": "int"},
                                  "interface": {"required": False, "type": "str"},
-                                 "ip": {"required": False, "type": "str"},
+                                 "ip": {"required": True, "type": "str"},
                                  "keep-alive-timer": {"required": False, "type": "int"},
                                  "link-down-failover": {"required": False, "type": "str",
                                                         "choices": ["enable", "disable"]},
@@ -1788,7 +1780,7 @@ def main():
                                                          "choices": ["enable", "disable"]},
                                  "passive": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},
-                                 "password": {"required": False, "type": "password"},
+                                 "password": {"required": False, "type": "str"},
                                  "prefix-list-in": {"required": False, "type": "str"},
                                  "prefix-list-in6": {"required": False, "type": "str"},
                                  "prefix-list-out": {"required": False, "type": "str"},
@@ -1967,14 +1959,14 @@ def main():
                                        "id": {"required": True, "type": "int"},
                                        "max-neighbor-num": {"required": False, "type": "int"},
                                        "neighbor-group": {"required": False, "type": "str"},
-                                       "prefix": {"required": False, "type": "ipv4-classnet"}
+                                       "prefix": {"required": False, "type": "str"}
                                    }},
                 "network": {"required": False, "type": "list",
                             "options": {
                                 "backdoor": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},
                                 "id": {"required": True, "type": "int"},
-                                "prefix": {"required": False, "type": "ipv4-classnet"},
+                                "prefix": {"required": False, "type": "str"},
                                 "route-map": {"required": False, "type": "str"}
                             }},
                 "network-import-check": {"required": False, "type": "str",
@@ -1984,7 +1976,7 @@ def main():
                                  "backdoor": {"required": False, "type": "str",
                                               "choices": ["enable", "disable"]},
                                  "id": {"required": True, "type": "int"},
-                                 "prefix6": {"required": False, "type": "ipv6-network"},
+                                 "prefix6": {"required": False, "type": "str"},
                                  "route-map": {"required": False, "type": "str"}
                              }},
                 "redistribute": {"required": False, "type": "list",
@@ -2001,7 +1993,7 @@ def main():
                                       "status": {"required": False, "type": "str",
                                                  "choices": ["enable", "disable"]}
                                   }},
-                "router-id": {"required": False, "type": "ipv4-address-any"},
+                "router-id": {"required": False, "type": "str"},
                 "scan-time": {"required": False, "type": "int"},
                 "synchronization": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]}
@@ -2017,6 +2009,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

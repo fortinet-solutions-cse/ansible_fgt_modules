@@ -7,10 +7,10 @@
   tasks:
   - name: Configure AntiSpam banned word list.
     fortios_spamfilter_bword:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_bword:
         state: "present"
         comment: "Optional comments."

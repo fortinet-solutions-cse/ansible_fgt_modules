@@ -7,10 +7,10 @@
   tasks:
   - name: Configure RADIUS server entries.
     fortios_user_radius:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_radius:
         state: "present"
         accounting-server:

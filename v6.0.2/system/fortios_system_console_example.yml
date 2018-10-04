@@ -7,12 +7,11 @@
   tasks:
   - name: Configure console.
     fortios_system_console:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_console:
-        state: "present"
         baudrate: "9600"
         login: "enable"
         mode: "batch"

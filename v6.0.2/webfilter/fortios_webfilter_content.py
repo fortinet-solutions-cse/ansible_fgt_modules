@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and content category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     webfilter_content:
         description:
             - Configure Web filter banned word table.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Optional comments.
@@ -103,7 +110,7 @@ options:
                         required: true
                     pattern-type:
                         description:
-                            - Banned word pattern type: wildcard pattern or Perl regular expression.
+                            - "Banned word pattern type: wildcard pattern or Perl regular expression."
                         choices:
                             - wildcard
                             - regexp
@@ -123,7 +130,6 @@ options:
             name:
                 description:
                     - Name of table.
-                required: true
 '''
 
 EXAMPLES = '''
@@ -136,10 +142,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure Web filter banned word table.
     fortios_webfilter_content:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_content:
         state: "present"
         comment: "Optional comments."
@@ -214,6 +220,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -247,7 +255,6 @@ def webfilter_content(data, fos):
     vdom = data['vdom']
     webfilter_content_data = data['webfilter_content']
     filtered_data = filter_webfilter_content_data(webfilter_content_data)
-
     if webfilter_content_data['state'] == "present":
         return fos.set('webfilter',
                        'content',
@@ -262,11 +269,7 @@ def webfilter_content(data, fos):
 
 
 def fortios_webfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['webfilter_content']
     for method in methodlist:
@@ -284,11 +287,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "webfilter_content": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "entries": {"required": False, "type": "list",
                             "options": {
@@ -306,7 +310,7 @@ def main():
                                            "choices": ["enable", "disable"]}
                             }},
                 "id": {"required": True, "type": "int"},
-                "name": {"required": True, "type": "str"}
+                "name": {"required": False, "type": "str"}
 
             }
         }
@@ -319,6 +323,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_webfilter(module.params, fos)

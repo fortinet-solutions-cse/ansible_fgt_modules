@@ -7,11 +7,10 @@
   tasks:
   - name: Settings for memory buffer.
     fortios_log.memory_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.memory_setting:
-        state: "present"
         diskfull: "overwrite"
         status: "enable"

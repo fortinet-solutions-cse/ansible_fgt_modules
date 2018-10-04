@@ -1,0 +1,45 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 interface policies.
+    fortios_firewall_interface_policy6:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_interface_policy6:
+        state: "present"
+        address-type: "ipv4"
+        application-list: "<your_own_value> (source application.list.name)"
+        application-list-status: "enable"
+        av-profile: "<your_own_value> (source antivirus.profile.name)"
+        av-profile-status: "enable"
+        comments: "<your_own_value>"
+        dlp-sensor: "<your_own_value> (source dlp.sensor.name)"
+        dlp-sensor-status: "enable"
+        dsri: "enable"
+        dstaddr6:
+         -
+            name: "default_name_13 (source firewall.address6.name firewall.addrgrp6.name)"
+        interface: "<your_own_value> (source system.zone.name system.interface.name)"
+        ips-sensor: "<your_own_value> (source ips.sensor.name)"
+        ips-sensor-status: "enable"
+        label: "<your_own_value>"
+        logtraffic: "all"
+        policyid: "19"
+        scan-botnet-connections: "disable"
+        service6:
+         -
+            name: "default_name_22 (source firewall.service.custom.name firewall.service.group.name)"
+        spamfilter-profile: "<your_own_value> (source spamfilter.profile.name)"
+        spamfilter-profile-status: "enable"
+        srcaddr6:
+         -
+            name: "default_name_26 (source firewall.address6.name firewall.addrgrp6.name)"
+        status: "enable"
+        webfilter-profile: "<your_own_value> (source webfilter.profile.name)"
+        webfilter-profile-status: "enable"

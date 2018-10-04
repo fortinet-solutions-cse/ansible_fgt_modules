@@ -7,13 +7,13 @@
   tasks:
   - name: Configure WAN optimization profiles.
     fortios_wanopt_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       wanopt_profile:
         state: "present"
-        auth-group: "<your_own_value> (source: wanopt.auth-group.name)"
+        auth-group: "<your_own_value> (source wanopt.auth-group.name)"
         cifs:
             byte-caching: "enable"
             log-traffic: "enable"

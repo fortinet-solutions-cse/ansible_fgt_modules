@@ -7,12 +7,11 @@
   tasks:
   - name: Filters for FortiCloud.
     fortios_log.fortiguard_filter:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.fortiguard_filter:
-        state: "present"
         anomaly: "enable"
         dlp-archive: "enable"
         dns: "enable"

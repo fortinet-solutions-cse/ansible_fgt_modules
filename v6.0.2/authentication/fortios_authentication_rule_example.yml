@@ -7,24 +7,24 @@
   tasks:
   - name: Configure Authentication Rules.
     fortios_authentication_rule:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_rule:
         state: "present"
-        active-auth-method: "<your_own_value> (source: authentication.scheme.name)"
+        active-auth-method: "<your_own_value> (source authentication.scheme.name)"
         comments: "<your_own_value>"
         ip-based: "enable"
         name: "default_name_6"
         protocol: "http"
         srcaddr:
          -
-            name: "default_name_9 (source: firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
         srcaddr6:
          -
-            name: "default_name_11 (source: firewall.address6.name firewall.addrgrp6.name)"
-        sso-auth-method: "<your_own_value> (source: authentication.scheme.name)"
+            name: "default_name_11 (source firewall.address6.name firewall.addrgrp6.name)"
+        sso-auth-method: "<your_own_value> (source authentication.scheme.name)"
         status: "enable"
         transaction-based: "enable"
         web-auth-cookie: "enable"

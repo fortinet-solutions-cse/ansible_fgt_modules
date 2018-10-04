@@ -7,12 +7,11 @@
   tasks:
   - name: Configure sFlow.
     fortios_system_sflow:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_sflow:
-        state: "present"
         collector-ip: "<your_own_value>"
         collector-port: "4"
         source-ip: "84.230.14.43"

@@ -7,10 +7,10 @@
   tasks:
   - name: Configure ICAP servers.
     fortios_icap_server:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       icap_server:
         state: "present"
         ip-address: "<your_own_value>"

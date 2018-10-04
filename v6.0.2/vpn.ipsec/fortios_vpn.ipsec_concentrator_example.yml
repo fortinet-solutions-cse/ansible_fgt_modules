@@ -7,14 +7,14 @@
   tasks:
   - name: Concentrator configuration.
     fortios_vpn.ipsec_concentrator:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ipsec_concentrator:
         state: "present"
         member:
          -
-            name: "default_name_4 (source: vpn.ipsec.manualkey.name vpn.ipsec.phase1.name)"
+            name: "default_name_4 (source vpn.ipsec.manualkey.name vpn.ipsec.phase1.name)"
         name: "default_name_5"
         src-check: "disable"

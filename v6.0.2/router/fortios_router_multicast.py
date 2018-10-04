@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and multicast category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_multicast:
         description:
             - Configure router multicast.
@@ -102,10 +103,10 @@ options:
                         suboptions:
                             access-group:
                                 description:
-                                    - Groups IGMP hosts are allowed to join. Source: router.access-list.name.
+                                    - Groups IGMP hosts are allowed to join. Source router.access-list.name.
                             immediate-leave-group:
                                 description:
-                                    - Groups to drop membership for immediately after receiving IGMPv2 leave. Source: router.access-list.name.
+                                    - Groups to drop membership for immediately after receiving IGMPv2 leave. Source router.access-list.name.
                             last-member-query-count:
                                 description:
                                     - Number of group specific queries before removing group (2 - 7, default = 2).
@@ -141,16 +142,17 @@ options:
                             address:
                                 description:
                                     - Multicast group IP address.
+                                required: true
                     multicast-flow:
                         description:
-                            - Acceptable source for multicast group. Source: router.multicast-flow.name.
+                            - Acceptable source for multicast group. Source router.multicast-flow.name.
                     name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                         required: true
                     neighbour-filter:
                         description:
-                            - Routers acknowledged as neighbor routers. Source: router.access-list.name.
+                            - Routers acknowledged as neighbor routers. Source router.access-list.name.
                     passive:
                         description:
                             - Enable/disable listening to IGMP but not participating in PIM.
@@ -174,7 +176,7 @@ options:
                             - disable
                     rp-candidate-group:
                         description:
-                            - Multicast groups managed by this RP. Source: router.access-list.name.
+                            - Multicast groups managed by this RP. Source router.access-list.name.
                     rp-candidate-interval:
                         description:
                             - RP candidate advertisement interval (1 - 16383 sec, default = 60).
@@ -186,7 +188,7 @@ options:
                             - Interval between sending state-refresh packets (1 - 100 sec, default = 60).
                     static-group:
                         description:
-                            - Statically set multicast groups to forward out. Source: router.multicast-flow.name.
+                            - Statically set multicast groups to forward out. Source router.multicast-flow.name.
                     ttl-threshold:
                         description:
                             - Minimum TTL of multicast packets that will be forwarded (applied only to new multicast routes) (1 - 255, default = 1).
@@ -202,10 +204,10 @@ options:
                 suboptions:
                     accept-register-list:
                         description:
-                            - Sources allowed to register packets with this Rendezvous Point (RP). Source: router.access-list.name.
+                            - Sources allowed to register packets with this Rendezvous Point (RP). Source router.access-list.name.
                     accept-source-list:
                         description:
-                            - Sources allowed to send multicast traffic. Source: router.access-list.name.
+                            - Sources allowed to send multicast traffic. Source router.access-list.name.
                     bsr-allow-quick-refresh:
                         description:
                             - Enable/disable accept BSR quick refresh packets from neighbors.
@@ -223,7 +225,7 @@ options:
                             - BSR hash length (0 - 32, default = 10).
                     bsr-interface:
                         description:
-                            - Interface to advertise as candidate BSR. Source: system.interface.name.
+                            - Interface to advertise as candidate BSR. Source system.interface.name.
                     bsr-priority:
                         description:
                             - BSR priority (0 - 255, default = 0).
@@ -247,7 +249,7 @@ options:
                             - disable
                     cisco-register-checksum-group:
                         description:
-                            - Cisco register checksum only these groups. Source: router.access-list.name.
+                            - Cisco register checksum only these groups. Source router.access-list.name.
                     join-prune-holdtime:
                         description:
                             - Join/prune holdtime (1 - 65535, default = 210).
@@ -275,7 +277,7 @@ options:
                             - ip-address
                     register-source-interface:
                         description:
-                            - Override with primary interface address. Source: system.interface.name.
+                            - Override with primary interface address. Source system.interface.name.
                     register-source-ip:
                         description:
                             - Override with local IP address.
@@ -288,7 +290,7 @@ options:
                         suboptions:
                             group:
                                 description:
-                                    - Groups to use this RP. Source: router.access-list.name.
+                                    - Groups to use this RP. Source router.access-list.name.
                             id:
                                 description:
                                     - ID.
@@ -307,7 +309,7 @@ options:
                             - disable
                     spt-threshold-group:
                         description:
-                            - Groups allowed to switch to source tree. Source: router.access-list.name.
+                            - Groups allowed to switch to source tree. Source router.access-list.name.
                     ssm:
                         description:
                             - Enable/disable source specific multicast.
@@ -316,7 +318,7 @@ options:
                             - disable
                     ssm-range:
                         description:
-                            - Groups allowed to source specific multicast. Source: router.access-list.name.
+                            - Groups allowed to source specific multicast. Source router.access-list.name.
             route-limit:
                 description:
                     - Maximum number of multicast routes.
@@ -335,12 +337,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure router multicast.
     fortios_router_multicast:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_multicast:
-        state: "present"
         interface:
          -
             bfd: "enable"
@@ -349,8 +350,8 @@ EXAMPLES = '''
             hello-holdtime: "7"
             hello-interval: "8"
             igmp:
-                access-group: "<your_own_value> (source: router.access-list.name)"
-                immediate-leave-group: "<your_own_value> (source: router.access-list.name)"
+                access-group: "<your_own_value> (source router.access-list.name)"
+                immediate-leave-group: "<your_own_value> (source router.access-list.name)"
                 last-member-query-count: "12"
                 last-member-query-interval: "13"
                 query-interval: "14"
@@ -361,51 +362,51 @@ EXAMPLES = '''
             join-group:
              -
                 address: "<your_own_value>"
-            multicast-flow: "<your_own_value> (source: router.multicast-flow.name)"
-            name: "default_name_22 (source: system.interface.name)"
-            neighbour-filter: "<your_own_value> (source: router.access-list.name)"
+            multicast-flow: "<your_own_value> (source router.multicast-flow.name)"
+            name: "default_name_22 (source system.interface.name)"
+            neighbour-filter: "<your_own_value> (source router.access-list.name)"
             passive: "enable"
             pim-mode: "sparse-mode"
             propagation-delay: "26"
             rp-candidate: "enable"
-            rp-candidate-group: "<your_own_value> (source: router.access-list.name)"
+            rp-candidate-group: "<your_own_value> (source router.access-list.name)"
             rp-candidate-interval: "29"
             rp-candidate-priority: "30"
             state-refresh-interval: "31"
-            static-group: "<your_own_value> (source: router.multicast-flow.name)"
+            static-group: "<your_own_value> (source router.multicast-flow.name)"
             ttl-threshold: "33"
         multicast-routing: "enable"
         pim-sm-global:
-            accept-register-list: "<your_own_value> (source: router.access-list.name)"
-            accept-source-list: "<your_own_value> (source: router.access-list.name)"
+            accept-register-list: "<your_own_value> (source router.access-list.name)"
+            accept-source-list: "<your_own_value> (source router.access-list.name)"
             bsr-allow-quick-refresh: "enable"
             bsr-candidate: "enable"
             bsr-hash: "40"
-            bsr-interface: "<your_own_value> (source: system.interface.name)"
+            bsr-interface: "<your_own_value> (source system.interface.name)"
             bsr-priority: "42"
             cisco-crp-prefix: "enable"
             cisco-ignore-rp-set-priority: "enable"
             cisco-register-checksum: "enable"
-            cisco-register-checksum-group: "<your_own_value> (source: router.access-list.name)"
+            cisco-register-checksum-group: "<your_own_value> (source router.access-list.name)"
             join-prune-holdtime: "47"
             message-interval: "48"
             null-register-retries: "49"
             register-rate-limit: "50"
             register-rp-reachability: "enable"
             register-source: "disable"
-            register-source-interface: "<your_own_value> (source: system.interface.name)"
+            register-source-interface: "<your_own_value> (source system.interface.name)"
             register-source-ip: "<your_own_value>"
             register-supression: "55"
             rp-address:
              -
-                group: "<your_own_value> (source: router.access-list.name)"
+                group: "<your_own_value> (source router.access-list.name)"
                 id:  "58"
                 ip-address: "<your_own_value>"
             rp-register-keepalive: "60"
             spt-threshold: "enable"
-            spt-threshold-group: "<your_own_value> (source: router.access-list.name)"
+            spt-threshold-group: "<your_own_value> (source router.access-list.name)"
             ssm: "enable"
-            ssm-range: "<your_own_value> (source: router.access-list.name)"
+            ssm-range: "<your_own_value> (source router.access-list.name)"
         route-limit: "65"
         route-threshold: "66"
 '''
@@ -469,6 +470,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -502,26 +505,14 @@ def router_multicast(data, fos):
     vdom = data['vdom']
     router_multicast_data = data['router_multicast']
     filtered_data = filter_router_multicast_data(router_multicast_data)
-
-    if router_multicast_data['state'] == "present":
-        return fos.set('router',
-                       'multicast',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_multicast_data['state'] == "absent":
-        return fos.delete('router',
-                          'multicast',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'multicast',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_multicast']
     for method in methodlist:
@@ -539,11 +530,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_multicast": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "interface": {"required": False, "type": "list",
                               "options": {
                                   "bfd": {"required": False, "type": "str",
@@ -569,7 +559,7 @@ def main():
                                            }},
                                   "join-group": {"required": False, "type": "list",
                                                  "options": {
-                                                     "address": {"required": False, "type": "ipv4-address-any"}
+                                                     "address": {"required": True, "type": "str"}
                                                  }},
                                   "multicast-flow": {"required": False, "type": "str"},
                                   "name": {"required": True, "type": "str"},
@@ -617,13 +607,13 @@ def main():
                                       "register-source": {"required": False, "type": "str",
                                                           "choices": ["disable", "interface", "ip-address"]},
                                       "register-source-interface": {"required": False, "type": "str"},
-                                      "register-source-ip": {"required": False, "type": "ipv4-address"},
+                                      "register-source-ip": {"required": False, "type": "str"},
                                       "register-supression": {"required": False, "type": "int"},
                                       "rp-address": {"required": False, "type": "list",
                                                      "options": {
                                                          "group": {"required": False, "type": "str"},
                                                          "id": {"required": True, "type": "int"},
-                                                         "ip-address": {"required": False, "type": "ipv4-address"}
+                                                         "ip-address": {"required": False, "type": "str"}
                                                      }},
                                       "rp-register-keepalive": {"required": False, "type": "int"},
                                       "spt-threshold": {"required": False, "type": "str",
@@ -647,6 +637,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

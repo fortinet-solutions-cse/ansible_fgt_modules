@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and dnstranslation category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,28 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_dnstranslation:
         description:
             - Configure DNS translation.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             dst:
                 description:
-                    - IPv4 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or subnet on the external network, but number of addresses must equal number of mapped IP addresses in src.
+                    - IPv4 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or
+                       subnet on the external network, but number of addresses must equal number of mapped IP addresses in src.
             id:
                 description:
                     - ID.
@@ -83,7 +91,8 @@ options:
                     - If src and dst are subnets rather than single IP addresses, enter the netmask for both src and dst.
             src:
                 description:
-                    - IPv4 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address matches, the resolved address is substituted with dst.
+                    - IPv4 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address
+                       matches, the resolved address is substituted with dst.
 '''
 
 EXAMPLES = '''
@@ -96,10 +105,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure DNS translation.
     fortios_firewall_dnstranslation:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_dnstranslation:
         state: "present"
         dst: "<your_own_value>"
@@ -167,6 +176,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -201,7 +212,6 @@ def firewall_dnstranslation(data, fos):
     firewall_dnstranslation_data = data['firewall_dnstranslation']
     filtered_data = filter_firewall_dnstranslation_data(
         firewall_dnstranslation_data)
-
     if firewall_dnstranslation_data['state'] == "present":
         return fos.set('firewall',
                        'dnstranslation',
@@ -216,11 +226,7 @@ def firewall_dnstranslation(data, fos):
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_dnstranslation']
     for method in methodlist:
@@ -238,15 +244,16 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_dnstranslation": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "dst": {"required": False, "type": "ipv4-address"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "dst": {"required": False, "type": "str"},
                 "id": {"required": True, "type": "int"},
-                "netmask": {"required": False, "type": "ipv4-netmask"},
-                "src": {"required": False, "type": "ipv4-address"}
+                "netmask": {"required": False, "type": "str"},
+                "src": {"required": False, "type": "str"}
 
             }
         }
@@ -259,6 +266,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

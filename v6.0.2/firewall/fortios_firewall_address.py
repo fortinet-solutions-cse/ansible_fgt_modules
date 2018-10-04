@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and address category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_address:
         description:
             - Configure IPv4 addresses.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             allow-routing:
                 description:
                     - Enable/disable use of this address in the static route configuration.
@@ -79,7 +86,7 @@ options:
                     - disable
             associated-interface:
                 description:
-                    - Network interface associated with address. Source: system.interface.name system.zone.name.
+                    - Network interface associated with address. Source system.interface.name system.zone.name.
             cache-ttl:
                 description:
                     - Defines the minimal TTL of individual IP addresses in FQDN cache measured in seconds.
@@ -111,6 +118,7 @@ options:
                     ip:
                         description:
                             - IP.
+                        required: true
             name:
                 description:
                     - Address name.
@@ -120,7 +128,7 @@ options:
                     - Object ID for NSX.
             organization:
                 description:
-                    - Organization domain name (Syntax: organization/domain).
+                    - "Organization domain name (Syntax: organization/domain)."
             policy-group:
                 description:
                     - Policy group name.
@@ -153,7 +161,7 @@ options:
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -164,7 +172,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
             tenant:
                 description:
@@ -207,14 +215,14 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv4 addresses.
     fortios_firewall_address:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_address:
         state: "present"
         allow-routing: "enable"
-        associated-interface: "<your_own_value> (source: system.interface.name system.zone.name)"
+        associated-interface: "<your_own_value> (source system.interface.name system.zone.name)"
         cache-ttl: "5"
         color: "6"
         comment: "Comment."
@@ -237,11 +245,11 @@ EXAMPLES = '''
         subnet-name: "<your_own_value>"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_26"
             tags:
              -
-                name: "default_name_28 (source: system.object-tagging.tags.name)"
+                name: "default_name_28 (source system.object-tagging.tags.name)"
         tenant: "<your_own_value>"
         type: "ipmask"
         uuid: "<your_own_value>"
@@ -309,6 +317,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -349,7 +359,6 @@ def firewall_address(data, fos):
     vdom = data['vdom']
     firewall_address_data = data['firewall_address']
     filtered_data = filter_firewall_address_data(firewall_address_data)
-
     if firewall_address_data['state'] == "present":
         return fos.set('firewall',
                        'address',
@@ -359,16 +368,12 @@ def firewall_address(data, fos):
     elif firewall_address_data['state'] == "absent":
         return fos.delete('firewall',
                           'address',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_address']
     for method in methodlist:
@@ -386,11 +391,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_address": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "allow-routing": {"required": False, "type": "str",
                                   "choices": ["enable", "disable"]},
                 "associated-interface": {"required": False, "type": "str"},
@@ -398,13 +404,13 @@ def main():
                 "color": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
                 "country": {"required": False, "type": "str"},
-                "end-ip": {"required": False, "type": "ipv4-address-any"},
+                "end-ip": {"required": False, "type": "str"},
                 "epg-name": {"required": False, "type": "str"},
                 "filter": {"required": False, "type": "str"},
                 "fqdn": {"required": False, "type": "str"},
                 "list": {"required": False, "type": "list",
                          "options": {
-                             "ip": {"required": False, "type": "str"}
+                             "ip": {"required": True, "type": "str"}
                          }},
                 "name": {"required": True, "type": "str"},
                 "obj-id": {"required": False, "type": "str"},
@@ -415,8 +421,8 @@ def main():
                                     "gcp", "nsx", "nuage",
                                     "oci"]},
                 "sdn-tag": {"required": False, "type": "str"},
-                "start-ip": {"required": False, "type": "ipv4-address-any"},
-                "subnet": {"required": False, "type": "ipv4-classnet-any"},
+                "start-ip": {"required": False, "type": "str"},
+                "subnet": {"required": False, "type": "str"},
                 "subnet-name": {"required": False, "type": "str"},
                 "tagging": {"required": False, "type": "list",
                             "options": {
@@ -432,10 +438,10 @@ def main():
                          "choices": ["ipmask", "iprange", "fqdn",
                                      "geography", "wildcard", "wildcard-fqdn",
                                      "dynamic"]},
-                "uuid": {"required": False, "type": "uuid"},
+                "uuid": {"required": False, "type": "str"},
                 "visibility": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
-                "wildcard": {"required": False, "type": "ipv4-classnet-any"},
+                "wildcard": {"required": False, "type": "str"},
                 "wildcard-fqdn": {"required": False, "type": "str"}
 
             }
@@ -449,6 +455,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

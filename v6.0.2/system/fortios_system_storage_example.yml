@@ -7,10 +7,10 @@
   tasks:
   - name: Configure logical storage.
     fortios_system_storage:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_storage:
         state: "present"
         device: "<your_own_value>"

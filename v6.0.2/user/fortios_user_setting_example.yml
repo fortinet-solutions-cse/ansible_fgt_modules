@@ -7,15 +7,14 @@
   tasks:
   - name: Configure user authentication setting.
     fortios_user_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_setting:
-        state: "present"
         auth-blackout-time: "3"
-        auth-ca-cert: "<your_own_value> (source: vpn.certificate.local.name)"
-        auth-cert: "<your_own_value> (source: vpn.certificate.local.name)"
+        auth-ca-cert: "<your_own_value> (source vpn.certificate.local.name)"
+        auth-cert: "<your_own_value> (source vpn.certificate.local.name)"
         auth-http-basic: "enable"
         auth-invalid-max: "7"
         auth-lockout-duration: "8"

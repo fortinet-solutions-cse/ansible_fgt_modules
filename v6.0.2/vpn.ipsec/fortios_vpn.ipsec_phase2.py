@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and phase2 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ipsec_phase2:
         description:
             - Configure VPN autokey tunnel.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             add-route:
                 description:
                     - Enable/disable automatic route addition.
@@ -129,10 +136,10 @@ options:
                     - Remote proxy ID IPv6 end.
             dst-name:
                 description:
-                    - Remote proxy ID name. Source: firewall.address.name firewall.addrgrp.name.
+                    - Remote proxy ID name. Source firewall.address.name firewall.addrgrp.name.
             dst-name6:
                 description:
-                    - Remote proxy ID name. Source: firewall.address6.name firewall.addrgrp6.name.
+                    - Remote proxy ID name. Source firewall.address6.name firewall.addrgrp6.name.
             dst-port:
                 description:
                     - Quick mode destination port (1 - 65535 or 0 for all).
@@ -191,7 +198,7 @@ options:
                     - disable
             phase1name:
                 description:
-                    - Phase 1 determines the options required for phase 2. Source: vpn.ipsec.phase1.name.
+                    - Phase 1 determines the options required for phase 2. Source vpn.ipsec.phase1.name.
             proposal:
                 description:
                     - Phase2 proposal.
@@ -252,10 +259,10 @@ options:
                     - Local proxy ID IPv6 end.
             src-name:
                 description:
-                    - Local proxy ID name. Source: firewall.address.name firewall.addrgrp.name.
+                    - Local proxy ID name. Source firewall.address.name firewall.addrgrp.name.
             src-name6:
                 description:
-                    - Local proxy ID name. Source: firewall.address6.name firewall.addrgrp6.name.
+                    - Local proxy ID name. Source firewall.address6.name firewall.addrgrp6.name.
             src-port:
                 description:
                     - Quick mode source port (1 - 65535 or 0 for all).
@@ -289,10 +296,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure VPN autokey tunnel.
     fortios_vpn.ipsec_phase2:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ipsec_phase2:
         state: "present"
         add-route: "phase1"
@@ -303,8 +310,8 @@ EXAMPLES = '''
         dst-addr-type: "subnet"
         dst-end-ip: "<your_own_value>"
         dst-end-ip6: "<your_own_value>"
-        dst-name: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
-        dst-name6: "<your_own_value> (source: firewall.address6.name firewall.addrgrp6.name)"
+        dst-name: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
+        dst-name6: "<your_own_value> (source firewall.address6.name firewall.addrgrp6.name)"
         dst-port: "13"
         dst-start-ip: "<your_own_value>"
         dst-start-ip6: "<your_own_value>"
@@ -318,7 +325,7 @@ EXAMPLES = '''
         l2tp: "enable"
         name: "default_name_24"
         pfs: "enable"
-        phase1name: "<your_own_value> (source: vpn.ipsec.phase1.name)"
+        phase1name: "<your_own_value> (source vpn.ipsec.phase1.name)"
         proposal: "null-md5"
         protocol: "28"
         replay: "enable"
@@ -328,8 +335,8 @@ EXAMPLES = '''
         src-addr-type: "subnet"
         src-end-ip: "<your_own_value>"
         src-end-ip6: "<your_own_value>"
-        src-name: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
-        src-name6: "<your_own_value> (source: firewall.address6.name firewall.addrgrp6.name)"
+        src-name: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
+        src-name6: "<your_own_value> (source firewall.address6.name firewall.addrgrp6.name)"
         src-port: "38"
         src-start-ip: "<your_own_value>"
         src-start-ip6: "<your_own_value>"
@@ -397,6 +404,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -442,7 +451,6 @@ def vpn.ipsec_phase2(data, fos):
     vdom = data['vdom']
     vpn.ipsec_phase2_data = data['vpn.ipsec_phase2']
     filtered_data = filter_vpn.ipsec_phase2_data(vpn.ipsec_phase2_data)
-
     if vpn.ipsec_phase2_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'phase2',
@@ -452,16 +460,12 @@ def vpn.ipsec_phase2(data, fos):
     elif vpn.ipsec_phase2_data['state'] == "absent":
         return fos.delete('vpn.ipsec',
                           'phase2',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_vpn.ipsec(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ipsec_phase2']
     for method in methodlist:
@@ -479,11 +483,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ipsec_phase2": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "add-route": {"required": False, "type": "str",
                               "choices": ["phase1", "enable", "disable"]},
                 "auto-negotiate": {"required": False, "type": "str",
@@ -501,15 +506,15 @@ def main():
                 "dst-addr-type": {"required": False, "type": "str",
                                   "choices": ["subnet", "range", "ip",
                                               "name"]},
-                "dst-end-ip": {"required": False, "type": "ipv4-address-any"},
-                "dst-end-ip6": {"required": False, "type": "ipv6-address"},
+                "dst-end-ip": {"required": False, "type": "str"},
+                "dst-end-ip6": {"required": False, "type": "str"},
                 "dst-name": {"required": False, "type": "str"},
                 "dst-name6": {"required": False, "type": "str"},
                 "dst-port": {"required": False, "type": "int"},
-                "dst-start-ip": {"required": False, "type": "ipv4-address-any"},
-                "dst-start-ip6": {"required": False, "type": "ipv6-address"},
-                "dst-subnet": {"required": False, "type": "ipv4-classnet-any"},
-                "dst-subnet6": {"required": False, "type": "ipv6-prefix"},
+                "dst-start-ip": {"required": False, "type": "str"},
+                "dst-start-ip6": {"required": False, "type": "str"},
+                "dst-subnet": {"required": False, "type": "str"},
+                "dst-subnet6": {"required": False, "type": "str"},
                 "encapsulation": {"required": False, "type": "str",
                                   "choices": ["tunnel-mode", "transport-mode"]},
                 "keepalive": {"required": False, "type": "str",
@@ -541,15 +546,15 @@ def main():
                 "src-addr-type": {"required": False, "type": "str",
                                   "choices": ["subnet", "range", "ip",
                                               "name"]},
-                "src-end-ip": {"required": False, "type": "ipv4-address-any"},
-                "src-end-ip6": {"required": False, "type": "ipv6-address"},
+                "src-end-ip": {"required": False, "type": "str"},
+                "src-end-ip6": {"required": False, "type": "str"},
                 "src-name": {"required": False, "type": "str"},
                 "src-name6": {"required": False, "type": "str"},
                 "src-port": {"required": False, "type": "int"},
-                "src-start-ip": {"required": False, "type": "ipv4-address-any"},
-                "src-start-ip6": {"required": False, "type": "ipv6-address"},
-                "src-subnet": {"required": False, "type": "ipv4-classnet-any"},
-                "src-subnet6": {"required": False, "type": "ipv6-prefix"},
+                "src-start-ip": {"required": False, "type": "str"},
+                "src-start-ip6": {"required": False, "type": "str"},
+                "src-subnet": {"required": False, "type": "str"},
+                "src-subnet6": {"required": False, "type": "str"},
                 "use-natip": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]}
 
@@ -564,6 +569,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ipsec(module.params, fos)

@@ -7,12 +7,11 @@
   tasks:
   - name: Configure quarantine options.
     fortios_antivirus_quarantine:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       antivirus_quarantine:
-        state: "present"
         agelimit: "3"
         destination: "NULL"
         drop-blocked: "imap"

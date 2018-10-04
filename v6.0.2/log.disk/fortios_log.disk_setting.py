@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.disk feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     log.disk_setting:
         description:
             - Settings for local disk logging.
@@ -73,7 +74,8 @@ options:
         suboptions:
             diskfull:
                 description:
-                    - Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full (default = overwrite).
+                    - Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full (default =
+                       overwrite).
                 choices:
                     - overwrite
                     - nolog
@@ -129,7 +131,7 @@ options:
                     - weekly
             roll-time:
                 description:
-                    - Time of day to roll the log file (hh:mm).
+                    - "Time of day to roll the log file (hh:mm)."
             source-ip:
                 description:
                     - Source IP address to use for uploading disk log files.
@@ -184,7 +186,7 @@ options:
                     - enable
             uploadtime:
                 description:
-                    - Time of day at which log files are uploaded if uploadsched is enabled (hh:mm or hh).
+                    - "Time of day at which log files are uploaded if uploadsched is enabled (hh:mm or hh)."
             uploadtype:
                 description:
                     - Types of log files to upload. Separate multiple entries with a space.
@@ -219,12 +221,11 @@ EXAMPLES = '''
   tasks:
   - name: Settings for local disk logging.
     fortios_log.disk_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.disk_setting:
-        state: "present"
         diskfull: "overwrite"
         dlp-archive-quota: "4"
         full-final-warning-threshold: "5"
@@ -314,6 +315,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -355,26 +358,14 @@ def log.disk_setting(data, fos):
     vdom = data['vdom']
     log.disk_setting_data = data['log.disk_setting']
     filtered_data = filter_log.disk_setting_data(log.disk_setting_data)
-
-    if log.disk_setting_data['state'] == "present":
-        return fos.set('log.disk',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif log.disk_setting_data['state'] == "absent":
-        return fos.delete('log.disk',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('log.disk',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_log.disk(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['log.disk_setting']
     for method in methodlist:
@@ -392,11 +383,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "log.disk_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "diskfull": {"required": False, "type": "str",
                              "choices": ["overwrite", "nolog"]},
                 "dlp-archive-quota": {"required": False, "type": "int"},
@@ -417,7 +407,7 @@ def main():
                 "roll-schedule": {"required": False, "type": "str",
                                   "choices": ["daily", "weekly"]},
                 "roll-time": {"required": False, "type": "str"},
-                "source-ip": {"required": False, "type": "ipv4-address"},
+                "source-ip": {"required": False, "type": "str"},
                 "status": {"required": False, "type": "str",
                            "choices": ["enable", "disable"]},
                 "upload": {"required": False, "type": "str",
@@ -430,8 +420,8 @@ def main():
                                     "choices": ["default", "high", "low",
                                                 "disable"]},
                 "uploaddir": {"required": False, "type": "str"},
-                "uploadip": {"required": False, "type": "ipv4-address"},
-                "uploadpass": {"required": False, "type": "password"},
+                "uploadip": {"required": False, "type": "str"},
+                "uploadpass": {"required": False, "type": "str"},
                 "uploadport": {"required": False, "type": "int"},
                 "uploadsched": {"required": False, "type": "str",
                                 "choices": ["disable", "enable"]},
@@ -455,6 +445,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_log.disk(module.params, fos)

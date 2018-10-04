@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure antivirus feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,27 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     antivirus_profile:
         description:
             - Configure AntiVirus profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             analytics-bl-filetype:
                 description:
-                    - Only submit files matching this DLP file-pattern to FortiSandbox. Source: dlp.filepattern.id.
+                    - Only submit files matching this DLP file-pattern to FortiSandbox. Source dlp.filepattern.id.
             analytics-db:
                 description:
                     - Enable/disable using the FortiSandbox signature database to supplement the AV signature databases.
@@ -85,7 +92,7 @@ options:
                     - Maximum size of files that can be uploaded to FortiSandbox (1 - 395 MBytes, default = 10).
             analytics-wl-filetype:
                 description:
-                    - Do not submit files matching this DLP file-pattern to FortiSandbox. Source: dlp.filepattern.id.
+                    - Do not submit files matching this DLP file-pattern to FortiSandbox. Source dlp.filepattern.id.
             av-block-log:
                 description:
                     - Enable/disable logging for AntiVirus file blocking.
@@ -588,7 +595,7 @@ options:
                             - full-archive
             replacemsg-group:
                 description:
-                    - Replacement message group customized for this profile. Source: system.replacemsg-group.name.
+                    - Replacement message group customized for this profile. Source system.replacemsg-group.name.
             scan-mode:
                 description:
                     - Choose between full scan mode and quick scan mode.
@@ -719,16 +726,16 @@ EXAMPLES = '''
   tasks:
   - name: Configure AntiVirus profiles.
     fortios_antivirus_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       antivirus_profile:
         state: "present"
-        analytics-bl-filetype: "3 (source: dlp.filepattern.id)"
+        analytics-bl-filetype: "3 (source dlp.filepattern.id)"
         analytics-db: "disable"
         analytics-max-upload: "5"
-        analytics-wl-filetype: "6 (source: dlp.filepattern.id)"
+        analytics-wl-filetype: "6 (source dlp.filepattern.id)"
         av-block-log: "enable"
         av-virus-log: "enable"
         comment: "Comment."
@@ -800,7 +807,7 @@ EXAMPLES = '''
             executables: "default"
             options: "scan"
             outbreak-prevention: "disabled"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         scan-mode: "quick"
         smb:
             archive-block: "encrypted"
@@ -877,6 +884,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -916,7 +925,6 @@ def antivirus_profile(data, fos):
     vdom = data['vdom']
     antivirus_profile_data = data['antivirus_profile']
     filtered_data = filter_antivirus_profile_data(antivirus_profile_data)
-
     if antivirus_profile_data['state'] == "present":
         return fos.set('antivirus',
                        'profile',
@@ -926,16 +934,12 @@ def antivirus_profile(data, fos):
     elif antivirus_profile_data['state'] == "absent":
         return fos.delete('antivirus',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_antivirus(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['antivirus_profile']
     for method in methodlist:
@@ -953,11 +957,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "antivirus_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "analytics-bl-filetype": {"required": False, "type": "int"},
                 "analytics-db": {"required": False, "type": "str",
                                  "choices": ["disable", "enable"]},
@@ -1187,6 +1192,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_antivirus(module.params, fos)

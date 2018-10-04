@@ -7,10 +7,10 @@
   tasks:
   - name: Configure Web filter profiles.
     fortios_webfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_profile:
         state: "present"
         comment: "Optional comments."
@@ -22,7 +22,7 @@
                 action: "block"
                 auth-usr-grp:
                  -
-                    name: "default_name_10 (source: user.group.name)"
+                    name: "default_name_10 (source user.group.name)"
                 category: "11"
                 id:  "12"
                 log: "enable"
@@ -58,26 +58,26 @@
             ovrd-scope: "user"
             ovrd-user-group:
              -
-                name: "default_name_44 (source: user.group.name)"
+                name: "default_name_44 (source user.group.name)"
             profile:
              -
-                name: "default_name_46 (source: webfilter.profile.name)"
+                name: "default_name_46 (source webfilter.profile.name)"
             profile-attribute: "User-Name"
             profile-type: "list"
         ovrd-perm: "bannedword-override"
         post-action: "normal"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         web:
             blacklist: "enable"
-            bword-table: "54 (source: webfilter.content.id)"
+            bword-table: "54 (source webfilter.content.id)"
             bword-threshold: "55"
-            content-header-list: "56 (source: webfilter.content-header.id)"
+            content-header-list: "56 (source webfilter.content-header.id)"
             keyword-match:
              -
                 pattern: "<your_own_value>"
             log-search: "enable"
             safe-search: "url"
-            urlfilter-table: "61 (source: webfilter.urlfilter.id)"
+            urlfilter-table: "61 (source webfilter.urlfilter.id)"
             whitelist: "exempt-av"
             youtube-restrict: "none"
         web-content-log: "enable"
@@ -100,7 +100,7 @@
         wisp-algorithm: "primary-secondary"
         wisp-servers:
          -
-            name: "default_name_83 (source: web-proxy.wisp.name)"
+            name: "default_name_83 (source web-proxy.wisp.name)"
         youtube-channel-filter:
          -
             channel-id: "<your_own_value>"

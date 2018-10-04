@@ -7,10 +7,10 @@
   tasks:
   - name: CA certificate.
     fortios_vpn.certificate_ca:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.certificate_ca:
         state: "present"
         auto-update-days: "3"

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and peer category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,22 +60,31 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     wanopt_peer:
         description:
             - Configure WAN optimization peers.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ip:
                 description:
                     - Peer IP address.
             peer-host-id:
                 description:
                     - Peer host ID.
+                required: true
 '''
 
 EXAMPLES = '''
@@ -89,10 +97,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure WAN optimization peers.
     fortios_wanopt_peer:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       wanopt_peer:
         state: "present"
         ip: "<your_own_value>"
@@ -158,6 +166,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -190,7 +200,6 @@ def wanopt_peer(data, fos):
     vdom = data['vdom']
     wanopt_peer_data = data['wanopt_peer']
     filtered_data = filter_wanopt_peer_data(wanopt_peer_data)
-
     if wanopt_peer_data['state'] == "present":
         return fos.set('wanopt',
                        'peer',
@@ -200,16 +209,12 @@ def wanopt_peer(data, fos):
     elif wanopt_peer_data['state'] == "absent":
         return fos.delete('wanopt',
                           'peer',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['peer-host-id'],
                           vdom=vdom)
 
 
 def fortios_wanopt(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['wanopt_peer']
     for method in methodlist:
@@ -227,13 +232,14 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "wanopt_peer": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "ip": {"required": False, "type": "ipv4-address-any"},
-                "peer-host-id": {"required": False, "type": "str"}
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "ip": {"required": False, "type": "str"},
+                "peer-host-id": {"required": True, "type": "str"}
 
             }
         }
@@ -246,6 +252,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_wanopt(module.params, fos)

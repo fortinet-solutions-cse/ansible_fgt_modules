@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and policy category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_policy:
         description:
             - Configure IPv4 routing policies.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             action:
                 description:
                     - Action of the policy route.
@@ -87,6 +94,7 @@ options:
                     subnet:
                         description:
                             - IP and mask.
+                        required: true
             dst-negate:
                 description:
                     - Enable/disable negating destination address match.
@@ -99,7 +107,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address/group name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address/group name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             end-port:
                 description:
@@ -116,17 +124,18 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                         required: true
             output-device:
                 description:
-                    - Outgoing interface name. Source: system.interface.name.
+                    - Outgoing interface name. Source system.interface.name.
             protocol:
                 description:
                     - Protocol number (0 - 255).
             seq-num:
                 description:
                     - Sequence number.
+                required: true
             src:
                 description:
                     - Source IP and mask (x.x.x.x/x).
@@ -134,6 +143,7 @@ options:
                     subnet:
                         description:
                             - IP and mask.
+                        required: true
             src-negate:
                 description:
                     - Enable/disable negating source address match.
@@ -146,7 +156,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address/group name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address/group name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             start-port:
                 description:
@@ -178,10 +188,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv4 routing policies.
     fortios_router_policy:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_policy:
         state: "present"
         action: "deny"
@@ -192,14 +202,14 @@ EXAMPLES = '''
         dst-negate: "enable"
         dstaddr:
          -
-            name: "default_name_9 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name)"
         end-port: "10"
         end-source-port: "11"
         gateway: "<your_own_value>"
         input-device:
          -
-            name: "default_name_14 (source: system.interface.name)"
-        output-device: "<your_own_value> (source: system.interface.name)"
+            name: "default_name_14 (source system.interface.name)"
+        output-device: "<your_own_value> (source system.interface.name)"
         protocol: "16"
         seq-num: "17"
         src:
@@ -208,7 +218,7 @@ EXAMPLES = '''
         src-negate: "enable"
         srcaddr:
          -
-            name: "default_name_22 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_22 (source firewall.address.name firewall.addrgrp.name)"
         start-port: "23"
         start-source-port: "24"
         status: "enable"
@@ -275,6 +285,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -313,7 +325,6 @@ def router_policy(data, fos):
     vdom = data['vdom']
     router_policy_data = data['router_policy']
     filtered_data = filter_router_policy_data(router_policy_data)
-
     if router_policy_data['state'] == "present":
         return fos.set('router',
                        'policy',
@@ -323,16 +334,12 @@ def router_policy(data, fos):
     elif router_policy_data['state'] == "absent":
         return fos.delete('router',
                           'policy',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['seq-num'],
                           vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_policy']
     for method in methodlist:
@@ -350,17 +357,18 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_policy": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "action": {"required": False, "type": "str",
                            "choices": ["deny", "permit"]},
                 "comments": {"required": False, "type": "str"},
                 "dst": {"required": False, "type": "list",
                         "options": {
-                            "subnet": {"required": False, "type": "str"}
+                            "subnet": {"required": True, "type": "str"}
                         }},
                 "dst-negate": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
@@ -370,17 +378,17 @@ def main():
                             }},
                 "end-port": {"required": False, "type": "int"},
                 "end-source-port": {"required": False, "type": "int"},
-                "gateway": {"required": False, "type": "ipv4-address"},
+                "gateway": {"required": False, "type": "str"},
                 "input-device": {"required": False, "type": "list",
                                  "options": {
                                      "name": {"required": True, "type": "str"}
                                  }},
                 "output-device": {"required": False, "type": "str"},
                 "protocol": {"required": False, "type": "int"},
-                "seq-num": {"required": False, "type": "int"},
+                "seq-num": {"required": True, "type": "int"},
                 "src": {"required": False, "type": "list",
                         "options": {
-                            "subnet": {"required": False, "type": "str"}
+                            "subnet": {"required": True, "type": "str"}
                         }},
                 "src-negate": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
@@ -406,6 +414,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

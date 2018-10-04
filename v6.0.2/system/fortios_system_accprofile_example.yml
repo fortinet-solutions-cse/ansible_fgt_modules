@@ -7,10 +7,10 @@
   tasks:
   - name: Configure access profiles for system administrators.
     fortios_system_accprofile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_accprofile:
         state: "present"
         admintimeout: "3"

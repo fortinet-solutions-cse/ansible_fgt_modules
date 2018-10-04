@@ -7,13 +7,13 @@
   tasks:
   - name: Configure peer groups.
     fortios_user_peergrp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_peergrp:
         state: "present"
         member:
          -
-            name: "default_name_4 (source: user.peer.name)"
+            name: "default_name_4 (source user.peer.name)"
         name: "default_name_5"

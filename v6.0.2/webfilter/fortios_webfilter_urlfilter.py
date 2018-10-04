@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and urlfilter category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     webfilter_urlfilter:
         description:
             - Configure URL filter lists.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Optional comments.
@@ -130,7 +137,7 @@ options:
                             - URL to be filtered.
                     web-proxy-profile:
                         description:
-                            - Web proxy profile. Source: web-proxy.profile.name.
+                            - Web proxy profile. Source web-proxy.profile.name.
             id:
                 description:
                     - ID.
@@ -144,7 +151,6 @@ options:
             name:
                 description:
                     - Name of URL filter list.
-                required: true
             one-arm-ips-urlfilter:
                 description:
                     - Enable/disable DNS resolver for one-arm IPS URL filter operation.
@@ -163,10 +169,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure URL filter lists.
     fortios_webfilter_urlfilter:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_urlfilter:
         state: "present"
         comment: "Optional comments."
@@ -180,7 +186,7 @@ EXAMPLES = '''
             status: "enable"
             type: "simple"
             url: "http://myurl.com"
-            web-proxy-profile: "<your_own_value> (source: web-proxy.profile.name)"
+            web-proxy-profile: "<your_own_value> (source web-proxy.profile.name)"
         id:  "14"
         ip-addr-block: "enable"
         name: "default_name_16"
@@ -246,6 +252,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -279,7 +287,6 @@ def webfilter_urlfilter(data, fos):
     vdom = data['vdom']
     webfilter_urlfilter_data = data['webfilter_urlfilter']
     filtered_data = filter_webfilter_urlfilter_data(webfilter_urlfilter_data)
-
     if webfilter_urlfilter_data['state'] == "present":
         return fos.set('webfilter',
                        'urlfilter',
@@ -294,11 +301,7 @@ def webfilter_urlfilter(data, fos):
 
 
 def fortios_webfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['webfilter_urlfilter']
     for method in methodlist:
@@ -316,11 +319,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "webfilter_urlfilter": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "entries": {"required": False, "type": "list",
                             "options": {
@@ -345,7 +349,7 @@ def main():
                 "id": {"required": True, "type": "int"},
                 "ip-addr-block": {"required": False, "type": "str",
                                   "choices": ["enable", "disable"]},
-                "name": {"required": True, "type": "str"},
+                "name": {"required": False, "type": "str"},
                 "one-arm-ips-urlfilter": {"required": False, "type": "str",
                                           "choices": ["enable", "disable"]}
 
@@ -360,6 +364,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_webfilter(module.params, fos)

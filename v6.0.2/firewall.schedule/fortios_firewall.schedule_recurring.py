@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.schedule feature and recurring category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.schedule_recurring:
         description:
             - Recurring schedule configuration.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             color:
                 description:
                     - Color of icon on the GUI.
@@ -88,14 +95,14 @@ options:
                     - none
             end:
                 description:
-                    - Time of day to end the schedule, format hh:mm.
+                    - "Time of day to end the schedule, format hh:mm."
             name:
                 description:
                     - Recurring schedule name.
                 required: true
             start:
                 description:
-                    - Time of day to start the schedule, format hh:mm.
+                    - "Time of day to start the schedule, format hh:mm."
 '''
 
 EXAMPLES = '''
@@ -108,10 +115,10 @@ EXAMPLES = '''
   tasks:
   - name: Recurring schedule configuration.
     fortios_firewall.schedule_recurring:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.schedule_recurring:
         state: "present"
         color: "3"
@@ -180,6 +187,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -214,7 +223,6 @@ def firewall.schedule_recurring(data, fos):
     firewall.schedule_recurring_data = data['firewall.schedule_recurring']
     filtered_data = filter_firewall.schedule_recurring_data(
         firewall.schedule_recurring_data)
-
     if firewall.schedule_recurring_data['state'] == "present":
         return fos.set('firewall.schedule',
                        'recurring',
@@ -224,16 +232,12 @@ def firewall.schedule_recurring(data, fos):
     elif firewall.schedule_recurring_data['state'] == "absent":
         return fos.delete('firewall.schedule',
                           'recurring',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall.schedule(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.schedule_recurring']
     for method in methodlist:
@@ -251,11 +255,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.schedule_recurring": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "color": {"required": False, "type": "int"},
                 "day": {"required": False, "type": "str",
                         "choices": ["sunday", "monday", "tuesday",
@@ -276,6 +281,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.schedule(

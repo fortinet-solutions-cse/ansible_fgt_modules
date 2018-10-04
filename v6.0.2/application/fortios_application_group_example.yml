@@ -7,10 +7,10 @@
   tasks:
   - name: Configure firewall application groups.
     fortios_application_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_group:
         state: "present"
         application:

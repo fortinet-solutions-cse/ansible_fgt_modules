@@ -7,12 +7,11 @@
   tasks:
   - name: Configure update schedule.
     fortios_system.autoupdate_schedule:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.autoupdate_schedule:
-        state: "present"
         day: "Sunday"
         frequency: "every"
         status: "enable"

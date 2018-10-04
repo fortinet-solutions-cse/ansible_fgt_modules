@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IPS rules.
     fortios_ips_rule:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_rule:
         state: "present"
         action: "pass"

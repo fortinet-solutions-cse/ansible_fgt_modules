@@ -7,18 +7,17 @@
   tasks:
   - name: SSH proxy settings.
     fortios_firewall.ssh_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ssh_setting:
-        state: "present"
-        caname: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        caname: "<your_own_value> (source firewall.ssh.local-ca.name)"
         host-trusted-checking: "enable"
-        hostkey-dsa1024: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa256: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa384: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ecdsa521: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-ed25519: "myhostname (source: firewall.ssh.local-key.name)"
-        hostkey-rsa2048: "myhostname (source: firewall.ssh.local-key.name)"
-        untrusted-caname: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        hostkey-dsa1024: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa256: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa384: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ecdsa521: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-ed25519: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey-rsa2048: "myhostname (source firewall.ssh.local-key.name)"
+        untrusted-caname: "<your_own_value> (source firewall.ssh.local-ca.name)"

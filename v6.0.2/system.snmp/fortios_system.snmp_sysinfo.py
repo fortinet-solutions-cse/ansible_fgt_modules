@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.snmp feature and sysinfo category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system.snmp_sysinfo:
         description:
             - SNMP system info configuration.
@@ -110,12 +111,11 @@ EXAMPLES = '''
   tasks:
   - name: SNMP system info configuration.
     fortios_system.snmp_sysinfo:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.snmp_sysinfo:
-        state: "present"
         contact-info: "<your_own_value>"
         description: "<your_own_value>"
         engine-id: "<your_own_value>"
@@ -185,6 +185,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -219,26 +221,14 @@ def system.snmp_sysinfo(data, fos):
     vdom = data['vdom']
     system.snmp_sysinfo_data = data['system.snmp_sysinfo']
     filtered_data = filter_system.snmp_sysinfo_data(system.snmp_sysinfo_data)
-
-    if system.snmp_sysinfo_data['state'] == "present":
-        return fos.set('system.snmp',
-                       'sysinfo',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system.snmp_sysinfo_data['state'] == "absent":
-        return fos.delete('system.snmp',
-                          'sysinfo',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system.snmp',
+                   'sysinfo',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system.snmp(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system.snmp_sysinfo']
     for method in methodlist:
@@ -256,11 +246,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system.snmp_sysinfo": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "contact-info": {"required": False, "type": "str"},
                 "description": {"required": False, "type": "str"},
                 "engine-id": {"required": False, "type": "str"},
@@ -282,6 +271,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system.snmp(module.params, fos)

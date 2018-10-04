@@ -7,10 +7,10 @@
   tasks:
   - name: SNMP user configuration.
     fortios_system.snmp_user:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.snmp_user:
         state: "present"
         auth-proto: "md5"

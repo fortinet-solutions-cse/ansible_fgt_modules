@@ -7,12 +7,11 @@
   tasks:
   - name: Configure web proxy tunnelling for the FDN.
     fortios_system.autoupdate_tunneling:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.autoupdate_tunneling:
-        state: "present"
         address: "<your_own_value>"
         password: "<your_own_value>"
         port: "5"

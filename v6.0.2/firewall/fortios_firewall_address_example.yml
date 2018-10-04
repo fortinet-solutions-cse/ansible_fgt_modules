@@ -7,14 +7,14 @@
   tasks:
   - name: Configure IPv4 addresses.
     fortios_firewall_address:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_address:
         state: "present"
         allow-routing: "enable"
-        associated-interface: "<your_own_value> (source: system.interface.name system.zone.name)"
+        associated-interface: "<your_own_value> (source system.interface.name system.zone.name)"
         cache-ttl: "5"
         color: "6"
         comment: "Comment."
@@ -37,11 +37,11 @@
         subnet-name: "<your_own_value>"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_26"
             tags:
              -
-                name: "default_name_28 (source: system.object-tagging.tags.name)"
+                name: "default_name_28 (source system.object-tagging.tags.name)"
         tenant: "<your_own_value>"
         type: "ipmask"
         uuid: "<your_own_value>"

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and ripng category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_ripng:
         description:
             - Configure RIPng.
@@ -97,7 +98,7 @@ options:
                 suboptions:
                     access-list6:
                         description:
-                            - Access list for route destination. Source: router.access-list6.name.
+                            - Access list for route destination. Source router.access-list6.name.
                     distance:
                         description:
                             - Distance (1 - 255).
@@ -124,10 +125,10 @@ options:
                         required: true
                     interface:
                         description:
-                            - Distribute list interface name. Source: system.interface.name.
+                            - Distribute list interface name. Source system.interface.name.
                     listname:
                         description:
-                            - Distribute access/prefix list name. Source: router.access-list6.name router.prefix-list6.name.
+                            - Distribute access/prefix list name. Source router.access-list6.name router.prefix-list6.name.
                     status:
                         description:
                             - status
@@ -146,7 +147,7 @@ options:
                             - Flags.
                     name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                         required: true
                     split-horizon:
                         description:
@@ -173,7 +174,7 @@ options:
                         required: true
                     interface:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                     ip6:
                         description:
                             - IPv6 link-local address.
@@ -194,7 +195,7 @@ options:
                 suboptions:
                     access-list6:
                         description:
-                            - IPv6 access list name. Source: router.access-list6.name.
+                            - IPv6 access list name. Source router.access-list6.name.
                     direction:
                         description:
                             - Offset list direction.
@@ -207,7 +208,7 @@ options:
                         required: true
                     interface:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                     offset:
                         description:
                             - offset
@@ -223,7 +224,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Passive interface name. Source: system.interface.name.
+                            - Passive interface name. Source system.interface.name.
                         required: true
             redistribute:
                 description:
@@ -238,7 +239,7 @@ options:
                         required: true
                     routemap:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - status
@@ -263,12 +264,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure RIPng.
     fortios_router_ripng:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_ripng:
-        state: "present"
         aggregate-address:
          -
             id:  "4"
@@ -277,7 +277,7 @@ EXAMPLES = '''
         default-metric: "7"
         distance:
          -
-            access-list6: "<your_own_value> (source: router.access-list6.name)"
+            access-list6: "<your_own_value> (source router.access-list6.name)"
             distance: "10"
             id:  "11"
             prefix6: "<your_own_value>"
@@ -285,21 +285,21 @@ EXAMPLES = '''
          -
             direction: "in"
             id:  "15"
-            interface: "<your_own_value> (source: system.interface.name)"
-            listname: "<your_own_value> (source: router.access-list6.name router.prefix-list6.name)"
+            interface: "<your_own_value> (source system.interface.name)"
+            listname: "<your_own_value> (source router.access-list6.name router.prefix-list6.name)"
             status: "enable"
         garbage-timer: "19"
         interface:
          -
             flags: "21"
-            name: "default_name_22 (source: system.interface.name)"
+            name: "default_name_22 (source system.interface.name)"
             split-horizon: "poisoned"
             split-horizon-status: "enable"
         max-out-metric: "25"
         neighbor:
          -
             id:  "27"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             ip6: "<your_own_value>"
         network:
          -
@@ -307,20 +307,20 @@ EXAMPLES = '''
             prefix: "<your_own_value>"
         offset-list:
          -
-            access-list6: "<your_own_value> (source: router.access-list6.name)"
+            access-list6: "<your_own_value> (source router.access-list6.name)"
             direction: "in"
             id:  "36"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             offset: "38"
             status: "enable"
         passive-interface:
          -
-            name: "default_name_41 (source: system.interface.name)"
+            name: "default_name_41 (source system.interface.name)"
         redistribute:
          -
             metric: "43"
             name: "default_name_44"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         timeout-timer: "47"
         update-timer: "48"
@@ -385,6 +385,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -421,26 +423,14 @@ def router_ripng(data, fos):
     vdom = data['vdom']
     router_ripng_data = data['router_ripng']
     filtered_data = filter_router_ripng_data(router_ripng_data)
-
-    if router_ripng_data['state'] == "present":
-        return fos.set('router',
-                       'ripng',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_ripng_data['state'] == "absent":
-        return fos.delete('router',
-                          'ripng',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'ripng',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_ripng']
     for method in methodlist:
@@ -458,15 +448,14 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_ripng": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "aggregate-address": {"required": False, "type": "list",
                                       "options": {
                                           "id": {"required": True, "type": "int"},
-                                          "prefix6": {"required": False, "type": "ipv6-prefix"}
+                                          "prefix6": {"required": False, "type": "str"}
                                       }},
                 "default-information-originate": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},
@@ -476,7 +465,7 @@ def main():
                                  "access-list6": {"required": False, "type": "str"},
                                  "distance": {"required": False, "type": "int"},
                                  "id": {"required": True, "type": "int"},
-                                 "prefix6": {"required": False, "type": "ipv6-prefix"}
+                                 "prefix6": {"required": False, "type": "str"}
                              }},
                 "distribute-list": {"required": False, "type": "list",
                                     "options": {
@@ -503,12 +492,12 @@ def main():
                              "options": {
                                  "id": {"required": True, "type": "int"},
                                  "interface": {"required": False, "type": "str"},
-                                 "ip6": {"required": False, "type": "ipv6-address"}
+                                 "ip6": {"required": False, "type": "str"}
                              }},
                 "network": {"required": False, "type": "list",
                             "options": {
                                 "id": {"required": True, "type": "int"},
-                                "prefix": {"required": False, "type": "ipv6-prefix"}
+                                "prefix": {"required": False, "type": "str"}
                             }},
                 "offset-list": {"required": False, "type": "list",
                                 "options": {
@@ -547,6 +536,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

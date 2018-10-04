@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and settings category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_settings:
         description:
             - Configure VDOM settings.
@@ -157,7 +158,7 @@ options:
                     - disable
             device:
                 description:
-                    - Interface to use for management access for NAT mode. Source: system.interface.name.
+                    - Interface to use for management access for NAT mode. Source system.interface.name.
             dhcp-proxy:
                 description:
                     - Enable/disable the DHCP Proxy.
@@ -602,7 +603,8 @@ options:
                     - disable
             sip-helper:
                 description:
-                    - Enable/disable the SIP session helper to process SIP sessions unless SIP sessions are accepted by the SIP application layer gateway (ALG).
+                    - Enable/disable the SIP session helper to process SIP sessions unless SIP sessions are accepted by the SIP application layer gateway
+                       (ALG).
                 choices:
                     - enable
                     - disable
@@ -629,7 +631,7 @@ options:
                     - disable
             ssl-ssh-profile:
                 description:
-                    - Profile for SSL/SSH inspection. Source: firewall.ssl-ssh-profile.name.
+                    - Profile for SSL/SSH inspection. Source firewall.ssl-ssh-profile.name.
             status:
                 description:
                     - Enable/disable this VDOM.
@@ -691,12 +693,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure VDOM settings.
     fortios_system_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_settings:
-        state: "present"
         allow-subnet-overlap: "enable"
         asymroute: "enable"
         asymroute-icmp: "enable"
@@ -713,7 +714,7 @@ EXAMPLES = '''
         compliance-check: "enable"
         default-voip-alg-mode: "proxy-based"
         deny-tcp-with-icmp: "enable"
-        device: "<your_own_value> (source: system.interface.name)"
+        device: "<your_own_value> (source system.interface.name)"
         dhcp-proxy: "enable"
         dhcp-server-ip: "<your_own_value>"
         dhcp6-server-ip: "<your_own_value>"
@@ -801,7 +802,7 @@ EXAMPLES = '''
         sip-tcp-port: "103"
         sip-udp-port: "104"
         snat-hairpin-traffic: "enable"
-        ssl-ssh-profile: "<your_own_value> (source: firewall.ssl-ssh-profile.name)"
+        ssl-ssh-profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
         status: "enable"
         strict-src-check: "enable"
         tcp-session-without-syn: "enable"
@@ -871,6 +872,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -939,26 +942,14 @@ def system_settings(data, fos):
     vdom = data['vdom']
     system_settings_data = data['system_settings']
     filtered_data = filter_system_settings_data(system_settings_data)
-
-    if system_settings_data['state'] == "present":
-        return fos.set('system',
-                       'settings',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system_settings_data['state'] == "absent":
-        return fos.delete('system',
-                          'settings',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system',
+                   'settings',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_settings']
     for method in methodlist:
@@ -976,11 +967,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_settings": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "allow-subnet-overlap": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},
                 "asymroute": {"required": False, "type": "str",
@@ -1022,8 +1012,8 @@ def main():
                                            "choices": ["check-all", "check-new", "check-policy-option"]},
                 "fw-session-hairpin": {"required": False, "type": "str",
                                        "choices": ["enable", "disable"]},
-                "gateway": {"required": False, "type": "ipv4-address"},
-                "gateway6": {"required": False, "type": "ipv6-address"},
+                "gateway": {"required": False, "type": "str"},
+                "gateway6": {"required": False, "type": "str"},
                 "gui-advanced-policy": {"required": False, "type": "str",
                                         "choices": ["enable", "disable"]},
                 "gui-allow-unnamed-policy": {"required": False, "type": "str",
@@ -1135,14 +1125,14 @@ def main():
                 "inspection-mode": {"required": False, "type": "str",
                                     "choices": ["proxy", "flow"]},
                 "ip": {"required": False, "type": "ipv4-classnet-host"},
-                "ip6": {"required": False, "type": "ipv6-prefix"},
+                "ip6": {"required": False, "type": "str"},
                 "link-down-access": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                 "lldp-transmission": {"required": False, "type": "str",
                                       "choices": ["enable", "disable", "global"]},
                 "mac-ttl": {"required": False, "type": "int"},
                 "manageip": {"required": False, "type": "str"},
-                "manageip6": {"required": False, "type": "ipv6-prefix"},
+                "manageip6": {"required": False, "type": "str"},
                 "multicast-forward": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
                 "multicast-skip-policy": {"required": False, "type": "str",
@@ -1197,6 +1187,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

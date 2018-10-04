@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and radius category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_radius:
         description:
             - Configure RADIUS server entries.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             accounting-server:
                 description:
                     - Additional accounting servers.
@@ -156,7 +163,8 @@ options:
                     - disable
             radius-coa:
                 description:
-                    - Enable to allow a mechanism to change the attributes of an authentication, authorization, and accounting session after it is authenticated.
+                    - Enable to allow a mechanism to change the attributes of an authentication, authorization, and accounting session after it is
+                       authenticated.
                 choices:
                     - enable
                     - disable
@@ -351,10 +359,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure RADIUS server entries.
     fortios_user_radius:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_radius:
         state: "present"
         accounting-server:
@@ -465,6 +473,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -509,7 +519,6 @@ def user_radius(data, fos):
     vdom = data['vdom']
     user_radius_data = data['user_radius']
     filtered_data = filter_user_radius_data(user_radius_data)
-
     if user_radius_data['state'] == "present":
         return fos.set('user',
                        'radius',
@@ -519,16 +528,12 @@ def user_radius(data, fos):
     elif user_radius_data['state'] == "absent":
         return fos.delete('user',
                           'radius',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_radius']
     for method in methodlist:
@@ -546,16 +551,17 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_radius": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "accounting-server": {"required": False, "type": "list",
                                       "options": {
                                           "id": {"required": True, "type": "int"},
                                           "port": {"required": False, "type": "int"},
-                                          "secret": {"required": False, "type": "password"},
+                                          "secret": {"required": False, "type": "str"},
                                           "server": {"required": False, "type": "str"},
                                           "source-ip": {"required": False, "type": "str"},
                                           "status": {"required": False, "type": "str",
@@ -576,7 +582,7 @@ def main():
                 "h3c-compatibility": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
                 "name": {"required": True, "type": "str"},
-                "nas-ip": {"required": False, "type": "ipv4-address"},
+                "nas-ip": {"required": False, "type": "str"},
                 "password-encoding": {"required": False, "type": "str",
                                       "choices": ["auto", "ISO-8859-1"]},
                 "password-renewal": {"required": False, "type": "str",
@@ -617,12 +623,12 @@ def main():
                 "rsso-radius-response": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},
                 "rsso-radius-server-port": {"required": False, "type": "int"},
-                "rsso-secret": {"required": False, "type": "password"},
+                "rsso-secret": {"required": False, "type": "str"},
                 "rsso-validate-request-secret": {"required": False, "type": "str",
                                                  "choices": ["enable", "disable"]},
-                "secondary-secret": {"required": False, "type": "password"},
+                "secondary-secret": {"required": False, "type": "str"},
                 "secondary-server": {"required": False, "type": "str"},
-                "secret": {"required": False, "type": "password"},
+                "secret": {"required": False, "type": "str"},
                 "server": {"required": False, "type": "str"},
                 "source-ip": {"required": False, "type": "str"},
                 "sso-attribute": {"required": False, "type": "str",
@@ -637,7 +643,7 @@ def main():
                 "sso-attribute-key": {"required": False, "type": "str"},
                 "sso-attribute-value-override": {"required": False, "type": "str",
                                                  "choices": ["enable", "disable"]},
-                "tertiary-secret": {"required": False, "type": "password"},
+                "tertiary-secret": {"required": False, "type": "str"},
                 "tertiary-server": {"required": False, "type": "str"},
                 "timeout": {"required": False, "type": "int"},
                 "use-management-vdom": {"required": False, "type": "str",
@@ -656,6 +662,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

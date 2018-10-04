@@ -1,0 +1,55 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure threat weight settings.
+    fortios_log_threat_weight:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      log_threat_weight:
+        application:
+         -
+            category: "4"
+            id:  "5"
+            level: "disable"
+        blocked-connection: "disable"
+        failed-connection: "disable"
+        geolocation:
+         -
+            country: "<your_own_value>"
+            id:  "11"
+            level: "disable"
+        ips:
+            critical-severity: "disable"
+            high-severity: "disable"
+            info-severity: "disable"
+            low-severity: "disable"
+            medium-severity: "disable"
+        level:
+            critical: "20"
+            high: "21"
+            low: "22"
+            medium: "23"
+        malware:
+            botnet-connection: "disable"
+            command-blocked: "disable"
+            mimefragmented: "disable"
+            oversized: "disable"
+            switch-proto: "disable"
+            virus-blocked: "disable"
+            virus-file-type-executable: "disable"
+            virus-infected: "disable"
+            virus-outbreak-prevention: "disable"
+            virus-scan-error: "disable"
+        status: "enable"
+        url-block-detected: "disable"
+        web:
+         -
+            category: "38"
+            id:  "39"
+            level: "disable"

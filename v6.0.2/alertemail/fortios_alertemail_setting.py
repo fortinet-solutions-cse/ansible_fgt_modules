@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure alertemail feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     alertemail_setting:
         description:
             - Configure alert email settings.
@@ -232,7 +233,7 @@ options:
                     - disable
             username:
                 description:
-                    - Name that appears in the From: field of alert emails (max. 36 characters).
+                    - "Name that appears in the From: field of alert emails (max. 36 characters)."
             violation-traffic-logs:
                 description:
                     - Enable/disable violation traffic logs in alert email.
@@ -260,12 +261,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure alert email settings.
     fortios_alertemail_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       alertemail_setting:
-        state: "present"
         admin-login-logs: "enable"
         alert-interval: "4"
         amc-interface-bypass-mode: "enable"
@@ -363,6 +363,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -406,26 +408,14 @@ def alertemail_setting(data, fos):
     vdom = data['vdom']
     alertemail_setting_data = data['alertemail_setting']
     filtered_data = filter_alertemail_setting_data(alertemail_setting_data)
-
-    if alertemail_setting_data['state'] == "present":
-        return fos.set('alertemail',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif alertemail_setting_data['state'] == "absent":
-        return fos.delete('alertemail',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('alertemail',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_alertemail(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['alertemail_setting']
     for method in methodlist:
@@ -443,11 +433,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "alertemail_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "admin-login-logs": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                 "alert-interval": {"required": False, "type": "int"},
@@ -519,6 +508,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_alertemail(module.params, fos)

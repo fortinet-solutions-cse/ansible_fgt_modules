@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortianalyzer2 feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     log.fortianalyzer2_setting:
         description:
             - Global FortiAnalyzer settings.
@@ -76,7 +77,7 @@ options:
                     - Hidden attribute.
             certificate:
                 description:
-                    - Certificate used to communicate with FortiAnalyzer. Source: certificate.local.name.
+                    - Certificate used to communicate with FortiAnalyzer. Source certificate.local.name.
             conn-timeout:
                 description:
                     - FortiAnalyzer connection time-out in seconds (for status and log buffer).
@@ -159,7 +160,7 @@ options:
                     - 5-minute
             upload-time:
                 description:
-                    - Time to upload logs (hh:mm).
+                    - "Time to upload logs (hh:mm)."
 '''
 
 EXAMPLES = '''
@@ -172,14 +173,13 @@ EXAMPLES = '''
   tasks:
   - name: Global FortiAnalyzer settings.
     fortios_log.fortianalyzer2_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.fortianalyzer2_setting:
-        state: "present"
         __change_ip: "3"
-        certificate: "<your_own_value> (source: certificate.local.name)"
+        certificate: "<your_own_value> (source certificate.local.name)"
         conn-timeout: "5"
         enc-algorithm: "high-medium"
         faz-type: "7"
@@ -258,6 +258,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -297,26 +299,14 @@ def log.fortianalyzer2_setting(data, fos):
     log.fortianalyzer2_setting_data = data['log.fortianalyzer2_setting']
     filtered_data = filter_log.fortianalyzer2_setting_data(
         log.fortianalyzer2_setting_data)
-
-    if log.fortianalyzer2_setting_data['state'] == "present":
-        return fos.set('log.fortianalyzer2',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif log.fortianalyzer2_setting_data['state'] == "absent":
-        return fos.delete('log.fortianalyzer2',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('log.fortianalyzer2',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_log.fortianalyzer2(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['log.fortianalyzer2_setting']
     for method in methodlist:
@@ -334,11 +324,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "log.fortianalyzer2_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "__change_ip": {"required": False, "type": "int"},
                 "certificate": {"required": False, "type": "str"},
                 "conn-timeout": {"required": False, "type": "int"},
@@ -381,6 +370,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_log.fortianalyzer2(

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure certificate feature and local category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     certificate_local:
         description:
             - Local keys and certificates.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auto-regenerate-days:
                 description:
                     - Number of days to wait before expiry of an updated local certificate is requested (0 = disabled).
@@ -94,10 +101,10 @@ options:
                     - renewal
             cmp-server:
                 description:
-                    - 'ADDRESS:PORT' for CMP server.
+                    - "'ADDRESS:PORT' for CMP server."
             cmp-server-cert:
                 description:
-                    - CMP server certificate. Source: certificate.ca.name.
+                    - CMP server certificate. Source certificate.ca.name.
             comments:
                 description:
                     - Comment.
@@ -177,10 +184,10 @@ EXAMPLES = '''
   tasks:
   - name: Local keys and certificates.
     fortios_certificate_local:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       certificate_local:
         state: "present"
         auto-regenerate-days: "3"
@@ -190,7 +197,7 @@ EXAMPLES = '''
         cmp-path: "<your_own_value>"
         cmp-regeneration-method: "keyupate"
         cmp-server: "<your_own_value>"
-        cmp-server-cert: "<your_own_value> (source: certificate.ca.name)"
+        cmp-server-cert: "<your_own_value> (source certificate.ca.name)"
         comments: "<your_own_value>"
         csr: "<your_own_value>"
         enroll-protocol: "none"
@@ -268,6 +275,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -307,7 +316,6 @@ def certificate_local(data, fos):
     vdom = data['vdom']
     certificate_local_data = data['certificate_local']
     filtered_data = filter_certificate_local_data(certificate_local_data)
-
     if certificate_local_data['state'] == "present":
         return fos.set('certificate',
                        'local',
@@ -317,16 +325,12 @@ def certificate_local(data, fos):
     elif certificate_local_data['state'] == "absent":
         return fos.delete('certificate',
                           'local',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_certificate(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['certificate_local']
     for method in methodlist:
@@ -344,11 +348,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "certificate_local": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auto-regenerate-days": {"required": False, "type": "int"},
                 "auto-regenerate-days-warning": {"required": False, "type": "int"},
                 "ca-identifier": {"required": False, "type": "str"},
@@ -369,16 +374,16 @@ def main():
                 "name": {"required": True, "type": "str"},
                 "name-encoding": {"required": False, "type": "str",
                                   "choices": ["printable", "utf8"]},
-                "password": {"required": False, "type": "password"},
+                "password": {"required": False, "type": "str"},
                 "private-key": {"required": False, "type": "str"},
                 "range": {"required": False, "type": "str",
                           "choices": ["global", "vdom"]},
-                "scep-password": {"required": False, "type": "password"},
+                "scep-password": {"required": False, "type": "str"},
                 "scep-url": {"required": False, "type": "str"},
                 "source": {"required": False, "type": "str",
                            "choices": ["factory", "user", "bundle",
                                        "fortiguard"]},
-                "source-ip": {"required": False, "type": "ipv4-address"},
+                "source-ip": {"required": False, "type": "str"},
                 "state": {"required": False, "type": "str"}
 
             }
@@ -392,6 +397,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_certificate(module.params, fos)

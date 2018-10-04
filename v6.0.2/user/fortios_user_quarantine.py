@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and quarantine category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_quarantine:
         description:
             - Configure quarantine support.
@@ -87,6 +88,7 @@ options:
                     entry:
                         description:
                             - Quarantine entry name.
+                        required: true
                     macs:
                         description:
                             - Quarantine MACs.
@@ -100,6 +102,7 @@ options:
                             mac:
                                 description:
                                     - Quarantine MAC.
+                                required: true
                             parent:
                                 description:
                                     - Parent entry name.
@@ -115,12 +118,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure quarantine support.
     fortios_user_quarantine:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_quarantine:
-        state: "present"
         quarantine: "enable"
         targets:
          -
@@ -193,6 +195,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -225,26 +229,14 @@ def user_quarantine(data, fos):
     vdom = data['vdom']
     user_quarantine_data = data['user_quarantine']
     filtered_data = filter_user_quarantine_data(user_quarantine_data)
-
-    if user_quarantine_data['state'] == "present":
-        return fos.set('user',
-                       'quarantine',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif user_quarantine_data['state'] == "absent":
-        return fos.delete('user',
-                          'quarantine',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('user',
+                   'quarantine',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_quarantine']
     for method in methodlist:
@@ -262,22 +254,21 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_quarantine": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "quarantine": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
                 "targets": {"required": False, "type": "list",
                             "options": {
                                 "description": {"required": False, "type": "str"},
-                                "entry": {"required": False, "type": "str"},
+                                "entry": {"required": True, "type": "str"},
                                 "macs": {"required": False, "type": "list",
                                          "options": {
                                              "description": {"required": False, "type": "str"},
                                              "entry-id": {"required": False, "type": "int"},
-                                             "mac": {"required": False, "type": "mac-address"},
+                                             "mac": {"required": True, "type": "str"},
                                              "parent": {"required": False, "type": "str"}
                                          }}
                             }}
@@ -293,6 +284,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

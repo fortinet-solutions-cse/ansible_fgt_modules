@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and nat64 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_nat64:
         description:
             - Configure NAT64.
@@ -85,7 +86,7 @@ options:
                     - disable
             nat64-prefix:
                 description:
-                    - NAT64 prefix must be ::/96 (default = 64:ff9b::/96).
+                    - "NAT64 prefix must be ::/96 (default = 64:ff9b::/96)."
             secondary-prefix:
                 description:
                     - Secondary NAT64 prefix.
@@ -121,12 +122,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure NAT64.
     fortios_system_nat64:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_nat64:
-        state: "present"
         always-synthesize-aaaa-record: "enable"
         generate-ipv6-fragment-header: "enable"
         nat64-prefix: "<your_own_value>"
@@ -197,6 +197,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -230,26 +232,14 @@ def system_nat64(data, fos):
     vdom = data['vdom']
     system_nat64_data = data['system_nat64']
     filtered_data = filter_system_nat64_data(system_nat64_data)
-
-    if system_nat64_data['state'] == "present":
-        return fos.set('system',
-                       'nat64',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system_nat64_data['state'] == "absent":
-        return fos.delete('system',
-                          'nat64',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system',
+                   'nat64',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_nat64']
     for method in methodlist:
@@ -267,20 +257,19 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_nat64": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "always-synthesize-aaaa-record": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},
                 "generate-ipv6-fragment-header": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},
-                "nat64-prefix": {"required": False, "type": "ipv6-prefix"},
+                "nat64-prefix": {"required": False, "type": "str"},
                 "secondary-prefix": {"required": False, "type": "list",
                                      "options": {
                                          "name": {"required": True, "type": "str"},
-                                         "nat64-prefix": {"required": False, "type": "ipv6-prefix"}
+                                         "nat64-prefix": {"required": False, "type": "str"}
                                      }},
                 "secondary-prefix-status": {"required": False, "type": "str",
                                             "choices": ["enable", "disable"]},
@@ -298,6 +287,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

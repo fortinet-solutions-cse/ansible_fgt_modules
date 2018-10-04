@@ -7,16 +7,15 @@
   tasks:
   - name: Configure FortiManager.
     fortios_system_fortimanager:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_fortimanager:
-        state: "present"
         central-management: "enable"
         central-mgmt-auto-backup: "enable"
         central-mgmt-schedule-config-restore: "enable"
         central-mgmt-schedule-script-restore: "enable"
         ip: "<your_own_value>"
         ipsec: "enable"
-        vdom: "<your_own_value> (source: system.vdom.name)"
+        vdom: "<your_own_value> (source system.vdom.name)"

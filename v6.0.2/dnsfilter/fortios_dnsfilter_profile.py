@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dnsfilter feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     dnsfilter_profile:
         description:
             - Configure DNS domain filter profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             block-action:
                 description:
                     - Action to take for blocked domains.
@@ -92,14 +99,14 @@ options:
                 suboptions:
                     domain-filter-table:
                         description:
-                            - DNS domain filter table ID. Source: dnsfilter.domain-filter.id.
+                            - DNS domain filter table ID. Source dnsfilter.domain-filter.id.
             external-ip-blocklist:
                 description:
                     - One or more external IP block lists.
                 suboptions:
                     name:
                         description:
-                            - External domain block list name. Source: system.external-resource.name.
+                            - External domain block list name. Source system.external-resource.name.
                         required: true
             ftgd-dns:
                 description:
@@ -183,20 +190,20 @@ EXAMPLES = '''
   tasks:
   - name: Configure DNS domain filter profiles.
     fortios_dnsfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dnsfilter_profile:
         state: "present"
         block-action: "block"
         block-botnet: "disable"
         comment: "Comment."
         domain-filter:
-            domain-filter-table: "7 (source: dnsfilter.domain-filter.id)"
+            domain-filter-table: "7 (source dnsfilter.domain-filter.id)"
         external-ip-blocklist:
          -
-            name: "default_name_9 (source: system.external-resource.name)"
+            name: "default_name_9 (source system.external-resource.name)"
         ftgd-dns:
             filters:
              -
@@ -273,6 +280,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -309,7 +318,6 @@ def dnsfilter_profile(data, fos):
     vdom = data['vdom']
     dnsfilter_profile_data = data['dnsfilter_profile']
     filtered_data = filter_dnsfilter_profile_data(dnsfilter_profile_data)
-
     if dnsfilter_profile_data['state'] == "present":
         return fos.set('dnsfilter',
                        'profile',
@@ -319,16 +327,12 @@ def dnsfilter_profile(data, fos):
     elif dnsfilter_profile_data['state'] == "absent":
         return fos.delete('dnsfilter',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_dnsfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['dnsfilter_profile']
     for method in methodlist:
@@ -346,11 +350,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "dnsfilter_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "block-action": {"required": False, "type": "str",
                                  "choices": ["block", "redirect"]},
                 "block-botnet": {"required": False, "type": "str",
@@ -381,7 +386,7 @@ def main():
                 "log-all-domain": {"required": False, "type": "str",
                                    "choices": ["enable", "disable"]},
                 "name": {"required": True, "type": "str"},
-                "redirect-portal": {"required": False, "type": "ipv4-address"},
+                "redirect-portal": {"required": False, "type": "str"},
                 "safe-search": {"required": False, "type": "str",
                                 "choices": ["disable", "enable"]},
                 "sdns-domain-log": {"required": False, "type": "str",
@@ -402,6 +407,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_dnsfilter(module.params, fos)

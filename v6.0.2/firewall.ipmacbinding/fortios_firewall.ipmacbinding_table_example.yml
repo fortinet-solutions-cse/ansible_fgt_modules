@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IP to MAC address pairs in the IP/MAC binding table.
     fortios_firewall.ipmacbinding_table:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ipmacbinding_table:
         state: "present"
         ip: "<your_own_value>"

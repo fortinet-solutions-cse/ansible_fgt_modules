@@ -7,12 +7,11 @@
   tasks:
   - name: Configure FortiGuard services.
     fortios_system_fortiguard:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_fortiguard:
-        state: "present"
         antispam-cache: "enable"
         antispam-cache-mpercent: "4"
         antispam-cache-ttl: "5"

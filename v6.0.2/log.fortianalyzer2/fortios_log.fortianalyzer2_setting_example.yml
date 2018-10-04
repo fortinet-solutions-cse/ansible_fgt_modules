@@ -7,14 +7,13 @@
   tasks:
   - name: Global FortiAnalyzer settings.
     fortios_log.fortianalyzer2_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.fortianalyzer2_setting:
-        state: "present"
         __change_ip: "3"
-        certificate: "<your_own_value> (source: certificate.local.name)"
+        certificate: "<your_own_value> (source certificate.local.name)"
         conn-timeout: "5"
         enc-algorithm: "high-medium"
         faz-type: "7"

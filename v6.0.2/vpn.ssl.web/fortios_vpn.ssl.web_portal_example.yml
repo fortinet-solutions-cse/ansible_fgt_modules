@@ -7,10 +7,10 @@
   tasks:
   - name: Portal.
     fortios_vpn.ssl.web_portal:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ssl.web_portal:
         state: "present"
         allow-user-access: "web"
@@ -47,7 +47,7 @@
                 sso-username: "<your_own_value>"
                 url: "http://myurl.com"
             name: "default_name_33"
-        custom-lang: "<your_own_value> (source: system.custom-language.name)"
+        custom-lang: "<your_own_value> (source system.custom-language.name)"
         customize-forticlient-download-url: "enable"
         display-bookmark: "enable"
         display-connection-tools: "enable"
@@ -65,22 +65,22 @@
         host-check-interval: "49"
         host-check-policy:
          -
-            name: "default_name_51 (source: vpn.ssl.web.host-check-software.name)"
+            name: "default_name_51 (source vpn.ssl.web.host-check-software.name)"
         ip-mode: "range"
         ip-pools:
          -
-            name: "default_name_54 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_54 (source firewall.address.name firewall.addrgrp.name)"
         ipv6-dns-server1: "<your_own_value>"
         ipv6-dns-server2: "<your_own_value>"
         ipv6-exclusive-routing: "enable"
         ipv6-pools:
          -
-            name: "default_name_59 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_59 (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-service-restriction: "enable"
         ipv6-split-tunneling: "enable"
         ipv6-split-tunneling-routing-address:
          -
-            name: "default_name_63 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_63 (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-tunnel-mode: "enable"
         ipv6-wins-server1: "<your_own_value>"
         ipv6-wins-server2: "<your_own_value>"
@@ -122,7 +122,7 @@
         split-tunneling: "enable"
         split-tunneling-routing-address:
          -
-            name: "default_name_100 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_100 (source firewall.address.name firewall.addrgrp.name)"
         theme: "blue"
         tunnel-mode: "enable"
         user-bookmark: "enable"

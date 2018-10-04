@@ -7,10 +7,10 @@
   tasks:
   - name: Configure anti-spam black/white list.
     fortios_spamfilter_bwl:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_bwl:
         state: "present"
         comment: "Optional comments."

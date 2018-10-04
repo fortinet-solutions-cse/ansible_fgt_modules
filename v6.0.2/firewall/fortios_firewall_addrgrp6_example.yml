@@ -7,24 +7,24 @@
   tasks:
   - name: Configure IPv6 address groups.
     fortios_firewall_addrgrp6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_addrgrp6:
         state: "present"
         color: "3"
         comment: "Comment."
         member:
          -
-            name: "default_name_6 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_6 (source firewall.address6.name firewall.addrgrp6.name)"
         name: "default_name_7"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_10"
             tags:
              -
-                name: "default_name_12 (source: system.object-tagging.tags.name)"
+                name: "default_name_12 (source system.object-tagging.tags.name)"
         uuid: "<your_own_value>"
         visibility: "enable"

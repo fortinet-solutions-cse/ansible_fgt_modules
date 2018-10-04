@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure a remote cache device as Web cache storage.
+    fortios_wanopt_remote_storage:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      wanopt_remote_storage:
+        local-cache-id: "<your_own_value>"
+        remote-cache-id: "<your_own_value>"
+        remote-cache-ip: "<your_own_value>"
+        status: "disable"

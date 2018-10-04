@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ddns category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_ddns:
         description:
             - Configure DDNS.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             bound-ip:
                 description:
                     - Bound IP address.
@@ -131,16 +138,18 @@ options:
             ddnsid:
                 description:
                     - DDNS ID.
+                required: true
             monitor-interface:
                 description:
                     - Monitored interface.
                 suboptions:
                     interface-name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
+                        required: true
             ssl-certificate:
                 description:
-                    - Name of local certificate for SSL connections. Source: certificate.local.name.
+                    - Name of local certificate for SSL connections. Source certificate.local.name.
             update-interval:
                 description:
                     - DDNS update interval (60 - 2592000 sec, default = 300).
@@ -162,10 +171,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure DDNS.
     fortios_system_ddns:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_ddns:
         state: "present"
         bound-ip: "<your_own_value>"
@@ -184,8 +193,8 @@ EXAMPLES = '''
         ddnsid: "16"
         monitor-interface:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
-        ssl-certificate: "<your_own_value> (source: certificate.local.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
+        ssl-certificate: "<your_own_value> (source certificate.local.name)"
         update-interval: "20"
         use-public-ip: "disable"
 '''
@@ -249,6 +258,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -286,7 +297,6 @@ def system_ddns(data, fos):
     vdom = data['vdom']
     system_ddns_data = data['system_ddns']
     filtered_data = filter_system_ddns_data(system_ddns_data)
-
     if system_ddns_data['state'] == "present":
         return fos.set('system',
                        'ddns',
@@ -296,16 +306,12 @@ def system_ddns(data, fos):
     elif system_ddns_data['state'] == "absent":
         return fos.delete('system',
                           'ddns',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['ddnsid'],
                           vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_ddns']
     for method in methodlist:
@@ -323,12 +329,13 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_ddns": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "bound-ip": {"required": False, "type": "ipv4-address"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "bound-ip": {"required": False, "type": "str"},
                 "clear-text": {"required": False, "type": "str",
                                "choices": ["disable", "enable"]},
                 "ddns-auth": {"required": False, "type": "str",
@@ -336,21 +343,21 @@ def main():
                 "ddns-domain": {"required": False, "type": "str"},
                 "ddns-key": {"required": False, "type": "str"},
                 "ddns-keyname": {"required": False, "type": "str"},
-                "ddns-password": {"required": False, "type": "password"},
+                "ddns-password": {"required": False, "type": "str"},
                 "ddns-server": {"required": False, "type": "str",
                                 "choices": ["dyndns.org", "dyns.net", "tzo.com",
                                             "vavic.com", "dipdns.net", "now.net.cn",
                                             "dhs.org", "easydns.com", "genericDDNS",
                                             "FortiGuardDDNS", "noip.com"]},
-                "ddns-server-ip": {"required": False, "type": "ipv4-address"},
+                "ddns-server-ip": {"required": False, "type": "str"},
                 "ddns-sn": {"required": False, "type": "str"},
                 "ddns-ttl": {"required": False, "type": "int"},
                 "ddns-username": {"required": False, "type": "str"},
                 "ddns-zone": {"required": False, "type": "str"},
-                "ddnsid": {"required": False, "type": "int"},
+                "ddnsid": {"required": True, "type": "int"},
                 "monitor-interface": {"required": False, "type": "list",
                                       "options": {
-                                          "interface-name": {"required": False, "type": "str"}
+                                          "interface-name": {"required": True, "type": "str"}
                                       }},
                 "ssl-certificate": {"required": False, "type": "str"},
                 "update-interval": {"required": False, "type": "int"},
@@ -368,6 +375,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

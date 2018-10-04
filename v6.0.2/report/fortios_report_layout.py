@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure report feature and layout category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     report_layout:
         description:
             - Report layout configuration.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             body-item:
                 description:
                     - Configure report body item.
@@ -149,7 +156,6 @@ options:
                             name:
                                 description:
                                     - Field name that match field of parameters defined in dataset.
-                                required: true
                             value:
                                 description:
                                     - Value to replace corresponding field of parameters defined in dataset.
@@ -201,7 +207,7 @@ options:
                     - custom
             cutoff-time:
                 description:
-                    - Custom cutoff time to generate report [hh:mm].
+                    - "Custom cutoff time to generate report [hh:mm]."
             day:
                 description:
                     - Schedule days of week to generate report.
@@ -357,7 +363,7 @@ options:
                     - Report subtitle.
             time:
                 description:
-                    - Schedule time to generate report [hh:mm].
+                    - "Schedule time to generate report [hh:mm]."
             title:
                 description:
                     - Report title.
@@ -373,10 +379,10 @@ EXAMPLES = '''
   tasks:
   - name: Report layout configuration.
     fortios_report_layout:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       report_layout:
         state: "present"
         body-item:
@@ -513,6 +519,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -550,7 +558,6 @@ def report_layout(data, fos):
     vdom = data['vdom']
     report_layout_data = data['report_layout']
     filtered_data = filter_report_layout_data(report_layout_data)
-
     if report_layout_data['state'] == "present":
         return fos.set('report',
                        'layout',
@@ -560,16 +567,12 @@ def report_layout(data, fos):
     elif report_layout_data['state'] == "absent":
         return fos.delete('report',
                           'layout',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_report(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['report_layout']
     for method in methodlist:
@@ -587,11 +590,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "report_layout": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "body-item": {"required": False, "type": "list",
                               "options": {
                                   "chart": {"required": False, "type": "str"},
@@ -619,7 +623,7 @@ def main():
                                   "parameters": {"required": False, "type": "list",
                                                  "options": {
                                                      "id": {"required": True, "type": "int"},
-                                                     "name": {"required": True, "type": "str"},
+                                                     "name": {"required": False, "type": "str"},
                                                      "value": {"required": False, "type": "str"}
                                                  }},
                                   "style": {"required": False, "type": "str"},
@@ -712,6 +716,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_report(module.params, fos)

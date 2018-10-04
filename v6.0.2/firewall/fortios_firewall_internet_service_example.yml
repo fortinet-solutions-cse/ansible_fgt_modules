@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Show Internet Service application.
+    fortios_firewall_internet_service:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_internet_service:
+        state: "present"
+        database: "isdb"
+        direction: "src"
+        entry:
+         -
+            id:  "6"
+            ip-number: "7"
+            ip-range-number: "8"
+            port: "9"
+            protocol: "10"
+        icon-id: "11"
+        id:  "12"
+        name: "default_name_13"
+        offset: "14"
+        reputation: "15"
+        sld-id: "16"

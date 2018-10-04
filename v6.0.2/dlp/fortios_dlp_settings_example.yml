@@ -7,14 +7,13 @@
   tasks:
   - name: Designate logical storage for DLP fingerprint database.
     fortios_dlp_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dlp_settings:
-        state: "present"
         cache-mem-percent: "3"
         chunk-size: "4"
         db-mode: "stop-adding"
         size: "6"
-        storage-device: "<your_own_value> (source: system.storage.name)"
+        storage-device: "<your_own_value> (source system.storage.name)"

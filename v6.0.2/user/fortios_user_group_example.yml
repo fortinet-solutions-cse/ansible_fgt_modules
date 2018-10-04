@@ -7,10 +7,10 @@
   tasks:
   - name: Configure user groups.
     fortios_user_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_group:
         state: "present"
         auth-concurrent-override: "enable"
@@ -38,16 +38,16 @@
          -
             group-name: "<your_own_value>"
             id:  "25"
-            server-name: "<your_own_value> (source: user.radius.name user.ldap.name user.tacacs+.name)"
+            server-name: "<your_own_value> (source user.radius.name user.ldap.name user.tacacs+.name)"
         max-accounts: "27"
         member:
          -
-            name: "default_name_29 (source: user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name)"
+            name: "default_name_29 (source user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name)"
         mobile-phone: "disable"
         multiple-guest-add: "disable"
         name: "default_name_32"
         password: "auto-generate"
-        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        sms-custom-server: "<your_own_value> (source system.sms-server.name)"
         sms-server: "fortiguard"
         sponsor: "optional"
         sso-attribute-value: "<your_own_value>"

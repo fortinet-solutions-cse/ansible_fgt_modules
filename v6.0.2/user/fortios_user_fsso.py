@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and fsso category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,27 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_fsso:
         description:
             - Configure Fortinet Single Sign On (FSSO) agents.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ldap-server:
                 description:
-                    - LDAP server to get group information. Source: user.ldap.name.
+                    - LDAP server to get group information. Source user.ldap.name.
             name:
                 description:
                     - Name.
@@ -141,13 +148,13 @@ EXAMPLES = '''
   tasks:
   - name: Configure Fortinet Single Sign On (FSSO) agents.
     fortios_user_fsso:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_fsso:
         state: "present"
-        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        ldap-server: "<your_own_value> (source user.ldap.name)"
         name: "default_name_4"
         password: "<your_own_value>"
         password2: "<your_own_value>"
@@ -227,6 +234,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -265,7 +274,6 @@ def user_fsso(data, fos):
     vdom = data['vdom']
     user_fsso_data = data['user_fsso']
     filtered_data = filter_user_fsso_data(user_fsso_data)
-
     if user_fsso_data['state'] == "present":
         return fos.set('user',
                        'fsso',
@@ -275,16 +283,12 @@ def user_fsso(data, fos):
     elif user_fsso_data['state'] == "absent":
         return fos.delete('user',
                           'fsso',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_fsso']
     for method in methodlist:
@@ -302,18 +306,19 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_fsso": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "ldap-server": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
-                "password": {"required": False, "type": "password"},
-                "password2": {"required": False, "type": "password"},
-                "password3": {"required": False, "type": "password"},
-                "password4": {"required": False, "type": "password"},
-                "password5": {"required": False, "type": "password"},
+                "password": {"required": False, "type": "str"},
+                "password2": {"required": False, "type": "str"},
+                "password3": {"required": False, "type": "str"},
+                "password4": {"required": False, "type": "str"},
+                "password5": {"required": False, "type": "str"},
                 "port": {"required": False, "type": "int"},
                 "port2": {"required": False, "type": "int"},
                 "port3": {"required": False, "type": "int"},
@@ -324,8 +329,8 @@ def main():
                 "server3": {"required": False, "type": "str"},
                 "server4": {"required": False, "type": "str"},
                 "server5": {"required": False, "type": "str"},
-                "source-ip": {"required": False, "type": "ipv4-address"},
-                "source-ip6": {"required": False, "type": "ipv6-address"}
+                "source-ip": {"required": False, "type": "str"},
+                "source-ip6": {"required": False, "type": "str"}
 
             }
         }
@@ -338,6 +343,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

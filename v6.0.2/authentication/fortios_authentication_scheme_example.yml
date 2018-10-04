@@ -7,21 +7,21 @@
   tasks:
   - name: Configure Authentication Schemes.
     fortios_authentication_scheme:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_scheme:
         state: "present"
-        domain-controller: "<your_own_value> (source: user.domain-controller.name)"
-        fsso-agent-for-ntlm: "<your_own_value> (source: user.fsso.name)"
+        domain-controller: "<your_own_value> (source user.domain-controller.name)"
+        fsso-agent-for-ntlm: "<your_own_value> (source user.fsso.name)"
         fsso-guest: "enable"
-        kerberos-keytab: "<your_own_value> (source: user.krb-keytab.name)"
+        kerberos-keytab: "<your_own_value> (source user.krb-keytab.name)"
         method: "ntlm"
         name: "default_name_8"
         negotiate-ntlm: "enable"
         require-tfa: "enable"
-        ssh-ca: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        ssh-ca: "<your_own_value> (source firewall.ssh.local-ca.name)"
         user-database:
          -
-            name: "default_name_13 (source: system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name)"
+            name: "default_name_13 (source system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name)"

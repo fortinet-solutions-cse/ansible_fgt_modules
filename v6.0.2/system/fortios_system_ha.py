@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ha category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_ha:
         description:
             - Configure HA.
@@ -135,7 +136,7 @@ options:
                         required: true
                     interface:
                         description:
-                            - Interface to reserve for HA management. Source: system.interface.name.
+                            - Interface to reserve for HA management. Source system.interface.name.
             ha-mgmt-status:
                 description:
                     - Enable to reserve interfaces to manage individual cluster units.
@@ -208,7 +209,7 @@ options:
                     - a-p
             monitor:
                 description:
-                    - Interfaces to check for port monitoring (or link failure). Source: system.interface.name.
+                    - Interfaces to check for port monitoring (or link failure). Source system.interface.name.
             multicast-ttl:
                 description:
                     - HA multicast TTL on master (5 - 3600 sec).
@@ -235,7 +236,7 @@ options:
                     - Time to wait in minutes before renegotiating after a remote IP monitoring failover.
             pingserver-monitor-interface:
                 description:
-                    - Interfaces to check for remote IP monitoring. Source: system.interface.name.
+                    - Interfaces to check for remote IP monitoring. Source system.interface.name.
             pingserver-slave-force-reset:
                 description:
                     - Enable to force the cluster to negotiate after a remote IP monitoring failover.
@@ -275,7 +276,7 @@ options:
                 suboptions:
                     monitor:
                         description:
-                            - Interfaces to check for port monitoring (or link failure). Source: system.interface.name.
+                            - Interfaces to check for port monitoring (or link failure). Source system.interface.name.
                     override:
                         description:
                             - Enable and increase the priority of the unit that should always be primary (master).
@@ -290,7 +291,7 @@ options:
                             - Remote IP monitoring failover threshold (0 - 50).
                     pingserver-monitor-interface:
                         description:
-                            - Interfaces to check for remote IP monitoring. Source: system.interface.name.
+                            - Interfaces to check for remote IP monitoring. Source system.interface.name.
                     pingserver-slave-force-reset:
                         description:
                             - Enable to force the cluster to negotiate after a remote IP monitoring failover.
@@ -338,7 +339,7 @@ options:
                     - disable
             session-sync-dev:
                 description:
-                    - Offload session sync to one or more interfaces to distribute traffic and prevent delays if needed. Source: system.interface.name.
+                    - Offload session sync to one or more interfaces to distribute traffic and prevent delays if needed. Source system.interface.name.
             smtp-proxy-threshold:
                 description:
                     - Dynamic weighted load balancing weight and high and low number of SMTP proxy sessions.
@@ -411,12 +412,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure HA.
     fortios_system_ha:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_ha:
-        state: "present"
         arps: "3"
         arps-interval: "4"
         authentication: "enable"
@@ -434,7 +434,7 @@ EXAMPLES = '''
             gateway: "<your_own_value>"
             gateway6: "<your_own_value>"
             id:  "18"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
         ha-mgmt-status: "enable"
         ha-uptime-diff-margin: "21"
         hb-interval: "22"
@@ -452,7 +452,7 @@ EXAMPLES = '''
         memory-compatible-mode: "enable"
         memory-threshold: "<your_own_value>"
         mode: "standalone"
-        monitor: "<your_own_value> (source: system.interface.name)"
+        monitor: "<your_own_value> (source system.interface.name)"
         multicast-ttl: "38"
         nntp-proxy-threshold: "<your_own_value>"
         override: "enable"
@@ -460,7 +460,7 @@ EXAMPLES = '''
         password: "<your_own_value>"
         pingserver-failover-threshold: "43"
         pingserver-flip-timeout: "44"
-        pingserver-monitor-interface: "<your_own_value> (source: system.interface.name)"
+        pingserver-monitor-interface: "<your_own_value> (source system.interface.name)"
         pingserver-slave-force-reset: "enable"
         pop3-proxy-threshold: "<your_own_value>"
         priority: "48"
@@ -469,11 +469,11 @@ EXAMPLES = '''
         route-wait: "51"
         schedule: "none"
         secondary-vcluster:
-            monitor: "<your_own_value> (source: system.interface.name)"
+            monitor: "<your_own_value> (source system.interface.name)"
             override: "enable"
             override-wait-time: "56"
             pingserver-failover-threshold: "57"
-            pingserver-monitor-interface: "<your_own_value> (source: system.interface.name)"
+            pingserver-monitor-interface: "<your_own_value> (source system.interface.name)"
             pingserver-slave-force-reset: "enable"
             priority: "60"
             vcluster-id: "61"
@@ -483,7 +483,7 @@ EXAMPLES = '''
         session-pickup-delay: "enable"
         session-pickup-expectation: "enable"
         session-pickup-nat: "enable"
-        session-sync-dev: "<your_own_value> (source: system.interface.name)"
+        session-sync-dev: "<your_own_value> (source system.interface.name)"
         smtp-proxy-threshold: "<your_own_value>"
         standalone-config-sync: "enable"
         standalone-mgmt-vdom: "enable"
@@ -558,6 +558,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -611,26 +613,14 @@ def system_ha(data, fos):
     vdom = data['vdom']
     system_ha_data = data['system_ha']
     filtered_data = filter_system_ha_data(system_ha_data)
-
-    if system_ha_data['state'] == "present":
-        return fos.set('system',
-                       'ha',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system_ha_data['state'] == "absent":
-        return fos.delete('system',
-                          'ha',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system',
+                   'ha',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_ha']
     for method in methodlist:
@@ -648,11 +638,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_ha": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "arps": {"required": False, "type": "int"},
                 "arps-interval": {"required": False, "type": "int"},
                 "authentication": {"required": False, "type": "str",
@@ -670,9 +659,9 @@ def main():
                 "ha-eth-type": {"required": False, "type": "str"},
                 "ha-mgmt-interfaces": {"required": False, "type": "list",
                                        "options": {
-                                           "dst": {"required": False, "type": "ipv4-classnet"},
-                                           "gateway": {"required": False, "type": "ipv4-address"},
-                                           "gateway6": {"required": False, "type": "ipv6-address"},
+                                           "dst": {"required": False, "type": "str"},
+                                           "gateway": {"required": False, "type": "str"},
+                                           "gateway6": {"required": False, "type": "str"},
                                            "id": {"required": True, "type": "int"},
                                            "interface": {"required": False, "type": "str"}
                                        }},
@@ -688,7 +677,7 @@ def main():
                 "imap-proxy-threshold": {"required": False, "type": "str"},
                 "inter-cluster-session-sync": {"required": False, "type": "str",
                                                "choices": ["enable", "disable"]},
-                "key": {"required": False, "type": "password"},
+                "key": {"required": False, "type": "str"},
                 "l2ep-eth-type": {"required": False, "type": "str"},
                 "link-failed-signal": {"required": False, "type": "str",
                                        "choices": ["enable", "disable"]},
@@ -705,7 +694,7 @@ def main():
                 "override": {"required": False, "type": "str",
                              "choices": ["enable", "disable"]},
                 "override-wait-time": {"required": False, "type": "int"},
-                "password": {"required": False, "type": "password"},
+                "password": {"required": False, "type": "str"},
                 "pingserver-failover-threshold": {"required": False, "type": "int"},
                 "pingserver-flip-timeout": {"required": False, "type": "int"},
                 "pingserver-monitor-interface": {"required": False, "type": "str"},
@@ -756,8 +745,8 @@ def main():
                                         "choices": ["enable", "disable"]},
                 "unicast-hb": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
-                "unicast-hb-netmask": {"required": False, "type": "ipv4-netmask"},
-                "unicast-hb-peerip": {"required": False, "type": "ipv4-address"},
+                "unicast-hb-netmask": {"required": False, "type": "str"},
+                "unicast-hb-peerip": {"required": False, "type": "str"},
                 "uninterruptible-upgrade": {"required": False, "type": "str",
                                             "choices": ["enable", "disable"]},
                 "vcluster-id": {"required": False, "type": "int"},
@@ -777,6 +766,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

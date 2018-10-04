@@ -7,13 +7,12 @@
   tasks:
   - name: Global settings for remote syslog server.
     fortios_log.syslogd_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.syslogd_setting:
-        state: "present"
-        certificate: "<your_own_value> (source: certificate.local.name)"
+        certificate: "<your_own_value> (source certificate.local.name)"
         custom-field-name:
          -
             custom: "<your_own_value>"

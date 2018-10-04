@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and bfd6 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_bfd6:
         description:
             - Configure IPv6 BFD.
@@ -77,10 +78,11 @@ options:
                 suboptions:
                     interface:
                         description:
-                            - Interface to the BFD neighbor. Source: system.interface.name.
+                            - Interface to the BFD neighbor. Source system.interface.name.
                     ip6-address:
                         description:
                             - IPv6 address of the BFD neighbor.
+                        required: true
 '''
 
 EXAMPLES = '''
@@ -93,15 +95,14 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv6 BFD.
     fortios_router_bfd6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_bfd6:
-        state: "present"
         neighbor:
          -
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             ip6-address: "<your_own_value>"
 '''
 
@@ -164,6 +165,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -196,26 +199,14 @@ def router_bfd6(data, fos):
     vdom = data['vdom']
     router_bfd6_data = data['router_bfd6']
     filtered_data = filter_router_bfd6_data(router_bfd6_data)
-
-    if router_bfd6_data['state'] == "present":
-        return fos.set('router',
-                       'bfd6',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_bfd6_data['state'] == "absent":
-        return fos.delete('router',
-                          'bfd6',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'bfd6',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_bfd6']
     for method in methodlist:
@@ -233,15 +224,14 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_bfd6": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "neighbor": {"required": False, "type": "list",
                              "options": {
                                  "interface": {"required": False, "type": "str"},
-                                 "ip6-address": {"required": False, "type": "ipv6-address"}
+                                 "ip6-address": {"required": True, "type": "str"}
                              }}
 
             }
@@ -255,6 +245,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

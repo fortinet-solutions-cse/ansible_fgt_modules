@@ -7,16 +7,15 @@
   tasks:
   - name: Configure FM.
     fortios_system_fm:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_fm:
-        state: "present"
         auto-backup: "enable"
         id:  "4"
         ip: "<your_own_value>"
         ipsec: "enable"
         scheduled-config-restore: "enable"
         status: "enable"
-        vdom: "<your_own_value> (source: system.vdom.name)"
+        vdom: "<your_own_value> (source system.vdom.name)"

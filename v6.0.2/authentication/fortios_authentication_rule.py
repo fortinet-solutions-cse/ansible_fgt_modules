@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure authentication feature and rule category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,27 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     authentication_rule:
         description:
             - Configure Authentication Rules.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             active-auth-method:
                 description:
-                    - Select an active authentication method. Source: authentication.scheme.name.
+                    - Select an active authentication method. Source authentication.scheme.name.
             comments:
                 description:
                     - Comment.
@@ -89,7 +96,8 @@ options:
                 required: true
             protocol:
                 description:
-                    - Select the protocol to use for authentication (default = http). Users connect to the FortiGate using this protocol and are asked to authenticate.
+                    - Select the protocol to use for authentication (default = http). Users connect to the FortiGate using this protocol and are asked to
+                       authenticate.
                 choices:
                     - http
                     - ftp
@@ -101,7 +109,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name.
                         required: true
             srcaddr6:
                 description:
@@ -109,11 +117,11 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             sso-auth-method:
                 description:
-                    - Select a single-sign on (SSO) authentication method. Source: authentication.scheme.name.
+                    - Select a single-sign on (SSO) authentication method. Source authentication.scheme.name.
             status:
                 description:
                     - Enable/disable this authentication rule.
@@ -144,24 +152,24 @@ EXAMPLES = '''
   tasks:
   - name: Configure Authentication Rules.
     fortios_authentication_rule:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_rule:
         state: "present"
-        active-auth-method: "<your_own_value> (source: authentication.scheme.name)"
+        active-auth-method: "<your_own_value> (source authentication.scheme.name)"
         comments: "<your_own_value>"
         ip-based: "enable"
         name: "default_name_6"
         protocol: "http"
         srcaddr:
          -
-            name: "default_name_9 (source: firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
         srcaddr6:
          -
-            name: "default_name_11 (source: firewall.address6.name firewall.addrgrp6.name)"
-        sso-auth-method: "<your_own_value> (source: authentication.scheme.name)"
+            name: "default_name_11 (source firewall.address6.name firewall.addrgrp6.name)"
+        sso-auth-method: "<your_own_value> (source authentication.scheme.name)"
         status: "enable"
         transaction-based: "enable"
         web-auth-cookie: "enable"
@@ -226,6 +234,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -261,7 +271,6 @@ def authentication_rule(data, fos):
     vdom = data['vdom']
     authentication_rule_data = data['authentication_rule']
     filtered_data = filter_authentication_rule_data(authentication_rule_data)
-
     if authentication_rule_data['state'] == "present":
         return fos.set('authentication',
                        'rule',
@@ -271,16 +280,12 @@ def authentication_rule(data, fos):
     elif authentication_rule_data['state'] == "absent":
         return fos.delete('authentication',
                           'rule',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_authentication(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['authentication_rule']
     for method in methodlist:
@@ -298,11 +303,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "authentication_rule": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "active-auth-method": {"required": False, "type": "str"},
                 "comments": {"required": False, "type": "str"},
                 "ip-based": {"required": False, "type": "str",
@@ -338,6 +344,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_authentication(module.params, fos)

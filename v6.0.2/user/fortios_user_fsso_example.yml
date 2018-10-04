@@ -7,13 +7,13 @@
   tasks:
   - name: Configure Fortinet Single Sign On (FSSO) agents.
     fortios_user_fsso:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_fsso:
         state: "present"
-        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        ldap-server: "<your_own_value> (source user.ldap.name)"
         name: "default_name_4"
         password: "<your_own_value>"
         password2: "<your_own_value>"

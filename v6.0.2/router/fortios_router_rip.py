@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and rip category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_rip:
         description:
             - Configure RIP.
@@ -86,7 +87,7 @@ options:
                 suboptions:
                     access-list:
                         description:
-                            - Access list for route destination. Source: router.access-list.name.
+                            - Access list for route destination. Source router.access-list.name.
                     distance:
                         description:
                             - Distance (1 - 255).
@@ -113,10 +114,10 @@ options:
                         required: true
                     interface:
                         description:
-                            - Distribute list interface name. Source: system.interface.name.
+                            - Distribute list interface name. Source system.interface.name.
                     listname:
                         description:
-                            - Distribute access/prefix list name. Source: router.access-list.name router.prefix-list.name.
+                            - Distribute access/prefix list name. Source router.access-list.name router.prefix-list.name.
                     status:
                         description:
                             - status
@@ -132,7 +133,7 @@ options:
                 suboptions:
                     auth-keychain:
                         description:
-                            - Authentication key-chain name. Source: router.key-chain.name.
+                            - Authentication key-chain name. Source router.key-chain.name.
                     auth-mode:
                         description:
                             - Authentication mode.
@@ -148,7 +149,7 @@ options:
                             - flags
                     name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                         required: true
                     receive-version:
                         description:
@@ -211,7 +212,7 @@ options:
                 suboptions:
                     access-list:
                         description:
-                            - Access list name. Source: router.access-list.name.
+                            - Access list name. Source router.access-list.name.
                     direction:
                         description:
                             - Offset list direction.
@@ -224,7 +225,7 @@ options:
                         required: true
                     interface:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
                     offset:
                         description:
                             - offset
@@ -240,7 +241,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Passive interface name. Source: system.interface.name.
+                            - Passive interface name. Source system.interface.name.
                         required: true
             recv-buffer-size:
                 description:
@@ -258,7 +259,7 @@ options:
                         required: true
                     routemap:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - status
@@ -289,17 +290,16 @@ EXAMPLES = '''
   tasks:
   - name: Configure RIP.
     fortios_router_rip:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_rip:
-        state: "present"
         default-information-originate: "enable"
         default-metric: "4"
         distance:
          -
-            access-list: "<your_own_value> (source: router.access-list.name)"
+            access-list: "<your_own_value> (source router.access-list.name)"
             distance: "7"
             id:  "8"
             prefix: "<your_own_value>"
@@ -307,17 +307,17 @@ EXAMPLES = '''
          -
             direction: "in"
             id:  "12"
-            interface: "<your_own_value> (source: system.interface.name)"
-            listname: "<your_own_value> (source: router.access-list.name router.prefix-list.name)"
+            interface: "<your_own_value> (source system.interface.name)"
+            listname: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
             status: "enable"
         garbage-timer: "16"
         interface:
          -
-            auth-keychain: "<your_own_value> (source: router.key-chain.name)"
+            auth-keychain: "<your_own_value> (source router.key-chain.name)"
             auth-mode: "none"
             auth-string: "<your_own_value>"
             flags: "21"
-            name: "default_name_22 (source: system.interface.name)"
+            name: "default_name_22 (source system.interface.name)"
             receive-version: "1"
             send-version: "1"
             send-version2-broadcast: "disable"
@@ -334,21 +334,21 @@ EXAMPLES = '''
             prefix: "<your_own_value>"
         offset-list:
          -
-            access-list: "<your_own_value> (source: router.access-list.name)"
+            access-list: "<your_own_value> (source router.access-list.name)"
             direction: "in"
             id:  "38"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             offset: "40"
             status: "enable"
         passive-interface:
          -
-            name: "default_name_43 (source: system.interface.name)"
+            name: "default_name_43 (source system.interface.name)"
         recv-buffer-size: "44"
         redistribute:
          -
             metric: "46"
             name: "default_name_47"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         timeout-timer: "50"
         update-timer: "51"
@@ -414,6 +414,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -451,26 +453,14 @@ def router_rip(data, fos):
     vdom = data['vdom']
     router_rip_data = data['router_rip']
     filtered_data = filter_router_rip_data(router_rip_data)
-
-    if router_rip_data['state'] == "present":
-        return fos.set('router',
-                       'rip',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_rip_data['state'] == "absent":
-        return fos.delete('router',
-                          'rip',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'rip',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_rip']
     for method in methodlist:
@@ -488,11 +478,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_rip": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "default-information-originate": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},
                 "default-metric": {"required": False, "type": "int"},
@@ -501,7 +490,7 @@ def main():
                                  "access-list": {"required": False, "type": "str"},
                                  "distance": {"required": False, "type": "int"},
                                  "id": {"required": True, "type": "int"},
-                                 "prefix": {"required": False, "type": "ipv4-classnet-any"}
+                                 "prefix": {"required": False, "type": "str"}
                              }},
                 "distribute-list": {"required": False, "type": "list",
                                     "options": {
@@ -519,7 +508,7 @@ def main():
                                   "auth-keychain": {"required": False, "type": "str"},
                                   "auth-mode": {"required": False, "type": "str",
                                                 "choices": ["none", "text", "md5"]},
-                                  "auth-string": {"required": False, "type": "password"},
+                                  "auth-string": {"required": False, "type": "str"},
                                   "flags": {"required": False, "type": "int"},
                                   "name": {"required": True, "type": "str"},
                                   "receive-version": {"required": False, "type": "str",
@@ -537,12 +526,12 @@ def main():
                 "neighbor": {"required": False, "type": "list",
                              "options": {
                                  "id": {"required": True, "type": "int"},
-                                 "ip": {"required": False, "type": "ipv4-address"}
+                                 "ip": {"required": False, "type": "str"}
                              }},
                 "network": {"required": False, "type": "list",
                             "options": {
                                 "id": {"required": True, "type": "int"},
-                                "prefix": {"required": False, "type": "ipv4-classnet"}
+                                "prefix": {"required": False, "type": "str"}
                             }},
                 "offset-list": {"required": False, "type": "list",
                                 "options": {
@@ -584,6 +573,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

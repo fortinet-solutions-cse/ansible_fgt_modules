@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure HA monitor.
+    fortios_system_ha_monitor:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      system_ha_monitor:
+        monitor-vlan: "enable"
+        vlan-hb-interval: "4"
+        vlan-hb-lost-threshold: "5"

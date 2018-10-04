@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IPS decoder.
     fortios_ips_decoder:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_decoder:
         state: "present"
         name: "default_name_3"

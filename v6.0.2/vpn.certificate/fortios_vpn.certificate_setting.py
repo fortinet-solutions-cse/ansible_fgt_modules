@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.certificate_setting:
         description:
             - VPN certificate setting.
@@ -73,22 +74,22 @@ options:
         suboptions:
             certname-dsa1024:
                 description:
-                    - 1024 bit DSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 1024 bit DSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             certname-dsa2048:
                 description:
-                    - 2048 bit DSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 2048 bit DSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             certname-ecdsa256:
                 description:
-                    - 256 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 256 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             certname-ecdsa384:
                 description:
-                    - 384 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 384 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             certname-rsa1024:
                 description:
-                    - 1024 bit RSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 1024 bit RSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             certname-rsa2048:
                 description:
-                    - 2048 bit RSA key certificate for re-signing server certificates for SSL inspection. Source: vpn.certificate.local.name.
+                    - 2048 bit RSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
             check-ca-cert:
                 description:
                     - Enable/disable verification of the user certificate and pass authentication if any CA in the chain is trusted (default = enable).
@@ -97,7 +98,8 @@ options:
                     - disable
             check-ca-chain:
                 description:
-                    - Enable/disable verification of the entire certificate chain and pass authentication only if the chain is complete and all of the CAs in the chain are trusted (default = disable).
+                    - Enable/disable verification of the entire certificate chain and pass authentication only if the chain is complete and all of the CAs in
+                       the chain are trusted (default = disable).
                 choices:
                     - enable
                     - disable
@@ -115,7 +117,7 @@ options:
                     - value
             ocsp-default-server:
                 description:
-                    - Default OCSP server. Source: vpn.certificate.ocsp-server.name.
+                    - Default OCSP server. Source vpn.certificate.ocsp-server.name.
             ocsp-status:
                 description:
                     - Enable/disable receiving certificates using the OCSP.
@@ -173,23 +175,22 @@ EXAMPLES = '''
   tasks:
   - name: VPN certificate setting.
     fortios_vpn.certificate_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.certificate_setting:
-        state: "present"
-        certname-dsa1024: "<your_own_value> (source: vpn.certificate.local.name)"
-        certname-dsa2048: "<your_own_value> (source: vpn.certificate.local.name)"
-        certname-ecdsa256: "<your_own_value> (source: vpn.certificate.local.name)"
-        certname-ecdsa384: "<your_own_value> (source: vpn.certificate.local.name)"
-        certname-rsa1024: "<your_own_value> (source: vpn.certificate.local.name)"
-        certname-rsa2048: "<your_own_value> (source: vpn.certificate.local.name)"
+        certname-dsa1024: "<your_own_value> (source vpn.certificate.local.name)"
+        certname-dsa2048: "<your_own_value> (source vpn.certificate.local.name)"
+        certname-ecdsa256: "<your_own_value> (source vpn.certificate.local.name)"
+        certname-ecdsa384: "<your_own_value> (source vpn.certificate.local.name)"
+        certname-rsa1024: "<your_own_value> (source vpn.certificate.local.name)"
+        certname-rsa2048: "<your_own_value> (source vpn.certificate.local.name)"
         check-ca-cert: "enable"
         check-ca-chain: "enable"
         cmp-save-extra-certs: "enable"
         cn-match: "substring"
-        ocsp-default-server: "<your_own_value> (source: vpn.certificate.ocsp-server.name)"
+        ocsp-default-server: "<your_own_value> (source vpn.certificate.ocsp-server.name)"
         ocsp-status: "enable"
         ssl-min-proto-version: "default"
         ssl-ocsp-option: "certificate"
@@ -258,6 +259,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -296,26 +299,14 @@ def vpn.certificate_setting(data, fos):
     vpn.certificate_setting_data = data['vpn.certificate_setting']
     filtered_data = filter_vpn.certificate_setting_data(
         vpn.certificate_setting_data)
-
-    if vpn.certificate_setting_data['state'] == "present":
-        return fos.set('vpn.certificate',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif vpn.certificate_setting_data['state'] == "absent":
-        return fos.delete('vpn.certificate',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('vpn.certificate',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_vpn.certificate(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.certificate_setting']
     for method in methodlist:
@@ -333,11 +324,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.certificate_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "certname-dsa1024": {"required": False, "type": "str"},
                 "certname-dsa2048": {"required": False, "type": "str"},
                 "certname-ecdsa256": {"required": False, "type": "str"},
@@ -380,6 +370,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.certificate(module.params, fos)

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.snmp feature and user category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system.snmp_user:
         description:
             - SNMP user configuration.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auth-proto:
                 description:
                     - Authentication protocol.
@@ -198,10 +205,10 @@ EXAMPLES = '''
   tasks:
   - name: SNMP user configuration.
     fortios_system.snmp_user:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.snmp_user:
         state: "present"
         auth-proto: "md5"
@@ -283,6 +290,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -320,7 +329,6 @@ def system.snmp_user(data, fos):
     vdom = data['vdom']
     system.snmp_user_data = data['system.snmp_user']
     filtered_data = filter_system.snmp_user_data(system.snmp_user_data)
-
     if system.snmp_user_data['state'] == "present":
         return fos.set('system.snmp',
                        'user',
@@ -330,16 +338,12 @@ def system.snmp_user(data, fos):
     elif system.snmp_user_data['state'] == "absent":
         return fos.delete('system.snmp',
                           'user',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_system.snmp(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system.snmp_user']
     for method in methodlist:
@@ -357,14 +361,15 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system.snmp_user": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auth-proto": {"required": False, "type": "str",
                                "choices": ["md5", "sha"]},
-                "auth-pwd": {"required": False, "type": "password"},
+                "auth-pwd": {"required": False, "type": "str"},
                 "events": {"required": False, "type": "str",
                            "choices": ["cpu-high", "mem-low", "log-full",
                                        "intf-ip", "vpn-tun-up", "vpn-tun-down",
@@ -381,19 +386,19 @@ def main():
                 "ha-direct": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]},
                 "name": {"required": True, "type": "str"},
-                "notify-hosts": {"required": False, "type": "ipv4-address"},
-                "notify-hosts6": {"required": False, "type": "ipv6-address"},
+                "notify-hosts": {"required": False, "type": "str"},
+                "notify-hosts6": {"required": False, "type": "str"},
                 "priv-proto": {"required": False, "type": "str",
                                "choices": ["aes", "des", "aes256",
                                            "aes256cisco"]},
-                "priv-pwd": {"required": False, "type": "password"},
+                "priv-pwd": {"required": False, "type": "str"},
                 "queries": {"required": False, "type": "str",
                             "choices": ["enable", "disable"]},
                 "query-port": {"required": False, "type": "int"},
                 "security-level": {"required": False, "type": "str",
                                    "choices": ["no-auth-no-priv", "auth-no-priv", "auth-priv"]},
-                "source-ip": {"required": False, "type": "ipv4-address"},
-                "source-ipv6": {"required": False, "type": "ipv6-address"},
+                "source-ip": {"required": False, "type": "str"},
+                "source-ipv6": {"required": False, "type": "str"},
                 "status": {"required": False, "type": "str",
                            "choices": ["enable", "disable"]},
                 "trap-lport": {"required": False, "type": "int"},
@@ -412,6 +417,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system.snmp(module.params, fos)

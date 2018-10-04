@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ssl feature and settings category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ssl_settings:
         description:
             - Configure SSL VPN.
@@ -106,7 +107,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Group name. Source: user.group.name.
+                                    - Group name. Source user.group.name.
                                 required: true
                     id:
                         description:
@@ -114,17 +115,17 @@ options:
                         required: true
                     portal:
                         description:
-                            - SSL VPN portal. Source: vpn.ssl.web.portal.name.
+                            - SSL VPN portal. Source vpn.ssl.web.portal.name.
                     realm:
                         description:
-                            - SSL VPN realm. Source: vpn.ssl.web.realm.url-path.
+                            - SSL VPN realm. Source vpn.ssl.web.realm.url-path.
                     source-address:
                         description:
                             - Source address of incoming traffic.
                         suboptions:
                             name:
                                 description:
-                                    - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Address name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
                     source-address-negate:
                         description:
@@ -138,7 +139,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - IPv6 address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                                    - IPv6 address name. Source firewall.address6.name firewall.addrgrp6.name.
                                 required: true
                     source-address6-negate:
                         description:
@@ -152,7 +153,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Interface name. Source: system.interface.name system.zone.name.
+                                    - Interface name. Source system.interface.name system.zone.name.
                                 required: true
                     users:
                         description:
@@ -160,7 +161,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - User name. Source: user.local.name.
+                                    - User name. Source user.local.name.
                                 required: true
             auto-tunnel-static-route:
                 description:
@@ -195,7 +196,7 @@ options:
                     - disable
             default-portal:
                 description:
-                    - Default SSL VPN portal. Source: vpn.ssl.web.portal.name.
+                    - Default SSL VPN portal. Source vpn.ssl.web.portal.name.
             deflate-compression-level:
                 description:
                     - Compression level (0~9).
@@ -304,14 +305,14 @@ options:
                     - disable
             servercert:
                 description:
-                    - Name of the server certificate to be used for SSL-VPNs. Source: vpn.certificate.local.name.
+                    - Name of the server certificate to be used for SSL-VPNs. Source vpn.certificate.local.name.
             source-address:
                 description:
                     - Source address of incoming traffic.
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             source-address-negate:
                 description:
@@ -325,7 +326,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - IPv6 address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - IPv6 address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             source-address6-negate:
                 description:
@@ -339,7 +340,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Interface name. Source: system.interface.name system.zone.name.
+                            - Interface name. Source system.interface.name system.zone.name.
                         required: true
             ssl-client-renegotiation:
                 description:
@@ -377,7 +378,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             tunnel-ipv6-pools:
                 description:
@@ -385,7 +386,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             unsafe-legacy-renegotiation:
                 description:
@@ -423,12 +424,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure SSL VPN.
     fortios_vpn.ssl_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ssl_settings:
-        state: "present"
         auth-timeout: "3"
         authentication-rule:
          -
@@ -437,28 +437,28 @@ EXAMPLES = '''
             client-cert: "enable"
             groups:
              -
-                name: "default_name_9 (source: user.group.name)"
+                name: "default_name_9 (source user.group.name)"
             id:  "10"
-            portal: "<your_own_value> (source: vpn.ssl.web.portal.name)"
-            realm: "<your_own_value> (source: vpn.ssl.web.realm.url-path)"
+            portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
+            realm: "<your_own_value> (source vpn.ssl.web.realm.url-path)"
             source-address:
              -
-                name: "default_name_14 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_14 (source firewall.address.name firewall.addrgrp.name)"
             source-address-negate: "enable"
             source-address6:
              -
-                name: "default_name_17 (source: firewall.address6.name firewall.addrgrp6.name)"
+                name: "default_name_17 (source firewall.address6.name firewall.addrgrp6.name)"
             source-address6-negate: "enable"
             source-interface:
              -
-                name: "default_name_20 (source: system.interface.name system.zone.name)"
+                name: "default_name_20 (source system.interface.name system.zone.name)"
             users:
              -
-                name: "default_name_22 (source: user.local.name)"
+                name: "default_name_22 (source user.local.name)"
         auto-tunnel-static-route: "enable"
         banned-cipher: "RSA"
         check-referer: "enable"
-        default-portal: "<your_own_value> (source: vpn.ssl.web.portal.name)"
+        default-portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
         deflate-compression-level: "27"
         deflate-min-data-size: "28"
         dns-server1: "<your_own_value>"
@@ -485,18 +485,18 @@ EXAMPLES = '''
         port-precedence: "enable"
         reqclientcert: "enable"
         route-source-interface: "enable"
-        servercert: "<your_own_value> (source: vpn.certificate.local.name)"
+        servercert: "<your_own_value> (source vpn.certificate.local.name)"
         source-address:
          -
-            name: "default_name_55 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_55 (source firewall.address.name firewall.addrgrp.name)"
         source-address-negate: "enable"
         source-address6:
          -
-            name: "default_name_58 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_58 (source firewall.address6.name firewall.addrgrp6.name)"
         source-address6-negate: "enable"
         source-interface:
          -
-            name: "default_name_61 (source: system.interface.name system.zone.name)"
+            name: "default_name_61 (source system.interface.name system.zone.name)"
         ssl-client-renegotiation: "disable"
         ssl-insert-empty-fragment: "enable"
         tlsv1-0: "enable"
@@ -504,10 +504,10 @@ EXAMPLES = '''
         tlsv1-2: "enable"
         tunnel-ip-pools:
          -
-            name: "default_name_68 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_68 (source firewall.address.name firewall.addrgrp.name)"
         tunnel-ipv6-pools:
          -
-            name: "default_name_70 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_70 (source firewall.address6.name firewall.addrgrp6.name)"
         unsafe-legacy-renegotiation: "enable"
         url-obscuration: "enable"
         wins-server1: "<your_own_value>"
@@ -574,6 +574,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -622,26 +624,14 @@ def vpn.ssl_settings(data, fos):
     vdom = data['vdom']
     vpn.ssl_settings_data = data['vpn.ssl_settings']
     filtered_data = filter_vpn.ssl_settings_data(vpn.ssl_settings_data)
-
-    if vpn.ssl_settings_data['state'] == "present":
-        return fos.set('vpn.ssl',
-                       'settings',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif vpn.ssl_settings_data['state'] == "absent":
-        return fos.delete('vpn.ssl',
-                          'settings',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('vpn.ssl',
+                   'settings',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_vpn.ssl(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ssl_settings']
     for method in methodlist:
@@ -659,11 +649,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ssl_settings": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "auth-timeout": {"required": False, "type": "int"},
                 "authentication-rule": {"required": False, "type": "list",
                                         "options": {
@@ -715,8 +704,8 @@ def main():
                 "default-portal": {"required": False, "type": "str"},
                 "deflate-compression-level": {"required": False, "type": "int"},
                 "deflate-min-data-size": {"required": False, "type": "int"},
-                "dns-server1": {"required": False, "type": "ipv4-address"},
-                "dns-server2": {"required": False, "type": "ipv4-address"},
+                "dns-server1": {"required": False, "type": "str"},
+                "dns-server2": {"required": False, "type": "str"},
                 "dns-suffix": {"required": False, "type": "str"},
                 "dtls-hello-timeout": {"required": False, "type": "int"},
                 "dtls-tunnel": {"required": False, "type": "str",
@@ -734,10 +723,10 @@ def main():
                 "https-redirect": {"required": False, "type": "str",
                                    "choices": ["enable", "disable"]},
                 "idle-timeout": {"required": False, "type": "int"},
-                "ipv6-dns-server1": {"required": False, "type": "ipv6-address"},
-                "ipv6-dns-server2": {"required": False, "type": "ipv6-address"},
-                "ipv6-wins-server1": {"required": False, "type": "ipv6-address"},
-                "ipv6-wins-server2": {"required": False, "type": "ipv6-address"},
+                "ipv6-dns-server1": {"required": False, "type": "str"},
+                "ipv6-dns-server2": {"required": False, "type": "str"},
+                "ipv6-wins-server1": {"required": False, "type": "str"},
+                "ipv6-wins-server2": {"required": False, "type": "str"},
                 "login-attempt-limit": {"required": False, "type": "int"},
                 "login-block-time": {"required": False, "type": "int"},
                 "login-timeout": {"required": False, "type": "int"},
@@ -787,8 +776,8 @@ def main():
                                                 "choices": ["enable", "disable"]},
                 "url-obscuration": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]},
-                "wins-server1": {"required": False, "type": "ipv4-address"},
-                "wins-server2": {"required": False, "type": "ipv4-address"},
+                "wins-server1": {"required": False, "type": "str"},
+                "wins-server2": {"required": False, "type": "str"},
                 "x-content-type-options": {"required": False, "type": "str",
                                            "choices": ["enable", "disable"]}
 
@@ -803,6 +792,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ssl(module.params, fos)

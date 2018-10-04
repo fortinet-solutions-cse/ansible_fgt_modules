@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ipmacbinding feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.ipmacbinding_setting:
         description:
             - Configure IP to MAC binding settings.
@@ -101,12 +102,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure IP to MAC binding settings.
     fortios_firewall.ipmacbinding_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ipmacbinding_setting:
-        state: "present"
         bindthroughfw: "enable"
         bindtofw: "enable"
         undefinedhost: "allow"
@@ -171,6 +171,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -204,26 +206,14 @@ def firewall.ipmacbinding_setting(data, fos):
     firewall.ipmacbinding_setting_data = data['firewall.ipmacbinding_setting']
     filtered_data = filter_firewall.ipmacbinding_setting_data(
         firewall.ipmacbinding_setting_data)
-
-    if firewall.ipmacbinding_setting_data['state'] == "present":
-        return fos.set('firewall.ipmacbinding',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif firewall.ipmacbinding_setting_data['state'] == "absent":
-        return fos.delete('firewall.ipmacbinding',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('firewall.ipmacbinding',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_firewall.ipmacbinding(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.ipmacbinding_setting']
     for method in methodlist:
@@ -241,11 +231,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.ipmacbinding_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "bindthroughfw": {"required": False, "type": "str",
                                   "choices": ["enable", "disable"]},
                 "bindtofw": {"required": False, "type": "str",
@@ -264,6 +253,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.ipmacbinding(

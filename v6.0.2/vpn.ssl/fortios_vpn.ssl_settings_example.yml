@@ -7,12 +7,11 @@
   tasks:
   - name: Configure SSL VPN.
     fortios_vpn.ssl_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ssl_settings:
-        state: "present"
         auth-timeout: "3"
         authentication-rule:
          -
@@ -21,28 +20,28 @@
             client-cert: "enable"
             groups:
              -
-                name: "default_name_9 (source: user.group.name)"
+                name: "default_name_9 (source user.group.name)"
             id:  "10"
-            portal: "<your_own_value> (source: vpn.ssl.web.portal.name)"
-            realm: "<your_own_value> (source: vpn.ssl.web.realm.url-path)"
+            portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
+            realm: "<your_own_value> (source vpn.ssl.web.realm.url-path)"
             source-address:
              -
-                name: "default_name_14 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_14 (source firewall.address.name firewall.addrgrp.name)"
             source-address-negate: "enable"
             source-address6:
              -
-                name: "default_name_17 (source: firewall.address6.name firewall.addrgrp6.name)"
+                name: "default_name_17 (source firewall.address6.name firewall.addrgrp6.name)"
             source-address6-negate: "enable"
             source-interface:
              -
-                name: "default_name_20 (source: system.interface.name system.zone.name)"
+                name: "default_name_20 (source system.interface.name system.zone.name)"
             users:
              -
-                name: "default_name_22 (source: user.local.name)"
+                name: "default_name_22 (source user.local.name)"
         auto-tunnel-static-route: "enable"
         banned-cipher: "RSA"
         check-referer: "enable"
-        default-portal: "<your_own_value> (source: vpn.ssl.web.portal.name)"
+        default-portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
         deflate-compression-level: "27"
         deflate-min-data-size: "28"
         dns-server1: "<your_own_value>"
@@ -69,18 +68,18 @@
         port-precedence: "enable"
         reqclientcert: "enable"
         route-source-interface: "enable"
-        servercert: "<your_own_value> (source: vpn.certificate.local.name)"
+        servercert: "<your_own_value> (source vpn.certificate.local.name)"
         source-address:
          -
-            name: "default_name_55 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_55 (source firewall.address.name firewall.addrgrp.name)"
         source-address-negate: "enable"
         source-address6:
          -
-            name: "default_name_58 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_58 (source firewall.address6.name firewall.addrgrp6.name)"
         source-address6-negate: "enable"
         source-interface:
          -
-            name: "default_name_61 (source: system.interface.name system.zone.name)"
+            name: "default_name_61 (source system.interface.name system.zone.name)"
         ssl-client-renegotiation: "disable"
         ssl-insert-empty-fragment: "enable"
         tlsv1-0: "enable"
@@ -88,10 +87,10 @@
         tlsv1-2: "enable"
         tunnel-ip-pools:
          -
-            name: "default_name_68 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_68 (source firewall.address.name firewall.addrgrp.name)"
         tunnel-ipv6-pools:
          -
-            name: "default_name_70 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_70 (source firewall.address6.name firewall.addrgrp6.name)"
         unsafe-legacy-renegotiation: "enable"
         url-obscuration: "enable"
         wins-server1: "<your_own_value>"

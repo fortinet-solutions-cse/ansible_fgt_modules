@@ -7,14 +7,14 @@
   tasks:
   - name: Schedule group configuration.
     fortios_firewall.schedule_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.schedule_group:
         state: "present"
         color: "3"
         member:
          -
-            name: "default_name_5 (source: firewall.schedule.onetime.name firewall.schedule.recurring.name)"
+            name: "default_name_5 (source firewall.schedule.onetime.name firewall.schedule.recurring.name)"
         name: "default_name_6"

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and peer category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,27 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_peer:
         description:
             - Configure peer users.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ca:
                 description:
-                    - Name of the CA certificate as returned by the execute vpn certificate ca list command. Source: vpn.certificate.ca.name.
+                    - Name of the CA certificate as returned by the execute vpn certificate ca list command. Source vpn.certificate.ca.name.
             cn:
                 description:
                     - Peer certificate common name.
@@ -97,13 +104,14 @@ options:
                     - Password for LDAP server bind.
             ldap-server:
                 description:
-                    - Name of an LDAP server defined under the user ldap command. Performs client access rights check. Source: user.ldap.name.
+                    - Name of an LDAP server defined under the user ldap command. Performs client access rights check. Source user.ldap.name.
             ldap-username:
                 description:
                     - Username for LDAP server bind.
             mandatory-ca-verify:
                 description:
-                    - Determine what happens to the peer if the CA certificate is not installed. Disable to automatically consider the peer certificate as valid.
+                    - Determine what happens to the peer if the CA certificate is not installed. Disable to automatically consider the peer certificate as
+                       valid.
                 choices:
                     - enable
                     - disable
@@ -113,7 +121,7 @@ options:
                 required: true
             ocsp-override-server:
                 description:
-                    - Online Certificate Status Protocol (OCSP) server for certificate retrieval. Source: vpn.certificate.ocsp-server.name.
+                    - Online Certificate Status Protocol (OCSP) server for certificate retrieval. Source vpn.certificate.ocsp-server.name.
             passwd:
                 description:
                     - Peer's password used for two-factor authentication.
@@ -138,22 +146,22 @@ EXAMPLES = '''
   tasks:
   - name: Configure peer users.
     fortios_user_peer:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_peer:
         state: "present"
-        ca: "<your_own_value> (source: vpn.certificate.ca.name)"
+        ca: "<your_own_value> (source vpn.certificate.ca.name)"
         cn: "<your_own_value>"
         cn-type: "string"
         ldap-mode: "password"
         ldap-password: "<your_own_value>"
-        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        ldap-server: "<your_own_value> (source user.ldap.name)"
         ldap-username: "<your_own_value>"
         mandatory-ca-verify: "enable"
         name: "default_name_11"
-        ocsp-override-server: "<your_own_value> (source: vpn.certificate.ocsp-server.name)"
+        ocsp-override-server: "<your_own_value> (source vpn.certificate.ocsp-server.name)"
         passwd: "<your_own_value>"
         subject: "<your_own_value>"
         two-factor: "enable"
@@ -218,6 +226,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -254,7 +264,6 @@ def user_peer(data, fos):
     vdom = data['vdom']
     user_peer_data = data['user_peer']
     filtered_data = filter_user_peer_data(user_peer_data)
-
     if user_peer_data['state'] == "present":
         return fos.set('user',
                        'peer',
@@ -264,16 +273,12 @@ def user_peer(data, fos):
     elif user_peer_data['state'] == "absent":
         return fos.delete('user',
                           'peer',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_peer']
     for method in methodlist:
@@ -291,11 +296,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_peer": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "ca": {"required": False, "type": "str"},
                 "cn": {"required": False, "type": "str"},
                 "cn-type": {"required": False, "type": "str",
@@ -303,14 +309,14 @@ def main():
                                         "ipv4", "ipv6"]},
                 "ldap-mode": {"required": False, "type": "str",
                               "choices": ["password", "principal-name"]},
-                "ldap-password": {"required": False, "type": "password"},
+                "ldap-password": {"required": False, "type": "str"},
                 "ldap-server": {"required": False, "type": "str"},
                 "ldap-username": {"required": False, "type": "str"},
                 "mandatory-ca-verify": {"required": False, "type": "str",
                                         "choices": ["enable", "disable"]},
                 "name": {"required": True, "type": "str"},
                 "ocsp-override-server": {"required": False, "type": "str"},
-                "passwd": {"required": False, "type": "password"},
+                "passwd": {"required": False, "type": "str"},
                 "subject": {"required": False, "type": "str"},
                 "two-factor": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]}
@@ -326,6 +332,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

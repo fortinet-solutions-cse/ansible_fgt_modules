@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure global 802.1X settings.
+    fortios_switch_controller_802_1X_settings:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      switch_controller_802_1X_settings:
+        link-down-auth: "set-unauth"
+        max-reauth-attempt: "4"
+        reauth-period: "5"

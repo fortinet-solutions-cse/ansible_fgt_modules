@@ -1,0 +1,145 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
+    fortios_system_virtual_wan_link:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      system_virtual_wan_link:
+        fail-alert-interfaces:
+         -
+            name: "default_name_4 (source system.interface.name)"
+        fail-detect: "enable"
+        health-check:
+         -
+            addr-mode: "ipv4"
+            failtime: "8"
+            http-get: "<your_own_value>"
+            http-match: "<your_own_value>"
+            interval: "11"
+            members:
+             -
+                seq-num: "13 (source system.virtual-wan-link.members.seq-num)"
+            name: "default_name_14"
+            packet-size: "15"
+            password: "<your_own_value>"
+            port: "17"
+            protocol: "ping"
+            recoverytime: "19"
+            security-mode: "none"
+            server: "192.168.100.40"
+            sla:
+             -
+                id:  "23"
+                jitter-threshold: "24"
+                latency-threshold: "25"
+                link-cost-factor: "latency"
+                packetloss-threshold: "27"
+            threshold-alert-jitter: "28"
+            threshold-alert-latency: "29"
+            threshold-alert-packetloss: "30"
+            threshold-warning-jitter: "31"
+            threshold-warning-latency: "32"
+            threshold-warning-packetloss: "33"
+            update-cascade-interface: "enable"
+            update-static-route: "enable"
+        load-balance-mode: "source-ip-based"
+        members:
+         -
+            comment: "Comments."
+            gateway: "<your_own_value>"
+            gateway6: "<your_own_value>"
+            ingress-spillover-threshold: "41"
+            interface: "<your_own_value> (source system.interface.name)"
+            priority: "43"
+            seq-num: "44"
+            source: "<your_own_value>"
+            source6: "<your_own_value>"
+            spillover-threshold: "47"
+            status: "disable"
+            volume-ratio: "49"
+            weight: "50"
+        service:
+         -
+            addr-mode: "ipv4"
+            bandwidth-weight: "53"
+            dscp-forward: "enable"
+            dscp-forward-tag: "<your_own_value>"
+            dscp-reverse: "enable"
+            dscp-reverse-tag: "<your_own_value>"
+            dst:
+             -
+                name: "default_name_59 (source firewall.address.name firewall.addrgrp.name)"
+            dst-negate: "enable"
+            dst6:
+             -
+                name: "default_name_62 (source firewall.address6.name firewall.addrgrp6.name)"
+            end-port: "63"
+            gateway: "enable"
+            groups:
+             -
+                name: "default_name_66 (source user.group.name)"
+            health-check: "<your_own_value> (source system.virtual-wan-link.health-check.name)"
+            hold-down-time: "68"
+            id:  "69"
+            input-device:
+             -
+                name: "default_name_71 (source system.interface.name)"
+            internet-service: "enable"
+            internet-service-ctrl:
+             -
+                id:  "74"
+            internet-service-ctrl-group:
+             -
+                name: "default_name_76 (source application.group.name)"
+            internet-service-custom:
+             -
+                name: "default_name_78 (source firewall.internet-service-custom.name)"
+            internet-service-custom-group:
+             -
+                name: "default_name_80 (source firewall.internet-service-custom-group.name)"
+            internet-service-group:
+             -
+                name: "default_name_82 (source firewall.internet-service-group.name)"
+            internet-service-id:
+             -
+                id:  "84 (source firewall.internet-service.id)"
+            jitter-weight: "85"
+            latency-weight: "86"
+            link-cost-factor: "latency"
+            link-cost-threshold: "88"
+            member: "89"
+            mode: "auto"
+            name: "default_name_91"
+            packet-loss-weight: "92"
+            priority-members:
+             -
+                seq-num: "94 (source system.virtual-wan-link.members.seq-num)"
+            protocol: "95"
+            quality-link: "96"
+            route-tag: "97"
+            sla:
+             -
+                health-check: "<your_own_value> (source system.virtual-wan-link.health-check.name)"
+                id:  "100"
+            src:
+             -
+                name: "default_name_102 (source firewall.address.name firewall.addrgrp.name)"
+            src-negate: "enable"
+            src6:
+             -
+                name: "default_name_105 (source firewall.address6.name firewall.addrgrp6.name)"
+            start-port: "106"
+            status: "enable"
+            tos: "<your_own_value>"
+            tos-mask: "<your_own_value>"
+            users:
+             -
+                name: "default_name_111 (source user.local.name)"
+        status: "disable"

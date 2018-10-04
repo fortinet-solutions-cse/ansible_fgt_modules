@@ -7,10 +7,10 @@
   tasks:
   - name: Configure Web filter banned word table.
     fortios_webfilter_content:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_content:
         state: "present"
         comment: "Optional comments."

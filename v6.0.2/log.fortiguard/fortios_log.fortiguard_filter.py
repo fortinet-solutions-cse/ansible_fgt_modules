@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortiguard feature and filter category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     log.fortiguard_filter:
         description:
             - Filters for FortiCloud.
@@ -172,12 +173,11 @@ EXAMPLES = '''
   tasks:
   - name: Filters for FortiCloud.
     fortios_log.fortiguard_filter:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.fortiguard_filter:
-        state: "present"
         anomaly: "enable"
         dlp-archive: "enable"
         dns: "enable"
@@ -254,6 +254,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -291,26 +293,14 @@ def log.fortiguard_filter(data, fos):
     log.fortiguard_filter_data = data['log.fortiguard_filter']
     filtered_data = filter_log.fortiguard_filter_data(
         log.fortiguard_filter_data)
-
-    if log.fortiguard_filter_data['state'] == "present":
-        return fos.set('log.fortiguard',
-                       'filter',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif log.fortiguard_filter_data['state'] == "absent":
-        return fos.delete('log.fortiguard',
-                          'filter',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('log.fortiguard',
+                   'filter',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_log.fortiguard(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['log.fortiguard_filter']
     for method in methodlist:
@@ -328,11 +318,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "log.fortiguard_filter": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "anomaly": {"required": False, "type": "str",
                             "choices": ["enable", "disable"]},
                 "dlp-archive": {"required": False, "type": "str",
@@ -376,6 +365,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_log.fortiguard(module.params, fos)

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and vip46 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_vip46:
         description:
             - Configure IPv4 to IPv6 virtual IPs.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             arp-reply:
                 description:
                     - Enable ARP reply.
@@ -92,7 +99,6 @@ options:
             id:
                 description:
                     - Custom defined id.
-                required: true
             ldb-method:
                 description:
                     - Load balance method.
@@ -115,7 +121,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Health monitor name. Source: firewall.ldb-monitor.name.
+                            - Health monitor name. Source firewall.ldb-monitor.name.
                         required: true
             name:
                 description:
@@ -162,7 +168,7 @@ options:
                             - Maximum number of connections allowed to server.
                     monitor:
                         description:
-                            - Health monitors. Source: firewall.ldb-monitor.name.
+                            - Health monitors. Source firewall.ldb-monitor.name.
                     port:
                         description:
                             - Mapped server port.
@@ -191,9 +197,10 @@ options:
                     range:
                         description:
                             - Src-filter range.
+                        required: true
             type:
                 description:
-                    - VIP type: static NAT or server load balance.
+                    - "VIP type: static NAT or server load balance."
                 choices:
                     - static-nat
                     - server-load-balance
@@ -212,10 +219,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv4 to IPv6 virtual IPs.
     fortios_firewall_vip46:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_vip46:
         state: "present"
         arp-reply: "disable"
@@ -229,7 +236,7 @@ EXAMPLES = '''
         mappedport: "<your_own_value>"
         monitor:
          -
-            name: "default_name_13 (source: firewall.ldb-monitor.name)"
+            name: "default_name_13 (source firewall.ldb-monitor.name)"
         name: "default_name_14"
         portforward: "disable"
         protocol: "tcp"
@@ -241,7 +248,7 @@ EXAMPLES = '''
             id:  "21"
             ip: "<your_own_value>"
             max-connections: "23"
-            monitor: "<your_own_value> (source: firewall.ldb-monitor.name)"
+            monitor: "<your_own_value> (source firewall.ldb-monitor.name)"
             port: "25"
             status: "active"
             weight: "27"
@@ -312,6 +319,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -349,7 +358,6 @@ def firewall_vip46(data, fos):
     vdom = data['vdom']
     firewall_vip46_data = data['firewall_vip46']
     filtered_data = filter_firewall_vip46_data(firewall_vip46_data)
-
     if firewall_vip46_data['state'] == "present":
         return fos.set('firewall',
                        'vip46',
@@ -359,16 +367,12 @@ def firewall_vip46(data, fos):
     elif firewall_vip46_data['state'] == "absent":
         return fos.delete('firewall',
                           'vip46',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_vip46']
     for method in methodlist:
@@ -386,18 +390,19 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_vip46": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "arp-reply": {"required": False, "type": "str",
                               "choices": ["disable", "enable"]},
                 "color": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
                 "extip": {"required": False, "type": "str"},
                 "extport": {"required": False, "type": "str"},
-                "id": {"required": True, "type": "int"},
+                "id": {"required": False, "type": "int"},
                 "ldb-method": {"required": False, "type": "str",
                                "choices": ["static", "round-robin", "weighted",
                                            "least-session", "least-rtt", "first-alive"]},
@@ -419,7 +424,7 @@ def main():
                                                     "choices": ["disable", "enable", "vip"]},
                                     "holddown-interval": {"required": False, "type": "int"},
                                     "id": {"required": True, "type": "int"},
-                                    "ip": {"required": False, "type": "ipv6-address"},
+                                    "ip": {"required": False, "type": "str"},
                                     "max-connections": {"required": False, "type": "int"},
                                     "monitor": {"required": False, "type": "str"},
                                     "port": {"required": False, "type": "int"},
@@ -432,11 +437,11 @@ def main():
                                             "ip"]},
                 "src-filter": {"required": False, "type": "list",
                                "options": {
-                                   "range": {"required": False, "type": "str"}
+                                   "range": {"required": True, "type": "str"}
                                }},
                 "type": {"required": False, "type": "str",
                          "choices": ["static-nat", "server-load-balance"]},
-                "uuid": {"required": False, "type": "uuid"}
+                "uuid": {"required": False, "type": "str"}
 
             }
         }
@@ -449,6 +454,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

@@ -7,12 +7,11 @@
   tasks:
   - name: Configure IPS global parameter.
     fortios_ips_global:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_global:
-        state: "present"
         anomaly-mode: "periodical"
         database: "regular"
         deep-app-insp-db-limit: "5"

@@ -7,10 +7,10 @@
   tasks:
   - name: Configure AntiSpam profiles.
     fortios_spamfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_profile:
         state: "present"
         comment: "Comment."
@@ -35,7 +35,7 @@
             log: "enable"
             tag-msg: "<your_own_value>"
             tag-type: "subject"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         smtp:
             action: "pass"
             hdrip: "disable"
@@ -43,14 +43,14 @@
             log: "enable"
             tag-msg: "<your_own_value>"
             tag-type: "subject"
-        spam-bwl-table: "33 (source: spamfilter.bwl.id)"
-        spam-bword-table: "34 (source: spamfilter.bword.id)"
+        spam-bwl-table: "33 (source spamfilter.bwl.id)"
+        spam-bword-table: "34 (source spamfilter.bword.id)"
         spam-bword-threshold: "35"
         spam-filtering: "enable"
-        spam-iptrust-table: "37 (source: spamfilter.iptrust.id)"
+        spam-iptrust-table: "37 (source spamfilter.iptrust.id)"
         spam-log: "disable"
         spam-log-fortiguard-response: "disable"
-        spam-mheader-table: "40 (source: spamfilter.mheader.id)"
-        spam-rbl-table: "41 (source: spamfilter.dnsbl.id)"
+        spam-mheader-table: "40 (source spamfilter.mheader.id)"
+        spam-rbl-table: "41 (source spamfilter.dnsbl.id)"
         yahoo-mail:
             log: "enable"

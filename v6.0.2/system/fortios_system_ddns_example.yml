@@ -7,10 +7,10 @@
   tasks:
   - name: Configure DDNS.
     fortios_system_ddns:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_ddns:
         state: "present"
         bound-ip: "<your_own_value>"
@@ -29,7 +29,7 @@
         ddnsid: "16"
         monitor-interface:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
-        ssl-certificate: "<your_own_value> (source: certificate.local.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
+        ssl-certificate: "<your_own_value> (source certificate.local.name)"
         update-interval: "20"
         use-public-ip: "disable"

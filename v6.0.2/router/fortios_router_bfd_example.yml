@@ -7,13 +7,12 @@
   tasks:
   - name: Configure BFD.
     fortios_router_bfd:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_bfd:
-        state: "present"
         neighbor:
          -
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             ip: "<your_own_value>"

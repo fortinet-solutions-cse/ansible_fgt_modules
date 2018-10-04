@@ -7,12 +7,11 @@
   tasks:
   - name: Configure logging to FortiCloud.
     fortios_log.fortiguard_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.fortiguard_setting:
-        state: "present"
         enc-algorithm: "high-medium"
         source-ip: "84.230.14.43"
         ssl-min-proto-version: "default"

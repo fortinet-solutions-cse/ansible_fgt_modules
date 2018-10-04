@@ -7,12 +7,11 @@
   tasks:
   - name: Configure IP to MAC binding settings.
     fortios_firewall.ipmacbinding_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ipmacbinding_setting:
-        state: "present"
         bindthroughfw: "enable"
         bindtofw: "enable"
         undefinedhost: "allow"

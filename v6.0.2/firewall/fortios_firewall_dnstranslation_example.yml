@@ -7,10 +7,10 @@
   tasks:
   - name: Configure DNS translation.
     fortios_firewall_dnstranslation:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_dnstranslation:
         state: "present"
         dst: "<your_own_value>"

@@ -7,17 +7,17 @@
   tasks:
   - name: Configure IPv4 virtual IP groups.
     fortios_firewall_vipgrp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_vipgrp:
         state: "present"
         color: "3"
         comments: "<your_own_value>"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         member:
          -
-            name: "default_name_7 (source: firewall.vip.name)"
+            name: "default_name_7 (source firewall.vip.name)"
         name: "default_name_8"
         uuid: "<your_own_value>"

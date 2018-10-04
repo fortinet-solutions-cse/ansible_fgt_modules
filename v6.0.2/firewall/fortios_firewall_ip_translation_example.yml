@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure firewall IP-translation.
+    fortios_firewall_ip_translation:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_ip_translation:
+        state: "present"
+        endip: "<your_own_value>"
+        map-startip: "<your_own_value>"
+        startip: "<your_own_value>"
+        transid: "6"
+        type: "SCTP"

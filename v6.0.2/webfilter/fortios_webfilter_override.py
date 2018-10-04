@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and override category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,27 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     webfilter_override:
         description:
             - Configure FortiGuard Web Filter administrative overrides.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             expires:
                 description:
-                    - Override expiration date and time, from 5 minutes to 365 from now (format: yyyy/mm/dd hh:mm:ss).
+                    - "Override expiration date and time, from 5 minutes to 365 from now (format: yyyy/mm/dd hh:mm:ss)."
             id:
                 description:
                     - Override rule ID.
@@ -89,10 +96,10 @@ options:
                     - IPv6 address which the override applies.
             new-profile:
                 description:
-                    - Name of the new web filter profile used by the override. Source: webfilter.profile.name.
+                    - Name of the new web filter profile used by the override. Source webfilter.profile.name.
             old-profile:
                 description:
-                    - Name of the web filter profile which the override applies. Source: webfilter.profile.name.
+                    - Name of the web filter profile which the override applies. Source webfilter.profile.name.
             scope:
                 description:
                     - Override either the specific user, user group, IPv4 address, or IPv6 address.
@@ -112,7 +119,7 @@ options:
                     - Name of the user which the override applies.
             user-group:
                 description:
-                    - Specify the user group for which the override applies. Source: user.group.name.
+                    - Specify the user group for which the override applies. Source user.group.name.
 '''
 
 EXAMPLES = '''
@@ -125,10 +132,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure FortiGuard Web Filter administrative overrides.
     fortios_webfilter_override:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_override:
         state: "present"
         expires: "<your_own_value>"
@@ -136,12 +143,12 @@ EXAMPLES = '''
         initiator: "<your_own_value>"
         ip: "<your_own_value>"
         ip6: "<your_own_value>"
-        new-profile: "<your_own_value> (source: webfilter.profile.name)"
-        old-profile: "<your_own_value> (source: webfilter.profile.name)"
+        new-profile: "<your_own_value> (source webfilter.profile.name)"
+        old-profile: "<your_own_value> (source webfilter.profile.name)"
         scope: "user"
         status: "enable"
         user: "<your_own_value>"
-        user-group: "<your_own_value> (source: user.group.name)"
+        user-group: "<your_own_value> (source user.group.name)"
 '''
 
 RETURN = '''
@@ -203,6 +210,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -238,7 +247,6 @@ def webfilter_override(data, fos):
     vdom = data['vdom']
     webfilter_override_data = data['webfilter_override']
     filtered_data = filter_webfilter_override_data(webfilter_override_data)
-
     if webfilter_override_data['state'] == "present":
         return fos.set('webfilter',
                        'override',
@@ -253,11 +261,7 @@ def webfilter_override(data, fos):
 
 
 def fortios_webfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['webfilter_override']
     for method in methodlist:
@@ -275,16 +279,17 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "webfilter_override": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "expires": {"required": False, "type": "str"},
                 "id": {"required": True, "type": "int"},
                 "initiator": {"required": False, "type": "str"},
-                "ip": {"required": False, "type": "ipv4-address"},
-                "ip6": {"required": False, "type": "ipv6-address"},
+                "ip": {"required": False, "type": "str"},
+                "ip6": {"required": False, "type": "str"},
                 "new-profile": {"required": False, "type": "str"},
                 "old-profile": {"required": False, "type": "str"},
                 "scope": {"required": False, "type": "str",
@@ -306,6 +311,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_webfilter(module.params, fos)

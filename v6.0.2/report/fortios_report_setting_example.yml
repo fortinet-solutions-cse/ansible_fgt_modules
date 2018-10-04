@@ -7,12 +7,11 @@
   tasks:
   - name: Report setting configuration.
     fortios_report_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       report_setting:
-        state: "present"
         fortiview: "enable"
         pdf-report: "enable"
         report-source: "forward-traffic"

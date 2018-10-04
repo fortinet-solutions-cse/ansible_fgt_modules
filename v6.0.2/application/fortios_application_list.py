@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure application feature and list category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     application_list:
         description:
             - Configure application control lists.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             app-replacemsg:
                 description:
                     - Enable/disable replacement messages for blocked applications.
@@ -145,7 +152,7 @@ options:
                                     - Parameter value.
                     per-ip-shaper:
                         description:
-                            - Per-IP traffic shaper. Source: firewall.shaper.per-ip-shaper.name.
+                            - Per-IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
                     popularity:
                         description:
                             - Application popularity filter (1 - 5, from least to most popular).
@@ -201,15 +208,16 @@ options:
                             level:
                                 description:
                                     - Risk, or impact, of allowing traffic from this application to occur (1 - 5; Low, Elevated, Medium, High, and Critical).
+                                required: true
                     session-ttl:
                         description:
                             - Session TTL (0 = default).
                     shaper:
                         description:
-                            - Traffic shaper. Source: firewall.shaper.traffic-shaper.name.
+                            - Traffic shaper. Source firewall.shaper.traffic-shaper.name.
                     shaper-reverse:
                         description:
-                            - Reverse traffic shaper. Source: firewall.shaper.traffic-shaper.name.
+                            - Reverse traffic shaper. Source firewall.shaper.traffic-shaper.name.
                     sub-category:
                         description:
                             - Application Sub-category ID list.
@@ -264,7 +272,7 @@ options:
                     - bittorrent
             replacemsg-group:
                 description:
-                    - Replacement message group. Source: system.replacemsg-group.name.
+                    - Replacement message group. Source system.replacemsg-group.name.
             unknown-application-action:
                 description:
                     - Pass or block traffic from unknown applications.
@@ -289,10 +297,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure application control lists.
     fortios_application_list:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_list:
         state: "present"
         app-replacemsg: "disable"
@@ -315,7 +323,7 @@ EXAMPLES = '''
              -
                 id:  "17"
                 value: "<your_own_value>"
-            per-ip-shaper: "<your_own_value> (source: firewall.shaper.per-ip-shaper.name)"
+            per-ip-shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
             popularity: "1"
             protocols: "<your_own_value>"
             quarantine: "none"
@@ -329,8 +337,8 @@ EXAMPLES = '''
              -
                 level: "30"
             session-ttl: "31"
-            shaper: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
-            shaper-reverse: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
+            shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+            shaper-reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
             sub-category:
              -
                 id:  "35"
@@ -342,7 +350,7 @@ EXAMPLES = '''
         other-application-action: "pass"
         other-application-log: "disable"
         p2p-black-list: "skype"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         unknown-application-action: "pass"
         unknown-application-log: "disable"
 '''
@@ -406,6 +414,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -442,7 +452,6 @@ def application_list(data, fos):
     vdom = data['vdom']
     application_list_data = data['application_list']
     filtered_data = filter_application_list_data(application_list_data)
-
     if application_list_data['state'] == "present":
         return fos.set('application',
                        'list',
@@ -452,16 +461,12 @@ def application_list(data, fos):
     elif application_list_data['state'] == "absent":
         return fos.delete('application',
                           'list',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_application(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['application_list']
     for method in methodlist:
@@ -479,11 +484,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "application_list": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "app-replacemsg": {"required": False, "type": "str",
                                    "choices": ["disable", "enable"]},
                 "comment": {"required": False, "type": "str"},
@@ -531,7 +537,7 @@ def main():
                                                            "dhcp-client-mac", "dns-domain"]},
                                 "risk": {"required": False, "type": "list",
                                          "options": {
-                                             "level": {"required": False, "type": "int"}
+                                             "level": {"required": True, "type": "int"}
                                          }},
                                 "session-ttl": {"required": False, "type": "int"},
                                 "shaper": {"required": False, "type": "str"},
@@ -572,6 +578,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_application(module.params, fos)

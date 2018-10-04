@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and filepattern category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     dlp_filepattern:
         description:
             - Configure file patterns used by DLP blocking.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Optional comments.
@@ -150,6 +157,7 @@ options:
                     pattern:
                         description:
                             - Add a file name pattern.
+                        required: true
             id:
                 description:
                     - ID.
@@ -157,7 +165,6 @@ options:
             name:
                 description:
                     - Name of table containing the file pattern list.
-                required: true
 '''
 
 EXAMPLES = '''
@@ -170,10 +177,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure file patterns used by DLP blocking.
     fortios_dlp_filepattern:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dlp_filepattern:
         state: "present"
         comment: "Optional comments."
@@ -245,6 +252,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -278,7 +287,6 @@ def dlp_filepattern(data, fos):
     vdom = data['vdom']
     dlp_filepattern_data = data['dlp_filepattern']
     filtered_data = filter_dlp_filepattern_data(dlp_filepattern_data)
-
     if dlp_filepattern_data['state'] == "present":
         return fos.set('dlp',
                        'filepattern',
@@ -293,11 +301,7 @@ def dlp_filepattern(data, fos):
 
 
 def fortios_dlp(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['dlp_filepattern']
     for method in methodlist:
@@ -315,11 +319,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "dlp_filepattern": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "entries": {"required": False, "type": "list",
                             "options": {
@@ -346,10 +351,10 @@ def main():
                                                           "iso", "crx"]},
                                 "filter-type": {"required": False, "type": "str",
                                                 "choices": ["pattern", "type"]},
-                                "pattern": {"required": False, "type": "str"}
+                                "pattern": {"required": True, "type": "str"}
                             }},
                 "id": {"required": True, "type": "int"},
-                "name": {"required": True, "type": "str"}
+                "name": {"required": False, "type": "str"}
 
             }
         }
@@ -362,6 +367,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_dlp(module.params, fos)

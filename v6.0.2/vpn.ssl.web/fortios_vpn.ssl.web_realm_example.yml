@@ -7,10 +7,10 @@
   tasks:
   - name: Realm.
     fortios_vpn.ssl.web_realm:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ssl.web_realm:
         state: "present"
         login-page: "<your_own_value>"

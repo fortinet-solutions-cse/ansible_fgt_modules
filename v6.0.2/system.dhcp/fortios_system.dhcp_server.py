@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.dhcp feature and server category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system.dhcp_server:
         description:
             - Configure DHCP servers.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auto-configuration:
                 description:
                     - Enable/disable auto configuration.
@@ -164,7 +171,7 @@ options:
                 required: true
             interface:
                 description:
-                    - DHCP server can assign IP configurations to clients connected to this interface. Source: system.interface.name.
+                    - DHCP server can assign IP configurations to clients connected to this interface. Source system.interface.name.
             ip-mode:
                 description:
                     - Method used to assign client IP.
@@ -286,6 +293,7 @@ options:
                     tftp-server:
                         description:
                             - TFTP server.
+                        required: true
             timezone:
                 description:
                     - Select the time zone to be assigned to DHCP clients.
@@ -398,6 +406,7 @@ options:
                     vci-string:
                         description:
                             - VCI strings.
+                        required: true
             wifi-ac1:
                 description:
                     - WiFi Access Controller 1 IP address (DHCP option 138, RFC 5417).
@@ -425,10 +434,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure DHCP servers.
     fortios_system.dhcp_server:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.dhcp_server:
         state: "present"
         auto-configuration: "disable"
@@ -455,7 +464,7 @@ EXAMPLES = '''
         filename: "<your_own_value>"
         forticlient-on-net-status: "disable"
         id:  "25"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ip-mode: "range"
         ip-range:
          -
@@ -562,6 +571,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -609,7 +620,6 @@ def system.dhcp_server(data, fos):
     vdom = data['vdom']
     system.dhcp_server_data = data['system.dhcp_server']
     filtered_data = filter_system.dhcp_server_data(system.dhcp_server_data)
-
     if system.dhcp_server_data['state'] == "present":
         return fos.set('system.dhcp',
                        'server',
@@ -624,11 +634,7 @@ def system.dhcp_server(data, fos):
 
 
 def fortios_system.dhcp(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system.dhcp_server']
     for method in methodlist:
@@ -646,11 +652,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system.dhcp_server": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auto-configuration": {"required": False, "type": "str",
                                        "choices": ["disable", "enable"]},
                 "conflicted-ip-timeout": {"required": False, "type": "int"},
@@ -658,25 +665,25 @@ def main():
                               "choices": ["disable", "tsig"]},
                 "ddns-key": {"required": False, "type": "str"},
                 "ddns-keyname": {"required": False, "type": "str"},
-                "ddns-server-ip": {"required": False, "type": "ipv4-address"},
+                "ddns-server-ip": {"required": False, "type": "str"},
                 "ddns-ttl": {"required": False, "type": "int"},
                 "ddns-update": {"required": False, "type": "str",
                                 "choices": ["disable", "enable"]},
                 "ddns-update-override": {"required": False, "type": "str",
                                          "choices": ["disable", "enable"]},
                 "ddns-zone": {"required": False, "type": "str"},
-                "default-gateway": {"required": False, "type": "ipv4-address"},
-                "dns-server1": {"required": False, "type": "ipv4-address"},
-                "dns-server2": {"required": False, "type": "ipv4-address"},
-                "dns-server3": {"required": False, "type": "ipv4-address"},
+                "default-gateway": {"required": False, "type": "str"},
+                "dns-server1": {"required": False, "type": "str"},
+                "dns-server2": {"required": False, "type": "str"},
+                "dns-server3": {"required": False, "type": "str"},
                 "dns-service": {"required": False, "type": "str",
                                 "choices": ["local", "default", "specify"]},
                 "domain": {"required": False, "type": "str"},
                 "exclude-range": {"required": False, "type": "list",
                                   "options": {
-                                      "end-ip": {"required": False, "type": "ipv4-address"},
+                                      "end-ip": {"required": False, "type": "str"},
                                       "id": {"required": True, "type": "int"},
-                                      "start-ip": {"required": False, "type": "ipv4-address"}
+                                      "start-ip": {"required": False, "type": "str"}
                                   }},
                 "filename": {"required": False, "type": "str"},
                 "forticlient-on-net-status": {"required": False, "type": "str",
@@ -687,19 +694,19 @@ def main():
                             "choices": ["range", "usrgrp"]},
                 "ip-range": {"required": False, "type": "list",
                              "options": {
-                                 "end-ip": {"required": False, "type": "ipv4-address"},
+                                 "end-ip": {"required": False, "type": "str"},
                                  "id": {"required": True, "type": "int"},
-                                 "start-ip": {"required": False, "type": "ipv4-address"}
+                                 "start-ip": {"required": False, "type": "str"}
                              }},
                 "ipsec-lease-hold": {"required": False, "type": "int"},
                 "lease-time": {"required": False, "type": "int"},
                 "mac-acl-default-action": {"required": False, "type": "str",
                                            "choices": ["assign", "block"]},
-                "netmask": {"required": False, "type": "ipv4-netmask"},
-                "next-server": {"required": False, "type": "ipv4-address"},
-                "ntp-server1": {"required": False, "type": "ipv4-address"},
-                "ntp-server2": {"required": False, "type": "ipv4-address"},
-                "ntp-server3": {"required": False, "type": "ipv4-address"},
+                "netmask": {"required": False, "type": "str"},
+                "next-server": {"required": False, "type": "str"},
+                "ntp-server1": {"required": False, "type": "str"},
+                "ntp-server2": {"required": False, "type": "str"},
+                "ntp-server3": {"required": False, "type": "str"},
                 "ntp-service": {"required": False, "type": "str",
                                 "choices": ["local", "default", "specify"]},
                 "options": {"required": False, "type": "list",
@@ -717,8 +724,8 @@ def main():
                                                     "choices": ["assign", "block", "reserved"]},
                                          "description": {"required": False, "type": "str"},
                                          "id": {"required": True, "type": "int"},
-                                         "ip": {"required": False, "type": "ipv4-address"},
-                                         "mac": {"required": False, "type": "mac-address"}
+                                         "ip": {"required": False, "type": "str"},
+                                         "mac": {"required": False, "type": "str"}
                                      }},
                 "server-type": {"required": False, "type": "str",
                                 "choices": ["regular", "ipsec"]},
@@ -726,7 +733,7 @@ def main():
                            "choices": ["disable", "enable"]},
                 "tftp-server": {"required": False, "type": "list",
                                 "options": {
-                                    "tftp-server": {"required": False, "type": "str"}
+                                    "tftp-server": {"required": True, "type": "str"}
                                 }},
                 "timezone": {"required": False, "type": "str",
                              "choices": ["01", "02", "03",
@@ -765,13 +772,13 @@ def main():
                               "choices": ["disable", "enable"]},
                 "vci-string": {"required": False, "type": "list",
                                "options": {
-                                   "vci-string": {"required": False, "type": "str"}
+                                   "vci-string": {"required": True, "type": "str"}
                                }},
-                "wifi-ac1": {"required": False, "type": "ipv4-address"},
-                "wifi-ac2": {"required": False, "type": "ipv4-address"},
-                "wifi-ac3": {"required": False, "type": "ipv4-address"},
-                "wins-server1": {"required": False, "type": "ipv4-address"},
-                "wins-server2": {"required": False, "type": "ipv4-address"}
+                "wifi-ac1": {"required": False, "type": "str"},
+                "wifi-ac2": {"required": False, "type": "str"},
+                "wifi-ac3": {"required": False, "type": "str"},
+                "wins-server1": {"required": False, "type": "str"},
+                "wins-server2": {"required": False, "type": "str"}
 
             }
         }
@@ -784,6 +791,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system.dhcp(module.params, fos)

@@ -7,10 +7,10 @@
   tasks:
   - name: Remote certificate as a PEM file.
     fortios_vpn.certificate_remote:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.certificate_remote:
         state: "present"
         name: "default_name_3"

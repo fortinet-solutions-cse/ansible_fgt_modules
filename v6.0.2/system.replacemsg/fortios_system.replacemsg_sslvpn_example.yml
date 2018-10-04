@@ -7,10 +7,10 @@
   tasks:
   - name: Replacement messages.
     fortios_system.replacemsg_sslvpn:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.replacemsg_sslvpn:
         state: "present"
         buffer: "<your_own_value>"

@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Hidden table for datasource.
+    fortios_waf_main_class:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      waf_main_class:
+        state: "present"
+        id:  "3"
+        name: "default_name_4"

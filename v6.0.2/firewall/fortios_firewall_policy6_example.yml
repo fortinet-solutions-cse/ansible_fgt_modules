@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IPv6 policies.
     fortios_firewall_policy6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_policy6:
         state: "present"
         action: "accept"
@@ -19,45 +19,45 @@
             id:  "5"
         app-group:
          -
-            name: "default_name_7 (source: application.group.name)"
+            name: "default_name_7 (source application.group.name)"
         application:
          -
             id:  "9"
-        application-list: "<your_own_value> (source: application.list.name)"
-        av-profile: "<your_own_value> (source: antivirus.profile.name)"
+        application-list: "<your_own_value> (source application.list.name)"
+        av-profile: "<your_own_value> (source antivirus.profile.name)"
         comments: "<your_own_value>"
         custom-log-fields:
          -
-            field-id: "<your_own_value> (source: log.custom-field.id)"
+            field-id: "<your_own_value> (source log.custom-field.id)"
         devices:
          -
-            name: "default_name_16 (source: user.device.alias user.device-group.name user.device-category.name)"
+            name: "default_name_16 (source user.device.alias user.device-group.name user.device-category.name)"
         diffserv-forward: "enable"
         diffserv-reverse: "enable"
         diffservcode-forward: "<your_own_value>"
         diffservcode-rev: "<your_own_value>"
-        dlp-sensor: "<your_own_value> (source: dlp.sensor.name)"
+        dlp-sensor: "<your_own_value> (source dlp.sensor.name)"
         dscp-match: "enable"
         dscp-negate: "enable"
         dscp-value: "<your_own_value>"
         dsri: "enable"
         dstaddr:
          -
-            name: "default_name_27 (source: firewall.address6.name firewall.addrgrp6.name firewall.vip6.name firewall.vipgrp6.name)"
+            name: "default_name_27 (source firewall.address6.name firewall.addrgrp6.name firewall.vip6.name firewall.vipgrp6.name)"
         dstaddr-negate: "enable"
         dstintf:
          -
-            name: "default_name_30 (source: system.interface.name system.zone.name)"
+            name: "default_name_30 (source system.interface.name system.zone.name)"
         firewall-session-dirty: "check-all"
         fixedport: "enable"
         global-label: "<your_own_value>"
         groups:
          -
-            name: "default_name_35 (source: user.group.name)"
-        icap-profile: "<your_own_value> (source: icap.profile.name)"
+            name: "default_name_35 (source user.group.name)"
+        icap-profile: "<your_own_value> (source icap.profile.name)"
         inbound: "enable"
         ippool: "enable"
-        ips-sensor: "<your_own_value> (source: ips.sensor.name)"
+        ips-sensor: "<your_own_value> (source ips.sensor.name)"
         label: "<your_own_value>"
         logtraffic: "all"
         logtraffic-start: "enable"
@@ -66,55 +66,55 @@
         natinbound: "enable"
         natoutbound: "enable"
         outbound: "enable"
-        per-ip-shaper: "<your_own_value> (source: firewall.shaper.per-ip-shaper.name)"
+        per-ip-shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
         policyid: "49"
         poolname:
          -
-            name: "default_name_51 (source: firewall.ippool6.name)"
-        profile-group: "<your_own_value> (source: firewall.profile-group.name)"
-        profile-protocol-options: "<your_own_value> (source: firewall.profile-protocol-options.name)"
+            name: "default_name_51 (source firewall.ippool6.name)"
+        profile-group: "<your_own_value> (source firewall.profile-group.name)"
+        profile-protocol-options: "<your_own_value> (source firewall.profile-protocol-options.name)"
         profile-type: "single"
-        replacemsg-override-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-override-group: "<your_own_value> (source system.replacemsg-group.name)"
         rsso: "enable"
-        schedule: "<your_own_value> (source: firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
+        schedule: "<your_own_value> (source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
         send-deny-packet: "enable"
         service:
          -
-            name: "default_name_60 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_60 (source firewall.service.custom.name firewall.service.group.name)"
         service-negate: "enable"
         session-ttl: "62"
-        spamfilter-profile: "<your_own_value> (source: spamfilter.profile.name)"
+        spamfilter-profile: "<your_own_value> (source spamfilter.profile.name)"
         srcaddr:
          -
-            name: "default_name_65 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_65 (source firewall.address6.name firewall.addrgrp6.name)"
         srcaddr-negate: "enable"
         srcintf:
          -
-            name: "default_name_68 (source: system.zone.name system.interface.name)"
-        ssh-filter-profile: "<your_own_value> (source: ssh-filter.profile.name)"
+            name: "default_name_68 (source system.zone.name system.interface.name)"
+        ssh-filter-profile: "<your_own_value> (source ssh-filter.profile.name)"
         ssl-mirror: "enable"
         ssl-mirror-intf:
          -
-            name: "default_name_72 (source: system.zone.name system.interface.name)"
-        ssl-ssh-profile: "<your_own_value> (source: firewall.ssl-ssh-profile.name)"
+            name: "default_name_72 (source system.zone.name system.interface.name)"
+        ssl-ssh-profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
         status: "enable"
         tcp-mss-receiver: "75"
         tcp-mss-sender: "76"
         tcp-session-without-syn: "all"
         timeout-send-rst: "enable"
-        traffic-shaper: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
-        traffic-shaper-reverse: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
+        traffic-shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+        traffic-shaper-reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
         url-category:
          -
             id:  "82"
         users:
          -
-            name: "default_name_84 (source: user.local.name)"
+            name: "default_name_84 (source user.local.name)"
         utm-status: "enable"
         uuid: "<your_own_value>"
         vlan-cos-fwd: "87"
         vlan-cos-rev: "88"
         vlan-filter: "<your_own_value>"
-        voip-profile: "<your_own_value> (source: voip.profile.name)"
-        vpntunnel: "<your_own_value> (source: vpn.ipsec.phase1.name vpn.ipsec.manualkey.name)"
-        webfilter-profile: "<your_own_value> (source: webfilter.profile.name)"
+        voip-profile: "<your_own_value> (source voip.profile.name)"
+        vpntunnel: "<your_own_value> (source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name)"
+        webfilter-profile: "<your_own_value> (source webfilter.profile.name)"

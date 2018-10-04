@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure virtual Access Point (VAP) groups.
+    fortios_wireless_controller_vap_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      wireless_controller_vap_group:
+        state: "present"
+        comment: "Comment."
+        name: "default_name_4"
+        vaps:
+         -
+            name: "default_name_6 (source wireless-controller.vap.name)"

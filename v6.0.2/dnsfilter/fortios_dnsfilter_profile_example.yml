@@ -7,20 +7,20 @@
   tasks:
   - name: Configure DNS domain filter profiles.
     fortios_dnsfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dnsfilter_profile:
         state: "present"
         block-action: "block"
         block-botnet: "disable"
         comment: "Comment."
         domain-filter:
-            domain-filter-table: "7 (source: dnsfilter.domain-filter.id)"
+            domain-filter-table: "7 (source dnsfilter.domain-filter.id)"
         external-ip-blocklist:
          -
-            name: "default_name_9 (source: system.external-resource.name)"
+            name: "default_name_9 (source system.external-resource.name)"
         ftgd-dns:
             filters:
              -

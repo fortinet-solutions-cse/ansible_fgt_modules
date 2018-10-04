@@ -7,10 +7,10 @@
   tasks:
   - name: Recurring schedule configuration.
     fortios_firewall.schedule_recurring:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.schedule_recurring:
         state: "present"
         color: "3"

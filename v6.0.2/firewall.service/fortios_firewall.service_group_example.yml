@@ -7,16 +7,16 @@
   tasks:
   - name: Configure service groups.
     fortios_firewall.service_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.service_group:
         state: "present"
         color: "3"
         comment: "Comment."
         member:
          -
-            name: "default_name_6 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_6 (source firewall.service.custom.name firewall.service.group.name)"
         name: "default_name_7"
         proxy: "enable"

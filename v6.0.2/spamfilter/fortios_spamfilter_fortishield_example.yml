@@ -7,12 +7,11 @@
   tasks:
   - name: Configure FortiGuard - AntiSpam.
     fortios_spamfilter_fortishield:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_fortishield:
-        state: "present"
         spam-submit-force: "enable"
         spam-submit-srv: "<your_own_value>"
         spam-submit-txt2htm: "enable"

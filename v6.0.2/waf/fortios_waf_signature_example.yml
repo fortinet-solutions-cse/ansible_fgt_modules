@@ -7,10 +7,10 @@
   tasks:
   - name: Hidden table for datasource.
     fortios_waf_signature:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       waf_signature:
         state: "present"
         desc: "<your_own_value>"

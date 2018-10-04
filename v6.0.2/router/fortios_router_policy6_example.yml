@@ -7,18 +7,18 @@
   tasks:
   - name: Configure IPv6 routing policies.
     fortios_router_policy6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_policy6:
         state: "present"
         comments: "<your_own_value>"
         dst: "<your_own_value>"
         end-port: "5"
         gateway: "<your_own_value>"
-        input-device: "<your_own_value> (source: system.interface.name)"
-        output-device: "<your_own_value> (source: system.interface.name)"
+        input-device: "<your_own_value> (source system.interface.name)"
+        output-device: "<your_own_value> (source system.interface.name)"
         protocol: "9"
         seq-num: "10"
         src: "<your_own_value>"

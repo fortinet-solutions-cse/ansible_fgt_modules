@@ -7,10 +7,10 @@
   tasks:
   - name: Configure DHCPv6 servers.
     fortios_system.dhcp6_server:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.dhcp6_server:
         state: "present"
         dns-search-list: "delegated"
@@ -20,7 +20,7 @@
         dns-service: "delegated"
         domain: "<your_own_value>"
         id:  "9"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ip-mode: "range"
         ip-range:
          -
@@ -40,4 +40,4 @@
         rapid-commit: "disable"
         status: "disable"
         subnet: "<your_own_value>"
-        upstream-interface: "<your_own_value> (source: system.interface.name)"
+        upstream-interface: "<your_own_value> (source system.interface.name)"

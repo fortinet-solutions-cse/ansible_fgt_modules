@@ -7,10 +7,10 @@
   tasks:
   - name: Configure VoIP profiles.
     fortios_voip_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       voip_profile:
         state: "present"
         comment: "Comment."
@@ -104,16 +104,16 @@
             rfc2543-branch: "disable"
             rtp: "disable"
             ssl-algorithm: "high"
-            ssl-auth-client: "<your_own_value> (source: user.peer.name user.peergrp.name)"
-            ssl-auth-server: "<your_own_value> (source: user.peer.name user.peergrp.name)"
-            ssl-client-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+            ssl-auth-client: "<your_own_value> (source user.peer.name user.peergrp.name)"
+            ssl-auth-server: "<your_own_value> (source user.peer.name user.peergrp.name)"
+            ssl-client-certificate: "<your_own_value> (source vpn.certificate.local.name)"
             ssl-client-renegotiation: "allow"
             ssl-max-version: "ssl-3.0"
             ssl-min-version: "ssl-3.0"
             ssl-mode: "off"
             ssl-pfs: "require"
             ssl-send-empty-frags: "enable"
-            ssl-server-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+            ssl-server-certificate: "<your_own_value> (source vpn.certificate.local.name)"
             status: "disable"
             strict-register: "disable"
             subscribe-rate: "106"

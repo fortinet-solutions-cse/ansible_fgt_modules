@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -28,13 +27,14 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_zone
-short_description: Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces in the zone.
+short_description: Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual
+   interfaces in the zone.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and zone category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,23 +61,33 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_zone:
         description:
-            - Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces in the zone.
+            - Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces
+               in the zone.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             interface:
                 description:
                     - Add interfaces to this zone. Interfaces must not be assigned to another zone or have firewall policies defined.
                 suboptions:
                     interface-name:
                         description:
-                            - Select two or more interfaces to add to the zone. Source: system.interface.name.
+                            - Select two or more interfaces to add to the zone. Source system.interface.name.
+                        required: true
             intrazone:
                 description:
                     - Allow or deny traffic routing between different interfaces in the same zone (default = deny).
@@ -94,7 +104,7 @@ options:
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -105,7 +115,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
 '''
 
@@ -117,26 +127,27 @@ EXAMPLES = '''
    password: ""
    vdom: "root"
   tasks:
-  - name: Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces in the zone.
+  - name: Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual interfaces in
+     the zone.
     fortios_system_zone:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_zone:
         state: "present"
         interface:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         intrazone: "allow"
         name: "default_name_6"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_9"
             tags:
              -
-                name: "default_name_11 (source: system.object-tagging.tags.name)"
+                name: "default_name_11 (source system.object-tagging.tags.name)"
 '''
 
 RETURN = '''
@@ -198,6 +209,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -231,7 +244,6 @@ def system_zone(data, fos):
     vdom = data['vdom']
     system_zone_data = data['system_zone']
     filtered_data = filter_system_zone_data(system_zone_data)
-
     if system_zone_data['state'] == "present":
         return fos.set('system',
                        'zone',
@@ -241,16 +253,12 @@ def system_zone(data, fos):
     elif system_zone_data['state'] == "absent":
         return fos.delete('system',
                           'zone',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_zone']
     for method in methodlist:
@@ -268,14 +276,15 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_zone": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "interface": {"required": False, "type": "list",
                               "options": {
-                                  "interface-name": {"required": False, "type": "str"}
+                                  "interface-name": {"required": True, "type": "str"}
                               }},
                 "intrazone": {"required": False, "type": "str",
                               "choices": ["allow", "deny"]},
@@ -301,6 +310,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

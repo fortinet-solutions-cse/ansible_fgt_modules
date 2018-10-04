@@ -7,10 +7,9 @@
   tasks:
   - name: Configure AntiSpam options.
     fortios_spamfilter_options:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_options:
-        state: "present"
         dns-timeout: "3"

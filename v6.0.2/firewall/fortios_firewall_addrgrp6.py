@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and addrgrp6 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_addrgrp6:
         description:
             - Configure IPv6 address groups.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             color:
                 description:
                     - Integer value to determine the color of the icon in the GUI (1 - 32, default = 0, which sets the value to 1).
@@ -83,7 +90,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address6/addrgrp6 name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address6/addrgrp6 name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             name:
                 description:
@@ -95,7 +102,7 @@ options:
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -106,7 +113,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
             uuid:
                 description:
@@ -129,25 +136,25 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv6 address groups.
     fortios_firewall_addrgrp6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_addrgrp6:
         state: "present"
         color: "3"
         comment: "Comment."
         member:
          -
-            name: "default_name_6 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_6 (source firewall.address6.name firewall.addrgrp6.name)"
         name: "default_name_7"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_10"
             tags:
              -
-                name: "default_name_12 (source: system.object-tagging.tags.name)"
+                name: "default_name_12 (source system.object-tagging.tags.name)"
         uuid: "<your_own_value>"
         visibility: "enable"
 '''
@@ -211,6 +218,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -245,7 +254,6 @@ def firewall_addrgrp6(data, fos):
     vdom = data['vdom']
     firewall_addrgrp6_data = data['firewall_addrgrp6']
     filtered_data = filter_firewall_addrgrp6_data(firewall_addrgrp6_data)
-
     if firewall_addrgrp6_data['state'] == "present":
         return fos.set('firewall',
                        'addrgrp6',
@@ -255,16 +263,12 @@ def firewall_addrgrp6(data, fos):
     elif firewall_addrgrp6_data['state'] == "absent":
         return fos.delete('firewall',
                           'addrgrp6',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_addrgrp6']
     for method in methodlist:
@@ -282,11 +286,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_addrgrp6": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "color": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
                 "member": {"required": False, "type": "list",
@@ -303,7 +308,7 @@ def main():
                                              "name": {"required": True, "type": "str"}
                                          }}
                             }},
-                "uuid": {"required": False, "type": "uuid"},
+                "uuid": {"required": False, "type": "str"},
                 "visibility": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]}
 
@@ -318,6 +323,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

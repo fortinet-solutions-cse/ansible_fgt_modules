@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure authentication feature and scheme category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,22 +60,30 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     authentication_scheme:
         description:
             - Configure Authentication Schemes.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             domain-controller:
                 description:
-                    - Domain controller setting. Source: user.domain-controller.name.
+                    - Domain controller setting. Source user.domain-controller.name.
             fsso-agent-for-ntlm:
                 description:
-                    - FSSO agent to use for NTLM authentication. Source: user.fsso.name.
+                    - FSSO agent to use for NTLM authentication. Source user.fsso.name.
             fsso-guest:
                 description:
                     - Enable/disable user fsso-guest authentication (default = disable).
@@ -85,7 +92,7 @@ options:
                     - disable
             kerberos-keytab:
                 description:
-                    - Kerberos keytab setting. Source: user.krb-keytab.name.
+                    - Kerberos keytab setting. Source user.krb-keytab.name.
             method:
                 description:
                     - Authentication methods (default = basic).
@@ -116,14 +123,14 @@ options:
                     - disable
             ssh-ca:
                 description:
-                    - SSH CA name. Source: firewall.ssh.local-ca.name.
+                    - SSH CA name. Source firewall.ssh.local-ca.name.
             user-database:
                 description:
                     - Authentication server to contain user information; "local" (default) or "123" (for LDAP).
                 suboptions:
                     name:
                         description:
-                            - Authentication server name. Source: system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name.
+                            - Authentication server name. Source system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name.
                         required: true
 '''
 
@@ -137,24 +144,24 @@ EXAMPLES = '''
   tasks:
   - name: Configure Authentication Schemes.
     fortios_authentication_scheme:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_scheme:
         state: "present"
-        domain-controller: "<your_own_value> (source: user.domain-controller.name)"
-        fsso-agent-for-ntlm: "<your_own_value> (source: user.fsso.name)"
+        domain-controller: "<your_own_value> (source user.domain-controller.name)"
+        fsso-agent-for-ntlm: "<your_own_value> (source user.fsso.name)"
         fsso-guest: "enable"
-        kerberos-keytab: "<your_own_value> (source: user.krb-keytab.name)"
+        kerberos-keytab: "<your_own_value> (source user.krb-keytab.name)"
         method: "ntlm"
         name: "default_name_8"
         negotiate-ntlm: "enable"
         require-tfa: "enable"
-        ssh-ca: "<your_own_value> (source: firewall.ssh.local-ca.name)"
+        ssh-ca: "<your_own_value> (source firewall.ssh.local-ca.name)"
         user-database:
          -
-            name: "default_name_13 (source: system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name)"
+            name: "default_name_13 (source system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name)"
 '''
 
 RETURN = '''
@@ -216,6 +223,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -252,7 +261,6 @@ def authentication_scheme(data, fos):
     authentication_scheme_data = data['authentication_scheme']
     filtered_data = filter_authentication_scheme_data(
         authentication_scheme_data)
-
     if authentication_scheme_data['state'] == "present":
         return fos.set('authentication',
                        'scheme',
@@ -262,16 +270,12 @@ def authentication_scheme(data, fos):
     elif authentication_scheme_data['state'] == "absent":
         return fos.delete('authentication',
                           'scheme',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_authentication(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['authentication_scheme']
     for method in methodlist:
@@ -289,11 +293,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "authentication_scheme": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "domain-controller": {"required": False, "type": "str"},
                 "fsso-agent-for-ntlm": {"required": False, "type": "str"},
                 "fsso-guest": {"required": False, "type": "str",
@@ -325,6 +330,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_authentication(module.params, fos)

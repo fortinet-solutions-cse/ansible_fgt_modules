@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure application feature and name category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     application_name:
         description:
             - Configure application signatures.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             behavior:
                 description:
                     - Application behavior.
@@ -80,7 +87,6 @@ options:
             id:
                 description:
                     - Application ID.
-                required: true
             metadata:
                 description:
                     - Meta data.
@@ -135,10 +141,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure application signatures.
     fortios_application_name:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_name:
         state: "present"
         behavior: "<your_own_value>"
@@ -219,6 +225,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -255,7 +263,6 @@ def application_name(data, fos):
     vdom = data['vdom']
     application_name_data = data['application_name']
     filtered_data = filter_application_name_data(application_name_data)
-
     if application_name_data['state'] == "present":
         return fos.set('application',
                        'name',
@@ -265,16 +272,12 @@ def application_name(data, fos):
     elif application_name_data['state'] == "absent":
         return fos.delete('application',
                           'name',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_application(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['application_name']
     for method in methodlist:
@@ -292,14 +295,15 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "application_name": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "behavior": {"required": False, "type": "str"},
                 "category": {"required": False, "type": "int"},
-                "id": {"required": True, "type": "int"},
+                "id": {"required": False, "type": "int"},
                 "metadata": {"required": False, "type": "list",
                              "options": {
                                  "id": {"required": True, "type": "int"},
@@ -327,6 +331,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_application(module.params, fos)

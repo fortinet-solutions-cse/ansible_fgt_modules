@@ -7,10 +7,10 @@
   tasks:
   - name: Configure application control lists.
     fortios_application_list:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_list:
         state: "present"
         app-replacemsg: "disable"
@@ -33,7 +33,7 @@
              -
                 id:  "17"
                 value: "<your_own_value>"
-            per-ip-shaper: "<your_own_value> (source: firewall.shaper.per-ip-shaper.name)"
+            per-ip-shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
             popularity: "1"
             protocols: "<your_own_value>"
             quarantine: "none"
@@ -47,8 +47,8 @@
              -
                 level: "30"
             session-ttl: "31"
-            shaper: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
-            shaper-reverse: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
+            shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+            shaper-reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
             sub-category:
              -
                 id:  "35"
@@ -60,6 +60,6 @@
         other-application-action: "pass"
         other-application-log: "disable"
         p2p-black-list: "skype"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         unknown-application-action: "pass"
         unknown-application-log: "disable"

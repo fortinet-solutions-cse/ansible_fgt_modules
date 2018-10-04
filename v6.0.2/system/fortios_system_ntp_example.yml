@@ -7,15 +7,14 @@
   tasks:
   - name: Configure system NTP information.
     fortios_system_ntp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_ntp:
-        state: "present"
         interface:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         ntpserver:
          -
             authentication: "enable"

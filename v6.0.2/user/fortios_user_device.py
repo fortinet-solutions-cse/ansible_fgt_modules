@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and device category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,19 +60,28 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_device:
         description:
             - Configure devices.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             alias:
                 description:
                     - Device alias.
+                required: true
             avatar:
                 description:
                     - Image file for avatar (maximum 4K base64 encoded).
@@ -96,14 +104,14 @@ options:
                     - Device MAC address(es).
             master-device:
                 description:
-                    - Master device (optional). Source: user.device.alias.
+                    - Master device (optional). Source user.device.alias.
             tagging:
                 description:
                     - Config object tagging.
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -114,7 +122,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
             type:
                 description:
@@ -156,10 +164,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure devices.
     fortios_user_device:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_device:
         state: "present"
         alias: "<your_own_value>"
@@ -167,14 +175,14 @@ EXAMPLES = '''
         category: "none"
         comment: "Comment."
         mac: "<your_own_value>"
-        master-device: "<your_own_value> (source: user.device.alias)"
+        master-device: "<your_own_value> (source user.device.alias)"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_11"
             tags:
              -
-                name: "default_name_13 (source: system.object-tagging.tags.name)"
+                name: "default_name_13 (source system.object-tagging.tags.name)"
         type: "unknown"
         user: "<your_own_value>"
 '''
@@ -238,6 +246,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -272,7 +282,6 @@ def user_device(data, fos):
     vdom = data['vdom']
     user_device_data = data['user_device']
     filtered_data = filter_user_device_data(user_device_data)
-
     if user_device_data['state'] == "present":
         return fos.set('user',
                        'device',
@@ -282,16 +291,12 @@ def user_device(data, fos):
     elif user_device_data['state'] == "absent":
         return fos.delete('user',
                           'device',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['alias'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_device']
     for method in methodlist:
@@ -309,19 +314,20 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_device": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "alias": {"required": False, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "alias": {"required": True, "type": "str"},
                 "avatar": {"required": False, "type": "str"},
                 "category": {"required": False, "type": "str",
                              "choices": ["none", "amazon-device", "android-device",
                                          "blackberry-device", "fortinet-device", "ios-device",
                                          "windows-device"]},
                 "comment": {"required": False, "type": "str"},
-                "mac": {"required": False, "type": "mac-address"},
+                "mac": {"required": False, "type": "str"},
                 "master-device": {"required": False, "type": "str"},
                 "tagging": {"required": False, "type": "list",
                             "options": {
@@ -353,6 +359,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

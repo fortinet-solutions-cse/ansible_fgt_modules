@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and isis category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_isis:
         description:
             - Configure IS-IS.
@@ -97,10 +98,10 @@ options:
                     - disable
             auth-keychain-l1:
                 description:
-                    - Authentication key-chain for level 1 PDUs. Source: router.key-chain.name.
+                    - Authentication key-chain for level 1 PDUs. Source router.key-chain.name.
             auth-keychain-l2:
                 description:
-                    - Authentication key-chain for level 2 PDUs. Source: router.key-chain.name.
+                    - Authentication key-chain for level 2 PDUs. Source router.key-chain.name.
             auth-mode-l1:
                 description:
                     - Level 1 authentication mode.
@@ -168,10 +169,10 @@ options:
                 suboptions:
                     auth-keychain-l1:
                         description:
-                            - Authentication key-chain for level 1 PDUs. Source: router.key-chain.name.
+                            - Authentication key-chain for level 1 PDUs. Source router.key-chain.name.
                     auth-keychain-l2:
                         description:
-                            - Authentication key-chain for level 2 PDUs. Source: router.key-chain.name.
+                            - Authentication key-chain for level 2 PDUs. Source router.key-chain.name.
                     auth-mode-l1:
                         description:
                             - Level 1 authentication mode.
@@ -247,7 +248,7 @@ options:
                             - disable
                     mesh-group-id:
                         description:
-                            - Mesh group ID <0-4294967295>, 0: mesh-group blocked.
+                            - "Mesh group ID <0-4294967295>, 0: mesh-group blocked."
                     metric-l1:
                         description:
                             - Level 1 metric for interface.
@@ -256,7 +257,7 @@ options:
                             - Level 2 metric for interface.
                     name:
                         description:
-                            - IS-IS interface name. Source: system.interface.name.
+                            - IS-IS interface name. Source system.interface.name.
                         required: true
                     network-type:
                         description:
@@ -367,9 +368,10 @@ options:
                     protocol:
                         description:
                             - Protocol name.
+                        required: true
                     routemap:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - Status.
@@ -384,7 +386,7 @@ options:
                     - disable
             redistribute-l1-list:
                 description:
-                    - Access-list for route redistribution from l1 to l2. Source: router.access-list.name.
+                    - Access-list for route redistribution from l1 to l2. Source router.access-list.name.
             redistribute-l2:
                 description:
                     - Enable/disable redistribution of level 2 routes into level 1.
@@ -393,7 +395,7 @@ options:
                     - disable
             redistribute-l2-list:
                 description:
-                    - Access-list for route redistribution from l2 to l1. Source: router.access-list.name.
+                    - Access-list for route redistribution from l2 to l1. Source router.access-list.name.
             redistribute6:
                 description:
                     - IS-IS IPv6 redistribution for routing protocols.
@@ -417,9 +419,10 @@ options:
                     protocol:
                         description:
                             - Protocol name.
+                        required: true
                     routemap:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - Enable/disable redistribution.
@@ -434,7 +437,7 @@ options:
                     - disable
             redistribute6-l1-list:
                 description:
-                    - Access-list for IPv6 route redistribution from l1 to l2. Source: router.access-list6.name.
+                    - Access-list for IPv6 route redistribution from l1 to l2. Source router.access-list6.name.
             redistribute6-l2:
                 description:
                     - Enable/disable redistribution of level 2 IPv6 routes into level 1.
@@ -443,7 +446,7 @@ options:
                     - disable
             redistribute6-l2-list:
                 description:
-                    - Access-list for IPv6 route redistribution from l2 to l1. Source: router.access-list6.name.
+                    - Access-list for IPv6 route redistribution from l2 to l1. Source router.access-list6.name.
             spf-interval-exp-l1:
                 description:
                     - Level 1 SPF calculation delay.
@@ -498,18 +501,17 @@ EXAMPLES = '''
   tasks:
   - name: Configure IS-IS.
     fortios_router_isis:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_isis:
-        state: "present"
         adjacency-check: "enable"
         adjacency-check6: "enable"
         adv-passive-only: "enable"
         adv-passive-only6: "enable"
-        auth-keychain-l1: "<your_own_value> (source: router.key-chain.name)"
-        auth-keychain-l2: "<your_own_value> (source: router.key-chain.name)"
+        auth-keychain-l1: "<your_own_value> (source router.key-chain.name)"
+        auth-keychain-l2: "<your_own_value> (source router.key-chain.name)"
         auth-mode-l1: "password"
         auth-mode-l2: "password"
         auth-password-l1: "<your_own_value>"
@@ -523,8 +525,8 @@ EXAMPLES = '''
         is-type: "level-1-2"
         isis-interface:
          -
-            auth-keychain-l1: "<your_own_value> (source: router.key-chain.name)"
-            auth-keychain-l2: "<your_own_value> (source: router.key-chain.name)"
+            auth-keychain-l1: "<your_own_value> (source router.key-chain.name)"
+            auth-keychain-l2: "<your_own_value> (source router.key-chain.name)"
             auth-mode-l1: "md5"
             auth-mode-l2: "md5"
             auth-password-l1: "<your_own_value>"
@@ -545,7 +547,7 @@ EXAMPLES = '''
             mesh-group-id: "40"
             metric-l1: "41"
             metric-l2: "42"
-            name: "default_name_43 (source: system.interface.name)"
+            name: "default_name_43 (source system.interface.name)"
             network-type: "broadcast"
             priority-l1: "45"
             priority-l2: "46"
@@ -571,24 +573,24 @@ EXAMPLES = '''
             metric: "64"
             metric-type: "external"
             protocol: "<your_own_value>"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         redistribute-l1: "enable"
-        redistribute-l1-list: "<your_own_value> (source: router.access-list.name)"
+        redistribute-l1-list: "<your_own_value> (source router.access-list.name)"
         redistribute-l2: "enable"
-        redistribute-l2-list: "<your_own_value> (source: router.access-list.name)"
+        redistribute-l2-list: "<your_own_value> (source router.access-list.name)"
         redistribute6:
          -
             level: "level-1-2"
             metric: "75"
             metric-type: "external"
             protocol: "<your_own_value>"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         redistribute6-l1: "enable"
-        redistribute6-l1-list: "<your_own_value> (source: router.access-list6.name)"
+        redistribute6-l1-list: "<your_own_value> (source router.access-list6.name)"
         redistribute6-l2: "enable"
-        redistribute6-l2-list: "<your_own_value> (source: router.access-list6.name)"
+        redistribute6-l2-list: "<your_own_value> (source router.access-list6.name)"
         spf-interval-exp-l1: "<your_own_value>"
         spf-interval-exp-l2: "<your_own_value>"
         summary-address:
@@ -662,6 +664,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -707,26 +711,14 @@ def router_isis(data, fos):
     vdom = data['vdom']
     router_isis_data = data['router_isis']
     filtered_data = filter_router_isis_data(router_isis_data)
-
-    if router_isis_data['state'] == "present":
-        return fos.set('router',
-                       'isis',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_isis_data['state'] == "absent":
-        return fos.delete('router',
-                          'isis',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'isis',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_isis']
     for method in methodlist:
@@ -744,11 +736,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_isis": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "adjacency-check": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]},
                 "adjacency-check6": {"required": False, "type": "str",
@@ -763,8 +754,8 @@ def main():
                                  "choices": ["password", "md5"]},
                 "auth-mode-l2": {"required": False, "type": "str",
                                  "choices": ["password", "md5"]},
-                "auth-password-l1": {"required": False, "type": "password"},
-                "auth-password-l2": {"required": False, "type": "password"},
+                "auth-password-l1": {"required": False, "type": "str"},
+                "auth-password-l2": {"required": False, "type": "str"},
                 "auth-sendonly-l1": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                 "auth-sendonly-l2": {"required": False, "type": "str",
@@ -787,8 +778,8 @@ def main():
                                                         "choices": ["md5", "password"]},
                                        "auth-mode-l2": {"required": False, "type": "str",
                                                         "choices": ["md5", "password"]},
-                                       "auth-password-l1": {"required": False, "type": "password"},
-                                       "auth-password-l2": {"required": False, "type": "password"},
+                                       "auth-password-l1": {"required": False, "type": "str"},
+                                       "auth-password-l2": {"required": False, "type": "str"},
                                        "auth-send-only-l1": {"required": False, "type": "str",
                                                              "choices": ["enable", "disable"]},
                                        "auth-send-only-l2": {"required": False, "type": "str",
@@ -849,7 +840,7 @@ def main():
                                      "metric": {"required": False, "type": "int"},
                                      "metric-type": {"required": False, "type": "str",
                                                      "choices": ["external", "internal"]},
-                                     "protocol": {"required": False, "type": "str"},
+                                     "protocol": {"required": True, "type": "str"},
                                      "routemap": {"required": False, "type": "str"},
                                      "status": {"required": False, "type": "str",
                                                 "choices": ["enable", "disable"]}
@@ -867,7 +858,7 @@ def main():
                                       "metric": {"required": False, "type": "int"},
                                       "metric-type": {"required": False, "type": "str",
                                                       "choices": ["external", "internal"]},
-                                      "protocol": {"required": False, "type": "str"},
+                                      "protocol": {"required": True, "type": "str"},
                                       "routemap": {"required": False, "type": "str"},
                                       "status": {"required": False, "type": "str",
                                                  "choices": ["enable", "disable"]}
@@ -885,14 +876,14 @@ def main():
                                         "id": {"required": True, "type": "int"},
                                         "level": {"required": False, "type": "str",
                                                   "choices": ["level-1-2", "level-1", "level-2"]},
-                                        "prefix": {"required": False, "type": "ipv4-classnet-any"}
+                                        "prefix": {"required": False, "type": "str"}
                                     }},
                 "summary-address6": {"required": False, "type": "list",
                                      "options": {
                                          "id": {"required": True, "type": "int"},
                                          "level": {"required": False, "type": "str",
                                                    "choices": ["level-1-2", "level-1", "level-2"]},
-                                         "prefix6": {"required": False, "type": "ipv6-prefix"}
+                                         "prefix6": {"required": False, "type": "str"}
                                      }}
 
             }
@@ -906,6 +897,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

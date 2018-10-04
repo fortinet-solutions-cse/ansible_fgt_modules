@@ -7,15 +7,15 @@
   tasks:
   - name: Configure LDAP server entries.
     fortios_user_ldap:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_ldap:
         state: "present"
         account-key-filter: "<your_own_value>"
         account-key-processing: "same"
-        ca-cert: "<your_own_value> (source: vpn.certificate.ca.name)"
+        ca-cert: "<your_own_value> (source vpn.certificate.ca.name)"
         cnid: "<your_own_value>"
         dn: "<your_own_value>"
         group-filter: "<your_own_value>"

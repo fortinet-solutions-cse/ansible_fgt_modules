@@ -7,10 +7,10 @@
   tasks:
   - name: Configure IPv6 firewall addresses.
     fortios_firewall_address6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_address6:
         state: "present"
         cache-ttl: "3"
@@ -35,12 +35,12 @@
             value: "<your_own_value>"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_23"
             tags:
              -
-                name: "default_name_25 (source: system.object-tagging.tags.name)"
-        template: "<your_own_value> (source: firewall.address6-template.name)"
+                name: "default_name_25 (source system.object-tagging.tags.name)"
+        template: "<your_own_value> (source firewall.address6-template.name)"
         type: "ipprefix"
         uuid: "<your_own_value>"
         visibility: "enable"

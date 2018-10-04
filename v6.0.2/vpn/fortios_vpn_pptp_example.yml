@@ -7,15 +7,14 @@
   tasks:
   - name: Configure PPTP.
     fortios_vpn_pptp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn_pptp:
-        state: "present"
         eip: "<your_own_value>"
         ip-mode: "range"
         local-ip: "<your_own_value>"
         sip: "<your_own_value>"
         status: "enable"
-        usrgrp: "<your_own_value> (source: user.group.name)"
+        usrgrp: "<your_own_value> (source user.group.name)"

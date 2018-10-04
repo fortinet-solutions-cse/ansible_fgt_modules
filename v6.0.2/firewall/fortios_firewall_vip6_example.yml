@@ -7,10 +7,10 @@
   tasks:
   - name: Configure virtual IP for IPv6.
     fortios_firewall_vip6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_vip6:
         state: "present"
         arp-reply: "disable"
@@ -35,7 +35,7 @@
         max-embryonic-connections: "22"
         monitor:
          -
-            name: "default_name_24 (source: firewall.ldb-monitor.name)"
+            name: "default_name_24 (source firewall.ldb-monitor.name)"
         name: "default_name_25"
         outlook-web-access: "disable"
         persistence: "none"
@@ -50,7 +50,7 @@
             id:  "35"
             ip: "<your_own_value>"
             max-connections: "37"
-            monitor: "<your_own_value> (source: firewall.ldb-monitor.name)"
+            monitor: "<your_own_value> (source firewall.ldb-monitor.name)"
             port: "39"
             status: "active"
             weight: "41"
@@ -59,7 +59,7 @@
          -
             range: "<your_own_value>"
         ssl-algorithm: "high"
-        ssl-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+        ssl-certificate: "<your_own_value> (source vpn.certificate.local.name)"
         ssl-cipher-suites:
          -
             cipher: "TLS-RSA-WITH-3DES-EDE-CBC-SHA"
@@ -73,9 +73,9 @@
         ssl-dh-bits: "768"
         ssl-hpkp: "disable"
         ssl-hpkp-age: "58"
-        ssl-hpkp-backup: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-backup: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-include-subdomains: "disable"
-        ssl-hpkp-primary: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-primary: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-report-uri: "<your_own_value>"
         ssl-hsts: "disable"
         ssl-hsts-age: "64"

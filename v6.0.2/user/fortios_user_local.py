@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and local category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_local:
         description:
             - Configure local users.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auth-concurrent-override:
                 description:
                     - Enable/disable overriding the policy-auth-concurrent under config system global.
@@ -88,14 +95,13 @@ options:
                     - Two-factor recipient's email address.
             fortitoken:
                 description:
-                    - Two-factor recipient's FortiToken serial number. Source: user.fortitoken.serial-number.
+                    - Two-factor recipient's FortiToken serial number. Source user.fortitoken.serial-number.
             id:
                 description:
                     - User ID.
-                required: true
             ldap-server:
                 description:
-                    - Name of LDAP server with which the user must authenticate. Source: user.ldap.name.
+                    - Name of LDAP server with which the user must authenticate. Source user.ldap.name.
             name:
                 description:
                     - User name.
@@ -105,7 +111,7 @@ options:
                     - User's password.
             passwd-policy:
                 description:
-                    - Password policy to apply to this user, as defined in config user password-policy. Source: user.password-policy.name.
+                    - Password policy to apply to this user, as defined in config user password-policy. Source user.password-policy.name.
             passwd-time:
                 description:
                     - Time of the last password update.
@@ -117,10 +123,10 @@ options:
                     - IKEv2 Postquantum Preshared Key (ASCII string or hexadecimal encoded with a leading 0x).
             radius-server:
                 description:
-                    - Name of RADIUS server with which the user must authenticate. Source: user.radius.name.
+                    - Name of RADIUS server with which the user must authenticate. Source user.radius.name.
             sms-custom-server:
                 description:
-                    - Two-factor recipient's SMS server. Source: system.sms-server.name.
+                    - Two-factor recipient's SMS server. Source system.sms-server.name.
             sms-phone:
                 description:
                     - Two-factor recipient's mobile phone number.
@@ -138,7 +144,7 @@ options:
                     - disable
             tacacs+-server:
                 description:
-                    - Name of TACACS+ server with which the user must authenticate. Source: user.tacacs+.name.
+                    - Name of TACACS+ server with which the user must authenticate. Source user.tacacs+.name.
             two-factor:
                 description:
                     - Enable/disable two-factor authentication.
@@ -170,31 +176,31 @@ EXAMPLES = '''
   tasks:
   - name: Configure local users.
     fortios_user_local:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_local:
         state: "present"
         auth-concurrent-override: "enable"
         auth-concurrent-value: "4"
         authtimeout: "5"
         email-to: "<your_own_value>"
-        fortitoken: "<your_own_value> (source: user.fortitoken.serial-number)"
+        fortitoken: "<your_own_value> (source user.fortitoken.serial-number)"
         id:  "8"
-        ldap-server: "<your_own_value> (source: user.ldap.name)"
+        ldap-server: "<your_own_value> (source user.ldap.name)"
         name: "default_name_10"
         passwd: "<your_own_value>"
-        passwd-policy: "<your_own_value> (source: user.password-policy.name)"
+        passwd-policy: "<your_own_value> (source user.password-policy.name)"
         passwd-time: "<your_own_value>"
         ppk-identity: "<your_own_value>"
         ppk-secret: "<your_own_value>"
-        radius-server: "<your_own_value> (source: user.radius.name)"
-        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        radius-server: "<your_own_value> (source user.radius.name)"
+        sms-custom-server: "<your_own_value> (source system.sms-server.name)"
         sms-phone: "<your_own_value>"
         sms-server: "fortiguard"
         status: "enable"
-        tacacs+-server: "<your_own_value> (source: user.tacacs+.name)"
+        tacacs+-server: "<your_own_value> (source user.tacacs+.name)"
         two-factor: "disable"
         type: "password"
         workstation: "<your_own_value>"
@@ -259,6 +265,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -298,7 +306,6 @@ def user_local(data, fos):
     vdom = data['vdom']
     user_local_data = data['user_local']
     filtered_data = filter_user_local_data(user_local_data)
-
     if user_local_data['state'] == "present":
         return fos.set('user',
                        'local',
@@ -308,16 +315,12 @@ def user_local(data, fos):
     elif user_local_data['state'] == "absent":
         return fos.delete('user',
                           'local',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_local']
     for method in methodlist:
@@ -335,21 +338,22 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_local": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auth-concurrent-override": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},
                 "auth-concurrent-value": {"required": False, "type": "int"},
                 "authtimeout": {"required": False, "type": "int"},
                 "email-to": {"required": False, "type": "str"},
                 "fortitoken": {"required": False, "type": "str"},
-                "id": {"required": True, "type": "int"},
+                "id": {"required": False, "type": "int"},
                 "ldap-server": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
-                "passwd": {"required": False, "type": "password"},
+                "passwd": {"required": False, "type": "str"},
                 "passwd-policy": {"required": False, "type": "str"},
                 "passwd-time": {"required": False, "type": "str"},
                 "ppk-identity": {"required": False, "type": "str"},
@@ -381,6 +385,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

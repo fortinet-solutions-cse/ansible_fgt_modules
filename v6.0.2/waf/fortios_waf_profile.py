@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure waf feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     waf_profile:
         description:
             - Web application firewall configuration.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             address-list:
                 description:
                     - Black address list and white address list.
@@ -81,7 +88,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Address name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
                     blocked-log:
                         description:
@@ -108,7 +115,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Address name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
             comment:
                 description:
@@ -155,7 +162,7 @@ options:
                         suboptions:
                             address:
                                 description:
-                                    - Host address. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Host address. Source firewall.address.name firewall.addrgrp.name.
                             content-length:
                                 description:
                                     - HTTP content length in request.
@@ -660,7 +667,7 @@ options:
                         suboptions:
                             address:
                                 description:
-                                    - Host address. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Host address. Source firewall.address.name firewall.addrgrp.name.
                             allowed-methods:
                                 description:
                                     - Allowed Methods.
@@ -783,7 +790,7 @@ options:
                         suboptions:
                             id:
                                 description:
-                                    - Signature ID. Source: waf.signature.id.
+                                    - Signature ID. Source waf.signature.id.
                                 required: true
                     disabled-sub-class:
                         description:
@@ -791,7 +798,7 @@ options:
                         suboptions:
                             id:
                                 description:
-                                    - Signature subclass ID. Source: waf.sub-class.id.
+                                    - Signature subclass ID. Source waf.sub-class.id.
                                 required: true
                     main-class:
                         description:
@@ -806,7 +813,7 @@ options:
                                     - erase
                             id:
                                 description:
-                                    - Main signature class ID. Source: waf.main-class.id.
+                                    - Main signature class ID. Source waf.main-class.id.
                                 required: true
                             log:
                                 description:
@@ -856,7 +863,7 @@ options:
                                     - disable
                             srcaddr:
                                 description:
-                                    - Source address. Source: firewall.address.name firewall.addrgrp.name.
+                                    - Source address. Source firewall.address.name firewall.addrgrp.name.
                     action:
                         description:
                             - Action.
@@ -866,7 +873,7 @@ options:
                             - block
                     address:
                         description:
-                            - Host address. Source: firewall.address.name firewall.addrgrp.name.
+                            - Host address. Source firewall.address.name firewall.addrgrp.name.
                     id:
                         description:
                             - URL access ID.
@@ -896,22 +903,22 @@ EXAMPLES = '''
   tasks:
   - name: Web application firewall configuration.
     fortios_waf_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       waf_profile:
         state: "present"
         address-list:
             blocked-address:
              -
-                name: "default_name_5 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_5 (source firewall.address.name firewall.addrgrp.name)"
             blocked-log: "enable"
             severity: "high"
             status: "enable"
             trusted-address:
              -
-                name: "default_name_10 (source: firewall.address.name firewall.addrgrp.name)"
+                name: "default_name_10 (source firewall.address.name firewall.addrgrp.name)"
         comment: "Comment."
         constraint:
             content-length:
@@ -922,7 +929,7 @@ EXAMPLES = '''
                 status: "enable"
             exception:
              -
-                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
                 content-length: "enable"
                 header-length: "enable"
                 hostname: "enable"
@@ -1014,7 +1021,7 @@ EXAMPLES = '''
             log: "enable"
             method-policy:
              -
-                address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
                 allowed-methods: "get"
                 id:  "113"
                 pattern: "<your_own_value>"
@@ -1037,14 +1044,14 @@ EXAMPLES = '''
                 target: "arg"
             disabled-signature:
              -
-                id:  "132 (source: waf.signature.id)"
+                id:  "132 (source waf.signature.id)"
             disabled-sub-class:
              -
-                id:  "134 (source: waf.sub-class.id)"
+                id:  "134 (source waf.sub-class.id)"
             main-class:
              -
                 action: "allow"
-                id:  "137 (source: waf.main-class.id)"
+                id:  "137 (source waf.main-class.id)"
                 log: "enable"
                 severity: "high"
                 status: "enable"
@@ -1056,9 +1063,9 @@ EXAMPLES = '''
                 negate: "enable"
                 pattern: "<your_own_value>"
                 regex: "enable"
-                srcaddr: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+                srcaddr: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
             action: "bypass"
-            address: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+            address: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
             id:  "150"
             log: "enable"
             severity: "high"
@@ -1123,6 +1130,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -1157,7 +1166,6 @@ def waf_profile(data, fos):
     vdom = data['vdom']
     waf_profile_data = data['waf_profile']
     filtered_data = filter_waf_profile_data(waf_profile_data)
-
     if waf_profile_data['state'] == "present":
         return fos.set('waf',
                        'profile',
@@ -1167,16 +1175,12 @@ def waf_profile(data, fos):
     elif waf_profile_data['state'] == "absent":
         return fos.delete('waf',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_waf(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['waf_profile']
     for method in methodlist:
@@ -1194,11 +1198,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "waf_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "address-list": {"required": False, "type": "dict",
                                  "options": {
                                      "blocked-address": {"required": False, "type": "list",
@@ -1516,6 +1521,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_waf(module.params, fos)

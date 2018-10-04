@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and vip category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_vip:
         description:
             - Configure virtual IP for IPv4.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             arp-reply:
                 description:
                     - Enable to respond to ARP requests for this virtual IP address. Enabled by default.
@@ -92,11 +99,12 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             extintf:
                 description:
-                    - Interface connected to the source network that receives the packets that will be forwarded to the destination network. Source: system.interface.name.
+                    - Interface connected to the source network that receives the packets that will be forwarded to the destination network. Source system
+                      .interface.name.
             extip:
                 description:
                     - IP address or address range on the external interface that you want to map to an address or address range on the destination network.
@@ -126,7 +134,8 @@ options:
                     - Limit HTTP cookie persistence to the specified path.
             http-cookie-share:
                 description:
-                    - Control sharing of cookies across virtual servers. same-ip means a cookie from one virtual server can be used by another. Disable stops cookie sharing.
+                    - Control sharing of cookies across virtual servers. same-ip means a cookie from one virtual server can be used by another. Disable stops
+                       cookie sharing.
                 choices:
                     - disable
                     - same-ip
@@ -138,7 +147,8 @@ options:
                     - disable
             http-ip-header-name:
                 description:
-                    - For HTTP multiplexing, enter a custom HTTPS header name. The original client IP address is added to this header. If empty, X-Forwarded-For is used.
+                    - For HTTP multiplexing, enter a custom HTTPS header name. The original client IP address is added to this header. If empty,
+                       X-Forwarded-For is used.
             http-multiplex:
                 description:
                     - Enable/disable HTTP multiplexing.
@@ -154,7 +164,6 @@ options:
             id:
                 description:
                     - Custom defined ID.
-                required: true
             ldb-method:
                 description:
                     - Method used to distribute sessions to real servers.
@@ -168,7 +177,7 @@ options:
                     - http-host
             mapped-addr:
                 description:
-                    - Mapped FQDN address name. Source: firewall.address.name.
+                    - Mapped FQDN address name. Source firewall.address.name.
             mappedip:
                 description:
                     - IP address or address range on the destination network to which the external IP address is mapped.
@@ -176,6 +185,7 @@ options:
                     range:
                         description:
                             - Mapped IP range.
+                        required: true
             mappedport:
                 description:
                     - Port number range on the destination network to which the external port number range is mapped.
@@ -188,7 +198,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Health monitor name. Source: firewall.ldb-monitor.name.
+                            - Health monitor name. Source firewall.ldb-monitor.name.
                         required: true
             name:
                 description:
@@ -265,7 +275,8 @@ options:
                             - Max number of active connections that can be directed to the real server. When reached, sessions are sent to other real servers.
                     monitor:
                         description:
-                            - Name of the health check monitor to use when polling to determine a virtual server's connectivity status. Source: firewall.ldb-monitor.name.
+                            - Name of the health check monitor to use when polling to determine a virtual server's connectivity status. Source firewall
+                              .ldb-monitor.name.
                     port:
                         description:
                             - Port for communicating with the real server. Required if port forwarding is enabled.
@@ -298,7 +309,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Service name. Source: firewall.service.custom.name firewall.service.group.name.
+                            - Service name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
             src-filter:
                 description:
@@ -307,13 +318,15 @@ options:
                     range:
                         description:
                             - Source-filter range.
+                        required: true
             srcintf-filter:
                 description:
                     - Interfaces to which the VIP applies. Separate the names with spaces.
                 suboptions:
                     interface-name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
+                        required: true
             ssl-algorithm:
                 description:
                     - Permitted encryption algorithms for SSL sessions according to encryption strength.
@@ -324,7 +337,7 @@ options:
                     - custom
             ssl-certificate:
                 description:
-                    - The name of the SSL certificate to use for SSL acceleration. Source: vpn.certificate.local.name.
+                    - The name of the SSL certificate to use for SSL acceleration. Source vpn.certificate.local.name.
             ssl-cipher-suites:
                 description:
                     - SSL/TLS cipher suites acceptable from a client, ordered by priority.
@@ -339,6 +352,7 @@ options:
                     priority:
                         description:
                             - SSL/TLS cipher suites priority.
+                        required: true
                     versions:
                         description:
                             - SSL/TLS versions that the cipher suite can be used with.
@@ -396,7 +410,7 @@ options:
                     - Number of seconds the client should honour the HPKP setting.
             ssl-hpkp-backup:
                 description:
-                    - Certificate to generate backup HPKP pin from. Source: vpn.certificate.local.name vpn.certificate.ca.name.
+                    - Certificate to generate backup HPKP pin from. Source vpn.certificate.local.name vpn.certificate.ca.name.
             ssl-hpkp-include-subdomains:
                 description:
                     - Indicate that HPKP header applies to all subdomains.
@@ -405,7 +419,7 @@ options:
                     - enable
             ssl-hpkp-primary:
                 description:
-                    - Certificate to generate primary HPKP pin from. Source: vpn.certificate.local.name vpn.certificate.ca.name.
+                    - Certificate to generate primary HPKP pin from. Source vpn.certificate.local.name vpn.certificate.ca.name.
             ssl-hpkp-report-uri:
                 description:
                     - URL to report HPKP violations to.
@@ -454,7 +468,8 @@ options:
                     - tls-1.2
             ssl-mode:
                 description:
-                    - Apply SSL offloading between the client and the FortiGate (half) or from the client to the FortiGate and from the FortiGate to the server (full).
+                    - Apply SSL offloading between the client and the FortiGate (half) or from the client to the FortiGate and from the FortiGate to the
+                       server (full).
                 choices:
                     - half
                     - full
@@ -467,7 +482,8 @@ options:
                     - allow
             ssl-send-empty-frags:
                 description:
-                    - Enable/disable sending empty fragments to avoid CBC IV attacks (SSL 3.0 & TLS 1.0 only). May need to be disabled for compatibility with older systems.
+                    - Enable/disable sending empty fragments to avoid CBC IV attacks (SSL 3.0 & TLS 1.0 only). May need to be disabled for compatibility with
+                       older systems.
                 choices:
                     - enable
                     - disable
@@ -494,6 +510,7 @@ options:
                     priority:
                         description:
                             - SSL/TLS cipher suites priority.
+                        required: true
                     versions:
                         description:
                             - SSL/TLS versions that the cipher suite can be used with.
@@ -570,10 +587,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure virtual IP for IPv4.
     fortios_firewall_vip:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_vip:
         state: "present"
         arp-reply: "disable"
@@ -582,8 +599,8 @@ EXAMPLES = '''
         dns-mapping-ttl: "6"
         extaddr:
          -
-            name: "default_name_8 (source: firewall.address.name firewall.addrgrp.name)"
-        extintf: "<your_own_value> (source: system.interface.name)"
+            name: "default_name_8 (source firewall.address.name firewall.addrgrp.name)"
+        extintf: "<your_own_value> (source system.interface.name)"
         extip: "<your_own_value>"
         extport: "<your_own_value>"
         gratuitous-arp-interval: "12"
@@ -599,7 +616,7 @@ EXAMPLES = '''
         https-cookie-secure: "disable"
         id:  "23"
         ldb-method: "static"
-        mapped-addr: "<your_own_value> (source: firewall.address.name)"
+        mapped-addr: "<your_own_value> (source firewall.address.name)"
         mappedip:
          -
             range: "<your_own_value>"
@@ -607,7 +624,7 @@ EXAMPLES = '''
         max-embryonic-connections: "29"
         monitor:
          -
-            name: "default_name_31 (source: firewall.ldb-monitor.name)"
+            name: "default_name_31 (source firewall.ldb-monitor.name)"
         name: "default_name_32"
         nat-source-vip: "disable"
         outlook-web-access: "disable"
@@ -624,22 +641,22 @@ EXAMPLES = '''
             id:  "44"
             ip: "<your_own_value>"
             max-connections: "46"
-            monitor: "<your_own_value> (source: firewall.ldb-monitor.name)"
+            monitor: "<your_own_value> (source firewall.ldb-monitor.name)"
             port: "48"
             status: "active"
             weight: "50"
         server-type: "http"
         service:
          -
-            name: "default_name_53 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_53 (source firewall.service.custom.name firewall.service.group.name)"
         src-filter:
          -
             range: "<your_own_value>"
         srcintf-filter:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         ssl-algorithm: "high"
-        ssl-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+        ssl-certificate: "<your_own_value> (source vpn.certificate.local.name)"
         ssl-cipher-suites:
          -
             cipher: "TLS-RSA-WITH-3DES-EDE-CBC-SHA"
@@ -653,9 +670,9 @@ EXAMPLES = '''
         ssl-dh-bits: "768"
         ssl-hpkp: "disable"
         ssl-hpkp-age: "71"
-        ssl-hpkp-backup: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-backup: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-include-subdomains: "disable"
-        ssl-hpkp-primary: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-primary: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-report-uri: "<your_own_value>"
         ssl-hsts: "disable"
         ssl-hsts-age: "77"
@@ -743,6 +760,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -799,7 +818,6 @@ def firewall_vip(data, fos):
     vdom = data['vdom']
     firewall_vip_data = data['firewall_vip']
     filtered_data = filter_firewall_vip_data(firewall_vip_data)
-
     if firewall_vip_data['state'] == "present":
         return fos.set('firewall',
                        'vip',
@@ -809,16 +827,12 @@ def firewall_vip(data, fos):
     elif firewall_vip_data['state'] == "absent":
         return fos.delete('firewall',
                           'vip',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_vip']
     for method in methodlist:
@@ -836,11 +850,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_vip": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "arp-reply": {"required": False, "type": "str",
                               "choices": ["disable", "enable"]},
                 "color": {"required": False, "type": "int"},
@@ -869,7 +884,7 @@ def main():
                                    "choices": ["enable", "disable"]},
                 "https-cookie-secure": {"required": False, "type": "str",
                                         "choices": ["disable", "enable"]},
-                "id": {"required": True, "type": "int"},
+                "id": {"required": False, "type": "int"},
                 "ldb-method": {"required": False, "type": "str",
                                "choices": ["static", "round-robin", "weighted",
                                            "least-session", "least-rtt", "first-alive",
@@ -877,7 +892,7 @@ def main():
                 "mapped-addr": {"required": False, "type": "str"},
                 "mappedip": {"required": False, "type": "list",
                              "options": {
-                                 "range": {"required": False, "type": "str"}
+                                 "range": {"required": True, "type": "str"}
                              }},
                 "mappedport": {"required": False, "type": "str"},
                 "max-embryonic-connections": {"required": False, "type": "int"},
@@ -907,7 +922,7 @@ def main():
                                     "holddown-interval": {"required": False, "type": "int"},
                                     "http-host": {"required": False, "type": "str"},
                                     "id": {"required": True, "type": "int"},
-                                    "ip": {"required": False, "type": "ipv4-address-any"},
+                                    "ip": {"required": False, "type": "str"},
                                     "max-connections": {"required": False, "type": "int"},
                                     "monitor": {"required": False, "type": "str"},
                                     "port": {"required": False, "type": "int"},
@@ -925,11 +940,11 @@ def main():
                             }},
                 "src-filter": {"required": False, "type": "list",
                                "options": {
-                                   "range": {"required": False, "type": "str"}
+                                   "range": {"required": True, "type": "str"}
                                }},
                 "srcintf-filter": {"required": False, "type": "list",
                                    "options": {
-                                       "interface-name": {"required": False, "type": "str"}
+                                       "interface-name": {"required": True, "type": "str"}
                                    }},
                 "ssl-algorithm": {"required": False, "type": "str",
                                   "choices": ["high", "medium", "low",
@@ -939,7 +954,7 @@ def main():
                                       "options": {
                                           "cipher": {"required": False, "type": "str",
                                                      "choices": ["TLS-RSA-WITH-3DES-EDE-CBC-SHA", "TLS-DHE-RSA-WITH-DES-CBC-SHA", "TLS-DHE-DSS-WITH-DES-CBC-SHA"]},
-                                          "priority": {"required": False, "type": "int"},
+                                          "priority": {"required": True, "type": "int"},
                                           "versions": {"required": False, "type": "str",
                                                        "choices": ["ssl-3.0", "tls-1.0", "tls-1.1",
                                                                    "tls-1.2"]}
@@ -992,7 +1007,7 @@ def main():
                                              "options": {
                                                  "cipher": {"required": False, "type": "str",
                                                             "choices": ["TLS-RSA-WITH-3DES-EDE-CBC-SHA", "TLS-DHE-RSA-WITH-DES-CBC-SHA", "TLS-DHE-DSS-WITH-DES-CBC-SHA"]},
-                                                 "priority": {"required": False, "type": "int"},
+                                                 "priority": {"required": True, "type": "int"},
                                                  "versions": {"required": False, "type": "str",
                                                               "choices": ["ssl-3.0", "tls-1.0", "tls-1.1",
                                                                           "tls-1.2"]}
@@ -1011,7 +1026,7 @@ def main():
                 "type": {"required": False, "type": "str",
                          "choices": ["static-nat", "load-balance", "server-load-balance",
                                      "dns-translation", "fqdn"]},
-                "uuid": {"required": False, "type": "uuid"},
+                "uuid": {"required": False, "type": "str"},
                 "weblogic-server": {"required": False, "type": "str",
                                     "choices": ["disable", "enable"]},
                 "websphere-server": {"required": False, "type": "str",
@@ -1028,6 +1043,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

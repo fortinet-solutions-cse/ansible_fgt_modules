@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ssl.web feature and portal category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ssl.web_portal:
         description:
             - Portal.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             allow-user-access:
                 description:
                     - Allow user access to SSL-VPN applications.
@@ -227,7 +234,8 @@ options:
                         required: true
             custom-lang:
                 description:
-                    - Change the web portal display language. Overrides config system global set language. You can use config system custom-language and execute system custom-language to add custom language files. Source: system.custom-language.name.
+                    - Change the web portal display language. Overrides config system global set language. You can use config system custom-language and
+                       execute system custom-language to add custom language files. Source system.custom-language.name.
             customize-forticlient-download-url:
                 description:
                     - Enable support of customized download URL for FortiClient.
@@ -312,7 +320,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Host check software list name. Source: vpn.ssl.web.host-check-software.name.
+                            - Host check software list name. Source vpn.ssl.web.host-check-software.name.
                         required: true
             ip-mode:
                 description:
@@ -326,7 +334,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             ipv6-dns-server1:
                 description:
@@ -346,7 +354,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             ipv6-service-restriction:
                 description:
@@ -366,7 +374,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             ipv6-tunnel-mode:
                 description:
@@ -415,6 +423,7 @@ options:
                             addr:
                                 description:
                                     - Client MAC address.
+                                required: true
                     mac-addr-mask:
                         description:
                             - Client MAC address mask.
@@ -530,7 +539,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
             theme:
                 description:
@@ -586,10 +595,10 @@ EXAMPLES = '''
   tasks:
   - name: Portal.
     fortios_vpn.ssl.web_portal:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ssl.web_portal:
         state: "present"
         allow-user-access: "web"
@@ -626,7 +635,7 @@ EXAMPLES = '''
                 sso-username: "<your_own_value>"
                 url: "http://myurl.com"
             name: "default_name_33"
-        custom-lang: "<your_own_value> (source: system.custom-language.name)"
+        custom-lang: "<your_own_value> (source system.custom-language.name)"
         customize-forticlient-download-url: "enable"
         display-bookmark: "enable"
         display-connection-tools: "enable"
@@ -644,22 +653,22 @@ EXAMPLES = '''
         host-check-interval: "49"
         host-check-policy:
          -
-            name: "default_name_51 (source: vpn.ssl.web.host-check-software.name)"
+            name: "default_name_51 (source vpn.ssl.web.host-check-software.name)"
         ip-mode: "range"
         ip-pools:
          -
-            name: "default_name_54 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_54 (source firewall.address.name firewall.addrgrp.name)"
         ipv6-dns-server1: "<your_own_value>"
         ipv6-dns-server2: "<your_own_value>"
         ipv6-exclusive-routing: "enable"
         ipv6-pools:
          -
-            name: "default_name_59 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_59 (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-service-restriction: "enable"
         ipv6-split-tunneling: "enable"
         ipv6-split-tunneling-routing-address:
          -
-            name: "default_name_63 (source: firewall.address6.name firewall.addrgrp6.name)"
+            name: "default_name_63 (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-tunnel-mode: "enable"
         ipv6-wins-server1: "<your_own_value>"
         ipv6-wins-server2: "<your_own_value>"
@@ -701,7 +710,7 @@ EXAMPLES = '''
         split-tunneling: "enable"
         split-tunneling-routing-address:
          -
-            name: "default_name_100 (source: firewall.address.name firewall.addrgrp.name)"
+            name: "default_name_100 (source firewall.address.name firewall.addrgrp.name)"
         theme: "blue"
         tunnel-mode: "enable"
         user-bookmark: "enable"
@@ -771,6 +780,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -822,7 +833,6 @@ def vpn.ssl.web_portal(data, fos):
     vdom = data['vdom']
     vpn.ssl.web_portal_data = data['vpn.ssl.web_portal']
     filtered_data = filter_vpn.ssl.web_portal_data(vpn.ssl.web_portal_data)
-
     if vpn.ssl.web_portal_data['state'] == "present":
         return fos.set('vpn.ssl.web',
                        'portal',
@@ -832,16 +842,12 @@ def vpn.ssl.web_portal(data, fos):
     elif vpn.ssl.web_portal_data['state'] == "absent":
         return fos.delete('vpn.ssl.web',
                           'portal',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_vpn.ssl.web(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ssl.web_portal']
     for method in methodlist:
@@ -859,11 +865,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ssl.web_portal": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "allow-user-access": {"required": False, "type": "str",
                                       "choices": ["web", "ftp", "smb",
                                                   "telnet", "ssh", "vnc",
@@ -890,7 +897,7 @@ def main():
                                                          "host": {"required": False, "type": "str"},
                                                          "listening-port": {"required": False, "type": "int"},
                                                          "load-balancing-info": {"required": False, "type": "str"},
-                                                         "logon-password": {"required": False, "type": "password"},
+                                                         "logon-password": {"required": False, "type": "str"},
                                                          "logon-user": {"required": False, "type": "str"},
                                                          "name": {"required": True, "type": "str"},
                                                          "port": {"required": False, "type": "int"},
@@ -913,7 +920,7 @@ def main():
                                                                             "choices": ["sslvpn-login", "alternative"]},
                                                          "sso-credential-sent-once": {"required": False, "type": "str",
                                                                                       "choices": ["enable", "disable"]},
-                                                         "sso-password": {"required": False, "type": "password"},
+                                                         "sso-password": {"required": False, "type": "str"},
                                                          "sso-username": {"required": False, "type": "str"},
                                                          "url": {"required": False, "type": "str"}
                                                      }},
@@ -930,8 +937,8 @@ def main():
                                     "choices": ["enable", "disable"]},
                 "display-status": {"required": False, "type": "str",
                                    "choices": ["enable", "disable"]},
-                "dns-server1": {"required": False, "type": "ipv4-address"},
-                "dns-server2": {"required": False, "type": "ipv4-address"},
+                "dns-server1": {"required": False, "type": "str"},
+                "dns-server2": {"required": False, "type": "str"},
                 "dns-suffix": {"required": False, "type": "str"},
                 "exclusive-routing": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
@@ -956,8 +963,8 @@ def main():
                              "options": {
                                  "name": {"required": True, "type": "str"}
                              }},
-                "ipv6-dns-server1": {"required": False, "type": "ipv6-address"},
-                "ipv6-dns-server2": {"required": False, "type": "ipv6-address"},
+                "ipv6-dns-server1": {"required": False, "type": "str"},
+                "ipv6-dns-server2": {"required": False, "type": "str"},
                 "ipv6-exclusive-routing": {"required": False, "type": "str",
                                            "choices": ["enable", "disable"]},
                 "ipv6-pools": {"required": False, "type": "list",
@@ -974,8 +981,8 @@ def main():
                                                          }},
                 "ipv6-tunnel-mode": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
-                "ipv6-wins-server1": {"required": False, "type": "ipv6-address"},
-                "ipv6-wins-server2": {"required": False, "type": "ipv6-address"},
+                "ipv6-wins-server1": {"required": False, "type": "str"},
+                "ipv6-wins-server2": {"required": False, "type": "str"},
                 "keep-alive": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]},
                 "limit-user-logins": {"required": False, "type": "str",
@@ -988,7 +995,7 @@ def main():
                                         "options": {
                                             "mac-addr-list": {"required": False, "type": "list",
                                                               "options": {
-                                                                  "addr": {"required": False, "type": "mac-address"}
+                                                                  "addr": {"required": True, "type": "str"}
                                                               }},
                                             "mac-addr-mask": {"required": False, "type": "int"},
                                             "name": {"required": True, "type": "str"}
@@ -1020,12 +1027,12 @@ def main():
                           "choices": ["enable", "disable"]},
                 "split-dns": {"required": False, "type": "list",
                               "options": {
-                                  "dns-server1": {"required": False, "type": "ipv4-address"},
-                                  "dns-server2": {"required": False, "type": "ipv4-address"},
+                                  "dns-server1": {"required": False, "type": "str"},
+                                  "dns-server2": {"required": False, "type": "str"},
                                   "domains": {"required": False, "type": "str"},
                                   "id": {"required": True, "type": "int"},
-                                  "ipv6-dns-server1": {"required": False, "type": "ipv6-address"},
-                                  "ipv6-dns-server2": {"required": False, "type": "ipv6-address"}
+                                  "ipv6-dns-server1": {"required": False, "type": "str"},
+                                  "ipv6-dns-server2": {"required": False, "type": "str"}
                               }},
                 "split-tunneling": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]},
@@ -1045,8 +1052,8 @@ def main():
                 "web-mode": {"required": False, "type": "str",
                              "choices": ["enable", "disable"]},
                 "windows-forticlient-download-url": {"required": False, "type": "str"},
-                "wins-server1": {"required": False, "type": "ipv4-address"},
-                "wins-server2": {"required": False, "type": "ipv4-address"}
+                "wins-server1": {"required": False, "type": "str"},
+                "wins-server2": {"required": False, "type": "str"}
 
             }
         }
@@ -1059,6 +1066,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ssl.web(module.params, fos)

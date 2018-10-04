@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and group category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_group:
         description:
             - Configure user groups.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auth-concurrent-override:
                 description:
                     - Enable/disable overriding the global number of concurrent authentication sessions for this user group.
@@ -135,7 +142,6 @@ options:
                     name:
                         description:
                             - Guest name.
-                        required: true
                     password:
                         description:
                             - Guest password.
@@ -145,13 +151,13 @@ options:
                     user-id:
                         description:
                             - Guest ID.
+                        required: true
             http-digest-realm:
                 description:
                     - Realm attribute for MD5-digest authentication.
             id:
                 description:
                     - Group ID.
-                required: true
             match:
                 description:
                     - Group matches.
@@ -165,7 +171,7 @@ options:
                         required: true
                     server-name:
                         description:
-                            - Name of remote auth server. Source: user.radius.name user.ldap.name user.tacacs+.name.
+                            - Name of remote auth server. Source user.radius.name user.ldap.name user.tacacs+.name.
             max-accounts:
                 description:
                     - Maximum number of guest accounts that can be created for this group (0 means unlimited).
@@ -175,7 +181,8 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Group member name. Source: user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name.
+                            - Group member name. Source user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user
+                              .pop3.name.
                         required: true
             mobile-phone:
                 description:
@@ -202,7 +209,7 @@ options:
                     - disable
             sms-custom-server:
                 description:
-                    - SMS server. Source: system.sms-server.name.
+                    - SMS server. Source system.sms-server.name.
             sms-server:
                 description:
                     - Send SMS through FortiGuard or other external server.
@@ -244,10 +251,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure user groups.
     fortios_user_group:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_group:
         state: "present"
         auth-concurrent-override: "enable"
@@ -275,16 +282,16 @@ EXAMPLES = '''
          -
             group-name: "<your_own_value>"
             id:  "25"
-            server-name: "<your_own_value> (source: user.radius.name user.ldap.name user.tacacs+.name)"
+            server-name: "<your_own_value> (source user.radius.name user.ldap.name user.tacacs+.name)"
         max-accounts: "27"
         member:
          -
-            name: "default_name_29 (source: user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name)"
+            name: "default_name_29 (source user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name)"
         mobile-phone: "disable"
         multiple-guest-add: "disable"
         name: "default_name_32"
         password: "auto-generate"
-        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        sms-custom-server: "<your_own_value> (source system.sms-server.name)"
         sms-server: "fortiguard"
         sponsor: "optional"
         sso-attribute-value: "<your_own_value>"
@@ -351,6 +358,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -390,7 +399,6 @@ def user_group(data, fos):
     vdom = data['vdom']
     user_group_data = data['user_group']
     filtered_data = filter_user_group_data(user_group_data)
-
     if user_group_data['state'] == "present":
         return fos.set('user',
                        'group',
@@ -400,16 +408,12 @@ def user_group(data, fos):
     elif user_group_data['state'] == "absent":
         return fos.delete('user',
                           'group',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_group']
     for method in methodlist:
@@ -427,11 +431,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_group": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auth-concurrent-override": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},
                 "auth-concurrent-value": {"required": False, "type": "int"},
@@ -453,13 +458,13 @@ def main():
                               "email": {"required": False, "type": "str"},
                               "expiration": {"required": False, "type": "str"},
                               "mobile-phone": {"required": False, "type": "str"},
-                              "name": {"required": True, "type": "str"},
-                              "password": {"required": False, "type": "password"},
+                              "name": {"required": False, "type": "str"},
+                              "password": {"required": False, "type": "str"},
                               "sponsor": {"required": False, "type": "str"},
-                              "user-id": {"required": False, "type": "str"}
+                              "user-id": {"required": True, "type": "str"}
                           }},
                 "http-digest-realm": {"required": False, "type": "str"},
-                "id": {"required": True, "type": "int"},
+                "id": {"required": False, "type": "int"},
                 "match": {"required": False, "type": "list",
                           "options": {
                               "group-name": {"required": False, "type": "str"},
@@ -500,6 +505,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

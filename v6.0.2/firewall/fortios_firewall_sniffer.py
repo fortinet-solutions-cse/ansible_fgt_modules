@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and sniffer category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_sniffer:
         description:
             - Configure sniffer.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             anomaly:
                 description:
                     - Configuration method to edit Denial of Service (DoS) anomaly settings.
@@ -117,10 +124,11 @@ options:
                             - Anomaly threshold. Number of detected instances per minute that triggers the anomaly action.
                     threshold(default):
                         description:
-                            - Number of detected instances per minute which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a different threshold value assigned to it.
+                            - Number of detected instances per minute which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a
+                               different threshold value assigned to it.
             application-list:
                 description:
-                    - Name of an existing application list. Source: application.list.name.
+                    - Name of an existing application list. Source application.list.name.
             application-list-status:
                 description:
                     - Enable/disable application control profile.
@@ -129,7 +137,7 @@ options:
                     - disable
             av-profile:
                 description:
-                    - Name of an existing antivirus profile. Source: antivirus.profile.name.
+                    - Name of an existing antivirus profile. Source antivirus.profile.name.
             av-profile-status:
                 description:
                     - Enable/disable antivirus profile.
@@ -138,7 +146,7 @@ options:
                     - disable
             dlp-sensor:
                 description:
-                    - Name of an existing DLP sensor. Source: dlp.sensor.name.
+                    - Name of an existing DLP sensor. Source dlp.sensor.name.
             dlp-sensor-status:
                 description:
                     - Enable/disable DLP sensor.
@@ -153,14 +161,14 @@ options:
                     - disable
             host:
                 description:
-                    - Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0-4.4.4.240).
+                    - "Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0-4.4.4.240)."
             id:
                 description:
                     - Sniffer ID.
                 required: true
             interface:
                 description:
-                    - Interface name that traffic sniffing will take place on. Source: system.interface.name.
+                    - Interface name that traffic sniffing will take place on. Source system.interface.name.
             ips-dos-status:
                 description:
                     - Enable/disable IPS DoS anomaly detection.
@@ -169,7 +177,7 @@ options:
                     - disable
             ips-sensor:
                 description:
-                    - Name of an existing IPS sensor. Source: ips.sensor.name.
+                    - Name of an existing IPS sensor. Source ips.sensor.name.
             ips-sensor-status:
                 description:
                     - Enable/disable IPS sensor.
@@ -200,7 +208,7 @@ options:
                     - disable
             port:
                 description:
-                    - Ports to sniff (Format examples: 10, :20, 30:40, 50-, 100-200).
+                    - "Ports to sniff (Format examples: 10, :20, 30:40, 50-, 100-200)."
             protocol:
                 description:
                     - Integer value for the protocol type as defined by IANA (0 - 255).
@@ -213,7 +221,7 @@ options:
                     - monitor
             spamfilter-profile:
                 description:
-                    - Name of an existing spam filter profile. Source: spamfilter.profile.name.
+                    - Name of an existing spam filter profile. Source spamfilter.profile.name.
             spamfilter-profile-status:
                 description:
                     - Enable/disable spam filter.
@@ -231,7 +239,7 @@ options:
                     - List of VLANs to sniff.
             webfilter-profile:
                 description:
-                    - Name of an existing web filter profile. Source: webfilter.profile.name.
+                    - Name of an existing web filter profile. Source webfilter.profile.name.
             webfilter-profile-status:
                 description:
                     - Enable/disable web filter profile.
@@ -250,10 +258,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure sniffer.
     fortios_firewall_sniffer:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_sniffer:
         state: "present"
         anomaly:
@@ -267,18 +275,18 @@ EXAMPLES = '''
             status: "disable"
             threshold: "11"
             threshold(default): "12"
-        application-list: "<your_own_value> (source: application.list.name)"
+        application-list: "<your_own_value> (source application.list.name)"
         application-list-status: "enable"
-        av-profile: "<your_own_value> (source: antivirus.profile.name)"
+        av-profile: "<your_own_value> (source antivirus.profile.name)"
         av-profile-status: "enable"
-        dlp-sensor: "<your_own_value> (source: dlp.sensor.name)"
+        dlp-sensor: "<your_own_value> (source dlp.sensor.name)"
         dlp-sensor-status: "enable"
         dsri: "enable"
         host: "myhostname"
         id:  "21"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ips-dos-status: "enable"
-        ips-sensor: "<your_own_value> (source: ips.sensor.name)"
+        ips-sensor: "<your_own_value> (source ips.sensor.name)"
         ips-sensor-status: "enable"
         ipv6: "enable"
         logtraffic: "all"
@@ -287,11 +295,11 @@ EXAMPLES = '''
         port: "<your_own_value>"
         protocol: "<your_own_value>"
         scan-botnet-connections: "disable"
-        spamfilter-profile: "<your_own_value> (source: spamfilter.profile.name)"
+        spamfilter-profile: "<your_own_value> (source spamfilter.profile.name)"
         spamfilter-profile-status: "enable"
         status: "enable"
         vlan: "<your_own_value>"
-        webfilter-profile: "<your_own_value> (source: webfilter.profile.name)"
+        webfilter-profile: "<your_own_value> (source webfilter.profile.name)"
         webfilter-profile-status: "enable"
 '''
 
@@ -354,6 +362,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -394,7 +404,6 @@ def firewall_sniffer(data, fos):
     vdom = data['vdom']
     firewall_sniffer_data = data['firewall_sniffer']
     filtered_data = filter_firewall_sniffer_data(firewall_sniffer_data)
-
     if firewall_sniffer_data['state'] == "present":
         return fos.set('firewall',
                        'sniffer',
@@ -409,11 +418,7 @@ def firewall_sniffer(data, fos):
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_sniffer']
     for method in methodlist:
@@ -431,11 +436,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_sniffer": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "anomaly": {"required": False, "type": "list",
                             "options": {
                                 "action": {"required": False, "type": "str",
@@ -504,6 +510,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

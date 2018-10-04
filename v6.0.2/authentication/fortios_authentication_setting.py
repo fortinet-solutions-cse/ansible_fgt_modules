@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure authentication feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     authentication_setting:
         description:
             - Configure authentication setting.
@@ -73,10 +74,10 @@ options:
         suboptions:
             active-auth-scheme:
                 description:
-                    - Active authentication method (scheme name). Source: authentication.scheme.name.
+                    - Active authentication method (scheme name). Source authentication.scheme.name.
             captive-portal:
                 description:
-                    - Captive portal host name. Source: firewall.address.name.
+                    - Captive portal host name. Source firewall.address.name.
             captive-portal-ip:
                 description:
                     - Captive portal IP address.
@@ -94,10 +95,10 @@ options:
                     - ip
             captive-portal6:
                 description:
-                    - IPv6 captive portal host name. Source: firewall.address6.name.
+                    - IPv6 captive portal host name. Source firewall.address6.name.
             sso-auth-scheme:
                 description:
-                    - Single-Sign-On authentication method (scheme name). Source: authentication.scheme.name.
+                    - Single-Sign-On authentication method (scheme name). Source authentication.scheme.name.
 '''
 
 EXAMPLES = '''
@@ -110,20 +111,19 @@ EXAMPLES = '''
   tasks:
   - name: Configure authentication setting.
     fortios_authentication_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_setting:
-        state: "present"
-        active-auth-scheme: "<your_own_value> (source: authentication.scheme.name)"
-        captive-portal: "<your_own_value> (source: firewall.address.name)"
+        active-auth-scheme: "<your_own_value> (source authentication.scheme.name)"
+        captive-portal: "<your_own_value> (source firewall.address.name)"
         captive-portal-ip: "<your_own_value>"
         captive-portal-ip6: "<your_own_value>"
         captive-portal-port: "7"
         captive-portal-type: "fqdn"
-        captive-portal6: "<your_own_value> (source: firewall.address6.name)"
-        sso-auth-scheme: "<your_own_value> (source: authentication.scheme.name)"
+        captive-portal6: "<your_own_value> (source firewall.address6.name)"
+        sso-auth-scheme: "<your_own_value> (source authentication.scheme.name)"
 '''
 
 RETURN = '''
@@ -185,6 +185,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -220,26 +222,14 @@ def authentication_setting(data, fos):
     authentication_setting_data = data['authentication_setting']
     filtered_data = filter_authentication_setting_data(
         authentication_setting_data)
-
-    if authentication_setting_data['state'] == "present":
-        return fos.set('authentication',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif authentication_setting_data['state'] == "absent":
-        return fos.delete('authentication',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('authentication',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_authentication(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['authentication_setting']
     for method in methodlist:
@@ -257,15 +247,14 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "authentication_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "active-auth-scheme": {"required": False, "type": "str"},
                 "captive-portal": {"required": False, "type": "str"},
-                "captive-portal-ip": {"required": False, "type": "ipv4-address-any"},
-                "captive-portal-ip6": {"required": False, "type": "ipv6-address"},
+                "captive-portal-ip": {"required": False, "type": "str"},
+                "captive-portal-ip6": {"required": False, "type": "str"},
                 "captive-portal-port": {"required": False, "type": "int"},
                 "captive-portal-type": {"required": False, "type": "str",
                                         "choices": ["fqdn", "ip"]},
@@ -283,6 +272,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_authentication(module.params, fos)

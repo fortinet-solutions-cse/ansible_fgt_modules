@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.replacemsg feature and http category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system.replacemsg_http:
         description:
             - Replacement messages.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             buffer:
                 description:
                     - Message string.
@@ -92,6 +99,7 @@ options:
             msg-type:
                 description:
                     - Message type.
+                required: true
 '''
 
 EXAMPLES = '''
@@ -104,10 +112,10 @@ EXAMPLES = '''
   tasks:
   - name: Replacement messages.
     fortios_system.replacemsg_http:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.replacemsg_http:
         state: "present"
         buffer: "<your_own_value>"
@@ -175,6 +183,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -209,7 +219,6 @@ def system.replacemsg_http(data, fos):
     system.replacemsg_http_data = data['system.replacemsg_http']
     filtered_data = filter_system.replacemsg_http_data(
         system.replacemsg_http_data)
-
     if system.replacemsg_http_data['state'] == "present":
         return fos.set('system.replacemsg',
                        'http',
@@ -219,16 +228,12 @@ def system.replacemsg_http(data, fos):
     elif system.replacemsg_http_data['state'] == "absent":
         return fos.delete('system.replacemsg',
                           'http',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['msg-type'],
                           vdom=vdom)
 
 
 def fortios_system.replacemsg(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system.replacemsg_http']
     for method in methodlist:
@@ -246,18 +251,19 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system.replacemsg_http": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "buffer": {"required": False, "type": "str"},
                 "format": {"required": False, "type": "str",
                            "choices": ["none", "text", "html",
                                        "wml"]},
                 "header": {"required": False, "type": "str",
                            "choices": ["none", "http", "8bit"]},
-                "msg-type": {"required": False, "type": "str"}
+                "msg-type": {"required": True, "type": "str"}
 
             }
         }
@@ -270,6 +276,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system.replacemsg(

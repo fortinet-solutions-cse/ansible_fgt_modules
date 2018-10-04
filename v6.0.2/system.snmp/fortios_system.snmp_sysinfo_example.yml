@@ -7,12 +7,11 @@
   tasks:
   - name: SNMP system info configuration.
     fortios_system.snmp_sysinfo:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.snmp_sysinfo:
-        state: "present"
         contact-info: "<your_own_value>"
         description: "<your_own_value>"
         engine-id: "<your_own_value>"

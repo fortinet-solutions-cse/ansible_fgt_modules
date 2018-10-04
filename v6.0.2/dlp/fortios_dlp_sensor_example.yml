@@ -7,10 +7,10 @@
   tasks:
   - name: Configure DLP sensors.
     fortios_dlp_sensor:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dlp_sensor:
         state: "present"
         comment: "Comment."
@@ -23,11 +23,11 @@
             company-identifier:  "myId_9"
             expiry: "<your_own_value>"
             file-size: "11"
-            file-type: "12 (source: dlp.filepattern.id)"
+            file-type: "12 (source dlp.filepattern.id)"
             filter-by: "credit-card"
             fp-sensitivity:
              -
-                name: "default_name_15 (source: dlp.fp-sensitivity.name)"
+                name: "default_name_15 (source dlp.fp-sensitivity.name)"
             id:  "16"
             match-percentage: "17"
             name: "default_name_18"
@@ -40,5 +40,5 @@
         nac-quar-log: "enable"
         name: "default_name_26"
         options: "<your_own_value>"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         summary-proto: "smtp"

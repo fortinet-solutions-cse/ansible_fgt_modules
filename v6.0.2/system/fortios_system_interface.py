@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and interface category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_interface:
         description:
             - Configure interfaces.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ac-name:
                 description:
                     - PPPoE server name.
@@ -324,7 +331,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Names of the physical interfaces belonging to the aggregate or redundant interface. Source: system.interface.name.
+                            - Names of the physical interfaces belonging to the aggregate or redundant interface. Source system.interface.name.
                         required: true
             fail-alert-method:
                 description:
@@ -361,7 +368,8 @@ options:
                     - fortilink split interface backup link.
             fortilink-split-interface:
                 description:
-                    - Enable/disable FortiLink split interface to connect member link to different FortiSwitch in stack for uplink redundancy (maximum 2 interfaces in the "members" command).
+                    - Enable/disable FortiLink split interface to connect member link to different FortiSwitch in stack for uplink redundancy (maximum 2
+                       interfaces in the "members" command).
                 choices:
                     - enable
                     - disable
@@ -412,13 +420,13 @@ options:
                     - Ingress Spillover threshold (0 - 16776000 kbps).
             interface:
                 description:
-                    - Interface name. Source: system.interface.name.
+                    - Interface name. Source system.interface.name.
             internal:
                 description:
                     - Implicitly created.
             ip:
                 description:
-                    - Interface IPv4 address and subnet mask, syntax: X.X.X.X/24.
+                    - "Interface IPv4 address and subnet mask, syntax: X.X.X.X/24."
             ipmac:
                 description:
                     - Enable/disable IP/MAC binding.
@@ -488,7 +496,7 @@ options:
                             - regular
                     ip6-address:
                         description:
-                            - Primary IPv6 address prefix, syntax: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx
+                            - "Primary IPv6 address prefix, syntax: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx"
                     ip6-allowaccess:
                         description:
                             - Allow management access to the interface.
@@ -523,6 +531,7 @@ options:
                             prefix-id:
                                 description:
                                     - Prefix ID.
+                                required: true
                             rdnss:
                                 description:
                                     - Recursive DNS server option.
@@ -538,7 +547,7 @@ options:
                                     -  Add subnet ID to routing prefix.
                             upstream-interface:
                                 description:
-                                    - Name of the interface that provides delegated information. Source: system.interface.name.
+                                    - Name of the interface that provides delegated information. Source system.interface.name.
                     ip6-dns-server-override:
                         description:
                             - Enable/disable using the DNS server acquired by DHCP.
@@ -552,6 +561,7 @@ options:
                             prefix:
                                 description:
                                     - IPv6 address prefix.
+                                required: true
                     ip6-hop-limit:
                         description:
                             - Hop limit (0 means unspecified).
@@ -601,6 +611,7 @@ options:
                                     domain:
                                         description:
                                             - Domain name.
+                                        required: true
                             onlink-flag:
                                 description:
                                     - Enable/disable the onlink flag.
@@ -613,6 +624,7 @@ options:
                             prefix:
                                 description:
                                     - IPv6 prefix.
+                                required: true
                             rdnss:
                                 description:
                                     - Recursive DNS server option.
@@ -633,13 +645,13 @@ options:
                             - disable
                     ip6-subnet:
                         description:
-                            -  Subnet to routing prefix, syntax: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx
+                            - " Subnet to routing prefix, syntax: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx"
                     ip6-upstream-interface:
                         description:
-                            - Interface name providing delegated information. Source: system.interface.name.
+                            - Interface name providing delegated information. Source system.interface.name.
                     nd-cert:
                         description:
-                            - Neighbor discovery certificate. Source: certificate.local.name.
+                            - Neighbor discovery certificate. Source certificate.local.name.
                     nd-cga-modifier:
                         description:
                             - Neighbor discovery CGA modifier.
@@ -707,6 +719,7 @@ options:
                             vrid:
                                 description:
                                     - Virtual router identifier (1 - 255).
+                                required: true
                             vrip6:
                                 description:
                                     - IPv6 address of the virtual router.
@@ -771,7 +784,8 @@ options:
                 suboptions:
                     interface-name:
                         description:
-                            - Physical interface name. Source: system.interface.name.
+                            - Physical interface name. Source system.interface.name.
+                        required: true
             min-links:
                 description:
                     - Minimum number of aggregated ports that must be up.
@@ -1120,7 +1134,7 @@ options:
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -1131,7 +1145,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
             tcp-mss:
                 description:
@@ -1147,13 +1161,13 @@ options:
                     - Trusted host for dedicated management traffic (0.0.0.0/24 for all hosts).
             trust-ip6-1:
                 description:
-                    - Trusted IPv6 host for dedicated management traffic (::/0 for all hosts).
+                    - "Trusted IPv6 host for dedicated management traffic (::/0 for all hosts)."
             trust-ip6-2:
                 description:
-                    - Trusted IPv6 host for dedicated management traffic (::/0 for all hosts).
+                    - "Trusted IPv6 host for dedicated management traffic (::/0 for all hosts)."
             trust-ip6-3:
                 description:
-                    - Trusted IPv6 host for dedicated management traffic (::/0 for all hosts).
+                    - "Trusted IPv6 host for dedicated management traffic (::/0 for all hosts)."
             type:
                 description:
                     - Interface type.
@@ -1178,7 +1192,7 @@ options:
                     - Username of the PPPoE account, provided by your ISP.
             vdom:
                 description:
-                    - Interface is in this virtual domain (VDOM). Source: system.vdom.name.
+                    - Interface is in this virtual domain (VDOM). Source system.vdom.name.
             vindex:
                 description:
                     - Switch control interface VLAN ID.
@@ -1254,6 +1268,7 @@ options:
                     vrid:
                         description:
                             - Virtual router identifier (1 - 255).
+                        required: true
                     vrip:
                         description:
                             - IP address of the virtual router.
@@ -1287,10 +1302,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure interfaces.
     fortios_system_interface:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_interface:
         state: "present"
         ac-name: "<your_own_value>"
@@ -1345,7 +1360,7 @@ EXAMPLES = '''
         fail-action-on-extender: "soft-restart"
         fail-alert-interfaces:
          -
-            name: "default_name_54 (source: system.interface.name)"
+            name: "default_name_54 (source system.interface.name)"
         fail-alert-method: "link-failed-signal"
         fail-detect: "enable"
         fail-detect-option: "detectserver"
@@ -1363,7 +1378,7 @@ EXAMPLES = '''
         idle-timeout: "69"
         inbandwidth: "70"
         ingress-spillover-threshold: "71"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         internal: "73"
         ip: "<your_own_value>"
         ipmac: "enable"
@@ -1391,7 +1406,7 @@ EXAMPLES = '''
                 rdnss: "<your_own_value>"
                 rdnss-service: "delegated"
                 subnet: "<your_own_value>"
-                upstream-interface: "<your_own_value> (source: system.interface.name)"
+                upstream-interface: "<your_own_value> (source system.interface.name)"
             ip6-dns-server-override: "enable"
             ip6-extra-addr:
              -
@@ -1418,8 +1433,8 @@ EXAMPLES = '''
             ip6-retrans-time: "120"
             ip6-send-adv: "enable"
             ip6-subnet: "<your_own_value>"
-            ip6-upstream-interface: "<your_own_value> (source: system.interface.name)"
-            nd-cert: "<your_own_value> (source: certificate.local.name)"
+            ip6-upstream-interface: "<your_own_value> (source system.interface.name)"
+            nd-cert: "<your_own_value> (source certificate.local.name)"
             nd-cga-modifier: "<your_own_value>"
             nd-mode: "basic"
             nd-security-level: "127"
@@ -1454,7 +1469,7 @@ EXAMPLES = '''
         management-ip: "<your_own_value>"
         member:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         min-links: "157"
         min-links-down: "operational"
         mode: "static"
@@ -1528,11 +1543,11 @@ EXAMPLES = '''
         switch-controller-learning-limit: "225"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_228"
             tags:
              -
-                name: "default_name_230 (source: system.object-tagging.tags.name)"
+                name: "default_name_230 (source system.object-tagging.tags.name)"
         tcp-mss: "231"
         trust-ip-1: "<your_own_value>"
         trust-ip-2: "<your_own_value>"
@@ -1542,7 +1557,7 @@ EXAMPLES = '''
         trust-ip6-3: "<your_own_value>"
         type: "physical"
         username: "<your_own_value>"
-        vdom: "<your_own_value> (source: system.vdom.name)"
+        vdom: "<your_own_value> (source system.vdom.name)"
         vindex: "241"
         vlanforward: "enable"
         vlanid: "243"
@@ -1629,6 +1644,8 @@ version:
   sample: "v5.6.3"
 
 '''
+
+from ansible.module_utils.basic import AnsibleModule
 
 fos = None
 
@@ -1717,7 +1734,6 @@ def system_interface(data, fos):
     vdom = data['vdom']
     system_interface_data = data['system_interface']
     filtered_data = filter_system_interface_data(system_interface_data)
-
     if system_interface_data['state'] == "present":
         return fos.set('system',
                        'interface',
@@ -1727,16 +1743,12 @@ def system_interface(data, fos):
     elif system_interface_data['state'] == "absent":
         return fos.delete('system',
                           'interface',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_interface']
     for method in methodlist:
@@ -1754,11 +1766,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_interface": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "ac-name": {"required": False, "type": "str"},
                 "aggregate": {"required": False, "type": "str"},
                 "algorithm": {"required": False, "type": "str",
@@ -1879,7 +1892,7 @@ def main():
                           "choices": ["enable", "disable"]},
                 "ips-sniffer-mode": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
-                "ipunnumbered": {"required": False, "type": "ipv4-address"},
+                "ipunnumbered": {"required": False, "type": "str"},
                 "ipv6": {"required": False, "type": "dict",
                          "options": {
                              "autoconf": {"required": False, "type": "str",
@@ -1890,7 +1903,7 @@ def main():
                                                            "choices": ["enable", "disable"]},
                              "dhcp6-prefix-delegation": {"required": False, "type": "str",
                                                          "choices": ["enable", "disable"]},
-                             "dhcp6-prefix-hint": {"required": False, "type": "ipv6-network"},
+                             "dhcp6-prefix-hint": {"required": False, "type": "str"},
                              "dhcp6-prefix-hint-plt": {"required": False, "type": "int"},
                              "dhcp6-prefix-hint-vlt": {"required": False, "type": "int"},
                              "dhcp6-relay-ip": {"required": False, "type": "str"},
@@ -1898,7 +1911,7 @@ def main():
                                                      "choices": ["disable", "enable"]},
                              "dhcp6-relay-type": {"required": False, "type": "str",
                                                   "choices": ["regular"]},
-                             "ip6-address": {"required": False, "type": "ipv6-prefix"},
+                             "ip6-address": {"required": False, "type": "str"},
                              "ip6-allowaccess": {"required": False, "type": "str",
                                                  "choices": ["ping", "https", "ssh",
                                                              "snmp", "http", "telnet",
@@ -1910,18 +1923,18 @@ def main():
                                                                                    "choices": ["enable", "disable"]},
                                                                "onlink-flag": {"required": False, "type": "str",
                                                                                "choices": ["enable", "disable"]},
-                                                               "prefix-id": {"required": False, "type": "int"},
+                                                               "prefix-id": {"required": True, "type": "int"},
                                                                "rdnss": {"required": False, "type": "str"},
                                                                "rdnss-service": {"required": False, "type": "str",
                                                                                  "choices": ["delegated", "default", "specify"]},
-                                                               "subnet": {"required": False, "type": "ipv6-network"},
+                                                               "subnet": {"required": False, "type": "str"},
                                                                "upstream-interface": {"required": False, "type": "str"}
                                                            }},
                              "ip6-dns-server-override": {"required": False, "type": "str",
                                                          "choices": ["enable", "disable"]},
                              "ip6-extra-addr": {"required": False, "type": "list",
                                                 "options": {
-                                                    "prefix": {"required": False, "type": "ipv6-prefix"}
+                                                    "prefix": {"required": True, "type": "str"}
                                                 }},
                              "ip6-hop-limit": {"required": False, "type": "int"},
                              "ip6-link-mtu": {"required": False, "type": "int"},
@@ -1940,12 +1953,12 @@ def main():
                                                                          "choices": ["enable", "disable"]},
                                                      "dnssl": {"required": False, "type": "list",
                                                                "options": {
-                                                                   "domain": {"required": False, "type": "str"}
+                                                                   "domain": {"required": True, "type": "str"}
                                                                }},
                                                      "onlink-flag": {"required": False, "type": "str",
                                                                      "choices": ["enable", "disable"]},
                                                      "preferred-life-time": {"required": False, "type": "int"},
-                                                     "prefix": {"required": False, "type": "ipv6-network"},
+                                                     "prefix": {"required": True, "type": "str"},
                                                      "rdnss": {"required": False, "type": "str"},
                                                      "valid-life-time": {"required": False, "type": "int"}
                                                  }},
@@ -1953,7 +1966,7 @@ def main():
                              "ip6-retrans-time": {"required": False, "type": "int"},
                              "ip6-send-adv": {"required": False, "type": "str",
                                               "choices": ["enable", "disable"]},
-                             "ip6-subnet": {"required": False, "type": "ipv6-prefix"},
+                             "ip6-subnet": {"required": False, "type": "str"},
                              "ip6-upstream-interface": {"required": False, "type": "str"},
                              "nd-cert": {"required": False, "type": "str"},
                              "nd-cga-modifier": {"required": False, "type": "str"},
@@ -1962,7 +1975,7 @@ def main():
                              "nd-security-level": {"required": False, "type": "int"},
                              "nd-timestamp-delta": {"required": False, "type": "int"},
                              "nd-timestamp-fuzz": {"required": False, "type": "int"},
-                             "vrip6_link_local": {"required": False, "type": "ipv6-address"},
+                             "vrip6_link_local": {"required": False, "type": "str"},
                              "vrrp-virtual-mac6": {"required": False, "type": "str",
                                                    "choices": ["enable", "disable"]},
                              "vrrp6": {"required": False, "type": "list",
@@ -1976,10 +1989,10 @@ def main():
                                            "start-time": {"required": False, "type": "int"},
                                            "status": {"required": False, "type": "str",
                                                       "choices": ["enable", "disable"]},
-                                           "vrdst6": {"required": False, "type": "ipv6-address"},
+                                           "vrdst6": {"required": False, "type": "str"},
                                            "vrgrp": {"required": False, "type": "int"},
-                                           "vrid": {"required": False, "type": "int"},
-                                           "vrip6": {"required": False, "type": "ipv6-address"}
+                                           "vrid": {"required": True, "type": "int"},
+                                           "vrip6": {"required": False, "type": "str"}
                                        }}
                          }},
                 "l2forward": {"required": False, "type": "str",
@@ -1995,7 +2008,7 @@ def main():
                 "link-up-delay": {"required": False, "type": "int"},
                 "lldp-transmission": {"required": False, "type": "str",
                                       "choices": ["enable", "disable", "vdom"]},
-                "macaddr": {"required": False, "type": "mac-address"},
+                "macaddr": {"required": False, "type": "str"},
                 "managed-device": {"required": False, "type": "list",
                                    "options": {
                                        "name": {"required": True, "type": "str"}
@@ -2003,7 +2016,7 @@ def main():
                 "management-ip": {"required": False, "type": "ipv4-classnet-host"},
                 "member": {"required": False, "type": "list",
                            "options": {
-                               "interface-name": {"required": False, "type": "str"}
+                               "interface-name": {"required": True, "type": "str"}
                            }},
                 "min-links": {"required": False, "type": "int"},
                 "min-links-down": {"required": False, "type": "str",
@@ -2023,7 +2036,7 @@ def main():
                                                 "both"]},
                 "outbandwidth": {"required": False, "type": "int"},
                 "padt-retry-timeout": {"required": False, "type": "int"},
-                "password": {"required": False, "type": "password"},
+                "password": {"required": False, "type": "str"},
                 "ping-serv-status": {"required": False, "type": "int"},
                 "polling-interval": {"required": False, "type": "int"},
                 "pppoe-unnumbered-negotiate": {"required": False, "type": "str",
@@ -2033,8 +2046,8 @@ def main():
                                                "mschapv1", "mschapv2"]},
                 "pptp-client": {"required": False, "type": "str",
                                 "choices": ["enable", "disable"]},
-                "pptp-password": {"required": False, "type": "password"},
-                "pptp-server-ip": {"required": False, "type": "ipv4-address"},
+                "pptp-password": {"required": False, "type": "str"},
+                "pptp-server-ip": {"required": False, "type": "str"},
                 "pptp-timeout": {"required": False, "type": "int"},
                 "pptp-user": {"required": False, "type": "str"},
                 "preserve-session-route": {"required": False, "type": "str",
@@ -2105,7 +2118,7 @@ def main():
                                     "choices": ["rpl-all-ext-id", "rpl-bridge-ext-id", "rpl-nothing"]},
                 "subst": {"required": False, "type": "str",
                           "choices": ["enable", "disable"]},
-                "substitute-dst-mac": {"required": False, "type": "mac-address"},
+                "substitute-dst-mac": {"required": False, "type": "str"},
                 "switch": {"required": False, "type": "str"},
                 "switch-controller-access-vlan": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},
@@ -2130,12 +2143,12 @@ def main():
                                          }}
                             }},
                 "tcp-mss": {"required": False, "type": "int"},
-                "trust-ip-1": {"required": False, "type": "ipv4-classnet-any"},
-                "trust-ip-2": {"required": False, "type": "ipv4-classnet-any"},
-                "trust-ip-3": {"required": False, "type": "ipv4-classnet-any"},
-                "trust-ip6-1": {"required": False, "type": "ipv6-prefix"},
-                "trust-ip6-2": {"required": False, "type": "ipv6-prefix"},
-                "trust-ip6-3": {"required": False, "type": "ipv6-prefix"},
+                "trust-ip-1": {"required": False, "type": "str"},
+                "trust-ip-2": {"required": False, "type": "str"},
+                "trust-ip-3": {"required": False, "type": "str"},
+                "trust-ip6-1": {"required": False, "type": "str"},
+                "trust-ip6-2": {"required": False, "type": "str"},
+                "trust-ip6-3": {"required": False, "type": "str"},
                 "type": {"required": False, "type": "str",
                          "choices": ["physical", "vlan", "aggregate",
                                      "redundant", "tunnel", "vdom-link",
@@ -2167,18 +2180,18 @@ def main():
                                         "choices": ["enable", "disable"]},
                              "version": {"required": False, "type": "str",
                                          "choices": ["2", "3"]},
-                             "vrdst": {"required": False, "type": "ipv4-address-any"},
+                             "vrdst": {"required": False, "type": "str"},
                              "vrdst-priority": {"required": False, "type": "int"},
                              "vrgrp": {"required": False, "type": "int"},
-                             "vrid": {"required": False, "type": "int"},
-                             "vrip": {"required": False, "type": "ipv4-address-any"}
+                             "vrid": {"required": True, "type": "int"},
+                             "vrip": {"required": False, "type": "str"}
                          }},
                 "vrrp-virtual-mac": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                 "wccp": {"required": False, "type": "str",
                          "choices": ["enable", "disable"]},
                 "weight": {"required": False, "type": "int"},
-                "wins-ip": {"required": False, "type": "ipv4-address"}
+                "wins-ip": {"required": False, "type": "str"}
 
             }
         }
@@ -2191,6 +2204,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

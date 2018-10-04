@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure ips feature and global category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     ips_global:
         description:
             - Configure IPS global parameter.
@@ -79,7 +80,8 @@ options:
                     - continuous
             database:
                 description:
-                    - Regular or extended IPS database. Regular protects against the latest common and in-the-wild attacks. Extended includes protection from legacy attacks.
+                    - Regular or extended IPS database. Regular protects against the latest common and in-the-wild attacks. Extended includes protection from
+                       legacy attacks.
                 choices:
                     - regular
                     - extended
@@ -91,7 +93,8 @@ options:
                     - Timeout for Deep application inspection (1 - 2147483647 sec., 0 = use recommended setting).
             engine-count:
                 description:
-                    - Number of IPS engines running. If set to the default value of 0, FortiOS sets the number to optimize performance depending on the number of CPU cores.
+                    - Number of IPS engines running. If set to the default value of 0, FortiOS sets the number to optimize performance depending on the number
+                       of CPU cores.
             exclude-signatures:
                 description:
                     - Excluded signatures.
@@ -112,7 +115,8 @@ options:
                     - disable
             session-limit-mode:
                 description:
-                    - Method of counting concurrent sessions used by session limit anomalies. Choose between greater accuracy (accurate) or improved performance (heuristics).
+                    - Method of counting concurrent sessions used by session limit anomalies. Choose between greater accuracy (accurate) or improved
+                       performance (heuristics).
                 choices:
                     - accurate
                     - heuristic
@@ -146,12 +150,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPS global parameter.
     fortios_ips_global:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_global:
-        state: "present"
         anomaly-mode: "periodical"
         database: "regular"
         deep-app-insp-db-limit: "5"
@@ -226,6 +229,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -262,26 +267,14 @@ def ips_global(data, fos):
     vdom = data['vdom']
     ips_global_data = data['ips_global']
     filtered_data = filter_ips_global_data(ips_global_data)
-
-    if ips_global_data['state'] == "present":
-        return fos.set('ips',
-                       'global',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif ips_global_data['state'] == "absent":
-        return fos.delete('ips',
-                          'global',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('ips',
+                   'global',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_ips(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['ips_global']
     for method in methodlist:
@@ -299,11 +292,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "ips_global": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "anomaly-mode": {"required": False, "type": "str",
                                  "choices": ["periodical", "continuous"]},
                 "database": {"required": False, "type": "str",
@@ -337,6 +329,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_ips(module.params, fos)

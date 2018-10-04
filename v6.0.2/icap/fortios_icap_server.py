@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure icap feature and server category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     icap_server:
         description:
             - Configure ICAP servers.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ip-address:
                 description:
                     - IPv4 address of the ICAP server.
@@ -105,10 +112,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure ICAP servers.
     fortios_icap_server:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       icap_server:
         state: "present"
         ip-address: "<your_own_value>"
@@ -178,6 +185,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -211,7 +220,6 @@ def icap_server(data, fos):
     vdom = data['vdom']
     icap_server_data = data['icap_server']
     filtered_data = filter_icap_server_data(icap_server_data)
-
     if icap_server_data['state'] == "present":
         return fos.set('icap',
                        'server',
@@ -221,16 +229,12 @@ def icap_server(data, fos):
     elif icap_server_data['state'] == "absent":
         return fos.delete('icap',
                           'server',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_icap(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['icap_server']
     for method in methodlist:
@@ -248,15 +252,16 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "icap_server": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "ip-address": {"required": False, "type": "ipv4-address-any"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "ip-address": {"required": False, "type": "str"},
                 "ip-version": {"required": False, "type": "str",
                                "choices": ["4", "6"]},
-                "ip6-address": {"required": False, "type": "ipv6-address"},
+                "ip6-address": {"required": False, "type": "str"},
                 "max-connections": {"required": False, "type": "int"},
                 "name": {"required": True, "type": "str"},
                 "port": {"required": False, "type": "int"}
@@ -272,6 +277,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_icap(module.params, fos)

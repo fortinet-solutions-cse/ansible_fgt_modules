@@ -7,12 +7,11 @@
   tasks:
   - name: Configure FortiSandbox.
     fortios_system_fortisandbox:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_fortisandbox:
-        state: "present"
         email: "<your_own_value>"
         enc-algorithm: "default"
         server: "192.168.100.40"

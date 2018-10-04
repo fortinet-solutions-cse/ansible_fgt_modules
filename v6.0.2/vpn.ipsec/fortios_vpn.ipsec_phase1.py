@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and phase1 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ipsec_phase1:
         description:
             - Configure VPN remote gateway.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             acct-verify:
                 description:
                     - Enable/disable verification of RADIUS accounting record.
@@ -123,7 +130,7 @@ options:
                     - XAuth user name.
             authusrgrp:
                 description:
-                    - Authentication user group. Source: user.group.name.
+                    - Authentication user group. Source user.group.name.
             auto-negotiate:
                 description:
                     - Enable/disable automatic initiation of IKE SA negotiation.
@@ -137,6 +144,7 @@ options:
                     address:
                         description:
                             - Address of backup gateway.
+                        required: true
             banner:
                 description:
                     - Message that unity client should display after connecting.
@@ -152,7 +160,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Certificate name. Source: vpn.certificate.local.name.
+                            - Certificate name. Source vpn.certificate.local.name.
                         required: true
             childless-ike:
                 description:
@@ -298,7 +306,7 @@ options:
                     - enable
             interface:
                 description:
-                    - Local physical, aggregate, or VLAN outgoing interface. Source: system.interface.name.
+                    - Local physical, aggregate, or VLAN outgoing interface. Source system.interface.name.
             ipv4-dns-server1:
                 description:
                     - IPv4 DNS server 1.
@@ -327,16 +335,16 @@ options:
                             - Start of IPv4 exclusive range.
             ipv4-name:
                 description:
-                    - IPv4 address name. Source: firewall.address.name firewall.addrgrp.name.
+                    - IPv4 address name. Source firewall.address.name firewall.addrgrp.name.
             ipv4-netmask:
                 description:
                     - IPv4 Netmask.
             ipv4-split-exclude:
                 description:
-                    - IPv4 subnets that should not be sent over the IPsec tunnel. Source: firewall.address.name firewall.addrgrp.name.
+                    - IPv4 subnets that should not be sent over the IPsec tunnel. Source firewall.address.name firewall.addrgrp.name.
             ipv4-split-include:
                 description:
-                    - IPv4 split-include subnets. Source: firewall.address.name firewall.addrgrp.name.
+                    - IPv4 split-include subnets. Source firewall.address.name firewall.addrgrp.name.
             ipv4-start-ip:
                 description:
                     - Start of IPv4 range.
@@ -374,16 +382,16 @@ options:
                             - Start of IPv6 exclusive range.
             ipv6-name:
                 description:
-                    - IPv6 address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                    - IPv6 address name. Source firewall.address6.name firewall.addrgrp6.name.
             ipv6-prefix:
                 description:
                     - IPv6 prefix.
             ipv6-split-exclude:
                 description:
-                    - IPv6 subnets that should not be sent over the IPsec tunnel. Source: firewall.address6.name firewall.addrgrp6.name.
+                    - IPv6 subnets that should not be sent over the IPsec tunnel. Source firewall.address6.name firewall.addrgrp6.name.
             ipv6-split-include:
                 description:
-                    - IPv6 split-include subnets. Source: firewall.address6.name firewall.addrgrp6.name.
+                    - IPv6 split-include subnets. Source firewall.address6.name firewall.addrgrp6.name.
             ipv6-start-ip:
                 description:
                     - Start of IPv6 range.
@@ -450,10 +458,10 @@ options:
                     - disable
             peer:
                 description:
-                    - Accept this peer certificate. Source: user.peer.name.
+                    - Accept this peer certificate. Source user.peer.name.
             peergrp:
                 description:
-                    - Accept this peer certificate group. Source: user.peergrp.name.
+                    - Accept this peer certificate group. Source user.peergrp.name.
             peerid:
                 description:
                     - Accept this peer identity.
@@ -543,7 +551,7 @@ options:
                     - sha2-512
             split-include-service:
                 description:
-                    - Split-include services. Source: firewall.service.group.name firewall.service.custom.name.
+                    - Split-include services. Source firewall.service.group.name firewall.service.custom.name.
             suite-b:
                 description:
                     - Use Suite-B.
@@ -566,7 +574,7 @@ options:
                     - enable
             usrgrp:
                 description:
-                    - User group name for dialup peers. Source: user.group.name.
+                    - User group name for dialup peers. Source user.group.name.
             wizard-type:
                 description:
                     - GUI VPN Wizard Type.
@@ -602,10 +610,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure VPN remote gateway.
     fortios_vpn.ipsec_phase1:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ipsec_phase1:
         state: "present"
         acct-verify: "enable"
@@ -617,7 +625,7 @@ EXAMPLES = '''
         authmethod-remote: "psk"
         authpasswd: "<your_own_value>"
         authusr: "<your_own_value>"
-        authusrgrp: "<your_own_value> (source: user.group.name)"
+        authusrgrp: "<your_own_value> (source user.group.name)"
         auto-negotiate: "enable"
         backup-gateway:
          -
@@ -626,7 +634,7 @@ EXAMPLES = '''
         cert-id-validation: "enable"
         certificate:
          -
-            name: "default_name_19 (source: vpn.certificate.local.name)"
+            name: "default_name_19 (source vpn.certificate.local.name)"
         childless-ike: "enable"
         client-auto-negotiate: "disable"
         client-keep-alive: "disable"
@@ -652,7 +660,7 @@ EXAMPLES = '''
         idle-timeoutinterval: "42"
         ike-version: "1"
         include-local-lan: "disable"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ipv4-dns-server1: "<your_own_value>"
         ipv4-dns-server2: "<your_own_value>"
         ipv4-dns-server3: "<your_own_value>"
@@ -662,10 +670,10 @@ EXAMPLES = '''
             end-ip: "<your_own_value>"
             id:  "52"
             start-ip: "<your_own_value>"
-        ipv4-name: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+        ipv4-name: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
         ipv4-netmask: "<your_own_value>"
-        ipv4-split-exclude: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
-        ipv4-split-include: "<your_own_value> (source: firewall.address.name firewall.addrgrp.name)"
+        ipv4-split-exclude: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
+        ipv4-split-include: "<your_own_value> (source firewall.address.name firewall.addrgrp.name)"
         ipv4-start-ip: "<your_own_value>"
         ipv4-wins-server1: "<your_own_value>"
         ipv4-wins-server2: "<your_own_value>"
@@ -678,10 +686,10 @@ EXAMPLES = '''
             end-ip: "<your_own_value>"
             id:  "67"
             start-ip: "<your_own_value>"
-        ipv6-name: "<your_own_value> (source: firewall.address6.name firewall.addrgrp6.name)"
+        ipv6-name: "<your_own_value> (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-prefix: "70"
-        ipv6-split-exclude: "<your_own_value> (source: firewall.address6.name firewall.addrgrp6.name)"
-        ipv6-split-include: "<your_own_value> (source: firewall.address6.name firewall.addrgrp6.name)"
+        ipv6-split-exclude: "<your_own_value> (source firewall.address6.name firewall.addrgrp6.name)"
+        ipv6-split-include: "<your_own_value> (source firewall.address6.name firewall.addrgrp6.name)"
         ipv6-start-ip: "<your_own_value>"
         keepalive: "74"
         keylife: "75"
@@ -695,8 +703,8 @@ EXAMPLES = '''
         nattraversal: "enable"
         negotiate-timeout: "84"
         npu-offload: "enable"
-        peer: "<your_own_value> (source: user.peer.name)"
-        peergrp: "<your_own_value> (source: user.peergrp.name)"
+        peer: "<your_own_value> (source user.peer.name)"
+        peergrp: "<your_own_value> (source user.peergrp.name)"
         peerid: "<your_own_value>"
         peertype: "any"
         ppk: "disable"
@@ -714,11 +722,11 @@ EXAMPLES = '''
         save-password: "disable"
         send-cert-chain: "enable"
         signature-hash-alg: "sha1"
-        split-include-service: "<your_own_value> (source: firewall.service.group.name firewall.service.custom.name)"
+        split-include-service: "<your_own_value> (source firewall.service.group.name firewall.service.custom.name)"
         suite-b: "disable"
         type: "static"
         unity-support: "disable"
-        usrgrp: "<your_own_value> (source: user.group.name)"
+        usrgrp: "<your_own_value> (source user.group.name)"
         wizard-type: "custom"
         xauthtype: "disable"
 '''
@@ -781,6 +789,8 @@ version:
   sample: "v5.6.3"
 
 '''
+
+from ansible.module_utils.basic import AnsibleModule
 
 fos = None
 
@@ -847,7 +857,6 @@ def vpn.ipsec_phase1(data, fos):
     vdom = data['vdom']
     vpn.ipsec_phase1_data = data['vpn.ipsec_phase1']
     filtered_data = filter_vpn.ipsec_phase1_data(vpn.ipsec_phase1_data)
-
     if vpn.ipsec_phase1_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'phase1',
@@ -857,16 +866,12 @@ def vpn.ipsec_phase1(data, fos):
     elif vpn.ipsec_phase1_data['state'] == "absent":
         return fos.delete('vpn.ipsec',
                           'phase1',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_vpn.ipsec(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ipsec_phase1']
     for method in methodlist:
@@ -884,11 +889,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ipsec_phase1": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "acct-verify": {"required": False, "type": "str",
                                 "choices": ["enable", "disable"]},
                 "add-gw-route": {"required": False, "type": "str",
@@ -904,14 +910,14 @@ def main():
                                "choices": ["psk", "signature"]},
                 "authmethod-remote": {"required": False, "type": "str",
                                       "choices": ["psk", "signature"]},
-                "authpasswd": {"required": False, "type": "password"},
+                "authpasswd": {"required": False, "type": "str"},
                 "authusr": {"required": False, "type": "str"},
                 "authusrgrp": {"required": False, "type": "str"},
                 "auto-negotiate": {"required": False, "type": "str",
                                    "choices": ["enable", "disable"]},
                 "backup-gateway": {"required": False, "type": "list",
                                    "options": {
-                                       "address": {"required": False, "type": "str"}
+                                       "address": {"required": True, "type": "str"}
                                    }},
                 "banner": {"required": False, "type": "str"},
                 "cert-id-validation": {"required": False, "type": "str",
@@ -968,41 +974,41 @@ def main():
                 "include-local-lan": {"required": False, "type": "str",
                                       "choices": ["disable", "enable"]},
                 "interface": {"required": False, "type": "str"},
-                "ipv4-dns-server1": {"required": False, "type": "ipv4-address"},
-                "ipv4-dns-server2": {"required": False, "type": "ipv4-address"},
-                "ipv4-dns-server3": {"required": False, "type": "ipv4-address"},
-                "ipv4-end-ip": {"required": False, "type": "ipv4-address"},
+                "ipv4-dns-server1": {"required": False, "type": "str"},
+                "ipv4-dns-server2": {"required": False, "type": "str"},
+                "ipv4-dns-server3": {"required": False, "type": "str"},
+                "ipv4-end-ip": {"required": False, "type": "str"},
                 "ipv4-exclude-range": {"required": False, "type": "list",
                                        "options": {
-                                           "end-ip": {"required": False, "type": "ipv4-address"},
+                                           "end-ip": {"required": False, "type": "str"},
                                            "id": {"required": True, "type": "int"},
-                                           "start-ip": {"required": False, "type": "ipv4-address"}
+                                           "start-ip": {"required": False, "type": "str"}
                                        }},
                 "ipv4-name": {"required": False, "type": "str"},
-                "ipv4-netmask": {"required": False, "type": "ipv4-netmask"},
+                "ipv4-netmask": {"required": False, "type": "str"},
                 "ipv4-split-exclude": {"required": False, "type": "str"},
                 "ipv4-split-include": {"required": False, "type": "str"},
-                "ipv4-start-ip": {"required": False, "type": "ipv4-address"},
-                "ipv4-wins-server1": {"required": False, "type": "ipv4-address"},
-                "ipv4-wins-server2": {"required": False, "type": "ipv4-address"},
-                "ipv6-dns-server1": {"required": False, "type": "ipv6-address"},
-                "ipv6-dns-server2": {"required": False, "type": "ipv6-address"},
-                "ipv6-dns-server3": {"required": False, "type": "ipv6-address"},
-                "ipv6-end-ip": {"required": False, "type": "ipv6-address"},
+                "ipv4-start-ip": {"required": False, "type": "str"},
+                "ipv4-wins-server1": {"required": False, "type": "str"},
+                "ipv4-wins-server2": {"required": False, "type": "str"},
+                "ipv6-dns-server1": {"required": False, "type": "str"},
+                "ipv6-dns-server2": {"required": False, "type": "str"},
+                "ipv6-dns-server3": {"required": False, "type": "str"},
+                "ipv6-end-ip": {"required": False, "type": "str"},
                 "ipv6-exclude-range": {"required": False, "type": "list",
                                        "options": {
-                                           "end-ip": {"required": False, "type": "ipv6-address"},
+                                           "end-ip": {"required": False, "type": "str"},
                                            "id": {"required": True, "type": "int"},
-                                           "start-ip": {"required": False, "type": "ipv6-address"}
+                                           "start-ip": {"required": False, "type": "str"}
                                        }},
                 "ipv6-name": {"required": False, "type": "str"},
                 "ipv6-prefix": {"required": False, "type": "int"},
                 "ipv6-split-exclude": {"required": False, "type": "str"},
                 "ipv6-split-include": {"required": False, "type": "str"},
-                "ipv6-start-ip": {"required": False, "type": "ipv6-address"},
+                "ipv6-start-ip": {"required": False, "type": "str"},
                 "keepalive": {"required": False, "type": "int"},
                 "keylife": {"required": False, "type": "int"},
-                "local-gw": {"required": False, "type": "ipv4-address"},
+                "local-gw": {"required": False, "type": "str"},
                 "localid": {"required": False, "type": "str"},
                 "localid-type": {"required": False, "type": "str",
                                  "choices": ["auto", "fqdn", "user-fqdn",
@@ -1039,7 +1045,7 @@ def main():
                            "choices": ["disable", "enable"]},
                 "rekey": {"required": False, "type": "str",
                           "choices": ["enable", "disable"]},
-                "remote-gw": {"required": False, "type": "ipv4-address"},
+                "remote-gw": {"required": False, "type": "str"},
                 "remotegw-ddns": {"required": False, "type": "str"},
                 "rsa-signature-format": {"required": False, "type": "str",
                                          "choices": ["pkcs1", "pss"]},
@@ -1078,6 +1084,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ipsec(module.params, fos)

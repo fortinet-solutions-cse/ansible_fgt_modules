@@ -7,10 +7,10 @@
   tasks:
   - name: Configure devices.
     fortios_user_device:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_device:
         state: "present"
         alias: "<your_own_value>"
@@ -18,13 +18,13 @@
         category: "none"
         comment: "Comment."
         mac: "<your_own_value>"
-        master-device: "<your_own_value> (source: user.device.alias)"
+        master-device: "<your_own_value> (source user.device.alias)"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_11"
             tags:
              -
-                name: "default_name_13 (source: system.object-tagging.tags.name)"
+                name: "default_name_13 (source system.object-tagging.tags.name)"
         type: "unknown"
         user: "<your_own_value>"

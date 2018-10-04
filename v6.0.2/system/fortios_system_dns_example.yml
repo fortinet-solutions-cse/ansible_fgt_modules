@@ -7,12 +7,11 @@
   tasks:
   - name: Configure DNS.
     fortios_system_dns:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_dns:
-        state: "present"
         cache-notfound-responses: "disable"
         dns-cache-limit: "4"
         dns-cache-ttl: "5"

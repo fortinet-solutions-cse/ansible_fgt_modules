@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and admin category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,22 +60,31 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_admin:
         description:
             - Configure admin users.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             accprofile:
                 description:
-                    - Access profile for this administrator. Access profiles control administrator access to FortiGate features. Source: system.accprofile.name.
+                    - Access profile for this administrator. Access profiles control administrator access to FortiGate features. Source system.accprofile.name.
             accprofile-override:
                 description:
-                    - Enable to use the name of an access profile provided by the remote authentication server to control the FortiGate features that this administrator can access.
+                    - Enable to use the name of an access profile provided by the remote authentication server to control the FortiGate features that this
+                       administrator can access.
                 choices:
                     - enable
                     - disable
@@ -109,7 +117,7 @@ options:
                     - enable
             guest-lang:
                 description:
-                    - Guest management portal language. Source: system.custom-language.name.
+                    - Guest management portal language. Source system.custom-language.name.
             guest-usergroups:
                 description:
                     - Select guest user groups.
@@ -138,7 +146,6 @@ options:
                     name:
                         description:
                             - Dashboard name.
-                        required: true
                     scope:
                         description:
                             - Dashboard scope.
@@ -181,7 +188,7 @@ options:
                                     - custom
                             interface:
                                 description:
-                                    - Interface to monitor. Source: system.interface.name.
+                                    - Interface to monitor. Source system.interface.name.
                             region:
                                 description:
                                     - Security Audit Rating region.
@@ -340,6 +347,7 @@ options:
                     usr-name:
                         description:
                             - User name.
+                        required: true
             name:
                 description:
                     - User name.
@@ -358,7 +366,8 @@ options:
                     - disable
             peer-group:
                 description:
-                    - Name of peer group defined under config user group which has PKI members. Used for peer certificate authentication (for HTTPS admin access).
+                    - Name of peer group defined under config user group which has PKI members. Used for peer certificate authentication (for HTTPS admin
+                       access).
             radius-vdom-override:
                 description:
                     - Enable to use the names of VDOMs provided by the remote authentication server to control the VDOMs that this administrator can access.
@@ -379,7 +388,7 @@ options:
                     - Firewall schedule used to restrict when the administrator can log in. No schedule means no restrictions.
             sms-custom-server:
                 description:
-                    - Custom SMS server to send SMS messages to. Source: system.sms-server.name.
+                    - Custom SMS server to send SMS messages to. Source system.sms-server.name.
             sms-phone:
                 description:
                     - Phone number on which the administrator receives SMS messages.
@@ -391,46 +400,59 @@ options:
                     - custom
             ssh-certificate:
                 description:
-                    - Select the certificate to be used by the FortiGate for authentication with an SSH client. Source: certificate.local.name.
+                    - Select the certificate to be used by the FortiGate for authentication with an SSH client. Source certificate.local.name.
             ssh-public-key1:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the SSH client application.
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
+                       SSH client application.
             ssh-public-key2:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the SSH client application.
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
+                       SSH client application.
             ssh-public-key3:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the SSH client application.
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
+                       SSH client application.
             trusthost1:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost10:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost2:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost3:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost4:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost5:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost6:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost7:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost8:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             trusthost9:
                 description:
-                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access from any IPv4 address.
+                    - Any IPv4 address or subnet address and netmask from which the administrator can connect to the FortiGate unit. Default allows access
+                       from any IPv4 address.
             two-factor:
                 description:
                     - Enable/disable two-factor authentication.
@@ -445,7 +467,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Virtual domain name. Source: system.vdom.name.
+                            - Virtual domain name. Source system.vdom.name.
                         required: true
             wildcard:
                 description:
@@ -465,13 +487,13 @@ EXAMPLES = '''
   tasks:
   - name: Configure admin users.
     fortios_system_admin:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_admin:
         state: "present"
-        accprofile: "<your_own_value> (source: system.accprofile.name)"
+        accprofile: "<your_own_value> (source system.accprofile.name)"
         accprofile-override: "enable"
         allow-remove-admin-session: "enable"
         comments: "<your_own_value>"
@@ -479,7 +501,7 @@ EXAMPLES = '''
         force-password-change: "enable"
         fortitoken: "<your_own_value>"
         guest-auth: "disable"
-        guest-lang: "<your_own_value> (source: system.custom-language.name)"
+        guest-lang: "<your_own_value> (source system.custom-language.name)"
         guest-usergroups:
          -
             name: "default_name_13"
@@ -501,7 +523,7 @@ EXAMPLES = '''
                 height: "26"
                 id:  "27"
                 industry: "default"
-                interface: "<your_own_value> (source: system.interface.name)"
+                interface: "<your_own_value> (source system.interface.name)"
                 region: "default"
                 report-by: "source"
                 sort-by: "<your_own_value>"
@@ -545,10 +567,10 @@ EXAMPLES = '''
         remote-auth: "enable"
         remote-group: "<your_own_value>"
         schedule: "<your_own_value>"
-        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        sms-custom-server: "<your_own_value> (source system.sms-server.name)"
         sms-phone: "<your_own_value>"
         sms-server: "fortiguard"
-        ssh-certificate: "<your_own_value> (source: certificate.local.name)"
+        ssh-certificate: "<your_own_value> (source certificate.local.name)"
         ssh-public-key1: "<your_own_value>"
         ssh-public-key2: "<your_own_value>"
         ssh-public-key3: "<your_own_value>"
@@ -565,7 +587,7 @@ EXAMPLES = '''
         two-factor: "disable"
         vdom:
          -
-            name: "default_name_89 (source: system.vdom.name)"
+            name: "default_name_89 (source system.vdom.name)"
         wildcard: "enable"
 '''
 
@@ -628,6 +650,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -678,7 +702,6 @@ def system_admin(data, fos):
     vdom = data['vdom']
     system_admin_data = data['system_admin']
     filtered_data = filter_system_admin_data(system_admin_data)
-
     if system_admin_data['state'] == "present":
         return fos.set('system',
                        'admin',
@@ -688,16 +711,12 @@ def system_admin(data, fos):
     elif system_admin_data['state'] == "absent":
         return fos.delete('system',
                           'admin',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_admin']
     for method in methodlist:
@@ -715,11 +734,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_admin": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "accprofile": {"required": False, "type": "str"},
                 "accprofile-override": {"required": False, "type": "str",
                                         "choices": ["enable", "disable"]},
@@ -743,7 +763,7 @@ def main():
                                       "id": {"required": True, "type": "int"},
                                       "layout-type": {"required": False, "type": "str",
                                                       "choices": ["responsive", "fixed"]},
-                                      "name": {"required": True, "type": "str"},
+                                      "name": {"required": False, "type": "str"},
                                       "scope": {"required": False, "type": "str",
                                                 "choices": ["global", "vdom"]},
                                       "widget": {"required": False, "type": "list",
@@ -804,21 +824,21 @@ def main():
                 "hidden": {"required": False, "type": "int"},
                 "history0": {"required": False, "type": "password-2"},
                 "history1": {"required": False, "type": "password-2"},
-                "ip6-trusthost1": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost10": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost2": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost3": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost4": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost5": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost6": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost7": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost8": {"required": False, "type": "ipv6-prefix"},
-                "ip6-trusthost9": {"required": False, "type": "ipv6-prefix"},
+                "ip6-trusthost1": {"required": False, "type": "str"},
+                "ip6-trusthost10": {"required": False, "type": "str"},
+                "ip6-trusthost2": {"required": False, "type": "str"},
+                "ip6-trusthost3": {"required": False, "type": "str"},
+                "ip6-trusthost4": {"required": False, "type": "str"},
+                "ip6-trusthost5": {"required": False, "type": "str"},
+                "ip6-trusthost6": {"required": False, "type": "str"},
+                "ip6-trusthost7": {"required": False, "type": "str"},
+                "ip6-trusthost8": {"required": False, "type": "str"},
+                "ip6-trusthost9": {"required": False, "type": "str"},
                 "login-time": {"required": False, "type": "list",
                                "options": {
-                                   "last-failed-login": {"required": False, "type": "datetime"},
-                                   "last-login": {"required": False, "type": "datetime"},
-                                   "usr-name": {"required": False, "type": "str"}
+                                   "last-failed-login": {"required": False, "type": "str"},
+                                   "last-login": {"required": False, "type": "str"},
+                                   "usr-name": {"required": True, "type": "str"}
                                }},
                 "name": {"required": True, "type": "str"},
                 "password": {"required": False, "type": "password-2"},
@@ -840,16 +860,16 @@ def main():
                 "ssh-public-key1": {"required": False, "type": "str"},
                 "ssh-public-key2": {"required": False, "type": "str"},
                 "ssh-public-key3": {"required": False, "type": "str"},
-                "trusthost1": {"required": False, "type": "ipv4-classnet"},
-                "trusthost10": {"required": False, "type": "ipv4-classnet"},
-                "trusthost2": {"required": False, "type": "ipv4-classnet"},
-                "trusthost3": {"required": False, "type": "ipv4-classnet"},
-                "trusthost4": {"required": False, "type": "ipv4-classnet"},
-                "trusthost5": {"required": False, "type": "ipv4-classnet"},
-                "trusthost6": {"required": False, "type": "ipv4-classnet"},
-                "trusthost7": {"required": False, "type": "ipv4-classnet"},
-                "trusthost8": {"required": False, "type": "ipv4-classnet"},
-                "trusthost9": {"required": False, "type": "ipv4-classnet"},
+                "trusthost1": {"required": False, "type": "str"},
+                "trusthost10": {"required": False, "type": "str"},
+                "trusthost2": {"required": False, "type": "str"},
+                "trusthost3": {"required": False, "type": "str"},
+                "trusthost4": {"required": False, "type": "str"},
+                "trusthost5": {"required": False, "type": "str"},
+                "trusthost6": {"required": False, "type": "str"},
+                "trusthost7": {"required": False, "type": "str"},
+                "trusthost8": {"required": False, "type": "str"},
+                "trusthost9": {"required": False, "type": "str"},
                 "two-factor": {"required": False, "type": "str",
                                "choices": ["disable", "fortitoken", "email",
                                            "sms"]},
@@ -871,6 +891,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

@@ -7,12 +7,11 @@
   tasks:
   - name: Configure WAN optimization settings.
     fortios_wanopt_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       wanopt_settings:
-        state: "present"
         auto-detect-algorithm: "simple"
         host-id: "myhostname"
         tunnel-ssl-algorithm: "low"

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure icap feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     icap_profile:
         description:
             - Configure ICAP profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             methods:
                 description:
                     - The allowed HTTP methods that will be sent to ICAP server for further processing.
@@ -89,7 +96,7 @@ options:
                 required: true
             replacemsg-group:
                 description:
-                    - Replacement message group. Source: system.replacemsg-group.name.
+                    - Replacement message group. Source system.replacemsg-group.name.
             request:
                 description:
                     - Enable/disable whether an HTTP request is passed to an ICAP server.
@@ -107,7 +114,7 @@ options:
                     - Path component of the ICAP URI that identifies the HTTP request processing service.
             request-server:
                 description:
-                    - ICAP server to use for an HTTP request. Source: icap.server.name.
+                    - ICAP server to use for an HTTP request. Source icap.server.name.
             response:
                 description:
                     - Enable/disable whether an HTTP response is passed to an ICAP server.
@@ -125,7 +132,7 @@ options:
                     - Path component of the ICAP URI that identifies the HTTP response processing service.
             response-server:
                 description:
-                    - ICAP server to use for an HTTP response. Source: icap.server.name.
+                    - ICAP server to use for an HTTP response. Source icap.server.name.
             streaming-content-bypass:
                 description:
                     - Enable/disable bypassing of ICAP server for streaming content.
@@ -144,23 +151,23 @@ EXAMPLES = '''
   tasks:
   - name: Configure ICAP profiles.
     fortios_icap_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       icap_profile:
         state: "present"
         methods: "delete"
         name: "default_name_4"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         request: "disable"
         request-failure: "error"
         request-path: "<your_own_value>"
-        request-server: "<your_own_value> (source: icap.server.name)"
+        request-server: "<your_own_value> (source icap.server.name)"
         response: "disable"
         response-failure: "error"
         response-path: "<your_own_value>"
-        response-server: "<your_own_value> (source: icap.server.name)"
+        response-server: "<your_own_value> (source icap.server.name)"
         streaming-content-bypass: "disable"
 '''
 
@@ -223,6 +230,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -258,7 +267,6 @@ def icap_profile(data, fos):
     vdom = data['vdom']
     icap_profile_data = data['icap_profile']
     filtered_data = filter_icap_profile_data(icap_profile_data)
-
     if icap_profile_data['state'] == "present":
         return fos.set('icap',
                        'profile',
@@ -268,16 +276,12 @@ def icap_profile(data, fos):
     elif icap_profile_data['state'] == "absent":
         return fos.delete('icap',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_icap(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['icap_profile']
     for method in methodlist:
@@ -295,11 +299,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "icap_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "methods": {"required": False, "type": "str",
                             "choices": ["delete", "get", "head",
                                         "options", "post", "put",
@@ -332,6 +337,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_icap(module.params, fos)

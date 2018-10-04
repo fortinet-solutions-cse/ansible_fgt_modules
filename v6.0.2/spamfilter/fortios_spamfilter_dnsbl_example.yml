@@ -7,10 +7,10 @@
   tasks:
   - name: Configure AntiSpam DNSBL/ORBL.
     fortios_spamfilter_dnsbl:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_dnsbl:
         state: "present"
         comment: "Optional comments."

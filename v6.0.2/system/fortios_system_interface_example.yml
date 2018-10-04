@@ -7,10 +7,10 @@
   tasks:
   - name: Configure interfaces.
     fortios_system_interface:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_interface:
         state: "present"
         ac-name: "<your_own_value>"
@@ -65,7 +65,7 @@
         fail-action-on-extender: "soft-restart"
         fail-alert-interfaces:
          -
-            name: "default_name_54 (source: system.interface.name)"
+            name: "default_name_54 (source system.interface.name)"
         fail-alert-method: "link-failed-signal"
         fail-detect: "enable"
         fail-detect-option: "detectserver"
@@ -83,7 +83,7 @@
         idle-timeout: "69"
         inbandwidth: "70"
         ingress-spillover-threshold: "71"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         internal: "73"
         ip: "<your_own_value>"
         ipmac: "enable"
@@ -111,7 +111,7 @@
                 rdnss: "<your_own_value>"
                 rdnss-service: "delegated"
                 subnet: "<your_own_value>"
-                upstream-interface: "<your_own_value> (source: system.interface.name)"
+                upstream-interface: "<your_own_value> (source system.interface.name)"
             ip6-dns-server-override: "enable"
             ip6-extra-addr:
              -
@@ -138,8 +138,8 @@
             ip6-retrans-time: "120"
             ip6-send-adv: "enable"
             ip6-subnet: "<your_own_value>"
-            ip6-upstream-interface: "<your_own_value> (source: system.interface.name)"
-            nd-cert: "<your_own_value> (source: certificate.local.name)"
+            ip6-upstream-interface: "<your_own_value> (source system.interface.name)"
+            nd-cert: "<your_own_value> (source certificate.local.name)"
             nd-cga-modifier: "<your_own_value>"
             nd-mode: "basic"
             nd-security-level: "127"
@@ -174,7 +174,7 @@
         management-ip: "<your_own_value>"
         member:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         min-links: "157"
         min-links-down: "operational"
         mode: "static"
@@ -248,11 +248,11 @@
         switch-controller-learning-limit: "225"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_228"
             tags:
              -
-                name: "default_name_230 (source: system.object-tagging.tags.name)"
+                name: "default_name_230 (source system.object-tagging.tags.name)"
         tcp-mss: "231"
         trust-ip-1: "<your_own_value>"
         trust-ip-2: "<your_own_value>"
@@ -262,7 +262,7 @@
         trust-ip6-3: "<your_own_value>"
         type: "physical"
         username: "<your_own_value>"
-        vdom: "<your_own_value> (source: system.vdom.name)"
+        vdom: "<your_own_value> (source system.vdom.name)"
         vindex: "241"
         vlanforward: "enable"
         vlanid: "243"

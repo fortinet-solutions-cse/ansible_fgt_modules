@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.syslogd2 feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     log.syslogd2_setting:
         description:
             - Global settings for remote syslog server.
@@ -73,7 +74,7 @@ options:
         suboptions:
             certificate:
                 description:
-                    - Certificate used to communicate with Syslog server. Source: certificate.local.name.
+                    - Certificate used to communicate with Syslog server. Source certificate.local.name.
             custom-field-name:
                 description:
                     - Custom field name for CEF format logging.
@@ -88,7 +89,6 @@ options:
                     name:
                         description:
                             - Field name.
-                        required: true
             enc-algorithm:
                 description:
                     - Enable/disable reliable syslogging with TLS encryption.
@@ -166,13 +166,12 @@ EXAMPLES = '''
   tasks:
   - name: Global settings for remote syslog server.
     fortios_log.syslogd2_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.syslogd2_setting:
-        state: "present"
-        certificate: "<your_own_value> (source: certificate.local.name)"
+        certificate: "<your_own_value> (source certificate.local.name)"
         custom-field-name:
          -
             custom: "<your_own_value>"
@@ -247,6 +246,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -282,26 +283,14 @@ def log.syslogd2_setting(data, fos):
     vdom = data['vdom']
     log.syslogd2_setting_data = data['log.syslogd2_setting']
     filtered_data = filter_log.syslogd2_setting_data(log.syslogd2_setting_data)
-
-    if log.syslogd2_setting_data['state'] == "present":
-        return fos.set('log.syslogd2',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif log.syslogd2_setting_data['state'] == "absent":
-        return fos.delete('log.syslogd2',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('log.syslogd2',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_log.syslogd2(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['log.syslogd2_setting']
     for method in methodlist:
@@ -319,17 +308,16 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "log.syslogd2_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "certificate": {"required": False, "type": "str"},
                 "custom-field-name": {"required": False, "type": "list",
                                       "options": {
                                           "custom": {"required": False, "type": "str"},
                                           "id": {"required": True, "type": "int"},
-                                          "name": {"required": True, "type": "str"}
+                                          "name": {"required": False, "type": "str"}
                                       }},
                 "enc-algorithm": {"required": False, "type": "str",
                                   "choices": ["high-medium", "high", "low",
@@ -364,6 +352,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_log.syslogd2(module.params, fos)

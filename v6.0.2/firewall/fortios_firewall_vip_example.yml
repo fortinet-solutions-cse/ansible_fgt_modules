@@ -7,10 +7,10 @@
   tasks:
   - name: Configure virtual IP for IPv4.
     fortios_firewall_vip:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_vip:
         state: "present"
         arp-reply: "disable"
@@ -19,8 +19,8 @@
         dns-mapping-ttl: "6"
         extaddr:
          -
-            name: "default_name_8 (source: firewall.address.name firewall.addrgrp.name)"
-        extintf: "<your_own_value> (source: system.interface.name)"
+            name: "default_name_8 (source firewall.address.name firewall.addrgrp.name)"
+        extintf: "<your_own_value> (source system.interface.name)"
         extip: "<your_own_value>"
         extport: "<your_own_value>"
         gratuitous-arp-interval: "12"
@@ -36,7 +36,7 @@
         https-cookie-secure: "disable"
         id:  "23"
         ldb-method: "static"
-        mapped-addr: "<your_own_value> (source: firewall.address.name)"
+        mapped-addr: "<your_own_value> (source firewall.address.name)"
         mappedip:
          -
             range: "<your_own_value>"
@@ -44,7 +44,7 @@
         max-embryonic-connections: "29"
         monitor:
          -
-            name: "default_name_31 (source: firewall.ldb-monitor.name)"
+            name: "default_name_31 (source firewall.ldb-monitor.name)"
         name: "default_name_32"
         nat-source-vip: "disable"
         outlook-web-access: "disable"
@@ -61,22 +61,22 @@
             id:  "44"
             ip: "<your_own_value>"
             max-connections: "46"
-            monitor: "<your_own_value> (source: firewall.ldb-monitor.name)"
+            monitor: "<your_own_value> (source firewall.ldb-monitor.name)"
             port: "48"
             status: "active"
             weight: "50"
         server-type: "http"
         service:
          -
-            name: "default_name_53 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_53 (source firewall.service.custom.name firewall.service.group.name)"
         src-filter:
          -
             range: "<your_own_value>"
         srcintf-filter:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         ssl-algorithm: "high"
-        ssl-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+        ssl-certificate: "<your_own_value> (source vpn.certificate.local.name)"
         ssl-cipher-suites:
          -
             cipher: "TLS-RSA-WITH-3DES-EDE-CBC-SHA"
@@ -90,9 +90,9 @@
         ssl-dh-bits: "768"
         ssl-hpkp: "disable"
         ssl-hpkp-age: "71"
-        ssl-hpkp-backup: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-backup: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-include-subdomains: "disable"
-        ssl-hpkp-primary: "<your_own_value> (source: vpn.certificate.local.name vpn.certificate.ca.name)"
+        ssl-hpkp-primary: "<your_own_value> (source vpn.certificate.local.name vpn.certificate.ca.name)"
         ssl-hpkp-report-uri: "<your_own_value>"
         ssl-hsts: "disable"
         ssl-hsts-age: "77"

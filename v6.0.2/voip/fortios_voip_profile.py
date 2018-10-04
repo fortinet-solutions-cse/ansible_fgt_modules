@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure voip feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     voip_profile:
         description:
             - Configure VoIP profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Comment.
@@ -235,7 +242,7 @@ options:
                             - CANCEL request rate limit (per second, per policy).
                     contact-fixup:
                         description:
-                            - Fixup contact anyway even if contact's IP:port doesn't match session's IP:port.
+                            - "Fixup contact anyway even if contact's IP:port doesn't match session's IP:port."
                         choices:
                             - disable
                             - enable
@@ -540,7 +547,7 @@ options:
                             - PRACK request rate limit (per second, per policy).
                     preserve-override:
                         description:
-                            - Override i line to preserve original IPS (default: append).
+                            - "Override i line to preserve original IPS (default: append)."
                         choices:
                             - disable
                             - enable
@@ -583,13 +590,13 @@ options:
                             - low
                     ssl-auth-client:
                         description:
-                            - Require a client certificate and authenticate it with the peer/peergrp. Source: user.peer.name user.peergrp.name.
+                            - Require a client certificate and authenticate it with the peer/peergrp. Source user.peer.name user.peergrp.name.
                     ssl-auth-server:
                         description:
-                            - Authenticate the server's certificate with the peer/peergrp. Source: user.peer.name user.peergrp.name.
+                            - Authenticate the server's certificate with the peer/peergrp. Source user.peer.name user.peergrp.name.
                     ssl-client-certificate:
                         description:
-                            - Name of Certificate to offer to server if requested. Source: vpn.certificate.local.name.
+                            - Name of Certificate to offer to server if requested. Source vpn.certificate.local.name.
                     ssl-client-renegotiation:
                         description:
                             - Allow/block client renegotiation by server.
@@ -634,7 +641,7 @@ options:
                             - disable
                     ssl-server-certificate:
                         description:
-                            - Name of Certificate return to the client in every SSL connection. Source: vpn.certificate.local.name.
+                            - Name of Certificate return to the client in every SSL connection. Source vpn.certificate.local.name.
                     status:
                         description:
                             - Enable/disable SIP.
@@ -672,10 +679,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure VoIP profiles.
     fortios_voip_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       voip_profile:
         state: "present"
         comment: "Comment."
@@ -769,16 +776,16 @@ EXAMPLES = '''
             rfc2543-branch: "disable"
             rtp: "disable"
             ssl-algorithm: "high"
-            ssl-auth-client: "<your_own_value> (source: user.peer.name user.peergrp.name)"
-            ssl-auth-server: "<your_own_value> (source: user.peer.name user.peergrp.name)"
-            ssl-client-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+            ssl-auth-client: "<your_own_value> (source user.peer.name user.peergrp.name)"
+            ssl-auth-server: "<your_own_value> (source user.peer.name user.peergrp.name)"
+            ssl-client-certificate: "<your_own_value> (source vpn.certificate.local.name)"
             ssl-client-renegotiation: "allow"
             ssl-max-version: "ssl-3.0"
             ssl-min-version: "ssl-3.0"
             ssl-mode: "off"
             ssl-pfs: "require"
             ssl-send-empty-frags: "enable"
-            ssl-server-certificate: "<your_own_value> (source: vpn.certificate.local.name)"
+            ssl-server-certificate: "<your_own_value> (source vpn.certificate.local.name)"
             status: "disable"
             strict-register: "disable"
             subscribe-rate: "106"
@@ -845,6 +852,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -878,7 +887,6 @@ def voip_profile(data, fos):
     vdom = data['vdom']
     voip_profile_data = data['voip_profile']
     filtered_data = filter_voip_profile_data(voip_profile_data)
-
     if voip_profile_data['state'] == "present":
         return fos.set('voip',
                        'profile',
@@ -888,16 +896,12 @@ def voip_profile(data, fos):
     elif voip_profile_data['state'] == "absent":
         return fos.delete('voip',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_voip(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['voip_profile']
     for method in methodlist:
@@ -915,11 +919,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "voip_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
                 "sccp": {"required": False, "type": "dict",
@@ -1121,6 +1126,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_voip(module.params, fos)

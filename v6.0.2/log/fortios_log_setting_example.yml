@@ -7,16 +7,15 @@
   tasks:
   - name: Configure general log settings.
     fortios_log_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log_setting:
-        state: "present"
         brief-traffic-format: "enable"
         custom-log-fields:
          -
-            field-id: "<your_own_value> (source: log.custom-field.id)"
+            field-id: "<your_own_value> (source log.custom-field.id)"
         daemon-log: "enable"
         expolicy-implicit-log: "enable"
         fwpolicy-implicit-log: "enable"

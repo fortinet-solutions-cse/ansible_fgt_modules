@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure custom Internet Service group.
+    fortios_firewall_internet_service_custom_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_internet_service_custom_group:
+        state: "present"
+        comment: "Comment."
+        member:
+         -
+            name: "default_name_5 (source firewall.internet-service-custom.name)"
+        name: "default_name_6"

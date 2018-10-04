@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ssl feature and setting category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.ssl_setting:
         description:
             - SSL proxy settings.
@@ -85,7 +86,8 @@ options:
                     - Time limit to keep certificate cache (1 - 120 min, default = 10).
             kxp-queue-threshold:
                 description:
-                    - Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default = 16).
+                    - Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default =
+                       16).
             no-matching-cipher-action:
                 description:
                     - Bypass or drop the connection when no matching cipher is found.
@@ -111,7 +113,8 @@ options:
                     - 2048
             ssl-queue-threshold:
                 description:
-                    - Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default = 32).
+                    - Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default =
+                       32).
             ssl-send-empty-frags:
                 description:
                     - Enable/disable sending empty fragments to avoid attack on CBC IV (for SSL 3.0 and TLS 1.0 only).
@@ -130,12 +133,11 @@ EXAMPLES = '''
   tasks:
   - name: SSL proxy settings.
     fortios_firewall.ssl_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ssl_setting:
-        state: "present"
         abbreviate-handshake: "enable"
         cert-cache-capacity: "4"
         cert-cache-timeout: "5"
@@ -208,6 +210,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -243,26 +247,14 @@ def firewall.ssl_setting(data, fos):
     vdom = data['vdom']
     firewall.ssl_setting_data = data['firewall.ssl_setting']
     filtered_data = filter_firewall.ssl_setting_data(firewall.ssl_setting_data)
-
-    if firewall.ssl_setting_data['state'] == "present":
-        return fos.set('firewall.ssl',
-                       'setting',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif firewall.ssl_setting_data['state'] == "absent":
-        return fos.delete('firewall.ssl',
-                          'setting',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('firewall.ssl',
+                   'setting',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_firewall.ssl(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.ssl_setting']
     for method in methodlist:
@@ -280,11 +272,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.ssl_setting": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "abbreviate-handshake": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},
                 "cert-cache-capacity": {"required": False, "type": "int"},
@@ -313,6 +304,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.ssl(module.params, fos)

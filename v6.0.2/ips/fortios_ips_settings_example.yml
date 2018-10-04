@@ -7,12 +7,11 @@
   tasks:
   - name: Configure IPS VDOM parameter.
     fortios_ips_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       ips_settings:
-        state: "present"
         ips-packet-quota: "3"
         packet-log-history: "4"
         packet-log-memory: "5"

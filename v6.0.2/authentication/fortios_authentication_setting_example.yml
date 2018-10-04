@@ -7,17 +7,16 @@
   tasks:
   - name: Configure authentication setting.
     fortios_authentication_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       authentication_setting:
-        state: "present"
-        active-auth-scheme: "<your_own_value> (source: authentication.scheme.name)"
-        captive-portal: "<your_own_value> (source: firewall.address.name)"
+        active-auth-scheme: "<your_own_value> (source authentication.scheme.name)"
+        captive-portal: "<your_own_value> (source firewall.address.name)"
         captive-portal-ip: "<your_own_value>"
         captive-portal-ip6: "<your_own_value>"
         captive-portal-port: "7"
         captive-portal-type: "fqdn"
-        captive-portal6: "<your_own_value> (source: firewall.address6.name)"
-        sso-auth-scheme: "<your_own_value> (source: authentication.scheme.name)"
+        captive-portal6: "<your_own_value> (source firewall.address6.name)"
+        sso-auth-scheme: "<your_own_value> (source authentication.scheme.name)"

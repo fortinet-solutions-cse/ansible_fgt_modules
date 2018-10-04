@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and ospf category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_ospf:
         description:
             - Configure OSPF.
@@ -109,7 +110,7 @@ options:
                                 required: true
                             list:
                                 description:
-                                    - Access-list or prefix-list name. Source: router.access-list.name router.prefix-list.name.
+                                    - Access-list or prefix-list name. Source router.access-list.name router.prefix-list.name.
                     id:
                         description:
                             - Area entry IP address.
@@ -264,7 +265,7 @@ options:
                     - disable
             default-information-route-map:
                 description:
-                    - Default information route map. Source: router.route-map.name.
+                    - Default information route map. Source router.route-map.name.
             default-metric:
                 description:
                     - Default metric of redistribute routes.
@@ -286,7 +287,7 @@ options:
                 suboptions:
                     access-list:
                         description:
-                            - Access list name. Source: router.access-list.name.
+                            - Access list name. Source router.access-list.name.
                     id:
                         description:
                             - Distribute list entry ID.
@@ -300,10 +301,10 @@ options:
                             - rip
             distribute-list-in:
                 description:
-                    - Filter incoming routes. Source: router.access-list.name router.prefix-list.name.
+                    - Filter incoming routes. Source router.access-list.name router.prefix-list.name.
             distribute-route-map-in:
                 description:
-                    - Filter incoming external routes by route-map. Source: router.route-map.name.
+                    - Filter incoming external routes by route-map. Source router.route-map.name.
             log-neighbour-changes:
                 description:
                     - Enable logging of OSPF neighbour's changes
@@ -385,7 +386,7 @@ options:
                             - Number of hello packets within dead interval.
                     interface:
                         description:
-                            - Configuration interface name. Source: system.interface.name.
+                            - Configuration interface name. Source system.interface.name.
                     ip:
                         description:
                             - IP address.
@@ -441,7 +442,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Passive interface name. Source: system.interface.name.
+                            - Passive interface name. Source system.interface.name.
                         required: true
             redistribute:
                 description:
@@ -462,7 +463,7 @@ options:
                         required: true
                     routemap:
                         description:
-                            - Route map name. Source: router.route-map.name.
+                            - Route map name. Source router.route-map.name.
                     status:
                         description:
                             - status
@@ -526,12 +527,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure OSPF.
     fortios_router_ospf:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_ospf:
-        state: "present"
         abr-type: "cisco"
         area:
          -
@@ -541,7 +541,7 @@ EXAMPLES = '''
              -
                 direction: "in"
                 id:  "9"
-                list: "<your_own_value> (source: router.access-list.name router.prefix-list.name)"
+                list: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
             id:  "11"
             nssa-default-information-originate: "enable"
             nssa-default-information-originate-metric: "13"
@@ -577,7 +577,7 @@ EXAMPLES = '''
         default-information-metric: "41"
         default-information-metric-type: "1"
         default-information-originate: "enable"
-        default-information-route-map: "<your_own_value> (source: router.route-map.name)"
+        default-information-route-map: "<your_own_value> (source router.route-map.name)"
         default-metric: "45"
         distance: "46"
         distance-external: "47"
@@ -585,11 +585,11 @@ EXAMPLES = '''
         distance-intra-area: "49"
         distribute-list:
          -
-            access-list: "<your_own_value> (source: router.access-list.name)"
+            access-list: "<your_own_value> (source router.access-list.name)"
             id:  "52"
             protocol: "connected"
-        distribute-list-in: "<your_own_value> (source: router.access-list.name router.prefix-list.name)"
-        distribute-route-map-in: "<your_own_value> (source: router.route-map.name)"
+        distribute-list-in: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
+        distribute-route-map-in: "<your_own_value> (source router.route-map.name)"
         log-neighbour-changes: "enable"
         neighbor:
          -
@@ -613,7 +613,7 @@ EXAMPLES = '''
             dead-interval: "73"
             hello-interval: "74"
             hello-multiplier: "75"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             ip: "<your_own_value>"
             md5-key: "<your_own_value>"
             mtu: "79"
@@ -628,13 +628,13 @@ EXAMPLES = '''
             transmit-delay: "88"
         passive-interface:
          -
-            name: "default_name_90 (source: system.interface.name)"
+            name: "default_name_90 (source system.interface.name)"
         redistribute:
          -
             metric: "92"
             metric-type: "1"
             name: "default_name_94"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
             tag: "97"
         restart-mode: "none"
@@ -709,6 +709,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -751,26 +753,14 @@ def router_ospf(data, fos):
     vdom = data['vdom']
     router_ospf_data = data['router_ospf']
     filtered_data = filter_router_ospf_data(router_ospf_data)
-
-    if router_ospf_data['state'] == "present":
-        return fos.set('router',
-                       'ospf',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif router_ospf_data['state'] == "absent":
-        return fos.delete('router',
-                          'ospf',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('router',
+                   'ospf',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_ospf']
     for method in methodlist:
@@ -788,11 +778,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_ospf": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "abr-type": {"required": False, "type": "str",
                              "choices": ["cisco", "ibm", "shortcut",
                                          "standard"]},
@@ -808,7 +797,7 @@ def main():
                                                  "id": {"required": True, "type": "int"},
                                                  "list": {"required": False, "type": "str"}
                                              }},
-                             "id": {"required": True, "type": "ipv4-address-any"},
+                             "id": {"required": True, "type": "str"},
                              "nssa-default-information-originate": {"required": False, "type": "str",
                                                                     "choices": ["enable", "always", "disable"]},
                              "nssa-default-information-originate-metric": {"required": False, "type": "int"},
@@ -823,8 +812,8 @@ def main():
                                            "advertise": {"required": False, "type": "str",
                                                          "choices": ["disable", "enable"]},
                                            "id": {"required": True, "type": "int"},
-                                           "prefix": {"required": False, "type": "ipv4-classnet-any"},
-                                           "substitute": {"required": False, "type": "ipv4-classnet-any"},
+                                           "prefix": {"required": False, "type": "str"},
+                                           "substitute": {"required": False, "type": "str"},
                                            "substitute-status": {"required": False, "type": "str",
                                                                  "choices": ["enable", "disable"]}
                                        }},
@@ -838,12 +827,12 @@ def main():
                                               "options": {
                                                   "authentication": {"required": False, "type": "str",
                                                                      "choices": ["none", "text", "md5"]},
-                                                  "authentication-key": {"required": False, "type": "password"},
+                                                  "authentication-key": {"required": False, "type": "str"},
                                                   "dead-interval": {"required": False, "type": "int"},
                                                   "hello-interval": {"required": False, "type": "int"},
                                                   "md5-key": {"required": False, "type": "str"},
                                                   "name": {"required": True, "type": "str"},
-                                                  "peer": {"required": False, "type": "ipv4-address-any"},
+                                                  "peer": {"required": False, "type": "str"},
                                                   "retransmit-interval": {"required": False, "type": "int"},
                                                   "transmit-delay": {"required": False, "type": "int"}
                                               }}
@@ -881,21 +870,21 @@ def main():
                              "options": {
                                  "cost": {"required": False, "type": "int"},
                                  "id": {"required": True, "type": "int"},
-                                 "ip": {"required": False, "type": "ipv4-address"},
+                                 "ip": {"required": False, "type": "str"},
                                  "poll-interval": {"required": False, "type": "int"},
                                  "priority": {"required": False, "type": "int"}
                              }},
                 "network": {"required": False, "type": "list",
                             "options": {
-                                "area": {"required": False, "type": "ipv4-address-any"},
+                                "area": {"required": False, "type": "str"},
                                 "id": {"required": True, "type": "int"},
-                                "prefix": {"required": False, "type": "ipv4-classnet"}
+                                "prefix": {"required": False, "type": "str"}
                             }},
                 "ospf-interface": {"required": False, "type": "list",
                                    "options": {
                                        "authentication": {"required": False, "type": "str",
                                                           "choices": ["none", "text", "md5"]},
-                                       "authentication-key": {"required": False, "type": "password"},
+                                       "authentication-key": {"required": False, "type": "str"},
                                        "bfd": {"required": False, "type": "str",
                                                "choices": ["global", "enable", "disable"]},
                                        "cost": {"required": False, "type": "int"},
@@ -905,7 +894,7 @@ def main():
                                        "hello-interval": {"required": False, "type": "int"},
                                        "hello-multiplier": {"required": False, "type": "int"},
                                        "interface": {"required": False, "type": "str"},
-                                       "ip": {"required": False, "type": "ipv4-address"},
+                                       "ip": {"required": False, "type": "str"},
                                        "md5-key": {"required": False, "type": "str"},
                                        "mtu": {"required": False, "type": "int"},
                                        "mtu-ignore": {"required": False, "type": "str",
@@ -942,14 +931,14 @@ def main():
                 "restart-period": {"required": False, "type": "int"},
                 "rfc1583-compatible": {"required": False, "type": "str",
                                        "choices": ["enable", "disable"]},
-                "router-id": {"required": False, "type": "ipv4-address-any"},
+                "router-id": {"required": False, "type": "str"},
                 "spf-timers": {"required": False, "type": "str"},
                 "summary-address": {"required": False, "type": "list",
                                     "options": {
                                         "advertise": {"required": False, "type": "str",
                                                       "choices": ["disable", "enable"]},
                                         "id": {"required": True, "type": "int"},
-                                        "prefix": {"required": False, "type": "ipv4-classnet"},
+                                        "prefix": {"required": False, "type": "str"},
                                         "tag": {"required": False, "type": "int"}
                                     }}
 
@@ -964,6 +953,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

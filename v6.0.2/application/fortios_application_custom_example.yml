@@ -7,10 +7,10 @@
   tasks:
   - name: Configure custom application signatures.
     fortios_application_custom:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_custom:
         state: "present"
         behavior: "<your_own_value>"

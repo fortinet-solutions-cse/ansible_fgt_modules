@@ -7,13 +7,13 @@
   tasks:
   - name: Configure admin users.
     fortios_system_admin:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_admin:
         state: "present"
-        accprofile: "<your_own_value> (source: system.accprofile.name)"
+        accprofile: "<your_own_value> (source system.accprofile.name)"
         accprofile-override: "enable"
         allow-remove-admin-session: "enable"
         comments: "<your_own_value>"
@@ -21,7 +21,7 @@
         force-password-change: "enable"
         fortitoken: "<your_own_value>"
         guest-auth: "disable"
-        guest-lang: "<your_own_value> (source: system.custom-language.name)"
+        guest-lang: "<your_own_value> (source system.custom-language.name)"
         guest-usergroups:
          -
             name: "default_name_13"
@@ -43,7 +43,7 @@
                 height: "26"
                 id:  "27"
                 industry: "default"
-                interface: "<your_own_value> (source: system.interface.name)"
+                interface: "<your_own_value> (source system.interface.name)"
                 region: "default"
                 report-by: "source"
                 sort-by: "<your_own_value>"
@@ -87,10 +87,10 @@
         remote-auth: "enable"
         remote-group: "<your_own_value>"
         schedule: "<your_own_value>"
-        sms-custom-server: "<your_own_value> (source: system.sms-server.name)"
+        sms-custom-server: "<your_own_value> (source system.sms-server.name)"
         sms-phone: "<your_own_value>"
         sms-server: "fortiguard"
-        ssh-certificate: "<your_own_value> (source: certificate.local.name)"
+        ssh-certificate: "<your_own_value> (source certificate.local.name)"
         ssh-public-key1: "<your_own_value>"
         ssh-public-key2: "<your_own_value>"
         ssh-public-key3: "<your_own_value>"
@@ -107,5 +107,5 @@
         two-factor: "disable"
         vdom:
          -
-            name: "default_name_89 (source: system.vdom.name)"
+            name: "default_name_89 (source system.vdom.name)"
         wildcard: "enable"

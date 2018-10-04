@@ -7,12 +7,11 @@
   tasks:
   - name: Configure VDOM settings.
     fortios_system_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_settings:
-        state: "present"
         allow-subnet-overlap: "enable"
         asymroute: "enable"
         asymroute-icmp: "enable"
@@ -29,7 +28,7 @@
         compliance-check: "enable"
         default-voip-alg-mode: "proxy-based"
         deny-tcp-with-icmp: "enable"
-        device: "<your_own_value> (source: system.interface.name)"
+        device: "<your_own_value> (source system.interface.name)"
         dhcp-proxy: "enable"
         dhcp-server-ip: "<your_own_value>"
         dhcp6-server-ip: "<your_own_value>"
@@ -117,7 +116,7 @@
         sip-tcp-port: "103"
         sip-udp-port: "104"
         snat-hairpin-traffic: "enable"
-        ssl-ssh-profile: "<your_own_value> (source: firewall.ssl-ssh-profile.name)"
+        ssl-ssh-profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
         status: "enable"
         strict-src-check: "enable"
         tcp-session-without-syn: "enable"

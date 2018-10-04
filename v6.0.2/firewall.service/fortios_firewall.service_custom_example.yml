@@ -7,10 +7,10 @@
   tasks:
   - name: Configure custom services.
     fortios_firewall.service_custom:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.service_custom:
         state: "present"
         app-category:
@@ -20,7 +20,7 @@
         application:
          -
             id:  "7"
-        category: "<your_own_value> (source: firewall.service.category.name)"
+        category: "<your_own_value> (source firewall.service.category.name)"
         check-reset-range: "disable"
         color: "10"
         comment: "Comment."

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and webcache category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     wanopt_webcache:
         description:
             - Configure global Web cache settings.
@@ -97,7 +98,8 @@ options:
                     - disable
             default-ttl:
                 description:
-                    - Default object expiry time (default = 1440 min (1 day); maximum = 5256000 min (100 years)). This only applies to those objects that do not have an expiry time set by the web server.
+                    - Default object expiry time (default = 1440 min (1 day); maximum = 5256000 min (100 years)). This only applies to those objects that do
+                       not have an expiry time set by the web server.
             external:
                 description:
                     - Enable/disable external Web caching.
@@ -106,10 +108,11 @@ options:
                     - disable
             fresh-factor:
                 description:
-                    - Frequency that the server is checked to see if any objects have expired (1 - 100, default = 100). The higher the fresh factor, the less often the checks occur.
+                    - Frequency that the server is checked to see if any objects have expired (1 - 100, default = 100). The higher the fresh factor, the less
+                       often the checks occur.
             host-validate:
                 description:
-                    - Enable/disable validating "Host:" with original server IP.
+                    - "Enable/disable validating "Host:" with original server IP."
                 choices:
                     - enable
                     - disable
@@ -121,7 +124,7 @@ options:
                     - disable
             ignore-ie-reload:
                 description:
-                    - Enable/disable ignoring the PNC-interpretation of Internet Explorer's Accept: / header.
+                    - "Enable/disable ignoring the PNC-interpretation of Internet Explorer's Accept: / header."
                 choices:
                     - enable
                     - disable
@@ -139,13 +142,16 @@ options:
                     - disable
             max-object-size:
                 description:
-                    - Maximum cacheable object size in kB (1 - 2147483 kb (2GB). All objects that exceed this are delivered to the client but not stored in the web cache.
+                    - Maximum cacheable object size in kB (1 - 2147483 kb (2GB). All objects that exceed this are delivered to the client but not stored in
+                       the web cache.
             max-ttl:
                 description:
-                    - Maximum time an object can stay in the web cache without checking to see if it has expired on the server (default = 7200 min (5 days); maximum = 5256000 min (100 years)).
+                    - Maximum time an object can stay in the web cache without checking to see if it has expired on the server (default = 7200 min (5 days);
+                       maximum = 5256000 min (100 years)).
             min-ttl:
                 description:
-                    - Minimum time an object can stay in the web cache without checking to see if it has expired on the server (default = 5 min; maximum = 5256000 (100 years)).
+                    - Minimum time an object can stay in the web cache without checking to see if it has expired on the server (default = 5 min; maximum =
+                       5256000 (100 years)).
             neg-resp-time:
                 description:
                     - Time in minutes to cache negative responses or errors (0 - 4294967295, default = 0  which means negative responses are not cached).
@@ -167,12 +173,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure global Web cache settings.
     fortios_wanopt_webcache:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       wanopt_webcache:
-        state: "present"
         always-revalidate: "enable"
         cache-by-default: "enable"
         cache-cookie: "enable"
@@ -251,6 +256,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -288,26 +295,14 @@ def wanopt_webcache(data, fos):
     vdom = data['vdom']
     wanopt_webcache_data = data['wanopt_webcache']
     filtered_data = filter_wanopt_webcache_data(wanopt_webcache_data)
-
-    if wanopt_webcache_data['state'] == "present":
-        return fos.set('wanopt',
-                       'webcache',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif wanopt_webcache_data['state'] == "absent":
-        return fos.delete('wanopt',
-                          'webcache',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('wanopt',
+                   'webcache',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_wanopt(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['wanopt_webcache']
     for method in methodlist:
@@ -325,11 +320,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "wanopt_webcache": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "always-revalidate": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
                 "cache-by-default": {"required": False, "type": "str",
@@ -370,6 +364,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_wanopt(module.params, fos)

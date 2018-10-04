@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and global category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_global:
         description:
             - Configure global attributes.
@@ -79,10 +80,12 @@ options:
                     - disable
             admin-console-timeout:
                 description:
-                    - Console login timeout that overrides the admintimeout value. (15 - 300 seconds) (15 seconds to 5 minutes). 0 the default, disables this timeout.
+                    - Console login timeout that overrides the admintimeout value. (15 - 300 seconds) (15 seconds to 5 minutes). 0 the default, disables this
+                       timeout.
             admin-https-pki-required:
                 description:
-                    - Enable/disable admin login method. Enable to force administrators to provide a valid certificate to log in if PKI is enabled. Disable to allow administrators to log in with a certificate or password.
+                    - Enable/disable admin login method. Enable to force administrators to provide a valid certificate to log in if PKI is enabled. Disable to
+                       allow administrators to log in with a certificate or password.
                 choices:
                     - enable
                     - disable
@@ -95,7 +98,8 @@ options:
                     - tlsv1-2
             admin-lockout-duration:
                 description:
-                    - Amount of time in seconds that an administrator account is locked out after reaching the admin-lockout-threshold for repeated failed login attempts.
+                    - Amount of time in seconds that an administrator account is locked out after reaching the admin-lockout-threshold for repeated failed
+                       login attempts.
             admin-lockout-threshold:
                 description:
                     - Number of failed login attempts before an administrator account is locked out for the admin-lockout-duration.
@@ -104,7 +108,8 @@ options:
                     - Maximum number of administrators who can be logged in at the same time (1 - 100, default = 100)
             admin-maintainer:
                 description:
-                    - Enable/disable maintainer administrator login. When enabled, the maintainer account can be used to log in from the console after a hard reboot. The password is "bcpb" followed by the FortiGate unit serial number. You have limited time to complete this login.
+                    - Enable/disable maintainer administrator login. When enabled, the maintainer account can be used to log in from the console after a hard
+                       reboot. The password is "bcpb" followed by the FortiGate unit serial number. You have limited time to complete this login.
                 choices:
                     - enable
                     - disable
@@ -125,13 +130,14 @@ options:
                     - disable
             admin-server-cert:
                 description:
-                    - Server certificate that the FortiGate uses for HTTPS administrative connections. Source: certificate.local.name.
+                    - Server certificate that the FortiGate uses for HTTPS administrative connections. Source certificate.local.name.
             admin-sport:
                 description:
                     - Administrative access port for HTTPS. (1 - 65535, default = 443).
             admin-ssh-grace-time:
                 description:
-                    - Maximum time in seconds permitted between making an SSH connection to the FortiGate unit and authenticating (10 - 3600 sec (1 hour), default 120).
+                    - Maximum time in seconds permitted between making an SSH connection to the FortiGate unit and authenticating (10 - 3600 sec (1 hour),
+                       default 120).
             admin-ssh-password:
                 description:
                     - Enable/disable password authentication for SSH admin access.
@@ -152,7 +158,8 @@ options:
                     - Administrative access port for TELNET. (1 - 65535, default = 23).
             admintimeout:
                 description:
-                    - Number of minutes before an idle administrator session times out (5 - 480 minutes (8 hours), default = 5). A shorter idle timeout is more secure.
+                    - Number of minutes before an idle administrator session times out (5 - 480 minutes (8 hours), default = 5). A shorter idle timeout is
+                       more secure.
             alias:
                 description:
                     - Alias for your FortiGate unit.
@@ -180,7 +187,7 @@ options:
                     - disable
             auth-cert:
                 description:
-                    - Server certificate that the FortiGate uses for HTTPS firewall authentication connections. Source: certificate.local.name.
+                    - Server certificate that the FortiGate uses for HTTPS firewall authentication connections. Source certificate.local.name.
             auth-http-port:
                 description:
                     - User authentication HTTP port. (1 - 65535, default = 80).
@@ -217,7 +224,8 @@ options:
                     - one-shot
             av-failopen-session:
                 description:
-                    - When enabled and a proxy for a protocol runs out of room in its session table, that protocol goes into failopen mode and enacts the action specified by av-failopen.
+                    - When enabled and a proxy for a protocol runs out of room in its session table, that protocol goes into failopen mode and enacts the
+                       action specified by av-failopen.
                 choices:
                     - enable
                     - disable
@@ -248,7 +256,8 @@ options:
                     - revert
             check-protocol-header:
                 description:
-                    - Level of checking performed on protocol headers. Strict checking is more thorough but may affect performance. Loose checking is ok in most cases.
+                    - Level of checking performed on protocol headers. Strict checking is more thorough but may affect performance. Loose checking is ok in
+                       most cases.
                 choices:
                     - loose
                     - strict
@@ -299,7 +308,8 @@ options:
                     - Number of seconds to passively scan a device before performing an active scan. (20 - 3600 sec, (20 sec to 1 hour), default = 90).
             device-idle-timeout:
                 description:
-                    - Time in seconds that a device must be idle to automatically log the device user out. (30 - 31536000 sec (30 sec to 1 year), default = 300).
+                    - Time in seconds that a device must be idle to automatically log the device user out. (30 - 31536000 sec (30 sec to 1 year), default =
+                       300).
             dh-params:
                 description:
                     - Number of bits to use in the Diffie-Hellman exchange for HTTPS/SSH protocols.
@@ -331,7 +341,8 @@ options:
                     - Fail-time for server lost.
             fds-statistics:
                 description:
-                    - Enable/disable sending IPS, Application Control, and AntiVirus data to FortiGuard. This data is used to improve FortiGuard services and is not shared with external parties and is protected by Fortinet's privacy policy.
+                    - Enable/disable sending IPS, Application Control, and AntiVirus data to FortiGuard. This data is used to improve FortiGuard services and
+                       is not shared with external parties and is protected by Fortinet's privacy policy.
                 choices:
                     - enable
                     - disable
@@ -365,7 +376,8 @@ options:
                     - disable
             fortiservice-port:
                 description:
-                    - FortiService port (1 - 65535, default = 8013). Used by FortiClient endpoint compliance. Older versions of FortiClient used a different port.
+                    - FortiService port (1 - 65535, default = 8013). Used by FortiClient endpoint compliance. Older versions of FortiClient used a different
+                       port.
             gui-certificates:
                 description:
                     - Enable/disable the System > Certificate GUI page, allowing you to add and configure certificates from the GUI.
@@ -444,10 +456,12 @@ options:
                     - IP source port range used for traffic originating from the FortiGate unit.
             ips-affinity:
                 description:
-                    - Affinity setting for IPS (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx; allowed CPUs must be less than total number of IPS engine daemons).
+                    - Affinity setting for IPS (hexadecimal value up to 256 bits in the format of xxxxxxxxxxxxxxxx; allowed CPUs must be less than total
+                       number of IPS engine daemons).
             ipsec-asic-offload:
                 description:
-                    - Enable/disable ASIC offloading (hardware acceleration) for IPsec VPN traffic. Hardware acceleration can offload IPsec VPN sessions and accelerate encryption and decryption.
+                    - Enable/disable ASIC offloading (hardware acceleration) for IPsec VPN traffic. Hardware acceleration can offload IPsec VPN sessions and
+                       accelerate encryption and decryption.
                 choices:
                     - enable
                     - disable
@@ -501,7 +515,8 @@ options:
                     - disable
             log-uuid:
                 description:
-                    - Whether UUIDs are added to traffic logs. You can disable UUIDs, add firewall policy UUIDs to traffic logs, or add all UUIDs to traffic logs.
+                    - Whether UUIDs are added to traffic logs. You can disable UUIDs, add firewall policy UUIDs to traffic logs, or add all UUIDs to traffic
+                       logs.
                 choices:
                     - disable
                     - policy-only
@@ -520,7 +535,7 @@ options:
                     - disable
             management-vdom:
                 description:
-                    - Management virtual domain name. Source: system.vdom.name.
+                    - Management virtual domain name. Source system.vdom.name.
             max-dlpstat-memory:
                 description:
                     - Maximum DLP stat memory (0 - 4294967295).
@@ -547,7 +562,8 @@ options:
                     - Affinity setting for logging (64-bit hexadecimal value in the format of xxxxxxxxxxxxxxxx).
             miglogd-children:
                 description:
-                    - Number of logging (miglogd) processes to be allowed to run. Higher number can reduce performance; lower number can slow log processing time. No logs will be dropped or lost if the number is changed.
+                    - Number of logging (miglogd) processes to be allowed to run. Higher number can reduce performance; lower number can slow log processing
+                       time. No logs will be dropped or lost if the number is changed.
             multi-factor-authentication:
                 description:
                     - Enforce all login methods to require an additional authentication factor (default = optional).
@@ -592,7 +608,8 @@ options:
                     - enable
             proxy-auth-lifetime:
                 description:
-                    - Enable/disable authenticated users lifetime control.  This is a cap on the total time a proxy user can be authenticated for after which re-authentication will take place.
+                    - Enable/disable authenticated users lifetime control.  This is a cap on the total time a proxy user can be authenticated for after which
+                       re-authentication will take place.
                 choices:
                     - enable
                     - disable
@@ -616,7 +633,8 @@ options:
                     - enable
             proxy-re-authentication-mode:
                 description:
-                    - Control if users must re-authenticate after a session is closed, traffic has been idle, or from the point at which the user was first created.
+                    - Control if users must re-authenticate after a session is closed, traffic has been idle, or from the point at which the user was first
+                       created.
                 choices:
                     - session
                     - traffic
@@ -638,16 +656,18 @@ options:
                     - Statistics refresh interval in GUI.
             remoteauthtimeout:
                 description:
-                    - Number of seconds that the FortiGate waits for responses from remote RADIUS, LDAP, or TACACS+ authentication servers. (0-300 sec, default = 5, 0 means no timeout).
+                    - Number of seconds that the FortiGate waits for responses from remote RADIUS, LDAP, or TACACS+ authentication servers. (0-300 sec,
+                       default = 5, 0 means no timeout).
             reset-sessionless-tcp:
                 description:
-                    - Action to perform if the FortiGate receives a TCP packet but cannot find a corresponding session in its session table. NAT/Route mode only.
+                    - Action to perform if the FortiGate receives a TCP packet but cannot find a corresponding session in its session table. NAT/Route mode
+                       only.
                 choices:
                     - enable
                     - disable
             restart-time:
                 description:
-                    - Daily restart time (hh:mm).
+                    - "Daily restart time (hh:mm)."
             revision-backup-on-logout:
                 description:
                     - Enable/disable back-up of the latest configuration revision when an administrator logs out of the CLI or GUI.
@@ -677,7 +697,8 @@ options:
                     - disable
             send-pmtu-icmp:
                 description:
-                    - Enable/disable sending of path maximum transmission unit (PMTU) - ICMP destination unreachable packet and to support PMTUD protocol on your network to reduce fragmentation of packets.
+                    - Enable/disable sending of path maximum transmission unit (PMTU) - ICMP destination unreachable packet and to support PMTUD protocol on
+                       your network to reduce fragmentation of packets.
                 choices:
                     - enable
                     - disable
@@ -748,7 +769,9 @@ options:
                     - disable
             strict-dirty-session-check:
                 description:
-                    - Enable to check the session against the original policy when revalidating. This can prevent dropping of redirected sessions when web-filtering and authentication are enabled together. If this option is enabled, the FortiGate unit deletes a session if a routing or policy change causes the session to no longer match the policy that originally allowed the session.
+                    - Enable to check the session against the original policy when revalidating. This can prevent dropping of redirected sessions when
+                       web-filtering and authentication are enabled together. If this option is enabled, the FortiGate unit deletes a session if a routing or
+                          policy change causes the session to no longer match the policy that originally allowed the session.
                 choices:
                     - enable
                     - disable
@@ -772,10 +795,12 @@ options:
                     - Time in minutes between updates of performance statistics logging. (1 - 15 min, default = 5, 0 = disabled).
             tcp-halfclose-timer:
                 description:
-                    - Number of seconds the FortiGate unit should wait to close a session after one peer has sent a FIN packet but the other has not responded (1 - 86400 sec (1 day), default = 120).
+                    - Number of seconds the FortiGate unit should wait to close a session after one peer has sent a FIN packet but the other has not responded
+                       (1 - 86400 sec (1 day), default = 120).
             tcp-halfopen-timer:
                 description:
-                    - Number of seconds the FortiGate unit should wait to close a session after one peer has sent an open session packet but the other has not responded (1 - 86400 sec (1 day), default = 10).
+                    - Number of seconds the FortiGate unit should wait to close a session after one peer has sent an open session packet but the other has not
+                       responded (1 - 86400 sec (1 day), default = 10).
             tcp-option:
                 description:
                     - Enable SACK, timestamp and MSS TCP options.
@@ -793,7 +818,8 @@ options:
                     - disable
             timezone:
                 description:
-                    - Number corresponding to your time zone from 00 to 86. Enter set timezone ? to view the list of time zones and the numbers that represent them.
+                    - Number corresponding to your time zone from 00 to 86. Enter set timezone ? to view the list of time zones and the numbers that represent
+                       them.
                 choices:
                     - 01
                     - 02
@@ -919,10 +945,11 @@ options:
                     - SMS-based two-factor authentication session timeout (30 - 300 sec, default = 60).
             udp-idle-timer:
                 description:
-                    - UDP connection session timeout. This command can be useful in managing CPU and memory resources (1 - 86400 seconds (1 day), default = 60).
+                    - UDP connection session timeout. This command can be useful in managing CPU and memory resources (1 - 86400 seconds (1 day), default =
+                       60).
             user-server-cert:
                 description:
-                    - Certificate to use for https user authentication. Source: certificate.local.name.
+                    - Certificate to use for https user authentication. Source certificate.local.name.
             vdom-admin:
                 description:
                     - Enable/disable support for multiple virtual domains (VDOMs).
@@ -961,13 +988,14 @@ options:
                     - enable
             wad-worker-count:
                 description:
-                    - Number of explicit proxy WAN optimization daemon (WAD) processes. By default WAN optimization, explicit proxy, and web caching is handled by all of the CPU cores in a FortiGate unit.
+                    - Number of explicit proxy WAN optimization daemon (WAD) processes. By default WAN optimization, explicit proxy, and web caching is
+                       handled by all of the CPU cores in a FortiGate unit.
             wifi-ca-certificate:
                 description:
-                    - CA certificate that verifies the WiFi certificate. Source: certificate.ca.name.
+                    - CA certificate that verifies the WiFi certificate. Source certificate.ca.name.
             wifi-certificate:
                 description:
-                    - Certificate to use for WiFi authentication. Source: certificate.local.name.
+                    - Certificate to use for WiFi authentication. Source certificate.local.name.
             wimax-4g-usb:
                 description:
                     - Enable/disable comparability with WiMAX 4G USB devices.
@@ -982,7 +1010,8 @@ options:
                     - disable
             wireless-controller-port:
                 description:
-                    - Port used for the control channel in wireless controller mode (wireless-mode is ac). The data channel port is the control channel port number plus one (1024 - 49150, default = 5246).
+                    - Port used for the control channel in wireless controller mode (wireless-mode is ac). The data channel port is the control channel port
+                       number plus one (1024 - 49150, default = 5246).
 '''
 
 EXAMPLES = '''
@@ -995,12 +1024,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure global attributes.
     fortios_system_global:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_global:
-        state: "present"
         admin-concurrent: "enable"
         admin-console-timeout: "4"
         admin-https-pki-required: "enable"
@@ -1012,7 +1040,7 @@ EXAMPLES = '''
         admin-port: "11"
         admin-restrict-local: "enable"
         admin-scp: "enable"
-        admin-server-cert: "<your_own_value> (source: certificate.local.name)"
+        admin-server-cert: "<your_own_value> (source certificate.local.name)"
         admin-sport: "15"
         admin-ssh-grace-time: "16"
         admin-ssh-password: "enable"
@@ -1025,7 +1053,7 @@ EXAMPLES = '''
         anti-replay: "disable"
         arp-max-entry: "25"
         asymroute: "enable"
-        auth-cert: "<your_own_value> (source: certificate.local.name)"
+        auth-cert: "<your_own_value> (source certificate.local.name)"
         auth-http-port: "28"
         auth-https-port: "29"
         auth-keepalive: "enable"
@@ -1091,7 +1119,7 @@ EXAMPLES = '''
         log-uuid: "disable"
         login-timestamp: "enable"
         long-vdom-name: "enable"
-        management-vdom: "<your_own_value> (source: system.vdom.name)"
+        management-vdom: "<your_own_value> (source system.vdom.name)"
         max-dlpstat-memory: "94"
         max-route-cache-size: "95"
         mc-ttl-notchange: "enable"
@@ -1158,7 +1186,7 @@ EXAMPLES = '''
         two-factor-ftm-expiry: "157"
         two-factor-sms-expiry: "158"
         udp-idle-timer: "159"
-        user-server-cert: "<your_own_value> (source: certificate.local.name)"
+        user-server-cert: "<your_own_value> (source certificate.local.name)"
         vdom-admin: "enable"
         vip-arp-range: "unlimited"
         virtual-server-count: "163"
@@ -1168,8 +1196,8 @@ EXAMPLES = '''
         wad-csvc-db-count: "167"
         wad-source-affinity: "disable"
         wad-worker-count: "169"
-        wifi-ca-certificate: "<your_own_value> (source: certificate.ca.name)"
-        wifi-certificate: "<your_own_value> (source: certificate.local.name)"
+        wifi-ca-certificate: "<your_own_value> (source certificate.ca.name)"
+        wifi-certificate: "<your_own_value> (source certificate.local.name)"
         wimax-4g-usb: "enable"
         wireless-controller: "enable"
         wireless-controller-port: "174"
@@ -1233,6 +1261,8 @@ version:
   sample: "v5.6.3"
 
 '''
+
+from ansible.module_utils.basic import AnsibleModule
 
 fos = None
 
@@ -1323,26 +1353,14 @@ def system_global(data, fos):
     vdom = data['vdom']
     system_global_data = data['system_global']
     filtered_data = filter_system_global_data(system_global_data)
-
-    if system_global_data['state'] == "present":
-        return fos.set('system',
-                       'global',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system_global_data['state'] == "absent":
-        return fos.delete('system',
-                          'global',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system',
+                   'global',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_global']
     for method in methodlist:
@@ -1360,11 +1378,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_global": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "admin-concurrent": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                 "admin-console-timeout": {"required": False, "type": "int"},
@@ -1432,7 +1449,7 @@ def main():
                                  "choices": ["enable", "disable"]},
                 "compliance-check": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
-                "compliance-check-time": {"required": False, "type": "time"},
+                "compliance-check-time": {"required": False, "type": "str"},
                 "cpu-use-threshold": {"required": False, "type": "int"},
                 "csr-ca-attribute": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
@@ -1594,7 +1611,7 @@ def main():
                                   "choices": ["enable", "disable"]},
                 "switch-controller": {"required": False, "type": "str",
                                       "choices": ["disable", "enable"]},
-                "switch-controller-reserved-network": {"required": False, "type": "ipv4-classnet"},
+                "switch-controller-reserved-network": {"required": False, "type": "str"},
                 "sys-perf-log-interval": {"required": False, "type": "int"},
                 "tcp-halfclose-timer": {"required": False, "type": "int"},
                 "tcp-halfopen-timer": {"required": False, "type": "int"},
@@ -1679,6 +1696,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

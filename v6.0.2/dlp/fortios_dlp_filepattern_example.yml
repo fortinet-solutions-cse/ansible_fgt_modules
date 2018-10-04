@@ -7,10 +7,10 @@
   tasks:
   - name: Configure file patterns used by DLP blocking.
     fortios_dlp_filepattern:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dlp_filepattern:
         state: "present"
         comment: "Optional comments."

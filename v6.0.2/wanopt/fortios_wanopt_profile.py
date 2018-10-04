@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,26 +60,36 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     wanopt_profile:
         description:
             - Configure WAN optimization profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             auth-group:
                 description:
-                    - Optionally add an authentication group to restrict access to the WAN Optimization tunnel to peers in the authentication group. Source: wanopt.auth-group.name.
+                    - Optionally add an authentication group to restrict access to the WAN Optimization tunnel to peers in the authentication group. Source
+                       wanopt.auth-group.name.
             cifs:
                 description:
                     - Enable/disable CIFS (Windows sharing) WAN Optimization and configure CIFS WAN Optimization features.
                 suboptions:
                     byte-caching:
                         description:
-                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in future serving if from the cache.
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                               future serving if from the cache.
                         choices:
                             - enable
                             - disable
@@ -92,7 +101,8 @@ options:
                             - disable
                     port:
                         description:
-                            - Single port number or port number range for CIFS. Only packets with a destination port number that matches this port number or range are accepted by this profile.
+                            - Single port number or port number range for CIFS. Only packets with a destination port number that matches this port number or
+                               range are accepted by this profile.
                     prefer-chunking:
                         description:
                             - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
@@ -127,7 +137,8 @@ options:
                 suboptions:
                     byte-caching:
                         description:
-                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in future serving if from the cache.
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                               future serving if from the cache.
                         choices:
                             - enable
                             - disable
@@ -139,7 +150,8 @@ options:
                             - disable
                     port:
                         description:
-                            - Single port number or port number range for FTP. Only packets with a destination port number that matches this port number or range are accepted by this profile.
+                            - Single port number or port number range for FTP. Only packets with a destination port number that matches this port number or
+                               range are accepted by this profile.
                     prefer-chunking:
                         description:
                             - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
@@ -171,7 +183,8 @@ options:
                 suboptions:
                     byte-caching:
                         description:
-                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in future serving if from the cache.
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                               future serving if from the cache.
                         choices:
                             - enable
                             - disable
@@ -183,7 +196,8 @@ options:
                             - disable
                     port:
                         description:
-                            - Single port number or port number range for HTTP. Only packets with a destination port number that matches this port number or range are accepted by this profile.
+                            - Single port number or port number range for HTTP. Only packets with a destination port number that matches this port number or
+                               range are accepted by this profile.
                     prefer-chunking:
                         description:
                             - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
@@ -213,7 +227,8 @@ options:
                             - disable
                     tunnel-non-http:
                         description:
-                            - Configure how to process non-HTTP traffic when a profile configured for HTTP traffic accepts a non-HTTP session. Can occur if an application sends non-HTTP traffic using an HTTP destination port.
+                            - Configure how to process non-HTTP traffic when a profile configured for HTTP traffic accepts a non-HTTP session. Can occur if an
+                               application sends non-HTTP traffic using an HTTP destination port.
                         choices:
                             - enable
                             - disable
@@ -237,7 +252,8 @@ options:
                 suboptions:
                     byte-caching:
                         description:
-                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in future serving if from the cache.
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                               future serving if from the cache.
                         choices:
                             - enable
                             - disable
@@ -249,7 +265,8 @@ options:
                             - disable
                     port:
                         description:
-                            - Single port number or port number range for MAPI. Only packets with a destination port number that matches this port number or range are accepted by this profile.
+                            - Single port number or port number range for MAPI. Only packets with a destination port number that matches this port number or
+                               range are accepted by this profile.
                     secure-tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
@@ -279,7 +296,8 @@ options:
                 suboptions:
                     byte-caching:
                         description:
-                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in future serving if from the cache.
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                               future serving if from the cache.
                         choices:
                             - enable
                             - disable
@@ -297,7 +315,8 @@ options:
                             - disable
                     port:
                         description:
-                            - Single port number or port number range for TCP. Only packets with a destination port number that matches this port number or range are accepted by this profile.
+                            - Single port number or port number range for TCP. Only packets with a destination port number that matches this port number or
+                               range are accepted by this profile.
                     secure-tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
@@ -344,13 +363,13 @@ EXAMPLES = '''
   tasks:
   - name: Configure WAN optimization profiles.
     fortios_wanopt_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       wanopt_profile:
         state: "present"
-        auth-group: "<your_own_value> (source: wanopt.auth-group.name)"
+        auth-group: "<your_own_value> (source wanopt.auth-group.name)"
         cifs:
             byte-caching: "enable"
             log-traffic: "enable"
@@ -460,6 +479,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -494,7 +515,6 @@ def wanopt_profile(data, fos):
     vdom = data['vdom']
     wanopt_profile_data = data['wanopt_profile']
     filtered_data = filter_wanopt_profile_data(wanopt_profile_data)
-
     if wanopt_profile_data['state'] == "present":
         return fos.set('wanopt',
                        'profile',
@@ -504,16 +524,12 @@ def wanopt_profile(data, fos):
     elif wanopt_profile_data['state'] == "absent":
         return fos.delete('wanopt',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_wanopt(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['wanopt_profile']
     for method in methodlist:
@@ -531,11 +547,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "wanopt_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "auth-group": {"required": False, "type": "str"},
                 "cifs": {"required": False, "type": "dict",
                          "options": {
@@ -641,6 +658,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_wanopt(module.params, fos)

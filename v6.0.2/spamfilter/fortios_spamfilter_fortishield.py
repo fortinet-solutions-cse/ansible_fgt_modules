@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and fortishield category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     spamfilter_fortishield:
         description:
             - Configure FortiGuard - AntiSpam.
@@ -98,12 +99,11 @@ EXAMPLES = '''
   tasks:
   - name: Configure FortiGuard - AntiSpam.
     fortios_spamfilter_fortishield:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_fortishield:
-        state: "present"
         spam-submit-force: "enable"
         spam-submit-srv: "<your_own_value>"
         spam-submit-txt2htm: "enable"
@@ -168,6 +168,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -204,26 +206,14 @@ def spamfilter_fortishield(data, fos):
     spamfilter_fortishield_data = data['spamfilter_fortishield']
     filtered_data = filter_spamfilter_fortishield_data(
         spamfilter_fortishield_data)
-
-    if spamfilter_fortishield_data['state'] == "present":
-        return fos.set('spamfilter',
-                       'fortishield',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif spamfilter_fortishield_data['state'] == "absent":
-        return fos.delete('spamfilter',
-                          'fortishield',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('spamfilter',
+                   'fortishield',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_spamfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['spamfilter_fortishield']
     for method in methodlist:
@@ -241,11 +231,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "spamfilter_fortishield": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "spam-submit-force": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
                 "spam-submit-srv": {"required": False, "type": "str"},
@@ -263,6 +252,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_spamfilter(module.params, fos)

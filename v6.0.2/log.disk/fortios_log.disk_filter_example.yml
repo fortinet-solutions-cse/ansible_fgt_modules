@@ -7,12 +7,11 @@
   tasks:
   - name: Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type.
     fortios_log.disk_filter:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       log.disk_filter:
-        state: "present"
         admin: "enable"
         anomaly: "enable"
         auth: "enable"

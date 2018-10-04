@@ -7,14 +7,13 @@
   tasks:
   - name: Configure L2TP.
     fortios_vpn_l2tp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn_l2tp:
-        state: "present"
         eip: "<your_own_value>"
         enforce-ipsec: "enable"
         sip: "<your_own_value>"
         status: "enable"
-        usrgrp: "<your_own_value> (source: user.group.name)"
+        usrgrp: "<your_own_value> (source user.group.name)"

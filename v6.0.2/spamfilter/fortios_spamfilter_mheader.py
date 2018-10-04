@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and mheader category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     spamfilter_mheader:
         description:
             - Configure AntiSpam MIME header.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Optional comments.
@@ -113,7 +120,6 @@ options:
             name:
                 description:
                     - Name of table.
-                required: true
 '''
 
 EXAMPLES = '''
@@ -126,10 +132,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure AntiSpam MIME header.
     fortios_spamfilter_mheader:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       spamfilter_mheader:
         state: "present"
         comment: "Optional comments."
@@ -204,6 +210,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -237,7 +245,6 @@ def spamfilter_mheader(data, fos):
     vdom = data['vdom']
     spamfilter_mheader_data = data['spamfilter_mheader']
     filtered_data = filter_spamfilter_mheader_data(spamfilter_mheader_data)
-
     if spamfilter_mheader_data['state'] == "present":
         return fos.set('spamfilter',
                        'mheader',
@@ -252,11 +259,7 @@ def spamfilter_mheader(data, fos):
 
 
 def fortios_spamfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['spamfilter_mheader']
     for method in methodlist:
@@ -274,11 +277,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "spamfilter_mheader": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "entries": {"required": False, "type": "list",
                             "options": {
@@ -293,7 +297,7 @@ def main():
                                            "choices": ["enable", "disable"]}
                             }},
                 "id": {"required": True, "type": "int"},
-                "name": {"required": True, "type": "str"}
+                "name": {"required": False, "type": "str"}
 
             }
         }
@@ -306,6 +310,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_spamfilter(module.params, fos)

@@ -1,0 +1,16 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure switch object tags.
+    fortios_switch_controller_switch_interface_tag:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      switch_controller_switch_interface_tag:
+        state: "present"
+        name: "default_name_3"

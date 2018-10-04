@@ -7,16 +7,16 @@
   tasks:
   - name: Configure IPv6 static routing tables.
     fortios_router_static6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_static6:
         state: "present"
         bfd: "enable"
         blackhole: "enable"
         comment: "Optional comments."
-        device: "<your_own_value> (source: system.interface.name)"
+        device: "<your_own_value> (source system.interface.name)"
         devindex: "7"
         distance: "8"
         dst: "<your_own_value>"

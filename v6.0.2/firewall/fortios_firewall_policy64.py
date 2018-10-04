@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and policy64 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_policy64:
         description:
             - Configure IPv6 to IPv4 policies.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             action:
                 description:
                     - Policy action.
@@ -86,11 +93,11 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address.name firewall.addrgrp.name firewall.vip64.name firewall.vipgrp64.name.
+                            - Address name. Source firewall.address.name firewall.addrgrp.name firewall.vip64.name firewall.vipgrp64.name.
                         required: true
             dstintf:
                 description:
-                    - Destination interface name. Source: system.interface.name system.zone.name.
+                    - Destination interface name. Source system.interface.name system.zone.name.
             fixedport:
                 description:
                     - Enable/disable policy fixed port.
@@ -111,7 +118,7 @@ options:
                     - disable
             per-ip-shaper:
                 description:
-                    - Per-IP traffic shaper. Source: firewall.shaper.per-ip-shaper.name.
+                    - Per-IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
             permit-any-host:
                 description:
                     - Enable/disable permit any host in.
@@ -121,24 +128,25 @@ options:
             policyid:
                 description:
                     - Policy ID.
+                required: true
             poolname:
                 description:
                     - Policy IP pool names.
                 suboptions:
                     name:
                         description:
-                            - IP pool name. Source: firewall.ippool.name.
+                            - IP pool name. Source firewall.ippool.name.
                         required: true
             schedule:
                 description:
-                    - Schedule name. Source: firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name.
+                    - Schedule name. Source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name.
             service:
                 description:
                     - Service name.
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.service.custom.name firewall.service.group.name.
+                            - Address name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
             srcaddr:
                 description:
@@ -146,11 +154,11 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Address name. Source: firewall.address6.name firewall.addrgrp6.name.
+                            - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
             srcintf:
                 description:
-                    - Source interface name. Source: system.zone.name system.interface.name.
+                    - Source interface name. Source system.zone.name system.interface.name.
             status:
                 description:
                     - Enable/disable policy status.
@@ -165,10 +173,10 @@ options:
                     - TCP MSS value of sender.
             traffic-shaper:
                 description:
-                    - Traffic shaper. Source: firewall.shaper.traffic-shaper.name.
+                    - Traffic shaper. Source firewall.shaper.traffic-shaper.name.
             traffic-shaper-reverse:
                 description:
-                    - Reverse traffic shaper. Source: firewall.shaper.traffic-shaper.name.
+                    - Reverse traffic shaper. Source firewall.shaper.traffic-shaper.name.
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
@@ -184,40 +192,40 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv6 to IPv4 policies.
     fortios_firewall_policy64:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_policy64:
         state: "present"
         action: "accept"
         comments: "<your_own_value>"
         dstaddr:
          -
-            name: "default_name_6 (source: firewall.address.name firewall.addrgrp.name firewall.vip64.name firewall.vipgrp64.name)"
-        dstintf: "<your_own_value> (source: system.interface.name system.zone.name)"
+            name: "default_name_6 (source firewall.address.name firewall.addrgrp.name firewall.vip64.name firewall.vipgrp64.name)"
+        dstintf: "<your_own_value> (source system.interface.name system.zone.name)"
         fixedport: "enable"
         ippool: "enable"
         logtraffic: "enable"
-        per-ip-shaper: "<your_own_value> (source: firewall.shaper.per-ip-shaper.name)"
+        per-ip-shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
         permit-any-host: "enable"
         policyid: "13"
         poolname:
          -
-            name: "default_name_15 (source: firewall.ippool.name)"
-        schedule: "<your_own_value> (source: firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
+            name: "default_name_15 (source firewall.ippool.name)"
+        schedule: "<your_own_value> (source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
         service:
          -
-            name: "default_name_18 (source: firewall.service.custom.name firewall.service.group.name)"
+            name: "default_name_18 (source firewall.service.custom.name firewall.service.group.name)"
         srcaddr:
          -
-            name: "default_name_20 (source: firewall.address6.name firewall.addrgrp6.name)"
-        srcintf: "<your_own_value> (source: system.zone.name system.interface.name)"
+            name: "default_name_20 (source firewall.address6.name firewall.addrgrp6.name)"
+        srcintf: "<your_own_value> (source system.zone.name system.interface.name)"
         status: "enable"
         tcp-mss-receiver: "23"
         tcp-mss-sender: "24"
-        traffic-shaper: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
-        traffic-shaper-reverse: "<your_own_value> (source: firewall.shaper.traffic-shaper.name)"
+        traffic-shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+        traffic-shaper-reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
         uuid: "<your_own_value>"
 '''
 
@@ -280,6 +288,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -318,7 +328,6 @@ def firewall_policy64(data, fos):
     vdom = data['vdom']
     firewall_policy64_data = data['firewall_policy64']
     filtered_data = filter_firewall_policy64_data(firewall_policy64_data)
-
     if firewall_policy64_data['state'] == "present":
         return fos.set('firewall',
                        'policy64',
@@ -328,16 +337,12 @@ def firewall_policy64(data, fos):
     elif firewall_policy64_data['state'] == "absent":
         return fos.delete('firewall',
                           'policy64',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['policyid'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_policy64']
     for method in methodlist:
@@ -355,11 +360,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_policy64": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny"]},
                 "comments": {"required": False, "type": "str"},
@@ -377,7 +383,7 @@ def main():
                 "per-ip-shaper": {"required": False, "type": "str"},
                 "permit-any-host": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]},
-                "policyid": {"required": False, "type": "int"},
+                "policyid": {"required": True, "type": "int"},
                 "poolname": {"required": False, "type": "list",
                              "options": {
                                  "name": {"required": True, "type": "str"}
@@ -398,7 +404,7 @@ def main():
                 "tcp-mss-sender": {"required": False, "type": "int"},
                 "traffic-shaper": {"required": False, "type": "str"},
                 "traffic-shaper-reverse": {"required": False, "type": "str"},
-                "uuid": {"required": False, "type": "uuid"}
+                "uuid": {"required": False, "type": "str"}
 
             }
         }
@@ -411,6 +417,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

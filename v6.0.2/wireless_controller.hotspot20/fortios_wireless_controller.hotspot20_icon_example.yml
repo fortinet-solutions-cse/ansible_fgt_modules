@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure OSU provider icon.
+    fortios_wireless_controller.hotspot20_icon:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      wireless_controller.hotspot20_icon:
+        state: "present"
+        icon-list:
+         -
+            file: "<your_own_value>"
+            height: "5"
+            lang: "<your_own_value>"
+            name: "default_name_7"
+            type: "bmp"
+            width: "9"
+        name: "default_name_10"

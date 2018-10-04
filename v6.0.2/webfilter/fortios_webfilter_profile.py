@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and profile category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     webfilter_profile:
         description:
             - Configure Web filter profiles.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             comment:
                 description:
                     - Optional comments.
@@ -105,7 +112,7 @@ options:
                                 suboptions:
                                     name:
                                         description:
-                                            - User group name. Source: user.group.name.
+                                            - User group name. Source user.group.name.
                                         required: true
                             category:
                                 description:
@@ -282,7 +289,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - User group name. Source: user.group.name.
+                                    - User group name. Source user.group.name.
                                 required: true
                     profile:
                         description:
@@ -290,7 +297,7 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Web profile. Source: webfilter.profile.name.
+                                    - Web profile. Source webfilter.profile.name.
                                 required: true
                     profile-attribute:
                         description:
@@ -340,7 +347,7 @@ options:
                     - block
             replacemsg-group:
                 description:
-                    - Replacement message group. Source: system.replacemsg-group.name.
+                    - Replacement message group. Source system.replacemsg-group.name.
             web:
                 description:
                     - Web content filtering settings.
@@ -353,13 +360,13 @@ options:
                             - disable
                     bword-table:
                         description:
-                            - Banned word table ID. Source: webfilter.content.id.
+                            - Banned word table ID. Source webfilter.content.id.
                     bword-threshold:
                         description:
                             - Banned word score threshold.
                     content-header-list:
                         description:
-                            - Content header list. Source: webfilter.content-header.id.
+                            - Content header list. Source webfilter.content-header.id.
                     keyword-match:
                         description:
                             - Search keywords to log when match is found.
@@ -367,6 +374,7 @@ options:
                             pattern:
                                 description:
                                     - Pattern/keyword to search for.
+                                required: true
                     log-search:
                         description:
                             - Enable/disable logging all search phrases.
@@ -381,7 +389,7 @@ options:
                             - header
                     urlfilter-table:
                         description:
-                            - URL filter table ID. Source: webfilter.urlfilter.id.
+                            - URL filter table ID. Source webfilter.urlfilter.id.
                     whitelist:
                         description:
                             - FortiGuard whitelist settings.
@@ -514,7 +522,7 @@ options:
                 suboptions:
                     name:
                         description:
-                            - Server name. Source: web-proxy.wisp.name.
+                            - Server name. Source web-proxy.wisp.name.
                         required: true
             youtube-channel-filter:
                 description:
@@ -549,10 +557,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure Web filter profiles.
     fortios_webfilter_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       webfilter_profile:
         state: "present"
         comment: "Optional comments."
@@ -564,7 +572,7 @@ EXAMPLES = '''
                 action: "block"
                 auth-usr-grp:
                  -
-                    name: "default_name_10 (source: user.group.name)"
+                    name: "default_name_10 (source user.group.name)"
                 category: "11"
                 id:  "12"
                 log: "enable"
@@ -600,26 +608,26 @@ EXAMPLES = '''
             ovrd-scope: "user"
             ovrd-user-group:
              -
-                name: "default_name_44 (source: user.group.name)"
+                name: "default_name_44 (source user.group.name)"
             profile:
              -
-                name: "default_name_46 (source: webfilter.profile.name)"
+                name: "default_name_46 (source webfilter.profile.name)"
             profile-attribute: "User-Name"
             profile-type: "list"
         ovrd-perm: "bannedword-override"
         post-action: "normal"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         web:
             blacklist: "enable"
-            bword-table: "54 (source: webfilter.content.id)"
+            bword-table: "54 (source webfilter.content.id)"
             bword-threshold: "55"
-            content-header-list: "56 (source: webfilter.content-header.id)"
+            content-header-list: "56 (source webfilter.content-header.id)"
             keyword-match:
              -
                 pattern: "<your_own_value>"
             log-search: "enable"
             safe-search: "url"
-            urlfilter-table: "61 (source: webfilter.urlfilter.id)"
+            urlfilter-table: "61 (source webfilter.urlfilter.id)"
             whitelist: "exempt-av"
             youtube-restrict: "none"
         web-content-log: "enable"
@@ -642,7 +650,7 @@ EXAMPLES = '''
         wisp-algorithm: "primary-secondary"
         wisp-servers:
          -
-            name: "default_name_83 (source: web-proxy.wisp.name)"
+            name: "default_name_83 (source web-proxy.wisp.name)"
         youtube-channel-filter:
          -
             channel-id: "<your_own_value>"
@@ -710,6 +718,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -753,7 +763,6 @@ def webfilter_profile(data, fos):
     vdom = data['vdom']
     webfilter_profile_data = data['webfilter_profile']
     filtered_data = filter_webfilter_profile_data(webfilter_profile_data)
-
     if webfilter_profile_data['state'] == "present":
         return fos.set('webfilter',
                        'profile',
@@ -763,16 +772,12 @@ def webfilter_profile(data, fos):
     elif webfilter_profile_data['state'] == "absent":
         return fos.delete('webfilter',
                           'profile',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_webfilter(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['webfilter_profile']
     for method in methodlist:
@@ -790,11 +795,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "webfilter_profile": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "comment": {"required": False, "type": "str"},
                 "extended-log": {"required": False, "type": "str",
                                  "choices": ["enable", "disable"]},
@@ -905,7 +911,7 @@ def main():
                             "content-header-list": {"required": False, "type": "int"},
                             "keyword-match": {"required": False, "type": "str",
                                               "options": {
-                                                  "pattern": {"required": False, "type": "str"}
+                                                  "pattern": {"required": True, "type": "str"}
                                               }},
                             "log-search": {"required": False, "type": "str",
                                            "choices": ["enable", "disable"]},
@@ -978,6 +984,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_webfilter(module.params, fos)

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and forticlient category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,22 +60,32 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ipsec_forticlient:
         description:
             - Configure FortiClient policy realm.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             phase2name:
                 description:
-                    - Phase 2 tunnel name that you defined in the FortiClient dialup configuration. Source: vpn.ipsec.phase2.name vpn.ipsec.phase2-interface.name.
+                    - Phase 2 tunnel name that you defined in the FortiClient dialup configuration. Source vpn.ipsec.phase2.name vpn.ipsec.phase2-interface
+                      .name.
             realm:
                 description:
                     - FortiClient realm name.
+                required: true
             status:
                 description:
                     - Enable/disable this FortiClient configuration.
@@ -85,7 +94,7 @@ options:
                     - disable
             usergroupname:
                 description:
-                    - User group name for FortiClient users. Source: user.group.name.
+                    - User group name for FortiClient users. Source user.group.name.
 '''
 
 EXAMPLES = '''
@@ -98,16 +107,16 @@ EXAMPLES = '''
   tasks:
   - name: Configure FortiClient policy realm.
     fortios_vpn.ipsec_forticlient:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ipsec_forticlient:
         state: "present"
-        phase2name: "<your_own_value> (source: vpn.ipsec.phase2.name vpn.ipsec.phase2-interface.name)"
+        phase2name: "<your_own_value> (source vpn.ipsec.phase2.name vpn.ipsec.phase2-interface.name)"
         realm: "<your_own_value>"
         status: "enable"
-        usergroupname: "<your_own_value> (source: user.group.name)"
+        usergroupname: "<your_own_value> (source user.group.name)"
 '''
 
 RETURN = '''
@@ -169,6 +178,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -203,7 +214,6 @@ def vpn.ipsec_forticlient(data, fos):
     vpn.ipsec_forticlient_data = data['vpn.ipsec_forticlient']
     filtered_data = filter_vpn.ipsec_forticlient_data(
         vpn.ipsec_forticlient_data)
-
     if vpn.ipsec_forticlient_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'forticlient',
@@ -213,16 +223,12 @@ def vpn.ipsec_forticlient(data, fos):
     elif vpn.ipsec_forticlient_data['state'] == "absent":
         return fos.delete('vpn.ipsec',
                           'forticlient',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['realm'],
                           vdom=vdom)
 
 
 def fortios_vpn.ipsec(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ipsec_forticlient']
     for method in methodlist:
@@ -240,13 +246,14 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ipsec_forticlient": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "phase2name": {"required": False, "type": "str"},
-                "realm": {"required": False, "type": "str"},
+                "realm": {"required": True, "type": "str"},
                 "status": {"required": False, "type": "str",
                            "choices": ["enable", "disable"]},
                 "usergroupname": {"required": False, "type": "str"}
@@ -262,6 +269,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ipsec(module.params, fos)

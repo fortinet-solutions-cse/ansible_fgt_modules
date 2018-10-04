@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and crl category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.certificate_crl:
         description:
             - Certificate Revocation List as a PEM file.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             crl:
                 description:
                     - Certificate Revocation List as a PEM file.
@@ -101,7 +108,7 @@ options:
                     - vdom
             scep-cert:
                 description:
-                    - Local certificate for SCEP communication for CRL auto-update. Source: vpn.certificate.local.name.
+                    - Local certificate for SCEP communication for CRL auto-update. Source vpn.certificate.local.name.
             scep-url:
                 description:
                     - SCEP server URL for CRL auto-update.
@@ -121,7 +128,7 @@ options:
                     - Time in seconds before the FortiGate checks for an updated CRL. Set to 0 to update only when it expires.
             update-vdom:
                 description:
-                    - VDOM for CRL update. Source: system.vdom.name.
+                    - VDOM for CRL update. Source system.vdom.name.
 '''
 
 EXAMPLES = '''
@@ -134,10 +141,10 @@ EXAMPLES = '''
   tasks:
   - name: Certificate Revocation List as a PEM file.
     fortios_vpn.certificate_crl:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.certificate_crl:
         state: "present"
         crl: "<your_own_value>"
@@ -148,12 +155,12 @@ EXAMPLES = '''
         ldap-username: "<your_own_value>"
         name: "default_name_9"
         range: "global"
-        scep-cert: "<your_own_value> (source: vpn.certificate.local.name)"
+        scep-cert: "<your_own_value> (source vpn.certificate.local.name)"
         scep-url: "<your_own_value>"
         source: "factory"
         source-ip: "84.230.14.43"
         update-interval: "15"
-        update-vdom: "<your_own_value> (source: system.vdom.name)"
+        update-vdom: "<your_own_value> (source system.vdom.name)"
 '''
 
 RETURN = '''
@@ -215,6 +222,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -251,7 +260,6 @@ def vpn.certificate_crl(data, fos):
     vdom = data['vdom']
     vpn.certificate_crl_data = data['vpn.certificate_crl']
     filtered_data = filter_vpn.certificate_crl_data(vpn.certificate_crl_data)
-
     if vpn.certificate_crl_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'crl',
@@ -261,16 +269,12 @@ def vpn.certificate_crl(data, fos):
     elif vpn.certificate_crl_data['state'] == "absent":
         return fos.delete('vpn.certificate',
                           'crl',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_vpn.certificate(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.certificate_crl']
     for method in methodlist:
@@ -288,15 +292,16 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.certificate_crl": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "crl": {"required": False, "type": "str"},
                 "http-url": {"required": False, "type": "str"},
                 "last-updated": {"required": False, "type": "int"},
-                "ldap-password": {"required": False, "type": "password"},
+                "ldap-password": {"required": False, "type": "str"},
                 "ldap-server": {"required": False, "type": "str"},
                 "ldap-username": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
@@ -307,7 +312,7 @@ def main():
                 "source": {"required": False, "type": "str",
                            "choices": ["factory", "user", "bundle",
                                        "fortiguard"]},
-                "source-ip": {"required": False, "type": "ipv4-address"},
+                "source-ip": {"required": False, "type": "str"},
                 "update-interval": {"required": False, "type": "int"},
                 "update-vdom": {"required": False, "type": "str"}
 
@@ -322,6 +327,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.certificate(module.params, fos)

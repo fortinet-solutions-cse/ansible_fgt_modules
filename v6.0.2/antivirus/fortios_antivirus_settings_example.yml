@@ -7,12 +7,11 @@
   tasks:
   - name: Configure AntiVirus settings.
     fortios_antivirus_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       antivirus_settings:
-        state: "present"
         default-db: "normal"
         grayware: "enable"
         override-timeout: "5"

@@ -7,10 +7,10 @@
   tasks:
   - name: Configure WCCP.
     fortios_system_wccp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_wccp:
         state: "present"
         assignment-bucket-format: "wccp-v2"

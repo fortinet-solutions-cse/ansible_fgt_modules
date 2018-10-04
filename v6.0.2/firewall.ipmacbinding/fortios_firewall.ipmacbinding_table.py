@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ipmacbinding feature and table category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,29 +60,37 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall.ipmacbinding_table:
         description:
             - Configure IP to MAC address pairs in the IP/MAC binding table.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             ip:
                 description:
-                    - IPv4 address portion of the pair (format: xxx.xxx.xxx.xxx).
+                    - "IPv4 address portion of the pair (format: xxx.xxx.xxx.xxx)."
             mac:
                 description:
-                    - MAC address portion of the pair (format: xx:xx:xx:xx:xx:xx in hexidecimal).
+                    - "MAC address portion of the pair (format: xx:xx:xx:xx:xx:xx in hexidecimal)."
             name:
                 description:
                     - Name of the pair (optional, default = no name).
-                required: true
             seq-num:
                 description:
                     - Entry number.
+                required: true
             status:
                 description:
                     - Enable/disable this IP-mac binding pair.
@@ -102,10 +109,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure IP to MAC address pairs in the IP/MAC binding table.
     fortios_firewall.ipmacbinding_table:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.ipmacbinding_table:
         state: "present"
         ip: "<your_own_value>"
@@ -174,6 +181,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -208,7 +217,6 @@ def firewall.ipmacbinding_table(data, fos):
     firewall.ipmacbinding_table_data = data['firewall.ipmacbinding_table']
     filtered_data = filter_firewall.ipmacbinding_table_data(
         firewall.ipmacbinding_table_data)
-
     if firewall.ipmacbinding_table_data['state'] == "present":
         return fos.set('firewall.ipmacbinding',
                        'table',
@@ -218,16 +226,12 @@ def firewall.ipmacbinding_table(data, fos):
     elif firewall.ipmacbinding_table_data['state'] == "absent":
         return fos.delete('firewall.ipmacbinding',
                           'table',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['seq-num'],
                           vdom=vdom)
 
 
 def fortios_firewall.ipmacbinding(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall.ipmacbinding_table']
     for method in methodlist:
@@ -245,15 +249,16 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall.ipmacbinding_table": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
-                "ip": {"required": False, "type": "ipv4-address"},
-                "mac": {"required": False, "type": "mac-address"},
-                "name": {"required": True, "type": "str"},
-                "seq-num": {"required": False, "type": "int"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
+                "ip": {"required": False, "type": "str"},
+                "mac": {"required": False, "type": "str"},
+                "name": {"required": False, "type": "str"},
+                "seq-num": {"required": True, "type": "int"},
                 "status": {"required": False, "type": "str",
                            "choices": ["enable", "disable"]}
 
@@ -268,6 +273,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall.ipmacbinding(

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and manualkey category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     vpn.ipsec_manualkey:
         description:
             - Configure IPsec manual keys.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             authentication:
                 description:
                     - Authentication algorithm. Must be the same for both ends of the tunnel.
@@ -95,7 +102,7 @@ options:
                     - des
             interface:
                 description:
-                    - Name of the physical, aggregate, or VLAN interface. Source: system.interface.name.
+                    - Name of the physical, aggregate, or VLAN interface. Source system.interface.name.
             local-gw:
                 description:
                     - Local gateway.
@@ -130,17 +137,17 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPsec manual keys.
     fortios_vpn.ipsec_manualkey:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       vpn.ipsec_manualkey:
         state: "present"
         authentication: "null"
         authkey: "<your_own_value>"
         enckey: "<your_own_value>"
         encryption: "null"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         local-gw: "<your_own_value>"
         localspi: "<your_own_value>"
         name: "default_name_10"
@@ -208,6 +215,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -243,7 +252,6 @@ def vpn.ipsec_manualkey(data, fos):
     vdom = data['vdom']
     vpn.ipsec_manualkey_data = data['vpn.ipsec_manualkey']
     filtered_data = filter_vpn.ipsec_manualkey_data(vpn.ipsec_manualkey_data)
-
     if vpn.ipsec_manualkey_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'manualkey',
@@ -253,16 +261,12 @@ def vpn.ipsec_manualkey(data, fos):
     elif vpn.ipsec_manualkey_data['state'] == "absent":
         return fos.delete('vpn.ipsec',
                           'manualkey',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_vpn.ipsec(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['vpn.ipsec_manualkey']
     for method in methodlist:
@@ -280,11 +284,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "vpn.ipsec_manualkey": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "authentication": {"required": False, "type": "str",
                                    "choices": ["null", "md5", "sha1",
                                                "sha256", "sha384", "sha512"]},
@@ -293,12 +298,12 @@ def main():
                 "encryption": {"required": False, "type": "str",
                                "choices": ["null", "des"]},
                 "interface": {"required": False, "type": "str"},
-                "local-gw": {"required": False, "type": "ipv4-address-any"},
+                "local-gw": {"required": False, "type": "str"},
                 "localspi": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
                 "npu-offload": {"required": False, "type": "str",
                                 "choices": ["enable", "disable"]},
-                "remote-gw": {"required": False, "type": "ipv4-address"},
+                "remote-gw": {"required": False, "type": "str"},
                 "remotespi": {"required": False, "type": "str"}
 
             }
@@ -312,6 +317,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_vpn.ipsec(module.params, fos)

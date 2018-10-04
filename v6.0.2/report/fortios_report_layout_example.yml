@@ -7,10 +7,10 @@
   tasks:
   - name: Report layout configuration.
     fortios_report_layout:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       report_layout:
         state: "present"
         body-item:

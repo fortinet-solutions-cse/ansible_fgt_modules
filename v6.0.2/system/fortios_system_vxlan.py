@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and vxlan category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,22 +60,30 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_vxlan:
         description:
             - Configure VXLAN devices.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             dstport:
                 description:
                     - VXLAN destination port (1 - 65535, default = 4789).
             interface:
                 description:
-                    - Outgoing interface for VXLAN encapsulated traffic. Source: system.interface.name.
+                    - Outgoing interface for VXLAN encapsulated traffic. Source system.interface.name.
             ip-version:
                 description:
                     - IP version to use for the VXLAN interface and so for communication over the VXLAN. IPv4 or IPv6 unicast or multicast.
@@ -99,6 +106,7 @@ options:
                     ip:
                         description:
                             - IPv4 address.
+                        required: true
             remote-ip6:
                 description:
                     - IPv6 IP address of the VXLAN interface on the device at the remote end of the VXLAN.
@@ -106,6 +114,7 @@ options:
                     ip6:
                         description:
                             - IPv6 address.
+                        required: true
             vni:
                 description:
                     - VXLAN network ID.
@@ -121,14 +130,14 @@ EXAMPLES = '''
   tasks:
   - name: Configure VXLAN devices.
     fortios_system_vxlan:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_vxlan:
         state: "present"
         dstport: "3"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ip-version: "ipv4-unicast"
         multicast-ttl: "6"
         name: "default_name_7"
@@ -200,6 +209,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -234,7 +245,6 @@ def system_vxlan(data, fos):
     vdom = data['vdom']
     system_vxlan_data = data['system_vxlan']
     filtered_data = filter_system_vxlan_data(system_vxlan_data)
-
     if system_vxlan_data['state'] == "present":
         return fos.set('system',
                        'vxlan',
@@ -244,16 +254,12 @@ def system_vxlan(data, fos):
     elif system_vxlan_data['state'] == "absent":
         return fos.delete('system',
                           'vxlan',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_vxlan']
     for method in methodlist:
@@ -271,11 +277,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_vxlan": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "dstport": {"required": False, "type": "int"},
                 "interface": {"required": False, "type": "str"},
                 "ip-version": {"required": False, "type": "str",
@@ -285,11 +292,11 @@ def main():
                 "name": {"required": True, "type": "str"},
                 "remote-ip": {"required": False, "type": "list",
                               "options": {
-                                  "ip": {"required": False, "type": "str"}
+                                  "ip": {"required": True, "type": "str"}
                               }},
                 "remote-ip6": {"required": False, "type": "list",
                                "options": {
-                                   "ip6": {"required": False, "type": "str"}
+                                   "ip6": {"required": True, "type": "str"}
                                }},
                 "vni": {"required": False, "type": "int"}
 
@@ -304,6 +311,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

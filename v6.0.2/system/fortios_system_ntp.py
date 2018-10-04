@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ntp category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system_ntp:
         description:
             - Configure system NTP information.
@@ -77,7 +78,8 @@ options:
                 suboptions:
                     interface-name:
                         description:
-                            - Interface name. Source: system.interface.name.
+                            - Interface name. Source system.interface.name.
+                        required: true
             ntpserver:
                 description:
                     - Configure the FortiGate to connect to any available third-party NTP server.
@@ -115,7 +117,8 @@ options:
                     - disable
             server-mode:
                 description:
-                    - Enable/disable FortiGate NTP Server Mode. Your FortiGate becomes an NTP server for other devices on your network. The FortiGate relays NTP requests to its configured NTP server.
+                    - Enable/disable FortiGate NTP Server Mode. Your FortiGate becomes an NTP server for other devices on your network. The FortiGate relays
+                       NTP requests to its configured NTP server.
                 choices:
                     - enable
                     - disable
@@ -143,15 +146,14 @@ EXAMPLES = '''
   tasks:
   - name: Configure system NTP information.
     fortios_system_ntp:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_ntp:
-        state: "present"
         interface:
          -
-            interface-name: "<your_own_value> (source: system.interface.name)"
+            interface-name: "<your_own_value> (source system.interface.name)"
         ntpserver:
          -
             authentication: "enable"
@@ -226,6 +228,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -260,26 +264,14 @@ def system_ntp(data, fos):
     vdom = data['vdom']
     system_ntp_data = data['system_ntp']
     filtered_data = filter_system_ntp_data(system_ntp_data)
-
-    if system_ntp_data['state'] == "present":
-        return fos.set('system',
-                       'ntp',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif system_ntp_data['state'] == "absent":
-        return fos.delete('system',
-                          'ntp',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('system',
+                   'ntp',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_system(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system_ntp']
     for method in methodlist:
@@ -297,21 +289,20 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system_ntp": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "interface": {"required": False, "type": "list",
                               "options": {
-                                  "interface-name": {"required": False, "type": "str"}
+                                  "interface-name": {"required": True, "type": "str"}
                               }},
                 "ntpserver": {"required": False, "type": "list",
                               "options": {
                                   "authentication": {"required": False, "type": "str",
                                                      "choices": ["enable", "disable"]},
                                   "id": {"required": True, "type": "int"},
-                                  "key": {"required": False, "type": "password"},
+                                  "key": {"required": False, "type": "str"},
                                   "key-id": {"required": False, "type": "int"},
                                   "ntpv3": {"required": False, "type": "str",
                                             "choices": ["enable", "disable"]},
@@ -321,7 +312,7 @@ def main():
                             "choices": ["enable", "disable"]},
                 "server-mode": {"required": False, "type": "str",
                                 "choices": ["enable", "disable"]},
-                "source-ip": {"required": False, "type": "ipv4-address"},
+                "source-ip": {"required": False, "type": "str"},
                 "syncinterval": {"required": False, "type": "int"},
                 "type": {"required": False, "type": "str",
                          "choices": ["fortiguard", "custom"]}
@@ -337,6 +328,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system(module.params, fos)

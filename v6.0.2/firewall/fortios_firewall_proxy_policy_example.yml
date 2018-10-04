@@ -1,0 +1,92 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure proxy policies.
+    fortios_firewall_proxy_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_proxy_policy:
+        state: "present"
+        action: "accept"
+        application-list: "<your_own_value> (source application.list.name)"
+        av-profile: "<your_own_value> (source antivirus.profile.name)"
+        comments: "<your_own_value>"
+        disclaimer: "disable"
+        dlp-sensor: "<your_own_value> (source dlp.sensor.name)"
+        dstaddr:
+         -
+            name: "default_name_10 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name firewall.vip.name firewall.vipgrp.name firewall.vip46.name firewall.vipgrp46.name system.external-resource.name)"
+        dstaddr-negate: "enable"
+        dstaddr6:
+         -
+            name: "default_name_13 (source firewall.address6.name firewall.addrgrp6.name firewall.vip6.name firewall.vipgrp6.name firewall.vip64.name firewall.vipgrp64.name system.external-resource.name)"
+        dstintf:
+         -
+            name: "default_name_15 (source system.interface.name system.zone.name)"
+        global-label: "<your_own_value>"
+        groups:
+         -
+            name: "default_name_18 (source user.group.name)"
+        http-tunnel-auth: "enable"
+        icap-profile: "<your_own_value> (source icap.profile.name)"
+        internet-service: "enable"
+        internet-service-custom:
+         -
+            name: "default_name_23 (source firewall.internet-service-custom.name)"
+        internet-service-id:
+         -
+            id:  "25 (source firewall.internet-service.id)"
+        internet-service-negate: "enable"
+        ips-sensor: "<your_own_value> (source ips.sensor.name)"
+        label: "<your_own_value>"
+        logtraffic: "all"
+        logtraffic-start: "enable"
+        policyid: "31"
+        poolname:
+         -
+            name: "default_name_33 (source firewall.ippool.name)"
+        profile-group: "<your_own_value> (source firewall.profile-group.name)"
+        profile-protocol-options: "<your_own_value> (source firewall.profile-protocol-options.name)"
+        profile-type: "single"
+        proxy: "explicit-web"
+        redirect-url: "<your_own_value>"
+        replacemsg-override-group: "<your_own_value> (source system.replacemsg-group.name)"
+        scan-botnet-connections: "disable"
+        schedule: "<your_own_value> (source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
+        service:
+         -
+            name: "default_name_43 (source firewall.service.custom.name firewall.service.group.name)"
+        service-negate: "enable"
+        session-ttl: "45"
+        spamfilter-profile: "<your_own_value> (source spamfilter.profile.name)"
+        srcaddr:
+         -
+            name: "default_name_48 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name system.external-resource.name)"
+        srcaddr-negate: "enable"
+        srcaddr6:
+         -
+            name: "default_name_51 (source firewall.address6.name firewall.addrgrp6.name system.external-resource.name)"
+        srcintf:
+         -
+            name: "default_name_53 (source system.interface.name system.zone.name)"
+        ssh-filter-profile: "<your_own_value> (source ssh-filter.profile.name)"
+        ssl-ssh-profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
+        status: "enable"
+        transparent: "enable"
+        users:
+         -
+            name: "default_name_59 (source user.local.name)"
+        utm-status: "enable"
+        uuid: "<your_own_value>"
+        waf-profile: "<your_own_value> (source waf.profile.name)"
+        webcache: "enable"
+        webcache-https: "disable"
+        webfilter-profile: "<your_own_value> (source webfilter.profile.name)"
+        webproxy-forward-server: "<your_own_value> (source web-proxy.forward-server.name web-proxy.forward-server-group.name)"
+        webproxy-profile: "<your_own_value> (source web-proxy.profile.name)"

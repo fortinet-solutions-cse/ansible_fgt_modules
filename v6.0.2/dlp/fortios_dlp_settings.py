@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and settings category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,11 +60,13 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     dlp_settings:
         description:
             - Designate logical storage for DLP fingerprint database.
@@ -89,7 +90,7 @@ options:
                     - Maximum total size of files within the storage (MB).
             storage-device:
                 description:
-                    - Storage device name. Source: system.storage.name.
+                    - Storage device name. Source system.storage.name.
 '''
 
 EXAMPLES = '''
@@ -102,17 +103,16 @@ EXAMPLES = '''
   tasks:
   - name: Designate logical storage for DLP fingerprint database.
     fortios_dlp_settings:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       dlp_settings:
-        state: "present"
         cache-mem-percent: "3"
         chunk-size: "4"
         db-mode: "stop-adding"
         size: "6"
-        storage-device: "<your_own_value> (source: system.storage.name)"
+        storage-device: "<your_own_value> (source system.storage.name)"
 '''
 
 RETURN = '''
@@ -174,6 +174,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -207,26 +209,14 @@ def dlp_settings(data, fos):
     vdom = data['vdom']
     dlp_settings_data = data['dlp_settings']
     filtered_data = filter_dlp_settings_data(dlp_settings_data)
-
-    if dlp_settings_data['state'] == "present":
-        return fos.set('dlp',
-                       'settings',
-                       data=filtered_data,
-                       vdom=vdom)
-
-    elif dlp_settings_data['state'] == "absent":
-        return fos.delete('dlp',
-                          'settings',
-                          mkey=filtered_data['id'],
-                          vdom=vdom)
+    return fos.set('dlp',
+                   'settings',
+                   data=filtered_data,
+                   vdom=vdom)
 
 
 def fortios_dlp(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['dlp_settings']
     for method in methodlist:
@@ -244,11 +234,10 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "dlp_settings": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
                 "cache-mem-percent": {"required": False, "type": "int"},
                 "chunk-size": {"required": False, "type": "int"},
                 "db-mode": {"required": False, "type": "str",
@@ -267,6 +256,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_dlp(module.params, fos)

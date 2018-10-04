@@ -7,11 +7,10 @@
   tasks:
   - name: Configure router settings.
     fortios_router_setting:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_setting:
-        state: "present"
         hostname: "myhostname"
-        show-filter: "<your_own_value> (source: router.prefix-list.name)"
+        show-filter: "<your_own_value> (source router.prefix-list.name)"

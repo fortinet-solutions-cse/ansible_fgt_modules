@@ -7,16 +7,16 @@
   tasks:
   - name: Configure AntiVirus profiles.
     fortios_antivirus_profile:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       antivirus_profile:
         state: "present"
-        analytics-bl-filetype: "3 (source: dlp.filepattern.id)"
+        analytics-bl-filetype: "3 (source dlp.filepattern.id)"
         analytics-db: "disable"
         analytics-max-upload: "5"
-        analytics-wl-filetype: "6 (source: dlp.filepattern.id)"
+        analytics-wl-filetype: "6 (source dlp.filepattern.id)"
         av-block-log: "enable"
         av-virus-log: "enable"
         comment: "Comment."
@@ -88,7 +88,7 @@
             executables: "default"
             options: "scan"
             outbreak-prevention: "disabled"
-        replacemsg-group: "<your_own_value> (source: system.replacemsg-group.name)"
+        replacemsg-group: "<your_own_value> (source system.replacemsg-group.name)"
         scan-mode: "quick"
         smb:
             archive-block: "encrypted"

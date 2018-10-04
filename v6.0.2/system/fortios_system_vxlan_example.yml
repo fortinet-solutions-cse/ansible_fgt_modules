@@ -7,14 +7,14 @@
   tasks:
   - name: Configure VXLAN devices.
     fortios_system_vxlan:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system_vxlan:
         state: "present"
         dstport: "3"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ip-version: "ipv4-unicast"
         multicast-ttl: "6"
         name: "default_name_7"

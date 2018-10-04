@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure application feature and custom category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     application_custom:
         description:
             - Configure custom application signatures.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             behavior:
                 description:
                     - Custom application signature behavior.
@@ -83,11 +90,9 @@ options:
             id:
                 description:
                     - Custom application category ID (use ? to view available options).
-                required: true
             name:
                 description:
                     - Name of this custom application signature.
-                required: true
             protocol:
                 description:
                     - Custom application signature protocol.
@@ -97,6 +102,7 @@ options:
             tag:
                 description:
                     - Signature tag.
+                required: true
             technology:
                 description:
                     - Custom application signature technology.
@@ -115,10 +121,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure custom application signatures.
     fortios_application_custom:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       application_custom:
         state: "present"
         behavior: "<your_own_value>"
@@ -192,6 +198,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -227,7 +235,6 @@ def application_custom(data, fos):
     vdom = data['vdom']
     application_custom_data = data['application_custom']
     filtered_data = filter_application_custom_data(application_custom_data)
-
     if application_custom_data['state'] == "present":
         return fos.set('application',
                        'custom',
@@ -237,16 +244,12 @@ def application_custom(data, fos):
     elif application_custom_data['state'] == "absent":
         return fos.delete('application',
                           'custom',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['tag'],
                           vdom=vdom)
 
 
 def fortios_application(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['application_custom']
     for method in methodlist:
@@ -264,19 +267,20 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "application_custom": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "behavior": {"required": False, "type": "str"},
                 "category": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
-                "id": {"required": True, "type": "int"},
-                "name": {"required": True, "type": "str"},
+                "id": {"required": False, "type": "int"},
+                "name": {"required": False, "type": "str"},
                 "protocol": {"required": False, "type": "str"},
                 "signature": {"required": False, "type": "str"},
-                "tag": {"required": False, "type": "str"},
+                "tag": {"required": True, "type": "str"},
                 "technology": {"required": False, "type": "str"},
                 "vendor": {"required": False, "type": "str"}
 
@@ -291,6 +295,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_application(module.params, fos)

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and static6 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     router_static6:
         description:
             - Configure IPv6 static routing tables.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             bfd:
                 description:
                     - Enable/disable Bidirectional Forwarding Detection (BFD).
@@ -88,7 +95,7 @@ options:
                     - Optional comments.
             device:
                 description:
-                    - Gateway out interface or tunnel. Source: system.interface.name.
+                    - Gateway out interface or tunnel. Source system.interface.name.
             devindex:
                 description:
                     - Device index (0 - 4294967295).
@@ -107,6 +114,7 @@ options:
             seq-num:
                 description:
                     - Sequence number.
+                required: true
             status:
                 description:
                     - Enable/disable this static route.
@@ -131,16 +139,16 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv6 static routing tables.
     fortios_router_static6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_static6:
         state: "present"
         bfd: "enable"
         blackhole: "enable"
         comment: "Optional comments."
-        device: "<your_own_value> (source: system.interface.name)"
+        device: "<your_own_value> (source system.interface.name)"
         devindex: "7"
         distance: "8"
         dst: "<your_own_value>"
@@ -210,6 +218,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -245,7 +255,6 @@ def router_static6(data, fos):
     vdom = data['vdom']
     router_static6_data = data['router_static6']
     filtered_data = filter_router_static6_data(router_static6_data)
-
     if router_static6_data['state'] == "present":
         return fos.set('router',
                        'static6',
@@ -255,16 +264,12 @@ def router_static6(data, fos):
     elif router_static6_data['state'] == "absent":
         return fos.delete('router',
                           'static6',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['seq-num'],
                           vdom=vdom)
 
 
 def fortios_router(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['router_static6']
     for method in methodlist:
@@ -282,11 +287,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "router_static6": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "bfd": {"required": False, "type": "str",
                         "choices": ["enable", "disable"]},
                 "blackhole": {"required": False, "type": "str",
@@ -295,10 +301,10 @@ def main():
                 "device": {"required": False, "type": "str"},
                 "devindex": {"required": False, "type": "int"},
                 "distance": {"required": False, "type": "int"},
-                "dst": {"required": False, "type": "ipv6-network"},
-                "gateway": {"required": False, "type": "ipv6-address"},
+                "dst": {"required": False, "type": "str"},
+                "gateway": {"required": False, "type": "str"},
                 "priority": {"required": False, "type": "int"},
-                "seq-num": {"required": False, "type": "int"},
+                "seq-num": {"required": True, "type": "int"},
                 "status": {"required": False, "type": "str",
                            "choices": ["enable", "disable"]},
                 "virtual-wan-link": {"required": False, "type": "str",
@@ -315,6 +321,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

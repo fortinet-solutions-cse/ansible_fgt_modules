@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and ldap category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_ldap:
         description:
             - Configure LDAP server entries.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             account-key-filter:
                 description:
                     - Account key filter, using the UPN as the search filter.
@@ -82,7 +89,7 @@ options:
                     - strip
             ca-cert:
                 description:
-                    - CA certificate name. Source: vpn.certificate.ca.name.
+                    - CA certificate name. Source vpn.certificate.ca.name.
             cnid:
                 description:
                     - Common name identifier for the LDAP server. The common name identifier for most LDAP servers is "cn".
@@ -180,15 +187,15 @@ EXAMPLES = '''
   tasks:
   - name: Configure LDAP server entries.
     fortios_user_ldap:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_ldap:
         state: "present"
         account-key-filter: "<your_own_value>"
         account-key-processing: "same"
-        ca-cert: "<your_own_value> (source: vpn.certificate.ca.name)"
+        ca-cert: "<your_own_value> (source vpn.certificate.ca.name)"
         cnid: "<your_own_value>"
         dn: "<your_own_value>"
         group-filter: "<your_own_value>"
@@ -270,6 +277,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -309,7 +318,6 @@ def user_ldap(data, fos):
     vdom = data['vdom']
     user_ldap_data = data['user_ldap']
     filtered_data = filter_user_ldap_data(user_ldap_data)
-
     if user_ldap_data['state'] == "present":
         return fos.set('user',
                        'ldap',
@@ -319,16 +327,12 @@ def user_ldap(data, fos):
     elif user_ldap_data['state'] == "absent":
         return fos.delete('user',
                           'ldap',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_ldap']
     for method in methodlist:
@@ -346,11 +350,12 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_ldap": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "account-key-filter": {"required": False, "type": "str"},
                 "account-key-processing": {"required": False, "type": "str",
                                            "choices": ["same", "strip"]},
@@ -364,7 +369,7 @@ def main():
                 "group-search-base": {"required": False, "type": "str"},
                 "member-attr": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
-                "password": {"required": False, "type": "password"},
+                "password": {"required": False, "type": "str"},
                 "password-expiry-warning": {"required": False, "type": "str",
                                             "choices": ["enable", "disable"]},
                 "password-renewal": {"required": False, "type": "str",
@@ -374,7 +379,7 @@ def main():
                 "secure": {"required": False, "type": "str",
                            "choices": ["disable", "starttls", "ldaps"]},
                 "server": {"required": False, "type": "str"},
-                "source-ip": {"required": False, "type": "ipv4-address"},
+                "source-ip": {"required": False, "type": "str"},
                 "ssl-min-proto-version": {"required": False, "type": "str",
                                           "choices": ["default", "SSLv3", "TLSv1",
                                                       "TLSv1-1", "TLSv1-2"]},
@@ -394,6 +399,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

@@ -7,10 +7,10 @@
   tasks:
   - name: Report style configuration.
     fortios_report_style:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       report_style:
         state: "present"
         align: "left"

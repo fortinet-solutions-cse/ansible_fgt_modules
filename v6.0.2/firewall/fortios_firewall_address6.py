@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and address6 category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     firewall_address6:
         description:
             - Configure IPv6 firewall addresses.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             cache-ttl:
                 description:
                     - Minimal TTL of individual IPv6 addresses in FQDN cache.
@@ -82,7 +89,7 @@ options:
                     - Comment.
             end-ip:
                 description:
-                    - Final IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).
+                    - "Final IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx)."
             fqdn:
                 description:
                     - Fully qualified domain name.
@@ -97,7 +104,7 @@ options:
                     - specific
             ip6:
                 description:
-                    - IPv6 address prefix (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx).
+                    - "IPv6 address prefix (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx)."
             list:
                 description:
                     - IP address list.
@@ -105,6 +112,7 @@ options:
                     ip:
                         description:
                             - IP.
+                        required: true
             name:
                 description:
                     - Address name.
@@ -119,7 +127,7 @@ options:
                     - nsx
             start-ip:
                 description:
-                    - First IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx).
+                    - "First IP address (inclusive) in the range for the address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx)."
             subnet-segment:
                 description:
                     - IPv6 subnet segments.
@@ -143,7 +151,7 @@ options:
                 suboptions:
                     category:
                         description:
-                            - Tag category. Source: system.object-tagging.category.
+                            - Tag category. Source system.object-tagging.category.
                     name:
                         description:
                             - Tagging entry name.
@@ -154,11 +162,11 @@ options:
                         suboptions:
                             name:
                                 description:
-                                    - Tag name. Source: system.object-tagging.tags.name.
+                                    - Tag name. Source system.object-tagging.tags.name.
                                 required: true
             template:
                 description:
-                    - IPv6 address template. Source: firewall.address6-template.name.
+                    - IPv6 address template. Source firewall.address6-template.name.
             type:
                 description:
                     - Type of IPv6 address object (default = ipprefix).
@@ -189,10 +197,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure IPv6 firewall addresses.
     fortios_firewall_address6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall_address6:
         state: "present"
         cache-ttl: "3"
@@ -217,12 +225,12 @@ EXAMPLES = '''
             value: "<your_own_value>"
         tagging:
          -
-            category: "<your_own_value> (source: system.object-tagging.category)"
+            category: "<your_own_value> (source system.object-tagging.category)"
             name: "default_name_23"
             tags:
              -
-                name: "default_name_25 (source: system.object-tagging.tags.name)"
-        template: "<your_own_value> (source: firewall.address6-template.name)"
+                name: "default_name_25 (source system.object-tagging.tags.name)"
+        template: "<your_own_value> (source firewall.address6-template.name)"
         type: "ipprefix"
         uuid: "<your_own_value>"
         visibility: "enable"
@@ -287,6 +295,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -325,7 +335,6 @@ def firewall_address6(data, fos):
     vdom = data['vdom']
     firewall_address6_data = data['firewall_address6']
     filtered_data = filter_firewall_address6_data(firewall_address6_data)
-
     if firewall_address6_data['state'] == "present":
         return fos.set('firewall',
                        'address6',
@@ -335,16 +344,12 @@ def firewall_address6(data, fos):
     elif firewall_address6_data['state'] == "absent":
         return fos.delete('firewall',
                           'address6',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_firewall(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['firewall_address6']
     for method in methodlist:
@@ -362,29 +367,30 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "firewall_address6": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "cache-ttl": {"required": False, "type": "int"},
                 "color": {"required": False, "type": "int"},
                 "comment": {"required": False, "type": "str"},
-                "end-ip": {"required": False, "type": "ipv6-address"},
+                "end-ip": {"required": False, "type": "str"},
                 "fqdn": {"required": False, "type": "str"},
-                "host": {"required": False, "type": "ipv6-address"},
+                "host": {"required": False, "type": "str"},
                 "host-type": {"required": False, "type": "str",
                               "choices": ["any", "specific"]},
-                "ip6": {"required": False, "type": "ipv6-network"},
+                "ip6": {"required": False, "type": "str"},
                 "list": {"required": False, "type": "list",
                          "options": {
-                             "ip": {"required": False, "type": "str"}
+                             "ip": {"required": True, "type": "str"}
                          }},
                 "name": {"required": True, "type": "str"},
                 "obj-id": {"required": False, "type": "str"},
                 "sdn": {"required": False, "type": "str",
                         "choices": ["nsx"]},
-                "start-ip": {"required": False, "type": "ipv6-address"},
+                "start-ip": {"required": False, "type": "str"},
                 "subnet-segment": {"required": False, "type": "list",
                                    "options": {
                                        "name": {"required": True, "type": "str"},
@@ -405,7 +411,7 @@ def main():
                 "type": {"required": False, "type": "str",
                          "choices": ["ipprefix", "iprange", "fqdn",
                                      "dynamic", "template"]},
-                "uuid": {"required": False, "type": "uuid"},
+                "uuid": {"required": False, "type": "str"},
                 "visibility": {"required": False, "type": "str",
                                "choices": ["enable", "disable"]}
 
@@ -420,6 +426,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

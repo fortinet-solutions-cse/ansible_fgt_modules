@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.dhcp6 feature and server category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     system.dhcp6_server:
         description:
             - Configure DHCPv6 servers.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             dns-search-list:
                 description:
                     - DNS search list options.
@@ -102,7 +109,7 @@ options:
                 required: true
             interface:
                 description:
-                    - DHCP server can assign IP configurations to clients connected to this interface. Source: system.interface.name.
+                    - DHCP server can assign IP configurations to clients connected to this interface. Source system.interface.name.
             ip-mode:
                 description:
                     - Method used to assign client IP.
@@ -169,7 +176,7 @@ options:
                     - Subnet or subnet-id if the IP mode is delegated.
             upstream-interface:
                 description:
-                    - Interface name from where delegated information is provided. Source: system.interface.name.
+                    - Interface name from where delegated information is provided. Source system.interface.name.
 '''
 
 EXAMPLES = '''
@@ -182,10 +189,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure DHCPv6 servers.
     fortios_system.dhcp6_server:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       system.dhcp6_server:
         state: "present"
         dns-search-list: "delegated"
@@ -195,7 +202,7 @@ EXAMPLES = '''
         dns-service: "delegated"
         domain: "<your_own_value>"
         id:  "9"
-        interface: "<your_own_value> (source: system.interface.name)"
+        interface: "<your_own_value> (source system.interface.name)"
         ip-mode: "range"
         ip-range:
          -
@@ -215,7 +222,7 @@ EXAMPLES = '''
         rapid-commit: "disable"
         status: "disable"
         subnet: "<your_own_value>"
-        upstream-interface: "<your_own_value> (source: system.interface.name)"
+        upstream-interface: "<your_own_value> (source system.interface.name)"
 '''
 
 RETURN = '''
@@ -277,6 +284,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -315,7 +324,6 @@ def system.dhcp6_server(data, fos):
     vdom = data['vdom']
     system.dhcp6_server_data = data['system.dhcp6_server']
     filtered_data = filter_system.dhcp6_server_data(system.dhcp6_server_data)
-
     if system.dhcp6_server_data['state'] == "present":
         return fos.set('system.dhcp6',
                        'server',
@@ -330,11 +338,7 @@ def system.dhcp6_server(data, fos):
 
 
 def fortios_system.dhcp6(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['system.dhcp6_server']
     for method in methodlist:
@@ -352,16 +356,17 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "system.dhcp6_server": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "dns-search-list": {"required": False, "type": "str",
                                     "choices": ["delegated", "specify"]},
-                "dns-server1": {"required": False, "type": "ipv6-address"},
-                "dns-server2": {"required": False, "type": "ipv6-address"},
-                "dns-server3": {"required": False, "type": "ipv6-address"},
+                "dns-server1": {"required": False, "type": "str"},
+                "dns-server2": {"required": False, "type": "str"},
+                "dns-server3": {"required": False, "type": "str"},
                 "dns-service": {"required": False, "type": "str",
                                 "choices": ["delegated", "default", "specify"]},
                 "domain": {"required": False, "type": "str"},
@@ -371,9 +376,9 @@ def main():
                             "choices": ["range", "delegated"]},
                 "ip-range": {"required": False, "type": "list",
                              "options": {
-                                 "end-ip": {"required": False, "type": "ipv6-address"},
+                                 "end-ip": {"required": False, "type": "str"},
                                  "id": {"required": True, "type": "int"},
-                                 "start-ip": {"required": False, "type": "ipv6-address"}
+                                 "start-ip": {"required": False, "type": "str"}
                              }},
                 "lease-time": {"required": False, "type": "int"},
                 "option1": {"required": False, "type": "str"},
@@ -381,16 +386,16 @@ def main():
                 "option3": {"required": False, "type": "str"},
                 "prefix-range": {"required": False, "type": "list",
                                  "options": {
-                                     "end-prefix": {"required": False, "type": "ipv6-address"},
+                                     "end-prefix": {"required": False, "type": "str"},
                                      "id": {"required": True, "type": "int"},
                                      "prefix-length": {"required": False, "type": "int"},
-                                     "start-prefix": {"required": False, "type": "ipv6-address"}
+                                     "start-prefix": {"required": False, "type": "str"}
                                  }},
                 "rapid-commit": {"required": False, "type": "str",
                                  "choices": ["disable", "enable"]},
                 "status": {"required": False, "type": "str",
                            "choices": ["disable", "enable"]},
-                "subnet": {"required": False, "type": "ipv6-prefix"},
+                "subnet": {"required": False, "type": "str"},
                 "upstream-interface": {"required": False, "type": "str"}
 
             }
@@ -404,6 +409,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_system.dhcp6(module.params, fos)

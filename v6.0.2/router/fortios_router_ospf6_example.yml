@@ -7,12 +7,11 @@
   tasks:
   - name: Configure IPv6 OSPF.
     fortios_router_ospf6:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       router_ospf6:
-        state: "present"
         abr-type: "cisco"
         area:
          -
@@ -43,7 +42,7 @@
         default-information-metric: "27"
         default-information-metric-type: "1"
         default-information-originate: "enable"
-        default-information-route-map: "<your_own_value> (source: router.route-map.name)"
+        default-information-route-map: "<your_own_value> (source router.route-map.name)"
         default-metric: "31"
         log-neighbour-changes: "enable"
         ospf6-interface:
@@ -53,7 +52,7 @@
             cost: "36"
             dead-interval: "37"
             hello-interval: "38"
-            interface: "<your_own_value> (source: system.interface.name)"
+            interface: "<your_own_value> (source system.interface.name)"
             name: "default_name_40"
             neighbor:
              -
@@ -68,13 +67,13 @@
             transmit-delay: "50"
         passive-interface:
          -
-            name: "default_name_52 (source: system.interface.name)"
+            name: "default_name_52 (source system.interface.name)"
         redistribute:
          -
             metric: "54"
             metric-type: "1"
             name: "default_name_56"
-            routemap: "<your_own_value> (source: router.route-map.name)"
+            routemap: "<your_own_value> (source router.route-map.name)"
             status: "enable"
         router-id: "<your_own_value>"
         spf-timers: "<your_own_value>"

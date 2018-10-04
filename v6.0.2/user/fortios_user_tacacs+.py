@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-from ansible.module_utils.basic import AnsibleModule
 # Copyright 2018 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -33,8 +32,8 @@ description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and tacacs+ category.
       Examples includes all options and need to be adjusted to datasources before usage.
-      Tested with FOS: v6.0.2
-version_added: "2.6"
+      Tested with FOS v6.0.2
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -61,16 +60,24 @@ options:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
-        default: "root"
+        default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
+        type: bool
+        default: false
     user_tacacs+:
         description:
             - Configure TACACS+ server entries.
         default: null
         suboptions:
+            state:
+                description:
+                    - Indicates whether to create or remove the object
+                choices:
+                    - present
+                    - absent
             authen-type:
                 description:
                     - Allowed authentication protocols/methods.
@@ -126,10 +133,10 @@ EXAMPLES = '''
   tasks:
   - name: Configure TACACS+ server entries.
     fortios_user_tacacs+:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       user_tacacs+:
         state: "present"
         authen-type: "mschap"
@@ -204,6 +211,8 @@ version:
 
 '''
 
+from ansible.module_utils.basic import AnsibleModule
+
 fos = None
 
 
@@ -239,7 +248,6 @@ def user_tacacs+(data, fos):
     vdom = data['vdom']
     user_tacacs+_data = data['user_tacacs+']
     filtered_data = filter_user_tacacs+_data(user_tacacs+_data)
-
     if user_tacacs+_data['state'] == "present":
         return fos.set('user',
                        'tacacs+',
@@ -249,16 +257,12 @@ def user_tacacs+(data, fos):
     elif user_tacacs+_data['state'] == "absent":
         return fos.delete('user',
                           'tacacs+',
-                          mkey=filtered_data['id'],
+                          mkey=filtered_data['name'],
                           vdom=vdom)
 
 
 def fortios_user(data, fos):
-    host = data['host']
-    username = data['username']
-    password = data['password']
-    fos.https('off')
-    fos.login(host, username, password)
+    login(data)
 
     methodlist = ['user_tacacs+']
     for method in methodlist:
@@ -276,24 +280,25 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "True"},
+        "https": {"required": False, "type": "bool", "default": "False"},
         "user_tacacs+": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str"},
+                "state": {"required": True, "type": "str",
+                          "choices": ["present", "absent"]},
                 "authen-type": {"required": False, "type": "str",
                                 "choices": ["mschap", "chap", "pap",
                                             "ascii", "auto"]},
                 "authorization": {"required": False, "type": "str",
                                   "choices": ["enable", "disable"]},
-                "key": {"required": False, "type": "password"},
+                "key": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},
                 "port": {"required": False, "type": "int"},
-                "secondary-key": {"required": False, "type": "password"},
+                "secondary-key": {"required": False, "type": "str"},
                 "secondary-server": {"required": False, "type": "str"},
                 "server": {"required": False, "type": "str"},
                 "source-ip": {"required": False, "type": "str"},
-                "tertiary-key": {"required": False, "type": "password"},
+                "tertiary-key": {"required": False, "type": "str"},
                 "tertiary-server": {"required": False, "type": "str"}
 
             }
@@ -307,6 +312,7 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
+    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

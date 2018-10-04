@@ -7,10 +7,10 @@
   tasks:
   - name: Configure service categories.
     fortios_firewall.service_category:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       firewall.service_category:
         state: "present"
         comment: "Comment."

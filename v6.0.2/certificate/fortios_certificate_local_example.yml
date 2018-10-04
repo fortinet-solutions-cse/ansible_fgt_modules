@@ -7,10 +7,10 @@
   tasks:
   - name: Local keys and certificates.
     fortios_certificate_local:
-      host:  "{{  host }}"
+      host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
-      vdom:  "{{  vdom }}"
+      vdom:  "{{ vdom }}"
       certificate_local:
         state: "present"
         auto-regenerate-days: "3"
@@ -20,7 +20,7 @@
         cmp-path: "<your_own_value>"
         cmp-regeneration-method: "keyupate"
         cmp-server: "<your_own_value>"
-        cmp-server-cert: "<your_own_value> (source: certificate.ca.name)"
+        cmp-server-cert: "<your_own_value> (source certificate.ca.name)"
         comments: "<your_own_value>"
         csr: "<your_own_value>"
         enroll-protocol: "none"

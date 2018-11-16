@@ -41,5 +41,5 @@
             sso-credential-sent-once: "enable"
             sso-password: "<your_own_value>"
             sso-username: "<your_own_value>"
-            url: "http://myurl.com"
+            url: "myurl.com"
         name: "default_name_30 (source user.group.name)"

@@ -218,7 +218,7 @@ def filter_system_session_helper_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

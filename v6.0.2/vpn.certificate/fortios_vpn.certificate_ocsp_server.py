@@ -127,7 +127,7 @@ EXAMPLES = '''
         secondary-url: "<your_own_value>"
         source-ip: "84.230.14.43"
         unavail-action: "revoke"
-        url: "http://myurl.com"
+        url: "myurl.com"
 '''
 
 RETURN = '''
@@ -215,7 +215,7 @@ def filter_vpn.certificate_ocsp_server_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

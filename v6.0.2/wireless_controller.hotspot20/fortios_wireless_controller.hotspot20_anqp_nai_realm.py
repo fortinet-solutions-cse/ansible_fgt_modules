@@ -288,7 +288,7 @@ def filter_wireless_controller.hotspot20_anqp_nai_realm_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

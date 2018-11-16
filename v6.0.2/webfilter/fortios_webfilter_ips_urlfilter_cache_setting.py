@@ -182,7 +182,7 @@ def filter_webfilter_ips_urlfilter_cache_setting_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

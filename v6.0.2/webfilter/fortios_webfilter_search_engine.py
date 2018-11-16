@@ -131,7 +131,7 @@ EXAMPLES = '''
         query: "<your_own_value>"
         safesearch: "disable"
         safesearch-str: "<your_own_value>"
-        url: "http://myurl.com"
+        url: "myurl.com"
 '''
 
 RETURN = '''
@@ -219,7 +219,7 @@ def filter_webfilter_search_engine_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

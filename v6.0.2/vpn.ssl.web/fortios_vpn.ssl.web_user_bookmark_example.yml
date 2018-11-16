@@ -41,6 +41,6 @@
             sso-credential-sent-once: "enable"
             sso-password: "<your_own_value>"
             sso-username: "<your_own_value>"
-            url: "http://myurl.com"
+            url: "myurl.com"
         custom-lang: "<your_own_value> (source system.custom-language.name)"
         name: "default_name_31"

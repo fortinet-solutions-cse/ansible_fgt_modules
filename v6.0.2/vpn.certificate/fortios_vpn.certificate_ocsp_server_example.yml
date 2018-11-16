@@ -19,4 +19,4 @@
         secondary-url: "<your_own_value>"
         source-ip: "84.230.14.43"
         unavail-action: "revoke"
-        url: "http://myurl.com"
+        url: "myurl.com"

@@ -19,4 +19,4 @@
         query: "<your_own_value>"
         safesearch: "disable"
         safesearch-str: "<your_own_value>"
-        url: "http://myurl.com"
+        url: "myurl.com"

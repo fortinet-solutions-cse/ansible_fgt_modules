@@ -111,7 +111,7 @@ EXAMPLES = '''
         state: "present"
         rating: "<your_own_value>"
         status: "enable"
-        url: "http://myurl.com"
+        url: "myurl.com"
 '''
 
 RETURN = '''
@@ -197,7 +197,7 @@ def filter_webfilter_ftgd_local_rating_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

@@ -185,7 +185,7 @@ EXAMPLES = '''
             referrer-host: "myhostname"
             status: "enable"
             type: "simple"
-            url: "http://myurl.com"
+            url: "myurl.com"
             web-proxy-profile: "<your_own_value> (source web-proxy.profile.name)"
         id:  "14"
         ip-addr-block: "enable"
@@ -277,7 +277,7 @@ def filter_webfilter_urlfilter_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

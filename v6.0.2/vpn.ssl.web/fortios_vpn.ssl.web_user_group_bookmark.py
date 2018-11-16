@@ -254,7 +254,7 @@ EXAMPLES = '''
             sso-credential-sent-once: "enable"
             sso-password: "<your_own_value>"
             sso-username: "<your_own_value>"
-            url: "http://myurl.com"
+            url: "myurl.com"
         name: "default_name_30 (source user.group.name)"
 '''
 
@@ -341,7 +341,7 @@ def filter_vpn.ssl.web_user_group_bookmark_data(json):
     dictionary = {}
 
     for attribute in option_list:
-        if attribute in json:
+        if attribute in json and json[attribute] is not None:
             dictionary[attribute] = json[attribute]
 
     return dictionary

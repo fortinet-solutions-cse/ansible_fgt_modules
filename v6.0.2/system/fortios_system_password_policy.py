@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_password_policy
-short_description: Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys.
+short_description: Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and password_policy category.
@@ -245,8 +245,7 @@ def filter_system_password_policy_data(json):
 def system_password_policy(data, fos):
     vdom = data['vdom']
     system_password_policy_data = data['system_password_policy']
-    filtered_data = filter_system_password_policy_data(
-        system_password_policy_data)
+    filtered_data = filter_system_password_policy_data(system_password_policy_data)
     return fos.set('system',
                    'password-policy',
                    data=filtered_data,

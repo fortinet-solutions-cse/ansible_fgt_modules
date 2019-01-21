@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wanopt_settings
-short_description: Configure WAN optimization settings.
+short_description: Configure WAN optimization settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and settings category.

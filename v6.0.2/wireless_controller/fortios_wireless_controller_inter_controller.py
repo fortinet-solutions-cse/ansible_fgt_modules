@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_inter_controller
-short_description: Configure inter wireless controller operation.
+short_description: Configure inter wireless controller operation in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and inter_controller category.
@@ -237,8 +237,7 @@ def filter_wireless_controller_inter_controller_data(json):
 def wireless_controller_inter_controller(data, fos):
     vdom = data['vdom']
     wireless_controller_inter_controller_data = data['wireless_controller_inter_controller']
-    filtered_data = filter_wireless_controller_inter_controller_data(
-        wireless_controller_inter_controller_data)
+    filtered_data = filter_wireless_controller_inter_controller_data(wireless_controller_inter_controller_data)
     return fos.set('wireless-controller',
                    'inter-controller',
                    data=filtered_data,
@@ -298,8 +297,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

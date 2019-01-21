@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_ipv6_neighbor_cache
-short_description: Configure IPv6 neighbor cache table.
+short_description: Configure IPv6 neighbor cache table in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ipv6_neighbor_cache category.
@@ -208,8 +208,7 @@ def filter_system_ipv6_neighbor_cache_data(json):
 def system_ipv6_neighbor_cache(data, fos):
     vdom = data['vdom']
     system_ipv6_neighbor_cache_data = data['system_ipv6_neighbor_cache']
-    filtered_data = filter_system_ipv6_neighbor_cache_data(
-        system_ipv6_neighbor_cache_data)
+    filtered_data = filter_system_ipv6_neighbor_cache_data(system_ipv6_neighbor_cache_data)
     if system_ipv6_neighbor_cache_data['state'] == "present":
         return fos.set('system',
                        'ipv6-neighbor-cache',

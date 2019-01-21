@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_multicast_policy
-short_description: Configure multicast NAT policies.
+short_description: Configure multicast NAT policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and multicast_policy category.
@@ -277,8 +277,7 @@ def filter_firewall_multicast_policy_data(json):
 def firewall_multicast_policy(data, fos):
     vdom = data['vdom']
     firewall_multicast_policy_data = data['firewall_multicast_policy']
-    filtered_data = filter_firewall_multicast_policy_data(
-        firewall_multicast_policy_data)
+    filtered_data = filter_firewall_multicast_policy_data(firewall_multicast_policy_data)
     if firewall_multicast_policy_data['state'] == "present":
         return fos.set('firewall',
                        'multicast-policy',

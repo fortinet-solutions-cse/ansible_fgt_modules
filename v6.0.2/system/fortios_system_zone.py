@@ -28,7 +28,7 @@ DOCUMENTATION = '''
 ---
 module: fortios_system_zone
 short_description: Configure zones to group two or more interfaces. When a zone is created you can configure policies for the zone instead of individual
-   interfaces in the zone.
+   interfaces in the zone in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and zone category.

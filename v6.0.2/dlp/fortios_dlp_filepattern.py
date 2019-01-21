@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dlp_filepattern
-short_description: Configure file patterns used by DLP blocking.
+short_description: Configure file patterns used by DLP blocking in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and filepattern category.

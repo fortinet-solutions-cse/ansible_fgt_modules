@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_ippool6
-short_description: Configure IPv6 IP pools.
+short_description: Configure IPv6 IP pools in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and ippool6 category.

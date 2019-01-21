@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_vip
-short_description: Configure virtual IP for IPv4.
+short_description: Configure virtual IP for IPv4 in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and vip category.

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_shaping_policy
-short_description: Configure shaping policies.
+short_description: Configure shaping policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and shaping_policy category.
@@ -420,8 +420,7 @@ def filter_firewall_shaping_policy_data(json):
 def firewall_shaping_policy(data, fos):
     vdom = data['vdom']
     firewall_shaping_policy_data = data['firewall_shaping_policy']
-    filtered_data = filter_firewall_shaping_policy_data(
-        firewall_shaping_policy_data)
+    filtered_data = filter_firewall_shaping_policy_data(firewall_shaping_policy_data)
     if firewall_shaping_policy_data['state'] == "present":
         return fos.set('firewall',
                        'shaping-policy',

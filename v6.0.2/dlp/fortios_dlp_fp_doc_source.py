@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dlp_fp_doc_source
-short_description: Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints.
+short_description: Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints in
+   Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and fp_doc_source category.

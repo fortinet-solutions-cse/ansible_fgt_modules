@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller.hotspot20_anqp_3gpp_cellular
-short_description: Configure 3GPP public land mobile network (PLMN).
+short_description: Configure 3GPP public land mobile network (PLMN) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller.hotspot20 feature and anqp_3gpp_cellular category.
@@ -213,10 +213,8 @@ def filter_wireless_controller.hotspot20_anqp_3gpp_cellular_data(json):
 
 def wireless_controller.hotspot20_anqp_3gpp_cellular(data, fos):
     vdom = data['vdom']
-    wireless_controller.hotspot20_anqp_3gpp_cellular_data = data[
-        'wireless_controller.hotspot20_anqp_3gpp_cellular']
-    filtered_data = filter_wireless_controller.hotspot20_anqp_3gpp_cellular_data(
-        wireless_controller.hotspot20_anqp_3gpp_cellular_data)
+    wireless_controller.hotspot20_anqp_3gpp_cellular_data = data['wireless_controller.hotspot20_anqp_3gpp_cellular']
+    filtered_data = filter_wireless_controller.hotspot20_anqp_3gpp_cellular_data(wireless_controller.hotspot20_anqp_3gpp_cellular_data)
     if wireless_controller.hotspot20_anqp_3gpp_cellular_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'anqp-3gpp-cellular',
@@ -277,8 +275,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller.hotspot20(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller.hotspot20(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

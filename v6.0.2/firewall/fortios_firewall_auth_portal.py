@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_auth_portal
-short_description: Configure firewall authentication portals.
+short_description: Configure firewall authentication portals in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and auth_portal category.

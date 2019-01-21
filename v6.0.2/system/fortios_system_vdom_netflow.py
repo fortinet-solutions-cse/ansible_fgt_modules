@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_vdom_netflow
-short_description: Configure NetFlow per VDOM.
+short_description: Configure NetFlow per VDOM in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and vdom_netflow category.

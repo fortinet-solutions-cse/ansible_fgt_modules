@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_mobile_tunnel
-short_description: Configure Mobile tunnels, an implementation of Network Mobility (NEMO) extensions for Mobile IPv4 RFC5177.
+short_description: Configure Mobile tunnels, an implementation of Network Mobility (NEMO) extensions for Mobile IPv4 RFC5177 in Fortinet's FortiOS and
+   FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and mobile_tunnel category.

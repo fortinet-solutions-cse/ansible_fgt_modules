@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_multicast6
-short_description: Configure IPv6 multicast.
+short_description: Configure IPv6 multicast in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and multicast6 category.

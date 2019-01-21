@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dlp_fp_sensitivity
-short_description: Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source.
+short_description: Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source in Fortinet's FortiOS and
+   FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and fp_sensitivity category.

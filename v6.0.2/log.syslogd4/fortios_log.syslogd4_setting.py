@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.syslogd4_setting
-short_description: Global settings for remote syslog server.
+short_description: Global settings for remote syslog server in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.syslogd4 feature and setting category.

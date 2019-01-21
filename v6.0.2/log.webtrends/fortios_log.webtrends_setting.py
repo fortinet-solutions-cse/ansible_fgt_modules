@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.webtrends_setting
-short_description: Settings for WebTrends.
+short_description: Settings for WebTrends in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.webtrends feature and setting category.
@@ -194,8 +194,7 @@ def filter_log.webtrends_setting_data(json):
 def log.webtrends_setting(data, fos):
     vdom = data['vdom']
     log.webtrends_setting_data = data['log.webtrends_setting']
-    filtered_data = filter_log.webtrends_setting_data(
-        log.webtrends_setting_data)
+    filtered_data = filter_log.webtrends_setting_data(log.webtrends_setting_data)
     return fos.set('log.webtrends',
                    'setting',
                    data=filtered_data,

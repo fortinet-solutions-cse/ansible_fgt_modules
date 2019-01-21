@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_network_monitor_settings
-short_description: Configure network monitor settings.
+short_description: Configure network monitor settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and network_monitor_settings category.
@@ -189,10 +189,8 @@ def filter_switch_controller_network_monitor_settings_data(json):
 
 def switch_controller_network_monitor_settings(data, fos):
     vdom = data['vdom']
-    switch_controller_network_monitor_settings_data = data[
-        'switch_controller_network_monitor_settings']
-    filtered_data = filter_switch_controller_network_monitor_settings_data(
-        switch_controller_network_monitor_settings_data)
+    switch_controller_network_monitor_settings_data = data['switch_controller_network_monitor_settings']
+    filtered_data = filter_switch_controller_network_monitor_settings_data(switch_controller_network_monitor_settings_data)
     return fos.set('switch-controller',
                    'network-monitor-settings',
                    data=filtered_data,
@@ -239,8 +237,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.syslogd_override_setting
-short_description: Override settings for remote syslog server.
+short_description: Override settings for remote syslog server in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.syslogd feature and override_setting category.
@@ -289,8 +289,7 @@ def filter_log.syslogd_override_setting_data(json):
 def log.syslogd_override_setting(data, fos):
     vdom = data['vdom']
     log.syslogd_override_setting_data = data['log.syslogd_override_setting']
-    filtered_data = filter_log.syslogd_override_setting_data(
-        log.syslogd_override_setting_data)
+    filtered_data = filter_log.syslogd_override_setting_data(log.syslogd_override_setting_data)
     return fos.set('log.syslogd',
                    'override-setting',
                    data=filtered_data,

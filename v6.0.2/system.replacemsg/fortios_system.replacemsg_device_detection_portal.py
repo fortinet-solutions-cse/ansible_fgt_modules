@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.replacemsg_device_detection_portal
-short_description: Replacement messages.
+short_description: Replacement messages in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.replacemsg feature and device_detection_portal category.
@@ -216,10 +216,8 @@ def filter_system.replacemsg_device_detection_portal_data(json):
 
 def system.replacemsg_device_detection_portal(data, fos):
     vdom = data['vdom']
-    system.replacemsg_device_detection_portal_data = data[
-        'system.replacemsg_device_detection_portal']
-    filtered_data = filter_system.replacemsg_device_detection_portal_data(
-        system.replacemsg_device_detection_portal_data)
+    system.replacemsg_device_detection_portal_data = data['system.replacemsg_device_detection_portal']
+    filtered_data = filter_system.replacemsg_device_detection_portal_data(system.replacemsg_device_detection_portal_data)
     if system.replacemsg_device_detection_portal_data['state'] == "present":
         return fos.set('system.replacemsg',
                        'device-detection-portal',
@@ -280,8 +278,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.replacemsg(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.replacemsg(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

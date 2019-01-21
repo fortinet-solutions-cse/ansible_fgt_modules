@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_ips_urlfilter_setting6
-short_description: Configure IPS URL filter settings for IPv6.
+short_description: Configure IPS URL filter settings for IPv6 in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and ips_urlfilter_setting6 category.
@@ -200,8 +200,7 @@ def filter_webfilter_ips_urlfilter_setting6_data(json):
 def webfilter_ips_urlfilter_setting6(data, fos):
     vdom = data['vdom']
     webfilter_ips_urlfilter_setting6_data = data['webfilter_ips_urlfilter_setting6']
-    filtered_data = filter_webfilter_ips_urlfilter_setting6_data(
-        webfilter_ips_urlfilter_setting6_data)
+    filtered_data = filter_webfilter_ips_urlfilter_setting6_data(webfilter_ips_urlfilter_setting6_data)
     return fos.set('webfilter',
                    'ips-urlfilter-setting6',
                    data=filtered_data,

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_forward_server
-short_description: Configure forward-server addresses.
+short_description: Configure forward-server addresses in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure web_proxy feature and forward_server category.
@@ -240,8 +240,7 @@ def filter_web_proxy_forward_server_data(json):
 def web_proxy_forward_server(data, fos):
     vdom = data['vdom']
     web_proxy_forward_server_data = data['web_proxy_forward_server']
-    filtered_data = filter_web_proxy_forward_server_data(
-        web_proxy_forward_server_data)
+    filtered_data = filter_web_proxy_forward_server_data(web_proxy_forward_server_data)
     if web_proxy_forward_server_data['state'] == "present":
         return fos.set('web-proxy',
                        'forward-server',

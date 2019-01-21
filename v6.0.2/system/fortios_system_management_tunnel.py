@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_management_tunnel
-short_description: Management tunnel configuration.
+short_description: Management tunnel configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and management_tunnel category.
@@ -231,8 +231,7 @@ def filter_system_management_tunnel_data(json):
 def system_management_tunnel(data, fos):
     vdom = data['vdom']
     system_management_tunnel_data = data['system_management_tunnel']
-    filtered_data = filter_system_management_tunnel_data(
-        system_management_tunnel_data)
+    filtered_data = filter_system_management_tunnel_data(system_management_tunnel_data)
     return fos.set('system',
                    'management-tunnel',
                    data=filtered_data,

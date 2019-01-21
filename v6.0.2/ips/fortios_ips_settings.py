@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_ips_settings
-short_description: Configure IPS VDOM parameter.
+short_description: Configure IPS VDOM parameter in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure ips feature and settings category.

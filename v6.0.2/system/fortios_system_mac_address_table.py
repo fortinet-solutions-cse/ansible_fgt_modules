@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_mac_address_table
-short_description: Configure MAC address tables.
+short_description: Configure MAC address tables in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and mac_address_table category.
@@ -203,8 +203,7 @@ def filter_system_mac_address_table_data(json):
 def system_mac_address_table(data, fos):
     vdom = data['vdom']
     system_mac_address_table_data = data['system_mac_address_table']
-    filtered_data = filter_system_mac_address_table_data(
-        system_mac_address_table_data)
+    filtered_data = filter_system_mac_address_table_data(system_mac_address_table_data)
     if system_mac_address_table_data['state'] == "present":
         return fos.set('system',
                        'mac-address-table',

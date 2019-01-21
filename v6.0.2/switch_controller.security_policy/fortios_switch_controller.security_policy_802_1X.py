@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller.security_policy_802_1X
-short_description: Configure 802.1x MAC Authentication Bypass (MAB) policies.
+short_description: Configure 802.1x MAC Authentication Bypass (MAB) policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller.security_policy feature and 802_1X category.
@@ -285,8 +285,7 @@ def filter_switch_controller.security_policy_802_1X_data(json):
 def switch_controller.security_policy_802_1X(data, fos):
     vdom = data['vdom']
     switch_controller.security_policy_802_1X_data = data['switch_controller.security_policy_802_1X']
-    filtered_data = filter_switch_controller.security_policy_802_1X_data(
-        switch_controller.security_policy_802_1X_data)
+    filtered_data = filter_switch_controller.security_policy_802_1X_data(switch_controller.security_policy_802_1X_data)
     if switch_controller.security_policy_802_1X_data['state'] == "present":
         return fos.set('switch-controller.security-policy',
                        '802-1X',
@@ -366,8 +365,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller.security_policy(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller.security_policy(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

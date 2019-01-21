@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.service_group
-short_description: Configure service groups.
+short_description: Configure service groups in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.service feature and group category.
@@ -222,8 +222,7 @@ def filter_firewall.service_group_data(json):
 def firewall.service_group(data, fos):
     vdom = data['vdom']
     firewall.service_group_data = data['firewall.service_group']
-    filtered_data = filter_firewall.service_group_data(
-        firewall.service_group_data)
+    filtered_data = filter_firewall.service_group_data(firewall.service_group_data)
     if firewall.service_group_data['state'] == "present":
         return fos.set('firewall.service',
                        'group',
@@ -286,8 +285,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.service(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.service(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

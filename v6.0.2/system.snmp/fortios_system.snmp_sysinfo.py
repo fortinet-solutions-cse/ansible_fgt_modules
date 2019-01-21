@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.snmp_sysinfo
-short_description: SNMP system info configuration.
+short_description: SNMP system info configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.snmp feature and sysinfo category.

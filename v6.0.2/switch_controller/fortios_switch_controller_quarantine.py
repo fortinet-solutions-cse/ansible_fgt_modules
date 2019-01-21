@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_quarantine
-short_description: Configure FortiSwitch quarantine support.
+short_description: Configure FortiSwitch quarantine support in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and quarantine category.
@@ -220,8 +220,7 @@ def filter_switch_controller_quarantine_data(json):
 def switch_controller_quarantine(data, fos):
     vdom = data['vdom']
     switch_controller_quarantine_data = data['switch_controller_quarantine']
-    filtered_data = filter_switch_controller_quarantine_data(
-        switch_controller_quarantine_data)
+    filtered_data = filter_switch_controller_quarantine_data(switch_controller_quarantine_data)
     return fos.set('switch-controller',
                    'quarantine',
                    data=filtered_data,
@@ -278,8 +277,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

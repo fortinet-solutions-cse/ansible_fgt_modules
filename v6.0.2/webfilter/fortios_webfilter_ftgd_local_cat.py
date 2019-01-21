@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_ftgd_local_cat
-short_description: Configure FortiGuard Web Filter local categories.
+short_description: Configure FortiGuard Web Filter local categories in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and ftgd_local_cat category.
@@ -206,8 +206,7 @@ def filter_webfilter_ftgd_local_cat_data(json):
 def webfilter_ftgd_local_cat(data, fos):
     vdom = data['vdom']
     webfilter_ftgd_local_cat_data = data['webfilter_ftgd_local_cat']
-    filtered_data = filter_webfilter_ftgd_local_cat_data(
-        webfilter_ftgd_local_cat_data)
+    filtered_data = filter_webfilter_ftgd_local_cat_data(webfilter_ftgd_local_cat_data)
     if webfilter_ftgd_local_cat_data['state'] == "present":
         return fos.set('webfilter',
                        'ftgd-local-cat',

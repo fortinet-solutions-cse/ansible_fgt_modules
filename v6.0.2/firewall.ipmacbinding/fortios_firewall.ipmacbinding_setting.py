@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.ipmacbinding_setting
-short_description: Configure IP to MAC binding settings.
+short_description: Configure IP to MAC binding settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ipmacbinding feature and setting category.
@@ -204,8 +204,7 @@ def filter_firewall.ipmacbinding_setting_data(json):
 def firewall.ipmacbinding_setting(data, fos):
     vdom = data['vdom']
     firewall.ipmacbinding_setting_data = data['firewall.ipmacbinding_setting']
-    filtered_data = filter_firewall.ipmacbinding_setting_data(
-        firewall.ipmacbinding_setting_data)
+    filtered_data = filter_firewall.ipmacbinding_setting_data(firewall.ipmacbinding_setting_data)
     return fos.set('firewall.ipmacbinding',
                    'setting',
                    data=filtered_data,
@@ -256,8 +255,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.ipmacbinding(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.ipmacbinding(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

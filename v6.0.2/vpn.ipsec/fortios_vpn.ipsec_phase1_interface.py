@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ipsec_phase1_interface
-short_description: Configure VPN remote gateway.
+short_description: Configure VPN remote gateway in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and phase1_interface category.
@@ -1012,8 +1012,7 @@ def filter_vpn.ipsec_phase1_interface_data(json):
 def vpn.ipsec_phase1_interface(data, fos):
     vdom = data['vdom']
     vpn.ipsec_phase1_interface_data = data['vpn.ipsec_phase1_interface']
-    filtered_data = filter_vpn.ipsec_phase1_interface_data(
-        vpn.ipsec_phase1_interface_data)
+    filtered_data = filter_vpn.ipsec_phase1_interface_data(vpn.ipsec_phase1_interface_data)
     if vpn.ipsec_phase1_interface_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'phase1-interface',

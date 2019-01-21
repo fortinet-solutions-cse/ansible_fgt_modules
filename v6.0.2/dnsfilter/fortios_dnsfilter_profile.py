@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dnsfilter_profile
-short_description: Configure DNS domain filter profiles.
+short_description: Configure DNS domain filter profiles in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dnsfilter feature and profile category.

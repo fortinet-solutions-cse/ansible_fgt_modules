@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortianalyzer_override_setting
-short_description: Override FortiAnalyzer settings.
+short_description: Override FortiAnalyzer settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortianalyzer feature and override_setting category.
@@ -311,8 +311,7 @@ def filter_log.fortianalyzer_override_setting_data(json):
 def log.fortianalyzer_override_setting(data, fos):
     vdom = data['vdom']
     log.fortianalyzer_override_setting_data = data['log.fortianalyzer_override_setting']
-    filtered_data = filter_log.fortianalyzer_override_setting_data(
-        log.fortianalyzer_override_setting_data)
+    filtered_data = filter_log.fortianalyzer_override_setting_data(log.fortianalyzer_override_setting_data)
     return fos.set('log.fortianalyzer',
                    'override-setting',
                    data=filtered_data,
@@ -391,8 +390,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_log.fortianalyzer(
-        module.params, fos)
+    is_error, has_changed, result = fortios_log.fortianalyzer(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

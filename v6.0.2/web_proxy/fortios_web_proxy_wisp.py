@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_wisp
-short_description: Configure Wireless Internet service provider (WISP) servers.
+short_description: Configure Wireless Internet service provider (WISP) servers in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure web_proxy feature and wisp category.

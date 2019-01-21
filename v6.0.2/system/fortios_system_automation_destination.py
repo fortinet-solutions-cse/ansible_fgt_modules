@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_automation_destination
-short_description: Automation destinations.
+short_description: Automation destinations in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and automation_destination category.
@@ -218,8 +218,7 @@ def filter_system_automation_destination_data(json):
 def system_automation_destination(data, fos):
     vdom = data['vdom']
     system_automation_destination_data = data['system_automation_destination']
-    filtered_data = filter_system_automation_destination_data(
-        system_automation_destination_data)
+    filtered_data = filter_system_automation_destination_data(system_automation_destination_data)
     if system_automation_destination_data['state'] == "present":
         return fos.set('system',
                        'automation-destination',

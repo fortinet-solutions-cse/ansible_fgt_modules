@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_vipgrp46
-short_description: Configure IPv4 to IPv6 virtual IP groups.
+short_description: Configure IPv4 to IPv6 virtual IP groups in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and vipgrp46 category.

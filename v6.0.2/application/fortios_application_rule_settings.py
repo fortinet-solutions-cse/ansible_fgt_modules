@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_application_rule_settings
-short_description: Configure application rule settings.
+short_description: Configure application rule settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure application feature and rule_settings category.
@@ -195,8 +195,7 @@ def filter_application_rule_settings_data(json):
 def application_rule_settings(data, fos):
     vdom = data['vdom']
     application_rule_settings_data = data['application_rule_settings']
-    filtered_data = filter_application_rule_settings_data(
-        application_rule_settings_data)
+    filtered_data = filter_application_rule_settings_data(application_rule_settings_data)
     if application_rule_settings_data['state'] == "present":
         return fos.set('application',
                        'rule-settings',

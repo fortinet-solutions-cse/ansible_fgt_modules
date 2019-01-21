@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wanopt_cache_service
-short_description: Designate cache-service for wan-optimization and webcache.
+short_description: Designate cache-service for wan-optimization and webcache in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and cache_service category.

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_wtp_profile
-short_description: Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms.
+short_description: Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and wtp_profile category.
@@ -1390,8 +1390,7 @@ def filter_wireless_controller_wtp_profile_data(json):
 def wireless_controller_wtp_profile(data, fos):
     vdom = data['vdom']
     wireless_controller_wtp_profile_data = data['wireless_controller_wtp_profile']
-    filtered_data = filter_wireless_controller_wtp_profile_data(
-        wireless_controller_wtp_profile_data)
+    filtered_data = filter_wireless_controller_wtp_profile_data(wireless_controller_wtp_profile_data)
     if wireless_controller_wtp_profile_data['state'] == "present":
         return fos.set('wireless-controller',
                        'wtp-profile',
@@ -1798,8 +1797,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

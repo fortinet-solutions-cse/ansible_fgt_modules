@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.certificate_ocsp_server
-short_description: OCSP server configuration.
+short_description: OCSP server configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and ocsp_server category.
@@ -224,8 +224,7 @@ def filter_vpn.certificate_ocsp_server_data(json):
 def vpn.certificate_ocsp_server(data, fos):
     vdom = data['vdom']
     vpn.certificate_ocsp_server_data = data['vpn.certificate_ocsp_server']
-    filtered_data = filter_vpn.certificate_ocsp_server_data(
-        vpn.certificate_ocsp_server_data)
+    filtered_data = filter_vpn.certificate_ocsp_server_data(vpn.certificate_ocsp_server_data)
     if vpn.certificate_ocsp_server_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'ocsp-server',

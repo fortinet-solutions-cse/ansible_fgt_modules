@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ssl.web_host_check_software
-short_description: SSL-VPN host check software.
+short_description: SSL-VPN host check software in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ssl.web feature and host_check_software category.
@@ -263,8 +263,7 @@ def filter_vpn.ssl.web_host_check_software_data(json):
 def vpn.ssl.web_host_check_software(data, fos):
     vdom = data['vdom']
     vpn.ssl.web_host_check_software_data = data['vpn.ssl.web_host_check_software']
-    filtered_data = filter_vpn.ssl.web_host_check_software_data(
-        vpn.ssl.web_host_check_software_data)
+    filtered_data = filter_vpn.ssl.web_host_check_software_data(vpn.ssl.web_host_check_software_data)
     if vpn.ssl.web_host_check_software_data['state'] == "present":
         return fos.set('vpn.ssl.web',
                        'host-check-software',

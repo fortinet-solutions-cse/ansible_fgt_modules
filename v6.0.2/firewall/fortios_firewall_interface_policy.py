@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_interface_policy
-short_description: Configure IPv4 interface policies.
+short_description: Configure IPv4 interface policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and interface_policy category.
@@ -350,8 +350,7 @@ def filter_firewall_interface_policy_data(json):
 def firewall_interface_policy(data, fos):
     vdom = data['vdom']
     firewall_interface_policy_data = data['firewall_interface_policy']
-    filtered_data = filter_firewall_interface_policy_data(
-        firewall_interface_policy_data)
+    filtered_data = filter_firewall_interface_policy_data(firewall_interface_policy_data)
     if firewall_interface_policy_data['state'] == "present":
         return fos.set('firewall',
                        'interface-policy',

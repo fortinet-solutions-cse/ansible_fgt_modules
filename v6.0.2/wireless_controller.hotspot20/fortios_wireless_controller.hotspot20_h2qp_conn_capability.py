@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller.hotspot20_h2qp_conn_capability
-short_description: Configure connection capability.
+short_description: Configure connection capability in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller.hotspot20 feature and h2qp_conn_capability category.
@@ -285,10 +285,8 @@ def filter_wireless_controller.hotspot20_h2qp_conn_capability_data(json):
 
 def wireless_controller.hotspot20_h2qp_conn_capability(data, fos):
     vdom = data['vdom']
-    wireless_controller.hotspot20_h2qp_conn_capability_data = data[
-        'wireless_controller.hotspot20_h2qp_conn_capability']
-    filtered_data = filter_wireless_controller.hotspot20_h2qp_conn_capability_data(
-        wireless_controller.hotspot20_h2qp_conn_capability_data)
+    wireless_controller.hotspot20_h2qp_conn_capability_data = data['wireless_controller.hotspot20_h2qp_conn_capability']
+    filtered_data = filter_wireless_controller.hotspot20_h2qp_conn_capability_data(wireless_controller.hotspot20_h2qp_conn_capability_data)
     if wireless_controller.hotspot20_h2qp_conn_capability_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'h2qp-conn-capability',
@@ -365,8 +363,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller.hotspot20(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller.hotspot20(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

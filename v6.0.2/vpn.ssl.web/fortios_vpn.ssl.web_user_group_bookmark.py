@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ssl.web_user_group_bookmark
-short_description: Configure SSL VPN user group bookmark.
+short_description: Configure SSL VPN user group bookmark in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ssl.web feature and user_group_bookmark category.
@@ -350,8 +350,7 @@ def filter_vpn.ssl.web_user_group_bookmark_data(json):
 def vpn.ssl.web_user_group_bookmark(data, fos):
     vdom = data['vdom']
     vpn.ssl.web_user_group_bookmark_data = data['vpn.ssl.web_user_group_bookmark']
-    filtered_data = filter_vpn.ssl.web_user_group_bookmark_data(
-        vpn.ssl.web_user_group_bookmark_data)
+    filtered_data = filter_vpn.ssl.web_user_group_bookmark_data(vpn.ssl.web_user_group_bookmark_data)
     if vpn.ssl.web_user_group_bookmark_data['state'] == "present":
         return fos.set('vpn.ssl.web',
                        'user-group-bookmark',

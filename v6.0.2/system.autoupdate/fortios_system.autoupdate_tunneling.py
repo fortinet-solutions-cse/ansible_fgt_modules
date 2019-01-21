@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.autoupdate_tunneling
-short_description: Configure web proxy tunnelling for the FDN.
+short_description: Configure web proxy tunnelling for the FDN in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.autoupdate feature and tunneling category.
@@ -207,8 +207,7 @@ def filter_system.autoupdate_tunneling_data(json):
 def system.autoupdate_tunneling(data, fos):
     vdom = data['vdom']
     system.autoupdate_tunneling_data = data['system.autoupdate_tunneling']
-    filtered_data = filter_system.autoupdate_tunneling_data(
-        system.autoupdate_tunneling_data)
+    filtered_data = filter_system.autoupdate_tunneling_data(system.autoupdate_tunneling_data)
     return fos.set('system.autoupdate',
                    'tunneling',
                    data=filtered_data,
@@ -259,8 +258,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.autoupdate(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.autoupdate(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

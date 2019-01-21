@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wanopt_remote_storage
-short_description: Configure a remote cache device as Web cache storage.
+short_description: Configure a remote cache device as Web cache storage in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and remote_storage category.
@@ -203,8 +203,7 @@ def filter_wanopt_remote_storage_data(json):
 def wanopt_remote_storage(data, fos):
     vdom = data['vdom']
     wanopt_remote_storage_data = data['wanopt_remote_storage']
-    filtered_data = filter_wanopt_remote_storage_data(
-        wanopt_remote_storage_data)
+    filtered_data = filter_wanopt_remote_storage_data(wanopt_remote_storage_data)
     return fos.set('wanopt',
                    'remote-storage',
                    data=filtered_data,

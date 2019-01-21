@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.shaper_traffic_shaper
-short_description: Configure shared traffic shaper.
+short_description: Configure shared traffic shaper in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.shaper feature and traffic_shaper category.
@@ -240,8 +240,7 @@ def filter_firewall.shaper_traffic_shaper_data(json):
 def firewall.shaper_traffic_shaper(data, fos):
     vdom = data['vdom']
     firewall.shaper_traffic_shaper_data = data['firewall.shaper_traffic_shaper']
-    filtered_data = filter_firewall.shaper_traffic_shaper_data(
-        firewall.shaper_traffic_shaper_data)
+    filtered_data = filter_firewall.shaper_traffic_shaper_data(firewall.shaper_traffic_shaper_data)
     if firewall.shaper_traffic_shaper_data['state'] == "present":
         return fos.set('firewall.shaper',
                        'traffic-shaper',

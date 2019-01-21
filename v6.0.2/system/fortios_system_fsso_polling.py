@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_fsso_polling
-short_description: Configure Fortinet Single Sign On (FSSO) server.
+short_description: Configure Fortinet Single Sign On (FSSO) server in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and fsso_polling category.

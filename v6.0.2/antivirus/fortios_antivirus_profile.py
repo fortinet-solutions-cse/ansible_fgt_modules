@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_antivirus_profile
-short_description: Configure AntiVirus profiles.
+short_description: Configure AntiVirus profiles in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure antivirus feature and profile category.

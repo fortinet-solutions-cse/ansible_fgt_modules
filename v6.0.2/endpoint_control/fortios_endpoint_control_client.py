@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_endpoint_control_client
-short_description: Configure endpoint control client lists.
+short_description: Configure endpoint control client lists in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure endpoint_control feature and client category.
@@ -216,8 +216,7 @@ def filter_endpoint_control_client_data(json):
 def endpoint_control_client(data, fos):
     vdom = data['vdom']
     endpoint_control_client_data = data['endpoint_control_client']
-    filtered_data = filter_endpoint_control_client_data(
-        endpoint_control_client_data)
+    filtered_data = filter_endpoint_control_client_data(endpoint_control_client_data)
     if endpoint_control_client_data['state'] == "present":
         return fos.set('endpoint-control',
                        'client',
@@ -277,8 +276,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_endpoint_control(
-        module.params, fos)
+    is_error, has_changed, result = fortios_endpoint_control(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

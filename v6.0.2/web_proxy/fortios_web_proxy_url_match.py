@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_url_match
-short_description: Exempt URLs from web proxy forwarding and caching.
+short_description: Exempt URLs from web proxy forwarding and caching in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure web_proxy feature and url_match category.

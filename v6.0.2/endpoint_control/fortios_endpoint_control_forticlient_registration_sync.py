@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_endpoint_control_forticlient_registration_sync
-short_description: Configure FortiClient registration synchronization settings.
+short_description: Configure FortiClient registration synchronization settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure endpoint_control feature and forticlient_registration_sync category.
@@ -198,10 +198,8 @@ def filter_endpoint_control_forticlient_registration_sync_data(json):
 
 def endpoint_control_forticlient_registration_sync(data, fos):
     vdom = data['vdom']
-    endpoint_control_forticlient_registration_sync_data = data[
-        'endpoint_control_forticlient_registration_sync']
-    filtered_data = filter_endpoint_control_forticlient_registration_sync_data(
-        endpoint_control_forticlient_registration_sync_data)
+    endpoint_control_forticlient_registration_sync_data = data['endpoint_control_forticlient_registration_sync']
+    filtered_data = filter_endpoint_control_forticlient_registration_sync_data(endpoint_control_forticlient_registration_sync_data)
     if endpoint_control_forticlient_registration_sync_data['state'] == "present":
         return fos.set('endpoint-control',
                        'forticlient-registration-sync',
@@ -257,8 +255,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_endpoint_control(
-        module.params, fos)
+    is_error, has_changed, result = fortios_endpoint_control(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

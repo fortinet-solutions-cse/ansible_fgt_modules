@@ -28,7 +28,7 @@ DOCUMENTATION = '''
 ---
 module: fortios_system_vdom_sflow
 short_description: Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to send sFlow datagrams
-   to an sFlow collector.
+   to an sFlow collector in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and vdom_sflow category.

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_user_fsso_polling
-short_description: Configure FSSO active directory servers for polling mode.
+short_description: Configure FSSO active directory servers for polling mode in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and fsso_polling category.

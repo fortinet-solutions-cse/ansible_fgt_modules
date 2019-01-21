@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_spamfilter_dnsbl
-short_description: Configure AntiSpam DNSBL/ORBL.
+short_description: Configure AntiSpam DNSBL/ORBL in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and dnsbl category.

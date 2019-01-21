@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_affinity_packet_redistribution
-short_description: Configure packet redistribution.
+short_description: Configure packet redistribution in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and affinity_packet_redistribution category.
@@ -208,8 +208,7 @@ def filter_system_affinity_packet_redistribution_data(json):
 def system_affinity_packet_redistribution(data, fos):
     vdom = data['vdom']
     system_affinity_packet_redistribution_data = data['system_affinity_packet_redistribution']
-    filtered_data = filter_system_affinity_packet_redistribution_data(
-        system_affinity_packet_redistribution_data)
+    filtered_data = filter_system_affinity_packet_redistribution_data(system_affinity_packet_redistribution_data)
     if system_affinity_packet_redistribution_data['state'] == "present":
         return fos.set('system',
                        'affinity-packet-redistribution',

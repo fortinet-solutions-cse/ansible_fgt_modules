@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_pppoe_interface
-short_description: Configure the PPPoE interfaces.
+short_description: Configure the PPPoE interfaces in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and pppoe_interface category.
@@ -275,8 +275,7 @@ def filter_system_pppoe_interface_data(json):
 def system_pppoe_interface(data, fos):
     vdom = data['vdom']
     system_pppoe_interface_data = data['system_pppoe_interface']
-    filtered_data = filter_system_pppoe_interface_data(
-        system_pppoe_interface_data)
+    filtered_data = filter_system_pppoe_interface_data(system_pppoe_interface_data)
     if system_pppoe_interface_data['state'] == "present":
         return fos.set('system',
                        'pppoe-interface',

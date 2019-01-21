@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_replacemsg_group
-short_description: Configure replacement message groups.
+short_description: Configure replacement message groups in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and replacemsg_group category.
@@ -790,8 +790,7 @@ def filter_system_replacemsg_group_data(json):
 def system_replacemsg_group(data, fos):
     vdom = data['vdom']
     system_replacemsg_group_data = data['system_replacemsg_group']
-    filtered_data = filter_system_replacemsg_group_data(
-        system_replacemsg_group_data)
+    filtered_data = filter_system_replacemsg_group_data(system_replacemsg_group_data)
     if system_replacemsg_group_data['state'] == "present":
         return fos.set('system',
                        'replacemsg-group',

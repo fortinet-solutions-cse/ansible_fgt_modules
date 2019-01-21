@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_proxy_addrgrp
-short_description: Web proxy address group configuration.
+short_description: Web proxy address group configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and proxy_addrgrp category.
@@ -260,8 +260,7 @@ def filter_firewall_proxy_addrgrp_data(json):
 def firewall_proxy_addrgrp(data, fos):
     vdom = data['vdom']
     firewall_proxy_addrgrp_data = data['firewall_proxy_addrgrp']
-    filtered_data = filter_firewall_proxy_addrgrp_data(
-        firewall_proxy_addrgrp_data)
+    filtered_data = filter_firewall_proxy_addrgrp_data(firewall_proxy_addrgrp_data)
     if firewall_proxy_addrgrp_data['state'] == "present":
         return fos.set('firewall',
                        'proxy-addrgrp',

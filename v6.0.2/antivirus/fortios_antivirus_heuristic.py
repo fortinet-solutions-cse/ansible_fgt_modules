@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_antivirus_heuristic
-short_description: Configure global heuristic options.
+short_description: Configure global heuristic options in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure antivirus feature and heuristic category.

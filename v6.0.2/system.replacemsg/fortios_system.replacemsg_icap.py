@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.replacemsg_icap
-short_description: Replacement messages.
+short_description: Replacement messages in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.replacemsg feature and icap category.
@@ -217,8 +217,7 @@ def filter_system.replacemsg_icap_data(json):
 def system.replacemsg_icap(data, fos):
     vdom = data['vdom']
     system.replacemsg_icap_data = data['system.replacemsg_icap']
-    filtered_data = filter_system.replacemsg_icap_data(
-        system.replacemsg_icap_data)
+    filtered_data = filter_system.replacemsg_icap_data(system.replacemsg_icap_data)
     if system.replacemsg_icap_data['state'] == "present":
         return fos.set('system.replacemsg',
                        'icap',
@@ -279,8 +278,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.replacemsg(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.replacemsg(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_switch_profile
-short_description: Configure FortiSwitch switch profile.
+short_description: Configure FortiSwitch switch profile in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and switch_profile category.
@@ -207,8 +207,7 @@ def filter_switch_controller_switch_profile_data(json):
 def switch_controller_switch_profile(data, fos):
     vdom = data['vdom']
     switch_controller_switch_profile_data = data['switch_controller_switch_profile']
-    filtered_data = filter_switch_controller_switch_profile_data(
-        switch_controller_switch_profile_data)
+    filtered_data = filter_switch_controller_switch_profile_data(switch_controller_switch_profile_data)
     if switch_controller_switch_profile_data['state'] == "present":
         return fos.set('switch-controller',
                        'switch-profile',
@@ -266,8 +265,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

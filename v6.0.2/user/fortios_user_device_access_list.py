@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_user_device_access_list
-short_description: Configure device access control lists.
+short_description: Configure device access control lists in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and device_access_list category.
@@ -224,8 +224,7 @@ def filter_user_device_access_list_data(json):
 def user_device_access_list(data, fos):
     vdom = data['vdom']
     user_device_access_list_data = data['user_device_access_list']
-    filtered_data = filter_user_device_access_list_data(
-        user_device_access_list_data)
+    filtered_data = filter_user_device_access_list_data(user_device_access_list_data)
     if user_device_access_list_data['state'] == "present":
         return fos.set('user',
                        'device-access-list',

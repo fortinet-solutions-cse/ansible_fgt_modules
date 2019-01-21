@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_internet_service
-short_description: Show Internet Service application.
+short_description: Show Internet Service application in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and internet_service category.
@@ -259,8 +259,7 @@ def filter_firewall_internet_service_data(json):
 def firewall_internet_service(data, fos):
     vdom = data['vdom']
     firewall_internet_service_data = data['firewall_internet_service']
-    filtered_data = filter_firewall_internet_service_data(
-        firewall_internet_service_data)
+    filtered_data = filter_firewall_internet_service_data(firewall_internet_service_data)
     if firewall_internet_service_data['state'] == "present":
         return fos.set('firewall',
                        'internet-service',

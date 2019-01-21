@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_spamfilter_bwl
-short_description: Configure anti-spam black/white list.
+short_description: Configure anti-spam black/white list in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and bwl category.

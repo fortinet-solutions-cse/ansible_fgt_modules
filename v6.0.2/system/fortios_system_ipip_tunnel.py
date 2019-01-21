@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_ipip_tunnel
-short_description: Configure IP in IP Tunneling.
+short_description: Configure IP in IP Tunneling in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ipip_tunnel category.

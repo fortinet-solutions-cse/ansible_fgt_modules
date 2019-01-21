@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.ipmacbinding_table
-short_description: Configure IP to MAC address pairs in the IP/MAC binding table.
+short_description: Configure IP to MAC address pairs in the IP/MAC binding table in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ipmacbinding feature and table category.
@@ -215,8 +215,7 @@ def filter_firewall.ipmacbinding_table_data(json):
 def firewall.ipmacbinding_table(data, fos):
     vdom = data['vdom']
     firewall.ipmacbinding_table_data = data['firewall.ipmacbinding_table']
-    filtered_data = filter_firewall.ipmacbinding_table_data(
-        firewall.ipmacbinding_table_data)
+    filtered_data = filter_firewall.ipmacbinding_table_data(firewall.ipmacbinding_table_data)
     if firewall.ipmacbinding_table_data['state'] == "present":
         return fos.set('firewall.ipmacbinding',
                        'table',
@@ -276,8 +275,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.ipmacbinding(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.ipmacbinding(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

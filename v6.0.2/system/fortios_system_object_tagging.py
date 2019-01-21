@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_object_tagging
-short_description: Configure object tagging.
+short_description: Configure object tagging in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and object_tagging category.
@@ -243,8 +243,7 @@ def filter_system_object_tagging_data(json):
 def system_object_tagging(data, fos):
     vdom = data['vdom']
     system_object_tagging_data = data['system_object_tagging']
-    filtered_data = filter_system_object_tagging_data(
-        system_object_tagging_data)
+    filtered_data = filter_system_object_tagging_data(system_object_tagging_data)
     if system_object_tagging_data['state'] == "present":
         return fos.set('system',
                        'object-tagging',

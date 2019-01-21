@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.autoupdate_push_update
-short_description: Configure push updates.
+short_description: Configure push updates in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.autoupdate feature and push_update category.
@@ -206,8 +206,7 @@ def filter_system.autoupdate_push_update_data(json):
 def system.autoupdate_push_update(data, fos):
     vdom = data['vdom']
     system.autoupdate_push_update_data = data['system.autoupdate_push_update']
-    filtered_data = filter_system.autoupdate_push_update_data(
-        system.autoupdate_push_update_data)
+    filtered_data = filter_system.autoupdate_push_update_data(system.autoupdate_push_update_data)
     return fos.set('system.autoupdate',
                    'push-update',
                    data=filtered_data,
@@ -258,8 +257,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.autoupdate(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.autoupdate(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

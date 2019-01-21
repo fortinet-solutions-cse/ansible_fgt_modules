@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_geoip_override
-short_description: Configure geographical location mapping for IP address(es) to override mappings from FortiGuard.
+short_description: Configure geographical location mapping for IP address(es) to override mappings from FortiGuard in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and geoip_override category.
@@ -223,8 +223,7 @@ def filter_system_geoip_override_data(json):
 def system_geoip_override(data, fos):
     vdom = data['vdom']
     system_geoip_override_data = data['system_geoip_override']
-    filtered_data = filter_system_geoip_override_data(
-        system_geoip_override_data)
+    filtered_data = filter_system_geoip_override_data(system_geoip_override_data)
     if system_geoip_override_data['state'] == "present":
         return fos.set('system',
                        'geoip-override',

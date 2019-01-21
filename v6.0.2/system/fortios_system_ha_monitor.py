@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_ha_monitor
-short_description: Configure HA monitor.
+short_description: Configure HA monitor in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ha_monitor category.
@@ -185,10 +185,7 @@ def login(data):
 
 
 def filter_system_ha_monitor_data(json):
-    option_list = [
-        'monitor-vlan',
-        'vlan-hb-interval',
-        'vlan-hb-lost-threshold']
+    option_list = ['monitor-vlan', 'vlan-hb-interval', 'vlan-hb-lost-threshold']
     dictionary = {}
 
     for attribute in option_list:

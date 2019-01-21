@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_sms_server
-short_description: Configure SMS server for sending SMS messages to support user authentication.
+short_description: Configure SMS server for sending SMS messages to support user authentication in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and sms_server category.

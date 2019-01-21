@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortiguard_override_setting
-short_description: Override global FortiCloud logging settings for this VDOM.
+short_description: Override global FortiCloud logging settings for this VDOM in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortiguard feature and override_setting category.
@@ -223,8 +223,7 @@ def filter_log.fortiguard_override_setting_data(json):
 def log.fortiguard_override_setting(data, fos):
     vdom = data['vdom']
     log.fortiguard_override_setting_data = data['log.fortiguard_override_setting']
-    filtered_data = filter_log.fortiguard_override_setting_data(
-        log.fortiguard_override_setting_data)
+    filtered_data = filter_log.fortiguard_override_setting_data(log.fortiguard_override_setting_data)
     return fos.set('log.fortiguard',
                    'override-setting',
                    data=filtered_data,

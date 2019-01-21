@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.shaper_per_ip_shaper
-short_description: Configure per-IP traffic shaper.
+short_description: Configure per-IP traffic shaper in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.shaper feature and per_ip_shaper category.
@@ -235,8 +235,7 @@ def filter_firewall.shaper_per_ip_shaper_data(json):
 def firewall.shaper_per_ip_shaper(data, fos):
     vdom = data['vdom']
     firewall.shaper_per_ip_shaper_data = data['firewall.shaper_per_ip_shaper']
-    filtered_data = filter_firewall.shaper_per_ip_shaper_data(
-        firewall.shaper_per_ip_shaper_data)
+    filtered_data = filter_firewall.shaper_per_ip_shaper_data(firewall.shaper_per_ip_shaper_data)
     if firewall.shaper_per_ip_shaper_data['state'] == "present":
         return fos.set('firewall.shaper',
                        'per-ip-shaper',

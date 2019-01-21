@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_api_user
-short_description: Configure API users.
+short_description: Configure API users in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and api_user category.
@@ -306,7 +306,7 @@ def main():
                 "state": {"required": True, "type": "str",
                           "choices": ["present", "absent"]},
                 "accprofile": {"required": False, "type": "str"},
-                "api-key": {"required": False, "type": "password-2"},
+                "api-key": {"required": False, "type": "str"},
                 "comments": {"required": False, "type": "str"},
                 "cors-allow-origin": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},

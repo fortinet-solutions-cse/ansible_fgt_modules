@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.replacemsg_nac_quar
-short_description: Replacement messages.
+short_description: Replacement messages in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.replacemsg feature and nac_quar category.
@@ -217,8 +217,7 @@ def filter_system.replacemsg_nac_quar_data(json):
 def system.replacemsg_nac_quar(data, fos):
     vdom = data['vdom']
     system.replacemsg_nac_quar_data = data['system.replacemsg_nac_quar']
-    filtered_data = filter_system.replacemsg_nac_quar_data(
-        system.replacemsg_nac_quar_data)
+    filtered_data = filter_system.replacemsg_nac_quar_data(system.replacemsg_nac_quar_data)
     if system.replacemsg_nac_quar_data['state'] == "present":
         return fos.set('system.replacemsg',
                        'nac-quar',
@@ -279,8 +278,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.replacemsg(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.replacemsg(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

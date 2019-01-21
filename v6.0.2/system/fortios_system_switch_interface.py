@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_switch_interface
-short_description: Configure software switch interfaces by grouping physical and WiFi interfaces.
+short_description: Configure software switch interfaces by grouping physical and WiFi interfaces in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and switch_interface category.
@@ -256,8 +256,7 @@ def filter_system_switch_interface_data(json):
 def system_switch_interface(data, fos):
     vdom = data['vdom']
     system_switch_interface_data = data['system_switch_interface']
-    filtered_data = filter_system_switch_interface_data(
-        system_switch_interface_data)
+    filtered_data = filter_system_switch_interface_data(system_switch_interface_data)
     if system_switch_interface_data['state'] == "present":
         return fos.set('system',
                        'switch-interface',

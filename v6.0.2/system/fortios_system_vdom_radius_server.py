@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_vdom_radius_server
-short_description: Configure a RADIUS server to use as a RADIUS Single Sign On (RSSO) server for this VDOM.
+short_description: Configure a RADIUS server to use as a RADIUS Single Sign On (RSSO) server for this VDOM in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and vdom_radius_server category.
@@ -206,8 +206,7 @@ def filter_system_vdom_radius_server_data(json):
 def system_vdom_radius_server(data, fos):
     vdom = data['vdom']
     system_vdom_radius_server_data = data['system_vdom_radius_server']
-    filtered_data = filter_system_vdom_radius_server_data(
-        system_vdom_radius_server_data)
+    filtered_data = filter_system_vdom_radius_server_data(system_vdom_radius_server_data)
     if system_vdom_radius_server_data['state'] == "present":
         return fos.set('system',
                        'vdom-radius-server',

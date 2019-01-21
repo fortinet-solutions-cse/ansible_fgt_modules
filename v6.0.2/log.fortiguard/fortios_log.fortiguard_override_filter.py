@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortiguard_override_filter
-short_description: Override filters for FortiCloud.
+short_description: Override filters for FortiCloud in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortiguard feature and override_filter category.
@@ -291,8 +291,7 @@ def filter_log.fortiguard_override_filter_data(json):
 def log.fortiguard_override_filter(data, fos):
     vdom = data['vdom']
     log.fortiguard_override_filter_data = data['log.fortiguard_override_filter']
-    filtered_data = filter_log.fortiguard_override_filter_data(
-        log.fortiguard_override_filter_data)
+    filtered_data = filter_log.fortiguard_override_filter_data(log.fortiguard_override_filter_data)
     return fos.set('log.fortiguard',
                    'override-filter',
                    data=filtered_data,

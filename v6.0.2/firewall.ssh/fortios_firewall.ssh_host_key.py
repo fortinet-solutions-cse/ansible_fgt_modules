@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.ssh_host_key
-short_description: SSH proxy host public keys.
+short_description: SSH proxy host public keys in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ssh feature and host_key category.
@@ -241,8 +241,7 @@ def filter_firewall.ssh_host_key_data(json):
 def firewall.ssh_host_key(data, fos):
     vdom = data['vdom']
     firewall.ssh_host_key_data = data['firewall.ssh_host_key']
-    filtered_data = filter_firewall.ssh_host_key_data(
-        firewall.ssh_host_key_data)
+    filtered_data = filter_firewall.ssh_host_key_data(firewall.ssh_host_key_data)
     if firewall.ssh_host_key_data['state'] == "present":
         return fos.set('firewall.ssh',
                        'host-key',

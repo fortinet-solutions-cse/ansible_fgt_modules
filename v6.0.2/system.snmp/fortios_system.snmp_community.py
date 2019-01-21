@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.snmp_community
-short_description: SNMP community configuration.
+short_description: SNMP community configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.snmp feature and community category.
@@ -371,8 +371,7 @@ def filter_system.snmp_community_data(json):
 def system.snmp_community(data, fos):
     vdom = data['vdom']
     system.snmp_community_data = data['system.snmp_community']
-    filtered_data = filter_system.snmp_community_data(
-        system.snmp_community_data)
+    filtered_data = filter_system.snmp_community_data(system.snmp_community_data)
     if system.snmp_community_data['state'] == "present":
         return fos.set('system.snmp',
                        'community',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_internet_service_custom
-short_description: Configure custom Internet Services.
+short_description: Configure custom Internet Services in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and internet_service_custom category.
@@ -288,8 +288,7 @@ def filter_firewall_internet_service_custom_data(json):
 def firewall_internet_service_custom(data, fos):
     vdom = data['vdom']
     firewall_internet_service_custom_data = data['firewall_internet_service_custom']
-    filtered_data = filter_firewall_internet_service_custom_data(
-        firewall_internet_service_custom_data)
+    filtered_data = filter_firewall_internet_service_custom_data(firewall_internet_service_custom_data)
     if firewall_internet_service_custom_data['state'] == "present":
         return fos.set('firewall',
                        'internet-service-custom',

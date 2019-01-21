@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.service_category
-short_description: Configure service categories.
+short_description: Configure service categories in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.service feature and category category.
@@ -199,8 +199,7 @@ def filter_firewall.service_category_data(json):
 def firewall.service_category(data, fos):
     vdom = data['vdom']
     firewall.service_category_data = data['firewall.service_category']
-    filtered_data = filter_firewall.service_category_data(
-        firewall.service_category_data)
+    filtered_data = filter_firewall.service_category_data(firewall.service_category_data)
     if firewall.service_category_data['state'] == "present":
         return fos.set('firewall.service',
                        'category',
@@ -256,8 +255,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.service(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.service(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

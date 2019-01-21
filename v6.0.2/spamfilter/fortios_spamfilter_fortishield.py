@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_spamfilter_fortishield
-short_description: Configure FortiGuard - AntiSpam.
+short_description: Configure FortiGuard - AntiSpam in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure spamfilter feature and fortishield category.
@@ -188,10 +188,7 @@ def login(data):
 
 
 def filter_spamfilter_fortishield_data(json):
-    option_list = [
-        'spam-submit-force',
-        'spam-submit-srv',
-        'spam-submit-txt2htm']
+    option_list = ['spam-submit-force', 'spam-submit-srv', 'spam-submit-txt2htm']
     dictionary = {}
 
     for attribute in option_list:
@@ -204,8 +201,7 @@ def filter_spamfilter_fortishield_data(json):
 def spamfilter_fortishield(data, fos):
     vdom = data['vdom']
     spamfilter_fortishield_data = data['spamfilter_fortishield']
-    filtered_data = filter_spamfilter_fortishield_data(
-        spamfilter_fortishield_data)
+    filtered_data = filter_spamfilter_fortishield_data(spamfilter_fortishield_data)
     return fos.set('spamfilter',
                    'fortishield',
                    data=filtered_data,

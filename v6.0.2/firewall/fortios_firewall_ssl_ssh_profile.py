@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_ssl_ssh_profile
-short_description: Configure SSL/SSH protocol options.
+short_description: Configure SSL/SSH protocol options in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and ssl_ssh_profile category.
@@ -701,8 +701,7 @@ def filter_firewall_ssl_ssh_profile_data(json):
 def firewall_ssl_ssh_profile(data, fos):
     vdom = data['vdom']
     firewall_ssl_ssh_profile_data = data['firewall_ssl_ssh_profile']
-    filtered_data = filter_firewall_ssl_ssh_profile_data(
-        firewall_ssl_ssh_profile_data)
+    filtered_data = filter_firewall_ssl_ssh_profile_data(firewall_ssl_ssh_profile_data)
     if firewall_ssl_ssh_profile_data['state'] == "present":
         return fos.set('firewall',
                        'ssl-ssh-profile',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_local_in_policy
-short_description: Configure user defined IPv4 local-in policies.
+short_description: Configure user defined IPv4 local-in policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and local_in_policy category.
@@ -265,8 +265,7 @@ def filter_firewall_local_in_policy_data(json):
 def firewall_local_in_policy(data, fos):
     vdom = data['vdom']
     firewall_local_in_policy_data = data['firewall_local_in_policy']
-    filtered_data = filter_firewall_local_in_policy_data(
-        firewall_local_in_policy_data)
+    filtered_data = filter_firewall_local_in_policy_data(firewall_local_in_policy_data)
     if firewall_local_in_policy_data['state'] == "present":
         return fos.set('firewall',
                        'local-in-policy',

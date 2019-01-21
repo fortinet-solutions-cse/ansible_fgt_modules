@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_ftgd_local_rating
-short_description: Configure local FortiGuard Web Filter local ratings.
+short_description: Configure local FortiGuard Web Filter local ratings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and ftgd_local_rating category.
@@ -206,8 +206,7 @@ def filter_webfilter_ftgd_local_rating_data(json):
 def webfilter_ftgd_local_rating(data, fos):
     vdom = data['vdom']
     webfilter_ftgd_local_rating_data = data['webfilter_ftgd_local_rating']
-    filtered_data = filter_webfilter_ftgd_local_rating_data(
-        webfilter_ftgd_local_rating_data)
+    filtered_data = filter_webfilter_ftgd_local_rating_data(webfilter_ftgd_local_rating_data)
     if webfilter_ftgd_local_rating_data['state'] == "present":
         return fos.set('webfilter',
                        'ftgd-local-rating',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_identity_based_route
-short_description: Configure identity based routing.
+short_description: Configure identity based routing in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and identity_based_route category.
@@ -229,8 +229,7 @@ def filter_firewall_identity_based_route_data(json):
 def firewall_identity_based_route(data, fos):
     vdom = data['vdom']
     firewall_identity_based_route_data = data['firewall_identity_based_route']
-    filtered_data = filter_firewall_identity_based_route_data(
-        firewall_identity_based_route_data)
+    filtered_data = filter_firewall_identity_based_route_data(firewall_identity_based_route_data)
     if firewall_identity_based_route_data['state'] == "present":
         return fos.set('firewall',
                        'identity-based-route',

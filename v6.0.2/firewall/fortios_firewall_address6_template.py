@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_address6_template
-short_description: Configure IPv6 address templates.
+short_description: Configure IPv6 address templates in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and address6_template category.
@@ -245,8 +245,7 @@ def filter_firewall_address6_template_data(json):
 def firewall_address6_template(data, fos):
     vdom = data['vdom']
     firewall_address6_template_data = data['firewall_address6_template']
-    filtered_data = filter_firewall_address6_template_data(
-        firewall_address6_template_data)
+    filtered_data = filter_firewall_address6_template_data(firewall_address6_template_data)
     if firewall_address6_template_data['state'] == "present":
         return fos.set('firewall',
                        'address6-template',

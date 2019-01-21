@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_profile_protocol_options
-short_description: Configure protocol options.
+short_description: Configure protocol options in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and profile_protocol_options category.
@@ -705,8 +705,7 @@ def filter_firewall_profile_protocol_options_data(json):
 def firewall_profile_protocol_options(data, fos):
     vdom = data['vdom']
     firewall_profile_protocol_options_data = data['firewall_profile_protocol_options']
-    filtered_data = filter_firewall_profile_protocol_options_data(
-        firewall_profile_protocol_options_data)
+    filtered_data = filter_firewall_profile_protocol_options_data(firewall_profile_protocol_options_data)
     if firewall_profile_protocol_options_data['state'] == "present":
         return fos.set('firewall',
                        'profile-protocol-options',

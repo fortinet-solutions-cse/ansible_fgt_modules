@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller.qos_dot1p_map
-short_description: Configure FortiSwitch QoS 802.1p.
+short_description: Configure FortiSwitch QoS 802.1p in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller.qos feature and dot1p_map category.
@@ -306,8 +306,7 @@ def filter_switch_controller.qos_dot1p_map_data(json):
 def switch_controller.qos_dot1p_map(data, fos):
     vdom = data['vdom']
     switch_controller.qos_dot1p_map_data = data['switch_controller.qos_dot1p_map']
-    filtered_data = filter_switch_controller.qos_dot1p_map_data(
-        switch_controller.qos_dot1p_map_data)
+    filtered_data = filter_switch_controller.qos_dot1p_map_data(switch_controller.qos_dot1p_map_data)
     if switch_controller.qos_dot1p_map_data['state'] == "present":
         return fos.set('switch-controller.qos',
                        'dot1p-map',
@@ -395,8 +394,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller.qos(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller.qos(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

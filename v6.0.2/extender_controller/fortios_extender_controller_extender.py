@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_extender_controller_extender
-short_description: Extender controller configuration.
+short_description: Extender controller configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure extender_controller feature and extender category.
@@ -403,8 +403,7 @@ def filter_extender_controller_extender_data(json):
 def extender_controller_extender(data, fos):
     vdom = data['vdom']
     extender_controller_extender_data = data['extender_controller_extender']
-    filtered_data = filter_extender_controller_extender_data(
-        extender_controller_extender_data)
+    filtered_data = filter_extender_controller_extender_data(extender_controller_extender_data)
     if extender_controller_extender_data['state'] == "present":
         return fos.set('extender-controller',
                        'extender',
@@ -511,8 +510,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_extender_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_extender_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

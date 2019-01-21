@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_802_1X_settings
-short_description: Configure global 802.1X settings.
+short_description: Configure global 802.1X settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and 802_1X_settings category.
@@ -198,8 +198,7 @@ def filter_switch_controller_802_1X_settings_data(json):
 def switch_controller_802_1X_settings(data, fos):
     vdom = data['vdom']
     switch_controller_802_1X_settings_data = data['switch_controller_802_1X_settings']
-    filtered_data = filter_switch_controller_802_1X_settings_data(
-        switch_controller_802_1X_settings_data)
+    filtered_data = filter_switch_controller_802_1X_settings_data(switch_controller_802_1X_settings_data)
     return fos.set('switch-controller',
                    '802-1X-settings',
                    data=filtered_data,
@@ -248,8 +247,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

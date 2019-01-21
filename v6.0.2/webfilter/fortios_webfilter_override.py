@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_override
-short_description: Configure FortiGuard Web Filter administrative overrides.
+short_description: Configure FortiGuard Web Filter administrative overrides in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and override category.

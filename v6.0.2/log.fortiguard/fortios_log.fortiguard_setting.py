@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortiguard_setting
-short_description: Configure logging to FortiCloud.
+short_description: Configure logging to FortiCloud in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortiguard feature and setting category.
@@ -240,8 +240,7 @@ def filter_log.fortiguard_setting_data(json):
 def log.fortiguard_setting(data, fos):
     vdom = data['vdom']
     log.fortiguard_setting_data = data['log.fortiguard_setting']
-    filtered_data = filter_log.fortiguard_setting_data(
-        log.fortiguard_setting_data)
+    filtered_data = filter_log.fortiguard_setting_data(log.fortiguard_setting_data)
     return fos.set('log.fortiguard',
                    'setting',
                    data=filtered_data,

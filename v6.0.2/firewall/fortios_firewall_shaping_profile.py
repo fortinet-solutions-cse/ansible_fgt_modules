@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_shaping_profile
-short_description: Configure shaping profiles.
+short_description: Configure shaping profiles in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and shaping_profile category.
@@ -235,8 +235,7 @@ def filter_firewall_shaping_profile_data(json):
 def firewall_shaping_profile(data, fos):
     vdom = data['vdom']
     firewall_shaping_profile_data = data['firewall_shaping_profile']
-    filtered_data = filter_firewall_shaping_profile_data(
-        firewall_shaping_profile_data)
+    filtered_data = filter_firewall_shaping_profile_data(firewall_shaping_profile_data)
     if firewall_shaping_profile_data['state'] == "present":
         return fos.set('firewall',
                        'shaping-profile',

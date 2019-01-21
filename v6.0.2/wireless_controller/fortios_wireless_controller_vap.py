@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_vap
-short_description: Configure Virtual Access Points (VAPs).
+short_description: Configure Virtual Access Points (VAPs) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and vap category.
@@ -1013,8 +1013,7 @@ def filter_wireless_controller_vap_data(json):
 def wireless_controller_vap(data, fos):
     vdom = data['vdom']
     wireless_controller_vap_data = data['wireless_controller_vap']
-    filtered_data = filter_wireless_controller_vap_data(
-        wireless_controller_vap_data)
+    filtered_data = filter_wireless_controller_vap_data(wireless_controller_vap_data)
     if wireless_controller_vap_data['state'] == "present":
         return fos.set('wireless-controller',
                        'vap',
@@ -1299,8 +1298,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller.security_policy_captive_portal
-short_description: Names of VLANs that use captive portal authentication.
+short_description: Names of VLANs that use captive portal authentication in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller.security_policy feature and captive_portal category.
@@ -204,10 +204,8 @@ def filter_switch_controller.security_policy_captive_portal_data(json):
 
 def switch_controller.security_policy_captive_portal(data, fos):
     vdom = data['vdom']
-    switch_controller.security_policy_captive_portal_data = data[
-        'switch_controller.security_policy_captive_portal']
-    filtered_data = filter_switch_controller.security_policy_captive_portal_data(
-        switch_controller.security_policy_captive_portal_data)
+    switch_controller.security_policy_captive_portal_data = data['switch_controller.security_policy_captive_portal']
+    filtered_data = filter_switch_controller.security_policy_captive_portal_data(switch_controller.security_policy_captive_portal_data)
     if switch_controller.security_policy_captive_portal_data['state'] == "present":
         return fos.set('switch-controller.security-policy',
                        'captive-portal',
@@ -265,8 +263,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller.security_policy(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller.security_policy(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

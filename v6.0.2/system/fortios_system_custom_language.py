@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_custom_language
-short_description: Configure custom languages.
+short_description: Configure custom languages in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and custom_language category.
@@ -203,8 +203,7 @@ def filter_system_custom_language_data(json):
 def system_custom_language(data, fos):
     vdom = data['vdom']
     system_custom_language_data = data['system_custom_language']
-    filtered_data = filter_system_custom_language_data(
-        system_custom_language_data)
+    filtered_data = filter_system_custom_language_data(system_custom_language_data)
     if system_custom_language_data['state'] == "present":
         return fos.set('system',
                        'custom-language',

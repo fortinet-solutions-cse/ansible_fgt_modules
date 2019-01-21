@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_ap_status
-short_description: Configure access point status (rogue | accepted | suppressed).
+short_description: Configure access point status (rogue | accepted | suppressed) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and ap_status category.
@@ -212,8 +212,7 @@ def filter_wireless_controller_ap_status_data(json):
 def wireless_controller_ap_status(data, fos):
     vdom = data['vdom']
     wireless_controller_ap_status_data = data['wireless_controller_ap_status']
-    filtered_data = filter_wireless_controller_ap_status_data(
-        wireless_controller_ap_status_data)
+    filtered_data = filter_wireless_controller_ap_status_data(wireless_controller_ap_status_data)
     if wireless_controller_ap_status_data['state'] == "present":
         return fos.set('wireless-controller',
                        'ap-status',
@@ -272,8 +271,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

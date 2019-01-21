@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.certificate_remote
-short_description: Remote certificate as a PEM file.
+short_description: Remote certificate as a PEM file in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and remote category.
@@ -216,8 +216,7 @@ def filter_vpn.certificate_remote_data(json):
 def vpn.certificate_remote(data, fos):
     vdom = data['vdom']
     vpn.certificate_remote_data = data['vpn.certificate_remote']
-    filtered_data = filter_vpn.certificate_remote_data(
-        vpn.certificate_remote_data)
+    filtered_data = filter_vpn.certificate_remote_data(vpn.certificate_remote_data)
     if vpn.certificate_remote_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'remote',

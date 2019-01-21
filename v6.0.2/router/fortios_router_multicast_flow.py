@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_multicast_flow
-short_description: Configure multicast-flow.
+short_description: Configure multicast-flow in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and multicast_flow category.
@@ -218,8 +218,7 @@ def filter_router_multicast_flow_data(json):
 def router_multicast_flow(data, fos):
     vdom = data['vdom']
     router_multicast_flow_data = data['router_multicast_flow']
-    filtered_data = filter_router_multicast_flow_data(
-        router_multicast_flow_data)
+    filtered_data = filter_router_multicast_flow_data(router_multicast_flow_data)
     if router_multicast_flow_data['state'] == "present":
         return fos.set('router',
                        'multicast-flow',

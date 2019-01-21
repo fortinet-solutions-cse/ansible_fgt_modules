@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_fips_cc
-short_description: Configure FIPS-CC mode.
+short_description: Configure FIPS-CC mode in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and fips_cc category.
@@ -189,10 +189,7 @@ def login(data):
 
 
 def filter_system_fips_cc_data(json):
-    option_list = [
-        'entropy-token',
-        'key-generation-self-test',
-        'self-test-period']
+    option_list = ['entropy-token', 'key-generation-self-test', 'self-test-period']
     dictionary = {}
 
     for attribute in option_list:

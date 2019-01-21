@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_user_domain_controller
-short_description: Configure domain controller entries.
+short_description: Configure domain controller entries in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure user feature and domain_controller category.
@@ -212,8 +212,7 @@ def filter_user_domain_controller_data(json):
 def user_domain_controller(data, fos):
     vdom = data['vdom']
     user_domain_controller_data = data['user_domain_controller']
-    filtered_data = filter_user_domain_controller_data(
-        user_domain_controller_data)
+    filtered_data = filter_user_domain_controller_data(user_domain_controller_data)
     if user_domain_controller_data['state'] == "present":
         return fos.set('user',
                        'domain-controller',

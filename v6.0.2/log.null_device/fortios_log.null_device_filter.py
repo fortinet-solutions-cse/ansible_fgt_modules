@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.null_device_filter
-short_description: Filters for null device logging.
+short_description: Filters for null device logging in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.null_device feature and filter category.
@@ -284,8 +284,7 @@ def filter_log.null_device_filter_data(json):
 def log.null_device_filter(data, fos):
     vdom = data['vdom']
     log.null_device_filter_data = data['log.null_device_filter']
-    filtered_data = filter_log.null_device_filter_data(
-        log.null_device_filter_data)
+    filtered_data = filter_log.null_device_filter_data(log.null_device_filter_data)
     return fos.set('log.null-device',
                    'filter',
                    data=filtered_data,

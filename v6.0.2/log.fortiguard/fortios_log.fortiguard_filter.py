@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortiguard_filter
-short_description: Filters for FortiCloud.
+short_description: Filters for FortiCloud in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortiguard feature and filter category.
@@ -291,8 +291,7 @@ def filter_log.fortiguard_filter_data(json):
 def log.fortiguard_filter(data, fos):
     vdom = data['vdom']
     log.fortiguard_filter_data = data['log.fortiguard_filter']
-    filtered_data = filter_log.fortiguard_filter_data(
-        log.fortiguard_filter_data)
+    filtered_data = filter_log.fortiguard_filter_data(log.fortiguard_filter_data)
     return fos.set('log.fortiguard',
                    'filter',
                    data=filtered_data,

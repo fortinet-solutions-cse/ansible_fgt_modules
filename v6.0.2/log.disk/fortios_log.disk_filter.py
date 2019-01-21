@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.disk_filter
-short_description: Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type.
+short_description: Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type in
+   Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.disk feature and filter category.

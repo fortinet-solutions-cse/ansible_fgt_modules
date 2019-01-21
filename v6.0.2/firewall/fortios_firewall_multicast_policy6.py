@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_multicast_policy6
-short_description: Configure IPv6 multicast NAT policies.
+short_description: Configure IPv6 multicast NAT policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and multicast_policy6 category.
@@ -261,8 +261,7 @@ def filter_firewall_multicast_policy6_data(json):
 def firewall_multicast_policy6(data, fos):
     vdom = data['vdom']
     firewall_multicast_policy6_data = data['firewall_multicast_policy6']
-    filtered_data = filter_firewall_multicast_policy6_data(
-        firewall_multicast_policy6_data)
+    filtered_data = filter_firewall_multicast_policy6_data(firewall_multicast_policy6_data)
     if firewall_multicast_policy6_data['state'] == "present":
         return fos.set('firewall',
                        'multicast-policy6',

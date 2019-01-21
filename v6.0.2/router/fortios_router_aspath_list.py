@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_aspath_list
-short_description: Configure Autonomous System (AS) path lists.
+short_description: Configure Autonomous System (AS) path lists in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and aspath_list category.

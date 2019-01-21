@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_dscp_based_priority
-short_description: Configure DSCP based priority table.
+short_description: Configure DSCP based priority table in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and dscp_based_priority category.
@@ -207,8 +207,7 @@ def filter_system_dscp_based_priority_data(json):
 def system_dscp_based_priority(data, fos):
     vdom = data['vdom']
     system_dscp_based_priority_data = data['system_dscp_based_priority']
-    filtered_data = filter_system_dscp_based_priority_data(
-        system_dscp_based_priority_data)
+    filtered_data = filter_system_dscp_based_priority_data(system_dscp_based_priority_data)
     if system_dscp_based_priority_data['state'] == "present":
         return fos.set('system',
                        'dscp-based-priority',

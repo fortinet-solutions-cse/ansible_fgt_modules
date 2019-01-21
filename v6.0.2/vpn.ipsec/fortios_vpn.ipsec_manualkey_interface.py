@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ipsec_manualkey_interface
-short_description: Configure IPsec manual keys.
+short_description: Configure IPsec manual keys in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and manualkey_interface category.
@@ -274,8 +274,7 @@ def filter_vpn.ipsec_manualkey_interface_data(json):
 def vpn.ipsec_manualkey_interface(data, fos):
     vdom = data['vdom']
     vpn.ipsec_manualkey_interface_data = data['vpn.ipsec_manualkey_interface']
-    filtered_data = filter_vpn.ipsec_manualkey_interface_data(
-        vpn.ipsec_manualkey_interface_data)
+    filtered_data = filter_vpn.ipsec_manualkey_interface_data(vpn.ipsec_manualkey_interface_data)
     if vpn.ipsec_manualkey_interface_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'manualkey-interface',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_tos_based_priority
-short_description: Configure Type of Service (ToS) based priority table to set network traffic priorities.
+short_description: Configure Type of Service (ToS) based priority table to set network traffic priorities in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and tos_based_priority category.
@@ -208,8 +208,7 @@ def filter_system_tos_based_priority_data(json):
 def system_tos_based_priority(data, fos):
     vdom = data['vdom']
     system_tos_based_priority_data = data['system_tos_based_priority']
-    filtered_data = filter_system_tos_based_priority_data(
-        system_tos_based_priority_data)
+    filtered_data = filter_system_tos_based_priority_data(system_tos_based_priority_data)
     if system_tos_based_priority_data['state'] == "present":
         return fos.set('system',
                        'tos-based-priority',

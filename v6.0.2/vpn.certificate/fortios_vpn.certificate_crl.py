@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.certificate_crl
-short_description: Certificate Revocation List as a PEM file.
+short_description: Certificate Revocation List as a PEM file in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and crl category.

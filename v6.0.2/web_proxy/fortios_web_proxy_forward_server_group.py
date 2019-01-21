@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_forward_server_group
-short_description: Configure a forward server group consisting or multiple forward servers. Supports failover and load balancing.
+short_description: Configure a forward server group consisting or multiple forward servers. Supports failover and load balancing in Fortinet's FortiOS and
+   FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure web_proxy feature and forward_server_group category.
@@ -234,8 +235,7 @@ def filter_web_proxy_forward_server_group_data(json):
 def web_proxy_forward_server_group(data, fos):
     vdom = data['vdom']
     web_proxy_forward_server_group_data = data['web_proxy_forward_server_group']
-    filtered_data = filter_web_proxy_forward_server_group_data(
-        web_proxy_forward_server_group_data)
+    filtered_data = filter_web_proxy_forward_server_group_data(web_proxy_forward_server_group_data)
     if web_proxy_forward_server_group_data['state'] == "present":
         return fos.set('web-proxy',
                        'forward-server-group',

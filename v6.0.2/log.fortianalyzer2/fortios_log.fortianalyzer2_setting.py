@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortianalyzer2_setting
-short_description: Global FortiAnalyzer settings.
+short_description: Global FortiAnalyzer settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortianalyzer2 feature and setting category.
@@ -297,8 +297,7 @@ def filter_log.fortianalyzer2_setting_data(json):
 def log.fortianalyzer2_setting(data, fos):
     vdom = data['vdom']
     log.fortianalyzer2_setting_data = data['log.fortianalyzer2_setting']
-    filtered_data = filter_log.fortianalyzer2_setting_data(
-        log.fortianalyzer2_setting_data)
+    filtered_data = filter_log.fortianalyzer2_setting_data(log.fortianalyzer2_setting_data)
     return fos.set('log.fortianalyzer2',
                    'setting',
                    data=filtered_data,
@@ -373,8 +372,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_log.fortianalyzer2(
-        module.params, fos)
+    is_error, has_changed, result = fortios_log.fortianalyzer2(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

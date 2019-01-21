@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_network_visibility
-short_description: Configure network visibility settings.
+short_description: Configure network visibility settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and network_visibility category.
@@ -220,8 +220,7 @@ def filter_system_network_visibility_data(json):
 def system_network_visibility(data, fos):
     vdom = data['vdom']
     system_network_visibility_data = data['system_network_visibility']
-    filtered_data = filter_system_network_visibility_data(
-        system_network_visibility_data)
+    filtered_data = filter_system_network_visibility_data(system_network_visibility_data)
     return fos.set('system',
                    'network-visibility',
                    data=filtered_data,

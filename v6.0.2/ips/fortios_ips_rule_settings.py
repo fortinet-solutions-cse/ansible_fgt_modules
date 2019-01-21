@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_ips_rule_settings
-short_description: Configure IPS rule setting.
+short_description: Configure IPS rule setting in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure ips feature and rule_settings category.

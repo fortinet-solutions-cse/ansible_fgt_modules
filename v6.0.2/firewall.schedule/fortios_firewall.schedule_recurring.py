@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.schedule_recurring
-short_description: Recurring schedule configuration.
+short_description: Recurring schedule configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.schedule feature and recurring category.
@@ -221,8 +221,7 @@ def filter_firewall.schedule_recurring_data(json):
 def firewall.schedule_recurring(data, fos):
     vdom = data['vdom']
     firewall.schedule_recurring_data = data['firewall.schedule_recurring']
-    filtered_data = filter_firewall.schedule_recurring_data(
-        firewall.schedule_recurring_data)
+    filtered_data = filter_firewall.schedule_recurring_data(firewall.schedule_recurring_data)
     if firewall.schedule_recurring_data['state'] == "present":
         return fos.set('firewall.schedule',
                        'recurring',
@@ -284,8 +283,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.schedule(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.schedule(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

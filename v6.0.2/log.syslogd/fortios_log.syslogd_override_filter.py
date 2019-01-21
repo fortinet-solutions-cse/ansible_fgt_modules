@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.syslogd_override_filter
-short_description: Override filters for remote system server.
+short_description: Override filters for remote system server in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.syslogd feature and override_filter category.
@@ -284,8 +284,7 @@ def filter_log.syslogd_override_filter_data(json):
 def log.syslogd_override_filter(data, fos):
     vdom = data['vdom']
     log.syslogd_override_filter_data = data['log.syslogd_override_filter']
-    filtered_data = filter_log.syslogd_override_filter_data(
-        log.syslogd_override_filter_data)
+    filtered_data = filter_log.syslogd_override_filter_data(log.syslogd_override_filter_data)
     return fos.set('log.syslogd',
                    'override-filter',
                    data=filtered_data,

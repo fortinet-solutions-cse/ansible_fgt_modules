@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_session_helper
-short_description: Configure session helper.
+short_description: Configure session helper in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and session_helper category.
@@ -227,8 +227,7 @@ def filter_system_session_helper_data(json):
 def system_session_helper(data, fos):
     vdom = data['vdom']
     system_session_helper_data = data['system_session_helper']
-    filtered_data = filter_system_session_helper_data(
-        system_session_helper_data)
+    filtered_data = filter_system_session_helper_data(system_session_helper_data)
     if system_session_helper_data['state'] == "present":
         return fos.set('system',
                        'session-helper',

@@ -28,7 +28,7 @@ DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_bonjour_profile
 short_description: Configure Bonjour profiles. Bonjour is Apple's zero configuration networking protocol. Bonjour profiles allow APs and FortiAPs to connnect
-   to networks using Bonjour.
+   to networks using Bonjour in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and bonjour_profile category.
@@ -242,8 +242,7 @@ def filter_wireless_controller_bonjour_profile_data(json):
 def wireless_controller_bonjour_profile(data, fos):
     vdom = data['vdom']
     wireless_controller_bonjour_profile_data = data['wireless_controller_bonjour_profile']
-    filtered_data = filter_wireless_controller_bonjour_profile_data(
-        wireless_controller_bonjour_profile_data)
+    filtered_data = filter_wireless_controller_bonjour_profile_data(wireless_controller_bonjour_profile_data)
     if wireless_controller_bonjour_profile_data['state'] == "present":
         return fos.set('wireless-controller',
                        'bonjour-profile',
@@ -311,8 +310,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

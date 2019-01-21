@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_debug_url
-short_description: Configure debug URL addresses.
+short_description: Configure debug URL addresses in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure web_proxy feature and debug_url category.

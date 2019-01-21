@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_dedicated_mgmt
-short_description: Configure dedicated management.
+short_description: Configure dedicated management in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and dedicated_mgmt category.
@@ -219,8 +219,7 @@ def filter_system_dedicated_mgmt_data(json):
 def system_dedicated_mgmt(data, fos):
     vdom = data['vdom']
     system_dedicated_mgmt_data = data['system_dedicated_mgmt']
-    filtered_data = filter_system_dedicated_mgmt_data(
-        system_dedicated_mgmt_data)
+    filtered_data = filter_system_dedicated_mgmt_data(system_dedicated_mgmt_data)
     return fos.set('system',
                    'dedicated-mgmt',
                    data=filtered_data,

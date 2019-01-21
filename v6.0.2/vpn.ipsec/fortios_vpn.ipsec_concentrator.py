@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ipsec_concentrator
-short_description: Concentrator configuration.
+short_description: Concentrator configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and concentrator category.
@@ -213,8 +213,7 @@ def filter_vpn.ipsec_concentrator_data(json):
 def vpn.ipsec_concentrator(data, fos):
     vdom = data['vdom']
     vpn.ipsec_concentrator_data = data['vpn.ipsec_concentrator']
-    filtered_data = filter_vpn.ipsec_concentrator_data(
-        vpn.ipsec_concentrator_data)
+    filtered_data = filter_vpn.ipsec_concentrator_data(vpn.ipsec_concentrator_data)
     if vpn.ipsec_concentrator_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'concentrator',

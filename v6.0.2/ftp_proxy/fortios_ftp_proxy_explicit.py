@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_ftp_proxy_explicit
-short_description: Configure explicit FTP proxy settings.
+short_description: Configure explicit FTP proxy settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure ftp_proxy feature and explicit category.

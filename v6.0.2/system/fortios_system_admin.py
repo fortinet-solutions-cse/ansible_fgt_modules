@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_admin
-short_description: Configure admin users.
+short_description: Configure admin users in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and admin category.
@@ -822,8 +822,8 @@ def main():
                                                 "id": {"required": True, "type": "str"}
                                             }},
                 "hidden": {"required": False, "type": "int"},
-                "history0": {"required": False, "type": "password-2"},
-                "history1": {"required": False, "type": "password-2"},
+                "history0": {"required": False, "type": "str"},
+                "history1": {"required": False, "type": "str"},
                 "ip6-trusthost1": {"required": False, "type": "str"},
                 "ip6-trusthost10": {"required": False, "type": "str"},
                 "ip6-trusthost2": {"required": False, "type": "str"},
@@ -841,7 +841,7 @@ def main():
                                    "usr-name": {"required": True, "type": "str"}
                                }},
                 "name": {"required": True, "type": "str"},
-                "password": {"required": False, "type": "password-2"},
+                "password": {"required": False, "type": "str"},
                 "password-expire": {"required": False, "type": "str"},
                 "peer-auth": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]},

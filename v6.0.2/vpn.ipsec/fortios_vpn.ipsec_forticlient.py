@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.ipsec_forticlient
-short_description: Configure FortiClient policy realm.
+short_description: Configure FortiClient policy realm in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.ipsec feature and forticlient category.
@@ -212,8 +212,7 @@ def filter_vpn.ipsec_forticlient_data(json):
 def vpn.ipsec_forticlient(data, fos):
     vdom = data['vdom']
     vpn.ipsec_forticlient_data = data['vpn.ipsec_forticlient']
-    filtered_data = filter_vpn.ipsec_forticlient_data(
-        vpn.ipsec_forticlient_data)
+    filtered_data = filter_vpn.ipsec_forticlient_data(vpn.ipsec_forticlient_data)
     if vpn.ipsec_forticlient_data['state'] == "present":
         return fos.set('vpn.ipsec',
                        'forticlient',

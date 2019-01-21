@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller.hotspot20_anqp_network_auth_type
-short_description: Configure network authentication type.
+short_description: Configure network authentication type in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller.hotspot20 feature and anqp_network_auth_type category.
@@ -207,10 +207,8 @@ def filter_wireless_controller.hotspot20_anqp_network_auth_type_data(json):
 
 def wireless_controller.hotspot20_anqp_network_auth_type(data, fos):
     vdom = data['vdom']
-    wireless_controller.hotspot20_anqp_network_auth_type_data = data[
-        'wireless_controller.hotspot20_anqp_network_auth_type']
-    filtered_data = filter_wireless_controller.hotspot20_anqp_network_auth_type_data(
-        wireless_controller.hotspot20_anqp_network_auth_type_data)
+    wireless_controller.hotspot20_anqp_network_auth_type_data = data['wireless_controller.hotspot20_anqp_network_auth_type']
+    filtered_data = filter_wireless_controller.hotspot20_anqp_network_auth_type_data(wireless_controller.hotspot20_anqp_network_auth_type_data)
     if wireless_controller.hotspot20_anqp_network_auth_type_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'anqp-network-auth-type',
@@ -269,8 +267,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller.hotspot20(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller.hotspot20(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

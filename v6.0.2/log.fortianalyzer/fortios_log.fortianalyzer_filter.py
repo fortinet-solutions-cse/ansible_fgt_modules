@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.fortianalyzer_filter
-short_description: Filters for FortiAnalyzer.
+short_description: Filters for FortiAnalyzer in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.fortianalyzer feature and filter category.
@@ -291,8 +291,7 @@ def filter_log.fortianalyzer_filter_data(json):
 def log.fortianalyzer_filter(data, fos):
     vdom = data['vdom']
     log.fortianalyzer_filter_data = data['log.fortianalyzer_filter']
-    filtered_data = filter_log.fortianalyzer_filter_data(
-        log.fortianalyzer_filter_data)
+    filtered_data = filter_log.fortianalyzer_filter_data(log.fortianalyzer_filter_data)
     return fos.set('log.fortianalyzer',
                    'filter',
                    data=filtered_data,
@@ -368,8 +367,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_log.fortianalyzer(
-        module.params, fos)
+    is_error, has_changed, result = fortios_log.fortianalyzer(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

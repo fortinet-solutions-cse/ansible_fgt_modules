@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_authentication_scheme
-short_description: Configure Authentication Schemes.
+short_description: Configure Authentication Schemes in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure authentication feature and scheme category.
@@ -259,8 +259,7 @@ def filter_authentication_scheme_data(json):
 def authentication_scheme(data, fos):
     vdom = data['vdom']
     authentication_scheme_data = data['authentication_scheme']
-    filtered_data = filter_authentication_scheme_data(
-        authentication_scheme_data)
+    filtered_data = filter_authentication_scheme_data(authentication_scheme_data)
     if authentication_scheme_data['state'] == "present":
         return fos.set('authentication',
                        'scheme',

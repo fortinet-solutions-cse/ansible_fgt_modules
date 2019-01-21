@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_wtp
-short_description: Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate.
+short_description: Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and wtp category.
@@ -766,8 +766,7 @@ def filter_wireless_controller_wtp_data(json):
 def wireless_controller_wtp(data, fos):
     vdom = data['vdom']
     wireless_controller_wtp_data = data['wireless_controller_wtp']
-    filtered_data = filter_wireless_controller_wtp_data(
-        wireless_controller_wtp_data)
+    filtered_data = filter_wireless_controller_wtp_data(wireless_controller_wtp_data)
     if wireless_controller_wtp_data['state'] == "present":
         return fos.set('wireless-controller',
                        'wtp',
@@ -989,8 +988,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

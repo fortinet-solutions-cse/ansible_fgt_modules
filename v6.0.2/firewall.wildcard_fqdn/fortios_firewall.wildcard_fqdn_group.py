@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.wildcard_fqdn_group
-short_description: Config global Wildcard FQDN address groups.
+short_description: Config global Wildcard FQDN address groups in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.wildcard_fqdn feature and group category.
@@ -226,8 +226,7 @@ def filter_firewall.wildcard_fqdn_group_data(json):
 def firewall.wildcard_fqdn_group(data, fos):
     vdom = data['vdom']
     firewall.wildcard_fqdn_group_data = data['firewall.wildcard_fqdn_group']
-    filtered_data = filter_firewall.wildcard_fqdn_group_data(
-        firewall.wildcard_fqdn_group_data)
+    filtered_data = filter_firewall.wildcard_fqdn_group_data(firewall.wildcard_fqdn_group_data)
     if firewall.wildcard_fqdn_group_data['state'] == "present":
         return fos.set('firewall.wildcard-fqdn',
                        'group',
@@ -291,8 +290,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.wildcard_fqdn(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.wildcard_fqdn(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

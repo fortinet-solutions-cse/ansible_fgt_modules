@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_endpoint_control_forticlient_ems
-short_description: Configure FortiClient Enterprise Management Server (EMS) entries.
+short_description: Configure FortiClient Enterprise Management Server (EMS) entries in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure endpoint_control feature and forticlient_ems category.
@@ -240,8 +240,7 @@ def filter_endpoint_control_forticlient_ems_data(json):
 def endpoint_control_forticlient_ems(data, fos):
     vdom = data['vdom']
     endpoint_control_forticlient_ems_data = data['endpoint_control_forticlient_ems']
-    filtered_data = filter_endpoint_control_forticlient_ems_data(
-        endpoint_control_forticlient_ems_data)
+    filtered_data = filter_endpoint_control_forticlient_ems_data(endpoint_control_forticlient_ems_data)
     if endpoint_control_forticlient_ems_data['state'] == "present":
         return fos.set('endpoint-control',
                        'forticlient-ems',
@@ -307,8 +306,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_endpoint_control(
-        module.params, fos)
+    is_error, has_changed, result = fortios_endpoint_control(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

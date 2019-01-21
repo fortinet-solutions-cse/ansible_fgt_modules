@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.schedule_group
-short_description: Schedule group configuration.
+short_description: Schedule group configuration in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.schedule feature and group category.
@@ -210,8 +210,7 @@ def filter_firewall.schedule_group_data(json):
 def firewall.schedule_group(data, fos):
     vdom = data['vdom']
     firewall.schedule_group_data = data['firewall.schedule_group']
-    filtered_data = filter_firewall.schedule_group_data(
-        firewall.schedule_group_data)
+    filtered_data = filter_firewall.schedule_group_data(firewall.schedule_group_data)
     if firewall.schedule_group_data['state'] == "present":
         return fos.set('firewall.schedule',
                        'group',
@@ -271,8 +270,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.schedule(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.schedule(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

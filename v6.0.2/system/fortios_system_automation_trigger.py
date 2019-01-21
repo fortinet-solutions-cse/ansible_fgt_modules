@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_automation_trigger
-short_description: Trigger for automation stitches.
+short_description: Trigger for automation stitches in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and automation_trigger category.
@@ -276,8 +276,7 @@ def filter_system_automation_trigger_data(json):
 def system_automation_trigger(data, fos):
     vdom = data['vdom']
     system_automation_trigger_data = data['system_automation_trigger']
-    filtered_data = filter_system_automation_trigger_data(
-        system_automation_trigger_data)
+    filtered_data = filter_system_automation_trigger_data(system_automation_trigger_data)
     if system_automation_trigger_data['state'] == "present":
         return fos.set('system',
                        'automation-trigger',

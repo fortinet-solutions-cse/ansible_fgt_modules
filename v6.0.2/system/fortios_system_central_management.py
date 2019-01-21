@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_central_management
-short_description: Configure central management.
+short_description: Configure central management in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and central_management category.
@@ -319,8 +319,7 @@ def filter_system_central_management_data(json):
 def system_central_management(data, fos):
     vdom = data['vdom']
     system_central_management_data = data['system_central_management']
-    filtered_data = filter_system_central_management_data(
-        system_central_management_data)
+    filtered_data = filter_system_central_management_data(system_central_management_data)
     return fos.set('system',
                    'central-management',
                    data=filtered_data,

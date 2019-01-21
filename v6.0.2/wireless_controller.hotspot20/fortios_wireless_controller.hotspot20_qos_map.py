@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller.hotspot20_qos_map
-short_description: Configure QoS map set.
+short_description: Configure QoS map set in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller.hotspot20 feature and qos_map category.
@@ -237,8 +237,7 @@ def filter_wireless_controller.hotspot20_qos_map_data(json):
 def wireless_controller.hotspot20_qos_map(data, fos):
     vdom = data['vdom']
     wireless_controller.hotspot20_qos_map_data = data['wireless_controller.hotspot20_qos_map']
-    filtered_data = filter_wireless_controller.hotspot20_qos_map_data(
-        wireless_controller.hotspot20_qos_map_data)
+    filtered_data = filter_wireless_controller.hotspot20_qos_map_data(wireless_controller.hotspot20_qos_map_data)
     if wireless_controller.hotspot20_qos_map_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'qos-map',
@@ -306,8 +305,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller.hotspot20(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller.hotspot20(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_authentication_setting
-short_description: Configure authentication setting.
+short_description: Configure authentication setting in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure authentication feature and setting category.
@@ -220,8 +220,7 @@ def filter_authentication_setting_data(json):
 def authentication_setting(data, fos):
     vdom = data['vdom']
     authentication_setting_data = data['authentication_setting']
-    filtered_data = filter_authentication_setting_data(
-        authentication_setting_data)
+    filtered_data = filter_authentication_setting_data(authentication_setting_data)
     return fos.set('authentication',
                    'setting',
                    data=filtered_data,

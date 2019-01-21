@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_community_list
-short_description: Configure community lists.
+short_description: Configure community lists in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure router feature and community_list category.
@@ -228,8 +228,7 @@ def filter_router_community_list_data(json):
 def router_community_list(data, fos):
     vdom = data['vdom']
     router_community_list_data = data['router_community_list']
-    filtered_data = filter_router_community_list_data(
-        router_community_list_data)
+    filtered_data = filter_router_community_list_data(router_community_list_data)
     if router_community_list_data['state'] == "present":
         return fos.set('router',
                        'community-list',

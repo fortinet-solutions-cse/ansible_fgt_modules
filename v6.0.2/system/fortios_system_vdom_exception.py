@@ -27,7 +27,8 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_vdom_exception
-short_description: Global configuration objects that can be configured independently for all VDOMs or for the defined VDOM scope.
+short_description: Global configuration objects that can be configured independently for all VDOMs or for the defined VDOM scope in Fortinet's FortiOS and
+   FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and vdom_exception category.
@@ -226,8 +227,7 @@ def filter_system_vdom_exception_data(json):
 def system_vdom_exception(data, fos):
     vdom = data['vdom']
     system_vdom_exception_data = data['system_vdom_exception']
-    filtered_data = filter_system_vdom_exception_data(
-        system_vdom_exception_data)
+    filtered_data = filter_system_vdom_exception_data(system_vdom_exception_data)
     if system_vdom_exception_data['state'] == "present":
         return fos.set('system',
                        'vdom-exception',

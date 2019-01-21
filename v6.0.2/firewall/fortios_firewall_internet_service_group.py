@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_internet_service_group
-short_description: Configure group of Internet Service.
+short_description: Configure group of Internet Service in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and internet_service_group category.
@@ -210,8 +210,7 @@ def filter_firewall_internet_service_group_data(json):
 def firewall_internet_service_group(data, fos):
     vdom = data['vdom']
     firewall_internet_service_group_data = data['firewall_internet_service_group']
-    filtered_data = filter_firewall_internet_service_group_data(
-        firewall_internet_service_group_data)
+    filtered_data = filter_firewall_internet_service_group_data(firewall_internet_service_group_data)
     if firewall_internet_service_group_data['state'] == "present":
         return fos.set('firewall',
                        'internet-service-group',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wanopt_content_delivery_network_rule
-short_description: Configure WAN optimization content delivery network rules.
+short_description: Configure WAN optimization content delivery network rules in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wanopt feature and content_delivery_network_rule category.
@@ -407,8 +407,7 @@ def filter_wanopt_content_delivery_network_rule_data(json):
 def wanopt_content_delivery_network_rule(data, fos):
     vdom = data['vdom']
     wanopt_content_delivery_network_rule_data = data['wanopt_content_delivery_network_rule']
-    filtered_data = filter_wanopt_content_delivery_network_rule_data(
-        wanopt_content_delivery_network_rule_data)
+    filtered_data = filter_wanopt_content_delivery_network_rule_data(wanopt_content_delivery_network_rule_data)
     if wanopt_content_delivery_network_rule_data['state'] == "present":
         return fos.set('wanopt',
                        'content-delivery-network-rule',

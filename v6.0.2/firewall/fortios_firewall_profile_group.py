@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_profile_group
-short_description: Configure profile groups.
+short_description: Configure profile groups in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and profile_group category.
@@ -251,8 +251,7 @@ def filter_firewall_profile_group_data(json):
 def firewall_profile_group(data, fos):
     vdom = data['vdom']
     firewall_profile_group_data = data['firewall_profile_group']
-    filtered_data = filter_firewall_profile_group_data(
-        firewall_profile_group_data)
+    filtered_data = filter_firewall_profile_group_data(firewall_profile_group_data)
     if firewall_profile_group_data['state'] == "present":
         return fos.set('firewall',
                        'profile-group',

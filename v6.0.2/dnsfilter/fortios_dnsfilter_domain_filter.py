@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dnsfilter_domain_filter
-short_description: Configure DNS domain filters.
+short_description: Configure DNS domain filters in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dnsfilter feature and domain_filter category.
@@ -242,8 +242,7 @@ def filter_dnsfilter_domain_filter_data(json):
 def dnsfilter_domain_filter(data, fos):
     vdom = data['vdom']
     dnsfilter_domain_filter_data = data['dnsfilter_domain_filter']
-    filtered_data = filter_dnsfilter_domain_filter_data(
-        dnsfilter_domain_filter_data)
+    filtered_data = filter_dnsfilter_domain_filter_data(dnsfilter_domain_filter_data)
     if dnsfilter_domain_filter_data['state'] == "present":
         return fos.set('dnsfilter',
                        'domain-filter',

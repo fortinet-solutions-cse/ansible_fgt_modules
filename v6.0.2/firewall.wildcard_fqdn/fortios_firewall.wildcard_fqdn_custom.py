@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.wildcard_fqdn_custom
-short_description: Config global/VDOM Wildcard FQDN address.
+short_description: Config global/VDOM Wildcard FQDN address in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.wildcard_fqdn feature and custom category.
@@ -219,8 +219,7 @@ def filter_firewall.wildcard_fqdn_custom_data(json):
 def firewall.wildcard_fqdn_custom(data, fos):
     vdom = data['vdom']
     firewall.wildcard_fqdn_custom_data = data['firewall.wildcard_fqdn_custom']
-    filtered_data = filter_firewall.wildcard_fqdn_custom_data(
-        firewall.wildcard_fqdn_custom_data)
+    filtered_data = filter_firewall.wildcard_fqdn_custom_data(firewall.wildcard_fqdn_custom_data)
     if firewall.wildcard_fqdn_custom_data['state'] == "present":
         return fos.set('firewall.wildcard-fqdn',
                        'custom',
@@ -281,8 +280,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.wildcard_fqdn(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.wildcard_fqdn(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

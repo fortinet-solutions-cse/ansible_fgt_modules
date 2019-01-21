@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_affinity_interrupt
-short_description: Configure interrupt affinity.
+short_description: Configure interrupt affinity in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and affinity_interrupt category.
@@ -203,8 +203,7 @@ def filter_system_affinity_interrupt_data(json):
 def system_affinity_interrupt(data, fos):
     vdom = data['vdom']
     system_affinity_interrupt_data = data['system_affinity_interrupt']
-    filtered_data = filter_system_affinity_interrupt_data(
-        system_affinity_interrupt_data)
+    filtered_data = filter_system_affinity_interrupt_data(system_affinity_interrupt_data)
     if system_affinity_interrupt_data['state'] == "present":
         return fos.set('system',
                        'affinity-interrupt',

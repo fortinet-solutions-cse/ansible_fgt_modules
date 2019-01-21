@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.certificate_setting
-short_description: VPN certificate setting.
+short_description: VPN certificate setting in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and setting category.
@@ -297,8 +297,7 @@ def filter_vpn.certificate_setting_data(json):
 def vpn.certificate_setting(data, fos):
     vdom = data['vdom']
     vpn.certificate_setting_data = data['vpn.certificate_setting']
-    filtered_data = filter_vpn.certificate_setting_data(
-        vpn.certificate_setting_data)
+    filtered_data = filter_vpn.certificate_setting_data(vpn.certificate_setting_data)
     return fos.set('vpn.certificate',
                    'setting',
                    data=filtered_data,

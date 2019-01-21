@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_content_header
-short_description: Configure content types used by Web filter.
+short_description: Configure content types used by Web filter in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and content_header category.
@@ -227,8 +227,7 @@ def filter_webfilter_content_header_data(json):
 def webfilter_content_header(data, fos):
     vdom = data['vdom']
     webfilter_content_header_data = data['webfilter_content_header']
-    filtered_data = filter_webfilter_content_header_data(
-        webfilter_content_header_data)
+    filtered_data = filter_webfilter_content_header_data(webfilter_content_header_data)
     if webfilter_content_header_data['state'] == "present":
         return fos.set('webfilter',
                        'content-header',

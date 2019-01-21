@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_system
-short_description: Configure system-wide switch controller settings.
+short_description: Configure system-wide switch controller settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and system category.
@@ -194,8 +194,7 @@ def filter_switch_controller_system_data(json):
 def switch_controller_system(data, fos):
     vdom = data['vdom']
     switch_controller_system_data = data['switch_controller_system']
-    filtered_data = filter_switch_controller_system_data(
-        switch_controller_system_data)
+    filtered_data = filter_switch_controller_system_data(switch_controller_system_data)
     return fos.set('switch-controller',
                    'system',
                    data=filtered_data,
@@ -243,8 +242,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

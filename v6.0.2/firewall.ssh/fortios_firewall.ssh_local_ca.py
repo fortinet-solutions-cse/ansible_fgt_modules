@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.ssh_local_ca
-short_description: SSH proxy local CA.
+short_description: SSH proxy local CA in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.ssh feature and local_ca category.
@@ -215,8 +215,7 @@ def filter_firewall.ssh_local_ca_data(json):
 def firewall.ssh_local_ca(data, fos):
     vdom = data['vdom']
     firewall.ssh_local_ca_data = data['firewall.ssh_local_ca']
-    filtered_data = filter_firewall.ssh_local_ca_data(
-        firewall.ssh_local_ca_data)
+    filtered_data = filter_firewall.ssh_local_ca_data(firewall.ssh_local_ca_data)
     if firewall.ssh_local_ca_data['state'] == "present":
         return fos.set('firewall.ssh',
                        'local-ca',

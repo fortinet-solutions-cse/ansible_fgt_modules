@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_nd_proxy
-short_description: Configure IPv6 neighbor discovery proxy (RFC4389).
+short_description: Configure IPv6 neighbor discovery proxy (RFC4389) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and nd_proxy category.

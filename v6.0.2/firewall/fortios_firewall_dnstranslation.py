@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_dnstranslation
-short_description: Configure DNS translation.
+short_description: Configure DNS translation in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and dnstranslation category.
@@ -210,8 +210,7 @@ def filter_firewall_dnstranslation_data(json):
 def firewall_dnstranslation(data, fos):
     vdom = data['vdom']
     firewall_dnstranslation_data = data['firewall_dnstranslation']
-    filtered_data = filter_firewall_dnstranslation_data(
-        firewall_dnstranslation_data)
+    filtered_data = filter_firewall_dnstranslation_data(firewall_dnstranslation_data)
     if firewall_dnstranslation_data['state'] == "present":
         return fos.set('firewall',
                        'dnstranslation',

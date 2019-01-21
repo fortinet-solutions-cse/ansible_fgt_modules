@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall.service_custom
-short_description: Configure custom services.
+short_description: Configure custom services in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall.service feature and custom category.
@@ -359,8 +359,7 @@ def filter_firewall.service_custom_data(json):
 def firewall.service_custom(data, fos):
     vdom = data['vdom']
     firewall.service_custom_data = data['firewall.service_custom']
-    filtered_data = filter_firewall.service_custom_data(
-        firewall.service_custom_data)
+    filtered_data = filter_firewall.service_custom_data(firewall.service_custom_data)
     if firewall.service_custom_data['state'] == "present":
         return fos.set('firewall.service',
                        'custom',
@@ -460,8 +459,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_firewall.service(
-        module.params, fos)
+    is_error, has_changed, result = fortios_firewall.service(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

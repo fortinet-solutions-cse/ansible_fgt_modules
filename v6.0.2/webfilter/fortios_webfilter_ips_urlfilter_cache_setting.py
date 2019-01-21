@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_ips_urlfilter_cache_setting
-short_description: Configure IPS URL filter cache settings.
+short_description: Configure IPS URL filter cache settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and ips_urlfilter_cache_setting category.
@@ -191,8 +191,7 @@ def filter_webfilter_ips_urlfilter_cache_setting_data(json):
 def webfilter_ips_urlfilter_cache_setting(data, fos):
     vdom = data['vdom']
     webfilter_ips_urlfilter_cache_setting_data = data['webfilter_ips_urlfilter_cache_setting']
-    filtered_data = filter_webfilter_ips_urlfilter_cache_setting_data(
-        webfilter_ips_urlfilter_cache_setting_data)
+    filtered_data = filter_webfilter_ips_urlfilter_cache_setting_data(webfilter_ips_urlfilter_cache_setting_data)
     return fos.set('webfilter',
                    'ips-urlfilter-cache-setting',
                    data=filtered_data,

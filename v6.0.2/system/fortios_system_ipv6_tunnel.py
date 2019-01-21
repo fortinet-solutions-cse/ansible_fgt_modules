@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_ipv6_tunnel
-short_description: Configure IPv6/IPv4 in IPv6 tunnel.
+short_description: Configure IPv6/IPv4 in IPv6 tunnel in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ipv6_tunnel category.

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller_timers
-short_description: Configure CAPWAP timers.
+short_description: Configure CAPWAP timers in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller feature and timers category.
@@ -262,8 +262,7 @@ def filter_wireless_controller_timers_data(json):
 def wireless_controller_timers(data, fos):
     vdom = data['vdom']
     wireless_controller_timers_data = data['wireless_controller_timers']
-    filtered_data = filter_wireless_controller_timers_data(
-        wireless_controller_timers_data)
+    filtered_data = filter_wireless_controller_timers_data(wireless_controller_timers_data)
     return fos.set('wireless-controller',
                    'timers',
                    data=filtered_data,
@@ -329,8 +328,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

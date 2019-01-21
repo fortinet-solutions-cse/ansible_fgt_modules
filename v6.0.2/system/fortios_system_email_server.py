@@ -28,7 +28,7 @@ DOCUMENTATION = '''
 ---
 module: fortios_system_email_server
 short_description: Configure the email server used by the FortiGate various things. For example, for sending email messages to users to support user
-   authentication features.
+   authentication features in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and email_server category.

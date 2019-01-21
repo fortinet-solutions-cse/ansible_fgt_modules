@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_ips_urlfilter_dns6
-short_description: Configure IPS URL filter IPv6 DNS servers.
+short_description: Configure IPS URL filter IPv6 DNS servers in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and ips_urlfilter_dns6 category.
@@ -202,8 +202,7 @@ def filter_system_ips_urlfilter_dns6_data(json):
 def system_ips_urlfilter_dns6(data, fos):
     vdom = data['vdom']
     system_ips_urlfilter_dns6_data = data['system_ips_urlfilter_dns6']
-    filtered_data = filter_system_ips_urlfilter_dns6_data(
-        system_ips_urlfilter_dns6_data)
+    filtered_data = filter_system_ips_urlfilter_dns6_data(system_ips_urlfilter_dns6_data)
     if system_ips_urlfilter_dns6_data['state'] == "present":
         return fos.set('system',
                        'ips-urlfilter-dns6',

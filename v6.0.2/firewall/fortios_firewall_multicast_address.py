@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_multicast_address
-short_description: Configure multicast addresses.
+short_description: Configure multicast addresses in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and multicast_address category.
@@ -263,8 +263,7 @@ def filter_firewall_multicast_address_data(json):
 def firewall_multicast_address(data, fos):
     vdom = data['vdom']
     firewall_multicast_address_data = data['firewall_multicast_address']
-    filtered_data = filter_firewall_multicast_address_data(
-        firewall_multicast_address_data)
+    filtered_data = filter_firewall_multicast_address_data(firewall_multicast_address_data)
     if firewall_multicast_address_data['state'] == "present":
         return fos.set('firewall',
                        'multicast-address',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system.replacemsg_ec
-short_description: Replacement messages.
+short_description: Replacement messages in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system.replacemsg feature and ec category.
@@ -278,8 +278,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_system.replacemsg(
-        module.params, fos)
+    is_error, has_changed, result = fortios_system.replacemsg(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

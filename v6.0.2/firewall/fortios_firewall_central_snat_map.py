@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_central_snat_map
-short_description: Configure central SNAT policies.
+short_description: Configure central SNAT policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and central_snat_map category.
@@ -283,8 +283,7 @@ def filter_firewall_central_snat_map_data(json):
 def firewall_central_snat_map(data, fos):
     vdom = data['vdom']
     firewall_central_snat_map_data = data['firewall_central_snat_map']
-    filtered_data = filter_firewall_central_snat_map_data(
-        firewall_central_snat_map_data)
+    filtered_data = filter_firewall_central_snat_map_data(firewall_central_snat_map_data)
     if firewall_central_snat_map_data['state'] == "present":
         return fos.set('firewall',
                        'central-snat-map',

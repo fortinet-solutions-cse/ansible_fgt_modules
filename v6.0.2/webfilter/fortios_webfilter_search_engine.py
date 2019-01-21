@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_webfilter_search_engine
-short_description: Configure web filter search engines.
+short_description: Configure web filter search engines in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure webfilter feature and search_engine category.
@@ -228,8 +228,7 @@ def filter_webfilter_search_engine_data(json):
 def webfilter_search_engine(data, fos):
     vdom = data['vdom']
     webfilter_search_engine_data = data['webfilter_search_engine']
-    filtered_data = filter_webfilter_search_engine_data(
-        webfilter_search_engine_data)
+    filtered_data = filter_webfilter_search_engine_data(webfilter_search_engine_data)
     if webfilter_search_engine_data['state'] == "present":
         return fos.set('webfilter',
                        'search-engine',

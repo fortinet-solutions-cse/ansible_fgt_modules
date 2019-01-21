@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_resource_limits
-short_description: Configure resource limits.
+short_description: Configure resource limits in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and resource_limits category.
@@ -260,8 +260,7 @@ def filter_system_resource_limits_data(json):
 def system_resource_limits(data, fos):
     vdom = data['vdom']
     system_resource_limits_data = data['system_resource_limits']
-    filtered_data = filter_system_resource_limits_data(
-        system_resource_limits_data)
+    filtered_data = filter_system_resource_limits_data(system_resource_limits_data)
     return fos.set('system',
                    'resource-limits',
                    data=filtered_data,

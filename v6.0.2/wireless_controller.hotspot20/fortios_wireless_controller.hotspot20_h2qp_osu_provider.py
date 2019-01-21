@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wireless_controller.hotspot20_h2qp_osu_provider
-short_description: Configure online sign up (OSU) provider list.
+short_description: Configure online sign up (OSU) provider list in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure wireless_controller.hotspot20 feature and h2qp_osu_provider category.
@@ -254,10 +254,8 @@ def filter_wireless_controller.hotspot20_h2qp_osu_provider_data(json):
 
 def wireless_controller.hotspot20_h2qp_osu_provider(data, fos):
     vdom = data['vdom']
-    wireless_controller.hotspot20_h2qp_osu_provider_data = data[
-        'wireless_controller.hotspot20_h2qp_osu_provider']
-    filtered_data = filter_wireless_controller.hotspot20_h2qp_osu_provider_data(
-        wireless_controller.hotspot20_h2qp_osu_provider_data)
+    wireless_controller.hotspot20_h2qp_osu_provider_data = data['wireless_controller.hotspot20_h2qp_osu_provider']
+    filtered_data = filter_wireless_controller.hotspot20_h2qp_osu_provider_data(wireless_controller.hotspot20_h2qp_osu_provider_data)
     if wireless_controller.hotspot20_h2qp_osu_provider_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'h2qp-osu-provider',
@@ -329,8 +327,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_wireless_controller.hotspot20(
-        module.params, fos)
+    is_error, has_changed, result = fortios_wireless_controller.hotspot20(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

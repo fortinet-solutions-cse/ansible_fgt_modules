@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_dlp_settings
-short_description: Designate logical storage for DLP fingerprint database.
+short_description: Designate logical storage for DLP fingerprint database in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure dlp feature and settings category.

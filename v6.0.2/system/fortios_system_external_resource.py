@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_external_resource
-short_description: Configure external resource.
+short_description: Configure external resource in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and external_resource category.
@@ -228,8 +228,7 @@ def filter_system_external_resource_data(json):
 def system_external_resource(data, fos):
     vdom = data['vdom']
     system_external_resource_data = data['system_external_resource']
-    filtered_data = filter_system_external_resource_data(
-        system_external_resource_data)
+    filtered_data = filter_system_external_resource_data(system_external_resource_data)
     if system_external_resource_data['state'] == "present":
         return fos.set('system',
                        'external-resource',

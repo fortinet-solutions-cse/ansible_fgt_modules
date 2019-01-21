@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_virtual_wan_link
-short_description: Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
+short_description: Configure redundant internet connections using SD-WAN (formerly virtual WAN link) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and virtual_wan_link category.
@@ -768,8 +768,7 @@ def filter_system_virtual_wan_link_data(json):
 def system_virtual_wan_link(data, fos):
     vdom = data['vdom']
     system_virtual_wan_link_data = data['system_virtual_wan_link']
-    filtered_data = filter_system_virtual_wan_link_data(
-        system_virtual_wan_link_data)
+    filtered_data = filter_system_virtual_wan_link_data(system_virtual_wan_link_data)
     return fos.set('system',
                    'virtual-wan-link',
                    data=filtered_data,

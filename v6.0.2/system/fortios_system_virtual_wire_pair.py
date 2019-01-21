@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_virtual_wire_pair
-short_description: Configure virtual wire pairs.
+short_description: Configure virtual wire pairs in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and virtual_wire_pair category.
@@ -218,8 +218,7 @@ def filter_system_virtual_wire_pair_data(json):
 def system_virtual_wire_pair(data, fos):
     vdom = data['vdom']
     system_virtual_wire_pair_data = data['system_virtual_wire_pair']
-    filtered_data = filter_system_virtual_wire_pair_data(
-        system_virtual_wire_pair_data)
+    filtered_data = filter_system_virtual_wire_pair_data(system_virtual_wire_pair_data)
     if system_virtual_wire_pair_data['state'] == "present":
         return fos.set('system',
                        'virtual-wire-pair',

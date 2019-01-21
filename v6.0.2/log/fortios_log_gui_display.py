@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log_gui_display
-short_description: Configure how log messages are displayed on the GUI.
+short_description: Configure how log messages are displayed on the GUI in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log feature and gui_display category.

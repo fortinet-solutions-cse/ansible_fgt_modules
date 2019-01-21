@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_endpoint_control_profile
-short_description: Configure FortiClient endpoint control profiles.
+short_description: Configure FortiClient endpoint control profiles in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure endpoint_control feature and profile category.
@@ -768,8 +768,7 @@ def filter_endpoint_control_profile_data(json):
 def endpoint_control_profile(data, fos):
     vdom = data['vdom']
     endpoint_control_profile_data = data['endpoint_control_profile']
-    filtered_data = filter_endpoint_control_profile_data(
-        endpoint_control_profile_data)
+    filtered_data = filter_endpoint_control_profile_data(endpoint_control_profile_data)
     if endpoint_control_profile_data['state'] == "present":
         return fos.set('endpoint-control',
                        'profile',
@@ -998,8 +997,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_endpoint_control(
-        module.params, fos)
+    is_error, has_changed, result = fortios_endpoint_control(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

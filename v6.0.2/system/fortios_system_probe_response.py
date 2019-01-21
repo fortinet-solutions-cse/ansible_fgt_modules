@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_probe_response
-short_description: Configure system probe response.
+short_description: Configure system probe response in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and probe_response category.
@@ -224,8 +224,7 @@ def filter_system_probe_response_data(json):
 def system_probe_response(data, fos):
     vdom = data['vdom']
     system_probe_response_data = data['system_probe_response']
-    filtered_data = filter_system_probe_response_data(
-        system_probe_response_data)
+    filtered_data = filter_system_probe_response_data(system_probe_response_data)
     return fos.set('system',
                    'probe-response',
                    data=filtered_data,

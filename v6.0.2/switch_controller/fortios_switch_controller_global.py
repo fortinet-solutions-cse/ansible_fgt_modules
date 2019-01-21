@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_global
-short_description: Configure FortiSwitch global settings.
+short_description: Configure FortiSwitch global settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure switch_controller feature and global category.
@@ -233,8 +233,7 @@ def filter_switch_controller_global_data(json):
 def switch_controller_global(data, fos):
     vdom = data['vdom']
     switch_controller_global_data = data['switch_controller_global']
-    filtered_data = filter_switch_controller_global_data(
-        switch_controller_global_data)
+    filtered_data = filter_switch_controller_global_data(switch_controller_global_data)
     return fos.set('switch-controller',
                    'global',
                    data=filtered_data,
@@ -293,8 +292,7 @@ def main():
     global fos
     fos = FortiOSAPI()
 
-    is_error, has_changed, result = fortios_switch_controller(
-        module.params, fos)
+    is_error, has_changed, result = fortios_switch_controller(module.params, fos)
 
     if not is_error:
         module.exit_json(changed=has_changed, meta=result)

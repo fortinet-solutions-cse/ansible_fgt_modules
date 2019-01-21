@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_ipv6_eh_filter
-short_description: Configure IPv6 extension header filter.
+short_description: Configure IPv6 extension header filter in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and ipv6_eh_filter category.
@@ -235,8 +235,7 @@ def filter_firewall_ipv6_eh_filter_data(json):
 def firewall_ipv6_eh_filter(data, fos):
     vdom = data['vdom']
     firewall_ipv6_eh_filter_data = data['firewall_ipv6_eh_filter']
-    filtered_data = filter_firewall_ipv6_eh_filter_data(
-        firewall_ipv6_eh_filter_data)
+    filtered_data = filter_firewall_ipv6_eh_filter_data(firewall_ipv6_eh_filter_data)
     return fos.set('firewall',
                    'ipv6-eh-filter',
                    data=filtered_data,

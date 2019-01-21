@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_ip_translation
-short_description: Configure firewall IP-translation.
+short_description: Configure firewall IP-translation in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure firewall feature and ip_translation category.
@@ -214,8 +214,7 @@ def filter_firewall_ip_translation_data(json):
 def firewall_ip_translation(data, fos):
     vdom = data['vdom']
     firewall_ip_translation_data = data['firewall_ip_translation']
-    filtered_data = filter_firewall_ip_translation_data(
-        firewall_ip_translation_data)
+    filtered_data = filter_firewall_ip_translation_data(firewall_ip_translation_data)
     if firewall_ip_translation_data['state'] == "present":
         return fos.set('firewall',
                        'ip-translation',

@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_password_policy_guest_admin
-short_description: Configure the password policy for guest administrators.
+short_description: Configure the password policy for guest administrators in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and password_policy_guest_admin category.
@@ -244,8 +244,7 @@ def filter_system_password_policy_guest_admin_data(json):
 def system_password_policy_guest_admin(data, fos):
     vdom = data['vdom']
     system_password_policy_guest_admin_data = data['system_password_policy_guest_admin']
-    filtered_data = filter_system_password_policy_guest_admin_data(
-        system_password_policy_guest_admin_data)
+    filtered_data = filter_system_password_policy_guest_admin_data(system_password_policy_guest_admin_data)
     return fos.set('system',
                    'password-policy-guest-admin',
                    data=filtered_data,

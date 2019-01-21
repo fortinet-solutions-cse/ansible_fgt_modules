@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_log.memory_global_setting
-short_description: Global settings for memory logging.
+short_description: Global settings for memory logging in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure log.memory feature and global_setting category.
@@ -200,8 +200,7 @@ def filter_log.memory_global_setting_data(json):
 def log.memory_global_setting(data, fos):
     vdom = data['vdom']
     log.memory_global_setting_data = data['log.memory_global_setting']
-    filtered_data = filter_log.memory_global_setting_data(
-        log.memory_global_setting_data)
+    filtered_data = filter_log.memory_global_setting_data(log.memory_global_setting_data)
     return fos.set('log.memory',
                    'global-setting',
                    data=filtered_data,

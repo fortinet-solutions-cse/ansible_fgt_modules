@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn.certificate_local
-short_description: Local keys and certificates.
+short_description: Local keys and certificates in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure vpn.certificate feature and local category.
@@ -315,8 +315,7 @@ def filter_vpn.certificate_local_data(json):
 def vpn.certificate_local(data, fos):
     vdom = data['vdom']
     vpn.certificate_local_data = data['vpn.certificate_local']
-    filtered_data = filter_vpn.certificate_local_data(
-        vpn.certificate_local_data)
+    filtered_data = filter_vpn.certificate_local_data(vpn.certificate_local_data)
     if vpn.certificate_local_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'local',

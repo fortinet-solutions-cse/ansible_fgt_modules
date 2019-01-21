@@ -27,7 +27,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_automation_stitch
-short_description: Automation stitches.
+short_description: Automation stitches in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
       allowing the user to configure system feature and automation_stitch category.
@@ -229,8 +229,7 @@ def filter_system_automation_stitch_data(json):
 def system_automation_stitch(data, fos):
     vdom = data['vdom']
     system_automation_stitch_data = data['system_automation_stitch']
-    filtered_data = filter_system_automation_stitch_data(
-        system_automation_stitch_data)
+    filtered_data = filter_system_automation_stitch_data(system_automation_stitch_data)
     if system_automation_stitch_data['state'] == "present":
         return fos.set('system',
                        'automation-stitch',

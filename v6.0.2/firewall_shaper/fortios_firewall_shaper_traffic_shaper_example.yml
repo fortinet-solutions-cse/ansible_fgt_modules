@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure shared traffic shaper.
+    fortios_firewall_shaper_traffic_shaper:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_shaper_traffic_shaper:
+        state: "present"
+        bandwidth-unit: "kbps"
+        diffserv: "enable"
+        diffservcode: "<your_own_value>"
+        guaranteed-bandwidth: "6"
+        maximum-bandwidth: "7"
+        name: "default_name_8"
+        per-policy: "disable"
+        priority: "low"

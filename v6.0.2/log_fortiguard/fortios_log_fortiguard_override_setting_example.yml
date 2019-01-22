@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Override global FortiCloud logging settings for this VDOM.
+    fortios_log_fortiguard_override_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      log_fortiguard_override_setting:
+        override: "enable"
+        status: "enable"
+        upload-day: "<your_own_value>"
+        upload-interval: "daily"
+        upload-option: "store-and-upload"
+        upload-time: "<your_own_value>"

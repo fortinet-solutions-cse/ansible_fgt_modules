@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure online sign up (OSU) provider list.
+    fortios_wireless_controller_hotspot20_h2qp_osu_provider:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      wireless_controller_hotspot20_h2qp_osu_provider:
+        state: "present"
+        friendly-name:
+         -
+            friendly-name: "<your_own_value>"
+            index: "5"
+            lang: "<your_own_value>"
+        icon: "<your_own_value> (source wireless-controller.hotspot20.icon.name)"
+        name: "default_name_8"
+        osu-method: "oma-dm"
+        osu-nai: "<your_own_value>"
+        server-uri: "<your_own_value>"
+        service-description:
+         -
+            lang: "<your_own_value>"
+            service-description: "<your_own_value>"
+            service-id: "15"

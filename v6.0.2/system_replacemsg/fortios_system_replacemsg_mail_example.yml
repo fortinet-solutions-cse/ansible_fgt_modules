@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Replacement messages.
+    fortios_system_replacemsg_mail:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      system_replacemsg_mail:
+        state: "present"
+        buffer: "<your_own_value>"
+        format: "none"
+        header: "none"
+        msg-type: "<your_own_value>"

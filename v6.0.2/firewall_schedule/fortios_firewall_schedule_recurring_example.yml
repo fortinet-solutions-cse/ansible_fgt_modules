@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Recurring schedule configuration.
+    fortios_firewall_schedule_recurring:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      firewall_schedule_recurring:
+        state: "present"
+        color: "3"
+        day: "sunday"
+        end: "<your_own_value>"
+        name: "default_name_6"
+        start: "<your_own_value>"

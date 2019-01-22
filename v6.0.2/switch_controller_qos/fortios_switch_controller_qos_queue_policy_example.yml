@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch QoS egress queue policy.
+    fortios_switch_controller_qos_queue_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      switch_controller_qos_queue_policy:
+        state: "present"
+        cos-queue:
+         -
+            description: "<your_own_value>"
+            drop-policy: "taildrop"
+            max-rate: "6"
+            min-rate: "7"
+            name: "default_name_8"
+            weight: "9"
+        name: "default_name_10"
+        schedule: "strict"

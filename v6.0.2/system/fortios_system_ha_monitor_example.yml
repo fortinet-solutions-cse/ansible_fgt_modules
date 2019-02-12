@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_ha_monitor:
         monitor-vlan: "enable"
         vlan-hb-interval: "4"

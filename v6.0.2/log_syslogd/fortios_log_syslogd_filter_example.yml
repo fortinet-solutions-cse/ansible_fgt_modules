@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_syslogd_filter:
         anomaly: "enable"
         dns: "enable"

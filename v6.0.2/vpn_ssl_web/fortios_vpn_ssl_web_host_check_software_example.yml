@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       vpn_ssl_web_host_check_software:
         state: "present"
         check-item-list:

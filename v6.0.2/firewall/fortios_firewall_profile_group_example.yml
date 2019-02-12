@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       firewall_profile_group:
         state: "present"
         application-list: "<your_own_value> (source application.list.name)"

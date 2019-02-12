@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       switch_controller_igmp_snooping:
         aging-time: "3"
         flood-unknown-multicast: "enable"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_ipip_tunnel:
         state: "present"
         interface: "<your_own_value> (source system.interface.name)"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_fortiguard_setting:
         enc-algorithm: "high-medium"
         source-ip: "84.230.14.43"

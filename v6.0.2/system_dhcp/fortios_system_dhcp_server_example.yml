@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_dhcp_server:
         state: "present"
         auto-configuration: "disable"

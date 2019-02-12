@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       user_setting:
         auth-blackout-time: "3"
         auth-ca-cert: "<your_own_value> (source vpn.certificate.local.name)"

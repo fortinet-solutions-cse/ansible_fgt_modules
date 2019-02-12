@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       certificate_local:
         state: "present"
         auto-regenerate-days: "3"

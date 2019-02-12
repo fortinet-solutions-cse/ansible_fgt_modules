@@ -11,5 +11,6 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       switch_controller_network_monitor_settings:
         network-monitoring: "enable"

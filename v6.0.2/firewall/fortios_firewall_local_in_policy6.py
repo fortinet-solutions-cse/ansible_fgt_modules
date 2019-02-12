@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-# Copyright 2018 Fortinet, Inc.
+# Copyright 2019 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -66,7 +66,7 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
         type: bool
-        default: false
+        default: true
     firewall_local_in_policy6:
         description:
             - Configure user defined IPv6 local-in policies.
@@ -144,6 +144,7 @@ EXAMPLES = '''
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       firewall_local_in_policy6:
         state: "present"
         action: "accept"
@@ -167,57 +168,57 @@ RETURN = '''
 build:
   description: Build number of the fortigate image
   returned: always
-  type: string
+  type: str
   sample: '1547'
 http_method:
   description: Last method used to provision the content into FortiGate
   returned: always
-  type: string
+  type: str
   sample: 'PUT'
 http_status:
   description: Last result given by FortiGate on last operation applied
   returned: always
-  type: string
+  type: str
   sample: "200"
 mkey:
   description: Master key (id) used in the last call to FortiGate
   returned: success
-  type: string
-  sample: "key1"
+  type: str
+  sample: "id"
 name:
   description: Name of the table used to fulfill the request
   returned: always
-  type: string
+  type: str
   sample: "urlfilter"
 path:
   description: Path of the table used to fulfill the request
   returned: always
-  type: string
+  type: str
   sample: "webfilter"
 revision:
   description: Internal revision number
   returned: always
-  type: string
+  type: str
   sample: "17.0.2.10658"
 serial:
   description: Serial number of the unit
   returned: always
-  type: string
+  type: str
   sample: "FGVMEVYYQT3AB5352"
 status:
   description: Indication of the operation's result
   returned: always
-  type: string
+  type: str
   sample: "success"
 vdom:
   description: Virtual domain used
   returned: always
-  type: string
+  type: str
   sample: "root"
 version:
   description: Version of the FortiGate
   returned: always
-  type: string
+  type: str
   sample: "v5.6.3"
 
 '''
@@ -290,7 +291,7 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "False"},
+        "https": {"required": False, "type": "bool", "default": True},
         "firewall_local_in_policy6": {
             "required": False, "type": "dict",
             "options": {

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from __future__ import (absolute_import, division, print_function)
-# Copyright 2018 Fortinet, Inc.
+# Copyright 2019 Fortinet, Inc.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,11 +26,11 @@ ANSIBLE_METADATA = {'status': ['preview'],
 
 DOCUMENTATION = '''
 ---
-module: fortios_user_tacacs+
+module: fortios_user_tacacsplus
 short_description: Configure TACACS+ server entries in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure user feature and tacacs+ category.
+      allowing the user to configure user feature and tacacsplus category.
       Examples includes all options and need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
@@ -66,8 +66,8 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS
               protocol
         type: bool
-        default: false
-    user_tacacs+:
+        default: true
+    user_tacacsplus:
         description:
             - Configure TACACS+ server entries.
         default: null
@@ -132,12 +132,13 @@ EXAMPLES = '''
    vdom: "root"
   tasks:
   - name: Configure TACACS+ server entries.
-    fortios_user_tacacs+:
+    fortios_user_tacacsplus:
       host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
-      user_tacacs+:
+      https: "False"
+      user_tacacsplus:
         state: "present"
         authen-type: "mschap"
         authorization: "enable"
@@ -156,57 +157,57 @@ RETURN = '''
 build:
   description: Build number of the fortigate image
   returned: always
-  type: string
+  type: str
   sample: '1547'
 http_method:
   description: Last method used to provision the content into FortiGate
   returned: always
-  type: string
+  type: str
   sample: 'PUT'
 http_status:
   description: Last result given by FortiGate on last operation applied
   returned: always
-  type: string
+  type: str
   sample: "200"
 mkey:
   description: Master key (id) used in the last call to FortiGate
   returned: success
-  type: string
-  sample: "key1"
+  type: str
+  sample: "id"
 name:
   description: Name of the table used to fulfill the request
   returned: always
-  type: string
+  type: str
   sample: "urlfilter"
 path:
   description: Path of the table used to fulfill the request
   returned: always
-  type: string
+  type: str
   sample: "webfilter"
 revision:
   description: Internal revision number
   returned: always
-  type: string
+  type: str
   sample: "17.0.2.10658"
 serial:
   description: Serial number of the unit
   returned: always
-  type: string
+  type: str
   sample: "FGVMEVYYQT3AB5352"
 status:
   description: Indication of the operation's result
   returned: always
-  type: string
+  type: str
   sample: "success"
 vdom:
   description: Virtual domain used
   returned: always
-  type: string
+  type: str
   sample: "root"
 version:
   description: Version of the FortiGate
   returned: always
-  type: string
+  type: str
   sample: "v5.6.3"
 
 '''
@@ -230,7 +231,7 @@ def login(data):
     fos.login(host, username, password)
 
 
-def filter_user_tacacs+_data(json):
+def filter_user_tacacsplus_data(json):
     option_list = ['authen-type', 'authorization', 'key',
                    'name', 'port', 'secondary-key',
                    'secondary-server', 'server', 'source-ip',
@@ -244,17 +245,17 @@ def filter_user_tacacs+_data(json):
     return dictionary
 
 
-def user_tacacs+(data, fos):
+def user_tacacsplus(data, fos):
     vdom = data['vdom']
-    user_tacacs+_data = data['user_tacacs+']
-    filtered_data = filter_user_tacacs+_data(user_tacacs+_data)
-    if user_tacacs+_data['state'] == "present":
+    user_tacacsplus_data = data['user_tacacsplus']
+    filtered_data = filter_user_tacacsplus_data(user_tacacsplus_data)
+    if user_tacacsplus_data['state'] == "present":
         return fos.set('user',
                        'tacacs+',
                        data=filtered_data,
                        vdom=vdom)
 
-    elif user_tacacs+_data['state'] == "absent":
+    elif user_tacacsplus_data['state'] == "absent":
         return fos.delete('user',
                           'tacacs+',
                           mkey=filtered_data['name'],
@@ -264,7 +265,7 @@ def user_tacacs+(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_tacacs+']
+    methodlist = ['user_tacacsplus']
     for method in methodlist:
         if data[method]:
             resp = eval(method)(data, fos)
@@ -280,8 +281,8 @@ def main():
         "username": {"required": True, "type": "str"},
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
-        "https": {"required": False, "type": "bool", "default": "False"},
-        "user_tacacs+": {
+        "https": {"required": False, "type": "bool", "default": True},
+        "user_tacacsplus": {
             "required": False, "type": "dict",
             "options": {
                 "state": {"required": True, "type": "str",

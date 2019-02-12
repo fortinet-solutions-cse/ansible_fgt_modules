@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       vpn_certificate_ocsp_server:
         state: "present"
         cert: "<your_own_value> (source vpn.certificate.remote.name vpn.certificate.ca.name)"

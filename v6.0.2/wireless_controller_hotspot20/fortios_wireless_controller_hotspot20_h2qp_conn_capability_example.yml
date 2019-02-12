@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_hotspot20_h2qp_conn_capability:
         state: "present"
         esp-port: "closed"

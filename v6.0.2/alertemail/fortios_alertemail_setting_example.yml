@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       alertemail_setting:
         admin-login-logs: "enable"
         alert-interval: "4"

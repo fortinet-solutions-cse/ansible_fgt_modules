@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_timers:
         ble-scan-report-intv: "3"
         client-idle-timeout: "4"

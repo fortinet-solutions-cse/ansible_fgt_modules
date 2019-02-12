@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       endpoint_control_settings:
         download-custom-link: "<your_own_value>"
         download-location: "fortiguard"

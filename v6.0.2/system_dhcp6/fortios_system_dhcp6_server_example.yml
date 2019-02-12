@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_dhcp6_server:
         state: "present"
         dns-search-list: "delegated"

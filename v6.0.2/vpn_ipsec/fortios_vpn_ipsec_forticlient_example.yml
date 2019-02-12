@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       vpn_ipsec_forticlient:
         state: "present"
         phase2name: "<your_own_value> (source vpn.ipsec.phase2.name vpn.ipsec.phase2-interface.name)"

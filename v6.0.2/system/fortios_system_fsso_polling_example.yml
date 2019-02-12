@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_fsso_polling:
         auth-password: "<your_own_value>"
         authentication: "enable"

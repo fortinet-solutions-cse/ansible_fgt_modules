@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       user_fortitoken:
         state: "present"
         activation-code: "<your_own_value>"

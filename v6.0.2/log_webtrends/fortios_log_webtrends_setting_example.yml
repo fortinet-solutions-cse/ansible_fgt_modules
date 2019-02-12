@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_webtrends_setting:
         server: "192.168.100.40"
         status: "enable"

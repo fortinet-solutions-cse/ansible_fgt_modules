@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       ips_settings:
         ips-packet-quota: "3"
         packet-log-history: "4"

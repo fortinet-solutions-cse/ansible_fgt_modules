@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_dedicated_mgmt:
         default-gateway: "<your_own_value>"
         dhcp-end-ip: "<your_own_value>"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_inter_controller:
         fast-failover-max: "3"
         fast-failover-wait: "4"

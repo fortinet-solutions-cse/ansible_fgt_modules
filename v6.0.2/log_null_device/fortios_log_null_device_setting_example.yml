@@ -11,5 +11,6 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_null_device_setting:
         status: "enable"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wanopt_peer:
         state: "present"
         ip: "<your_own_value>"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       switch_controller_custom_command:
         state: "present"
         command: "<your_own_value>"

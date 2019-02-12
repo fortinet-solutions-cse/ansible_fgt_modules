@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_ap_status:
         state: "present"
         bssid: "<your_own_value>"

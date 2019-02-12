@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_vdom_dns:
         ip6-primary: "<your_own_value>"
         ip6-secondary: "<your_own_value>"

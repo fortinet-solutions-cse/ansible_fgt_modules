@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_hotspot20_anqp_network_auth_type:
         state: "present"
         auth-type: "acceptance-of-terms"

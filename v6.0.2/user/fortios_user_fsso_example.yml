@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       user_fsso:
         state: "present"
         ldap-server: "<your_own_value> (source user.ldap.name)"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       firewall_ssl_setting:
         abbreviate-handshake: "enable"
         cert-cache-capacity: "4"

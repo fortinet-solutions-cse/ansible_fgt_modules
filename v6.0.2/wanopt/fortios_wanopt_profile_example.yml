@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wanopt_profile:
         state: "present"
         auth-group: "<your_own_value> (source wanopt.auth-group.name)"

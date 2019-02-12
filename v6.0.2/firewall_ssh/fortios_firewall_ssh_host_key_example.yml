@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       firewall_ssh_host_key:
         state: "present"
         hostname: "myhostname"

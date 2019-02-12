@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       wireless_controller_hotspot20_anqp_ip_address_type:
         state: "present"
         ipv4-address-type: "not-available"

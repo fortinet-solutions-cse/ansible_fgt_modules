@@ -11,5 +11,6 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       spamfilter_options:
         dns-timeout: "3"

@@ -11,5 +11,6 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       switch_controller_mac_sync_settings:
         mac-sync-interval: "3"

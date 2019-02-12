@@ -6,12 +6,13 @@
    vdom: "root"
   tasks:
   - name: Configure TACACS+ server entries.
-    fortios_user_tacacs+:
+    fortios_user_tacacsplus:
       host:  "{{ host }}"
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
-      user_tacacs+:
+      https: "False"
+      user_tacacsplus:
         state: "present"
         authen-type: "mschap"
         authorization: "enable"

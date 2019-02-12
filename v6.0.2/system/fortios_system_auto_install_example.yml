@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_auto_install:
         auto-install-config: "enable"
         auto-install-image: "enable"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_fips_cc:
         entropy-token: "enable"
         key-generation-self-test: "enable"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       report_theme:
         state: "present"
         bullet-list-style: "<your_own_value>"

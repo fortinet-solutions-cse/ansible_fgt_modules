@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_syslogd4_setting:
         certificate: "<your_own_value> (source certificate.local.name)"
         custom-field-name:

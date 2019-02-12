@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       authentication_rule:
         state: "present"
         active-auth-method: "<your_own_value> (source authentication.scheme.name)"

@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_api_user:
         state: "present"
         accprofile: "<your_own_value> (source system.accprofile.name)"

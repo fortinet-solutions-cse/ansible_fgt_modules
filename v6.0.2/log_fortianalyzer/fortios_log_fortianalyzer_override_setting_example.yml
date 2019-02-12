@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_fortianalyzer_override_setting:
         __change_ip: "3"
         certificate: "<your_own_value> (source certificate.local.name)"

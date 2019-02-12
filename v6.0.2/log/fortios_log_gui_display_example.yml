@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       log_gui_display:
         fortiview-unscanned-apps: "enable"
         resolve-apps: "enable"

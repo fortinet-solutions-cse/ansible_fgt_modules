@@ -11,6 +11,7 @@
       username: "{{ username }}"
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
+      https: "False"
       system_cluster_sync:
         state: "present"
         down-intfs-before-sess-sync:

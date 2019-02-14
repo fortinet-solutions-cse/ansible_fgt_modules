@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_ssh_filter_profile
 short_description: SSH filter profile in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure ssh_filter feature and profile category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify ssh_filter feature and profile category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -277,10 +277,26 @@ def filter_ssh_filter_profile_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def ssh_filter_profile(data, fos):
     vdom = data['vdom']
     ssh_filter_profile_data = data['ssh_filter_profile']
-    filtered_data = filter_ssh_filter_profile_data(ssh_filter_profile_data)
+    flattened_data = flatten_multilists_attributes(ssh_filter_profile_data)
+    filtered_data = filter_ssh_filter_profile_data(flattened_data)
     if ssh_filter_profile_data['state'] == "present":
         return fos.set('ssh-filter',
                        'profile',

@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_vpn_certificate_local
 short_description: Local keys and certificates in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure vpn_certificate feature and local category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify vpn_certificate feature and local category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -313,10 +313,26 @@ def filter_vpn_certificate_local_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def vpn_certificate_local(data, fos):
     vdom = data['vdom']
     vpn_certificate_local_data = data['vpn_certificate_local']
-    filtered_data = filter_vpn_certificate_local_data(vpn_certificate_local_data)
+    flattened_data = flatten_multilists_attributes(vpn_certificate_local_data)
+    filtered_data = filter_vpn_certificate_local_data(flattened_data)
     if vpn_certificate_local_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'local',

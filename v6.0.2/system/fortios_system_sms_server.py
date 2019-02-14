@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_system_sms_server
 short_description: Configure SMS server for sending SMS messages to support user authentication in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure system feature and sms_server category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify system feature and sms_server category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -197,10 +197,26 @@ def filter_system_sms_server_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def system_sms_server(data, fos):
     vdom = data['vdom']
     system_sms_server_data = data['system_sms_server']
-    filtered_data = filter_system_sms_server_data(system_sms_server_data)
+    flattened_data = flatten_multilists_attributes(system_sms_server_data)
+    filtered_data = filter_system_sms_server_data(flattened_data)
     if system_sms_server_data['state'] == "present":
         return fos.set('system',
                        'sms-server',

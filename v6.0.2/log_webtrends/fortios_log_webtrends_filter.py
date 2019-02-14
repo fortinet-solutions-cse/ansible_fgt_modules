@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_log_webtrends_filter
 short_description: Filters for WebTrends in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure log_webtrends feature and filter category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify log_webtrends feature and filter category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -282,10 +282,26 @@ def filter_log_webtrends_filter_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def log_webtrends_filter(data, fos):
     vdom = data['vdom']
     log_webtrends_filter_data = data['log_webtrends_filter']
-    filtered_data = filter_log_webtrends_filter_data(log_webtrends_filter_data)
+    flattened_data = flatten_multilists_attributes(log_webtrends_filter_data)
+    filtered_data = filter_log_webtrends_filter_data(flattened_data)
     return fos.set('log.webtrends',
                    'filter',
                    data=filtered_data,

@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_wireless_controller_hotspot20_hs_profile
 short_description: Configure hotspot profile in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure wireless_controller_hotspot20 feature and hs_profile category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify wireless_controller_hotspot20 feature and hs_profile category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -442,10 +442,26 @@ def filter_wireless_controller_hotspot20_hs_profile_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def wireless_controller_hotspot20_hs_profile(data, fos):
     vdom = data['vdom']
     wireless_controller_hotspot20_hs_profile_data = data['wireless_controller_hotspot20_hs_profile']
-    filtered_data = filter_wireless_controller_hotspot20_hs_profile_data(wireless_controller_hotspot20_hs_profile_data)
+    flattened_data = flatten_multilists_attributes(wireless_controller_hotspot20_hs_profile_data)
+    filtered_data = filter_wireless_controller_hotspot20_hs_profile_data(flattened_data)
     if wireless_controller_hotspot20_hs_profile_data['state'] == "present":
         return fos.set('wireless-controller.hotspot20',
                        'hs-profile',

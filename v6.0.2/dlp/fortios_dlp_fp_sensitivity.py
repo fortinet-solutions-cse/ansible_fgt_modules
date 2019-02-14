@@ -30,9 +30,9 @@ module: fortios_dlp_fp_sensitivity
 short_description: Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source in Fortinet's FortiOS and
    FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure dlp feature and fp_sensitivity category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify dlp feature and fp_sensitivity category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -46,7 +46,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -194,10 +194,26 @@ def filter_dlp_fp_sensitivity_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def dlp_fp_sensitivity(data, fos):
     vdom = data['vdom']
     dlp_fp_sensitivity_data = data['dlp_fp_sensitivity']
-    filtered_data = filter_dlp_fp_sensitivity_data(dlp_fp_sensitivity_data)
+    flattened_data = flatten_multilists_attributes(dlp_fp_sensitivity_data)
+    filtered_data = filter_dlp_fp_sensitivity_data(flattened_data)
     if dlp_fp_sensitivity_data['state'] == "present":
         return fos.set('dlp',
                        'fp-sensitivity',

@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_router_route_map
 short_description: Configure route maps in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure router feature and route_map category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify router feature and route_map category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -434,10 +434,26 @@ def filter_router_route_map_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def router_route_map(data, fos):
     vdom = data['vdom']
     router_route_map_data = data['router_route_map']
-    filtered_data = filter_router_route_map_data(router_route_map_data)
+    flattened_data = flatten_multilists_attributes(router_route_map_data)
+    filtered_data = filter_router_route_map_data(flattened_data)
     if router_route_map_data['state'] == "present":
         return fos.set('router',
                        'route-map',

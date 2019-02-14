@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_switch_controller_stp_settings
 short_description: Configure FortiSwitch spanning tree protocol (STP) in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure switch_controller feature and stp_settings category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify switch_controller feature and stp_settings category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -218,10 +218,26 @@ def filter_switch_controller_stp_settings_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def switch_controller_stp_settings(data, fos):
     vdom = data['vdom']
     switch_controller_stp_settings_data = data['switch_controller_stp_settings']
-    filtered_data = filter_switch_controller_stp_settings_data(switch_controller_stp_settings_data)
+    flattened_data = flatten_multilists_attributes(switch_controller_stp_settings_data)
+    filtered_data = filter_switch_controller_stp_settings_data(flattened_data)
     return fos.set('switch-controller',
                    'stp-settings',
                    data=filtered_data,

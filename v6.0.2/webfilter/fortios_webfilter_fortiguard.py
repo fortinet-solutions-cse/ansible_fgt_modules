@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_webfilter_fortiguard
 short_description: Configure FortiGuard Web Filter service in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure webfilter feature and fortiguard category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify webfilter feature and fortiguard category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -243,10 +243,26 @@ def filter_webfilter_fortiguard_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def webfilter_fortiguard(data, fos):
     vdom = data['vdom']
     webfilter_fortiguard_data = data['webfilter_fortiguard']
-    filtered_data = filter_webfilter_fortiguard_data(webfilter_fortiguard_data)
+    flattened_data = flatten_multilists_attributes(webfilter_fortiguard_data)
+    filtered_data = filter_webfilter_fortiguard_data(flattened_data)
     return fos.set('webfilter',
                    'fortiguard',
                    data=filtered_data,

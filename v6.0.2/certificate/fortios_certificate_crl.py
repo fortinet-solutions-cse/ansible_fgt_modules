@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_certificate_crl
 short_description: Certificate Revocation List as a PEM file in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure certificate feature and crl category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify certificate feature and crl category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -257,10 +257,26 @@ def filter_certificate_crl_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def certificate_crl(data, fos):
     vdom = data['vdom']
     certificate_crl_data = data['certificate_crl']
-    filtered_data = filter_certificate_crl_data(certificate_crl_data)
+    flattened_data = flatten_multilists_attributes(certificate_crl_data)
+    filtered_data = filter_certificate_crl_data(flattened_data)
     if certificate_crl_data['state'] == "present":
         return fos.set('certificate',
                        'crl',

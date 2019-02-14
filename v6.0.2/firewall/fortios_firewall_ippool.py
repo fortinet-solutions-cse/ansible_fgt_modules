@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_firewall_ippool
 short_description: Configure IPv4 IP pools in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure firewall feature and ippool category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify firewall feature and ippool category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -260,10 +260,26 @@ def filter_firewall_ippool_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def firewall_ippool(data, fos):
     vdom = data['vdom']
     firewall_ippool_data = data['firewall_ippool']
-    filtered_data = filter_firewall_ippool_data(firewall_ippool_data)
+    flattened_data = flatten_multilists_attributes(firewall_ippool_data)
+    filtered_data = filter_firewall_ippool_data(flattened_data)
     if firewall_ippool_data['state'] == "present":
         return fos.set('firewall',
                        'ippool',

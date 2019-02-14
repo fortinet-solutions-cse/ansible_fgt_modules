@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_log_gui_display
 short_description: Configure how log messages are displayed on the GUI in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure log feature and gui_display category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify log feature and gui_display category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -202,10 +202,26 @@ def filter_log_gui_display_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def log_gui_display(data, fos):
     vdom = data['vdom']
     log_gui_display_data = data['log_gui_display']
-    filtered_data = filter_log_gui_display_data(log_gui_display_data)
+    flattened_data = flatten_multilists_attributes(log_gui_display_data)
+    filtered_data = filter_log_gui_display_data(flattened_data)
     return fos.set('log',
                    'gui-display',
                    data=filtered_data,

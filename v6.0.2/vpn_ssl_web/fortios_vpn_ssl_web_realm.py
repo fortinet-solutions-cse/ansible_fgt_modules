@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_vpn_ssl_web_realm
 short_description: Realm in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure vpn_ssl_web feature and realm category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify vpn_ssl_web feature and realm category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -206,10 +206,26 @@ def filter_vpn_ssl_web_realm_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def vpn_ssl_web_realm(data, fos):
     vdom = data['vdom']
     vpn_ssl_web_realm_data = data['vpn_ssl_web_realm']
-    filtered_data = filter_vpn_ssl_web_realm_data(vpn_ssl_web_realm_data)
+    flattened_data = flatten_multilists_attributes(vpn_ssl_web_realm_data)
+    filtered_data = filter_vpn_ssl_web_realm_data(flattened_data)
     if vpn_ssl_web_realm_data['state'] == "present":
         return fos.set('vpn.ssl.web',
                        'realm',

@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_web_proxy_url_match
 short_description: Exempt URLs from web proxy forwarding and caching in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure web_proxy feature and url_match category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify web_proxy feature and url_match category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -220,10 +220,26 @@ def filter_web_proxy_url_match_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def web_proxy_url_match(data, fos):
     vdom = data['vdom']
     web_proxy_url_match_data = data['web_proxy_url_match']
-    filtered_data = filter_web_proxy_url_match_data(web_proxy_url_match_data)
+    flattened_data = flatten_multilists_attributes(web_proxy_url_match_data)
+    filtered_data = filter_web_proxy_url_match_data(flattened_data)
     if web_proxy_url_match_data['state'] == "present":
         return fos.set('web-proxy',
                        'url-match',

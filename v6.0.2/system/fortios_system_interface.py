@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_system_interface
 short_description: Configure interfaces in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure system feature and interface category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify system feature and interface category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -1731,10 +1731,26 @@ def filter_system_interface_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = [[u'allowaccess'], [u'ipv6', u'ip6-allowaccess']]
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def system_interface(data, fos):
     vdom = data['vdom']
     system_interface_data = data['system_interface']
-    filtered_data = filter_system_interface_data(system_interface_data)
+    flattened_data = flatten_multilists_attributes(system_interface_data)
+    filtered_data = filter_system_interface_data(flattened_data)
     if system_interface_data['state'] == "present":
         return fos.set('system',
                        'interface',
@@ -1778,7 +1794,7 @@ def main():
                 "algorithm": {"required": False, "type": "str",
                               "choices": ["L2", "L3", "L4"]},
                 "alias": {"required": False, "type": "str"},
-                "allowaccess": {"required": False, "type": "str",
+                "allowaccess": {"required": False, "type": "list",
                                 "choices": ["ping", "https", "ssh",
                                             "snmp", "http", "telnet",
                                             "fgfm", "radius-acct", "probe-response",
@@ -1888,7 +1904,7 @@ def main():
                 "ingress-spillover-threshold": {"required": False, "type": "int"},
                 "interface": {"required": False, "type": "str"},
                 "internal": {"required": False, "type": "int"},
-                "ip": {"required": False, "type": "ipv4-classnet-host"},
+                "ip": {"required": False, "type": "str"},
                 "ipmac": {"required": False, "type": "str",
                           "choices": ["enable", "disable"]},
                 "ips-sniffer-mode": {"required": False, "type": "str",
@@ -1913,7 +1929,7 @@ def main():
                              "dhcp6-relay-type": {"required": False, "type": "str",
                                                   "choices": ["regular"]},
                              "ip6-address": {"required": False, "type": "str"},
-                             "ip6-allowaccess": {"required": False, "type": "str",
+                             "ip6-allowaccess": {"required": False, "type": "list",
                                                  "choices": ["ping", "https", "ssh",
                                                              "snmp", "http", "telnet",
                                                              "fgfm", "capwap"]},
@@ -2014,7 +2030,7 @@ def main():
                                    "options": {
                                        "name": {"required": True, "type": "str"}
                                    }},
-                "management-ip": {"required": False, "type": "ipv4-classnet-host"},
+                "management-ip": {"required": False, "type": "str"},
                 "member": {"required": False, "type": "list",
                            "options": {
                                "interface-name": {"required": True, "type": "str"}
@@ -2059,7 +2075,7 @@ def main():
                 "proxy-captive-portal": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},
                 "redundant-interface": {"required": False, "type": "str"},
-                "remote-ip": {"required": False, "type": "ipv4-classnet-host"},
+                "remote-ip": {"required": False, "type": "str"},
                 "replacemsg-override-group": {"required": False, "type": "str"},
                 "role": {"required": False, "type": "str",
                          "choices": ["lan", "wan", "dmz",
@@ -2085,7 +2101,7 @@ def main():
                                                  "choices": ["enable", "disable"]},
                                     "ha-priority": {"required": False, "type": "int"},
                                     "id": {"required": True, "type": "int"},
-                                    "ip": {"required": False, "type": "ipv4-classnet-host"},
+                                    "ip": {"required": False, "type": "str"},
                                     "ping-serv-status": {"required": False, "type": "int"}
                                 }},
                 "security-exempt-list": {"required": False, "type": "str"},

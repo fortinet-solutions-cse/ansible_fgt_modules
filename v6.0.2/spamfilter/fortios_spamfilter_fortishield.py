@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_spamfilter_fortishield
 short_description: Configure FortiGuard - AntiSpam in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure spamfilter feature and fortishield category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify spamfilter feature and fortishield category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -199,10 +199,26 @@ def filter_spamfilter_fortishield_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def spamfilter_fortishield(data, fos):
     vdom = data['vdom']
     spamfilter_fortishield_data = data['spamfilter_fortishield']
-    filtered_data = filter_spamfilter_fortishield_data(spamfilter_fortishield_data)
+    flattened_data = flatten_multilists_attributes(spamfilter_fortishield_data)
+    filtered_data = filter_spamfilter_fortishield_data(flattened_data)
     return fos.set('spamfilter',
                    'fortishield',
                    data=filtered_data,

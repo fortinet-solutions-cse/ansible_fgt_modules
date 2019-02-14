@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_wireless_controller_timers
 short_description: Configure CAPWAP timers in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure wireless_controller feature and timers category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify wireless_controller feature and timers category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -260,10 +260,26 @@ def filter_wireless_controller_timers_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def wireless_controller_timers(data, fos):
     vdom = data['vdom']
     wireless_controller_timers_data = data['wireless_controller_timers']
-    filtered_data = filter_wireless_controller_timers_data(wireless_controller_timers_data)
+    flattened_data = flatten_multilists_attributes(wireless_controller_timers_data)
+    filtered_data = filter_wireless_controller_timers_data(flattened_data)
     return fos.set('wireless-controller',
                    'timers',
                    data=filtered_data,

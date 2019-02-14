@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_user_ldap
 short_description: Configure LDAP server entries in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure user feature and ldap category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify user feature and ldap category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -315,10 +315,26 @@ def filter_user_ldap_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def user_ldap(data, fos):
     vdom = data['vdom']
     user_ldap_data = data['user_ldap']
-    filtered_data = filter_user_ldap_data(user_ldap_data)
+    flattened_data = flatten_multilists_attributes(user_ldap_data)
+    filtered_data = filter_user_ldap_data(flattened_data)
     if user_ldap_data['state'] == "present":
         return fos.set('user',
                        'ldap',

@@ -30,9 +30,9 @@ module: fortios_system_vdom_exception
 short_description: Global configuration objects that can be configured independently for all VDOMs or for the defined VDOM scope in Fortinet's FortiOS and
    FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure system feature and vdom_exception category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify system feature and vdom_exception category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -46,7 +46,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -225,10 +225,26 @@ def filter_system_vdom_exception_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def system_vdom_exception(data, fos):
     vdom = data['vdom']
     system_vdom_exception_data = data['system_vdom_exception']
-    filtered_data = filter_system_vdom_exception_data(system_vdom_exception_data)
+    flattened_data = flatten_multilists_attributes(system_vdom_exception_data)
+    filtered_data = filter_system_vdom_exception_data(flattened_data)
     if system_vdom_exception_data['state'] == "present":
         return fos.set('system',
                        'vdom-exception',

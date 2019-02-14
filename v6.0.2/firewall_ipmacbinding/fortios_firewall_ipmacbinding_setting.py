@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_firewall_ipmacbinding_setting
 short_description: Configure IP to MAC binding settings in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure firewall_ipmacbinding feature and setting category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify firewall_ipmacbinding feature and setting category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -202,10 +202,26 @@ def filter_firewall_ipmacbinding_setting_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def firewall_ipmacbinding_setting(data, fos):
     vdom = data['vdom']
     firewall_ipmacbinding_setting_data = data['firewall_ipmacbinding_setting']
-    filtered_data = filter_firewall_ipmacbinding_setting_data(firewall_ipmacbinding_setting_data)
+    flattened_data = flatten_multilists_attributes(firewall_ipmacbinding_setting_data)
+    filtered_data = filter_firewall_ipmacbinding_setting_data(flattened_data)
     return fos.set('firewall.ipmacbinding',
                    'setting',
                    data=filtered_data,

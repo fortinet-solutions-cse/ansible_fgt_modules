@@ -29,9 +29,9 @@ DOCUMENTATION = '''
 module: fortios_application_rule_settings
 short_description: Configure application rule settings in Fortinet's FortiOS and FortiGate.
 description:
-    - This module is able to configure a FortiGate or FortiOS by
-      allowing the user to configure application feature and rule_settings category.
-      Examples includes all options and need to be adjusted to datasources before usage.
+    - This module is able to configure a FortiGate or FortiOS by allowing the
+      user to set and modify application feature and rule_settings category.
+      Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
 version_added: "2.8"
 author:
@@ -45,7 +45,7 @@ requirements:
 options:
     host:
        description:
-            - FortiOS or FortiGate ip adress.
+            - FortiOS or FortiGate ip address.
        required: true
     username:
         description:
@@ -193,10 +193,26 @@ def filter_application_rule_settings_data(json):
     return dictionary
 
 
+def flatten_multilists_attributes(data):
+    multilist_attrs = []
+
+    for attr in multilist_attrs:
+        try:
+            path = "data['" + "']['".join(elem for elem in attr) + "']"
+            current_val = eval(path)
+            flattened_val = ' '.join(elem for elem in current_val)
+            exec(path + '= flattened_val')
+        except BaseException:
+            pass
+
+    return data
+
+
 def application_rule_settings(data, fos):
     vdom = data['vdom']
     application_rule_settings_data = data['application_rule_settings']
-    filtered_data = filter_application_rule_settings_data(application_rule_settings_data)
+    flattened_data = flatten_multilists_attributes(application_rule_settings_data)
+    filtered_data = filter_application_rule_settings_data(flattened_data)
     if application_rule_settings_data['state'] == "present":
         return fos.set('application',
                        'rule-settings',

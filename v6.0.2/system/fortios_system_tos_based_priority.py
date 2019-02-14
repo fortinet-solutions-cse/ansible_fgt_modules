@@ -242,11 +242,8 @@ def system_tos_based_priority(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_tos_based_priority']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_tos_based_priority']:
+        resp = system_tos_based_priority(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

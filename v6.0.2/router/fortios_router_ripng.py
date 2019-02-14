@@ -449,11 +449,8 @@ def router_ripng(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_ripng']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_ripng']:
+        resp = router_ripng(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

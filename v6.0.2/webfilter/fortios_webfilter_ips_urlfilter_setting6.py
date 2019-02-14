@@ -227,11 +227,8 @@ def webfilter_ips_urlfilter_setting6(data, fos):
 def fortios_webfilter(data, fos):
     login(data)
 
-    methodlist = ['webfilter_ips_urlfilter_setting6']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['webfilter_ips_urlfilter_setting6']:
+        resp = webfilter_ips_urlfilter_setting6(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

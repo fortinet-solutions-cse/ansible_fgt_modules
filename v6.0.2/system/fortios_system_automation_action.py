@@ -336,11 +336,8 @@ def system_automation_action(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_automation_action']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_automation_action']:
+        resp = system_automation_action(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

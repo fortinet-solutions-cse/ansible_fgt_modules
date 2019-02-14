@@ -255,11 +255,8 @@ def endpoint_control_registered_forticlient(data, fos):
 def fortios_endpoint_control(data, fos):
     login(data)
 
-    methodlist = ['endpoint_control_registered_forticlient']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['endpoint_control_registered_forticlient']:
+        resp = endpoint_control_registered_forticlient(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

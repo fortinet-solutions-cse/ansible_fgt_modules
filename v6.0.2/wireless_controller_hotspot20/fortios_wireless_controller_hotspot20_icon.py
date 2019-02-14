@@ -266,11 +266,8 @@ def wireless_controller_hotspot20_icon(data, fos):
 def fortios_wireless_controller_hotspot20(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_hotspot20_icon']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_hotspot20_icon']:
+        resp = wireless_controller_hotspot20_icon(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

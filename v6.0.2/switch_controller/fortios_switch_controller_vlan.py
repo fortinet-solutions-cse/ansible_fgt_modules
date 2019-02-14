@@ -307,11 +307,8 @@ def switch_controller_vlan(data, fos):
 def fortios_switch_controller(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_vlan']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_vlan']:
+        resp = switch_controller_vlan(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

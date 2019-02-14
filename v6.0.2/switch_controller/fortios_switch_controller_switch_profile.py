@@ -241,11 +241,8 @@ def switch_controller_switch_profile(data, fos):
 def fortios_switch_controller(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_switch_profile']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_switch_profile']:
+        resp = switch_controller_switch_profile(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

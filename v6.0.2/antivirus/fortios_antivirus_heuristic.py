@@ -218,11 +218,8 @@ def antivirus_heuristic(data, fos):
 def fortios_antivirus(data, fos):
     login(data)
 
-    methodlist = ['antivirus_heuristic']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['antivirus_heuristic']:
+        resp = antivirus_heuristic(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

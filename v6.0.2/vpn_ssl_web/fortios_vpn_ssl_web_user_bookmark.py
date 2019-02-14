@@ -388,11 +388,8 @@ def vpn_ssl_web_user_bookmark(data, fos):
 def fortios_vpn_ssl_web(data, fos):
     login(data)
 
-    methodlist = ['vpn_ssl_web_user_bookmark']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['vpn_ssl_web_user_bookmark']:
+        resp = vpn_ssl_web_user_bookmark(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

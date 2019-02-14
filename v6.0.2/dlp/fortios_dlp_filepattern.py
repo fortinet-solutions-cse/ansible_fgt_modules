@@ -320,11 +320,8 @@ def dlp_filepattern(data, fos):
 def fortios_dlp(data, fos):
     login(data)
 
-    methodlist = ['dlp_filepattern']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dlp_filepattern']:
+        resp = dlp_filepattern(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

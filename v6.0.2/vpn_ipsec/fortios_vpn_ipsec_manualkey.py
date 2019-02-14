@@ -285,11 +285,8 @@ def vpn_ipsec_manualkey(data, fos):
 def fortios_vpn_ipsec(data, fos):
     login(data)
 
-    methodlist = ['vpn_ipsec_manualkey']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['vpn_ipsec_manualkey']:
+        resp = vpn_ipsec_manualkey(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

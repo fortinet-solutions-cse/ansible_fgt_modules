@@ -866,11 +866,8 @@ def vpn_ssl_web_portal(data, fos):
 def fortios_vpn_ssl_web(data, fos):
     login(data)
 
-    methodlist = ['vpn_ssl_web_portal']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['vpn_ssl_web_portal']:
+        resp = vpn_ssl_web_portal(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -246,11 +246,8 @@ def switch_controller_qos_qos_policy(data, fos):
 def fortios_switch_controller_qos(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_qos_qos_policy']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_qos_qos_policy']:
+        resp = switch_controller_qos_qos_policy(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -263,11 +263,8 @@ def firewall_identity_based_route(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_identity_based_route']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_identity_based_route']:
+        resp = firewall_identity_based_route(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

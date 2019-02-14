@@ -437,11 +437,8 @@ def extender_controller_extender(data, fos):
 def fortios_extender_controller(data, fos):
     login(data)
 
-    methodlist = ['extender_controller_extender']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['extender_controller_extender']:
+        resp = extender_controller_extender(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

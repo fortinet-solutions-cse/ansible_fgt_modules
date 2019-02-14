@@ -290,11 +290,8 @@ def system_switch_interface(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_switch_interface']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_switch_interface']:
+        resp = system_switch_interface(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

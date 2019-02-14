@@ -237,11 +237,8 @@ def ftp_proxy_explicit(data, fos):
 def fortios_ftp_proxy(data, fos):
     login(data)
 
-    methodlist = ['ftp_proxy_explicit']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['ftp_proxy_explicit']:
+        resp = ftp_proxy_explicit(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

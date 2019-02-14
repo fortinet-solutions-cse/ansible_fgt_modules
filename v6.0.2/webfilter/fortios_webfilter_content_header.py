@@ -261,11 +261,8 @@ def webfilter_content_header(data, fos):
 def fortios_webfilter(data, fos):
     login(data)
 
-    methodlist = ['webfilter_content_header']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['webfilter_content_header']:
+        resp = webfilter_content_header(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

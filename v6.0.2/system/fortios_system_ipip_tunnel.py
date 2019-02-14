@@ -242,11 +242,8 @@ def system_ipip_tunnel(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_ipip_tunnel']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_ipip_tunnel']:
+        resp = system_ipip_tunnel(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

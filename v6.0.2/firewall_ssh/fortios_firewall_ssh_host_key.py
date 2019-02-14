@@ -275,11 +275,8 @@ def firewall_ssh_host_key(data, fos):
 def fortios_firewall_ssh(data, fos):
     login(data)
 
-    methodlist = ['firewall_ssh_host_key']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_ssh_host_key']:
+        resp = firewall_ssh_host_key(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

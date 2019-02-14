@@ -420,11 +420,8 @@ def dlp_sensor(data, fos):
 def fortios_dlp(data, fos):
     login(data)
 
-    methodlist = ['dlp_sensor']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dlp_sensor']:
+        resp = dlp_sensor(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

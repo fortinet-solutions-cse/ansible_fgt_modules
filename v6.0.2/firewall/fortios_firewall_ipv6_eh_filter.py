@@ -262,11 +262,8 @@ def firewall_ipv6_eh_filter(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_ipv6_eh_filter']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_ipv6_eh_filter']:
+        resp = firewall_ipv6_eh_filter(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -291,11 +291,8 @@ def switch_controller_qos_ip_dscp_map(data, fos):
 def fortios_switch_controller_qos(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_qos_ip_dscp_map']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_qos_ip_dscp_map']:
+        resp = switch_controller_qos_ip_dscp_map(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

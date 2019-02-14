@@ -432,11 +432,8 @@ def user_group(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_group']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_group']:
+        resp = user_group(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

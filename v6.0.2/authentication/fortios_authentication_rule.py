@@ -304,11 +304,8 @@ def authentication_rule(data, fos):
 def fortios_authentication(data, fos):
     login(data)
 
-    methodlist = ['authentication_rule']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['authentication_rule']:
+        resp = authentication_rule(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

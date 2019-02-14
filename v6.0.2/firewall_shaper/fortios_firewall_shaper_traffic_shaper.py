@@ -274,11 +274,8 @@ def firewall_shaper_traffic_shaper(data, fos):
 def fortios_firewall_shaper(data, fos):
     login(data)
 
-    methodlist = ['firewall_shaper_traffic_shaper']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_shaper_traffic_shaper']:
+        resp = firewall_shaper_traffic_shaper(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

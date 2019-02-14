@@ -293,11 +293,8 @@ def certificate_crl(data, fos):
 def fortios_certificate(data, fos):
     login(data)
 
-    methodlist = ['certificate_crl']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['certificate_crl']:
+        resp = certificate_crl(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

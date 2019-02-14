@@ -235,11 +235,8 @@ def dlp_settings(data, fos):
 def fortios_dlp(data, fos):
     login(data)
 
-    methodlist = ['dlp_settings']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dlp_settings']:
+        resp = dlp_settings(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

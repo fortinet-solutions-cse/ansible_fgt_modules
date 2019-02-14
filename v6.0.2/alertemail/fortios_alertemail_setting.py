@@ -434,11 +434,8 @@ def alertemail_setting(data, fos):
 def fortios_alertemail(data, fos):
     login(data)
 
-    methodlist = ['alertemail_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['alertemail_setting']:
+        resp = alertemail_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

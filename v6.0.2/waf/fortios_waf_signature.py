@@ -233,11 +233,8 @@ def waf_signature(data, fos):
 def fortios_waf(data, fos):
     login(data)
 
-    methodlist = ['waf_signature']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['waf_signature']:
+        resp = waf_signature(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

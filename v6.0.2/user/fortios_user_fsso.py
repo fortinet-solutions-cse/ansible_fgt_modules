@@ -307,11 +307,8 @@ def user_fsso(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_fsso']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_fsso']:
+        resp = user_fsso(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -324,11 +324,8 @@ def vpn_certificate_setting(data, fos):
 def fortios_vpn_certificate(data, fos):
     login(data)
 
-    methodlist = ['vpn_certificate_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['vpn_certificate_setting']:
+        resp = vpn_certificate_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

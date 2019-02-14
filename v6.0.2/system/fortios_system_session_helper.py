@@ -261,11 +261,8 @@ def system_session_helper(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_session_helper']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_session_helper']:
+        resp = system_session_helper(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

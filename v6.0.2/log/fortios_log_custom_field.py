@@ -237,11 +237,8 @@ def log_custom_field(data, fos):
 def fortios_log(data, fos):
     login(data)
 
-    methodlist = ['log_custom_field']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_custom_field']:
+        resp = log_custom_field(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

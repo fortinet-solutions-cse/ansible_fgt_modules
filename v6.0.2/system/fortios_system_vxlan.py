@@ -278,11 +278,8 @@ def system_vxlan(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_vxlan']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_vxlan']:
+        resp = system_vxlan(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

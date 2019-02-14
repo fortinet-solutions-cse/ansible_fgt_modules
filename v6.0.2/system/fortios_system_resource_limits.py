@@ -287,11 +287,8 @@ def system_resource_limits(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_resource_limits']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_resource_limits']:
+        resp = system_resource_limits(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

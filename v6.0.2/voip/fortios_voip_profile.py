@@ -920,11 +920,8 @@ def voip_profile(data, fos):
 def fortios_voip(data, fos):
     login(data)
 
-    methodlist = ['voip_profile']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['voip_profile']:
+        resp = voip_profile(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

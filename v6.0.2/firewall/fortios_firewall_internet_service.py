@@ -293,11 +293,8 @@ def firewall_internet_service(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_internet_service']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_internet_service']:
+        resp = firewall_internet_service(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

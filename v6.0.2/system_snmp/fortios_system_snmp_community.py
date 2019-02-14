@@ -405,11 +405,8 @@ def system_snmp_community(data, fos):
 def fortios_system_snmp(data, fos):
     login(data)
 
-    methodlist = ['system_snmp_community']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_snmp_community']:
+        resp = system_snmp_community(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

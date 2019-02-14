@@ -253,11 +253,8 @@ def icap_server(data, fos):
 def fortios_icap(data, fos):
     login(data)
 
-    methodlist = ['icap_server']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['icap_server']:
+        resp = icap_server(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

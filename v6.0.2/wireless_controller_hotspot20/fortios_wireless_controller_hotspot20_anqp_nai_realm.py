@@ -331,11 +331,8 @@ def wireless_controller_hotspot20_anqp_nai_realm(data, fos):
 def fortios_wireless_controller_hotspot20(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_hotspot20_anqp_nai_realm']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_hotspot20_anqp_nai_realm']:
+        resp = wireless_controller_hotspot20_anqp_nai_realm(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

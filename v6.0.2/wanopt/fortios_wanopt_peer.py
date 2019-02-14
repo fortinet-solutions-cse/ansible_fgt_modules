@@ -233,11 +233,8 @@ def wanopt_peer(data, fos):
 def fortios_wanopt(data, fos):
     login(data)
 
-    methodlist = ['wanopt_peer']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wanopt_peer']:
+        resp = wanopt_peer(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -273,11 +273,8 @@ def firewall_ssl_setting(data, fos):
 def fortios_firewall_ssl(data, fos):
     login(data)
 
-    methodlist = ['firewall_ssl_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_ssl_setting']:
+        resp = firewall_ssl_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

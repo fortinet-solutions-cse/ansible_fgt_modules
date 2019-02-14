@@ -244,11 +244,8 @@ def firewall_schedule_group(data, fos):
 def fortios_firewall_schedule(data, fos):
     login(data)
 
-    methodlist = ['firewall_schedule_group']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_schedule_group']:
+        resp = firewall_schedule_group(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -441,11 +441,8 @@ def wanopt_content_delivery_network_rule(data, fos):
 def fortios_wanopt(data, fos):
     login(data)
 
-    methodlist = ['wanopt_content_delivery_network_rule']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wanopt_content_delivery_network_rule']:
+        resp = wanopt_content_delivery_network_rule(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

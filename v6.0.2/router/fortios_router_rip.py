@@ -479,11 +479,8 @@ def router_rip(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_rip']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_rip']:
+        resp = router_rip(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

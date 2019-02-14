@@ -273,11 +273,8 @@ def wireless_controller_hotspot20_h2qp_wan_metric(data, fos):
 def fortios_wireless_controller_hotspot20(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_hotspot20_h2qp_wan_metric']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_hotspot20_h2qp_wan_metric']:
+        resp = wireless_controller_hotspot20_h2qp_wan_metric(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -233,11 +233,8 @@ def system_autoupdate_push_update(data, fos):
 def fortios_system_autoupdate(data, fos):
     login(data)
 
-    methodlist = ['system_autoupdate_push_update']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_autoupdate_push_update']:
+        resp = system_autoupdate_push_update(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

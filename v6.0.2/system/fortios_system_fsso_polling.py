@@ -233,11 +233,8 @@ def system_fsso_polling(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_fsso_polling']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_fsso_polling']:
+        resp = system_fsso_polling(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

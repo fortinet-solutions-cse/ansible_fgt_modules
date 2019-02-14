@@ -339,11 +339,8 @@ def user_local(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_local']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_local']:
+        resp = user_local(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

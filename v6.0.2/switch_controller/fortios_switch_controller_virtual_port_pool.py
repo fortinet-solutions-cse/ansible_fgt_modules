@@ -233,11 +233,8 @@ def switch_controller_virtual_port_pool(data, fos):
 def fortios_switch_controller(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_virtual_port_pool']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_virtual_port_pool']:
+        resp = switch_controller_virtual_port_pool(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

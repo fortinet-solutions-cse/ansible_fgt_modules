@@ -274,11 +274,8 @@ def web_proxy_forward_server(data, fos):
 def fortios_web_proxy(data, fos):
     login(data)
 
-    methodlist = ['web_proxy_forward_server']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['web_proxy_forward_server']:
+        resp = web_proxy_forward_server(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

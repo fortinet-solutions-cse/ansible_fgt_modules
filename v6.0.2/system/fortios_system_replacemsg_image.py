@@ -242,11 +242,8 @@ def system_replacemsg_image(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_replacemsg_image']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_replacemsg_image']:
+        resp = system_replacemsg_image(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

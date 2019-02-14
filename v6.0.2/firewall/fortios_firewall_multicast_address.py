@@ -297,11 +297,8 @@ def firewall_multicast_address(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_multicast_address']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_multicast_address']:
+        resp = firewall_multicast_address(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

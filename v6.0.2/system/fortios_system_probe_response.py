@@ -251,11 +251,8 @@ def system_probe_response(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_probe_response']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_probe_response']:
+        resp = system_probe_response(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

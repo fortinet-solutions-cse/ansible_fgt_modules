@@ -291,11 +291,8 @@ def wanopt_cache_service(data, fos):
 def fortios_wanopt(data, fos):
     login(data)
 
-    methodlist = ['wanopt_cache_service']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wanopt_cache_service']:
+        resp = wanopt_cache_service(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

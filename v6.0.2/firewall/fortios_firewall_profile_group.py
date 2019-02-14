@@ -285,11 +285,8 @@ def firewall_profile_group(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_profile_group']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_profile_group']:
+        resp = firewall_profile_group(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

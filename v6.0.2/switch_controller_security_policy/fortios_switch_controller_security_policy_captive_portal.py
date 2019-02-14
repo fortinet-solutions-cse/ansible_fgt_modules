@@ -239,11 +239,8 @@ def switch_controller_security_policy_captive_portal(data, fos):
 def fortios_switch_controller_security_policy(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_security_policy_captive_portal']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_security_policy_captive_portal']:
+        resp = switch_controller_security_policy_captive_portal(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

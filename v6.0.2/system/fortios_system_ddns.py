@@ -330,11 +330,8 @@ def system_ddns(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_ddns']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_ddns']:
+        resp = system_ddns(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

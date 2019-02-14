@@ -312,11 +312,8 @@ def system_gre_tunnel(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_gre_tunnel']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_gre_tunnel']:
+        resp = system_gre_tunnel(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

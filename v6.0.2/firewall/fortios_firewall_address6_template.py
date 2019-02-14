@@ -279,11 +279,8 @@ def firewall_address6_template(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_address6_template']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_address6_template']:
+        resp = firewall_address6_template(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

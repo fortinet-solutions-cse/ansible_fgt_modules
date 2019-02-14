@@ -214,11 +214,8 @@ def spamfilter_options(data, fos):
 def fortios_spamfilter(data, fos):
     login(data)
 
-    methodlist = ['spamfilter_options']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['spamfilter_options']:
+        resp = spamfilter_options(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

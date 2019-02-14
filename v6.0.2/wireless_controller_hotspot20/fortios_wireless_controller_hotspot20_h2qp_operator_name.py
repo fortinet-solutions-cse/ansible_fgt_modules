@@ -248,11 +248,8 @@ def wireless_controller_hotspot20_h2qp_operator_name(data, fos):
 def fortios_wireless_controller_hotspot20(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_hotspot20_h2qp_operator_name']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_hotspot20_h2qp_operator_name']:
+        resp = wireless_controller_hotspot20_h2qp_operator_name(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

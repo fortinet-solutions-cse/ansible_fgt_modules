@@ -795,11 +795,8 @@ def system_virtual_wan_link(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_virtual_wan_link']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_virtual_wan_link']:
+        resp = system_virtual_wan_link(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

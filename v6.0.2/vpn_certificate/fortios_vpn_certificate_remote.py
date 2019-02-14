@@ -250,11 +250,8 @@ def vpn_certificate_remote(data, fos):
 def fortios_vpn_certificate(data, fos):
     login(data)
 
-    methodlist = ['vpn_certificate_remote']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['vpn_certificate_remote']:
+        resp = vpn_certificate_remote(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -223,11 +223,8 @@ def system_sflow(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_sflow']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_sflow']:
+        resp = system_sflow(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

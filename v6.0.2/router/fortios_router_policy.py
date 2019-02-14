@@ -358,11 +358,8 @@ def router_policy(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_policy']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_policy']:
+        resp = router_policy(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

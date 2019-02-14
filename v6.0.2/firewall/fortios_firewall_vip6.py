@@ -773,11 +773,8 @@ def firewall_vip6(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_vip6']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_vip6']:
+        resp = firewall_vip6(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -312,11 +312,8 @@ def web_proxy_global(data, fos):
 def fortios_web_proxy(data, fos):
     login(data)
 
-    methodlist = ['web_proxy_global']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['web_proxy_global']:
+        resp = web_proxy_global(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

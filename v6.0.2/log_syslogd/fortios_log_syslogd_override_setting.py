@@ -316,11 +316,8 @@ def log_syslogd_override_setting(data, fos):
 def fortios_log_syslogd(data, fos):
     login(data)
 
-    methodlist = ['log_syslogd_override_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_syslogd_override_setting']:
+        resp = log_syslogd_override_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

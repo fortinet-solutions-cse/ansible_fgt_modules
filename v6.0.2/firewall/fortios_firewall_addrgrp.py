@@ -294,11 +294,8 @@ def firewall_addrgrp(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_addrgrp']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_addrgrp']:
+        resp = firewall_addrgrp(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

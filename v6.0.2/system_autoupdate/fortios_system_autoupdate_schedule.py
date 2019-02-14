@@ -242,11 +242,8 @@ def system_autoupdate_schedule(data, fos):
 def fortios_system_autoupdate(data, fos):
     login(data)
 
-    methodlist = ['system_autoupdate_schedule']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_autoupdate_schedule']:
+        resp = system_autoupdate_schedule(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

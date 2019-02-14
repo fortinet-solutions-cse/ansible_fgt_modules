@@ -367,11 +367,8 @@ def report_style(data, fos):
 def fortios_report(data, fos):
     login(data)
 
-    methodlist = ['report_style']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['report_style']:
+        resp = report_style(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

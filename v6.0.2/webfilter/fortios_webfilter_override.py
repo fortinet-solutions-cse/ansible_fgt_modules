@@ -280,11 +280,8 @@ def webfilter_override(data, fos):
 def fortios_webfilter(data, fos):
     login(data)
 
-    methodlist = ['webfilter_override']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['webfilter_override']:
+        resp = webfilter_override(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

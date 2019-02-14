@@ -253,11 +253,8 @@ def firewall_vipgrp64(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_vipgrp64']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_vipgrp64']:
+        resp = firewall_vipgrp64(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

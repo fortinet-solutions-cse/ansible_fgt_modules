@@ -373,11 +373,8 @@ def system_fortiguard(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_fortiguard']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_fortiguard']:
+        resp = system_fortiguard(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

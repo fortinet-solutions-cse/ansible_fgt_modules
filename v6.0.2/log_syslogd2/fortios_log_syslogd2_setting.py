@@ -309,11 +309,8 @@ def log_syslogd2_setting(data, fos):
 def fortios_log_syslogd2(data, fos):
     login(data)
 
-    methodlist = ['log_syslogd2_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_syslogd2_setting']:
+        resp = log_syslogd2_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

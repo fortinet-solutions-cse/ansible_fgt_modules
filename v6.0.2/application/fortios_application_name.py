@@ -296,11 +296,8 @@ def application_name(data, fos):
 def fortios_application(data, fos):
     login(data)
 
-    methodlist = ['application_name']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['application_name']:
+        resp = application_name(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

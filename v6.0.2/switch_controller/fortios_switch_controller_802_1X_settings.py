@@ -225,11 +225,8 @@ def switch_controller_802_1X_settings(data, fos):
 def fortios_switch_controller(data, fos):
     login(data)
 
-    methodlist = ['switch_controller_802_1X_settings']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['switch_controller_802_1X_settings']:
+        resp = switch_controller_802_1X_settings(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

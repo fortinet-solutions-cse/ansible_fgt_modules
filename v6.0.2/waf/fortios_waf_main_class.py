@@ -233,11 +233,8 @@ def waf_main_class(data, fos):
 def fortios_waf(data, fos):
     login(data)
 
-    methodlist = ['waf_main_class']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['waf_main_class']:
+        resp = waf_main_class(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

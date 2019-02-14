@@ -255,11 +255,8 @@ def user_quarantine(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_quarantine']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_quarantine']:
+        resp = user_quarantine(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

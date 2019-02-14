@@ -272,11 +272,8 @@ def system_password_policy(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_password_policy']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_password_policy']:
+        resp = system_password_policy(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

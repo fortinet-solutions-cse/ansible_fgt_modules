@@ -247,11 +247,8 @@ def system_snmp_sysinfo(data, fos):
 def fortios_system_snmp(data, fos):
     login(data)
 
-    methodlist = ['system_snmp_sysinfo']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_snmp_sysinfo']:
+        resp = system_snmp_sysinfo(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

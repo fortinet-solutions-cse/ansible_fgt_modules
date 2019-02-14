@@ -321,11 +321,8 @@ def wanopt_webcache(data, fos):
 def fortios_wanopt(data, fos):
     login(data)
 
-    methodlist = ['wanopt_webcache']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wanopt_webcache']:
+        resp = wanopt_webcache(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

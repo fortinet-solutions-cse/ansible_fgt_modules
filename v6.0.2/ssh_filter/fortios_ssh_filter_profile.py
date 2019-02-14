@@ -313,11 +313,8 @@ def ssh_filter_profile(data, fos):
 def fortios_ssh_filter(data, fos):
     login(data)
 
-    methodlist = ['ssh_filter_profile']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['ssh_filter_profile']:
+        resp = ssh_filter_profile(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

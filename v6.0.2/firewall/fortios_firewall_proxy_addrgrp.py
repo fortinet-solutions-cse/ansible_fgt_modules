@@ -294,11 +294,8 @@ def firewall_proxy_addrgrp(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_proxy_addrgrp']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_proxy_addrgrp']:
+        resp = firewall_proxy_addrgrp(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

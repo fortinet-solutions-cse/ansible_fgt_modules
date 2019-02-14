@@ -253,11 +253,8 @@ def firewall_wildcard_fqdn_custom(data, fos):
 def fortios_firewall_wildcard_fqdn(data, fos):
     login(data)
 
-    methodlist = ['firewall_wildcard_fqdn_custom']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_wildcard_fqdn_custom']:
+        resp = firewall_wildcard_fqdn_custom(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -280,11 +280,8 @@ def firewall_ttl_policy(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_ttl_policy']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_ttl_policy']:
+        resp = firewall_ttl_policy(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

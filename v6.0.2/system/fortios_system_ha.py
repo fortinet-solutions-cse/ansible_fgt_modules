@@ -639,11 +639,8 @@ def system_ha(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_ha']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_ha']:
+        resp = system_ha(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

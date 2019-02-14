@@ -968,11 +968,8 @@ def system_settings(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_settings']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_settings']:
+        resp = system_settings(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

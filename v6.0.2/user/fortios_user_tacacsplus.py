@@ -281,11 +281,8 @@ def user_tacacsplus(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_tacacsplus']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_tacacsplus']:
+        resp = user_tacacsplus(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

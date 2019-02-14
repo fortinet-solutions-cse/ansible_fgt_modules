@@ -237,11 +237,8 @@ def user_device_category(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_device_category']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_device_category']:
+        resp = user_device_category(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

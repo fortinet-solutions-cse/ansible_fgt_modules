@@ -242,11 +242,8 @@ def system_console(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_console']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_console']:
+        resp = system_console(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

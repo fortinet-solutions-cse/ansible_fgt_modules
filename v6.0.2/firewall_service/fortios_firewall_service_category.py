@@ -233,11 +233,8 @@ def firewall_service_category(data, fos):
 def fortios_firewall_service(data, fos):
     login(data)
 
-    methodlist = ['firewall_service_category']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_service_category']:
+        resp = firewall_service_category(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -229,11 +229,8 @@ def system_fips_cc(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_fips_cc']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_fips_cc']:
+        resp = system_fips_cc(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

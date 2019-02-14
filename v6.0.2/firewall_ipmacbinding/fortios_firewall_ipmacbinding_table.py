@@ -249,11 +249,8 @@ def firewall_ipmacbinding_table(data, fos):
 def fortios_firewall_ipmacbinding(data, fos):
     login(data)
 
-    methodlist = ['firewall_ipmacbinding_table']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_ipmacbinding_table']:
+        resp = firewall_ipmacbinding_table(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

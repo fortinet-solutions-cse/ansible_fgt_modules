@@ -252,11 +252,8 @@ def system_automation_destination(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_automation_destination']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_automation_destination']:
+        resp = system_automation_destination(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

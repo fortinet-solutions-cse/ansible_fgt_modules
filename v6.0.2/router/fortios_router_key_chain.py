@@ -252,11 +252,8 @@ def router_key_chain(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_key_chain']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_key_chain']:
+        resp = router_key_chain(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

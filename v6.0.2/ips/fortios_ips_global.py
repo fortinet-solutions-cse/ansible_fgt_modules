@@ -293,11 +293,8 @@ def ips_global(data, fos):
 def fortios_ips(data, fos):
     login(data)
 
-    methodlist = ['ips_global']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['ips_global']:
+        resp = ips_global(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

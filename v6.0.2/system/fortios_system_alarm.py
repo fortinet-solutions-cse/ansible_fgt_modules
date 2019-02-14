@@ -314,11 +314,8 @@ def system_alarm(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_alarm']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_alarm']:
+        resp = system_alarm(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

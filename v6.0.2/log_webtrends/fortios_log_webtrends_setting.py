@@ -221,11 +221,8 @@ def log_webtrends_setting(data, fos):
 def fortios_log_webtrends(data, fos):
     login(data)
 
-    methodlist = ['log_webtrends_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_webtrends_setting']:
+        resp = log_webtrends_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

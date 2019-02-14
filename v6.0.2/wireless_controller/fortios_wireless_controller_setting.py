@@ -362,11 +362,8 @@ def wireless_controller_setting(data, fos):
 def fortios_wireless_controller(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_setting']:
+        resp = wireless_controller_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

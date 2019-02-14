@@ -240,11 +240,8 @@ def webfilter_ftgd_local_rating(data, fos):
 def fortios_webfilter(data, fos):
     login(data)
 
-    methodlist = ['webfilter_ftgd_local_rating']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['webfilter_ftgd_local_rating']:
+        resp = webfilter_ftgd_local_rating(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

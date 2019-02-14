@@ -1047,11 +1047,8 @@ def wireless_controller_vap(data, fos):
 def fortios_wireless_controller(data, fos):
     login(data)
 
-    methodlist = ['wireless_controller_vap']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wireless_controller_vap']:
+        resp = wireless_controller_vap(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -230,11 +230,8 @@ def dlp_fp_sensitivity(data, fos):
 def fortios_dlp(data, fos):
     login(data)
 
-    methodlist = ['dlp_fp_sensitivity']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dlp_fp_sensitivity']:
+        resp = dlp_fp_sensitivity(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

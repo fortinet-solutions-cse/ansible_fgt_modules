@@ -351,11 +351,8 @@ def dnsfilter_profile(data, fos):
 def fortios_dnsfilter(data, fos):
     login(data)
 
-    methodlist = ['dnsfilter_profile']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dnsfilter_profile']:
+        resp = dnsfilter_profile(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

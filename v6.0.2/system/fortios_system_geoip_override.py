@@ -257,11 +257,8 @@ def system_geoip_override(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_geoip_override']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_geoip_override']:
+        resp = system_geoip_override(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

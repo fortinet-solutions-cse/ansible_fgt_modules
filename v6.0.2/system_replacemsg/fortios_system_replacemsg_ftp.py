@@ -251,11 +251,8 @@ def system_replacemsg_ftp(data, fos):
 def fortios_system_replacemsg(data, fos):
     login(data)
 
-    methodlist = ['system_replacemsg_ftp']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_replacemsg_ftp']:
+        resp = system_replacemsg_ftp(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

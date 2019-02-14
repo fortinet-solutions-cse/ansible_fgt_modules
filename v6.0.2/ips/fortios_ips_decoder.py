@@ -244,11 +244,8 @@ def ips_decoder(data, fos):
 def fortios_ips(data, fos):
     login(data)
 
-    methodlist = ['ips_decoder']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['ips_decoder']:
+        resp = ips_decoder(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

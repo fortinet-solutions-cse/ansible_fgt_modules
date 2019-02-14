@@ -278,11 +278,8 @@ def spamfilter_mheader(data, fos):
 def fortios_spamfilter(data, fos):
     login(data)
 
-    methodlist = ['spamfilter_mheader']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['spamfilter_mheader']:
+        resp = spamfilter_mheader(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

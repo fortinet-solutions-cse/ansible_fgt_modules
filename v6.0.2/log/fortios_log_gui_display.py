@@ -231,11 +231,8 @@ def log_gui_display(data, fos):
 def fortios_log(data, fos):
     login(data)
 
-    methodlist = ['log_gui_display']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_gui_display']:
+        resp = log_gui_display(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

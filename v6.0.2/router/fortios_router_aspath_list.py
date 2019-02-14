@@ -251,11 +251,8 @@ def router_aspath_list(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_aspath_list']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_aspath_list']:
+        resp = router_aspath_list(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

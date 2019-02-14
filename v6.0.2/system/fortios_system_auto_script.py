@@ -253,11 +253,8 @@ def system_auto_script(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_auto_script']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_auto_script']:
+        resp = system_auto_script(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

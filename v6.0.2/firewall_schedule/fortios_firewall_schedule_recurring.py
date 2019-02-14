@@ -255,11 +255,8 @@ def firewall_schedule_recurring(data, fos):
 def fortios_firewall_schedule(data, fos):
     login(data)
 
-    methodlist = ['firewall_schedule_recurring']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_schedule_recurring']:
+        resp = firewall_schedule_recurring(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

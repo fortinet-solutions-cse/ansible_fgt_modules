@@ -234,11 +234,8 @@ def system_autoupdate_tunneling(data, fos):
 def fortios_system_autoupdate(data, fos):
     login(data)
 
-    methodlist = ['system_autoupdate_tunneling']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_autoupdate_tunneling']:
+        resp = system_autoupdate_tunneling(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

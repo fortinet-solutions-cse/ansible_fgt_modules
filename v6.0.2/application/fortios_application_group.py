@@ -263,11 +263,8 @@ def application_group(data, fos):
 def fortios_application(data, fos):
     login(data)
 
-    methodlist = ['application_group']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['application_group']:
+        resp = application_group(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

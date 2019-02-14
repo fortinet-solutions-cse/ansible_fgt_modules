@@ -1199,11 +1199,8 @@ def waf_profile(data, fos):
 def fortios_waf(data, fos):
     login(data)
 
-    methodlist = ['waf_profile']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['waf_profile']:
+        resp = waf_profile(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

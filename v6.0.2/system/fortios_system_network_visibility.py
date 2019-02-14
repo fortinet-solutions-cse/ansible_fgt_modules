@@ -247,11 +247,8 @@ def system_network_visibility(data, fos):
 def fortios_system(data, fos):
     login(data)
 
-    methodlist = ['system_network_visibility']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_network_visibility']:
+        resp = system_network_visibility(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

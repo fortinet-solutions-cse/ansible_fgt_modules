@@ -251,11 +251,8 @@ def system_replacemsg_nac_quar(data, fos):
 def fortios_system_replacemsg(data, fos):
     login(data)
 
-    methodlist = ['system_replacemsg_nac_quar']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_replacemsg_nac_quar']:
+        resp = system_replacemsg_nac_quar(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

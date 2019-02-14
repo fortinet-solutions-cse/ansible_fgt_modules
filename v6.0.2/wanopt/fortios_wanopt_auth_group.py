@@ -258,11 +258,8 @@ def wanopt_auth_group(data, fos):
 def fortios_wanopt(data, fos):
     login(data)
 
-    methodlist = ['wanopt_auth_group']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['wanopt_auth_group']:
+        resp = wanopt_auth_group(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

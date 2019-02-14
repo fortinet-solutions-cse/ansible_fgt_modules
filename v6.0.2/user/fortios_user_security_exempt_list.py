@@ -288,11 +288,8 @@ def user_security_exempt_list(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_security_exempt_list']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_security_exempt_list']:
+        resp = user_security_exempt_list(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

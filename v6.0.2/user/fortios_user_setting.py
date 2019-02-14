@@ -323,11 +323,8 @@ def user_setting(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_setting']:
+        resp = user_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -252,11 +252,8 @@ def router_multicast_flow(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_multicast_flow']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_multicast_flow']:
+        resp = router_multicast_flow(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

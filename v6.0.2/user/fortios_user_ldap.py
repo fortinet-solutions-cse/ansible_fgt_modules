@@ -351,11 +351,8 @@ def user_ldap(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_ldap']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_ldap']:
+        resp = user_ldap(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

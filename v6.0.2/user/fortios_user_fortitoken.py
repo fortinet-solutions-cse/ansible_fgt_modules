@@ -266,11 +266,8 @@ def user_fortitoken(data, fos):
 def fortios_user(data, fos):
     login(data)
 
-    methodlist = ['user_fortitoken']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['user_fortitoken']:
+        resp = user_fortitoken(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -318,11 +318,8 @@ def log_fortiguard_filter(data, fos):
 def fortios_log_fortiguard(data, fos):
     login(data)
 
-    methodlist = ['log_fortiguard_filter']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_fortiguard_filter']:
+        resp = log_fortiguard_filter(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

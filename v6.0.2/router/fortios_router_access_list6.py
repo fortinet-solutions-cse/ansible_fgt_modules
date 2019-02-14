@@ -266,11 +266,8 @@ def router_access_list6(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_access_list6']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_access_list6']:
+        resp = router_access_list6(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

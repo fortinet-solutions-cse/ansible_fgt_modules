@@ -334,11 +334,8 @@ def dlp_fp_doc_source(data, fos):
 def fortios_dlp(data, fos):
     login(data)
 
-    methodlist = ['dlp_fp_doc_source']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dlp_fp_doc_source']:
+        resp = dlp_fp_doc_source(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

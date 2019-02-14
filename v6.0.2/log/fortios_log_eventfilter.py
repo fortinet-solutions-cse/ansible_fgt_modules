@@ -290,11 +290,8 @@ def log_eventfilter(data, fos):
 def fortios_log(data, fos):
     login(data)
 
-    methodlist = ['log_eventfilter']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_eventfilter']:
+        resp = log_eventfilter(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

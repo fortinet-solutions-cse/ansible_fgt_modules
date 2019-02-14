@@ -217,11 +217,8 @@ def log_null_device_setting(data, fos):
 def fortios_log_null_device(data, fos):
     login(data)
 
-    methodlist = ['log_null_device_setting']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['log_null_device_setting']:
+        resp = log_null_device_setting(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

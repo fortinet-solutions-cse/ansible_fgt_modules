@@ -276,11 +276,8 @@ def dnsfilter_domain_filter(data, fos):
 def fortios_dnsfilter(data, fos):
     login(data)
 
-    methodlist = ['dnsfilter_domain_filter']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['dnsfilter_domain_filter']:
+        resp = dnsfilter_domain_filter(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

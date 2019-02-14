@@ -739,11 +739,8 @@ def firewall_profile_protocol_options(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_profile_protocol_options']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_profile_protocol_options']:
+        resp = firewall_profile_protocol_options(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -581,11 +581,8 @@ def report_chart(data, fos):
 def fortios_report(data, fos):
     login(data)
 
-    methodlist = ['report_chart']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['report_chart']:
+        resp = report_chart(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

@@ -251,11 +251,8 @@ def system_replacemsg_mail(data, fos):
 def fortios_system_replacemsg(data, fos):
     login(data)
 
-    methodlist = ['system_replacemsg_mail']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['system_replacemsg_mail']:
+        resp = system_replacemsg_mail(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

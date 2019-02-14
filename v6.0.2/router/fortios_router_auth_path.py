@@ -237,11 +237,8 @@ def router_auth_path(data, fos):
 def fortios_router(data, fos):
     login(data)
 
-    methodlist = ['router_auth_path']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['router_auth_path']:
+        resp = router_auth_path(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

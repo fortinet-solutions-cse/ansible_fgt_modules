@@ -234,11 +234,8 @@ def firewall_auth_portal(data, fos):
 def fortios_firewall(data, fos):
     login(data)
 
-    methodlist = ['firewall_auth_portal']
-    for method in methodlist:
-        if data[method]:
-            resp = eval(method)(data, fos)
-            break
+    if data['firewall_auth_portal']:
+        resp = firewall_auth_portal(data, fos)
 
     fos.logout()
     return not resp['status'] == "success", resp['status'] == "success", resp

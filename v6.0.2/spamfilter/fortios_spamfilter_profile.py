@@ -14,9 +14,6 @@ from __future__ import (absolute_import, division, print_function)
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-# the lib use python logging can get it if the following is set in your
-# Ansible config.
 
 __metaclass__ = type
 
@@ -447,7 +444,7 @@ def filter_spamfilter_profile_data(json):
 
 
 def flatten_multilists_attributes(data):
-    multilist_attrs = []
+    multilist_attrs = [[u'options'], [u'imap', u'tag-type'], [u'pop3', u'tag-type'], [u'smtp', u'tag-type']]
 
     for attr in multilist_attrs:
         try:
@@ -518,7 +515,7 @@ def main():
                              "log": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                              "tag-msg": {"required": False, "type": "str"},
-                             "tag-type": {"required": False, "type": "str",
+                             "tag-type": {"required": False, "type": "list",
                                           "choices": ["subject", "header", "spaminfo"]}
                          }},
                 "mapi": {"required": False, "type": "dict",
@@ -534,7 +531,7 @@ def main():
                                             "choices": ["enable", "disable"]}
                                 }},
                 "name": {"required": True, "type": "str"},
-                "options": {"required": False, "type": "str",
+                "options": {"required": False, "type": "list",
                             "choices": ["bannedword", "spambwl", "spamfsip",
                                         "spamfssubmit", "spamfschksum", "spamfsurl",
                                         "spamhelodns", "spamraddrdns", "spamrbl",
@@ -546,7 +543,7 @@ def main():
                              "log": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                              "tag-msg": {"required": False, "type": "str"},
-                             "tag-type": {"required": False, "type": "str",
+                             "tag-type": {"required": False, "type": "list",
                                           "choices": ["subject", "header", "spaminfo"]}
                          }},
                 "replacemsg-group": {"required": False, "type": "str"},
@@ -561,7 +558,7 @@ def main():
                              "log": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},
                              "tag-msg": {"required": False, "type": "str"},
-                             "tag-type": {"required": False, "type": "str",
+                             "tag-type": {"required": False, "type": "list",
                                           "choices": ["subject", "header", "spaminfo"]}
                          }},
                 "spam-bwl-table": {"required": False, "type": "int"},

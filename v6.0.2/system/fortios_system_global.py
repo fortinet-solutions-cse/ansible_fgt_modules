@@ -14,9 +14,6 @@ from __future__ import (absolute_import, division, print_function)
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-# the lib use python logging can get it if the following is set in your
-# Ansible config.
 
 __metaclass__ = type
 
@@ -1351,7 +1348,7 @@ def filter_system_global_data(json):
 
 
 def flatten_multilists_attributes(data):
-    multilist_attrs = []
+    multilist_attrs = [[u'admin-https-ssl-versions']]
 
     for attr in multilist_attrs:
         try:
@@ -1401,7 +1398,7 @@ def main():
                 "admin-console-timeout": {"required": False, "type": "int"},
                 "admin-https-pki-required": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},
-                "admin-https-ssl-versions": {"required": False, "type": "str",
+                "admin-https-ssl-versions": {"required": False, "type": "list",
                                              "choices": ["tlsv1-0", "tlsv1-1", "tlsv1-2"]},
                 "admin-lockout-duration": {"required": False, "type": "int"},
                 "admin-lockout-threshold": {"required": False, "type": "int"},

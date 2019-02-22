@@ -324,7 +324,7 @@ def filter_system_snmp_user_data(json):
 
 
 def flatten_multilists_attributes(data):
-    multilist_attrs = []
+    multilist_attrs = [[u'events']]
 
     for attr in multilist_attrs:
         try:
@@ -381,7 +381,7 @@ def main():
                 "auth-proto": {"required": False, "type": "str",
                                "choices": ["md5", "sha"]},
                 "auth-pwd": {"required": False, "type": "str"},
-                "events": {"required": False, "type": "str",
+                "events": {"required": False, "type": "list",
                            "choices": ["cpu-high", "mem-low", "log-full",
                                        "intf-ip", "vpn-tun-up", "vpn-tun-down",
                                        "ha-switch", "ha-hb-failure", "ips-signature",

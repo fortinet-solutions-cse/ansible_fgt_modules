@@ -162,10 +162,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -224,7 +222,7 @@ def ips_rule_settings(data, fos):
 
 
 def fortios_ips(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['ips_rule_settings']:
         resp = ips_rule_settings(data, fos)
@@ -258,7 +256,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_ips(module.params, fos)

@@ -172,10 +172,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -234,7 +232,7 @@ def switch_controller_security_policy_captive_portal(data, fos):
 
 
 def fortios_switch_controller_security_policy(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['switch_controller_security_policy_captive_portal']:
         resp = switch_controller_security_policy_captive_portal(data, fos)
@@ -271,7 +269,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_switch_controller_security_policy(module.params, fos)

@@ -285,10 +285,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -353,7 +351,7 @@ def router_policy(data, fos):
 
 
 def fortios_router(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['router_policy']:
         resp = router_policy(data, fos)
@@ -425,7 +423,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_router(module.params, fos)

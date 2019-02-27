@@ -240,10 +240,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -306,7 +304,7 @@ def firewall_multicast_policy(data, fos):
 
 
 def fortios_firewall(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['firewall_multicast_policy']:
         resp = firewall_multicast_policy(data, fos)
@@ -363,7 +361,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_firewall(module.params, fos)

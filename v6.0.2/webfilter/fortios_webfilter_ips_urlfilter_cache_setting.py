@@ -158,10 +158,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -213,7 +211,7 @@ def webfilter_ips_urlfilter_cache_setting(data, fos):
 
 
 def fortios_webfilter(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['webfilter_ips_urlfilter_cache_setting']:
         resp = webfilter_ips_urlfilter_cache_setting(data, fos)
@@ -246,7 +244,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_webfilter(module.params, fos)

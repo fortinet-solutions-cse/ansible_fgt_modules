@@ -220,10 +220,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -284,7 +282,7 @@ def wireless_controller_hotspot20_h2qp_osu_provider(data, fos):
 
 
 def fortios_wireless_controller_hotspot20(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['wireless_controller_hotspot20_h2qp_osu_provider']:
         resp = wireless_controller_hotspot20_h2qp_osu_provider(data, fos)
@@ -335,7 +333,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_wireless_controller_hotspot20(module.params, fos)

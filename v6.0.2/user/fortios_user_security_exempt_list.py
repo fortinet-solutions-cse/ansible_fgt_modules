@@ -221,10 +221,8 @@ version:
 
 from ansible.module_utils.basic import AnsibleModule
 
-fos = None
 
-
-def login(data):
+def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
@@ -283,7 +281,7 @@ def user_security_exempt_list(data, fos):
 
 
 def fortios_user(data, fos):
-    login(data)
+    login(data, fos)
 
     if data['user_security_exempt_list']:
         resp = user_security_exempt_list(data, fos)
@@ -338,7 +336,6 @@ def main():
     except ImportError:
         module.fail_json(msg="fortiosapi module is required")
 
-    global fos
     fos = FortiOSAPI()
 
     is_error, has_changed, result = fortios_user(module.params, fos)

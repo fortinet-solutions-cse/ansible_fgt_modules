@@ -208,26 +208,11 @@ def filter_firewall_ssh_local_ca_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_ssh_local_ca(data, fos):
     vdom = data['vdom']
     firewall_ssh_local_ca_data = data['firewall_ssh_local_ca']
-    flattened_data = flatten_multilists_attributes(firewall_ssh_local_ca_data)
-    filtered_data = filter_firewall_ssh_local_ca_data(flattened_data)
+    filtered_data = filter_firewall_ssh_local_ca_data(firewall_ssh_local_ca_data)
+
     if firewall_ssh_local_ca_data['state'] == "present":
         return fos.set('firewall.ssh',
                        'local-ca',

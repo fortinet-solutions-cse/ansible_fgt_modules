@@ -191,26 +191,11 @@ def filter_system_ftm_push_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_ftm_push(data, fos):
     vdom = data['vdom']
     system_ftm_push_data = data['system_ftm_push']
-    flattened_data = flatten_multilists_attributes(system_ftm_push_data)
-    filtered_data = filter_system_ftm_push_data(flattened_data)
+    filtered_data = filter_system_ftm_push_data(system_ftm_push_data)
+
     return fos.set('system',
                    'ftm-push',
                    data=filtered_data,

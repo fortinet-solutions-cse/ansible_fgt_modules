@@ -199,26 +199,11 @@ def filter_webfilter_ftgd_local_cat_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def webfilter_ftgd_local_cat(data, fos):
     vdom = data['vdom']
     webfilter_ftgd_local_cat_data = data['webfilter_ftgd_local_cat']
-    flattened_data = flatten_multilists_attributes(webfilter_ftgd_local_cat_data)
-    filtered_data = filter_webfilter_ftgd_local_cat_data(flattened_data)
+    filtered_data = filter_webfilter_ftgd_local_cat_data(webfilter_ftgd_local_cat_data)
+
     if webfilter_ftgd_local_cat_data['state'] == "present":
         return fos.set('webfilter',
                        'ftgd-local-cat',

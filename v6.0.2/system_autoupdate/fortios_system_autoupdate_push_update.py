@@ -199,26 +199,11 @@ def filter_system_autoupdate_push_update_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_autoupdate_push_update(data, fos):
     vdom = data['vdom']
     system_autoupdate_push_update_data = data['system_autoupdate_push_update']
-    flattened_data = flatten_multilists_attributes(system_autoupdate_push_update_data)
-    filtered_data = filter_system_autoupdate_push_update_data(flattened_data)
+    filtered_data = filter_system_autoupdate_push_update_data(system_autoupdate_push_update_data)
+
     return fos.set('system.autoupdate',
                    'push-update',
                    data=filtered_data,

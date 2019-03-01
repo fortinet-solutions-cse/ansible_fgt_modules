@@ -237,26 +237,11 @@ def filter_spamfilter_mheader_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def spamfilter_mheader(data, fos):
     vdom = data['vdom']
     spamfilter_mheader_data = data['spamfilter_mheader']
-    flattened_data = flatten_multilists_attributes(spamfilter_mheader_data)
-    filtered_data = filter_spamfilter_mheader_data(flattened_data)
+    filtered_data = filter_spamfilter_mheader_data(spamfilter_mheader_data)
+
     if spamfilter_mheader_data['state'] == "present":
         return fos.set('spamfilter',
                        'mheader',

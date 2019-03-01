@@ -200,26 +200,11 @@ def filter_system_vdom_sflow_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_vdom_sflow(data, fos):
     vdom = data['vdom']
     system_vdom_sflow_data = data['system_vdom_sflow']
-    flattened_data = flatten_multilists_attributes(system_vdom_sflow_data)
-    filtered_data = filter_system_vdom_sflow_data(flattened_data)
+    filtered_data = filter_system_vdom_sflow_data(system_vdom_sflow_data)
+
     return fos.set('system',
                    'vdom-sflow',
                    data=filtered_data,

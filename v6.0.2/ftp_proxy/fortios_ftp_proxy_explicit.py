@@ -203,26 +203,11 @@ def filter_ftp_proxy_explicit_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def ftp_proxy_explicit(data, fos):
     vdom = data['vdom']
     ftp_proxy_explicit_data = data['ftp_proxy_explicit']
-    flattened_data = flatten_multilists_attributes(ftp_proxy_explicit_data)
-    filtered_data = filter_ftp_proxy_explicit_data(flattened_data)
+    filtered_data = filter_ftp_proxy_explicit_data(ftp_proxy_explicit_data)
+
     return fos.set('ftp-proxy',
                    'explicit',
                    data=filtered_data,

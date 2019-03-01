@@ -193,26 +193,11 @@ def filter_webfilter_ips_urlfilter_setting6_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def webfilter_ips_urlfilter_setting6(data, fos):
     vdom = data['vdom']
     webfilter_ips_urlfilter_setting6_data = data['webfilter_ips_urlfilter_setting6']
-    flattened_data = flatten_multilists_attributes(webfilter_ips_urlfilter_setting6_data)
-    filtered_data = filter_webfilter_ips_urlfilter_setting6_data(flattened_data)
+    filtered_data = filter_webfilter_ips_urlfilter_setting6_data(webfilter_ips_urlfilter_setting6_data)
+
     return fos.set('webfilter',
                    'ips-urlfilter-setting6',
                    data=filtered_data,

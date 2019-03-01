@@ -337,26 +337,11 @@ def filter_antivirus_quarantine_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def antivirus_quarantine(data, fos):
     vdom = data['vdom']
     antivirus_quarantine_data = data['antivirus_quarantine']
-    flattened_data = flatten_multilists_attributes(antivirus_quarantine_data)
-    filtered_data = filter_antivirus_quarantine_data(flattened_data)
+    filtered_data = filter_antivirus_quarantine_data(antivirus_quarantine_data)
+
     return fos.set('antivirus',
                    'quarantine',
                    data=filtered_data,

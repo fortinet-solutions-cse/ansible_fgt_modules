@@ -212,26 +212,11 @@ def filter_system_auto_script_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_auto_script(data, fos):
     vdom = data['vdom']
     system_auto_script_data = data['system_auto_script']
-    flattened_data = flatten_multilists_attributes(system_auto_script_data)
-    filtered_data = filter_system_auto_script_data(flattened_data)
+    filtered_data = filter_system_auto_script_data(system_auto_script_data)
+
     if system_auto_script_data['state'] == "present":
         return fos.set('system',
                        'auto-script',

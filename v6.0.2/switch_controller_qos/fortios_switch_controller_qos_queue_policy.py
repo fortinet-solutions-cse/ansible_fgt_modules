@@ -230,26 +230,11 @@ def filter_switch_controller_qos_queue_policy_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def switch_controller_qos_queue_policy(data, fos):
     vdom = data['vdom']
     switch_controller_qos_queue_policy_data = data['switch_controller_qos_queue_policy']
-    flattened_data = flatten_multilists_attributes(switch_controller_qos_queue_policy_data)
-    filtered_data = filter_switch_controller_qos_queue_policy_data(flattened_data)
+    filtered_data = filter_switch_controller_qos_queue_policy_data(switch_controller_qos_queue_policy_data)
+
     if switch_controller_qos_queue_policy_data['state'] == "present":
         return fos.set('switch-controller.qos',
                        'queue-policy',

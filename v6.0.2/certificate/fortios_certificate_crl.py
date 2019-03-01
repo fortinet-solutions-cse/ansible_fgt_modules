@@ -252,26 +252,11 @@ def filter_certificate_crl_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def certificate_crl(data, fos):
     vdom = data['vdom']
     certificate_crl_data = data['certificate_crl']
-    flattened_data = flatten_multilists_attributes(certificate_crl_data)
-    filtered_data = filter_certificate_crl_data(flattened_data)
+    filtered_data = filter_certificate_crl_data(certificate_crl_data)
+
     if certificate_crl_data['state'] == "present":
         return fos.set('certificate',
                        'crl',

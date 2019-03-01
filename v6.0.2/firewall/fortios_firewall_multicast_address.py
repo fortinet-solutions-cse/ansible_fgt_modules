@@ -256,26 +256,11 @@ def filter_firewall_multicast_address_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_multicast_address(data, fos):
     vdom = data['vdom']
     firewall_multicast_address_data = data['firewall_multicast_address']
-    flattened_data = flatten_multilists_attributes(firewall_multicast_address_data)
-    filtered_data = filter_firewall_multicast_address_data(flattened_data)
+    filtered_data = filter_firewall_multicast_address_data(firewall_multicast_address_data)
+
     if firewall_multicast_address_data['state'] == "present":
         return fos.set('firewall',
                        'multicast-address',

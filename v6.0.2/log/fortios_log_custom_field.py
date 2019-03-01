@@ -196,26 +196,11 @@ def filter_log_custom_field_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def log_custom_field(data, fos):
     vdom = data['vdom']
     log_custom_field_data = data['log_custom_field']
-    flattened_data = flatten_multilists_attributes(log_custom_field_data)
-    filtered_data = filter_log_custom_field_data(flattened_data)
+    filtered_data = filter_log_custom_field_data(log_custom_field_data)
+
     if log_custom_field_data['state'] == "present":
         return fos.set('log',
                        'custom-field',

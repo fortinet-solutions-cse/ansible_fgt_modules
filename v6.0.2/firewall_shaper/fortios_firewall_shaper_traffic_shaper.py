@@ -233,26 +233,11 @@ def filter_firewall_shaper_traffic_shaper_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_shaper_traffic_shaper(data, fos):
     vdom = data['vdom']
     firewall_shaper_traffic_shaper_data = data['firewall_shaper_traffic_shaper']
-    flattened_data = flatten_multilists_attributes(firewall_shaper_traffic_shaper_data)
-    filtered_data = filter_firewall_shaper_traffic_shaper_data(flattened_data)
+    filtered_data = filter_firewall_shaper_traffic_shaper_data(firewall_shaper_traffic_shaper_data)
+
     if firewall_shaper_traffic_shaper_data['state'] == "present":
         return fos.set('firewall.shaper',
                        'traffic-shaper',

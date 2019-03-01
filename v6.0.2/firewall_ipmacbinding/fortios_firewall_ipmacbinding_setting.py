@@ -197,26 +197,11 @@ def filter_firewall_ipmacbinding_setting_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_ipmacbinding_setting(data, fos):
     vdom = data['vdom']
     firewall_ipmacbinding_setting_data = data['firewall_ipmacbinding_setting']
-    flattened_data = flatten_multilists_attributes(firewall_ipmacbinding_setting_data)
-    filtered_data = filter_firewall_ipmacbinding_setting_data(flattened_data)
+    filtered_data = filter_firewall_ipmacbinding_setting_data(firewall_ipmacbinding_setting_data)
+
     return fos.set('firewall.ipmacbinding',
                    'setting',
                    data=filtered_data,

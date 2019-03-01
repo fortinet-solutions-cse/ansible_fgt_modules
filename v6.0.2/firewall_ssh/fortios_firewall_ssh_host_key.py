@@ -234,26 +234,11 @@ def filter_firewall_ssh_host_key_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_ssh_host_key(data, fos):
     vdom = data['vdom']
     firewall_ssh_host_key_data = data['firewall_ssh_host_key']
-    flattened_data = flatten_multilists_attributes(firewall_ssh_host_key_data)
-    filtered_data = filter_firewall_ssh_host_key_data(flattened_data)
+    filtered_data = filter_firewall_ssh_host_key_data(firewall_ssh_host_key_data)
+
     if firewall_ssh_host_key_data['state'] == "present":
         return fos.set('firewall.ssh',
                        'host-key',

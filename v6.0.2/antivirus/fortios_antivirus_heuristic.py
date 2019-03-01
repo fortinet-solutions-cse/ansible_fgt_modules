@@ -184,26 +184,11 @@ def filter_antivirus_heuristic_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def antivirus_heuristic(data, fos):
     vdom = data['vdom']
     antivirus_heuristic_data = data['antivirus_heuristic']
-    flattened_data = flatten_multilists_attributes(antivirus_heuristic_data)
-    filtered_data = filter_antivirus_heuristic_data(flattened_data)
+    filtered_data = filter_antivirus_heuristic_data(antivirus_heuristic_data)
+
     return fos.set('antivirus',
                    'heuristic',
                    data=filtered_data,

@@ -320,26 +320,11 @@ def filter_report_theme_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def report_theme(data, fos):
     vdom = data['vdom']
     report_theme_data = data['report_theme']
-    flattened_data = flatten_multilists_attributes(report_theme_data)
-    filtered_data = filter_report_theme_data(flattened_data)
+    filtered_data = filter_report_theme_data(report_theme_data)
+
     if report_theme_data['state'] == "present":
         return fos.set('report',
                        'theme',

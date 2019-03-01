@@ -238,26 +238,11 @@ def filter_certificate_ca_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def certificate_ca(data, fos):
     vdom = data['vdom']
     certificate_ca_data = data['certificate_ca']
-    flattened_data = flatten_multilists_attributes(certificate_ca_data)
-    filtered_data = filter_certificate_ca_data(flattened_data)
+    filtered_data = filter_certificate_ca_data(certificate_ca_data)
+
     if certificate_ca_data['state'] == "present":
         return fos.set('certificate',
                        'ca',

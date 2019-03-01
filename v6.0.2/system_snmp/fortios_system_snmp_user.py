@@ -339,8 +339,9 @@ def flatten_multilists_attributes(data):
 def system_snmp_user(data, fos):
     vdom = data['vdom']
     system_snmp_user_data = data['system_snmp_user']
-    flattened_data = flatten_multilists_attributes(system_snmp_user_data)
-    filtered_data = filter_system_snmp_user_data(flattened_data)
+    system_snmp_user_data = flatten_multilists_attributes(system_snmp_user_data)
+    filtered_data = filter_system_snmp_user_data(system_snmp_user_data)
+
     if system_snmp_user_data['state'] == "present":
         return fos.set('system.snmp',
                        'user',

@@ -542,26 +542,11 @@ def filter_system_accprofile_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_accprofile(data, fos):
     vdom = data['vdom']
     system_accprofile_data = data['system_accprofile']
-    flattened_data = flatten_multilists_attributes(system_accprofile_data)
-    filtered_data = filter_system_accprofile_data(flattened_data)
+    filtered_data = filter_system_accprofile_data(system_accprofile_data)
+
     if system_accprofile_data['state'] == "present":
         return fos.set('system',
                        'accprofile',

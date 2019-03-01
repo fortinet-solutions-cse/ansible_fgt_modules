@@ -290,26 +290,11 @@ def filter_log_fortianalyzer2_setting_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def log_fortianalyzer2_setting(data, fos):
     vdom = data['vdom']
     log_fortianalyzer2_setting_data = data['log_fortianalyzer2_setting']
-    flattened_data = flatten_multilists_attributes(log_fortianalyzer2_setting_data)
-    filtered_data = filter_log_fortianalyzer2_setting_data(flattened_data)
+    filtered_data = filter_log_fortianalyzer2_setting_data(log_fortianalyzer2_setting_data)
+
     return fos.set('log.fortianalyzer2',
                    'setting',
                    data=filtered_data,

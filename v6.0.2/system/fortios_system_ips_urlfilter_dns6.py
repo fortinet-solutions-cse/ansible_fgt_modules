@@ -195,26 +195,11 @@ def filter_system_ips_urlfilter_dns6_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_ips_urlfilter_dns6(data, fos):
     vdom = data['vdom']
     system_ips_urlfilter_dns6_data = data['system_ips_urlfilter_dns6']
-    flattened_data = flatten_multilists_attributes(system_ips_urlfilter_dns6_data)
-    filtered_data = filter_system_ips_urlfilter_dns6_data(flattened_data)
+    filtered_data = filter_system_ips_urlfilter_dns6_data(system_ips_urlfilter_dns6_data)
+
     if system_ips_urlfilter_dns6_data['state'] == "present":
         return fos.set('system',
                        'ips-urlfilter-dns6',

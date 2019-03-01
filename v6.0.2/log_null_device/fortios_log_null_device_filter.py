@@ -277,26 +277,11 @@ def filter_log_null_device_filter_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def log_null_device_filter(data, fos):
     vdom = data['vdom']
     log_null_device_filter_data = data['log_null_device_filter']
-    flattened_data = flatten_multilists_attributes(log_null_device_filter_data)
-    filtered_data = filter_log_null_device_filter_data(flattened_data)
+    filtered_data = filter_log_null_device_filter_data(log_null_device_filter_data)
+
     return fos.set('log.null-device',
                    'filter',
                    data=filtered_data,

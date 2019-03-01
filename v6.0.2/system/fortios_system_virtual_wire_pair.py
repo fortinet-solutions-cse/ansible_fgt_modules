@@ -211,26 +211,11 @@ def filter_system_virtual_wire_pair_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_virtual_wire_pair(data, fos):
     vdom = data['vdom']
     system_virtual_wire_pair_data = data['system_virtual_wire_pair']
-    flattened_data = flatten_multilists_attributes(system_virtual_wire_pair_data)
-    filtered_data = filter_system_virtual_wire_pair_data(flattened_data)
+    filtered_data = filter_system_virtual_wire_pair_data(system_virtual_wire_pair_data)
+
     if system_virtual_wire_pair_data['state'] == "present":
         return fos.set('system',
                        'virtual-wire-pair',

@@ -226,26 +226,11 @@ def filter_spamfilter_dnsbl_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def spamfilter_dnsbl(data, fos):
     vdom = data['vdom']
     spamfilter_dnsbl_data = data['spamfilter_dnsbl']
-    flattened_data = flatten_multilists_attributes(spamfilter_dnsbl_data)
-    filtered_data = filter_spamfilter_dnsbl_data(flattened_data)
+    filtered_data = filter_spamfilter_dnsbl_data(spamfilter_dnsbl_data)
+
     if spamfilter_dnsbl_data['state'] == "present":
         return fos.set('spamfilter',
                        'dnsbl',

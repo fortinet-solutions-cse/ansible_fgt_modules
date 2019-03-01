@@ -415,26 +415,11 @@ def filter_router_ripng_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def router_ripng(data, fos):
     vdom = data['vdom']
     router_ripng_data = data['router_ripng']
-    flattened_data = flatten_multilists_attributes(router_ripng_data)
-    filtered_data = filter_router_ripng_data(flattened_data)
+    filtered_data = filter_router_ripng_data(router_ripng_data)
+
     return fos.set('router',
                    'ripng',
                    data=filtered_data,

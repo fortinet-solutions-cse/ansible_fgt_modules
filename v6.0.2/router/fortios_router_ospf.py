@@ -745,26 +745,11 @@ def filter_router_ospf_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def router_ospf(data, fos):
     vdom = data['vdom']
     router_ospf_data = data['router_ospf']
-    flattened_data = flatten_multilists_attributes(router_ospf_data)
-    filtered_data = filter_router_ospf_data(flattened_data)
+    filtered_data = filter_router_ospf_data(router_ospf_data)
+
     return fos.set('router',
                    'ospf',
                    data=filtered_data,

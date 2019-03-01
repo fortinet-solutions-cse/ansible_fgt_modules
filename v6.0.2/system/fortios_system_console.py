@@ -208,26 +208,11 @@ def filter_system_console_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_console(data, fos):
     vdom = data['vdom']
     system_console_data = data['system_console']
-    flattened_data = flatten_multilists_attributes(system_console_data)
-    filtered_data = filter_system_console_data(flattened_data)
+    filtered_data = filter_system_console_data(system_console_data)
+
     return fos.set('system',
                    'console',
                    data=filtered_data,

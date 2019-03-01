@@ -459,8 +459,9 @@ def flatten_multilists_attributes(data):
 def spamfilter_profile(data, fos):
     vdom = data['vdom']
     spamfilter_profile_data = data['spamfilter_profile']
-    flattened_data = flatten_multilists_attributes(spamfilter_profile_data)
-    filtered_data = filter_spamfilter_profile_data(flattened_data)
+    spamfilter_profile_data = flatten_multilists_attributes(spamfilter_profile_data)
+    filtered_data = filter_spamfilter_profile_data(spamfilter_profile_data)
+
     if spamfilter_profile_data['state'] == "present":
         return fos.set('spamfilter',
                        'profile',

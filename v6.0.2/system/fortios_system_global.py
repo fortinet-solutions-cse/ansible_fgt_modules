@@ -1363,8 +1363,9 @@ def flatten_multilists_attributes(data):
 def system_global(data, fos):
     vdom = data['vdom']
     system_global_data = data['system_global']
-    flattened_data = flatten_multilists_attributes(system_global_data)
-    filtered_data = filter_system_global_data(flattened_data)
+    system_global_data = flatten_multilists_attributes(system_global_data)
+    filtered_data = filter_system_global_data(system_global_data)
+
     return fos.set('system',
                    'global',
                    data=filtered_data,

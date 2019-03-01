@@ -320,26 +320,11 @@ def filter_firewall_policy64_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_policy64(data, fos):
     vdom = data['vdom']
     firewall_policy64_data = data['firewall_policy64']
-    flattened_data = flatten_multilists_attributes(firewall_policy64_data)
-    filtered_data = filter_firewall_policy64_data(flattened_data)
+    filtered_data = filter_firewall_policy64_data(firewall_policy64_data)
+
     if firewall_policy64_data['state'] == "present":
         return fos.set('firewall',
                        'policy64',

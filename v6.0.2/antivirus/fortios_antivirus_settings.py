@@ -196,26 +196,11 @@ def filter_antivirus_settings_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def antivirus_settings(data, fos):
     vdom = data['vdom']
     antivirus_settings_data = data['antivirus_settings']
-    flattened_data = flatten_multilists_attributes(antivirus_settings_data)
-    filtered_data = filter_antivirus_settings_data(flattened_data)
+    filtered_data = filter_antivirus_settings_data(antivirus_settings_data)
+
     return fos.set('antivirus',
                    'settings',
                    data=filtered_data,

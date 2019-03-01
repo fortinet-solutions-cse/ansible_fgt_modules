@@ -217,26 +217,11 @@ def filter_vpn_certificate_ocsp_server_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def vpn_certificate_ocsp_server(data, fos):
     vdom = data['vdom']
     vpn_certificate_ocsp_server_data = data['vpn_certificate_ocsp_server']
-    flattened_data = flatten_multilists_attributes(vpn_certificate_ocsp_server_data)
-    filtered_data = filter_vpn_certificate_ocsp_server_data(flattened_data)
+    filtered_data = filter_vpn_certificate_ocsp_server_data(vpn_certificate_ocsp_server_data)
+
     if vpn_certificate_ocsp_server_data['state'] == "present":
         return fos.set('vpn.certificate',
                        'ocsp-server',

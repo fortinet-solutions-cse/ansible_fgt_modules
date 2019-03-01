@@ -211,26 +211,11 @@ def filter_router_multicast_flow_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def router_multicast_flow(data, fos):
     vdom = data['vdom']
     router_multicast_flow_data = data['router_multicast_flow']
-    flattened_data = flatten_multilists_attributes(router_multicast_flow_data)
-    filtered_data = filter_router_multicast_flow_data(flattened_data)
+    filtered_data = filter_router_multicast_flow_data(router_multicast_flow_data)
+
     if router_multicast_flow_data['state'] == "present":
         return fos.set('router',
                        'multicast-flow',

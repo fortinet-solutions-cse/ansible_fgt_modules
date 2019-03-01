@@ -759,26 +759,11 @@ def filter_wireless_controller_wtp_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def wireless_controller_wtp(data, fos):
     vdom = data['vdom']
     wireless_controller_wtp_data = data['wireless_controller_wtp']
-    flattened_data = flatten_multilists_attributes(wireless_controller_wtp_data)
-    filtered_data = filter_wireless_controller_wtp_data(flattened_data)
+    filtered_data = filter_wireless_controller_wtp_data(wireless_controller_wtp_data)
+
     if wireless_controller_wtp_data['state'] == "present":
         return fos.set('wireless-controller',
                        'wtp',

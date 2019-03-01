@@ -214,26 +214,11 @@ def filter_firewall_schedule_recurring_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_schedule_recurring(data, fos):
     vdom = data['vdom']
     firewall_schedule_recurring_data = data['firewall_schedule_recurring']
-    flattened_data = flatten_multilists_attributes(firewall_schedule_recurring_data)
-    filtered_data = filter_firewall_schedule_recurring_data(flattened_data)
+    filtered_data = filter_firewall_schedule_recurring_data(firewall_schedule_recurring_data)
+
     if firewall_schedule_recurring_data['state'] == "present":
         return fos.set('firewall.schedule',
                        'recurring',

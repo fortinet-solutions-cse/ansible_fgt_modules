@@ -511,26 +511,11 @@ def filter_user_radius_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def user_radius(data, fos):
     vdom = data['vdom']
     user_radius_data = data['user_radius']
-    flattened_data = flatten_multilists_attributes(user_radius_data)
-    filtered_data = filter_user_radius_data(flattened_data)
+    filtered_data = filter_user_radius_data(user_radius_data)
+
     if user_radius_data['state'] == "present":
         return fos.set('user',
                        'radius',

@@ -391,26 +391,11 @@ def filter_user_group_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def user_group(data, fos):
     vdom = data['vdom']
     user_group_data = data['user_group']
-    flattened_data = flatten_multilists_attributes(user_group_data)
-    filtered_data = filter_user_group_data(flattened_data)
+    filtered_data = filter_user_group_data(user_group_data)
+
     if user_group_data['state'] == "present":
         return fos.set('user',
                        'group',

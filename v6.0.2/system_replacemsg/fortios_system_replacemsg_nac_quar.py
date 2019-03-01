@@ -210,26 +210,11 @@ def filter_system_replacemsg_nac_quar_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_replacemsg_nac_quar(data, fos):
     vdom = data['vdom']
     system_replacemsg_nac_quar_data = data['system_replacemsg_nac_quar']
-    flattened_data = flatten_multilists_attributes(system_replacemsg_nac_quar_data)
-    filtered_data = filter_system_replacemsg_nac_quar_data(flattened_data)
+    filtered_data = filter_system_replacemsg_nac_quar_data(system_replacemsg_nac_quar_data)
+
     if system_replacemsg_nac_quar_data['state'] == "present":
         return fos.set('system.replacemsg',
                        'nac-quar',

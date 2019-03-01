@@ -201,26 +201,11 @@ def filter_system_arp_table_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_arp_table(data, fos):
     vdom = data['vdom']
     system_arp_table_data = data['system_arp_table']
-    flattened_data = flatten_multilists_attributes(system_arp_table_data)
-    filtered_data = filter_system_arp_table_data(flattened_data)
+    filtered_data = filter_system_arp_table_data(system_arp_table_data)
+
     if system_arp_table_data['state'] == "present":
         return fos.set('system',
                        'arp-table',

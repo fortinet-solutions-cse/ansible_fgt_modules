@@ -257,26 +257,11 @@ def filter_wanopt_cache_service_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def wanopt_cache_service(data, fos):
     vdom = data['vdom']
     wanopt_cache_service_data = data['wanopt_cache_service']
-    flattened_data = flatten_multilists_attributes(wanopt_cache_service_data)
-    filtered_data = filter_wanopt_cache_service_data(flattened_data)
+    filtered_data = filter_wanopt_cache_service_data(wanopt_cache_service_data)
+
     return fos.set('wanopt',
                    'cache-service',
                    data=filtered_data,

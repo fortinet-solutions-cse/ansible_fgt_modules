@@ -732,26 +732,11 @@ def filter_firewall_vip6_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def firewall_vip6(data, fos):
     vdom = data['vdom']
     firewall_vip6_data = data['firewall_vip6']
-    flattened_data = flatten_multilists_attributes(firewall_vip6_data)
-    filtered_data = filter_firewall_vip6_data(flattened_data)
+    filtered_data = filter_firewall_vip6_data(firewall_vip6_data)
+
     if firewall_vip6_data['state'] == "present":
         return fos.set('firewall',
                        'vip6',

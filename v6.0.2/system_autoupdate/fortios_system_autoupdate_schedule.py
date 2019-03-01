@@ -208,26 +208,11 @@ def filter_system_autoupdate_schedule_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def system_autoupdate_schedule(data, fos):
     vdom = data['vdom']
     system_autoupdate_schedule_data = data['system_autoupdate_schedule']
-    flattened_data = flatten_multilists_attributes(system_autoupdate_schedule_data)
-    filtered_data = filter_system_autoupdate_schedule_data(flattened_data)
+    filtered_data = filter_system_autoupdate_schedule_data(system_autoupdate_schedule_data)
+
     return fos.set('system.autoupdate',
                    'schedule',
                    data=filtered_data,

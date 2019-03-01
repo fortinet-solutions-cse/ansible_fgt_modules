@@ -1744,8 +1744,9 @@ def flatten_multilists_attributes(data):
 def system_interface(data, fos):
     vdom = data['vdom']
     system_interface_data = data['system_interface']
-    flattened_data = flatten_multilists_attributes(system_interface_data)
-    filtered_data = filter_system_interface_data(flattened_data)
+    system_interface_data = flatten_multilists_attributes(system_interface_data)
+    filtered_data = filter_system_interface_data(system_interface_data)
+
     if system_interface_data['state'] == "present":
         return fos.set('system',
                        'interface',

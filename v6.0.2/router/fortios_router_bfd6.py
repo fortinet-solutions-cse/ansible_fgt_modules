@@ -191,26 +191,11 @@ def filter_router_bfd6_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def router_bfd6(data, fos):
     vdom = data['vdom']
     router_bfd6_data = data['router_bfd6']
-    flattened_data = flatten_multilists_attributes(router_bfd6_data)
-    filtered_data = filter_router_bfd6_data(flattened_data)
+    filtered_data = filter_router_bfd6_data(router_bfd6_data)
+
     return fos.set('router',
                    'bfd6',
                    data=filtered_data,

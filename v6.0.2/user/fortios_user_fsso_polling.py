@@ -241,26 +241,11 @@ def filter_user_fsso_polling_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def user_fsso_polling(data, fos):
     vdom = data['vdom']
     user_fsso_polling_data = data['user_fsso_polling']
-    flattened_data = flatten_multilists_attributes(user_fsso_polling_data)
-    filtered_data = filter_user_fsso_polling_data(flattened_data)
+    filtered_data = filter_user_fsso_polling_data(user_fsso_polling_data)
+
     if user_fsso_polling_data['state'] == "present":
         return fos.set('user',
                        'fsso-polling',

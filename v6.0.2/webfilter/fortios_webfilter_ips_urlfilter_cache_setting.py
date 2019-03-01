@@ -184,26 +184,11 @@ def filter_webfilter_ips_urlfilter_cache_setting_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def webfilter_ips_urlfilter_cache_setting(data, fos):
     vdom = data['vdom']
     webfilter_ips_urlfilter_cache_setting_data = data['webfilter_ips_urlfilter_cache_setting']
-    flattened_data = flatten_multilists_attributes(webfilter_ips_urlfilter_cache_setting_data)
-    filtered_data = filter_webfilter_ips_urlfilter_cache_setting_data(flattened_data)
+    filtered_data = filter_webfilter_ips_urlfilter_cache_setting_data(webfilter_ips_urlfilter_cache_setting_data)
+
     return fos.set('webfilter',
                    'ips-urlfilter-cache-setting',
                    data=filtered_data,

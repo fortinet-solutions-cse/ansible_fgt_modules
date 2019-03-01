@@ -192,26 +192,11 @@ def filter_waf_signature_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def waf_signature(data, fos):
     vdom = data['vdom']
     waf_signature_data = data['waf_signature']
-    flattened_data = flatten_multilists_attributes(waf_signature_data)
-    filtered_data = filter_waf_signature_data(flattened_data)
+    filtered_data = filter_waf_signature_data(waf_signature_data)
+
     if waf_signature_data['state'] == "present":
         return fos.set('waf',
                        'signature',

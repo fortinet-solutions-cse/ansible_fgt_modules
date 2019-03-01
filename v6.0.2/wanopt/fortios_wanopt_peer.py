@@ -192,26 +192,11 @@ def filter_wanopt_peer_data(json):
     return dictionary
 
 
-def flatten_multilists_attributes(data):
-    multilist_attrs = []
-
-    for attr in multilist_attrs:
-        try:
-            path = "data['" + "']['".join(elem for elem in attr) + "']"
-            current_val = eval(path)
-            flattened_val = ' '.join(elem for elem in current_val)
-            exec(path + '= flattened_val')
-        except BaseException:
-            pass
-
-    return data
-
-
 def wanopt_peer(data, fos):
     vdom = data['vdom']
     wanopt_peer_data = data['wanopt_peer']
-    flattened_data = flatten_multilists_attributes(wanopt_peer_data)
-    filtered_data = filter_wanopt_peer_data(flattened_data)
+    filtered_data = filter_wanopt_peer_data(wanopt_peer_data)
+
     if wanopt_peer_data['state'] == "present":
         return fos.set('wanopt',
                        'peer',

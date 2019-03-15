@@ -208,6 +208,11 @@ def log_gui_display(data, fos):
                    vdom=vdom)
 
 
+def is_successful_status(status):
+    return status['status'] == "success" or \
+        status['http_method'] == "DELETE" and status['http_status'] == 404
+
+
 def fortios_log(data, fos):
     login(data, fos)
 
@@ -215,7 +220,9 @@ def fortios_log(data, fos):
         resp = log_gui_display(data, fos)
 
     fos.logout()
-    return not resp['status'] == "success", resp['status'] == "success", resp
+    return not is_successful_status(resp), \
+        resp['status'] == "success", \
+        resp
 
 
 def main():

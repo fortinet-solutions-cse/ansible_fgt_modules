@@ -328,6 +328,11 @@ def dnsfilter_profile(data, fos):
                           vdom=vdom)
 
 
+def is_successful_status(status):
+    return status['status'] == "success" or \
+        status['http_method'] == "DELETE" and status['http_status'] == 404
+
+
 def fortios_dnsfilter(data, fos):
     login(data, fos)
 
@@ -335,7 +340,9 @@ def fortios_dnsfilter(data, fos):
         resp = dnsfilter_profile(data, fos)
 
     fos.logout()
-    return not resp['status'] == "success", resp['status'] == "success", resp
+    return not is_successful_status(resp), \
+        resp['status'] == "success", \
+        resp
 
 
 def main():

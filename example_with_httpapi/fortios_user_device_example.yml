@@ -1,0 +1,16 @@
+- hosts: fortigates
+  connection: httpapi
+  vars:
+   vdom: "root"
+  tasks:
+  - name: Configure devices.
+    fortios_user_device:
+      vdom:  "{{ vdom }}"
+      user_device:
+        state: "absent"
+        category: "none"
+        alias: "myuser"
+        comment: "Comment."
+        mac: "00:01:04:03:ab:c3:32"
+        type: "unknown"
+        user: "myuser"

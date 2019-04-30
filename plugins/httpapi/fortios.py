@@ -49,15 +49,16 @@ class HttpApi(HttpApiBase):
         self._become_pass = getattr(become_context, 'become_pass') or ''
 
     def login(self, username, password):
+        """Call a defined login endpoint to receive an authentication token."""
+
         data = "username=" + username + "&secretkey=" + password + "&ajax=1"
         status, result_data = self.send_request(url='/logincheck', data=data, method='POST')
+        if result_data[0] != '1':
+            raise Exception('Wrong credentials. Please check')
 
     def logout(self):
-        """ Call to implement session logout.
+        """ Call to implement session logout."""
 
-        Method to clear session gracefully e.g. tokens granted in login
-        need to be revoked.
-        """
         self.send_request(url='/logout', method="POST")
 
     def update_auth(self, response, response_text):
@@ -81,14 +82,6 @@ class HttpApi(HttpApiBase):
                     log("TOKEN: %s" % self._ccsrftoken)
 
         return cookies
-
-        cookie = response.info().get('Set-Cookie')
-
-        if cookie:
-            log(cookie)
-            return {'Cookie': cookie, "X-CSRFTOKEN": cookie}
-
-        return None
 
     def handle_httperror(self, exc):
         """Overridable method for dealing with HTTP codes.
@@ -119,6 +112,10 @@ class HttpApi(HttpApiBase):
         url = message_kwargs.get('url', '/')
         data = message_kwargs.get('data', '')
         method = message_kwargs.get('method', 'GET')
+
+        if self._ccsrftoken == '' and not (method == 'POST' and 'logincheck' in url):
+            raise Exception('Not logged in. Please login first')
+
         log('\nURL in request: %s' % str(url))
         log('Data in request: %s' % str(data))
         log('Method in request: %s \n' % str(method))

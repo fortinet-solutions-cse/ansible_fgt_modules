@@ -39,7 +39,7 @@ class HttpApi(HttpApiBase):
     def __init__(self, connection):
         super(HttpApiBase, self).__init__()
 
-        self.connection = connection
+        self._connection = connection
         self._become = False
         self._become_pass = ''
         self._ccsrftoken = ''
@@ -100,10 +100,10 @@ class HttpApi(HttpApiBase):
             server without making another request. In many cases, this can just
             be the original exception.
             """
-        if exc.code == 401 and self.connection._auth:
+        if exc.code == 401 and self._connection._auth:
             # Stored auth appears to be invalid, clear and retry
-            self.connection._auth = None
-            self.login(self.connection.get_option('remote_user'), self.connection.get_option('password'))
+            self._connection._auth = None
+            self.login(self._connection.get_option('remote_user'), self._connection.get_option('password'))
             return True
 
         return exc
@@ -125,7 +125,7 @@ class HttpApi(HttpApiBase):
             headers['x-csrftoken'] = self._ccsrftoken
 
         try:
-            response, response_data = self.connection.send(url, data, headers=headers, method=method)
+            response, response_data = self._connection.send(url, data, headers=headers, method=method)
             log(response.status)
             log(response_data.getvalue())
 

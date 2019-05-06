@@ -10,7 +10,7 @@
     fortios_user_device:
       vdom:  "{{ vdom }}"
       user_device:
-        state: "absent"
+        state: "present"
         category: "none"
         alias: "myuser"
         comment: "Comment."

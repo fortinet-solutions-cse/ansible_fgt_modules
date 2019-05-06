@@ -80,9 +80,8 @@ fortios_error_codes = {
 
 class FortiOSHandler(object):
 
-    def __init__(self, conn, module):
+    def __init__(self, conn):
         self._conn = conn
-        self._module = module
 
     def cmdb_url(self, path, name, vdom=None, mkey=None):
 

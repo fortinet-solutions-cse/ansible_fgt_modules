@@ -366,7 +366,10 @@ def main():
     if not legacy_mode:
         if module._socket_path:
             connection = Connection(module._socket_path)
-            fos = FortiOSHandler(connection, module)
+            fos = FortiOSHandler(connection)
+            log("*******************************************")
+            log(module.params)
+            log("*******************************************")
 
             is_error, has_changed, result = fortios_user(module.params, fos)
         else:
@@ -388,6 +391,9 @@ def main():
     else:
         module.fail_json(msg="Error in repo", meta=result)
 
+def log(data):
+    with open('/home/magonzalez/httpapi/ansible/trace.txt', 'a') as the_file:
+        the_file.write(str(data) + "\n")
 
 if __name__ == '__main__':
     main()

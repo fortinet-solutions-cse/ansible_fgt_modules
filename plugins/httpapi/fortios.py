@@ -79,7 +79,6 @@ class HttpApi(HttpApiBase):
                 csrftoken_search = re.search('\"(.*)\"', val)
                 if csrftoken_search:
                     self._ccsrftoken = csrftoken_search.group(1)
-                    log("TOKEN: %s" % self._ccsrftoken)
 
         return cookies
 
@@ -116,24 +115,16 @@ class HttpApi(HttpApiBase):
         if self._ccsrftoken == '' and not (method == 'POST' and 'logincheck' in url):
             raise Exception('Not logged in. Please login first')
 
-        log('\nURL in request: %s' % str(url))
-        log('Data in request: %s' % str(data))
-        log('Method in request: %s \n' % str(method))
-
         headers = {}
         if self._ccsrftoken != '':
             headers['x-csrftoken'] = self._ccsrftoken
 
+        if method == 'POST' or 'PUT':
+            headers['Content-Type'] = 'application/json'
+
         try:
             response, response_data = self._connection.send(url, data, headers=headers, method=method)
-            log(response.status)
-            log(response_data.getvalue())
 
             return response.status, to_text(response_data.getvalue())
         except Exception as err:
             raise Exception(err)
-
-
-def log(data):
-    with open('/home/magonzalez/httpapi/ansible/trace.txt', 'a') as the_file:
-        the_file.write(str(data) + "\n")

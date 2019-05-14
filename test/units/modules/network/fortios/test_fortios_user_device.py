@@ -44,11 +44,11 @@ def test_user_device_creation(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'present',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'present',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -88,11 +88,11 @@ def test_user_device_creation_fails(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'present',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'present',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -132,11 +132,11 @@ def test_users_device_removal(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'absent',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'absent',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -164,11 +164,11 @@ def test_user_device_deletion_fails(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'absent',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'absent',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -196,11 +196,11 @@ def test_user_device_idempotent(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'present',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'present',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -240,11 +240,11 @@ def test_user_device_filter_null_attributes(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'present',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'present',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
@@ -283,18 +283,18 @@ def test_user_device_filter_foreign_attributes(mocker):
 
     input_data = {
         'username': 'admin',
+        'state': 'present',
         'user_device': {
             'category': 'none',
             'comment': 'Comment.',
-            'master-device': 'master',
-            'state': 'present',
+            'master_device': 'master',
             'alias': 'myuser',
             'mac': '00:01:04:03:ab:c3:32',
             'user': 'myuser',
             'type': 'unknown',
             'tagging': 'tag',
             'avatar': 'avatar1',
-            'random-attribute-not-valid': 'tag'
+            'random_attribute_not_valid': 'tag'
         },
         'vdom': 'root'}
 

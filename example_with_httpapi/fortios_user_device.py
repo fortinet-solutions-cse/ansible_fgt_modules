@@ -64,17 +64,17 @@ options:
               protocol
         type: bool
         default: true
+    state:
+        description:
+            - Indicates whether to create or remove the object
+        choices:
+            - present
+            - absent
     user_device:
         description:
             - Configure devices.
         default: null
         suboptions:
-            state:
-                description:
-                    - Indicates whether to create or remove the object
-                choices:
-                    - present
-                    - absent
             alias:
                 description:
                     - Device alias.
@@ -99,7 +99,7 @@ options:
             mac:
                 description:
                     - Device MAC address(es).
-            master-device:
+            master_device:
                 description:
                     - Master device (optional). Source user.device.alias.
             tagging:
@@ -166,14 +166,14 @@ EXAMPLES = '''
       password: "{{ password }}"
       vdom:  "{{ vdom }}"
       https: "False"
+      state: "present"
       user_device:
-        state: "present"
         alias: "<your_own_value>"
         avatar: "<your_own_value>"
         category: "none"
         comment: "Comment."
         mac: "<your_own_value>"
-        master-device: "<your_own_value> (source user.device.alias)"
+        master_device: "<your_own_value> (source user.device.alias)"
         tagging:
          -
             category: "<your_own_value> (source system.object-tagging.category)"
@@ -265,7 +265,7 @@ def login(data, fos):
 
 def filter_user_device_data(json):
     option_list = ['alias', 'avatar', 'category',
-                   'comment', 'mac', 'master-device',
+                   'comment', 'mac', 'master_device',
                    'tagging', 'type', 'user']
     dictionary = {}
 
@@ -276,18 +276,32 @@ def filter_user_device_data(json):
     return dictionary
 
 
+def underscore_to_hyphen(data):
+    if isinstance(data, list):
+        for elem in data:
+            elem = underscore_to_hyphen(elem)
+    elif isinstance(data, dict):
+        new_data = {}
+        for k, v in data.items():
+            new_data[k.replace('_', '-')] = underscore_to_hyphen(v)
+        data = new_data
+
+    return data
+
+
 def user_device(data, fos):
     vdom = data['vdom']
+    state = data['state']
     user_device_data = data['user_device']
-    filtered_data = filter_user_device_data(user_device_data)
+    filtered_data = underscore_to_hyphen(filter_user_device_data(user_device_data))
 
-    if user_device_data['state'] == "present":
+    if state == "present":
         return fos.set('user',
                        'device',
                        data=filtered_data,
                        vdom=vdom)
 
-    elif user_device_data['state'] == "absent":
+    elif state == "absent":
         return fos.delete('user',
                           'device',
                           mkey=filtered_data['alias'],
@@ -308,9 +322,6 @@ def fortios_user(data, fos):
         resp['status'] == "success", \
         resp
 
-def log(data):
-    with open('/home/magonzalez/httpapi/ansible/trace.txt', 'a') as the_file:
-        the_file.write(str(data) + "\n")
 
 def main():
     fields = {
@@ -319,11 +330,11 @@ def main():
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
+        "state": {"required": True, "type": "str",
+                  "choices": ["present", "absent"]},
         "user_device": {
             "required": False, "type": "dict",
             "options": {
-                "state": {"required": True, "type": "str",
-                          "choices": ["present", "absent"]},
                 "alias": {"required": True, "type": "str"},
                 "avatar": {"required": False, "type": "str"},
                 "category": {"required": False, "type": "str",
@@ -332,7 +343,7 @@ def main():
                                          "windows-device"]},
                 "comment": {"required": False, "type": "str"},
                 "mac": {"required": False, "type": "str"},
-                "master-device": {"required": False, "type": "str"},
+                "master_device": {"required": False, "type": "str"},
                 "tagging": {"required": False, "type": "list",
                             "options": {
                                 "category": {"required": False, "type": "str"},
@@ -367,9 +378,6 @@ def main():
         if module._socket_path:
             connection = Connection(module._socket_path)
             fos = FortiOSHandler(connection)
-            log("*******************************************")
-            log(module.params)
-            log("*******************************************")
 
             is_error, has_changed, result = fortios_user(module.params, fos)
         else:
@@ -391,9 +399,6 @@ def main():
     else:
         module.fail_json(msg="Error in repo", meta=result)
 
-def log(data):
-    with open('/home/magonzalez/httpapi/ansible/trace.txt', 'a') as the_file:
-        the_file.write(str(data) + "\n")
 
 if __name__ == '__main__':
     main()

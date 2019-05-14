@@ -302,7 +302,3 @@ class AnsibleFortios(object):
         return FortiConfig(block_name, block_type)
 
 # END DEPRECATED
-
-def log(data):
-    with open('/home/magonzalez/httpapi/ansible/trace.txt', 'a') as the_file:
-        the_file.write(str(data) + "\n")

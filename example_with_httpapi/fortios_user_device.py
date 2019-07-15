@@ -24,9 +24,9 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_user_device
-short_description: Configure devices in Fortinet's FortiOS and FortiGate.
+short_description: Configure devices in Fortinet's FortiOS and FortiGate
 description:
-    - This module is able to configure a FortiGate or FortiOS by allowing the
+    - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify user feature and device category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.2
@@ -41,32 +41,37 @@ requirements:
     - fortiosapi>=0.9.8
 options:
     host:
-       description:
-            - FortiOS or FortiGate ip address.
-       required: true
+        description:
+            - FortiOS or FortiGate IP address.
+        type: str
+        required: true
     username:
         description:
             - FortiOS or FortiGate username.
+        type: str
         required: true
     password:
         description:
             - FortiOS or FortiGate password.
+        type: str
         default: ""
     vdom:
         description:
             - Virtual domain, among those defined previously. A vdom is a
               virtual instance of the FortiGate that can be configured and
               used as a different unit.
+        type: str
         default: root
     https:
         description:
             - Indicates if the requests towards FortiGate must use HTTPS
-              protocol
+              protocol.
         type: bool
         default: true
     state:
         description:
-            - Indicates whether to create or remove the object
+            - Indicates whether to create or remove the object.
+        type: str
         choices:
             - present
             - absent
@@ -74,6 +79,7 @@ options:
         description:
             - Configure devices.
         default: null
+        type: dict
         suboptions:
             alias:
                 description:
@@ -363,7 +369,6 @@ def main():
                                      "printer", "router-nat-device", "windows-pc",
                                      "windows-phone", "windows-tablet", "other-network-device"]},
                 "user": {"required": False, "type": "str"}
-
             }
         }
     }

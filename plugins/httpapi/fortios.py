@@ -25,7 +25,7 @@
 # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 # LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
 # USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+
 
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
@@ -39,7 +39,6 @@ short_description: HttpApi Plugin for Fortinet FortiOS Appliance or VM
 description:
   - This HttpApi plugin provides methods to connect to Fortinet FortiOS Appliance or VM via REST API
 version_added: "2.9"
-
 """
 
 from ansible.plugins.httpapi import HttpApiBase
@@ -53,9 +52,6 @@ class HttpApi(HttpApiBase):
     def __init__(self, connection):
         super(HttpApi, self).__init__(connection)
 
-        self._connection = connection
-        self._become = False
-        self._become_pass = ''
         self._ccsrftoken = ''
 
     def set_become(self, become_context):
@@ -84,27 +80,29 @@ class HttpApi(HttpApiBase):
         Get cookies and obtain value for csrftoken that will be used on next requests
         :param response: Response given by the server.
         :param response_text Unused_input.
-        :return: Dictionary containing cookies
+        :return: Dictionary containing headers
         """
 
-        cookies = {}
+        headers = {}
 
         for attr, val in response.getheaders():
             if attr == 'Set-Cookie' and 'APSCOOKIE_' in val:
-                cookies['Cookie'] = val
+                headers['Cookie'] = val
 
             elif attr == 'Set-Cookie' and 'ccsrftoken=' in val:
                 csrftoken_search = re.search('\"(.*)\"', val)
                 if csrftoken_search:
                     self._ccsrftoken = csrftoken_search.group(1)
 
-        return cookies
+        headers['x-csrftoken'] = self._ccsrftoken
+
+        return headers
 
     def handle_httperror(self, exc):
         """
         Not required on Fortinet devices - Skipped
         :param exc: Unused input.
-        :return: None
+        :return: exc
         """
         return exc
 
@@ -119,18 +117,8 @@ class HttpApi(HttpApiBase):
         data = message_kwargs.get('data', '')
         method = message_kwargs.get('method', 'GET')
 
-        if self._ccsrftoken == '' and not (method == 'POST' and 'logincheck' in url):
-            raise Exception('Not logged in. Please login first')
-
-        headers = {}
-        if self._ccsrftoken != '':
-            headers['x-csrftoken'] = self._ccsrftoken
-
-        if method == 'POST' or 'PUT':
-            headers['Content-Type'] = 'application/json'
-
         try:
-            response, response_data = self._connection.send(url, data, headers=headers, method=method)
+            response, response_data = self.connection.send(url, data, method=method)
 
             return response.status, to_text(response_data.getvalue())
         except Exception as err:

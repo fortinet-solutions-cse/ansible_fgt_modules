@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Type of Service (ToS) based priority table to set network traffic priorities.
+    fortios_system_tos_based_priority:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_tos_based_priority:
+        id:  "3"
+        priority: "low"
+        tos: "5"

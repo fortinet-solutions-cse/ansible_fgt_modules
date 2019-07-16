@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS URL filter cache settings.
+    fortios_webfilter_ips_urlfilter_cache_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      webfilter_ips_urlfilter_cache_setting:
+        dns_retry_interval: "3"
+        extended_ttl: "4"

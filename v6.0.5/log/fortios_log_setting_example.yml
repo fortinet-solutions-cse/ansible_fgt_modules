@@ -1,0 +1,35 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure general log settings.
+    fortios_log_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_setting:
+        brief_traffic_format: "enable"
+        custom_log_fields:
+         -
+            field_id: "<your_own_value> (source log.custom-field.id)"
+        daemon_log: "enable"
+        expolicy_implicit_log: "enable"
+        fwpolicy_implicit_log: "enable"
+        fwpolicy6_implicit_log: "enable"
+        local_in_allow: "enable"
+        local_in_deny_broadcast: "enable"
+        local_in_deny_unicast: "enable"
+        local_out: "enable"
+        log_invalid_packet: "enable"
+        log_policy_comment: "enable"
+        log_policy_name: "enable"
+        log_user_in_upper: "enable"
+        neighbor_event: "enable"
+        resolve_ip: "enable"
+        resolve_port: "enable"
+        user_anonymize: "enable"

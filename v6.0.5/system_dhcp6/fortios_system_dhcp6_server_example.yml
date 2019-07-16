@@ -1,0 +1,44 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure DHCPv6 servers.
+    fortios_system_dhcp6_server:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_dhcp6_server:
+        dns_search_list: "delegated"
+        dns_server1: "<your_own_value>"
+        dns_server2: "<your_own_value>"
+        dns_server3: "<your_own_value>"
+        dns_service: "delegated"
+        domain: "<your_own_value>"
+        id:  "9"
+        interface: "<your_own_value> (source system.interface.name)"
+        ip_mode: "range"
+        ip_range:
+         -
+            end_ip: "<your_own_value>"
+            id:  "14"
+            start_ip: "<your_own_value>"
+        lease_time: "16"
+        option1: "<your_own_value>"
+        option2: "<your_own_value>"
+        option3: "<your_own_value>"
+        prefix_range:
+         -
+            end_prefix: "<your_own_value>"
+            id:  "22"
+            prefix_length: "23"
+            start_prefix: "<your_own_value>"
+        rapid_commit: "disable"
+        status: "disable"
+        subnet: "<your_own_value>"
+        upstream_interface: "<your_own_value> (source system.interface.name)"

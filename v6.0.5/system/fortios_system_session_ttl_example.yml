@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure global session TTL timers for this FortiGate.
+    fortios_system_session_ttl:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_session_ttl:
+        default: "<your_own_value>"
+        port:
+         -
+            end_port: "5"
+            id:  "6"
+            protocol: "7"
+            start_port: "8"
+            timeout: "<your_own_value>"

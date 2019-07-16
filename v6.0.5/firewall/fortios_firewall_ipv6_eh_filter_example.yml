@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 extension header filter.
+    fortios_firewall_ipv6_eh_filter:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      firewall_ipv6_eh_filter:
+        auth: "enable"
+        dest_opt: "enable"
+        fragment: "enable"
+        hdopt_type: "6"
+        hop_opt: "enable"
+        no_next: "enable"
+        routing: "enable"
+        routing_type: "10"

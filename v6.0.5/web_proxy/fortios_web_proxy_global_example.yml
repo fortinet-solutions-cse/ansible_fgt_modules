@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Web proxy global settings.
+    fortios_web_proxy_global:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      web_proxy_global:
+        fast_policy_match: "enable"
+        forward_proxy_auth: "enable"
+        forward_server_affinity_timeout: "5"
+        learn_client_ip: "enable"
+        learn_client_ip_from_header: "true-client-ip"
+        learn_client_ip_srcaddr:
+         -
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name)"
+        learn_client_ip_srcaddr6:
+         -
+            name: "default_name_11 (source firewall.address6.name firewall.addrgrp6.name)"
+        max_message_length: "12"
+        max_request_length: "13"
+        max_waf_body_cache_length: "14"
+        proxy_fqdn: "<your_own_value>"
+        strict_web_check: "enable"
+        tunnel_non_http: "enable"
+        unknown_http_version: "reject"
+        webproxy_profile: "<your_own_value> (source web-proxy.profile.name)"

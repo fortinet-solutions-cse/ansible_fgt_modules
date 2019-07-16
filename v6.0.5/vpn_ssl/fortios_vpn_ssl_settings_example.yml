@@ -1,0 +1,99 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure SSL VPN.
+    fortios_vpn_ssl_settings:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      vpn_ssl_settings:
+        auth_timeout: "3"
+        authentication_rule:
+         -
+            auth: "any"
+            cipher: "any"
+            client_cert: "enable"
+            groups:
+             -
+                name: "default_name_9 (source user.group.name)"
+            id:  "10"
+            portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
+            realm: "<your_own_value> (source vpn.ssl.web.realm.url-path)"
+            source_address:
+             -
+                name: "default_name_14 (source firewall.address.name firewall.addrgrp.name)"
+            source_address_negate: "enable"
+            source_address6:
+             -
+                name: "default_name_17 (source firewall.address6.name firewall.addrgrp6.name)"
+            source_address6_negate: "enable"
+            source_interface:
+             -
+                name: "default_name_20 (source system.interface.name system.zone.name)"
+            users:
+             -
+                name: "default_name_22 (source user.local.name)"
+        auto_tunnel_static_route: "enable"
+        banned_cipher: "RSA"
+        check_referer: "enable"
+        default_portal: "<your_own_value> (source vpn.ssl.web.portal.name)"
+        deflate_compression_level: "27"
+        deflate_min_data_size: "28"
+        dns_server1: "<your_own_value>"
+        dns_server2: "<your_own_value>"
+        dns_suffix: "<your_own_value>"
+        dtls_hello_timeout: "32"
+        dtls_tunnel: "enable"
+        force_two_factor_auth: "enable"
+        header_x_forwarded_for: "pass"
+        http_compression: "enable"
+        http_only_cookie: "enable"
+        http_request_body_timeout: "38"
+        http_request_header_timeout: "39"
+        https_redirect: "enable"
+        idle_timeout: "41"
+        ipv6_dns_server1: "<your_own_value>"
+        ipv6_dns_server2: "<your_own_value>"
+        ipv6_wins_server1: "<your_own_value>"
+        ipv6_wins_server2: "<your_own_value>"
+        login_attempt_limit: "46"
+        login_block_time: "47"
+        login_timeout: "48"
+        port: "49"
+        port_precedence: "enable"
+        reqclientcert: "enable"
+        route_source_interface: "enable"
+        servercert: "<your_own_value> (source vpn.certificate.local.name)"
+        source_address:
+         -
+            name: "default_name_55 (source firewall.address.name firewall.addrgrp.name)"
+        source_address_negate: "enable"
+        source_address6:
+         -
+            name: "default_name_58 (source firewall.address6.name firewall.addrgrp6.name)"
+        source_address6_negate: "enable"
+        source_interface:
+         -
+            name: "default_name_61 (source system.interface.name system.zone.name)"
+        ssl_client_renegotiation: "disable"
+        ssl_insert_empty_fragment: "enable"
+        tlsv1_0: "enable"
+        tlsv1_1: "enable"
+        tlsv1_2: "enable"
+        tunnel_ip_pools:
+         -
+            name: "default_name_68 (source firewall.address.name firewall.addrgrp.name)"
+        tunnel_ipv6_pools:
+         -
+            name: "default_name_70 (source firewall.address6.name firewall.addrgrp6.name)"
+        unsafe_legacy_renegotiation: "enable"
+        url_obscuration: "enable"
+        wins_server1: "<your_own_value>"
+        wins_server2: "<your_own_value>"
+        x_content_type_options: "enable"

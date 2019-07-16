@@ -1,0 +1,110 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Web filter profiles.
+    fortios_webfilter_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      webfilter_profile:
+        comment: "Optional comments."
+        extended_log: "enable"
+        ftgd_wf:
+            exempt_quota: "<your_own_value>"
+            filters:
+             -
+                action: "block"
+                auth_usr_grp:
+                 -
+                    name: "default_name_10 (source user.group.name)"
+                category: "11"
+                id:  "12"
+                log: "enable"
+                override_replacemsg: "<your_own_value>"
+                warn_duration: "<your_own_value>"
+                warning_duration_type: "session"
+                warning_prompt: "per-domain"
+            max_quota_timeout: "18"
+            options: "error-allow"
+            ovrd: "<your_own_value>"
+            quota:
+             -
+                category: "<your_own_value>"
+                duration: "<your_own_value>"
+                id:  "24"
+                override_replacemsg: "<your_own_value>"
+                type: "time"
+                unit: "B"
+                value: "28"
+            rate_crl_urls: "disable"
+            rate_css_urls: "disable"
+            rate_image_urls: "disable"
+            rate_javascript_urls: "disable"
+        https_replacemsg: "enable"
+        inspection_mode: "proxy"
+        log_all_url: "enable"
+        name: "default_name_36"
+        options: "activexfilter"
+        override:
+            ovrd_cookie: "allow"
+            ovrd_dur: "<your_own_value>"
+            ovrd_dur_mode: "constant"
+            ovrd_scope: "user"
+            ovrd_user_group:
+             -
+                name: "default_name_44 (source user.group.name)"
+            profile:
+             -
+                name: "default_name_46 (source webfilter.profile.name)"
+            profile_attribute: "User-Name"
+            profile_type: "list"
+        ovrd_perm: "bannedword-override"
+        post_action: "normal"
+        replacemsg_group: "<your_own_value> (source system.replacemsg-group.name)"
+        web:
+            blacklist: "enable"
+            bword_table: "54 (source webfilter.content.id)"
+            bword_threshold: "55"
+            content_header_list: "56 (source webfilter.content-header.id)"
+            keyword_match:
+             -
+                pattern: "<your_own_value>"
+            log_search: "enable"
+            safe_search: "url"
+            urlfilter_table: "61 (source webfilter.urlfilter.id)"
+            whitelist: "exempt-av"
+            youtube_restrict: "none"
+        web_content_log: "enable"
+        web_extended_all_action_log: "enable"
+        web_filter_activex_log: "enable"
+        web_filter_applet_log: "enable"
+        web_filter_command_block_log: "enable"
+        web_filter_cookie_log: "enable"
+        web_filter_cookie_removal_log: "enable"
+        web_filter_js_log: "enable"
+        web_filter_jscript_log: "enable"
+        web_filter_referer_log: "enable"
+        web_filter_unknown_log: "enable"
+        web_filter_vbs_log: "enable"
+        web_ftgd_err_log: "enable"
+        web_ftgd_quota_usage: "enable"
+        web_invalid_domain_log: "enable"
+        web_url_log: "enable"
+        wisp: "enable"
+        wisp_algorithm: "primary-secondary"
+        wisp_servers:
+         -
+            name: "default_name_83 (source web-proxy.wisp.name)"
+        youtube_channel_filter:
+         -
+            channel_id: "<your_own_value>"
+            comment: "Comment."
+            id:  "87"
+        youtube_channel_status: "disable"

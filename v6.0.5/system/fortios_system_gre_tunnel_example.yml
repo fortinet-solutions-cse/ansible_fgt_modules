@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure GRE tunnel.
+    fortios_system_gre_tunnel:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_gre_tunnel:
+        checksum_reception: "disable"
+        checksum_transmission: "disable"
+        dscp_copying: "disable"
+        interface: "<your_own_value> (source system.interface.name)"
+        ip_version: "4"
+        keepalive_failtimes: "8"
+        keepalive_interval: "9"
+        key_inbound: "10"
+        key_outbound: "11"
+        local_gw: "<your_own_value>"
+        local_gw6: "<your_own_value>"
+        name: "default_name_14"
+        remote_gw: "<your_own_value>"
+        remote_gw6: "<your_own_value>"
+        sequence_number_reception: "disable"
+        sequence_number_transmission: "disable"

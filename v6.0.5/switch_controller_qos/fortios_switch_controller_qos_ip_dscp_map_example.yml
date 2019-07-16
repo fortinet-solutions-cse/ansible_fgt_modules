@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch QoS IP precedence/DSCP.
+    fortios_switch_controller_qos_ip_dscp_map:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      switch_controller_qos_ip_dscp_map:
+        description: "<your_own_value>"
+        map:
+         -
+            cos_queue: "5"
+            diffserv: "CS0"
+            ip_precedence: "network-control"
+            name: "default_name_8"
+            value: "<your_own_value>"
+        name: "default_name_10"

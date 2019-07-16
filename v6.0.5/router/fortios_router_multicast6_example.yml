@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 multicast.
+    fortios_router_multicast6:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      router_multicast6:
+        interface:
+         -
+            hello_holdtime: "4"
+            hello_interval: "5"
+            name: "default_name_6 (source system.interface.name)"
+        multicast_pmtu: "enable"
+        multicast_routing: "enable"
+        pim_sm_global:
+            register_rate_limit: "10"
+            rp_address:
+             -
+                id:  "12"
+                ip6_address: "<your_own_value>"

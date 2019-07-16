@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure content types used by Web filter.
+    fortios_webfilter_content_header:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      webfilter_content_header:
+        comment: "Optional comments."
+        entries:
+         -
+            action: "block"
+            category: "<your_own_value>"
+            pattern: "<your_own_value>"
+        id:  "8"
+        name: "default_name_9"

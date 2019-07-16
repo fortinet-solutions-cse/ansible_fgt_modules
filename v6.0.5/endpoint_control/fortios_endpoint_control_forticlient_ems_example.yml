@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiClient Enterprise Management Server (EMS) entries.
+    fortios_endpoint_control_forticlient_ems:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      endpoint_control_forticlient_ems:
+        address: "<your_own_value> (source firewall.address.name)"
+        admin_password: "<your_own_value>"
+        admin_type: "Windows"
+        admin_username: "<your_own_value>"
+        https_port: "7"
+        listen_port: "8"
+        name: "default_name_9"
+        rest_api_auth: "disable"
+        serial_number: "<your_own_value>"
+        upload_port: "12"

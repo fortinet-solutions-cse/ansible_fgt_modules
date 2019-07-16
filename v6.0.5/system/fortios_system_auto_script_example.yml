@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure auto script.
+    fortios_system_auto_script:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_auto_script:
+        interval: "3"
+        name: "default_name_4"
+        output_size: "5"
+        repeat: "6"
+        script: "<your_own_value>"
+        start: "manual"

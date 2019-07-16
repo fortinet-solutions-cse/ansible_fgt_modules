@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure dedicated management.
+    fortios_system_dedicated_mgmt:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_dedicated_mgmt:
+        default_gateway: "<your_own_value>"
+        dhcp_end_ip: "<your_own_value>"
+        dhcp_netmask: "<your_own_value>"
+        dhcp_server: "enable"
+        dhcp_start_ip: "<your_own_value>"
+        interface: "<your_own_value> (source system.interface.name)"
+        status: "enable"

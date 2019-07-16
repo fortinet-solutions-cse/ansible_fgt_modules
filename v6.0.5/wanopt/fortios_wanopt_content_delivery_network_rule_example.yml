@@ -1,0 +1,56 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure WAN optimization content delivery network rules.
+    fortios_wanopt_content_delivery_network_rule:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wanopt_content_delivery_network_rule:
+        category: "vcache"
+        comment: "Comment about this CDN_rule."
+        host_domain_name_suffix:
+         -
+            name: "default_name_6"
+        name: "default_name_7"
+        request_cache_control: "enable"
+        response_cache_control: "enable"
+        response_expires: "enable"
+        rules:
+         -
+            content_id:
+                end_direction: "forward"
+                end_skip: "14"
+                end_str: "<your_own_value>"
+                range_str: "<your_own_value>"
+                start_direction: "forward"
+                start_skip: "18"
+                start_str: "<your_own_value>"
+                target: "path"
+            match_entries:
+             -
+                id:  "22"
+                pattern:
+                 -
+                    string: "<your_own_value>"
+                target: "path"
+            match_mode: "all"
+            name: "default_name_27"
+            skip_entries:
+             -
+                id:  "29"
+                pattern:
+                 -
+                    string: "<your_own_value>"
+                target: "path"
+            skip_rule_mode: "all"
+        status: "enable"
+        text_response_vcache: "enable"
+        updateserver: "enable"

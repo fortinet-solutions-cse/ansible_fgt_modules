@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch QoS 802.1p.
+    fortios_switch_controller_qos_dot1p_map:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      switch_controller_qos_dot1p_map:
+        description: "<your_own_value>"
+        name: "default_name_4"
+        priority_0: "queue-0"
+        priority_1: "queue-0"
+        priority_2: "queue-0"
+        priority_3: "queue-0"
+        priority_4: "queue-0"
+        priority_5: "queue-0"
+        priority_6: "queue-0"
+        priority_7: "queue-0"

@@ -1,0 +1,36 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure DDNS.
+    fortios_system_ddns:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_ddns:
+        bound_ip: "<your_own_value>"
+        clear_text: "disable"
+        ddns_auth: "disable"
+        ddns_domain: "<your_own_value>"
+        ddns_key: "<your_own_value>"
+        ddns_keyname: "<your_own_value>"
+        ddns_password: "<your_own_value>"
+        ddns_server: "dyndns.org"
+        ddns_server_ip: "<your_own_value>"
+        ddns_sn: "<your_own_value>"
+        ddns_ttl: "13"
+        ddns_username: "<your_own_value>"
+        ddns_zone: "<your_own_value>"
+        ddnsid: "16"
+        monitor_interface:
+         -
+            interface_name: "<your_own_value> (source system.interface.name)"
+        ssl_certificate: "<your_own_value> (source certificate.local.name)"
+        update_interval: "20"
+        use_public_ip: "disable"

@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Bonjour profiles. Bonjour is Apple's zero configuration networking protocol. Bonjour profiles allow APs and FortiAPs to connnect to networks using Bonjour.
+    fortios_wireless_controller_bonjour_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_bonjour_profile:
+        comment: "Comment."
+        name: "default_name_4"
+        policy_list:
+         -
+            description: "<your_own_value>"
+            from_vlan: "<your_own_value>"
+            policy_id: "8"
+            services: "all"
+            to_vlan: "<your_own_value>"

@@ -1,0 +1,39 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Action for automation stitches.
+    fortios_system_automation_action:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_automation_action:
+        action_type: "email"
+        aws_api_id: "<your_own_value>"
+        aws_api_key: "<your_own_value>"
+        aws_api_path: "<your_own_value>"
+        aws_api_stage: "<your_own_value>"
+        aws_domain: "<your_own_value>"
+        aws_region: "<your_own_value>"
+        delay: "10"
+        email_subject: "<your_own_value>"
+        email_to:
+         -
+            name: "default_name_13"
+        headers:
+         -
+            header: "<your_own_value>"
+        http_body: "<your_own_value>"
+        method: "post"
+        minimum_interval: "18"
+        name: "default_name_19"
+        port: "20"
+        protocol: "http"
+        required: "enable"
+        uri: "<your_own_value>"

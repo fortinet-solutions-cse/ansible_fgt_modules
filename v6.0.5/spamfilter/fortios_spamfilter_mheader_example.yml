@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure AntiSpam MIME header.
+    fortios_spamfilter_mheader:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      spamfilter_mheader:
+        comment: "Optional comments."
+        entries:
+         -
+            action: "spam"
+            fieldbody: "<your_own_value>"
+            fieldname: "<your_own_value>"
+            id:  "8"
+            pattern_type: "wildcard"
+            status: "enable"
+        id:  "11"
+        name: "default_name_12"

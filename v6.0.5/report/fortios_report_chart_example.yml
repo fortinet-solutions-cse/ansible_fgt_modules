@@ -1,0 +1,83 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Report chart widget configuration.
+    fortios_report_chart:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      report_chart:
+        background: "<your_own_value>"
+        category: "misc"
+        category_series:
+            databind: "<your_own_value>"
+            font_size: "7"
+        color_palette: "<your_own_value>"
+        column:
+         -
+            detail_unit: "<your_own_value>"
+            detail_value: "<your_own_value>"
+            footer_unit: "<your_own_value>"
+            footer_value: "<your_own_value>"
+            header_value: "<your_own_value>"
+            id:  "15"
+            mapping:
+             -
+                displayname: "<your_own_value>"
+                id:  "18"
+                op: "none"
+                value_type: "integer"
+                value1: "<your_own_value>"
+                value2: "<your_own_value>"
+        comments: "<your_own_value>"
+        dataset: "<your_own_value>"
+        dimension: "2D"
+        drill_down_charts:
+         -
+            chart_name: "<your_own_value>"
+            id:  "28"
+            status: "enable"
+        favorite: "no"
+        graph_type: "none"
+        legend: "enable"
+        legend_font_size: "33"
+        name: "default_name_34"
+        period: "last24h"
+        policy: "36"
+        style: "auto"
+        title: "<your_own_value>"
+        title_font_size: "39"
+        type: "graph"
+        value_series:
+            databind: "<your_own_value>"
+        x_series:
+            caption: "<your_own_value>"
+            caption_font_size: "45"
+            databind: "<your_own_value>"
+            font_size: "47"
+            is_category: "yes"
+            label_angle: "45-degree"
+            scale_direction: "decrease"
+            scale_format: "YYYY-MM-DD-HH-MM"
+            scale_step: "52"
+            scale_unit: "minute"
+            unit: "<your_own_value>"
+        y_series:
+            caption: "<your_own_value>"
+            caption_font_size: "57"
+            databind: "<your_own_value>"
+            extra_databind: "<your_own_value>"
+            extra_y: "enable"
+            extra_y_legend: "<your_own_value>"
+            font_size: "62"
+            group: "<your_own_value>"
+            label_angle: "45-degree"
+            unit: "<your_own_value>"
+            y_legend: "<your_own_value>"

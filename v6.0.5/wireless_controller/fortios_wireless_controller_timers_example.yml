@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure CAPWAP timers.
+    fortios_wireless_controller_timers:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wireless_controller_timers:
+        ble_scan_report_intv: "3"
+        client_idle_timeout: "4"
+        darrp_day: "sunday"
+        darrp_optimize: "6"
+        darrp_time:
+         -
+            time: "<your_own_value>"
+        discovery_interval: "9"
+        echo_interval: "10"
+        fake_ap_log: "11"
+        ipsec_intf_cleanup: "12"
+        radio_stats_interval: "13"
+        rogue_ap_log: "14"
+        sta_capability_interval: "15"
+        sta_locate_timer: "16"
+        sta_stats_interval: "17"
+        vap_stats_interval: "18"

@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure NetFlow.
+    fortios_system_netflow:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_netflow:
+        active_flow_timeout: "3"
+        collector_ip: "<your_own_value>"
+        collector_port: "5"
+        inactive_flow_timeout: "6"
+        source_ip: "84.230.14.43"
+        template_tx_counter: "8"
+        template_tx_timeout: "9"

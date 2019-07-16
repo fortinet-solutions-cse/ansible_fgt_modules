@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Trigger for automation stitches.
+    fortios_system_automation_trigger:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_automation_trigger:
+        event_type: "ioc"
+        ioc_level: "medium"
+        license_type: "forticare-support"
+        logid: "6"
+        name: "default_name_7"
+        trigger_day: "8"
+        trigger_frequency: "hourly"
+        trigger_hour: "10"
+        trigger_minute: "11"
+        trigger_type: "event-based"
+        trigger_weekday: "sunday"

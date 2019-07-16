@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS global parameter.
+    fortios_ips_global:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      ips_global:
+        anomaly_mode: "periodical"
+        database: "regular"
+        deep_app_insp_db_limit: "5"
+        deep_app_insp_timeout: "6"
+        engine_count: "7"
+        exclude_signatures: "none"
+        fail_open: "enable"
+        intelligent_mode: "enable"
+        session_limit_mode: "accurate"
+        skype_client_public_ipaddr: "<your_own_value>"
+        socket_size: "13"
+        sync_session_ttl: "enable"
+        traffic_submit: "enable"

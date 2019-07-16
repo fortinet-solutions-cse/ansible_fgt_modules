@@ -1,0 +1,73 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure RIP.
+    fortios_router_rip:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      router_rip:
+        default_information_originate: "enable"
+        default_metric: "4"
+        distance:
+         -
+            access_list: "<your_own_value> (source router.access-list.name)"
+            distance: "7"
+            id:  "8"
+            prefix: "<your_own_value>"
+        distribute_list:
+         -
+            direction: "in"
+            id:  "12"
+            interface: "<your_own_value> (source system.interface.name)"
+            listname: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
+            status: "enable"
+        garbage_timer: "16"
+        interface:
+         -
+            auth_keychain: "<your_own_value> (source router.key-chain.name)"
+            auth_mode: "none"
+            auth_string: "<your_own_value>"
+            flags: "21"
+            name: "default_name_22 (source system.interface.name)"
+            receive_version: "1"
+            send_version: "1"
+            send_version2_broadcast: "disable"
+            split_horizon: "poisoned"
+            split_horizon_status: "enable"
+        max_out_metric: "28"
+        neighbor:
+         -
+            id:  "30"
+            ip: "<your_own_value>"
+        network:
+         -
+            id:  "33"
+            prefix: "<your_own_value>"
+        offset_list:
+         -
+            access_list: "<your_own_value> (source router.access-list.name)"
+            direction: "in"
+            id:  "38"
+            interface: "<your_own_value> (source system.interface.name)"
+            offset: "40"
+            status: "enable"
+        passive_interface:
+         -
+            name: "default_name_43 (source system.interface.name)"
+        recv_buffer_size: "44"
+        redistribute:
+         -
+            metric: "46"
+            name: "default_name_47"
+            routemap: "<your_own_value> (source router.route-map.name)"
+            status: "enable"
+        timeout_timer: "50"
+        update_timer: "51"
+        version: "1"

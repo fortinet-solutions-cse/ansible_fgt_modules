@@ -1,0 +1,112 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure admin users.
+    fortios_system_admin:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_admin:
+        accprofile: "<your_own_value> (source system.accprofile.name)"
+        accprofile_override: "enable"
+        allow_remove_admin_session: "enable"
+        comments: "<your_own_value>"
+        email_to: "<your_own_value>"
+        force_password_change: "enable"
+        fortitoken: "<your_own_value>"
+        guest_auth: "disable"
+        guest_lang: "<your_own_value> (source system.custom-language.name)"
+        guest_usergroups:
+         -
+            name: "default_name_13"
+        gui_dashboard:
+         -
+            columns: "15"
+            id:  "16"
+            layout_type: "responsive"
+            name: "default_name_18"
+            scope: "global"
+            widget:
+             -
+                fabric_device: "<your_own_value>"
+                fortiview_filters:
+                 -
+                    id:  "23"
+                    key: "<your_own_value>"
+                    value: "<your_own_value>"
+                fortiview_sort_by: "<your_own_value>"
+                fortiview_timeframe: "<your_own_value>"
+                fortiview_type: "<your_own_value>"
+                fortiview_visualization: "<your_own_value>"
+                height: "30"
+                id:  "31"
+                industry: "default"
+                interface: "<your_own_value> (source system.interface.name)"
+                region: "default"
+                title: "<your_own_value>"
+                type: "sysinfo"
+                width: "37"
+                x_pos: "38"
+                y_pos: "39"
+        gui_global_menu_favorites:
+         -
+            id:  "41"
+        gui_vdom_menu_favorites:
+         -
+            id:  "43"
+        hidden: "44"
+        history0: "<your_own_value>"
+        history1: "<your_own_value>"
+        ip6_trusthost1: "<your_own_value>"
+        ip6_trusthost10: "<your_own_value>"
+        ip6_trusthost2: "<your_own_value>"
+        ip6_trusthost3: "<your_own_value>"
+        ip6_trusthost4: "<your_own_value>"
+        ip6_trusthost5: "<your_own_value>"
+        ip6_trusthost6: "<your_own_value>"
+        ip6_trusthost7: "<your_own_value>"
+        ip6_trusthost8: "<your_own_value>"
+        ip6_trusthost9: "<your_own_value>"
+        login_time:
+         -
+            last_failed_login: "<your_own_value>"
+            last_login: "<your_own_value>"
+            usr_name: "<your_own_value>"
+        name: "default_name_61"
+        password: "<your_own_value>"
+        password_expire: "<your_own_value>"
+        peer_auth: "enable"
+        peer_group: "<your_own_value>"
+        radius_vdom_override: "enable"
+        remote_auth: "enable"
+        remote_group: "<your_own_value>"
+        schedule: "<your_own_value>"
+        sms_custom_server: "<your_own_value> (source system.sms-server.name)"
+        sms_phone: "<your_own_value>"
+        sms_server: "fortiguard"
+        ssh_certificate: "<your_own_value> (source certificate.local.name)"
+        ssh_public_key1: "<your_own_value>"
+        ssh_public_key2: "<your_own_value>"
+        ssh_public_key3: "<your_own_value>"
+        trusthost1: "<your_own_value>"
+        trusthost10: "<your_own_value>"
+        trusthost2: "<your_own_value>"
+        trusthost3: "<your_own_value>"
+        trusthost4: "<your_own_value>"
+        trusthost5: "<your_own_value>"
+        trusthost6: "<your_own_value>"
+        trusthost7: "<your_own_value>"
+        trusthost8: "<your_own_value>"
+        trusthost9: "<your_own_value>"
+        two_factor: "disable"
+        vdom:
+         -
+            name: "default_name_89 (source system.vdom.name)"
+        wildcard: "enable"

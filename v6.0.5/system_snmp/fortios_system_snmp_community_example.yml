@@ -1,0 +1,44 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: SNMP community configuration.
+    fortios_system_snmp_community:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_snmp_community:
+        events: "cpu-high"
+        hosts:
+         -
+            ha_direct: "enable"
+            host_type: "any"
+            id:  "7"
+            ip: "<your_own_value>"
+            source_ip: "84.230.14.43"
+        hosts6:
+         -
+            ha_direct: "enable"
+            host_type: "any"
+            id:  "13"
+            ipv6: "<your_own_value>"
+            source_ipv6: "<your_own_value>"
+        id:  "16"
+        name: "default_name_17"
+        query_v1_port: "18"
+        query_v1_status: "enable"
+        query_v2c_port: "20"
+        query_v2c_status: "enable"
+        status: "enable"
+        trap_v1_lport: "23"
+        trap_v1_rport: "24"
+        trap_v1_status: "enable"
+        trap_v2c_lport: "26"
+        trap_v2c_rport: "27"
+        trap_v2c_status: "enable"

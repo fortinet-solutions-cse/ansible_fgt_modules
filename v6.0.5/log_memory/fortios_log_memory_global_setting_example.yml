@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Global settings for memory logging.
+    fortios_log_memory_global_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_memory_global_setting:
+        full_final_warning_threshold: "3"
+        full_first_warning_threshold: "4"
+        full_second_warning_threshold: "5"
+        max_size: "6"

@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Management tunnel configuration.
+    fortios_system_management_tunnel:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_management_tunnel:
+        allow_collect_statistics: "enable"
+        allow_config_restore: "enable"
+        allow_push_configuration: "enable"
+        allow_push_firmware: "enable"
+        authorized_manager_only: "enable"
+        serial_number: "<your_own_value>"
+        status: "enable"

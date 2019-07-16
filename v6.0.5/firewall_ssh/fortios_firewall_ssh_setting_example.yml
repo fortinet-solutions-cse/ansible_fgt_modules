@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: SSH proxy settings.
+    fortios_firewall_ssh_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      firewall_ssh_setting:
+        caname: "<your_own_value> (source firewall.ssh.local-ca.name)"
+        host_trusted_checking: "enable"
+        hostkey_dsa1024: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey_ecdsa256: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey_ecdsa384: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey_ecdsa521: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey_ed25519: "myhostname (source firewall.ssh.local-key.name)"
+        hostkey_rsa2048: "myhostname (source firewall.ssh.local-key.name)"
+        untrusted_caname: "<your_own_value> (source firewall.ssh.local-ca.name)"

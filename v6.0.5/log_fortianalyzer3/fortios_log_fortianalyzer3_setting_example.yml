@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Global FortiAnalyzer settings.
+    fortios_log_fortianalyzer3_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_fortianalyzer3_setting:
+        __change_ip: "3"
+        certificate: "<your_own_value> (source certificate.local.name)"
+        conn_timeout: "5"
+        enc_algorithm: "high-medium"
+        faz_type: "7"
+        hmac_algorithm: "sha256"
+        ips_archive: "enable"
+        mgmt_name: "<your_own_value>"
+        monitor_failure_retry_period: "11"
+        monitor_keepalive_period: "12"
+        reliable: "enable"
+        server: "192.168.100.40"
+        source_ip: "84.230.14.43"
+        ssl_min_proto_version: "default"
+        status: "enable"
+        upload_day: "<your_own_value>"
+        upload_interval: "daily"
+        upload_option: "store-and-upload"
+        upload_time: "<your_own_value>"

@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch QoS policy.
+    fortios_switch_controller_qos_qos_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      switch_controller_qos_qos_policy:
+        default_cos: "3"
+        name: "default_name_4"
+        queue_policy: "<your_own_value> (source switch-controller.qos.queue-policy.name)"
+        trust_dot1p_map: "<your_own_value> (source switch-controller.qos.dot1p-map.name)"
+        trust_ip_dscp_map: "<your_own_value> (source switch-controller.qos.ip-dscp-map.name)"

@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiSwitch storm control.
+    fortios_switch_controller_storm_control:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      switch_controller_storm_control:
+        broadcast: "enable"
+        rate: "4"
+        unknown_multicast: "enable"
+        unknown_unicast: "enable"

@@ -1,0 +1,57 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure explicit Web proxy settings.
+    fortios_web_proxy_explicit:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      web_proxy_explicit:
+        ftp_incoming_port: "<your_own_value>"
+        ftp_over_http: "enable"
+        http_incoming_port: "<your_own_value>"
+        https_incoming_port: "<your_own_value>"
+        https_replacement_message: "enable"
+        incoming_ip: "<your_own_value>"
+        incoming_ip6: "<your_own_value>"
+        ipv6_status: "enable"
+        message_upon_server_error: "enable"
+        outgoing_ip: "<your_own_value>"
+        outgoing_ip6: "<your_own_value>"
+        pac_file_data: "<your_own_value>"
+        pac_file_name: "<your_own_value>"
+        pac_file_server_port: "<your_own_value>"
+        pac_file_server_status: "enable"
+        pac_file_url: "<your_own_value>"
+        pac_policy:
+         -
+            comments: "<your_own_value>"
+            dstaddr:
+             -
+                name: "default_name_22 (source firewall.address.name firewall.addrgrp.name)"
+            pac_file_data: "<your_own_value>"
+            pac_file_name: "<your_own_value>"
+            policyid: "25"
+            srcaddr:
+             -
+                name: "default_name_27 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
+            srcaddr6:
+             -
+                name: "default_name_29 (source firewall.address6.name firewall.addrgrp6.name)"
+            status: "enable"
+        pref_dns_result: "ipv4"
+        realm: "<your_own_value>"
+        sec_default_action: "accept"
+        socks: "enable"
+        socks_incoming_port: "<your_own_value>"
+        ssl_algorithm: "low"
+        status: "enable"
+        strict_guest: "enable"
+        trace_auth_no_rsp: "enable"
+        unknown_http_version: "reject"

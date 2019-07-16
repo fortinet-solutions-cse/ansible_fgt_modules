@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FM.
+    fortios_system_fm:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_fm:
+        auto_backup: "enable"
+        id:  "4"
+        ip: "<your_own_value>"
+        ipsec: "enable"
+        scheduled_config_restore: "enable"
+        status: "enable"
+        vdom: "<your_own_value> (source system.vdom.name)"

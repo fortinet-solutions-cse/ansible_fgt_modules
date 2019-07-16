@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS custom signature.
+    fortios_ips_custom:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      ips_custom:
+        action: "pass"
+        application: "<your_own_value>"
+        comment: "Comment."
+        location: "<your_own_value>"
+        log: "disable"
+        log_packet: "disable"
+        os: "<your_own_value>"
+        protocol: "<your_own_value>"
+        rule_id: "11"
+        severity: "<your_own_value>"
+        sig_name: "<your_own_value>"
+        signature: "<your_own_value>"
+        status: "disable"
+        tag: "<your_own_value>"

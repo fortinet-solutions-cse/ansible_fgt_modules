@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure global Web cache settings.
+    fortios_wanopt_webcache:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wanopt_webcache:
+        always_revalidate: "enable"
+        cache_by_default: "enable"
+        cache_cookie: "enable"
+        cache_expired: "enable"
+        default_ttl: "7"
+        external: "enable"
+        fresh_factor: "9"
+        host_validate: "enable"
+        ignore_conditional: "enable"
+        ignore_ie_reload: "enable"
+        ignore_ims: "enable"
+        ignore_pnc: "enable"
+        max_object_size: "15"
+        max_ttl: "16"
+        min_ttl: "17"
+        neg_resp_time: "18"
+        reval_pnc: "enable"

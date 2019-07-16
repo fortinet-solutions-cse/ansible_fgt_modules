@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Realm.
+    fortios_vpn_ssl_web_realm:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      vpn_ssl_web_realm:
+        login_page: "<your_own_value>"
+        max_concurrent_user: "4"
+        url_path: "<your_own_value>"
+        virtual_host: "<your_own_value>"

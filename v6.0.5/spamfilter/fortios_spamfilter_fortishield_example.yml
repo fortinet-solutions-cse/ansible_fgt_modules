@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiGuard _ AntiSpam.
+    fortios_spamfilter_fortishield:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      spamfilter_fortishield:
+        spam_submit_force: "enable"
+        spam_submit_srv: "<your_own_value>"
+        spam_submit_txt2htm: "enable"

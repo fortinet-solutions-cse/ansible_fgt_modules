@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure device groups.
+    fortios_user_device_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_device_group:
+        comment: "Comment."
+        member:
+         -
+            name: "default_name_5 (source user.device.alias user.device-category.name)"
+        name: "default_name_6"
+        tagging:
+         -
+            category: "<your_own_value> (source system.object-tagging.category)"
+            name: "default_name_9"
+            tags:
+             -
+                name: "default_name_11 (source system.object-tagging.tags.name)"

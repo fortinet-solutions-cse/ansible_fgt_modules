@@ -1,0 +1,40 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure FortiGate Session Life Support Protocol (FGSP) session synchronization.
+    fortios_system_cluster_sync:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_cluster_sync:
+        down_intfs_before_sess_sync:
+         -
+            name: "default_name_4 (source system.interface.name)"
+        hb_interval: "5"
+        hb_lost_threshold: "6"
+        peerip: "<your_own_value>"
+        peervd: "<your_own_value> (source system.vdom.name)"
+        session_sync_filter:
+            custom_service:
+             -
+                dst_port_range: "<your_own_value>"
+                id:  "12"
+                src_port_range: "<your_own_value>"
+            dstaddr: "<your_own_value>"
+            dstaddr6: "<your_own_value>"
+            dstintf: "<your_own_value> (source system.interface.name)"
+            srcaddr: "<your_own_value>"
+            srcaddr6: "<your_own_value>"
+            srcintf: "<your_own_value> (source system.interface.name)"
+        slave_add_ike_routes: "enable"
+        sync_id: "21"
+        syncvd:
+         -
+            name: "default_name_23 (source system.vdom.name)"

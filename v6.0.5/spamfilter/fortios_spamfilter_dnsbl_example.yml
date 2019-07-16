@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure AntiSpam DNSBL/ORBL.
+    fortios_spamfilter_dnsbl:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      spamfilter_dnsbl:
+        comment: "Optional comments."
+        entries:
+         -
+            action: "reject"
+            id:  "6"
+            server: "192.168.100.40"
+            status: "enable"
+        id:  "9"
+        name: "default_name_10"

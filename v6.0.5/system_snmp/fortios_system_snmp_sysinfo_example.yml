@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: SNMP system info configuration.
+    fortios_system_snmp_sysinfo:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_snmp_sysinfo:
+        contact_info: "<your_own_value>"
+        description: "<your_own_value>"
+        engine_id: "<your_own_value>"
+        location: "<your_own_value>"
+        status: "enable"
+        trap_high_cpu_threshold: "8"
+        trap_log_full_threshold: "9"
+        trap_low_memory_threshold: "10"

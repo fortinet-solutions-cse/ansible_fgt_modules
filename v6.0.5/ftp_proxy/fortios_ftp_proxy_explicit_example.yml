@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure explicit FTP proxy settings.
+    fortios_ftp_proxy_explicit:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      ftp_proxy_explicit:
+        incoming_ip: "<your_own_value>"
+        incoming_port: "<your_own_value>"
+        outgoing_ip: "<your_own_value>"
+        sec_default_action: "accept"
+        status: "enable"

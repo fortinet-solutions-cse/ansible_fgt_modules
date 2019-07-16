@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure WAN optimization authentication groups.
+    fortios_wanopt_auth_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wanopt_auth_group:
+        auth_method: "cert"
+        cert: "<your_own_value> (source vpn.certificate.local.name)"
+        name: "default_name_5"
+        peer: "<your_own_value> (source wanopt.peer.peer-host-id)"
+        peer_accept: "any"
+        psk: "<your_own_value>"

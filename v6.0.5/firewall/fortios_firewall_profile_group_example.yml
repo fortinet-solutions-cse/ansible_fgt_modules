@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure profile groups.
+    fortios_firewall_profile_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_profile_group:
+        application_list: "<your_own_value> (source application.list.name)"
+        av_profile: "<your_own_value> (source antivirus.profile.name)"
+        dlp_sensor: "<your_own_value> (source dlp.sensor.name)"
+        dnsfilter_profile: "<your_own_value> (source dnsfilter.profile.name)"
+        icap_profile: "<your_own_value> (source icap.profile.name)"
+        ips_sensor: "<your_own_value> (source ips.sensor.name)"
+        name: "default_name_9"
+        profile_protocol_options: "<your_own_value> (source firewall.profile-protocol-options.name)"
+        spamfilter_profile: "<your_own_value> (source spamfilter.profile.name)"
+        ssh_filter_profile: "<your_own_value> (source ssh-filter.profile.name)"
+        ssl_ssh_profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
+        voip_profile: "<your_own_value> (source voip.profile.name)"
+        waf_profile: "<your_own_value> (source waf.profile.name)"
+        webfilter_profile: "<your_own_value> (source webfilter.profile.name)"

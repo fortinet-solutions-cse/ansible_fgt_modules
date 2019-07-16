@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPS URL filter settings for IPv6.
+    fortios_webfilter_ips_urlfilter_setting6:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      webfilter_ips_urlfilter_setting6:
+        device: "<your_own_value> (source system.interface.name)"
+        distance: "4"
+        gateway6: "<your_own_value>"
+        geo_filter: "<your_own_value>"

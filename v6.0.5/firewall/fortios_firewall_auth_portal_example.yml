@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure firewall authentication portals.
+    fortios_firewall_auth_portal:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      firewall_auth_portal:
+        groups:
+         -
+            name: "default_name_4 (source user.group.name)"
+        identity_based_route: "<your_own_value> (source firewall.identity-based-route.name)"
+        portal_addr: "<your_own_value>"
+        portal_addr6: "<your_own_value>"

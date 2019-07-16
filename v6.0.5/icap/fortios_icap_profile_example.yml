@@ -1,0 +1,28 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure ICAP profiles.
+    fortios_icap_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      icap_profile:
+        methods: "delete"
+        name: "default_name_4"
+        replacemsg_group: "<your_own_value> (source system.replacemsg-group.name)"
+        request: "disable"
+        request_failure: "error"
+        request_path: "<your_own_value>"
+        request_server: "<your_own_value> (source icap.server.name)"
+        response: "disable"
+        response_failure: "error"
+        response_path: "<your_own_value>"
+        response_server: "<your_own_value> (source icap.server.name)"
+        streaming_content_bypass: "disable"

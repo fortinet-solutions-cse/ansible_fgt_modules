@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 address templates.
+    fortios_firewall_address6_template:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_address6_template:
+        ip6: "<your_own_value>"
+        name: "default_name_4"
+        subnet_segment:
+         -
+            bits: "6"
+            exclusive: "enable"
+            id:  "8"
+            name: "default_name_9"
+            values:
+             -
+                name: "default_name_11"
+                value: "<your_own_value>"
+        subnet_segment_count: "13"

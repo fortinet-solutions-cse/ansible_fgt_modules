@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure multicast_flow.
+    fortios_router_multicast_flow:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_multicast_flow:
+        comments: "<your_own_value>"
+        flows:
+         -
+            group_addr: "<your_own_value>"
+            id:  "6"
+            source_addr: "<your_own_value>"
+        name: "default_name_8"

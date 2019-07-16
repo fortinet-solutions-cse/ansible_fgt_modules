@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Wireless Internet service provider (WISP) servers.
+    fortios_web_proxy_wisp:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      web_proxy_wisp:
+        comment: "Comment."
+        max_connections: "4"
+        name: "default_name_5"
+        outgoing_ip: "<your_own_value>"
+        server_ip: "<your_own_value>"
+        server_port: "8"
+        timeout: "9"

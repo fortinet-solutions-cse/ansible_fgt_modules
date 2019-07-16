@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IPv6 neighbor discovery proxy (RFC4389).
+    fortios_system_nd_proxy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_nd_proxy:
+        member:
+         -
+            interface_name: "<your_own_value> (source system.interface.name)"
+        status: "enable"

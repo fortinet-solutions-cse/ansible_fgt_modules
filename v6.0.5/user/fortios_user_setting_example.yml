@@ -1,0 +1,35 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure user authentication setting.
+    fortios_user_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      user_setting:
+        auth_blackout_time: "3"
+        auth_ca_cert: "<your_own_value> (source vpn.certificate.local.name)"
+        auth_cert: "<your_own_value> (source vpn.certificate.local.name)"
+        auth_http_basic: "enable"
+        auth_invalid_max: "7"
+        auth_lockout_duration: "8"
+        auth_lockout_threshold: "9"
+        auth_portal_timeout: "10"
+        auth_ports:
+         -
+            id:  "12"
+            port: "13"
+            type: "http"
+        auth_secure_http: "enable"
+        auth_src_mac: "enable"
+        auth_ssl_allow_renegotiation: "enable"
+        auth_timeout: "18"
+        auth_timeout_type: "idle-timeout"
+        auth_type: "http"
+        radius_ses_timeout_act: "hard-timeout"

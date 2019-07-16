@@ -1,0 +1,47 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure SSL VPN user bookmark.
+    fortios_vpn_ssl_web_user_bookmark:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      vpn_ssl_web_user_bookmark:
+        bookmarks:
+         -
+            additional_params: "<your_own_value>"
+            apptype: "citrix"
+            description: "<your_own_value>"
+            folder: "<your_own_value>"
+            form_data:
+             -
+                name: "default_name_9"
+                value: "<your_own_value>"
+            host: "<your_own_value>"
+            listening_port: "12"
+            load_balancing_info: "<your_own_value>"
+            logon_password: "<your_own_value>"
+            logon_user: "<your_own_value>"
+            name: "default_name_16"
+            port: "17"
+            preconnection_blob: "<your_own_value>"
+            preconnection_id: "19"
+            remote_port: "20"
+            security: "rdp"
+            server_layout: "de-de-qwertz"
+            show_status_window: "enable"
+            sso: "disable"
+            sso_credential: "sslvpn-login"
+            sso_credential_sent_once: "enable"
+            sso_password: "<your_own_value>"
+            sso_username: "<your_own_value>"
+            url: "myurl.com"
+        custom_lang: "<your_own_value> (source system.custom-language.name)"
+        name: "default_name_31"

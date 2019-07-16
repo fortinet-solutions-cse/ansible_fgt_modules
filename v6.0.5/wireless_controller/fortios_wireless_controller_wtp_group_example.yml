@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure WTP groups.
+    fortios_wireless_controller_wtp_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_wtp_group:
+        name: "default_name_3"
+        platform_type: "AP-11N"
+        wtps:
+         -
+            wtp_id: "<your_own_value> (source wireless-controller.wtp.wtp-id)"

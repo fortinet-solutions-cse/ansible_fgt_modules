@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure service groups.
+    fortios_firewall_service_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_service_group:
+        color: "3"
+        comment: "Comment."
+        member:
+         -
+            name: "default_name_6 (source firewall.service.custom.name firewall.service.group.name)"
+        name: "default_name_7"
+        proxy: "enable"

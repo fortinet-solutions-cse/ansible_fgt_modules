@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure Bluetooth Low Energy profile.
+    fortios_wireless_controller_ble_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_ble_profile:
+        advertising: "ibeacon"
+        beacon_interval: "4"
+        ble_scanning: "enable"
+        comment: "Comment."
+        eddystone_instance: "<your_own_value>"
+        eddystone_namespace: "<your_own_value>"
+        eddystone_url: "<your_own_value>"
+        eddystone_url_encode_hex: "<your_own_value>"
+        ibeacon_uuid: "<your_own_value>"
+        major_id: "12"
+        minor_id: "13"
+        name: "default_name_14"
+        txpower: "0"

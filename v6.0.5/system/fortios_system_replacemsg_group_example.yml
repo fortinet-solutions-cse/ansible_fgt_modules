@@ -1,0 +1,127 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure replacement message groups.
+    fortios_system_replacemsg_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_replacemsg_group:
+        admin:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        alertmail:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        auth:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        comment: "Comment."
+        custom_message:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        device_detection_portal:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        ec:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        fortiguard_wf:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        ftp:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        group_type: "default"
+        http:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        icap:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        mail:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        nac_quar:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        name: "default_name_65"
+        nntp:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        spam:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        sslvpn:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        traffic_quota:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        utm:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"
+        webproxy:
+         -
+            buffer: "<your_own_value>"
+            format: "none"
+            header: "none"
+            msg_type: "<your_own_value>"

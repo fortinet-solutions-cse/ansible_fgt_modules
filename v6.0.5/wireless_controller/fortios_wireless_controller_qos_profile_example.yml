@@ -1,0 +1,42 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure WiFi quality of service (QoS) profiles.
+    fortios_wireless_controller_qos_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_qos_profile:
+        bandwidth_admission_control: "enable"
+        bandwidth_capacity: "4"
+        burst: "enable"
+        call_admission_control: "enable"
+        call_capacity: "7"
+        comment: "Comment."
+        downlink: "9"
+        downlink_sta: "10"
+        dscp_wmm_be:
+         -
+            id:  "12"
+        dscp_wmm_bk:
+         -
+            id:  "14"
+        dscp_wmm_mapping: "enable"
+        dscp_wmm_vi:
+         -
+            id:  "17"
+        dscp_wmm_vo:
+         -
+            id:  "19"
+        name: "default_name_20"
+        uplink: "21"
+        uplink_sta: "22"
+        wmm: "enable"
+        wmm_uapsd: "enable"

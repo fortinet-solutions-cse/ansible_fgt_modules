@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Report setting configuration.
+    fortios_report_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      report_setting:
+        fortiview: "enable"
+        pdf_report: "enable"
+        report_source: "forward-traffic"
+        top_n: "6"
+        web_browsing_threshold: "7"

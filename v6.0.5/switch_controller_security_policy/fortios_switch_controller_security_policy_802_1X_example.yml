@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure 802.1x MAC Authentication Bypass (MAB) policies.
+    fortios_switch_controller_security_policy_802_1X:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      switch_controller_security_policy_802_1X:
+        auth_fail_vlan: "disable"
+        auth_fail_vlan_id: "<your_own_value> (source system.interface.name)"
+        auth_fail_vlanid: "5"
+        eap_passthru: "disable"
+        guest_auth_delay: "7"
+        guest_vlan: "disable"
+        guest_vlan_id: "<your_own_value> (source system.interface.name)"
+        guest_vlanid: "10"
+        mac_auth_bypass: "disable"
+        name: "default_name_12"
+        open_auth: "disable"
+        policy_type: "802.1X"
+        radius_timeout_overwrite: "disable"
+        security_mode: "802.1X"
+        user_group:
+         -
+            name: "default_name_18 (source user.group.name)"

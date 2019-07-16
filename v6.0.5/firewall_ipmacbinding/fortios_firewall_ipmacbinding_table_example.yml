@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+  tasks:
+  - name: Configure IP to MAC address pairs in the IP/MAC binding table.
+    fortios_firewall_ipmacbinding_table:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_ipmacbinding_table:
+        ip: "<your_own_value>"
+        mac: "<your_own_value>"
+        name: "default_name_5"
+        seq_num: "6"
+        status: "enable"

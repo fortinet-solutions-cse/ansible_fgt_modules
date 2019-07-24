@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: VDOM wireless controller configuration.
     fortios_wireless_controller_setting:

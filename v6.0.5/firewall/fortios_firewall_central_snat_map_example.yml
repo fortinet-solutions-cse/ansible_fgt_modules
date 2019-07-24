@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure central SNAT policies.
     fortios_firewall_central_snat_map:

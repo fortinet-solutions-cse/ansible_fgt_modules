@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPv6 routing policies.
     fortios_router_policy6:

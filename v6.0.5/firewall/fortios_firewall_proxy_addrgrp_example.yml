@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Web proxy address group configuration.
     fortios_firewall_proxy_addrgrp:

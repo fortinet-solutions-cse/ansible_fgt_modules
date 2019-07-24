@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure explicit FTP proxy settings.
     fortios_ftp_proxy_explicit:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure venue name duple.
     fortios_wireless_controller_hotspot20_anqp_venue_name:

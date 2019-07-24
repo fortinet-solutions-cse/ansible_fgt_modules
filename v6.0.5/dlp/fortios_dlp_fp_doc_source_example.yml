@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints.
     fortios_dlp_fp_doc_source:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure VPN remote gateway.
     fortios_vpn_ipsec_phase1:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Override settings for remote syslog server.
     fortios_log_syslogd_override_setting:

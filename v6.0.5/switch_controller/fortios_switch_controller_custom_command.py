@@ -67,6 +67,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -99,6 +104,7 @@ EXAMPLES = '''
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure the FortiGate switch controller to send custom commands to managed FortiSwitch devices.
     fortios_switch_controller_custom_command:
@@ -183,6 +189,7 @@ def login(data, fos):
     host = data['host']
     username = data['username']
     password = data['password']
+    ssl_verify = data['ssl_verify']
 
     fos.debug('on')
     if 'https' in data and not data['https']:
@@ -190,7 +197,7 @@ def login(data, fos):
     else:
         fos.https('on')
 
-    fos.login(host, username, password)
+    fos.login(host, username, password, verify=ssl_verify)
 
 
 def filter_switch_controller_custom_command_data(json):
@@ -258,6 +265,7 @@ def main():
         "password": {"required": False, "type": "str", "no_log": True},
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
+        "ssl_verify": {"required": False, "type": "bool", "default": True},
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_custom_command": {

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiClient Enterprise Management Server (EMS) entries.
     fortios_endpoint_control_forticlient_ems:

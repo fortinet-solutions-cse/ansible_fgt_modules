@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure UTM (Unified Threat Management) profile.
     fortios_wireless_controller_utm_profile:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Global configuration objects that can be configured independently for all VDOMs or for the defined VDOM scope.
     fortios_system_vdom_exception:

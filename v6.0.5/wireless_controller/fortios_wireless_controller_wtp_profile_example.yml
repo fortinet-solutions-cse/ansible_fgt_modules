@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms.
     fortios_wireless_controller_wtp_profile:

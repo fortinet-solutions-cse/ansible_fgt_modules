@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure geographical location mapping for IP address(es) to override mappings from FortiGuard.
     fortios_system_geoip_override:

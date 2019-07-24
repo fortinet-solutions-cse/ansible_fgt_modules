@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Filters for FortiCloud.
     fortios_log_fortiguard_filter:

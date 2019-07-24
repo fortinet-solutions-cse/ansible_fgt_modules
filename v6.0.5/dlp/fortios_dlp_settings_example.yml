@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Designate logical storage for DLP fingerprint database.
     fortios_dlp_settings:

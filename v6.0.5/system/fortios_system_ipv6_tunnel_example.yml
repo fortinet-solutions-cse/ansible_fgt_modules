@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPv6/IPv4 in IPv6 tunnel.
     fortios_system_ipv6_tunnel:

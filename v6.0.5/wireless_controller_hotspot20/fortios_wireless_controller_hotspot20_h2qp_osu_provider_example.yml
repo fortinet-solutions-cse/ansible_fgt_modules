@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure online sign up (OSU) provider list.
     fortios_wireless_controller_hotspot20_h2qp_osu_provider:

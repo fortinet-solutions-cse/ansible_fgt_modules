@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPv6 neighbor discovery proxy (RFC4389).
     fortios_system_nd_proxy:

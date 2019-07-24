@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: SSH proxy settings.
     fortios_firewall_ssh_setting:

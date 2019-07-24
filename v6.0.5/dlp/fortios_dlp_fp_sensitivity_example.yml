@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Create self_explanatory DLP sensitivity levels to be used when setting sensitivity under config fp_doc_source.
     fortios_dlp_fp_sensitivity:

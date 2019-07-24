@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Designate cache_service for wan_optimization and webcache.
     fortios_wanopt_cache_service:

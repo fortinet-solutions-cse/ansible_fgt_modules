@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure Fortinet Single Sign On (FSSO) agents.
     fortios_user_fsso:

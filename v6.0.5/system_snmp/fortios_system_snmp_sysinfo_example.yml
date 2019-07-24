@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: SNMP system info configuration.
     fortios_system_snmp_sysinfo:

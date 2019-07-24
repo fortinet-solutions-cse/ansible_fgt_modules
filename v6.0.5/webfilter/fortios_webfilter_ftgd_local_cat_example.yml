@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiGuard Web Filter local categories.
     fortios_webfilter_ftgd_local_cat:

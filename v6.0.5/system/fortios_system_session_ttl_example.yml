@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure global session TTL timers for this FortiGate.
     fortios_system_session_ttl:

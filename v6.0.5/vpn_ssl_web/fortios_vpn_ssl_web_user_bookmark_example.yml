@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure SSL VPN user bookmark.
     fortios_vpn_ssl_web_user_bookmark:

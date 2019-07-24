@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure operator friendly name.
     fortios_wireless_controller_hotspot20_h2qp_operator_name:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPS URL filter settings for IPv6.
     fortios_webfilter_ips_urlfilter_setting6:

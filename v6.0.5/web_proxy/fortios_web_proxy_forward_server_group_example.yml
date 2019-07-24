@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure a forward server group consisting or multiple forward servers. Supports failover and load balancing.
     fortios_web_proxy_forward_server_group:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type.
     fortios_log_disk_filter:

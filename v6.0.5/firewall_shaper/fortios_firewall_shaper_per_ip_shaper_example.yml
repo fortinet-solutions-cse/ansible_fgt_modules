@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure per_IP traffic shaper.
     fortios_firewall_shaper_per_ip_shaper:

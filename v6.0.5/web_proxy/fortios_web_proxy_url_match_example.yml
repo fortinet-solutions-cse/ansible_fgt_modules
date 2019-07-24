@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Exempt URLs from web proxy forwarding and caching.
     fortios_web_proxy_url_match:

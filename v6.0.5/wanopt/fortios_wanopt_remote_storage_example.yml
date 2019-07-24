@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure a remote cache device as Web cache storage.
     fortios_wanopt_remote_storage:

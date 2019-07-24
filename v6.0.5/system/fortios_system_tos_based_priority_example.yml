@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure Type of Service (ToS) based priority table to set network traffic priorities.
     fortios_system_tos_based_priority:

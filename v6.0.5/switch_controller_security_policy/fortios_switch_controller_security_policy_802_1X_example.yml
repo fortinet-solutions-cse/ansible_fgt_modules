@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure 802.1x MAC Authentication Bypass (MAB) policies.
     fortios_switch_controller_security_policy_802_1X:

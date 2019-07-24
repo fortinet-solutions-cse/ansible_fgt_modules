@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPS URL filter DNS servers.
     fortios_system_ips_urlfilter_dns:

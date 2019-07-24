@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiSwitch QoS 802.1p.
     fortios_switch_controller_qos_dot1p_map:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiSwitch logging (logs are transferred to and inserted into FortiGate event log).
     fortios_switch_controller_switch_log:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiClient registration synchronization settings.
     fortios_endpoint_control_forticlient_registration_sync:

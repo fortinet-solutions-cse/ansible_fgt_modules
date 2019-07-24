@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure web proxy tunnelling for the FDN.
     fortios_system_autoupdate_tunneling:

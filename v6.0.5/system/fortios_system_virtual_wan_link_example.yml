@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure redundant internet connections using SD_WAN (formerly virtual WAN link).
     fortios_system_virtual_wan_link:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure Fortinet Single Sign On (FSSO) server.
     fortios_system_fsso_polling:

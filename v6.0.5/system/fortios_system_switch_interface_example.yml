@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure software switch interfaces by grouping physical and WiFi interfaces.
     fortios_system_switch_interface:

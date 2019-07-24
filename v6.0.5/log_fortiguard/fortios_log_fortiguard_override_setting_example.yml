@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Override global FortiCloud logging settings for this VDOM.
     fortios_log_fortiguard_override_setting:

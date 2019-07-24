@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiGate Session Life Support Protocol (FGSP) session synchronization.
     fortios_system_cluster_sync:

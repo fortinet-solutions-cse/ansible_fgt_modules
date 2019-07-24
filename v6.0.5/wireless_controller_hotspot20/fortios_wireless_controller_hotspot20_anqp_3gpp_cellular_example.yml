@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure 3GPP public land mobile network (PLMN).
     fortios_wireless_controller_hotspot20_anqp_3gpp_cellular:

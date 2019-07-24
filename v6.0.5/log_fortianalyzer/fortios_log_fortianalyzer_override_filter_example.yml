@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Override filters for FortiAnalyzer.
     fortios_log_fortianalyzer_override_filter:

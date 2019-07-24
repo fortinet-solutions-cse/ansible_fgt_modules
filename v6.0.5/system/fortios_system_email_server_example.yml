@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure the email server used by the FortiGate various things. For example, for sending email messages to users to support user authentication features.
     fortios_system_email_server:

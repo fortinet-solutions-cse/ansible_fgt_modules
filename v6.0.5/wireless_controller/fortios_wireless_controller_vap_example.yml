@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure Virtual Access Points (VAPs).
     fortios_wireless_controller_vap:

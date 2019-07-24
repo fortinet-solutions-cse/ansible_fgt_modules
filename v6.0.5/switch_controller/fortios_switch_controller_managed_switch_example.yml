@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure FortiSwitch devices that are managed by this FortiGate.
     fortios_switch_controller_managed_switch:

@@ -4,6 +4,7 @@
    username: "admin"
    password: ""
    vdom: "root"
+   ssl_verify: "False"
   tasks:
   - name: Configure IPv6 to IPv4 virtual IP groups.
     fortios_firewall_vipgrp64:

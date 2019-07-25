@@ -67,6 +67,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     log_fortiguard_override_setting:
         description:
             - Override global FortiCloud logging settings for this VDOM.

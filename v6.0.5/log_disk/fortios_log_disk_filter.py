@@ -68,6 +68,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     log_disk_filter:
         description:
             - Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type.

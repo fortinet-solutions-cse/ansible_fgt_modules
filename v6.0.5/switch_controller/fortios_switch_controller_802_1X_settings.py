@@ -67,6 +67,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     switch_controller_802_1X_settings:
         description:
             - Configure global 802.1X settings.

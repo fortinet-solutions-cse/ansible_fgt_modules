@@ -67,6 +67,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     firewall_ipv6_eh_filter:
         description:
             - Configure IPv6 extension header filter.

@@ -68,6 +68,11 @@ options:
             - Indicates if the requests towards FortiGate must use HTTPS protocol.
         type: bool
         default: true
+    ssl_verify:
+        description:
+            - Ensures FortiGate certificate must be verified by a proper CA.
+        type: bool
+        default: true
     system_email_server:
         description:
             - Configure the email server used by the FortiGate various things. For example, for sending email messages to users to support user authentication

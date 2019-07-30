@@ -88,18 +88,22 @@ options:
             downlink_load:
                 description:
                     - Downlink load.
+                type: int
             downlink_speed:
                 description:
                     - Downlink speed (in kilobits/s).
+                type: int
             link_at_capacity:
                 description:
                     - Link at capacity.
+                type: str
                 choices:
                     - enable
                     - disable
             link_status:
                 description:
                     - Link status.
+                type: str
                 choices:
                     - up
                     - down
@@ -107,22 +111,27 @@ options:
             load_measurement_duration:
                 description:
                     - Load measurement duration (in tenths of a second).
+                type: int
             name:
                 description:
                     - WAN metric name.
                 required: true
+                type: str
             symmetric_wan_link:
                 description:
                     - WAN link symmetry.
+                type: str
                 choices:
                     - symmetric
                     - asymmetric
             uplink_load:
                 description:
                     - Uplink load.
+                type: int
             uplink_speed:
                 description:
                     - Uplink speed (in kilobits/s).
+                type: int
 '''
 
 EXAMPLES = '''

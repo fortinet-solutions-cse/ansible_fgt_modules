@@ -81,6 +81,7 @@ options:
             dns_timeout:
                 description:
                     - DNS query time out (1 _ 30 sec).
+                type: int
 '''
 
 EXAMPLES = '''

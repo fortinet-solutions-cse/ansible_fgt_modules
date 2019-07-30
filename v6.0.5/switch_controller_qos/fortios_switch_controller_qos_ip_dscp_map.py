@@ -88,16 +88,20 @@ options:
             description:
                 description:
                     - Description of the ip_dscp map name.
+                type: str
             map:
                 description:
                     - Maps between IP_DSCP value to COS queue.
+                type: list
                 suboptions:
                     cos_queue:
                         description:
                             - COS queue number.
+                        type: int
                     diffserv:
                         description:
                             - Differentiated service.
+                        type: str
                         choices:
                             - CS0
                             - CS1
@@ -123,6 +127,7 @@ options:
                     ip_precedence:
                         description:
                             - IP Precedence.
+                        type: str
                         choices:
                             - network-control
                             - internetwork-control
@@ -136,13 +141,16 @@ options:
                         description:
                             - Dscp mapping entry name.
                         required: true
+                        type: str
                     value:
                         description:
                             - Raw values of DSCP (0 _ 63).
+                        type: str
             name:
                 description:
                     - Dscp map name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

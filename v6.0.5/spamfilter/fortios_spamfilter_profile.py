@@ -88,50 +88,60 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             external:
                 description:
                     - Enable/disable external Email inspection.
+                type: str
                 choices:
                     - enable
                     - disable
             flow_based:
                 description:
                     - Enable/disable flow_based spam filtering.
+                type: str
                 choices:
                     - enable
                     - disable
             gmail:
                 description:
                     - Gmail.
+                type: dict
                 suboptions:
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
             imap:
                 description:
                     - IMAP.
+                type: dict
                 suboptions:
                     action:
                         description:
                             - Action for spam email.
+                        type: str
                         choices:
                             - pass
                             - tag
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tag_msg:
                         description:
                             - Subject text or header added to spam email.
+                        type: str
                     tag_type:
                         description:
                             - Tag subject or header for spam email.
+                        type: list
                         choices:
                             - subject
                             - header
@@ -139,26 +149,31 @@ options:
             mapi:
                 description:
                     - MAPI.
+                type: dict
                 suboptions:
                     action:
                         description:
                             - Action for spam email.
+                        type: str
                         choices:
                             - pass
                             - discard
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
             msn_hotmail:
                 description:
                     - MSN Hotmail.
+                type: dict
                 suboptions:
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -166,9 +181,11 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             options:
                 description:
                     - Options.
+                type: list
                 choices:
                     - bannedword
                     - spambwl
@@ -184,25 +201,30 @@ options:
             pop3:
                 description:
                     - POP3.
+                type: dict
                 suboptions:
                     action:
                         description:
                             - Action for spam email.
+                        type: str
                         choices:
                             - pass
                             - tag
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tag_msg:
                         description:
                             - Subject text or header added to spam email.
+                        type: str
                     tag_type:
                         description:
                             - Tag subject or header for spam email.
+                        type: list
                         choices:
                             - subject
                             - header
@@ -210,13 +232,16 @@ options:
             replacemsg_group:
                 description:
                     - Replacement message group. Source system.replacemsg-group.name.
+                type: str
             smtp:
                 description:
                     - SMTP.
+                type: dict
                 suboptions:
                     action:
                         description:
                             - Action for spam email.
+                        type: str
                         choices:
                             - pass
                             - tag
@@ -224,27 +249,32 @@ options:
                     hdrip:
                         description:
                             - Enable/disable SMTP email header IP checks for spamfsip, spamrbl and spambwl filters.
+                        type: str
                         choices:
                             - disable
                             - enable
                     local_override:
                         description:
                             - Enable/disable local filter to override SMTP remote check result.
+                        type: str
                         choices:
                             - disable
                             - enable
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tag_msg:
                         description:
                             - Subject text or header added to spam email.
+                        type: str
                     tag_type:
                         description:
                             - Tag subject or header for spam email.
+                        type: list
                         choices:
                             - subject
                             - header
@@ -252,46 +282,57 @@ options:
             spam_bwl_table:
                 description:
                     - Anti_spam black/white list table ID. Source spamfilter.bwl.id.
+                type: int
             spam_bword_table:
                 description:
                     - Anti_spam banned word table ID. Source spamfilter.bword.id.
+                type: int
             spam_bword_threshold:
                 description:
                     - Spam banned word threshold.
+                type: int
             spam_filtering:
                 description:
                     - Enable/disable spam filtering.
+                type: str
                 choices:
                     - enable
                     - disable
             spam_iptrust_table:
                 description:
                     - Anti_spam IP trust table ID. Source spamfilter.iptrust.id.
+                type: int
             spam_log:
                 description:
                     - Enable/disable spam logging for email filtering.
+                type: str
                 choices:
                     - disable
                     - enable
             spam_log_fortiguard_response:
                 description:
                     - Enable/disable logging FortiGuard spam response.
+                type: str
                 choices:
                     - disable
                     - enable
             spam_mheader_table:
                 description:
                     - Anti_spam MIME header table ID. Source spamfilter.mheader.id.
+                type: int
             spam_rbl_table:
                 description:
                     - Anti_spam DNSBL table ID. Source spamfilter.dnsbl.id.
+                type: int
             yahoo_mail:
                 description:
                     - Yahoo! Mail.
+                type: dict
                 suboptions:
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable

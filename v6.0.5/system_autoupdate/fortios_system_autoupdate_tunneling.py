@@ -81,21 +81,26 @@ options:
             address:
                 description:
                     - Web proxy IP address or FQDN.
+                type: str
             password:
                 description:
                     - Web proxy password.
+                type: str
             port:
                 description:
                     - Web proxy port.
+                type: int
             status:
                 description:
                     - Enable/disable web proxy tunnelling.
+                type: str
                 choices:
                     - enable
                     - disable
             username:
                 description:
                     - Web proxy username.
+                type: str
 '''
 
 EXAMPLES = '''

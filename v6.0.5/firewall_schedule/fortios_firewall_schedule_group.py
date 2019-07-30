@@ -88,18 +88,22 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             member:
                 description:
                     - Schedules added to the schedule group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Schedule name. Source firewall.schedule.onetime.name firewall.schedule.recurring.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Schedule group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

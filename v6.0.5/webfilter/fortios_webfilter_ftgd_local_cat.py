@@ -89,12 +89,15 @@ options:
                 description:
                     - Local category description.
                 required: true
+                type: str
             id:
                 description:
                     - Local category ID.
+                type: int
             status:
                 description:
                     - Enable/disable the local category.
+                type: str
                 choices:
                     - enable
                     - disable

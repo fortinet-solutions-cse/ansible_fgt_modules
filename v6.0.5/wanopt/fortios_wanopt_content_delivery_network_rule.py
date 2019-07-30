@@ -88,80 +88,98 @@ options:
             category:
                 description:
                     - Content delivery network rule category.
+                type: str
                 choices:
                     - vcache
                     - youtube
             comment:
                 description:
                     - Comment about this CDN_rule.
+                type: str
             host_domain_name_suffix:
                 description:
                     - Suffix portion of the fully qualified domain name (eg. fortinet.com in "www.fortinet.com").
+                type: list
                 suboptions:
                     name:
                         description:
                             - Suffix portion of the fully qualified domain name.
                         required: true
+                        type: str
             name:
                 description:
                     - Name of table.
                 required: true
+                type: str
             request_cache_control:
                 description:
                     - Enable/disable HTTP request cache control.
+                type: str
                 choices:
                     - enable
                     - disable
             response_cache_control:
                 description:
                     - Enable/disable HTTP response cache control.
+                type: str
                 choices:
                     - enable
                     - disable
             response_expires:
                 description:
                     - Enable/disable HTTP response cache expires.
+                type: str
                 choices:
                     - enable
                     - disable
             rules:
                 description:
                     - WAN optimization content delivery network rule entries.
+                type: list
                 suboptions:
                     content_id:
                         description:
                             - Content ID settings.
+                        type: dict
                         suboptions:
                             end_direction:
                                 description:
                                     - Search direction from end_str match.
+                                type: str
                                 choices:
                                     - forward
                                     - backward
                             end_skip:
                                 description:
                                     - Number of characters in URL to skip after end_str has been matched.
+                                type: int
                             end_str:
                                 description:
                                     - String from which to end search.
+                                type: str
                             range_str:
                                 description:
                                     - Name of content ID within the start string and end string.
+                                type: str
                             start_direction:
                                 description:
                                     - Search direction from start_str match.
+                                type: str
                                 choices:
                                     - forward
                                     - backward
                             start_skip:
                                 description:
                                     - Number of characters in URL to skip after start_str has been matched.
+                                type: int
                             start_str:
                                 description:
                                     - String from which to start search.
+                                type: str
                             target:
                                 description:
                                     - Option in HTTP header or URL parameter to match.
+                                type: str
                                 choices:
                                     - path
                                     - parameter
@@ -176,22 +194,27 @@ options:
                     match_entries:
                         description:
                             - List of entries to match.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Rule ID.
                                 required: true
+                                type: int
                             pattern:
                                 description:
                                     - Pattern string for matching target (Referrer or URL pattern, eg. "a", "a*c", "*a*", "a*c*e", and "*").
+                                type: list
                                 suboptions:
                                     string:
                                         description:
                                             - Pattern strings.
                                         required: true
+                                        type: str
                             target:
                                 description:
                                     - Option in HTTP header or URL parameter to match.
+                                type: str
                                 choices:
                                     - path
                                     - parameter
@@ -202,6 +225,7 @@ options:
                     match_mode:
                         description:
                             - Match criteria for collecting content ID.
+                        type: str
                         choices:
                             - all
                             - any
@@ -209,25 +233,31 @@ options:
                         description:
                             - WAN optimization content delivery network rule name.
                         required: true
+                        type: str
                     skip_entries:
                         description:
                             - List of entries to skip.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Rule ID.
                                 required: true
+                                type: int
                             pattern:
                                 description:
                                     - Pattern string for matching target (Referrer or URL pattern, eg. "a", "a*c", "*a*", "a*c*e", and "*").
+                                type: list
                                 suboptions:
                                     string:
                                         description:
                                             - Pattern strings.
                                         required: true
+                                        type: str
                             target:
                                 description:
                                     - Option in HTTP header or URL parameter to match.
+                                type: str
                                 choices:
                                     - path
                                     - parameter
@@ -238,24 +268,28 @@ options:
                     skip_rule_mode:
                         description:
                             - Skip mode when evaluating skip_rules.
+                        type: str
                         choices:
                             - all
                             - any
             status:
                 description:
                     - Enable/disable WAN optimization content delivery network rules.
+                type: str
                 choices:
                     - enable
                     - disable
             text_response_vcache:
                 description:
                     - Enable/disable caching of text responses.
+                type: str
                 choices:
                     - enable
                     - disable
             updateserver:
                 description:
                     - Enable/disable update server.
+                type: str
                 choices:
                     - enable
                     - disable

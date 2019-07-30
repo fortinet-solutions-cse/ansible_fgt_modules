@@ -88,33 +88,42 @@ options:
             http_get:
                 description:
                     - URL used to send a GET request to check the health of an HTTP server.
+                type: str
             http_match:
                 description:
                     - String to match the value expected in response to an HTTP_GET request.
+                type: str
             http_max_redirects:
                 description:
                     - The maximum number of HTTP redirects to be allowed (0 _ 5, default = 0).
+                type: int
             interval:
                 description:
                     - Time between health checks (5 _ 65635 sec, default = 10).
+                type: int
             name:
                 description:
                     - Monitor name.
                 required: true
+                type: str
             port:
                 description:
                     - Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 _ 65635, default =
                        0).
+                type: int
             retry:
                 description:
                     - Number health check attempts before the server is considered down (1 _ 255, default = 3).
+                type: int
             timeout:
                 description:
                     - Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 _ 255 sec,
                        default = 2).
+                type: int
             type:
                 description:
                     - Select the Monitor type used by the health check monitor to check the health of the server (PING | TCP | HTTP).
+                type: str
                 choices:
                     - ping
                     - tcp

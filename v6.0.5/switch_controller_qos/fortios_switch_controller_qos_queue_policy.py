@@ -88,36 +88,45 @@ options:
             cos_queue:
                 description:
                     - COS queue configuration.
+                type: list
                 suboptions:
                     description:
                         description:
                             - Description of the COS queue.
+                        type: str
                     drop_policy:
                         description:
                             - COS queue drop policy.
+                        type: str
                         choices:
                             - taildrop
                             - weighted-random-early-detection
                     max_rate:
                         description:
                             - Maximum rate (0 _ 4294967295 kbps, 0 to disable).
+                        type: int
                     min_rate:
                         description:
                             - Minimum rate (0 _ 4294967295 kbps, 0 to disable).
+                        type: int
                     name:
                         description:
                             - Cos queue ID.
                         required: true
+                        type: str
                     weight:
                         description:
                             - Weight of weighted round robin scheduling.
+                        type: int
             name:
                 description:
                     - QoS policy name
                 required: true
+                type: str
             schedule:
                 description:
                     - COS queue scheduling.
+                type: str
                 choices:
                     - strict
                     - round-robin

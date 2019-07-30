@@ -89,9 +89,11 @@ options:
                 description:
                     - Signature subclass ID.
                 required: true
+                type: int
             name:
                 description:
                     - Signature subclass name.
+                type: str
 '''
 
 EXAMPLES = '''

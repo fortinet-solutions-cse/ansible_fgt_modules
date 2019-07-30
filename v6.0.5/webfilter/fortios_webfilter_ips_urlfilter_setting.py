@@ -81,15 +81,19 @@ options:
             device:
                 description:
                     - Interface for this route. Source system.interface.name.
+                type: str
             distance:
                 description:
                     - Administrative distance (1 _ 255) for this route.
+                type: int
             gateway:
                 description:
                     - Gateway IP address for this route.
+                type: str
             geo_filter:
                 description:
                     - Filter based on geographical location. Route will NOT be installed if the resolved IP address belongs to the country in the filter.
+                type: str
 '''
 
 EXAMPLES = '''

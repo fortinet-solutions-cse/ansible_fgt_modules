@@ -88,28 +88,36 @@ options:
             expires:
                 description:
                     - "Override expiration date and time, from 5 minutes to 365 from now (format: yyyy/mm/dd hh:mm:ss)."
+                type: str
             id:
                 description:
                     - Override rule ID.
                 required: true
+                type: int
             initiator:
                 description:
                     - Initiating user of override (read_only setting).
+                type: str
             ip:
                 description:
                     - IPv4 address which the override applies.
+                type: str
             ip6:
                 description:
                     - IPv6 address which the override applies.
+                type: str
             new_profile:
                 description:
                     - Name of the new web filter profile used by the override. Source webfilter.profile.name.
+                type: str
             old_profile:
                 description:
                     - Name of the web filter profile which the override applies. Source webfilter.profile.name.
+                type: str
             scope:
                 description:
                     - Override either the specific user, user group, IPv4 address, or IPv6 address.
+                type: str
                 choices:
                     - user
                     - user-group
@@ -118,15 +126,18 @@ options:
             status:
                 description:
                     - Enable/disable override rule.
+                type: str
                 choices:
                     - enable
                     - disable
             user:
                 description:
                     - Name of the user which the override applies.
+                type: str
             user_group:
                 description:
                     - Specify the user group for which the override applies. Source user.group.name.
+                type: str
 '''
 
 EXAMPLES = '''

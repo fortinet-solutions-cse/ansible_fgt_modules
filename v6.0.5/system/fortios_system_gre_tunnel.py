@@ -88,67 +88,83 @@ options:
             checksum_reception:
                 description:
                     - Enable/disable validating checksums in received GRE packets.
+                type: str
                 choices:
                     - disable
                     - enable
             checksum_transmission:
                 description:
                     - Enable/disable including checksums in transmitted GRE packets.
+                type: str
                 choices:
                     - disable
                     - enable
             dscp_copying:
                 description:
                     - Enable/disable DSCP copying.
+                type: str
                 choices:
                     - disable
                     - enable
             interface:
                 description:
                     - Interface name. Source system.interface.name.
+                type: str
             ip_version:
                 description:
                     - IP version to use for VPN interface.
+                type: str
                 choices:
                     - 4
                     - 6
             keepalive_failtimes:
                 description:
                     - Number of consecutive unreturned keepalive messages before a GRE connection is considered down (1 _ 255).
+                type: int
             keepalive_interval:
                 description:
                     - Keepalive message interval (0 _ 32767, 0 = disabled).
+                type: int
             key_inbound:
                 description:
                     - Require received GRE packets contain this key (0 _ 4294967295).
+                type: int
             key_outbound:
                 description:
                     - Include this key in transmitted GRE packets (0 _ 4294967295).
+                type: int
             local_gw:
                 description:
                     - IP address of the local gateway.
+                type: str
             local_gw6:
                 description:
                     - IPv6 address of the local gateway.
+                type: str
             name:
                 description:
                     - Tunnel name.
                 required: true
+                type: str
             remote_gw:
                 description:
                     - IP address of the remote gateway.
+                type: str
             remote_gw6:
                 description:
                     - IPv6 address of the remote gateway.
+                type: str
             sequence_number_reception:
                 description:
                     - Enable/disable validating sequence numbers in received GRE packets.
+                type: str
                 choices:
                     - disable
                     - enable
             sequence_number_transmission:
                 description:
                     - Enable/disable including of sequence numbers in transmitted GRE packets.
+                type: str
                 choices:
                     - disable
                     - enable

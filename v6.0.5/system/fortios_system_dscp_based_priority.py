@@ -88,13 +88,16 @@ options:
             ds:
                 description:
                     - DSCP(DiffServ) DS value (0 _ 63).
+                type: int
             id:
                 description:
                     - Item ID.
                 required: true
+                type: int
             priority:
                 description:
                     - DSCP based priority level.
+                type: str
                 choices:
                     - low
                     - medium

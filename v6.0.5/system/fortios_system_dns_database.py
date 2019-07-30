@@ -88,9 +88,11 @@ options:
             allow_transfer:
                 description:
                     - DNS zone transfer IP address list.
+                type: str
             authoritative:
                 description:
                     - Enable/disable authoritative zone.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -99,41 +101,52 @@ options:
                     - Email address of the administrator for this zone.
     		You can specify only the username (e.g. admin) or full email address (e.g. admin@test.com)
     		When using a simple username, the domain of the email will be this zone.
+                type: str
             dns_entry:
                 description:
                     - DNS entry.
+                type: list
                 suboptions:
                     canonical_name:
                         description:
                             - Canonical name of the host.
+                        type: str
                     hostname:
                         description:
                             - Name of the host.
+                        type: str
                     id:
                         description:
                             - DNS entry ID.
                         required: true
+                        type: int
                     ip:
                         description:
                             - IPv4 address of the host.
+                        type: str
                     ipv6:
                         description:
                             - IPv6 address of the host.
+                        type: str
                     preference:
                         description:
                             - DNS entry preference, 0 is the highest preference (0 _ 65535, default = 10)
+                        type: int
                     status:
                         description:
                             - Enable/disable resource record status.
+                        type: str
                         choices:
                             - enable
                             - disable
                     ttl:
                         description:
                             - Time_to_live for this entry (0 to 2147483647 sec, default = 0).
+                        type: int
                     type:
                         description:
                             - Resource record type.
+                        type: str
                         choices:
                             - A
                             - NS
@@ -145,40 +158,50 @@ options:
             domain:
                 description:
                     - Domain name.
+                type: str
             forwarder:
                 description:
                     - DNS zone forwarder IP address list.
+                type: str
             ip_master:
                 description:
                     - IP address of master DNS server. Entries in this master DNS server and imported into the DNS zone.
+                type: str
             name:
                 description:
                     - Zone name.
                 required: true
+                type: str
             primary_name:
                 description:
                     - Domain name of the default DNS server for this zone.
+                type: str
             source_ip:
                 description:
                     - Source IP for forwarding to DNS server.
+                type: str
             status:
                 description:
                     - Enable/disable this DNS zone.
+                type: str
                 choices:
                     - enable
                     - disable
             ttl:
                 description:
                     - Default time_to_live value for the entries of this DNS zone (0 _ 2147483647 sec, default = 86400).
+                type: int
             type:
                 description:
                     - Zone type (master to manage entries directly, slave to import entries from other zones).
+                type: str
                 choices:
                     - master
                     - slave
             view:
                 description:
                     - Zone view (public to serve public clients, shadow to serve internal clients).
+                type: str
                 choices:
                     - shadow
                     - public

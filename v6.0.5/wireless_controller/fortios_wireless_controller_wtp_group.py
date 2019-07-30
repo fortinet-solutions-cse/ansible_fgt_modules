@@ -89,9 +89,11 @@ options:
                 description:
                     - WTP group name.
                 required: true
+                type: str
             platform_type:
                 description:
                     - FortiAP models to define the WTP group platform type.
+                type: str
                 choices:
                     - AP-11N
                     - 220B
@@ -148,10 +150,12 @@ options:
             wtps:
                 description:
                     - WTP list.
+                type: list
                 suboptions:
                     wtp_id:
                         description:
                             - WTP ID. Source wireless-controller.wtp.wtp-id.
+                        type: str
 '''
 
 EXAMPLES = '''

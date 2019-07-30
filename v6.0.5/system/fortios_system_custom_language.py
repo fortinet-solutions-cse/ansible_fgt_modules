@@ -88,13 +88,16 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             filename:
                 description:
                     - Custom language file path.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

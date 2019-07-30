@@ -81,15 +81,18 @@ options:
             auto_detect_algorithm:
                 description:
                     - Auto detection algorithms used in tunnel negotiations.
+                type: str
                 choices:
                     - simple
                     - diff-req-resp
             host_id:
                 description:
                     - Local host ID (must also be entered in the remote FortiGate's peer list).
+                type: str
             tunnel_ssl_algorithm:
                 description:
                     - Relative strength of encryption algorithms accepted during tunnel negotiation.
+                type: str
                 choices:
                     - low
 '''

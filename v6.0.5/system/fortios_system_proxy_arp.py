@@ -88,16 +88,20 @@ options:
             end_ip:
                 description:
                     - End IP of IP range to be proxied.
+                type: str
             id:
                 description:
                     - Unique integer ID of the entry.
                 required: true
+                type: int
             interface:
                 description:
                     - Interface acting proxy_ARP. Source system.interface.name.
+                type: str
             ip:
                 description:
                     - IP address or start IP to be proxied.
+                type: str
 '''
 
 EXAMPLES = '''

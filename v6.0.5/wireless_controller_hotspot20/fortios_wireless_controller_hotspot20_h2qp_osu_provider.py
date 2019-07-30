@@ -88,27 +88,34 @@ options:
             friendly_name:
                 description:
                     - OSU provider friendly name.
+                type: list
                 suboptions:
                     friendly_name:
                         description:
                             - OSU provider friendly name.
+                        type: str
                     index:
                         description:
                             - OSU provider friendly name index.
                         required: true
+                        type: int
                     lang:
                         description:
                             - Language code.
+                        type: str
             icon:
                 description:
                     - OSU provider icon. Source wireless-controller.hotspot20.icon.name.
+                type: str
             name:
                 description:
                     - OSU provider ID.
                 required: true
+                type: str
             osu_method:
                 description:
                     - OSU method list.
+                type: str
                 choices:
                     - oma-dm
                     - soap-xml-spp
@@ -116,22 +123,28 @@ options:
             osu_nai:
                 description:
                     - OSU NAI.
+                type: str
             server_uri:
                 description:
                     - Server URI.
+                type: str
             service_description:
                 description:
                     - OSU service name.
+                type: list
                 suboptions:
                     lang:
                         description:
                             - Language code.
+                        type: str
                     service_description:
                         description:
                             - Service description.
+                        type: str
                     service_id:
                         description:
                             - OSU service ID.
+                        type: int
 '''
 
 EXAMPLES = '''

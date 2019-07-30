@@ -88,9 +88,11 @@ options:
             access_key:
                 description:
                     - AWS access key ID.
+                type: str
             azure_region:
                 description:
                     - Azure server region.
+                type: str
                 choices:
                     - global
                     - china
@@ -100,61 +102,78 @@ options:
             client_id:
                 description:
                     - Azure client ID (application ID).
+                type: str
             client_secret:
                 description:
                     - Azure client secret (application key).
+                type: str
             compartment_id:
                 description:
                     - Compartment ID.
+                type: str
             external_ip:
                 description:
                     - Configure GCP external IP.
+                type: list
                 suboptions:
                     name:
                         description:
                             - External IP name.
                         required: true
+                        type: str
             gcp_project:
                 description:
                     - GCP project name.
+                type: str
             key_passwd:
                 description:
                     - Private key password.
+                type: str
             login_endpoint:
                 description:
                     - Azure Stack login enpoint.
+                type: str
             name:
                 description:
                     - SDN connector name.
                 required: true
+                type: str
             nic:
                 description:
                     - Configure Azure network interface.
+                type: list
                 suboptions:
                     ip:
                         description:
                             - Configure IP configuration.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - IP configuration name.
                                 required: true
+                                type: str
                             public_ip:
                                 description:
                                     - Public IP name.
+                                type: str
                     name:
                         description:
                             - Network interface name.
                         required: true
+                        type: str
             oci_cert:
                 description:
                     - OCI certificate. Source certificate.local.name.
+                type: str
             oci_fingerprint:
                 description:
                     - OCI pubkey fingerprint.
+                type: str
             oci_region:
                 description:
                     - OCI server region.
+                type: str
                 choices:
                     - phoenix
                     - ashburn
@@ -163,72 +182,92 @@ options:
             password:
                 description:
                     - Password of the remote SDN connector as login credentials.
+                type: str
             private_key:
                 description:
                     - Private key of GCP service account.
+                type: str
             region:
                 description:
                     - AWS region name.
+                type: str
             resource_group:
                 description:
                     - Azure resource group.
+                type: str
             resource_url:
                 description:
                     - Azure Stack resource URL.
+                type: str
             route:
                 description:
                     - Configure GCP route.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Route name.
                         required: true
+                        type: str
             route_table:
                 description:
                     - Configure Azure route table.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Route table name.
                         required: true
+                        type: str
                     route:
                         description:
                             - Configure Azure route.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Route name.
                                 required: true
+                                type: str
                             next_hop:
                                 description:
                                     - Next hop address.
+                                type: str
             secret_key:
                 description:
                     - AWS secret access key.
+                type: str
             server:
                 description:
                     - Server address of the remote SDN connector.
+                type: str
             server_port:
                 description:
                     - Port number of the remote SDN connector.
+                type: int
             service_account:
                 description:
                     - GCP service account email.
+                type: str
             status:
                 description:
                     - Enable/disable connection to the remote SDN connector.
+                type: str
                 choices:
                     - disable
                     - enable
             subscription_id:
                 description:
                     - Azure subscription ID.
+                type: str
             tenant_id:
                 description:
                     - Tenant ID (directory ID).
+                type: str
             type:
                 description:
                     - Type of SDN connector.
+                type: str
                 choices:
                     - aci
                     - aws
@@ -241,21 +280,26 @@ options:
             update_interval:
                 description:
                     - Dynamic object update interval (0 _ 3600 sec, 0 means disabled, default = 60).
+                type: int
             use_metadata_iam:
                 description:
                     - Enable/disable using IAM role from metadata to call API.
+                type: str
                 choices:
                     - disable
                     - enable
             user_id:
                 description:
                     - User ID.
+                type: str
             username:
                 description:
                     - Username of the remote SDN connector as login credentials.
+                type: str
             vpc_id:
                 description:
                     - AWS VPC ID.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,18 +81,21 @@ options:
             fortiview_unscanned_apps:
                 description:
                     - Enable/disable showing unscanned traffic in FortiView application charts.
+                type: str
                 choices:
                     - enable
                     - disable
             resolve_apps:
                 description:
                     - Resolve unknown applications on the GUI using Fortinet's remote application database.
+                type: str
                 choices:
                     - enable
                     - disable
             resolve_hosts:
                 description:
                     - Enable/disable resolving IP addresses to hostname in log messages on the GUI using reverse DNS lookup
+                type: str
                 choices:
                     - enable
                     - disable

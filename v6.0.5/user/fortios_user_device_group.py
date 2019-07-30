@@ -88,37 +88,46 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Device group member.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Device name. Source user.device.alias user.device-category.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Device group name.
                 required: true
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
 '''
 
 EXAMPLES = '''

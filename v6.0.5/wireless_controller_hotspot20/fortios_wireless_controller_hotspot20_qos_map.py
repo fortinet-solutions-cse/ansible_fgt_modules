@@ -88,38 +88,48 @@ options:
             dscp_except:
                 description:
                     - Differentiated Services Code Point (DSCP) exceptions.
+                type: list
                 suboptions:
                     dscp:
                         description:
                             - DSCP value.
+                        type: int
                     index:
                         description:
                             - DSCP exception index.
                         required: true
+                        type: int
                     up:
                         description:
                             - User priority.
+                        type: int
             dscp_range:
                 description:
                     - Differentiated Services Code Point (DSCP) ranges.
+                type: list
                 suboptions:
                     high:
                         description:
                             - DSCP high value.
+                        type: int
                     index:
                         description:
                             - DSCP range index.
                         required: true
+                        type: int
                     low:
                         description:
                             - DSCP low value.
+                        type: int
                     up:
                         description:
                             - User priority.
+                        type: int
             name:
                 description:
                     - QOS_MAP name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,9 +81,11 @@ options:
             agelimit:
                 description:
                     - Age limit for quarantined files (0 _ 479 hours, 0 means forever).
+                type: int
             destination:
                 description:
                     - Choose whether to quarantine files to the FortiGate disk or to FortiAnalyzer or to delete them instead of quarantining them.
+                type: str
                 choices:
                     - NULL
                     - disk
@@ -91,6 +93,7 @@ options:
             drop_blocked:
                 description:
                     - Do not quarantine dropped files found in sessions using the selected protocols. Dropped files are deleted instead of being quarantined.
+                type: str
                 choices:
                     - imap
                     - smtp
@@ -112,6 +115,7 @@ options:
                 description:
                     - Do not quarantine files detected by heuristics found in sessions using the selected protocols. Dropped files are deleted instead of
                        being quarantined.
+                type: str
                 choices:
                     - imap
                     - smtp
@@ -133,6 +137,7 @@ options:
             drop_infected:
                 description:
                     - Do not quarantine infected files found in sessions using the selected protocols. Dropped files are deleted instead of being quarantined.
+                type: str
                 choices:
                     - imap
                     - smtp
@@ -154,18 +159,22 @@ options:
             lowspace:
                 description:
                     - Select the method for handling additional files when running low on disk space.
+                type: str
                 choices:
                     - drop-new
                     - ovrw-old
             maxfilesize:
                 description:
                     - Maximum file size to quarantine (0 _ 500 Mbytes, 0 means unlimited).
+                type: int
             quarantine_quota:
                 description:
                     - The amount of disk space to reserve for quarantining files (0 _ 4294967295 Mbytes, depends on disk space).
+                type: int
             store_blocked:
                 description:
                     - Quarantine blocked files found in sessions using the selected protocols.
+                type: str
                 choices:
                     - imap
                     - smtp
@@ -186,6 +195,7 @@ options:
             store_heuristic:
                 description:
                     - Quarantine files detected by heuristics found in sessions using the selected protocols.
+                type: str
                 choices:
                     - imap
                     - smtp
@@ -207,6 +217,7 @@ options:
             store_infected:
                 description:
                     - Quarantine infected files found in sessions using the selected protocols.
+                type: str
                 choices:
                     - imap
                     - smtp

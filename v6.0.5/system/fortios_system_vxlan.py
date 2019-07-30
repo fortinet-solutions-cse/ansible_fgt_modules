@@ -88,12 +88,15 @@ options:
             dstport:
                 description:
                     - VXLAN destination port (1 _ 65535, default = 4789).
+                type: int
             interface:
                 description:
                     - Outgoing interface for VXLAN encapsulated traffic. Source system.interface.name.
+                type: str
             ip_version:
                 description:
                     - IP version to use for the VXLAN interface and so for communication over the VXLAN. IPv4 or IPv6 unicast or multicast.
+                type: str
                 choices:
                     - ipv4-unicast
                     - ipv6-unicast
@@ -102,29 +105,36 @@ options:
             multicast_ttl:
                 description:
                     - VXLAN multicast TTL (1_255, default = 0).
+                type: int
             name:
                 description:
                     - VXLAN device or interface name. Must be a unique interface name.
                 required: true
+                type: str
             remote_ip:
                 description:
                     - IPv4 address of the VXLAN interface on the device at the remote end of the VXLAN.
+                type: list
                 suboptions:
                     ip:
                         description:
                             - IPv4 address.
                         required: true
+                        type: str
             remote_ip6:
                 description:
                     - IPv6 IP address of the VXLAN interface on the device at the remote end of the VXLAN.
+                type: list
                 suboptions:
                     ip6:
                         description:
                             - IPv6 address.
                         required: true
+                        type: str
             vni:
                 description:
                     - VXLAN network ID.
+                type: int
 '''
 
 EXAMPLES = '''

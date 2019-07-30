@@ -81,15 +81,19 @@ options:
             device:
                 description:
                     - Interface for this route. Source system.interface.name.
+                type: str
             distance:
                 description:
                     - Administrative distance (1 _ 255) for this route.
+                type: int
             gateway6:
                 description:
                     - Gateway IPv6 address for this route.
+                type: str
             geo_filter:
                 description:
                     - Filter based on geographical location. Route will NOT be installed if the resolved IPv6 address belongs to the country in the filter.
+                type: str
 '''
 
 EXAMPLES = '''

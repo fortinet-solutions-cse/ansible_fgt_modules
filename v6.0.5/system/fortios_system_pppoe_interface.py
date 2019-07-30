@@ -88,9 +88,11 @@ options:
             ac_name:
                 description:
                     - PPPoE AC name.
+                type: str
             auth_type:
                 description:
                     - PPP authentication type to use.
+                type: str
                 choices:
                     - auto
                     - pap
@@ -100,55 +102,69 @@ options:
             device:
                 description:
                     - Name for the physical interface. Source system.interface.name.
+                type: str
             dial_on_demand:
                 description:
                     - Enable/disable dial on demand to dial the PPPoE interface when packets are routed to the PPPoE interface.
+                type: str
                 choices:
                     - enable
                     - disable
             disc_retry_timeout:
                 description:
                     - PPPoE discovery init timeout value in (0_4294967295 sec).
+                type: int
             idle_timeout:
                 description:
                     - PPPoE auto disconnect after idle timeout (0_4294967295 sec).
+                type: int
             ipunnumbered:
                 description:
                     - PPPoE unnumbered IP.
+                type: str
             ipv6:
                 description:
                     - Enable/disable IPv6 Control Protocol (IPv6CP).
+                type: str
                 choices:
                     - enable
                     - disable
             lcp_echo_interval:
                 description:
                     - PPPoE LCP echo interval in (0_4294967295 sec, default = 5).
+                type: int
             lcp_max_echo_fails:
                 description:
                     - Maximum missed LCP echo messages before disconnect (0_4294967295, default = 3).
+                type: int
             name:
                 description:
                     - Name of the PPPoE interface.
                 required: true
+                type: str
             padt_retry_timeout:
                 description:
                     - PPPoE terminate timeout value in (0_4294967295 sec).
+                type: int
             password:
                 description:
                     - Enter the password.
+                type: str
             pppoe_unnumbered_negotiate:
                 description:
                     - Enable/disable PPPoE unnumbered negotiation.
+                type: str
                 choices:
                     - enable
                     - disable
             service_name:
                 description:
                     - PPPoE service name.
+                type: str
             username:
                 description:
                     - User name.
+                type: str
 '''
 
 EXAMPLES = '''

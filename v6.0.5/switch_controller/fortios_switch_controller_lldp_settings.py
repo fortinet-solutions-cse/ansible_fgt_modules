@@ -82,24 +82,29 @@ options:
                 description:
                     - Frequency of LLDP PDU transmission from FortiSwitch for the first 4 packets when the link is up (2 _ 5 sec, default = 2, 0 = disable
                        fast start).
+                type: int
             management_interface:
                 description:
                     - Primary management interface to be advertised in LLDP and CDP PDUs.
+                type: str
                 choices:
                     - internal
                     - mgmt
             status:
                 description:
                     - Enable/disable LLDP global settings.
+                type: str
                 choices:
                     - enable
                     - disable
             tx_hold:
                 description:
                     - Number of tx_intervals before local LLDP data expires (1 _ 16, default = 4). Packet TTL is tx_hold * tx_interval.
+                type: int
             tx_interval:
                 description:
                     - Frequency of LLDP PDU transmission from FortiSwitch (5 _ 4095 sec, default = 30). Packet TTL is tx_hold * tx_interval.
+                type: int
 '''
 
 EXAMPLES = '''

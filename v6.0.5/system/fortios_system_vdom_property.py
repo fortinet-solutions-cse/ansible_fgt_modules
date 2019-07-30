@@ -88,67 +88,88 @@ options:
             custom_service:
                 description:
                     - Maximum guaranteed number of firewall custom services.
+                type: str
             description:
                 description:
                     - Description.
+                type: str
             dialup_tunnel:
                 description:
                     - Maximum guaranteed number of dial_up tunnels.
+                type: str
             firewall_address:
                 description:
                     - Maximum guaranteed number of firewall addresses (IPv4, IPv6, multicast).
+                type: str
             firewall_addrgrp:
                 description:
                     - Maximum guaranteed number of firewall address groups (IPv4, IPv6).
+                type: str
             firewall_policy:
                 description:
                     - Maximum guaranteed number of firewall policies (IPv4, IPv6, policy46, policy64, DoS_policy4, DoS_policy6, multicast).
+                type: str
             ipsec_phase1:
                 description:
                     - Maximum guaranteed number of VPN IPsec phase 1 tunnels.
+                type: str
             ipsec_phase1_interface:
                 description:
                     - Maximum guaranteed number of VPN IPsec phase1 interface tunnels.
+                type: str
             ipsec_phase2:
                 description:
                     - Maximum guaranteed number of VPN IPsec phase 2 tunnels.
+                type: str
             ipsec_phase2_interface:
                 description:
                     - Maximum guaranteed number of VPN IPsec phase2 interface tunnels.
+                type: str
             log_disk_quota:
                 description:
                     - Log disk quota in MB (range depends on how much disk space is available).
+                type: str
             name:
                 description:
                     - VDOM name. Source system.vdom.name.
                 required: true
+                type: str
             onetime_schedule:
                 description:
                     - Maximum guaranteed number of firewall one_time schedules.
+                type: str
             proxy:
                 description:
                     - Maximum guaranteed number of concurrent proxy users.
+                type: str
             recurring_schedule:
                 description:
                     - Maximum guaranteed number of firewall recurring schedules.
+                type: str
             service_group:
                 description:
                     - Maximum guaranteed number of firewall service groups.
+                type: str
             session:
                 description:
                     - Maximum guaranteed number of sessions.
+                type: str
             snmp_index:
                 description:
                     - Permanent SNMP Index of the virtual domain (0 _ 4294967295).
+                type: int
             sslvpn:
                 description:
                     - Maximum guaranteed number of SSL_VPNs.
+                type: str
             user:
                 description:
                     - Maximum guaranteed number of local users.
+                type: str
             user_group:
                 description:
                     - Maximum guaranteed number of user groups.
+                type: str
 '''
 
 EXAMPLES = '''

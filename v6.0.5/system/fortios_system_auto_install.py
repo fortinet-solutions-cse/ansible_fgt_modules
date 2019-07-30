@@ -81,21 +81,25 @@ options:
             auto_install_config:
                 description:
                     - Enable/disable auto install the config in USB disk.
+                type: str
                 choices:
                     - enable
                     - disable
             auto_install_image:
                 description:
                     - Enable/disable auto install the image in USB disk.
+                type: str
                 choices:
                     - enable
                     - disable
             default_config_file:
                 description:
                     - Default config file name in USB disk.
+                type: str
             default_image_file:
                 description:
                     - Default image file name in USB disk.
+                type: str
 '''
 
 EXAMPLES = '''

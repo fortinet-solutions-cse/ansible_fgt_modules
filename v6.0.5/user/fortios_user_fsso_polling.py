@@ -88,45 +88,57 @@ options:
             adgrp:
                 description:
                     - LDAP Group Info.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Name.
                         required: true
+                        type: str
             default_domain:
                 description:
                     - Default domain managed by this Active Directory server.
+                type: str
             id:
                 description:
                     - Active Directory server ID.
                 required: true
+                type: int
             ldap_server:
                 description:
                     - LDAP server name used in LDAP connection strings. Source user.ldap.name.
+                type: str
             logon_history:
                 description:
                     - Number of hours of logon history to keep, 0 means keep all history.
+                type: int
             password:
                 description:
                     - Password required to log into this Active Directory server
+                type: str
             polling_frequency:
                 description:
                     - Polling frequency (every 1 to 30 seconds).
+                type: int
             port:
                 description:
                     - Port to communicate with this Active Directory server.
+                type: int
             server:
                 description:
                     - Host name or IP address of the Active Directory server.
+                type: str
             status:
                 description:
                     - Enable/disable polling for the status of this Active Directory server.
+                type: str
                 choices:
                     - enable
                     - disable
             user:
                 description:
                     - User name required to log into this Active Directory server.
+                type: str
 '''
 
 EXAMPLES = '''

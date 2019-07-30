@@ -89,9 +89,11 @@ options:
                 description:
                     - Main signature class ID.
                 required: true
+                type: int
             name:
                 description:
                     - Main signature class name.
+                type: str
 '''
 
 EXAMPLES = '''

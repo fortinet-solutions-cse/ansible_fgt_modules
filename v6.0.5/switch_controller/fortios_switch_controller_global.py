@@ -81,41 +81,50 @@ options:
             allow_multiple_interfaces:
                 description:
                     - Enable/disable multiple FortiLink interfaces for redundant connections between a managed FortiSwitch and FortiGate.
+                type: str
                 choices:
                     - enable
                     - disable
             default_virtual_switch_vlan:
                 description:
                     - Default VLAN for ports when added to the virtual_switch. Source system.interface.name.
+                type: str
             disable_discovery:
                 description:
                     - Prevent this FortiSwitch from discovering.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Managed device ID.
                         required: true
+                        type: str
             https_image_push:
                 description:
                     - Enable/disable image push to FortiSwitch using HTTPS.
+                type: str
                 choices:
                     - enable
                     - disable
             log_mac_limit_violations:
                 description:
                     - Enable/disable logs for Learning Limit Violations.
+                type: str
                 choices:
                     - enable
                     - disable
             mac_aging_interval:
                 description:
                     - Time after which an inactive MAC is aged out (10 _ 1000000 sec, default = 300, 0 = disable).
+                type: int
             mac_retention_period:
                 description:
                     - Time in hours after which an inactive MAC is removed from client DB.
+                type: int
             mac_violation_timer:
                 description:
                     - Set timeout for Learning Limit Violations (0 = disabled).
+                type: int
 '''
 
 EXAMPLES = '''

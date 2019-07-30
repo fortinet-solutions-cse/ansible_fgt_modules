@@ -88,13 +88,16 @@ options:
             bookmarks:
                 description:
                     - Bookmark table.
+                type: list
                 suboptions:
                     additional_params:
                         description:
                             - Additional parameters.
+                        type: str
                     apptype:
                         description:
                             - Application type.
+                        type: str
                         choices:
                             - citrix
                             - ftp
@@ -108,54 +111,70 @@ options:
                     description:
                         description:
                             - Description.
+                        type: str
                     folder:
                         description:
                             - Network shared file folder parameter.
+                        type: str
                     form_data:
                         description:
                             - Form data.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Name.
                                 required: true
+                                type: str
                             value:
                                 description:
                                     - Value.
+                                type: str
                     host:
                         description:
                             - Host name/IP parameter.
+                        type: str
                     listening_port:
                         description:
                             - Listening port (0 _ 65535).
+                        type: int
                     load_balancing_info:
                         description:
                             - The load balancing information or cookie which should be provided to the connection broker.
+                        type: str
                     logon_password:
                         description:
                             - Logon password.
+                        type: str
                     logon_user:
                         description:
                             - Logon user.
+                        type: str
                     name:
                         description:
                             - Bookmark name.
                         required: true
+                        type: str
                     port:
                         description:
                             - Remote port.
+                        type: int
                     preconnection_blob:
                         description:
                             - An arbitrary string which identifies the RDP source.
+                        type: str
                     preconnection_id:
                         description:
                             - The numeric ID of the RDP source (0_2147483648).
+                        type: int
                     remote_port:
                         description:
                             - Remote port (0 _ 65535).
+                        type: int
                     security:
                         description:
                             - Security mode for RDP connection.
+                        type: str
                         choices:
                             - rdp
                             - nla
@@ -164,6 +183,7 @@ options:
                     server_layout:
                         description:
                             - Server side keyboard layout.
+                        type: str
                         choices:
                             - de-de-qwertz
                             - en-gb-qwerty
@@ -180,12 +200,14 @@ options:
                     show_status_window:
                         description:
                             - Enable/disable showing of status window.
+                        type: str
                         choices:
                             - enable
                             - disable
                     sso:
                         description:
                             - Single Sign_On.
+                        type: str
                         choices:
                             - disable
                             - static
@@ -193,31 +215,38 @@ options:
                     sso_credential:
                         description:
                             - Single sign_on credentials.
+                        type: str
                         choices:
                             - sslvpn-login
                             - alternative
                     sso_credential_sent_once:
                         description:
                             - Single sign_on credentials are only sent once to remote server.
+                        type: str
                         choices:
                             - enable
                             - disable
                     sso_password:
                         description:
                             - SSO password.
+                        type: str
                     sso_username:
                         description:
                             - SSO user name.
+                        type: str
                     url:
                         description:
                             - URL parameter.
+                        type: str
             custom_lang:
                 description:
                     - Personal language. Source system.custom-language.name.
+                type: str
             name:
                 description:
                     - User and group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

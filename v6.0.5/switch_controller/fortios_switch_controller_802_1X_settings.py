@@ -81,15 +81,18 @@ options:
             link_down_auth:
                 description:
                     - Interface_reauthentication state to set if a link is down.
+                type: str
                 choices:
                     - set-unauth
                     - no-action
             max_reauth_attempt:
                 description:
                     - Maximum number of authentication attempts (0 _ 15, default = 3).
+                type: int
             reauth_period:
                 description:
                     - Period of time to allow for reauthentication (1 _ 1440 sec, default = 60, 0 = disable reauthentication).
+                type: int
 '''
 
 EXAMPLES = '''

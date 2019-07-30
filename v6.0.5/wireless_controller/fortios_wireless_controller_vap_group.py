@@ -88,18 +88,22 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Group Name
                 required: true
+                type: str
             vaps:
                 description:
                     - List of SSIDs to be included in the VAP group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - vap name Source wireless-controller.vap.name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

@@ -81,6 +81,7 @@ options:
             network_monitoring:
                 description:
                     - Enable/disable passive gathering of information by FortiSwitch units concerning other network devices.
+                type: str
                 choices:
                     - enable
                     - disable

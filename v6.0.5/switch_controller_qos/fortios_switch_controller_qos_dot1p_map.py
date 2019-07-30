@@ -88,13 +88,16 @@ options:
             description:
                 description:
                     - Description of the 802.1p name.
+                type: str
             name:
                 description:
                     - Dot1p map name.
                 required: true
+                type: str
             priority_0:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -107,6 +110,7 @@ options:
             priority_1:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -119,6 +123,7 @@ options:
             priority_2:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -131,6 +136,7 @@ options:
             priority_3:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -143,6 +149,7 @@ options:
             priority_4:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -155,6 +162,7 @@ options:
             priority_5:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -167,6 +175,7 @@ options:
             priority_6:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1
@@ -179,6 +188,7 @@ options:
             priority_7:
                 description:
                     - COS queue mapped to dot1p priority number.
+                type: str
                 choices:
                     - queue-0
                     - queue-1

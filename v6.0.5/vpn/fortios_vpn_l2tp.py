@@ -81,24 +81,29 @@ options:
             eip:
                 description:
                     - End IP.
+                type: str
             enforce_ipsec:
                 description:
                     - Enable/disable IPsec enforcement.
+                type: str
                 choices:
                     - enable
                     - disable
             sip:
                 description:
                     - Start IP.
+                type: str
             status:
                 description:
                     - Enable/disable FortiGate as a L2TP gateway.
+                type: str
                 choices:
                     - enable
                     - disable
             usrgrp:
                 description:
                     - User group. Source user.group.name.
+                type: str
 '''
 
 EXAMPLES = '''

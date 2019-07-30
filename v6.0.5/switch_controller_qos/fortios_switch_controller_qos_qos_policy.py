@@ -88,19 +88,24 @@ options:
             default_cos:
                 description:
                     - Default cos queue for untagged packets.
+                type: int
             name:
                 description:
                     - QoS policy name.
                 required: true
+                type: str
             queue_policy:
                 description:
                     - QoS egress queue policy. Source switch-controller.qos.queue-policy.name.
+                type: str
             trust_dot1p_map:
                 description:
                     - QoS trust 802.1p map. Source switch-controller.qos.dot1p-map.name.
+                type: str
             trust_ip_dscp_map:
                 description:
                     - QoS trust ip dscp map. Source switch-controller.qos.ip-dscp-map.name.
+                type: str
 '''
 
 EXAMPLES = '''

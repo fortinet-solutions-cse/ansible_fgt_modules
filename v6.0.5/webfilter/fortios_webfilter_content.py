@@ -88,19 +88,23 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Configure banned word entries.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Block or exempt word when a match is found.
+                        type: str
                         choices:
                             - block
                             - exempt
                     lang:
                         description:
                             - Language of banned word.
+                        type: str
                         choices:
                             - western
                             - simch
@@ -115,18 +119,22 @@ options:
                         description:
                             - Banned word.
                         required: true
+                        type: str
                     pattern_type:
                         description:
                             - "Banned word pattern type: wildcard pattern or Perl regular expression."
+                        type: str
                         choices:
                             - wildcard
                             - regexp
                     score:
                         description:
                             - Score, to be applied every time the word appears on a web page (0 _ 4294967295, default = 10).
+                        type: int
                     status:
                         description:
                             - Enable/disable banned word.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -134,9 +142,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

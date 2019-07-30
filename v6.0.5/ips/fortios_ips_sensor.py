@@ -88,19 +88,23 @@ options:
             block_malicious_url:
                 description:
                     - Enable/disable malicious URL blocking.
+                type: str
                 choices:
                     - disable
                     - enable
             comment:
                 description:
                     - Comment.
+                type: str
             entries:
                 description:
                     - IPS sensor filter.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action taken with traffic in which signatures are detected.
+                        type: str
                         choices:
                             - pass
                             - block
@@ -110,36 +114,45 @@ options:
                         description:
                             - Applications to be protected. set application ? lists available applications. all includes all applications. other includes all
                                unlisted applications.
+                        type: str
                     exempt_ip:
                         description:
                             - Traffic from selected source or destination IP addresses is exempt from this signature.
+                        type: list
                         suboptions:
                             dst_ip:
                                 description:
                                     - Destination IP address and netmask.
+                                type: str
                             id:
                                 description:
                                     - Exempt IP ID.
                                 required: true
+                                type: int
                             src_ip:
                                 description:
                                     - Source IP address and netmask.
+                                type: str
                     id:
                         description:
                             - Rule ID in IPS database (0 _ 4294967295).
                         required: true
+                        type: int
                     location:
                         description:
                             - Protect client or server traffic.
+                        type: str
                     log:
                         description:
                             - Enable/disable logging of signatures included in filter.
+                        type: str
                         choices:
                             - disable
                             - enable
                     log_attack_context:
                         description:
                             - "Enable/disable logging of attack context: URL buffer, header buffer, body buffer, packet buffer."
+                        type: str
                         choices:
                             - disable
                             - enable
@@ -147,46 +160,56 @@ options:
                         description:
                             - Enable/disable packet logging. Enable to save the packet that triggers the filter. You can download the packets in pcap format
                                for diagnostic use.
+                        type: str
                         choices:
                             - disable
                             - enable
                     os:
                         description:
                             - Operating systems to be protected.  all includes all operating systems. other includes all unlisted operating systems.
+                        type: str
                     protocol:
                         description:
                             - Protocols to be examined. set protocol ? lists available protocols. all includes all protocols. other includes all unlisted
                                protocols.
+                        type: str
                     quarantine:
                         description:
                             - Quarantine method.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
+                        type: str
                     quarantine_log:
                         description:
                             - Enable/disable quarantine logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     rate_count:
                         description:
                             - Count of the rate.
+                        type: int
                     rate_duration:
                         description:
                             - Duration (sec) of the rate.
+                        type: int
                     rate_mode:
                         description:
                             - Rate limit mode.
+                        type: str
                         choices:
                             - periodical
                             - continuous
                     rate_track:
                         description:
                             - Track the packet protocol field.
+                        type: str
                         choices:
                             - none
                             - src-ip
@@ -196,18 +219,22 @@ options:
                     rule:
                         description:
                             - Identifies the predefined or custom IPS signatures to add to the sensor.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Rule IPS.
                                 required: true
+                                type: int
                     severity:
                         description:
                             - Relative severity of the signature, from info to critical. Log messages generated by the signature include the severity.
+                        type: str
                     status:
                         description:
                             - Status of the signatures included in filter. default enables the filter and only use filters with default status of enable.
                                Filters with default status of disable will not be used.
+                        type: str
                         choices:
                             - disable
                             - enable
@@ -215,16 +242,19 @@ options:
             extended_log:
                 description:
                     - Enable/disable extended logging.
+                type: str
                 choices:
                     - enable
                     - disable
             filter:
                 description:
                     - IPS sensor filter.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action of selected rules.
+                        type: str
                         choices:
                             - pass
                             - block
@@ -233,18 +263,22 @@ options:
                     application:
                         description:
                             - Vulnerable application filter.
+                        type: str
                     location:
                         description:
                             - Vulnerability location filter.
+                        type: str
                     log:
                         description:
                             - Enable/disable logging of selected rules.
+                        type: str
                         choices:
                             - disable
                             - enable
                     log_packet:
                         description:
                             - Enable/disable packet logging of selected rules.
+                        type: str
                         choices:
                             - disable
                             - enable
@@ -252,33 +286,41 @@ options:
                         description:
                             - Filter name.
                         required: true
+                        type: str
                     os:
                         description:
                             - Vulnerable OS filter.
+                        type: str
                     protocol:
                         description:
                             - Vulnerable protocol filter.
+                        type: str
                     quarantine:
                         description:
                             - Quarantine IP or interface.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine in minute.
+                        type: int
                     quarantine_log:
                         description:
                             - Enable/disable logging of selected quarantine.
+                        type: str
                         choices:
                             - disable
                             - enable
                     severity:
                         description:
                             - Vulnerability severity filter.
+                        type: str
                     status:
                         description:
                             - Selected rules status.
+                        type: str
                         choices:
                             - disable
                             - enable
@@ -287,13 +329,16 @@ options:
                 description:
                     - Sensor name.
                 required: true
+                type: str
             override:
                 description:
                     - IPS override rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action of override rule.
+                        type: str
                         choices:
                             - pass
                             - block
@@ -301,56 +346,68 @@ options:
                     exempt_ip:
                         description:
                             - Exempted IP.
+                        type: list
                         suboptions:
                             dst_ip:
                                 description:
                                     - Destination IP address and netmask.
+                                type: str
                             id:
                                 description:
                                     - Exempt IP ID.
                                 required: true
+                                type: int
                             src_ip:
                                 description:
                                     - Source IP address and netmask.
+                                type: str
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     log_packet:
                         description:
                             - Enable/disable packet logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     quarantine:
                         description:
                             - Quarantine IP or interface.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine in minute.
+                        type: int
                     quarantine_log:
                         description:
                             - Enable/disable logging of selected quarantine.
+                        type: str
                         choices:
                             - disable
                             - enable
                     rule_id:
                         description:
                             - Override rule ID.
+                        type: int
                     status:
                         description:
                             - Enable/disable status of override rule.
+                        type: str
                         choices:
                             - disable
                             - enable
             replacemsg_group:
                 description:
                     - Replacement message group. Source system.replacemsg-group.name.
+                type: str
 '''
 
 EXAMPLES = '''

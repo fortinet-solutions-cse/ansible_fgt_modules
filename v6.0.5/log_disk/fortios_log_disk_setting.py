@@ -82,45 +82,57 @@ options:
                 description:
                     - Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full (default =
                        overwrite).
+                type: str
                 choices:
                     - overwrite
                     - nolog
             dlp_archive_quota:
                 description:
                     - DLP archive quota (MB).
+                type: int
             full_final_warning_threshold:
                 description:
                     - Log full final warning threshold as a percent (3 _ 100, default = 95).
+                type: int
             full_first_warning_threshold:
                 description:
                     - Log full first warning threshold as a percent (1 _ 98, default = 75).
+                type: int
             full_second_warning_threshold:
                 description:
                     - Log full second warning threshold as a percent (2 _ 99, default = 90).
+                type: int
             ips_archive:
                 description:
                     - Enable/disable IPS packet archiving to the local disk.
+                type: str
                 choices:
                     - enable
                     - disable
             log_quota:
                 description:
                     - Disk log quota (MB).
+                type: int
             max_log_file_size:
                 description:
                     - Maximum log file size before rolling (1 _ 100 Mbytes).
+                type: int
             max_policy_packet_capture_size:
                 description:
                     - Maximum size of policy sniffer in MB (0 means unlimited).
+                type: int
             maximum_log_age:
                 description:
                     - Delete log files older than (days).
+                type: int
             report_quota:
                 description:
                     - Report quota (MB).
+                type: int
             roll_day:
                 description:
                     - Day of week on which to roll log file.
+                type: str
                 choices:
                     - sunday
                     - monday
@@ -132,41 +144,49 @@ options:
             roll_schedule:
                 description:
                     - Frequency to check log file for rolling.
+                type: str
                 choices:
                     - daily
                     - weekly
             roll_time:
                 description:
                     - "Time of day to roll the log file (hh:mm)."
+                type: str
             source_ip:
                 description:
                     - Source IP address to use for uploading disk log files.
+                type: str
             status:
                 description:
                     - Enable/disable local disk logging.
+                type: str
                 choices:
                     - enable
                     - disable
             upload:
                 description:
                     - Enable/disable uploading log files when they are rolled.
+                type: str
                 choices:
                     - enable
                     - disable
             upload_delete_files:
                 description:
                     - Delete log files after uploading (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
             upload_destination:
                 description:
                     - The type of server to upload log files to. Only FTP is currently supported.
+                type: str
                 choices:
                     - ftp-server
             upload_ssl_conn:
                 description:
                     - Enable/disable encrypted FTPS communication to upload log files.
+                type: str
                 choices:
                     - default
                     - high
@@ -175,27 +195,34 @@ options:
             uploaddir:
                 description:
                     - The remote directory on the FTP server to upload log files to.
+                type: str
             uploadip:
                 description:
                     - IP address of the FTP server to upload log files to.
+                type: str
             uploadpass:
                 description:
                     - Password required to log into the FTP server to upload disk log files.
+                type: str
             uploadport:
                 description:
                     - TCP port to use for communicating with the FTP server (default = 21).
+                type: int
             uploadsched:
                 description:
                     - Set the schedule for uploading log files to the FTP server (default = disable = upload when rolling).
+                type: str
                 choices:
                     - disable
                     - enable
             uploadtime:
                 description:
                     - "Time of day at which log files are uploaded if uploadsched is enabled (hh:mm or hh)."
+                type: str
             uploadtype:
                 description:
                     - Types of log files to upload. Separate multiple entries with a space.
+                type: str
                 choices:
                     - traffic
                     - event
@@ -215,6 +242,7 @@ options:
             uploaduser:
                 description:
                     - Username required to log into the FTP server to upload disk log files.
+                type: str
 '''
 
 EXAMPLES = '''

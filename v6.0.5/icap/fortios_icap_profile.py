@@ -88,6 +88,7 @@ options:
             methods:
                 description:
                     - The allowed HTTP methods that will be sent to ICAP server for further processing.
+                type: str
                 choices:
                     - delete
                     - get
@@ -101,48 +102,59 @@ options:
                 description:
                     - ICAP profile name.
                 required: true
+                type: str
             replacemsg_group:
                 description:
                     - Replacement message group. Source system.replacemsg-group.name.
+                type: str
             request:
                 description:
                     - Enable/disable whether an HTTP request is passed to an ICAP server.
+                type: str
                 choices:
                     - disable
                     - enable
             request_failure:
                 description:
                     - Action to take if the ICAP server cannot be contacted when processing an HTTP request.
+                type: str
                 choices:
                     - error
                     - bypass
             request_path:
                 description:
                     - Path component of the ICAP URI that identifies the HTTP request processing service.
+                type: str
             request_server:
                 description:
                     - ICAP server to use for an HTTP request. Source icap.server.name.
+                type: str
             response:
                 description:
                     - Enable/disable whether an HTTP response is passed to an ICAP server.
+                type: str
                 choices:
                     - disable
                     - enable
             response_failure:
                 description:
                     - Action to take if the ICAP server cannot be contacted when processing an HTTP response.
+                type: str
                 choices:
                     - error
                     - bypass
             response_path:
                 description:
                     - Path component of the ICAP URI that identifies the HTTP response processing service.
+                type: str
             response_server:
                 description:
                     - ICAP server to use for an HTTP response. Source icap.server.name.
+                type: str
             streaming_content_bypass:
                 description:
                     - Enable/disable bypassing of ICAP server for streaming content.
+                type: str
                 choices:
                     - disable
                     - enable

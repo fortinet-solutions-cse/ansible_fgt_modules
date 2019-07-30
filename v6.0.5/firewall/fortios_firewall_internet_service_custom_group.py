@@ -88,18 +88,22 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Custom Internet Service group members.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Group member name. Source firewall.internet-service-custom.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Custom Internet Service group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

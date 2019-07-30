@@ -81,15 +81,19 @@ options:
             collector_ip:
                 description:
                     - NetFlow collector IP address.
+                type: str
             collector_port:
                 description:
                     - NetFlow collector port number.
+                type: int
             source_ip:
                 description:
                     - Source IP address for communication with the NetFlow agent.
+                type: str
             vdom_netflow:
                 description:
                     - Enable/disable NetFlow per VDOM.
+                type: str
                 choices:
                     - enable
                     - disable

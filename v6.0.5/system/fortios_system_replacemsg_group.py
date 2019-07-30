@@ -88,13 +88,16 @@ options:
             admin:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -103,6 +106,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -110,16 +114,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             alertmail:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -128,6 +136,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -135,16 +144,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             auth:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -153,6 +166,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -160,19 +174,24 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             comment:
                 description:
                     - Comment.
+                type: str
             custom_message:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -181,6 +200,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -188,16 +208,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             device_detection_portal:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -206,6 +230,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -213,16 +238,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             ec:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -231,6 +260,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -238,16 +268,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             fortiguard_wf:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -256,6 +290,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -263,16 +298,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             ftp:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -281,6 +320,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -288,9 +328,11 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             group_type:
                 description:
                     - Group type.
+                type: str
                 choices:
                     - default
                     - utm
@@ -299,13 +341,16 @@ options:
             http:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -314,6 +359,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -321,16 +367,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             icap:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -339,6 +389,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -346,16 +397,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             mail:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -364,6 +419,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -371,16 +427,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             nac_quar:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -389,6 +449,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -396,20 +457,25 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             name:
                 description:
                     - Group name.
                 required: true
+                type: str
             nntp:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -418,6 +484,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -425,16 +492,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             spam:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -443,6 +514,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -450,16 +522,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             sslvpn:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -468,6 +544,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -475,16 +552,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             traffic_quota:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -493,6 +574,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -500,16 +582,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             utm:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -518,6 +604,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -525,16 +612,20 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
             webproxy:
                 description:
                     - Replacement message table entries.
+                type: list
                 suboptions:
                     buffer:
                         description:
                             - Message string.
+                        type: str
                     format:
                         description:
                             - Format flag.
+                        type: str
                         choices:
                             - none
                             - text
@@ -543,6 +634,7 @@ options:
                     header:
                         description:
                             - Header flag.
+                        type: str
                         choices:
                             - none
                             - http
@@ -550,6 +642,7 @@ options:
                     msg_type:
                         description:
                             - Message type.
+                        type: str
 '''
 
 EXAMPLES = '''

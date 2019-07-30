@@ -89,19 +89,23 @@ options:
                 description:
                     - Phase 2 tunnel name that you defined in the FortiClient dialup configuration. Source vpn.ipsec.phase2.name vpn.ipsec.phase2-interface
                       .name.
+                type: str
             realm:
                 description:
                     - FortiClient realm name.
                 required: true
+                type: str
             status:
                 description:
                     - Enable/disable this FortiClient configuration.
+                type: str
                 choices:
                     - enable
                     - disable
             usergroupname:
                 description:
                     - User group name for FortiClient users. Source user.group.name.
+                type: str
 '''
 
 EXAMPLES = '''

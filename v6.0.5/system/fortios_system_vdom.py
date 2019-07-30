@@ -89,15 +89,19 @@ options:
                 description:
                     - VDOM name.
                 required: true
+                type: str
             short_name:
                 description:
                     - VDOM short name.
+                type: str
             temporary:
                 description:
                     - Temporary.
+                type: int
             vcluster_id:
                 description:
                     - Virtual cluster ID (0 _ 4294967295).
+                type: int
 '''
 
 EXAMPLES = '''

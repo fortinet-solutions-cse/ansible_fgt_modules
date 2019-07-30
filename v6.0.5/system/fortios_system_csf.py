@@ -81,81 +81,101 @@ options:
             configuration_sync:
                 description:
                     - Configuration sync mode.
+                type: str
                 choices:
                     - default
                     - local
             fabric_device:
                 description:
                     - Fabric device configuration.
+                type: list
                 suboptions:
                     device_ip:
                         description:
                             - Device IP.
+                        type: str
                     device_type:
                         description:
                             - Device type.
+                        type: str
                         choices:
                             - fortimail
                     login:
                         description:
                             - Device login name.
+                        type: str
                     name:
                         description:
                             - Device name.
                         required: true
+                        type: str
                     password:
                         description:
                             - Device login password.
+                        type: str
             fixed_key:
                 description:
                     - Auto_generated fixed key used when this device is the root. (Will automatically be generated if not set.)
+                type: str
             group_name:
                 description:
                     - Security Fabric group name. All FortiGates in a Security Fabric must have the same group name.
+                type: str
             group_password:
                 description:
                     - Security Fabric group password. All FortiGates in a Security Fabric must have the same group password.
+                type: str
             management_ip:
                 description:
                     - Management IP address of this FortiGate. Used to log into this FortiGate from another FortiGate in the Security Fabric.
+                type: str
             management_port:
                 description:
                     - Overriding port for management connection (Overrides admin port).
+                type: int
             status:
                 description:
                     - Enable/disable Security Fabric.
+                type: str
                 choices:
                     - enable
                     - disable
             trusted_list:
                 description:
                     - Pre_authorized and blocked security fabric nodes.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Security fabric authorization action.
+                        type: str
                         choices:
                             - accept
                             - deny
                     downstream_authorization:
                         description:
                             - Trust authorizations by this node's administrator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     ha_members:
                         description:
                             - HA members.
+                        type: str
                     serial:
                         description:
                             - Serial.
                         required: true
+                        type: str
             upstream_ip:
                 description:
                     - IP address of the FortiGate upstream from this FortiGate in the Security Fabric.
+                type: str
             upstream_port:
                 description:
                     - The port number to use to communicate with the FortiGate upstream from this FortiGate in the Security Fabric (default = 8013).
+                type: int
 '''
 
 EXAMPLES = '''

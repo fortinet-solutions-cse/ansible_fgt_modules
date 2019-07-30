@@ -88,16 +88,19 @@ options:
             anomaly:
                 description:
                     - Anomaly name.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action taken when the threshold is reached.
+                        type: str
                         choices:
                             - pass
                             - block
                     log:
                         description:
                             - Enable/disable anomaly logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -105,71 +108,88 @@ options:
                         description:
                             - Anomaly name.
                         required: true
+                        type: str
                     quarantine:
                         description:
                             - Quarantine method.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
+                        type: str
                     quarantine_log:
                         description:
                             - Enable/disable quarantine logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     status:
                         description:
                             - Enable/disable this anomaly.
+                        type: str
                         choices:
                             - disable
                             - enable
                     threshold:
                         description:
                             - Anomaly threshold. Number of detected instances per minute that triggers the anomaly action.
+                        type: int
                     threshold(default):
                         description:
                             - Number of detected instances per minute which triggers action (1 _ 2147483647, default = 1000). Note that each anomaly has a
                                different threshold value assigned to it.
+                        type: int
             comments:
                 description:
                     - Comment.
+                type: str
             dstaddr:
                 description:
                     - Destination address name from available addresses.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             interface:
                 description:
                     - Incoming interface name from available interfaces. Source system.zone.name system.interface.name.
+                type: str
             policyid:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             service:
                 description:
                     - Service object from available options.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Service name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             srcaddr:
                 description:
                     - Source address name from available addresses.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Service name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             status:
                 description:
                     - Enable/disable this policy.
+                type: str
                 choices:
                     - enable
                     - disable

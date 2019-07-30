@@ -81,31 +81,38 @@ options:
             quarantine:
                 description:
                     - Enable/disable quarantine.
+                type: str
                 choices:
                     - enable
                     - disable
             targets:
                 description:
                     - Quarantine MACs.
+                type: list
                 suboptions:
                     description:
                         description:
                             - Description for the quarantine MAC.
+                        type: str
                     entry_id:
                         description:
                             - FSW entry id for the quarantine MAC.
+                        type: int
                     mac:
                         description:
                             - Quarantine MAC.
                         required: true
+                        type: str
                     tag:
                         description:
                             - Tags for the quarantine MAC.
+                        type: list
                         suboptions:
                             tags:
                                 description:
                                     - Tag string(eg. string1 string2 string3).
                                 required: true
+                                type: str
 '''
 
 EXAMPLES = '''

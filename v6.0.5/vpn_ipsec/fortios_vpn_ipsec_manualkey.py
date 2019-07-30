@@ -88,6 +88,7 @@ options:
             authentication:
                 description:
                     - Authentication algorithm. Must be the same for both ends of the tunnel.
+                type: str
                 choices:
                     - null
                     - md5
@@ -98,34 +99,43 @@ options:
             authkey:
                 description:
                     - Hexadecimal authentication key in 16_digit (8_byte) segments separated by hyphens.
+                type: str
             enckey:
                 description:
                     - Hexadecimal encryption key in 16_digit (8_byte) segments separated by hyphens.
+                type: str
             encryption:
                 description:
                     - Encryption algorithm. Must be the same for both ends of the tunnel.
+                type: str
                 choices:
                     - null
                     - des
             interface:
                 description:
                     - Name of the physical, aggregate, or VLAN interface. Source system.interface.name.
+                type: str
             local_gw:
                 description:
                     - Local gateway.
+                type: str
             localspi:
                 description:
                     - Local SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                type: str
             name:
                 description:
                     - IPsec tunnel name.
                 required: true
+                type: str
             remote_gw:
                 description:
                     - Peer gateway.
+                type: str
             remotespi:
                 description:
                     - Remote SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                type: str
 '''
 
 EXAMPLES = '''

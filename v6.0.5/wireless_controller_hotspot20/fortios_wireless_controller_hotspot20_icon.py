@@ -88,23 +88,29 @@ options:
             icon_list:
                 description:
                     - Icon list.
+                type: list
                 suboptions:
                     file:
                         description:
                             - Icon file.
+                        type: str
                     height:
                         description:
                             - Icon height.
+                        type: int
                     lang:
                         description:
                             - Language code.
+                        type: str
                     name:
                         description:
                             - Icon name.
                         required: true
+                        type: str
                     type:
                         description:
                             - Icon type.
+                        type: str
                         choices:
                             - bmp
                             - gif
@@ -114,10 +120,12 @@ options:
                     width:
                         description:
                             - Icon width.
+                        type: int
             name:
                 description:
                     - Icon list ID.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

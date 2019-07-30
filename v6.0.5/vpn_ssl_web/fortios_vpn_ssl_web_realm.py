@@ -88,15 +88,19 @@ options:
             login_page:
                 description:
                     - Replacement HTML for SSL_VPN login page.
+                type: str
             max_concurrent_user:
                 description:
                     - Maximum concurrent users (0 _ 65535, 0 means unlimited).
+                type: int
             url_path:
                 description:
                     - URL path to access SSL_VPN login page.
+                type: str
             virtual_host:
                 description:
                     - Virtual host name for realm.
+                type: str
 '''
 
 EXAMPLES = '''

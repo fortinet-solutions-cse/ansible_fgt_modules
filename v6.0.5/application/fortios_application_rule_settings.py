@@ -89,6 +89,7 @@ options:
                 description:
                     - Rule ID.
                 required: true
+                type: int
 '''
 
 EXAMPLES = '''

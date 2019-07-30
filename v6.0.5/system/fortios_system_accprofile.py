@@ -88,15 +88,18 @@ options:
             admintimeout:
                 description:
                     - Administrator timeout for this access profile (0 _ 480 min, default = 10, 0 means never timeout).
+                type: int
             admintimeout_override:
                 description:
                     - Enable/disable overriding the global administrator idle timeout.
+                type: str
                 choices:
                     - enable
                     - disable
             authgrp:
                 description:
                     - Administrator access to Users and Devices.
+                type: str
                 choices:
                     - none
                     - read
@@ -104,9 +107,11 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             ftviewgrp:
                 description:
                     - FortiView.
+                type: str
                 choices:
                     - none
                     - read
@@ -114,6 +119,7 @@ options:
             fwgrp:
                 description:
                     - Administrator access to the Firewall configuration.
+                type: str
                 choices:
                     - none
                     - read
@@ -122,10 +128,12 @@ options:
             fwgrp_permission:
                 description:
                     - Custom firewall permission.
+                type: dict
                 suboptions:
                     address:
                         description:
                             - Address Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -133,6 +141,7 @@ options:
                     policy:
                         description:
                             - Policy Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -140,6 +149,7 @@ options:
                     schedule:
                         description:
                             - Schedule Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -147,6 +157,7 @@ options:
                     service:
                         description:
                             - Service Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -154,6 +165,7 @@ options:
             loggrp:
                 description:
                     - Administrator access to Logging and Reporting including viewing log messages.
+                type: str
                 choices:
                     - none
                     - read
@@ -162,10 +174,12 @@ options:
             loggrp_permission:
                 description:
                     - Custom Log & Report permission.
+                type: dict
                 suboptions:
                     config:
                         description:
                             - Log & Report configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -173,6 +187,7 @@ options:
                     data_access:
                         description:
                             - Log & Report Data Access.
+                        type: str
                         choices:
                             - none
                             - read
@@ -180,6 +195,7 @@ options:
                     report_access:
                         description:
                             - Log & Report Report Access.
+                        type: str
                         choices:
                             - none
                             - read
@@ -187,6 +203,7 @@ options:
                     threat_weight:
                         description:
                             - Log & Report Threat Weight.
+                        type: str
                         choices:
                             - none
                             - read
@@ -195,9 +212,11 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             netgrp:
                 description:
                     - Network Configuration.
+                type: str
                 choices:
                     - none
                     - read
@@ -206,10 +225,12 @@ options:
             netgrp_permission:
                 description:
                     - Custom network permission.
+                type: dict
                 suboptions:
                     cfg:
                         description:
                             - Network Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -217,6 +238,7 @@ options:
                     packet_capture:
                         description:
                             - Packet Capture Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -224,6 +246,7 @@ options:
                     route_cfg:
                         description:
                             - Router Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -231,12 +254,14 @@ options:
             scope:
                 description:
                     - "Scope of admin access: global or specific VDOM(s)."
+                type: str
                 choices:
                     - vdom
                     - global
             secfabgrp:
                 description:
                     - Security Fabric.
+                type: str
                 choices:
                     - none
                     - read
@@ -244,6 +269,7 @@ options:
             sysgrp:
                 description:
                     - System Configuration.
+                type: str
                 choices:
                     - none
                     - read
@@ -252,10 +278,12 @@ options:
             sysgrp_permission:
                 description:
                     - Custom system permission.
+                type: dict
                 suboptions:
                     admin:
                         description:
                             - Administrator Users.
+                        type: str
                         choices:
                             - none
                             - read
@@ -263,6 +291,7 @@ options:
                     cfg:
                         description:
                             - System Configuration.
+                        type: str
                         choices:
                             - none
                             - read
@@ -270,6 +299,7 @@ options:
                     mnt:
                         description:
                             - Maintenance.
+                        type: str
                         choices:
                             - none
                             - read
@@ -277,6 +307,7 @@ options:
                     upd:
                         description:
                             - FortiGuard Updates.
+                        type: str
                         choices:
                             - none
                             - read
@@ -284,6 +315,7 @@ options:
             utmgrp:
                 description:
                     - Administrator access to Security Profiles.
+                type: str
                 choices:
                     - none
                     - read
@@ -292,10 +324,12 @@ options:
             utmgrp_permission:
                 description:
                     - Custom Security Profile permissions.
+                type: dict
                 suboptions:
                     antivirus:
                         description:
                             - Antivirus profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -303,6 +337,7 @@ options:
                     application_control:
                         description:
                             - Application Control profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -310,6 +345,7 @@ options:
                     data_loss_prevention:
                         description:
                             - DLP profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -317,6 +353,7 @@ options:
                     dnsfilter:
                         description:
                             - DNS Filter profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -324,6 +361,7 @@ options:
                     endpoint_control:
                         description:
                             - FortiClient Profiles.
+                        type: str
                         choices:
                             - none
                             - read
@@ -331,6 +369,7 @@ options:
                     icap:
                         description:
                             - ICAP profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -338,6 +377,7 @@ options:
                     ips:
                         description:
                             - IPS profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -345,6 +385,7 @@ options:
                     spamfilter:
                         description:
                             - AntiSpam filter and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -352,6 +393,7 @@ options:
                     voip:
                         description:
                             - VoIP profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -359,6 +401,7 @@ options:
                     waf:
                         description:
                             - Web Application Firewall profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -366,6 +409,7 @@ options:
                     webfilter:
                         description:
                             - Web Filter profiles and settings.
+                        type: str
                         choices:
                             - none
                             - read
@@ -373,6 +417,7 @@ options:
             vpngrp:
                 description:
                     - Administrator access to IPsec, SSL, PPTP, and L2TP VPN.
+                type: str
                 choices:
                     - none
                     - read
@@ -380,6 +425,7 @@ options:
             wanoptgrp:
                 description:
                     - Administrator access to WAN Opt & Cache.
+                type: str
                 choices:
                     - none
                     - read
@@ -387,6 +433,7 @@ options:
             wifi:
                 description:
                     - Administrator access to the WiFi controller and Switch controller.
+                type: str
                 choices:
                     - none
                     - read

@@ -81,9 +81,11 @@ options:
             dns_retry_interval:
                 description:
                     - Retry interval. Refresh DNS faster than TTL to capture multiple IPs for hosts. 0 means use DNS server's TTL only.
+                type: int
             extended_ttl:
                 description:
                     - Extend time to live beyond reported by DNS. 0 means use DNS server's TTL
+                type: int
 '''
 
 EXAMPLES = '''

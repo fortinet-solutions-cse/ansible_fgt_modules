@@ -88,12 +88,14 @@ options:
             addr_type:
                 description:
                     - IP version to use for IP packets.
+                type: str
                 choices:
                     - 4
                     - 6
             auth_alg:
                 description:
                     - Authentication algorithm. Must be the same for both ends of the tunnel.
+                type: str
                 choices:
                     - null
                     - md5
@@ -104,46 +106,58 @@ options:
             auth_key:
                 description:
                     - Hexadecimal authentication key in 16_digit (8_byte) segments separated by hyphens.
+                type: str
             enc_alg:
                 description:
                     - Encryption algorithm. Must be the same for both ends of the tunnel.
+                type: str
                 choices:
                     - null
                     - des
             enc_key:
                 description:
                     - Hexadecimal encryption key in 16_digit (8_byte) segments separated by hyphens.
+                type: str
             interface:
                 description:
                     - Name of the physical, aggregate, or VLAN interface. Source system.interface.name.
+                type: str
             ip_version:
                 description:
                     - IP version to use for VPN interface.
+                type: str
                 choices:
                     - 4
                     - 6
             local_gw:
                 description:
                     - IPv4 address of the local gateway's external interface.
+                type: str
             local_gw6:
                 description:
                     - Local IPv6 address of VPN gateway.
+                type: str
             local_spi:
                 description:
                     - Local SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                type: str
             name:
                 description:
                     - IPsec tunnel name.
                 required: true
+                type: str
             remote_gw:
                 description:
                     - IPv4 address of the remote gateway's external interface.
+                type: str
             remote_gw6:
                 description:
                     - Remote IPv6 address of VPN gateway.
+                type: str
             remote_spi:
                 description:
                     - Remote SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                type: str
 '''
 
 EXAMPLES = '''

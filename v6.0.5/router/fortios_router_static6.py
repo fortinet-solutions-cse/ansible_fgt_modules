@@ -88,48 +88,60 @@ options:
             bfd:
                 description:
                     - Enable/disable Bidirectional Forwarding Detection (BFD).
+                type: str
                 choices:
                     - enable
                     - disable
             blackhole:
                 description:
                     - Enable/disable black hole.
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Optional comments.
+                type: str
             device:
                 description:
                     - Gateway out interface or tunnel. Source system.interface.name.
+                type: str
             devindex:
                 description:
                     - Device index (0 _ 4294967295).
+                type: int
             distance:
                 description:
                     - Administrative distance (1 _ 255).
+                type: int
             dst:
                 description:
                     - Destination IPv6 prefix.
+                type: str
             gateway:
                 description:
                     - IPv6 address of the gateway.
+                type: str
             priority:
                 description:
                     - Administrative priority (0 _ 4294967295).
+                type: int
             seq_num:
                 description:
                     - Sequence number.
+                type: int
             status:
                 description:
                     - Enable/disable this static route.
+                type: str
                 choices:
                     - enable
                     - disable
             virtual_wan_link:
                 description:
                     - Enable/disable egress through the virtual_wan_link.
+                type: str
                 choices:
                     - enable
                     - disable

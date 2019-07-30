@@ -88,13 +88,16 @@ options:
             expire_days:
                 description:
                     - Time in days before the user's password expires.
+                type: int
             name:
                 description:
                     - Password policy name.
                 required: true
+                type: str
             warn_days:
                 description:
                     - Time in days before a password expiration warning message is displayed to the user upon login.
+                type: int
 '''
 
 EXAMPLES = '''

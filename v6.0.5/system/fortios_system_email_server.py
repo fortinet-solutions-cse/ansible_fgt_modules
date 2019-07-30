@@ -83,21 +83,26 @@ options:
             authenticate:
                 description:
                     - Enable/disable authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             password:
                 description:
                     - SMTP server user password for authentication.
+                type: str
             port:
                 description:
                     - SMTP server port.
+                type: int
             reply_to:
                 description:
                     - Reply_To email address.
+                type: str
             security:
                 description:
                     - Connection security used by the email server.
+                type: str
                 choices:
                     - none
                     - starttls
@@ -105,15 +110,19 @@ options:
             server:
                 description:
                     - SMTP server IP address or hostname.
+                type: str
             source_ip:
                 description:
                     - SMTP server IPv4 source IP.
+                type: str
             source_ip6:
                 description:
                     - SMTP server IPv6 source IP.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -123,14 +132,17 @@ options:
             type:
                 description:
                     - Use FortiGuard Message service or custom email server.
+                type: str
                 choices:
                     - custom
             username:
                 description:
                     - SMTP server user name for authentication.
+                type: str
             validate_server:
                 description:
                     - Enable/disable validation of server certificate.
+                type: str
                 choices:
                     - enable
                     - disable

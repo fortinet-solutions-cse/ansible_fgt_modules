@@ -89,14 +89,17 @@ options:
                 description:
                     - Policy name.
                 required: true
+                type: str
             policy_type:
                 description:
                     - Policy type.
+                type: str
                 choices:
                     - captive-portal
             vlan:
                 description:
                     - Names of VLANs that use captive portal authentication. Source system.interface.name.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,16 +88,20 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             endip:
                 description:
                     - "Final IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, Default: ::)."
+                type: str
             name:
                 description:
                     - IPv6 IP pool name.
                 required: true
+                type: str
             startip:
                 description:
                     - "First IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, Default: ::)."
+                type: str
 '''
 
 EXAMPLES = '''

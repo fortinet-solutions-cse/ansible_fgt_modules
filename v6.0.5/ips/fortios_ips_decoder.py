@@ -89,17 +89,21 @@ options:
                 description:
                     - Decoder name.
                 required: true
+                type: str
             parameter:
                 description:
                     - IPS group parameters.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Parameter name.
                         required: true
+                        type: str
                     value:
                         description:
                             - Parameter value.
+                        type: str
 '''
 
 EXAMPLES = '''

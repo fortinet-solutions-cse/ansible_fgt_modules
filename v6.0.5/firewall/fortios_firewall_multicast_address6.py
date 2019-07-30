@@ -88,38 +88,48 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             ip6:
                 description:
                     - "IPv6 address prefix (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/xxx)."
+                type: str
             name:
                 description:
                     - IPv6 multicast address name.
                 required: true
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
             visibility:
                 description:
                     - Enable/disable visibility of the IPv6 multicast address on the GUI.
+                type: str
                 choices:
                     - enable
                     - disable

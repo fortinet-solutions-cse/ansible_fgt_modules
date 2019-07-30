@@ -81,6 +81,7 @@ options:
             mac_sync_interval:
                 description:
                     - Time interval between MAC synchronizations (30 _ 1800 sec, default = 60, 0 = disable MAC synchronization).
+                type: int
 '''
 
 EXAMPLES = '''

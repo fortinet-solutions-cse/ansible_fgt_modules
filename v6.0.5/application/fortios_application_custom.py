@@ -88,34 +88,44 @@ options:
             behavior:
                 description:
                     - Custom application signature behavior.
+                type: str
             category:
                 description:
                     - Custom application category ID (use ? to view available options).
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             id:
                 description:
                     - Custom application category ID (use ? to view available options).
+                type: int
             name:
                 description:
                     - Name of this custom application signature.
+                type: str
             protocol:
                 description:
                     - Custom application signature protocol.
+                type: str
             signature:
                 description:
                     - The text that makes up the actual custom application signature.
+                type: str
             tag:
                 description:
                     - Signature tag.
                 required: true
+                type: str
             technology:
                 description:
                     - Custom application signature technology.
+                type: str
             vendor:
                 description:
                     - Custom application signature vendor.
+                type: str
 '''
 
 EXAMPLES = '''

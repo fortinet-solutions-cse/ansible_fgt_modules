@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Spam filter banned word.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Mark spam or good.
+                        type: str
                         choices:
                             - spam
                             - clear
@@ -102,9 +105,11 @@ options:
                         description:
                             - Banned word entry ID.
                         required: true
+                        type: int
                     language:
                         description:
                             - Language for the banned word.
+                        type: str
                         choices:
                             - western
                             - simch
@@ -117,24 +122,29 @@ options:
                     pattern:
                         description:
                             - Pattern for the banned word.
+                        type: str
                     pattern_type:
                         description:
                             - Wildcard pattern or regular expression.
+                        type: str
                         choices:
                             - wildcard
                             - regexp
                     score:
                         description:
                             - Score value.
+                        type: int
                     status:
                         description:
                             - Enable/disable status.
+                        type: str
                         choices:
                             - enable
                             - disable
                     where:
                         description:
                             - Component of the email to be scanned.
+                        type: str
                         choices:
                             - subject
                             - body
@@ -143,9 +153,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

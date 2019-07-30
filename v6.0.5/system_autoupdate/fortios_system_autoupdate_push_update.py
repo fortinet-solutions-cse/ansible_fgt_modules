@@ -81,18 +81,22 @@ options:
             address:
                 description:
                     - Push update override server.
+                type: str
             override:
                 description:
                     - Enable/disable push update override server.
+                type: str
                 choices:
                     - enable
                     - disable
             port:
                 description:
                     - Push update override port. (Do not overlap with other service ports)
+                type: int
             status:
                 description:
                     - Enable/disable push updates.
+                type: str
                 choices:
                     - enable
                     - disable

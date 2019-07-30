@@ -88,24 +88,30 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Service objects contained within the group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Address group name.
                 required: true
+                type: str
             proxy:
                 description:
                     - Enable/disable web proxy service group.
+                type: str
                 choices:
                     - enable
                     - disable

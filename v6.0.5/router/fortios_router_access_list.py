@@ -88,39 +88,48 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             rule:
                 description:
                     - Rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Permit or deny this IP address and netmask prefix.
+                        type: str
                         choices:
                             - permit
                             - deny
                     exact_match:
                         description:
                             - Enable/disable exact match.
+                        type: str
                         choices:
                             - enable
                             - disable
                     flags:
                         description:
                             - Flags.
+                        type: int
                     id:
                         description:
                             - Rule ID.
                         required: true
+                        type: int
                     prefix:
                         description:
                             - IPv4 prefix to define regular filter criteria, such as "any" or subnets.
+                        type: str
                     wildcard:
                         description:
                             - Wildcard to define Cisco_style wildcard filter criteria.
+                        type: str
 '''
 
 EXAMPLES = '''

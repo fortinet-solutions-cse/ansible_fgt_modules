@@ -81,30 +81,38 @@ options:
             contact_info:
                 description:
                     - Contact information.
+                type: str
             description:
                 description:
                     - System description.
+                type: str
             engine_id:
                 description:
                     - Local SNMP engineID string (maximum 24 characters).
+                type: str
             location:
                 description:
                     - System location.
+                type: str
             status:
                 description:
                     - Enable/disable SNMP.
+                type: str
                 choices:
                     - enable
                     - disable
             trap_high_cpu_threshold:
                 description:
                     - CPU usage when trap is sent.
+                type: int
             trap_log_full_threshold:
                 description:
                     - Log disk usage when trap is sent.
+                type: int
             trap_low_memory_threshold:
                 description:
                     - Memory usage when trap is sent.
+                type: int
 '''
 
 EXAMPLES = '''

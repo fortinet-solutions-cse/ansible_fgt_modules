@@ -88,27 +88,34 @@ options:
             color:
                 description:
                     - GUI icon color.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Address group members.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.wildcard-fqdn.custom.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Address group name.
                 required: true
+                type: str
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
             visibility:
                 description:
                     - Enable/disable address visibility.
+                type: str
                 choices:
                     - enable
                     - disable

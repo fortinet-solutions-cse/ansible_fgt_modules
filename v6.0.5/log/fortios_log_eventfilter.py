@@ -81,66 +81,77 @@ options:
             compliance_check:
                 description:
                     - Enable/disable PCI DSS compliance check logging.
+                type: str
                 choices:
                     - enable
                     - disable
             endpoint:
                 description:
                     - Enable/disable endpoint event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             event:
                 description:
                     - Enable/disable event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ha:
                 description:
                     - Enable/disable ha event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             router:
                 description:
                     - Enable/disable router event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             security_rating:
                 description:
                     - Enable/disable Security Rating result logging.
+                type: str
                 choices:
                     - enable
                     - disable
             system:
                 description:
                     - Enable/disable system event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             user:
                 description:
                     - Enable/disable user authentication event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             vpn:
                 description:
                     - Enable/disable VPN event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             wan_opt:
                 description:
                     - Enable/disable WAN optimization event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             wireless_activity:
                 description:
                     - Enable/disable wireless event logging.
+                type: str
                 choices:
                     - enable
                     - disable

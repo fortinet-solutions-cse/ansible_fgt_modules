@@ -89,15 +89,19 @@ options:
             date:
                 description:
                     - Day of the month on which to scan the server (1 _ 31).
+                type: int
             file_path:
                 description:
                     - Path on the server to the fingerprint files (max 119 characters).
+                type: str
             file_pattern:
                 description:
                     - Files matching this pattern on the server are fingerprinted. Optionally use the * and ? wildcards.
+                type: str
             keep_modified:
                 description:
                     - Enable so that when a file is changed on the server the FortiGate keeps the old fingerprint and adds a new fingerprint to the database.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -105,12 +109,15 @@ options:
                 description:
                     - Name of the DLP fingerprint database.
                 required: true
+                type: str
             password:
                 description:
                     - Password required to log into the file server.
+                type: str
             period:
                 description:
                     - Frequency for which the FortiGate checks the server for new or changed files.
+                type: str
                 choices:
                     - none
                     - daily
@@ -119,18 +126,21 @@ options:
             remove_deleted:
                 description:
                     - Enable to keep the fingerprint database up to date when a file is deleted from the server.
+                type: str
                 choices:
                     - enable
                     - disable
             scan_on_creation:
                 description:
                     - Enable to keep the fingerprint database up to date when a file is added or changed on the server.
+                type: str
                 choices:
                     - enable
                     - disable
             scan_subdirectories:
                 description:
                     - Enable/disable scanning subdirectories to find files to create fingerprints from.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -138,32 +148,40 @@ options:
                 description:
                     - Select a sensitivity or threat level for matches with this fingerprint database. Add sensitivities using fp_sensitivity. Source dlp
                       .fp-sensitivity.name.
+                type: str
             server:
                 description:
                     - IPv4 or IPv6 address of the server.
+                type: str
             server_type:
                 description:
                     - Protocol used to communicate with the file server. Currently only Samba (SMB) servers are supported.
+                type: str
                 choices:
                     - samba
             tod_hour:
                 description:
                     - Hour of the day on which to scan the server (0 _ 23, default = 1).
+                type: int
             tod_min:
                 description:
                     - Minute of the hour on which to scan the server (0 _ 59).
+                type: int
             username:
                 description:
                     - User name required to log into the file server.
+                type: str
             vdom:
                 description:
                     - Select the VDOM that can communicate with the file server.
+                type: str
                 choices:
                     - mgmt
                     - current
             weekday:
                 description:
                     - Day of the week on which to scan the server.
+                type: str
                 choices:
                     - sunday
                     - monday

@@ -81,9 +81,11 @@ options:
             collector_ip:
                 description:
                     - Collector IP.
+                type: str
             collector_port:
                 description:
                     - SFlow collector port (0 _ 65535).
+                type: int
 '''
 
 EXAMPLES = '''

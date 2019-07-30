@@ -88,71 +88,89 @@ options:
             action:
                 description:
                     - Action.
+                type: str
                 choices:
                     - pass
                     - block
             application:
                 description:
                     - Vulnerable applications.
+                type: str
             date:
                 description:
                     - Date.
+                type: int
             group:
                 description:
                     - Group.
+                type: str
             location:
                 description:
                     - Vulnerable location.
+                type: str
                 choices:
             log:
                 description:
                     - Enable/disable logging.
+                type: str
                 choices:
                     - disable
                     - enable
             log_packet:
                 description:
                     - Enable/disable packet logging.
+                type: str
                 choices:
                     - disable
                     - enable
             metadata:
                 description:
                     - Meta data.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     metaid:
                         description:
                             - Meta ID.
+                        type: int
                     valueid:
                         description:
                             - Value ID.
+                        type: int
             name:
                 description:
                     - Rule name.
                 required: true
+                type: str
             os:
                 description:
                     - Vulnerable operation systems.
+                type: str
             rev:
                 description:
                     - Revision.
+                type: int
             rule_id:
                 description:
                     - Rule ID.
+                type: int
             service:
                 description:
                     - Vulnerable service.
+                type: str
             severity:
                 description:
                     - Severity.
+                type: str
                 choices:
             status:
                 description:
                     - Enable/disable status.
+                type: str
                 choices:
                     - disable
                     - enable

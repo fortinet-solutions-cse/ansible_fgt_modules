@@ -88,69 +88,84 @@ options:
             block_action:
                 description:
                     - Action to take for blocked domains.
+                type: str
                 choices:
                     - block
                     - redirect
             block_botnet:
                 description:
                     - Enable/disable blocking botnet C&C DNS lookups.
+                type: str
                 choices:
                     - disable
                     - enable
             comment:
                 description:
                     - Comment.
+                type: str
             domain_filter:
                 description:
                     - Domain filter settings.
+                type: dict
                 suboptions:
                     domain_filter_table:
                         description:
                             - DNS domain filter table ID. Source dnsfilter.domain-filter.id.
+                        type: int
             external_ip_blocklist:
                 description:
                     - One or more external IP block lists.
+                type: list
                 suboptions:
                     name:
                         description:
                             - External domain block list name. Source system.external-resource.name.
                         required: true
+                        type: str
             ftgd_dns:
                 description:
                     - FortiGuard DNS Filter settings.
+                type: dict
                 suboptions:
                     filters:
                         description:
                             - FortiGuard DNS domain filters.
+                        type: list
                         suboptions:
                             action:
                                 description:
                                     - Action to take for DNS requests matching the category.
+                                type: str
                                 choices:
                                     - block
                                     - monitor
                             category:
                                 description:
                                     - Category number.
+                                type: int
                             id:
                                 description:
                                     - ID number.
                                 required: true
+                                type: int
                             log:
                                 description:
                                     - Enable/disable DNS filter logging for this DNS profile.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     options:
                         description:
                             - FortiGuard DNS filter options.
+                        type: str
                         choices:
                             - error-allow
                             - ftgd-disable
             log_all_domain:
                 description:
                     - Enable/disable logging of all domains visited (detailed DNS logging).
+                type: str
                 choices:
                     - enable
                     - disable
@@ -158,30 +173,36 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             redirect_portal:
                 description:
                     - IP address of the SDNS redirect portal.
+                type: str
             safe_search:
                 description:
                     - Enable/disable Google, Bing, and YouTube safe search.
+                type: str
                 choices:
                     - disable
                     - enable
             sdns_domain_log:
                 description:
                     - Enable/disable domain filtering and botnet domain logging.
+                type: str
                 choices:
                     - enable
                     - disable
             sdns_ftgd_err_log:
                 description:
                     - Enable/disable FortiGuard SDNS rating error logging.
+                type: str
                 choices:
                     - enable
                     - disable
             youtube_restrict:
                 description:
                     - Set safe search for YouTube restriction level.
+                type: str
                 choices:
                     - strict
                     - moderate

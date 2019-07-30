@@ -88,17 +88,21 @@ options:
             comments:
                 description:
                     - Optional comments.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             rule:
                 description:
                     - Rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action.
+                        type: str
                         choices:
                             - permit
                             - deny
@@ -106,42 +110,54 @@ options:
                         description:
                             - Rule ID.
                         required: true
+                        type: int
                     match_as_path:
                         description:
                             - Match BGP AS path list. Source router.aspath-list.name.
+                        type: str
                     match_community:
                         description:
                             - Match BGP community list. Source router.community-list.name.
+                        type: str
                     match_community_exact:
                         description:
                             - Enable/disable exact matching of communities.
+                        type: str
                         choices:
                             - enable
                             - disable
                     match_flags:
                         description:
                             - BGP flag value to match (0 _ 65535)
+                        type: int
                     match_interface:
                         description:
                             - Match interface configuration. Source system.interface.name.
+                        type: str
                     match_ip_address:
                         description:
                             - Match IP address permitted by access_list or prefix_list. Source router.access-list.name router.prefix-list.name.
+                        type: str
                     match_ip_nexthop:
                         description:
                             - Match next hop IP address passed by access_list or prefix_list. Source router.access-list.name router.prefix-list.name.
+                        type: str
                     match_ip6_address:
                         description:
                             - Match IPv6 address permitted by access_list6 or prefix_list6. Source router.access-list6.name router.prefix-list6.name.
+                        type: str
                     match_ip6_nexthop:
                         description:
                             - Match next hop IPv6 address passed by access_list6 or prefix_list6. Source router.access-list6.name router.prefix-list6.name.
+                        type: str
                     match_metric:
                         description:
                             - Match metric for redistribute routes.
+                        type: int
                     match_origin:
                         description:
                             - Match BGP origin code.
+                        type: str
                         choices:
                             - none
                             - egp
@@ -150,6 +166,7 @@ options:
                     match_route_type:
                         description:
                             - Match route type.
+                        type: str
                         choices:
                             - 1
                             - 2
@@ -157,102 +174,129 @@ options:
                     match_tag:
                         description:
                             - Match tag.
+                        type: int
                     set_aggregator_as:
                         description:
                             - BGP aggregator AS.
+                        type: int
                     set_aggregator_ip:
                         description:
                             - BGP aggregator IP.
+                        type: str
                     set_aspath:
                         description:
                             - Prepend BGP AS path attribute.
+                        type: list
                         suboptions:
                             as:
                                 description:
                                     - "AS number (0 _ 42949672). NOTE: Use quotes for repeating numbers, e.g.: "1 1 2"
                     "
                                 required: true
+                                type: str
                     set_aspath_action:
                         description:
                             - Specify preferred action of set_aspath.
+                        type: str
                         choices:
                             - prepend
                             - replace
                     set_atomic_aggregate:
                         description:
                             - Enable/disable BGP atomic aggregate attribute.
+                        type: str
                         choices:
                             - enable
                             - disable
                     set_community:
                         description:
                             - BGP community attribute.
+                        type: list
                         suboptions:
                             community:
                                 description:
                                     - "Attribute: AA|AA:NN|internet|local_AS|no_advertise|no_export."
                                 required: true
+                                type: str
                     set_community_additive:
                         description:
                             - Enable/disable adding set_community to existing community.
+                        type: str
                         choices:
                             - enable
                             - disable
                     set_community_delete:
                         description:
                             - Delete communities matching community list. Source router.community-list.name.
+                        type: str
                     set_dampening_max_suppress:
                         description:
                             - Maximum duration to suppress a route (1 _ 255 min, 0 = unset).
+                        type: int
                     set_dampening_reachability_half_life:
                         description:
                             - Reachability half_life time for the penalty (1 _ 45 min, 0 = unset).
+                        type: int
                     set_dampening_reuse:
                         description:
                             - Value to start reusing a route (1 _ 20000, 0 = unset).
+                        type: int
                     set_dampening_suppress:
                         description:
                             - Value to start suppressing a route (1 _ 20000, 0 = unset).
+                        type: int
                     set_dampening_unreachability_half_life:
                         description:
                             - Unreachability Half_life time for the penalty (1 _ 45 min, 0 = unset)
+                        type: int
                     set_extcommunity_rt:
                         description:
                             - Route Target extended community.
+                        type: list
                         suboptions:
                             community:
                                 description:
                                     - "AA:NN."
                                 required: true
+                                type: str
                     set_extcommunity_soo:
                         description:
                             - Site_of_Origin extended community.
+                        type: list
                         suboptions:
                             community:
                                 description:
                                     - "AA:NN"
                                 required: true
+                                type: str
                     set_flags:
                         description:
                             - BGP flags value (0 _ 65535)
+                        type: int
                     set_ip_nexthop:
                         description:
                             - IP address of next hop.
+                        type: str
                     set_ip6_nexthop:
                         description:
                             - IPv6 global address of next hop.
+                        type: str
                     set_ip6_nexthop_local:
                         description:
                             - IPv6 local address of next hop.
+                        type: str
                     set_local_preference:
                         description:
                             - BGP local preference path attribute.
+                        type: int
                     set_metric:
                         description:
                             - Metric value.
+                        type: int
                     set_metric_type:
                         description:
                             - Metric type.
+                        type: str
                         choices:
                             - 1
                             - 2
@@ -260,6 +304,7 @@ options:
                     set_origin:
                         description:
                             - BGP origin code.
+                        type: str
                         choices:
                             - none
                             - egp
@@ -268,15 +313,19 @@ options:
                     set_originator_id:
                         description:
                             - BGP originator ID attribute.
+                        type: str
                     set_route_tag:
                         description:
                             - Route tag for routing table.
+                        type: int
                     set_tag:
                         description:
                             - Tag value.
+                        type: int
                     set_weight:
                         description:
                             - BGP weight for routing table.
+                        type: int
 '''
 
 EXAMPLES = '''

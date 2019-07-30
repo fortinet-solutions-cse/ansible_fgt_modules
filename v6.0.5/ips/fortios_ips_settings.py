@@ -81,15 +81,19 @@ options:
             ips_packet_quota:
                 description:
                     - Maximum amount of disk space in MB for logged packets when logging to disk. Range depends on disk size.
+                type: int
             packet_log_history:
                 description:
                     - Number of packets to capture before and including the one in which the IPS signature is detected (1 _ 255).
+                type: int
             packet_log_memory:
                 description:
                     - Maximum memory can be used by packet log (64 _ 8192 kB).
+                type: int
             packet_log_post_attack:
                 description:
                     - Number of packets to log after the IPS signature is detected (0 _ 255).
+                type: int
 '''
 
 EXAMPLES = '''

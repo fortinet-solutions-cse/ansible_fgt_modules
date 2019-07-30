@@ -81,44 +81,53 @@ options:
             always_synthesize_aaaa_record:
                 description:
                     - Enable/disable AAAA record synthesis (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
             generate_ipv6_fragment_header:
                 description:
                     - Enable/disable IPv6 fragment header generation.
+                type: str
                 choices:
                     - enable
                     - disable
             nat46_force_ipv4_packet_forwarding:
                 description:
                     - Enable/disable mandatory IPv4 packet forwarding in nat46.
+                type: str
                 choices:
                     - enable
                     - disable
             nat64_prefix:
                 description:
                     - "NAT64 prefix must be ::/96 (default = 64:ff9b::/96)."
+                type: str
             secondary_prefix:
                 description:
                     - Secondary NAT64 prefix.
+                type: list
                 suboptions:
                     name:
                         description:
                             - NAT64 prefix name.
                         required: true
+                        type: str
                     nat64_prefix:
                         description:
                             - NAT64 prefix.
+                        type: str
             secondary_prefix_status:
                 description:
                     - Enable/disable secondary NAT64 prefix.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable NAT64 (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable

@@ -88,39 +88,50 @@ options:
             auto_regenerate_days:
                 description:
                     - Number of days to wait before expiry of an updated local certificate is requested (0 = disabled).
+                type: int
             auto_regenerate_days_warning:
                 description:
                     - Number of days to wait before an expiry warning message is generated (0 = disabled).
+                type: int
             ca_identifier:
                 description:
                     - CA identifier of the CA server for signing via SCEP.
+                type: str
             certificate:
                 description:
                     - PEM format certificate.
+                type: str
             cmp_path:
                 description:
                     - Path location inside CMP server.
+                type: str
             cmp_regeneration_method:
                 description:
                     - CMP auto_regeneration method.
+                type: str
                 choices:
                     - keyupate
                     - renewal
             cmp_server:
                 description:
                     - "'ADDRESS:PORT' for CMP server."
+                type: str
             cmp_server_cert:
                 description:
                     - CMP server certificate. Source certificate.ca.name.
+                type: str
             comments:
                 description:
                     - Comment.
+                type: str
             csr:
                 description:
                     - Certificate Signing Request.
+                type: str
             enroll_protocol:
                 description:
                     - Certificate enrollment protocol.
+                type: str
                 choices:
                     - none
                     - scep
@@ -128,46 +139,57 @@ options:
             ike_localid:
                 description:
                     - Local ID the FortiGate uses for authentication as a VPN client.
+                type: str
             ike_localid_type:
                 description:
                     - IKE local ID type.
+                type: str
                 choices:
                     - asn1dn
                     - fqdn
             last_updated:
                 description:
                     - Time at which certificate was last updated.
+                type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             name_encoding:
                 description:
                     - Name encoding method for auto_regeneration.
+                type: str
                 choices:
                     - printable
                     - utf8
             password:
                 description:
                     - Password as a PEM file.
+                type: str
             private_key:
                 description:
                     - PEM format key, encrypted with a password.
+                type: str
             range:
                 description:
                     - Either a global or VDOM IP address range for the certificate.
+                type: str
                 choices:
                     - global
                     - vdom
             scep_password:
                 description:
                     - SCEP server challenge password for auto_regeneration.
+                type: str
             scep_url:
                 description:
                     - SCEP server URL.
+                type: str
             source:
                 description:
                     - Certificate source type.
+                type: str
                 choices:
                     - factory
                     - user
@@ -175,9 +197,11 @@ options:
             source_ip:
                 description:
                     - Source IP address for communications to the SCEP server.
+                type: str
             state:
                 description:
                     - Certificate Signing Request State.
+                type: str
 '''
 
 EXAMPLES = '''

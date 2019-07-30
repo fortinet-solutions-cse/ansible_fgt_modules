@@ -81,12 +81,15 @@ options:
             cache_mem_percent:
                 description:
                     - Maximum percentage of available memory allocated to caching (1 _ 15%).
+                type: int
             chunk_size:
                 description:
                     - Maximum fingerprint chunk size.  **Changing will flush the entire database**.
+                type: int
             db_mode:
                 description:
                     - Behaviour when the maximum size is reached.
+                type: str
                 choices:
                     - stop-adding
                     - remove-modified-then-oldest
@@ -94,9 +97,11 @@ options:
             size:
                 description:
                     - Maximum total size of files within the storage (MB).
+                type: int
             storage_device:
                 description:
                     - Storage device name. Source system.storage.name.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,6 +81,7 @@ options:
             enc_algorithm:
                 description:
                     - Enable and set the SSL security level for for sending encrypted logs to FortiCloud.
+                type: str
                 choices:
                     - high-medium
                     - high
@@ -88,9 +89,11 @@ options:
             source_ip:
                 description:
                     - Source IP address used to connect FortiCloud.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -100,15 +103,18 @@ options:
             status:
                 description:
                     - Enable/disable logging to FortiCloud.
+                type: str
                 choices:
                     - enable
                     - disable
             upload_day:
                 description:
                     - Day of week to roll logs.
+                type: str
             upload_interval:
                 description:
                     - Frequency of uploading log files to FortiCloud.
+                type: str
                 choices:
                     - daily
                     - weekly
@@ -116,6 +122,7 @@ options:
             upload_option:
                 description:
                     - Configure how log messages are sent to FortiCloud.
+                type: str
                 choices:
                     - store-and-upload
                     - realtime
@@ -124,6 +131,7 @@ options:
             upload_time:
                 description:
                     - "Time of day to roll logs (hh:mm)."
+                type: str
 '''
 
 EXAMPLES = '''

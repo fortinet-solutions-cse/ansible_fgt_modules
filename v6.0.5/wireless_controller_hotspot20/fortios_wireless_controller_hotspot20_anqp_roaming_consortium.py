@@ -89,20 +89,25 @@ options:
                 description:
                     - Roaming consortium name.
                 required: true
+                type: str
             oi_list:
                 description:
                     - Organization identifier list.
+                type: list
                 suboptions:
                     comment:
                         description:
                             - Comment.
+                        type: str
                     index:
                         description:
                             - OI index.
                         required: true
+                        type: int
                     oi:
                         description:
                             - Organization identifier.
+                        type: str
 '''
 
 EXAMPLES = '''

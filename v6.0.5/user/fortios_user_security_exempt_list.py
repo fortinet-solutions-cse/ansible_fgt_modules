@@ -88,50 +88,62 @@ options:
             description:
                 description:
                     - Description.
+                type: str
             name:
                 description:
                     - Name of the exempt list.
                 required: true
+                type: str
             rule:
                 description:
                     - Configure rules for exempting users from captive portal authentication.
+                type: list
                 suboptions:
                     devices:
                         description:
                             - Devices or device groups.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Device or group name. Source user.device.alias user.device-group.name user.device-category.name.
                                 required: true
+                                type: str
                     dstaddr:
                         description:
                             - Destination addresses or address groups.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Address or group name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
+                                type: str
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     service:
                         description:
                             - Destination services.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Service name. Source firewall.service.custom.name firewall.service.group.name.
                                 required: true
+                                type: str
                     srcaddr:
                         description:
                             - Source addresses or address groups.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Address or group name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
+                                type: str
 '''
 
 EXAMPLES = '''

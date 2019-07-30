@@ -88,10 +88,12 @@ options:
             desc:
                 description:
                     - Signature description.
+                type: str
             id:
                 description:
                     - Signature ID.
                 required: true
+                type: int
 '''
 
 EXAMPLES = '''

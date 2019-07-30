@@ -90,6 +90,7 @@ options:
                 description:
                     - Enable/disable affinity, attaching a source_ip's traffic to the assigned forwarding server until the forward_server_affinity_timeout is
                        reached (under web_proxy global).
+                type: str
                 choices:
                     - enable
                     - disable
@@ -97,12 +98,14 @@ options:
                 description:
                     - "Action to take when all of the servers in the forward server group are down: block sessions until at least one server is back up or
                        pass sessions to their destination."
+                type: str
                 choices:
                     - block
                     - pass
             ldb_method:
                 description:
                     - "Load balance method: weighted or least_session."
+                type: str
                 choices:
                     - weighted
                     - least-session
@@ -110,17 +113,21 @@ options:
                 description:
                     - Configure a forward server group consisting one or multiple forward servers. Supports failover and load balancing.
                 required: true
+                type: str
             server_list:
                 description:
                     - Add web forward servers to a list to form a server group. Optionally assign weights to each server.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Forward server name. Source web-proxy.forward-server.name.
                         required: true
+                        type: str
                     weight:
                         description:
                             - Optionally assign a weight of the forwarding server for weighted load balancing (1 _ 100, default = 10)
+                        type: int
 '''
 
 EXAMPLES = '''

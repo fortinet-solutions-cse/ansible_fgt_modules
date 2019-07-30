@@ -88,9 +88,11 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             day:
                 description:
                     - One or more days of the week on which the schedule is valid. Separate the names of the days with a space.
+                type: str
                 choices:
                     - sunday
                     - monday
@@ -103,13 +105,16 @@ options:
             end:
                 description:
                     - "Time of day to end the schedule, format hh:mm."
+                type: str
             name:
                 description:
                     - Recurring schedule name.
                 required: true
+                type: str
             start:
                 description:
                     - "Time of day to start the schedule, format hh:mm."
+                type: str
 '''
 
 EXAMPLES = '''

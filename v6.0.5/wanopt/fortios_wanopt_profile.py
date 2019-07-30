@@ -89,20 +89,24 @@ options:
                 description:
                     - Optionally add an authentication group to restrict access to the WAN Optimization tunnel to peers in the authentication group. Source
                        wanopt.auth-group.name.
+                type: str
             cifs:
                 description:
                     - Enable/disable CIFS (Windows sharing) WAN Optimization and configure CIFS WAN Optimization features.
+                type: dict
                 suboptions:
                     byte_caching:
                         description:
                             - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
+                        type: str
                         choices:
                             - enable
                             - disable
                     log_traffic:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -110,27 +114,32 @@ options:
                         description:
                             - Single port number or port number range for CIFS. Only packets with a destination port number that matches this port number or
                                range are accepted by this profile.
+                        type: int
                     prefer_chunking:
                         description:
                             - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                        type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable HTTP WAN Optimization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
                             - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                        type: str
                         choices:
                             - private
                             - shared
@@ -138,20 +147,24 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             ftp:
                 description:
                     - Enable/disable FTP WAN Optimization and configure FTP WAN Optimization features.
+                type: dict
                 suboptions:
                     byte_caching:
                         description:
                             - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
+                        type: str
                         choices:
                             - enable
                             - disable
                     log_traffic:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -159,27 +172,32 @@ options:
                         description:
                             - Single port number or port number range for FTP. Only packets with a destination port number that matches this port number or
                                range are accepted by this profile.
+                        type: int
                     prefer_chunking:
                         description:
                             - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                        type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable HTTP WAN Optimization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
                             - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                        type: str
                         choices:
                             - private
                             - shared
@@ -187,17 +205,20 @@ options:
             http:
                 description:
                     - Enable/disable HTTP WAN Optimization and configure HTTP WAN Optimization features.
+                type: dict
                 suboptions:
                     byte_caching:
                         description:
                             - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
+                        type: str
                         choices:
                             - enable
                             - disable
                     log_traffic:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -205,30 +226,36 @@ options:
                         description:
                             - Single port number or port number range for HTTP. Only packets with a destination port number that matches this port number or
                                range are accepted by this profile.
+                        type: int
                     prefer_chunking:
                         description:
                             - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                        type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ssl:
                         description:
                             - Enable/disable SSL/TLS offloading (hardware acceleration) for HTTPS traffic in this tunnel.
+                        type: str
                         choices:
                             - enable
                             - disable
                     ssl_port:
                         description:
                             - Port on which to expect HTTPS traffic for SSL/TLS offloading.
+                        type: int
                     status:
                         description:
                             - Enable/disable HTTP WAN Optimization.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -236,12 +263,14 @@ options:
                         description:
                             - Configure how to process non_HTTP traffic when a profile configured for HTTP traffic accepts a non_HTTP session. Can occur if an
                                application sends non_HTTP traffic using an HTTP destination port.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
                             - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                        type: str
                         choices:
                             - private
                             - shared
@@ -249,6 +278,7 @@ options:
                     unknown_http_version:
                         description:
                             - How to handle HTTP sessions that do not comply with HTTP 0.9, 1.0, or 1.1.
+                        type: str
                         choices:
                             - reject
                             - tunnel
@@ -256,17 +286,20 @@ options:
             mapi:
                 description:
                     - Enable/disable MAPI email WAN Optimization and configure MAPI WAN Optimization features.
+                type: dict
                 suboptions:
                     byte_caching:
                         description:
                             - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
+                        type: str
                         choices:
                             - enable
                             - disable
                     log_traffic:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -274,21 +307,25 @@ options:
                         description:
                             - Single port number or port number range for MAPI. Only packets with a destination port number that matches this port number or
                                range are accepted by this profile.
+                        type: int
                     secure_tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable HTTP WAN Optimization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
                             - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                        type: str
                         choices:
                             - private
                             - shared
@@ -297,26 +334,31 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             tcp:
                 description:
                     - Enable/disable TCP WAN Optimization and configure TCP WAN Optimization features.
+                type: dict
                 suboptions:
                     byte_caching:
                         description:
                             - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
+                        type: str
                         choices:
                             - enable
                             - disable
                     byte_caching_opt:
                         description:
                             - Select whether TCP byte_caching uses system memory only or both memory and disk space.
+                        type: str
                         choices:
                             - mem-only
                             - mem-disk
                     log_traffic:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -324,30 +366,36 @@ options:
                         description:
                             - Single port number or port number range for TCP. Only packets with a destination port number that matches this port number or
                                range are accepted by this profile.
+                        type: str
                     secure_tunnel:
                         description:
                             - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ssl:
                         description:
                             - Enable/disable SSL/TLS offloading.
+                        type: str
                         choices:
                             - enable
                             - disable
                     ssl_port:
                         description:
                             - Port on which to expect HTTPS traffic for SSL/TLS offloading.
+                        type: int
                     status:
                         description:
                             - Enable/disable HTTP WAN Optimization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
                             - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                        type: str
                         choices:
                             - private
                             - shared
@@ -355,6 +403,7 @@ options:
             transparent:
                 description:
                     - Enable/disable transparent mode.
+                type: str
                 choices:
                     - enable
                     - disable

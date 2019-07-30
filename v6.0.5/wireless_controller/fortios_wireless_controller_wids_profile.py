@@ -88,12 +88,14 @@ options:
             ap_auto_suppress:
                 description:
                     - Enable/disable on_wire rogue AP auto_suppression (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             ap_bgscan_disable_day:
                 description:
                     - Optionally turn off scanning for one or more days of the week. Separate the days with a space. By default, no days are set.
+                type: str
                 choices:
                     - sunday
                     - monday
@@ -105,181 +107,225 @@ options:
             ap_bgscan_disable_end:
                 description:
                     - "End time, using a 24_hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
+                type: str
             ap_bgscan_disable_start:
                 description:
                     - "Start time, using a 24_hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
+                type: str
             ap_bgscan_duration:
                 description:
                     - Listening time on a scanning channel (10 _ 1000 msec, default = 20).
+                type: int
             ap_bgscan_idle:
                 description:
                     - Waiting time for channel inactivity before scanning this channel (0 _ 1000 msec, default = 0).
+                type: int
             ap_bgscan_intv:
                 description:
                     - Period of time between scanning two channels (1 _ 600 sec, default = 1).
+                type: int
             ap_bgscan_period:
                 description:
                     - Period of time between background scans (60 _ 3600 sec, default = 600).
+                type: int
             ap_bgscan_report_intv:
                 description:
                     - Period of time between background scan reports (15 _ 600 sec, default = 30).
+                type: int
             ap_fgscan_report_intv:
                 description:
                     - Period of time between foreground scan reports (15 _ 600 sec, default = 15).
+                type: int
             ap_scan:
                 description:
                     - Enable/disable rogue AP detection.
+                type: str
                 choices:
                     - disable
                     - enable
             ap_scan_passive:
                 description:
                     - Enable/disable passive scanning. Enable means do not send probe request on any channels (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             asleap_attack:
                 description:
                     - Enable/disable asleap attack detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             assoc_flood_thresh:
                 description:
                     - The threshold value for association frame flooding.
+                type: int
             assoc_flood_time:
                 description:
                     - Number of seconds after which a station is considered not connected.
+                type: int
             assoc_frame_flood:
                 description:
                     - Enable/disable association frame flooding detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             auth_flood_thresh:
                 description:
                     - The threshold value for authentication frame flooding.
+                type: int
             auth_flood_time:
                 description:
                     - Number of seconds after which a station is considered not connected.
+                type: int
             auth_frame_flood:
                 description:
                     - Enable/disable authentication frame flooding detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Comment.
+                type: str
             deauth_broadcast:
                 description:
                     - Enable/disable broadcasting de_authentication detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             deauth_unknown_src_thresh:
                 description:
                     - "Threshold value per second to deauth unknown src for DoS attack (0: no limit)."
+                type: int
             eapol_fail_flood:
                 description:
                     - Enable/disable EAPOL_Failure flooding (to AP) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_fail_intv:
                 description:
                     - The detection interval for EAPOL_Failure flooding (1 _ 3600 sec).
+                type: int
             eapol_fail_thresh:
                 description:
                     - The threshold value for EAPOL_Failure flooding in specified interval.
+                type: int
             eapol_logoff_flood:
                 description:
                     - Enable/disable EAPOL_Logoff flooding (to AP) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_logoff_intv:
                 description:
                     - The detection interval for EAPOL_Logoff flooding (1 _ 3600 sec).
+                type: int
             eapol_logoff_thresh:
                 description:
                     - The threshold value for EAPOL_Logoff flooding in specified interval.
+                type: int
             eapol_pre_fail_flood:
                 description:
                     - Enable/disable premature EAPOL_Failure flooding (to STA) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_pre_fail_intv:
                 description:
                     - The detection interval for premature EAPOL_Failure flooding (1 _ 3600 sec).
+                type: int
             eapol_pre_fail_thresh:
                 description:
                     - The threshold value for premature EAPOL_Failure flooding in specified interval.
+                type: int
             eapol_pre_succ_flood:
                 description:
                     - Enable/disable premature EAPOL_Success flooding (to STA) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_pre_succ_intv:
                 description:
                     - The detection interval for premature EAPOL_Success flooding (1 _ 3600 sec).
+                type: int
             eapol_pre_succ_thresh:
                 description:
                     - The threshold value for premature EAPOL_Success flooding in specified interval.
+                type: int
             eapol_start_flood:
                 description:
                     - Enable/disable EAPOL_Start flooding (to AP) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_start_intv:
                 description:
                     - The detection interval for EAPOL_Start flooding (1 _ 3600 sec).
+                type: int
             eapol_start_thresh:
                 description:
                     - The threshold value for EAPOL_Start flooding in specified interval.
+                type: int
             eapol_succ_flood:
                 description:
                     - Enable/disable EAPOL_Success flooding (to AP) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             eapol_succ_intv:
                 description:
                     - The detection interval for EAPOL_Success flooding (1 _ 3600 sec).
+                type: int
             eapol_succ_thresh:
                 description:
                     - The threshold value for EAPOL_Success flooding in specified interval.
+                type: int
             invalid_mac_oui:
                 description:
                     - Enable/disable invalid MAC OUI detection.
+                type: str
                 choices:
                     - enable
                     - disable
             long_duration_attack:
                 description:
                     - Enable/disable long duration attack detection based on user configured threshold (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             long_duration_thresh:
                 description:
                     - Threshold value for long duration attack detection (1000 _ 32767 usec, default = 8200).
+                type: int
             name:
                 description:
                     - WIDS profile name.
                 required: true
+                type: str
             null_ssid_probe_resp:
                 description:
                     - Enable/disable null SSID probe response detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             sensor_mode:
                 description:
                     - Scan WiFi nearby stations (default = disable).
+                type: str
                 choices:
                     - disable
                     - foreign
@@ -287,18 +333,21 @@ options:
             spoofed_deauth:
                 description:
                     - Enable/disable spoofed de_authentication attack detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             weak_wep_iv:
                 description:
                     - Enable/disable weak WEP IV (Initialization Vector) detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             wireless_bridge:
                 description:
                     - Enable/disable wireless bridge detection (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable

@@ -88,20 +88,25 @@ options:
             ip6:
                 description:
                     - IPv6 address prefix.
+                type: str
             name:
                 description:
                     - IPv6 address template name.
                 required: true
+                type: str
             subnet_segment:
                 description:
                     - IPv6 subnet segments.
+                type: list
                 suboptions:
                     bits:
                         description:
                             - Number of bits.
+                        type: int
                     exclusive:
                         description:
                             - Enable/disable exclusive value.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -109,23 +114,29 @@ options:
                         description:
                             - Subnet segment ID.
                         required: true
+                        type: int
                     name:
                         description:
                             - Subnet segment name.
+                        type: str
                     values:
                         description:
                             - Subnet segment values.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Subnet segment value name.
                                 required: true
+                                type: str
                             value:
                                 description:
                                     - Subnet segment value.
+                                type: str
             subnet_segment_count:
                 description:
                     - Number of IPv6 subnet segments.
+                type: int
 '''
 
 EXAMPLES = '''

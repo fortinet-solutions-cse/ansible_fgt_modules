@@ -88,28 +88,34 @@ options:
             cache_exemption:
                 description:
                     - Enable/disable exempting this URL pattern from caching.
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Comment.
+                type: str
             forward_server:
                 description:
                     - Forward server name. Source web-proxy.forward-server.name web-proxy.forward-server-group.name.
+                type: str
             name:
                 description:
                     - Configure a name for the URL to be exempted.
                 required: true
+                type: str
             status:
                 description:
                     - Enable/disable exempting the URLs matching the URL pattern from web proxy forwarding and caching.
+                type: str
                 choices:
                     - enable
                     - disable
             url_pattern:
                 description:
                     - URL pattern to be exempted from web proxy forwarding and caching.
+                type: str
 '''
 
 EXAMPLES = '''

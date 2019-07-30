@@ -89,15 +89,18 @@ options:
                 description:
                     - VDOM link name (maximum = 8 characters).
                 required: true
+                type: str
             type:
                 description:
                     - "VDOM link type: PPP or Ethernet."
+                type: str
                 choices:
                     - ppp
                     - ethernet
             vcluster:
                 description:
                     - Virtual cluster.
+                type: str
                 choices:
                     - vcluster1
                     - vcluster2

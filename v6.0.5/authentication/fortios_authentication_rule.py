@@ -88,12 +88,15 @@ options:
             active_auth_method:
                 description:
                     - Select an active authentication method. Source authentication.scheme.name.
+                type: str
             comments:
                 description:
                     - Comment.
+                type: str
             ip_based:
                 description:
                     - Enable/disable IP_based authentication. Once a user authenticates all traffic from the IP address the user authenticated from is allowed.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -101,10 +104,12 @@ options:
                 description:
                     - Authentication rule name.
                 required: true
+                type: str
             protocol:
                 description:
                     - Select the protocol to use for authentication (default = http). Users connect to the FortiGate using this protocol and are asked to
                        authenticate.
+                type: str
                 choices:
                     - http
                     - ftp
@@ -113,37 +118,45 @@ options:
             srcaddr:
                 description:
                     - Select an IPv4 source address from available options. Required for web proxy authentication.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name.
                         required: true
+                        type: str
             srcaddr6:
                 description:
                     - Select an IPv6 source address. Required for web proxy authentication.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             sso_auth_method:
                 description:
                     - Select a single_sign on (SSO) authentication method. Source authentication.scheme.name.
+                type: str
             status:
                 description:
                     - Enable/disable this authentication rule.
+                type: str
                 choices:
                     - enable
                     - disable
             transaction_based:
                 description:
                     - Enable/disable transaction based authentication (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             web_auth_cookie:
                 description:
                     - Enable/disable Web authentication cookies (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable

@@ -81,11 +81,13 @@ options:
             diskfull:
                 description:
                     - Action to take when memory is full.
+                type: str
                 choices:
                     - overwrite
             status:
                 description:
                     - Enable/disable logging to the FortiGate's memory.
+                type: str
                 choices:
                     - enable
                     - disable

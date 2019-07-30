@@ -88,12 +88,15 @@ options:
             ca:
                 description:
                     - Name of the CA certificate as returned by the execute vpn certificate ca list command. Source vpn.certificate.ca.name.
+                type: str
             cn:
                 description:
                     - Peer certificate common name.
+                type: str
             cn_type:
                 description:
                     - Peer certificate common name type.
+                type: str
                 choices:
                     - string
                     - email
@@ -103,22 +106,27 @@ options:
             ldap_mode:
                 description:
                     - Mode for LDAP peer authentication.
+                type: str
                 choices:
                     - password
                     - principal-name
             ldap_password:
                 description:
                     - Password for LDAP server bind.
+                type: str
             ldap_server:
                 description:
                     - Name of an LDAP server defined under the user ldap command. Performs client access rights check. Source user.ldap.name.
+                type: str
             ldap_username:
                 description:
                     - Username for LDAP server bind.
+                type: str
             mandatory_ca_verify:
                 description:
                     - Determine what happens to the peer if the CA certificate is not installed. Disable to automatically consider the peer certificate as
                        valid.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -126,18 +134,23 @@ options:
                 description:
                     - Peer name.
                 required: true
+                type: str
             ocsp_override_server:
                 description:
                     - Online Certificate Status Protocol (OCSP) server for certificate retrieval. Source vpn.certificate.ocsp-server.name.
+                type: str
             passwd:
                 description:
                     - Peer's password used for two_factor authentication.
+                type: str
             subject:
                 description:
                     - Peer certificate name constraints.
+                type: str
             two_factor:
                 description:
                     - Enable/disable two_factor authentication, applying certificate and password_based authentication.
+                type: str
                 choices:
                     - enable
                     - disable

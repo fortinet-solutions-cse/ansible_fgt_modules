@@ -81,27 +81,35 @@ options:
             forward_time:
                 description:
                     - Period of time a port is in listening and learning state (4 _ 30 sec, default = 15).
+                type: int
             hello_time:
                 description:
                     - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 _ 10 sec, default = 2).
+                type: int
             max_age:
                 description:
                     - Maximum time before a bridge port saves its configuration BPDU information (6 _ 40 sec, default = 20).
+                type: int
             max_hops:
                 description:
                     - Maximum number of hops between the root bridge and the furthest bridge (1_ 40, default = 20).
+                type: int
             name:
                 description:
                     - Name of global STP settings configuration.
+                type: str
             pending_timer:
                 description:
                     - Pending time (1 _ 15 sec, default = 4).
+                type: int
             revision:
                 description:
                     - STP revision number (0 _ 65535).
+                type: int
             status:
                 description:
                     - Enable/disable STP.
+                type: str
                 choices:
                     - enable
                     - disable

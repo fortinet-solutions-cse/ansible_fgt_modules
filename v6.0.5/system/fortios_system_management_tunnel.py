@@ -81,39 +81,46 @@ options:
             allow_collect_statistics:
                 description:
                     - Enable/disable collection of run time statistics.
+                type: str
                 choices:
                     - enable
                     - disable
             allow_config_restore:
                 description:
                     - Enable/disable allow config restore.
+                type: str
                 choices:
                     - enable
                     - disable
             allow_push_configuration:
                 description:
                     - Enable/disable push configuration.
+                type: str
                 choices:
                     - enable
                     - disable
             allow_push_firmware:
                 description:
                     - Enable/disable push firmware.
+                type: str
                 choices:
                     - enable
                     - disable
             authorized_manager_only:
                 description:
                     - Enable/disable restriction of authorized manager only.
+                type: str
                 choices:
                     - enable
                     - disable
             serial_number:
                 description:
                     - Serial number.
+                type: str
             status:
                 description:
                     - Enable/disable FGFM tunnel.
+                type: str
                 choices:
                     - enable
                     - disable

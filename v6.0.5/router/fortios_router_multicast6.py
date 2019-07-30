@@ -81,47 +81,58 @@ options:
             interface:
                 description:
                     - Protocol Independent Multicast (PIM) interfaces.
+                type: list
                 suboptions:
                     hello_holdtime:
                         description:
                             - Time before old neighbour information expires (1 _ 65535 sec, default = 105).
+                        type: int
                     hello_interval:
                         description:
                             - Interval between sending PIM hello messages  (1 _ 65535 sec, default = 30)..
+                        type: int
                     name:
                         description:
                             - Interface name. Source system.interface.name.
                         required: true
+                        type: str
             multicast_pmtu:
                 description:
                     - Enable/disable PMTU for IPv6 multicast.
+                type: str
                 choices:
                     - enable
                     - disable
             multicast_routing:
                 description:
                     - Enable/disable IPv6 multicast routing.
+                type: str
                 choices:
                     - enable
                     - disable
             pim_sm_global:
                 description:
                     - PIM sparse_mode global settings.
+                type: dict
                 suboptions:
                     register_rate_limit:
                         description:
                             - Limit of packets/sec per source registered through this RP (0 means unlimited).
+                        type: int
                     rp_address:
                         description:
                             - Statically configured RP addresses.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - ID of the entry.
                                 required: true
+                                type: int
                             ip6_address:
                                 description:
                                     - RP router IPv6 address.
+                                type: str
 '''
 
 EXAMPLES = '''

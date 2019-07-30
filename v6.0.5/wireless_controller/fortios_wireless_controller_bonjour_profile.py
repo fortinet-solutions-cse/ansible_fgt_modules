@@ -90,26 +90,33 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Bonjour profile name.
                 required: true
+                type: str
             policy_list:
                 description:
                     - Bonjour policy list.
+                type: list
                 suboptions:
                     description:
                         description:
                             - Description.
+                        type: str
                     from_vlan:
                         description:
                             - VLAN ID from which the Bonjour service is advertised (0 _ 4094, default = 0).
+                        type: str
                     policy_id:
                         description:
                             - Policy ID.
+                        type: int
                     services:
                         description:
                             - Bonjour services for the VLAN connecting to the Bonjour network.
+                        type: str
                         choices:
                             - all
                             - airplay
@@ -126,6 +133,7 @@ options:
                     to_vlan:
                         description:
                             - VLAN ID to which the Bonjour service is made available (0 _ 4094, default = all).
+                        type: str
 '''
 
 EXAMPLES = '''

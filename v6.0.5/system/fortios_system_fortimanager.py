@@ -81,39 +81,46 @@ options:
             central_management:
                 description:
                     - Enable/disable FortiManager central management.
+                type: str
                 choices:
                     - enable
                     - disable
             central_mgmt_auto_backup:
                 description:
                     - Enable/disable central management auto backup.
+                type: str
                 choices:
                     - enable
                     - disable
             central_mgmt_schedule_config_restore:
                 description:
                     - Enable/disable central management schedule config restore.
+                type: str
                 choices:
                     - enable
                     - disable
             central_mgmt_schedule_script_restore:
                 description:
                     - Enable/disable central management schedule script restore.
+                type: str
                 choices:
                     - enable
                     - disable
             ip:
                 description:
                     - IP address.
+                type: str
             ipsec:
                 description:
                     - Enable/disable FortiManager IPsec tunnel.
+                type: str
                 choices:
                     - enable
                     - disable
             vdom:
                 description:
                     - Virtual domain name. Source system.vdom.name.
+                type: str
 '''
 
 EXAMPLES = '''

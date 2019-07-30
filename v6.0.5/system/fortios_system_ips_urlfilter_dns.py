@@ -89,15 +89,18 @@ options:
                 description:
                     - DNS server IP address.
                 required: true
+                type: str
             ipv6_capability:
                 description:
                     - Enable/disable this server for IPv6 queries.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable using this DNS server for IPS URL filter DNS queries.
+                type: str
                 choices:
                     - enable
                     - disable

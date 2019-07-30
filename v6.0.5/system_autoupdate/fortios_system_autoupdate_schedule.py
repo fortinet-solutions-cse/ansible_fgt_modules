@@ -81,6 +81,7 @@ options:
             day:
                 description:
                     - Update day.
+                type: str
                 choices:
                     - Sunday
                     - Monday
@@ -92,6 +93,7 @@ options:
             frequency:
                 description:
                     - Update frequency.
+                type: str
                 choices:
                     - every
                     - daily
@@ -99,12 +101,14 @@ options:
             status:
                 description:
                     - Enable/disable scheduled updates.
+                type: str
                 choices:
                     - enable
                     - disable
             time:
                 description:
                     - Update time.
+                type: str
 '''
 
 EXAMPLES = '''

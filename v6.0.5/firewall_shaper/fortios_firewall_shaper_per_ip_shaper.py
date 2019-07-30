@@ -88,6 +88,7 @@ options:
             bandwidth_unit:
                 description:
                     - Unit of measurement for maximum bandwidth for this shaper (Kbps, Mbps or Gbps).
+                type: str
                 choices:
                     - kbps
                     - mbps
@@ -95,31 +96,38 @@ options:
             diffserv_forward:
                 description:
                     - Enable/disable changing the Forward (original) DiffServ setting applied to traffic accepted by this shaper.
+                type: str
                 choices:
                     - enable
                     - disable
             diffserv_reverse:
                 description:
                     - Enable/disable changing the Reverse (reply) DiffServ setting applied to traffic accepted by this shaper.
+                type: str
                 choices:
                     - enable
                     - disable
             diffservcode_forward:
                 description:
                     - Forward (original) DiffServ setting to be applied to traffic accepted by this shaper.
+                type: str
             diffservcode_rev:
                 description:
                     - Reverse (reply) DiffServ setting to be applied to traffic accepted by this shaper.
+                type: str
             max_bandwidth:
                 description:
                     - Upper bandwidth limit enforced by this shaper (0 _ 16776000). 0 means no limit. Units depend on the bandwidth_unit setting.
+                type: int
             max_concurrent_session:
                 description:
                     - Maximum number of concurrent sessions allowed by this shaper (0 _ 2097000). 0 means no limit.
+                type: int
             name:
                 description:
                     - Traffic shaper name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

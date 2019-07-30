@@ -81,21 +81,27 @@ options:
             ip6_primary:
                 description:
                     - Primary IPv6 DNS server IP address for the VDOM.
+                type: str
             ip6_secondary:
                 description:
                     - Secondary IPv6 DNS server IP address for the VDOM.
+                type: str
             primary:
                 description:
                     - Primary DNS server IP address for the VDOM.
+                type: str
             secondary:
                 description:
                     - Secondary DNS server IP address for the VDOM.
+                type: str
             source_ip:
                 description:
                     - Source IP for communications with the DNS server.
+                type: str
             vdom_dns:
                 description:
                     - Enable/disable configuring DNS servers for the current VDOM.
+                type: str
                 choices:
                     - enable
                     - disable

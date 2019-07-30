@@ -88,49 +88,63 @@ options:
             addr_mode:
                 description:
                     - Address mode (IPv4 or IPv6).
+                type: str
                 choices:
                     - ipv4
                     - ipv6
             failtime:
                 description:
                     - Number of retry attempts before the server is considered down (1 _ 10, default = 5)
+                type: int
             gateway_ip:
                 description:
                     - Gateway IP address used to probe the server.
+                type: str
             gateway_ip6:
                 description:
                     - Gateway IPv6 address used to probe the server.
+                type: str
             ha_priority:
                 description:
                     - HA election priority (1 _ 50).
+                type: int
             http_agent:
                 description:
                     - String in the http_agent field in the HTTP header.
+                type: str
             http_get:
                 description:
                     - If you are monitoring an HTML server you can send an HTTP_GET request with a custom string. Use this option to define the string.
+                type: str
             http_match:
                 description:
                     - String that you expect to see in the HTTP_GET requests of the traffic to be monitored.
+                type: str
             interval:
                 description:
                     - Detection interval (1 _ 3600 sec, default = 5).
+                type: int
             name:
                 description:
                     - Link monitor name.
                 required: true
+                type: str
             packet_size:
                 description:
                     - Packet size of a twamp test session,
+                type: int
             password:
                 description:
                     - Twamp controller password in authentication mode
+                type: str
             port:
                 description:
                     - Port number of the traffic to be used to monitor the server.
+                type: int
             protocol:
                 description:
                     - Protocols used to monitor the server.
+                type: str
                 choices:
                     - ping
                     - tcp-echo
@@ -141,44 +155,54 @@ options:
             recoverytime:
                 description:
                     - Number of successful responses received before server is considered recovered (1 _ 10, default = 5).
+                type: int
             security_mode:
                 description:
                     - Twamp controller security mode.
+                type: str
                 choices:
                     - none
                     - authentication
             server:
                 description:
                     - IP address of the server(s) to be monitored.
+                type: list
                 suboptions:
                     address:
                         description:
                             - Server address.
                         required: true
+                        type: str
             source_ip:
                 description:
                     - Source IP address used in packet to the server.
+                type: str
             source_ip6:
                 description:
                     - Source IPv6 address used in packet to the server.
+                type: str
             srcintf:
                 description:
                     - Interface that receives the traffic to be monitored. Source system.interface.name.
+                type: str
             status:
                 description:
                     - Enable/disable this link monitor.
+                type: str
                 choices:
                     - enable
                     - disable
             update_cascade_interface:
                 description:
                     - Enable/disable update cascade interface.
+                type: str
                 choices:
                     - enable
                     - disable
             update_static_route:
                 description:
                     - Enable/disable updating the static route.
+                type: str
                 choices:
                     - enable
                     - disable

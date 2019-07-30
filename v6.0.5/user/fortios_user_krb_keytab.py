@@ -88,16 +88,20 @@ options:
             keytab:
                 description:
                     - base64 coded keytab file containing a pre_shared key.
+                type: str
             ldap_server:
                 description:
                     - LDAP server name. Source user.ldap.name.
+                type: str
             name:
                 description:
                     - Kerberos keytab entry name.
                 required: true
+                type: str
             principal:
                 description:
                     - Kerberos service principal, e.g. HTTP/fgt.example.com@EXAMPLE.COM.
+                type: str
 '''
 
 EXAMPLES = '''

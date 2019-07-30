@@ -88,71 +88,87 @@ options:
             address_type:
                 description:
                     - Policy address type (IPv4 or IPv6).
+                type: str
                 choices:
                     - ipv4
                     - ipv6
             application_list:
                 description:
                     - Application list name. Source application.list.name.
+                type: str
             application_list_status:
                 description:
                     - Enable/disable application control.
+                type: str
                 choices:
                     - enable
                     - disable
             av_profile:
                 description:
                     - Antivirus profile. Source antivirus.profile.name.
+                type: str
             av_profile_status:
                 description:
                     - Enable/disable antivirus.
+                type: str
                 choices:
                     - enable
                     - disable
             comments:
                 description:
                     - Comments.
+                type: str
             dlp_sensor:
                 description:
                     - DLP sensor name. Source dlp.sensor.name.
+                type: str
             dlp_sensor_status:
                 description:
                     - Enable/disable DLP.
+                type: str
                 choices:
                     - enable
                     - disable
             dsri:
                 description:
                     - Enable/disable DSRI.
+                type: str
                 choices:
                     - enable
                     - disable
             dstaddr6:
                 description:
                     - IPv6 address object to limit traffic monitoring to network traffic sent to the specified address or range.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             interface:
                 description:
                     - Monitored interface name from available interfaces. Source system.zone.name system.interface.name.
+                type: str
             ips_sensor:
                 description:
                     - IPS sensor name. Source ips.sensor.name.
+                type: str
             ips_sensor_status:
                 description:
                     - Enable/disable IPS.
+                type: str
                 choices:
                     - enable
                     - disable
             label:
                 description:
                     - Label.
+                type: str
             logtraffic:
                 description:
                     - "Logging type to be used in this policy (Options: all | utm | disable, Default: utm)."
+                type: str
                 choices:
                     - all
                     - utm
@@ -161,9 +177,11 @@ options:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             scan_botnet_connections:
                 description:
                     - Enable/disable scanning for connections to Botnet servers.
+                type: str
                 choices:
                     - disable
                     - block
@@ -171,40 +189,49 @@ options:
             service6:
                 description:
                     - Service name.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             spamfilter_profile:
                 description:
                     - Antispam profile. Source spamfilter.profile.name.
+                type: str
             spamfilter_profile_status:
                 description:
                     - Enable/disable antispam.
+                type: str
                 choices:
                     - enable
                     - disable
             srcaddr6:
                 description:
                     - IPv6 address object to limit traffic monitoring to network traffic sent from the specified address or range.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             status:
                 description:
                     - Enable/disable this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             webfilter_profile:
                 description:
                     - Web filter profile. Source webfilter.profile.name.
+                type: str
             webfilter_profile_status:
                 description:
                     - Enable/disable web filtering.
+                type: str
                 choices:
                     - enable
                     - disable

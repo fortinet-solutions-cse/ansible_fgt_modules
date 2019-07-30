@@ -81,17 +81,21 @@ options:
             interface:
                 description:
                     - FortiGate interface(s) with NTP server mode enabled. Devices on your network can contact these interfaces for NTP services.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
             ntpserver:
                 description:
                     - Configure the FortiGate to connect to any available third_party NTP server.
+                type: list
                 suboptions:
                     authentication:
                         description:
                             - Enable/disable MD5 authentication.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -99,24 +103,30 @@ options:
                         description:
                             - NTP server ID.
                         required: true
+                        type: int
                     key:
                         description:
                             - Key for MD5 authentication.
+                        type: str
                     key_id:
                         description:
                             - Key ID for authentication.
+                        type: int
                     ntpv3:
                         description:
                             - Enable to use NTPv3 instead of NTPv4.
+                        type: str
                         choices:
                             - enable
                             - disable
                     server:
                         description:
                             - IP address or hostname of the NTP Server.
+                        type: str
             ntpsync:
                 description:
                     - Enable/disable setting the FortiGate system time by synchronizing with an NTP Server.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -124,21 +134,26 @@ options:
                 description:
                     - Enable/disable FortiGate NTP Server Mode. Your FortiGate becomes an NTP server for other devices on your network. The FortiGate relays
                        NTP requests to its configured NTP server.
+                type: str
                 choices:
                     - enable
                     - disable
             source_ip:
                 description:
                     - Source IP address for communication to the NTP server.
+                type: str
             source_ip6:
                 description:
                     - Source IPv6 address for communication to the NTP server.
+                type: str
             syncinterval:
                 description:
                     - NTP synchronization interval (1 _ 1440 min).
+                type: int
             type:
                 description:
                     - Use the FortiGuard NTP server or any other available NTP Server.
+                type: str
                 choices:
                     - fortiguard
                     - custom

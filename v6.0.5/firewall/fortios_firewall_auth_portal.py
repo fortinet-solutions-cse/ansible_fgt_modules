@@ -81,20 +81,25 @@ options:
             groups:
                 description:
                     - Firewall user groups permitted to authenticate through this portal. Separate group names with spaces.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Group name. Source user.group.name.
                         required: true
+                        type: str
             identity_based_route:
                 description:
                     - Name of the identity_based route that applies to this portal. Source firewall.identity-based-route.name.
+                type: str
             portal_addr:
                 description:
                     - Address (or FQDN) of the authentication portal.
+                type: str
             portal_addr6:
                 description:
                     - IPv6 address (or FQDN) of authentication portal.
+                type: str
 '''
 
 EXAMPLES = '''

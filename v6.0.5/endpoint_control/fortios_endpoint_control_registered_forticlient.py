@@ -88,25 +88,32 @@ options:
             flag:
                 description:
                     - FortiClient registration flag.
+                type: int
             ip:
                 description:
                     - Endpoint IP address.
+                type: str
             mac:
                 description:
                     - Endpoint MAC address.
+                type: str
             reg_fortigate:
                 description:
                     - Registering FortiGate SN.
+                type: str
             status:
                 description:
                     - FortiClient registration status.
+                type: int
             uid:
                 description:
                     - FortiClient UID.
                 required: true
+                type: str
             vdom:
                 description:
                     - Registering vdom.
+                type: str
 '''
 
 EXAMPLES = '''

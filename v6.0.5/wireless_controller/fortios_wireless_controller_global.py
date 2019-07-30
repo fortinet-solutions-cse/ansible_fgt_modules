@@ -81,18 +81,22 @@ options:
             ap_log_server:
                 description:
                     - Enable/disable configuring APs or FortiAPs to send log messages to a syslog server (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             ap_log_server_ip:
                 description:
                     - IP address that APs or FortiAPs send log messages to.
+                type: str
             ap_log_server_port:
                 description:
                     - Port that APs or FortiAPs send log messages to.
+                type: int
             control_message_offload:
                 description:
                     - Configure CAPWAP control message data channel offload.
+                type: str
                 choices:
                     - ebp-frame
                     - aeroscout-tag
@@ -104,51 +108,64 @@ options:
             data_ethernet_II:
                 description:
                     - Configure the wireless controller to use Ethernet II or 802.3 frames with 802.3 data tunnel mode (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             discovery_mc_addr:
                 description:
                     - Multicast IP address for AP discovery (default = 244.0.1.140).
+                type: str
             fiapp_eth_type:
                 description:
                     - Ethernet type for Fortinet Inter_Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 _ 65535, default = 5252).
+                type: int
             image_download:
                 description:
                     - Enable/disable WTP image download at join time.
+                type: str
                 choices:
                     - enable
                     - disable
             ipsec_base_ip:
                 description:
                     - Base IP address for IPsec VPN tunnels between the access points and the wireless controller (default = 169.254.0.1).
+                type: str
             link_aggregation:
                 description:
                     - Enable/disable calculating the CAPWAP transmit hash to load balance sessions to link aggregation nodes (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             location:
                 description:
                     - Description of the location of the wireless controller.
+                type: str
             max_clients:
                 description:
                     - Maximum number of clients that can connect simultaneously (default = 0, meaning no limitation).
+                type: int
             max_retransmit:
                 description:
                     - Maximum number of tunnel packet retransmissions (0 _ 64, default = 3).
+                type: int
             mesh_eth_type:
                 description:
                     - Mesh Ethernet identifier included in backhaul packets (0 _ 65535, default = 8755).
+                type: int
             name:
                 description:
                     - Name of the wireless controller.
+                type: str
             rogue_scan_mac_adjacency:
                 description:
                     - Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 _ 31, default = 7).
+                type: int
             wtp_share:
                 description:
                     - Enable/disable sharing of WTPs between VDOMs.
+                type: str
                 choices:
                     - enable
                     - disable

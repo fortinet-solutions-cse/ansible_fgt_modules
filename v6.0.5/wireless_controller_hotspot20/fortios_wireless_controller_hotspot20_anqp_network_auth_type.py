@@ -88,6 +88,7 @@ options:
             auth_type:
                 description:
                     - Network authentication type.
+                type: str
                 choices:
                     - acceptance-of-terms
                     - online-enrollment
@@ -97,9 +98,11 @@ options:
                 description:
                     - Authentication type name.
                 required: true
+                type: str
             url:
                 description:
                     - Redirect URL.
+                type: str
 '''
 
 EXAMPLES = '''

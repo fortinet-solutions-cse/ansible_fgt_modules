@@ -81,26 +81,33 @@ options:
             default:
                 description:
                     - Default timeout.
+                type: str
             port:
                 description:
                     - Session TTL port.
+                type: list
                 suboptions:
                     end_port:
                         description:
                             - End port number.
+                        type: int
                     id:
                         description:
                             - Table entry ID.
                         required: true
+                        type: int
                     protocol:
                         description:
                             - Protocol (0 _ 255).
+                        type: int
                     start_port:
                         description:
                             - Start port number.
+                        type: int
                     timeout:
                         description:
                             - Session timeout (TTL).
+                        type: str
 '''
 
 EXAMPLES = '''

@@ -81,12 +81,15 @@ options:
             server_ip:
                 description:
                     - "IPv4 address of FortiToken Mobile push services server (format: xxx.xxx.xxx.xxx)."
+                type: str
             server_port:
                 description:
                     - Port to communicate with FortiToken Mobile push services server (1 _ 65535, default = 4433).
+                type: int
             status:
                 description:
                     - Enable/disable the use of FortiToken Mobile push services.
+                type: str
                 choices:
                     - enable
                     - disable

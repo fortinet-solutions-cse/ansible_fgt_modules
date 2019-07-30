@@ -88,27 +88,34 @@ options:
             country_id:
                 description:
                     - Two character Country ID code.
+                type: str
             description:
                 description:
                     - Description.
+                type: str
             ip_range:
                 description:
                     - Table of IP ranges assigned to country.
+                type: list
                 suboptions:
                     end_ip:
                         description:
                             - "Final IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx)."
+                        type: str
                     id:
                         description:
                             - ID number for individual entry in the IP_Range table.
                         required: true
+                        type: int
                     start_ip:
                         description:
                             - "Starting IP address, inclusive, of the address range (format: xxx.xxx.xxx.xxx)."
+                        type: str
             name:
                 description:
                     - Location name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

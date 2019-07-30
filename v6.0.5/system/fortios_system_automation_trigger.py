@@ -88,6 +88,7 @@ options:
             event_type:
                 description:
                     - Event type.
+                type: str
                 choices:
                     - ioc
                     - event-log
@@ -102,12 +103,14 @@ options:
             ioc_level:
                 description:
                     - IOC threat level.
+                type: str
                 choices:
                     - medium
                     - high
             license_type:
                 description:
                     - License type.
+                type: str
                 choices:
                     - forticare-support
                     - fortiguard-webfilter
@@ -119,16 +122,20 @@ options:
             logid:
                 description:
                     - Log ID to trigger event.
+                type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             trigger_day:
                 description:
                     - Day within a month to trigger.
+                type: int
             trigger_frequency:
                 description:
                     - Scheduled trigger frequency (default = daily).
+                type: str
                 choices:
                     - hourly
                     - daily
@@ -137,18 +144,22 @@ options:
             trigger_hour:
                 description:
                     - Hour of the day on which to trigger (0 _ 23, default = 1).
+                type: int
             trigger_minute:
                 description:
                     - Minute of the hour on which to trigger (0 _ 59, 60 to randomize).
+                type: int
             trigger_type:
                 description:
                     - Trigger type.
+                type: str
                 choices:
                     - event-based
                     - scheduled
             trigger_weekday:
                 description:
                     - Day of week for trigger.
+                type: str
                 choices:
                     - sunday
                     - monday

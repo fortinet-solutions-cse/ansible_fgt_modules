@@ -88,6 +88,7 @@ options:
             add_route:
                 description:
                     - Enable/disable automatic route addition.
+                type: str
                 choices:
                     - phase1
                     - enable
@@ -95,6 +96,7 @@ options:
             auto_discovery_forwarder:
                 description:
                     - Enable/disable forwarding short_cut messages.
+                type: str
                 choices:
                     - phase1
                     - enable
@@ -102,6 +104,7 @@ options:
             auto_discovery_sender:
                 description:
                     - Enable/disable sending short_cut messages.
+                type: str
                 choices:
                     - phase1
                     - enable
@@ -109,21 +112,25 @@ options:
             auto_negotiate:
                 description:
                     - Enable/disable IPsec SA auto_negotiation.
+                type: str
                 choices:
                     - enable
                     - disable
             comments:
                 description:
                     - Comment.
+                type: str
             dhcp_ipsec:
                 description:
                     - Enable/disable DHCP_IPsec.
+                type: str
                 choices:
                     - enable
                     - disable
             dhgrp:
                 description:
                     - Phase2 DH group.
+                type: str
                 choices:
                     - 1
                     - 2
@@ -144,6 +151,7 @@ options:
             dst_addr_type:
                 description:
                     - Remote proxy ID type.
+                type: str
                 choices:
                     - subnet
                     - range
@@ -156,45 +164,57 @@ options:
             dst_end_ip:
                 description:
                     - Remote proxy ID IPv4 end.
+                type: str
             dst_end_ip6:
                 description:
                     - Remote proxy ID IPv6 end.
+                type: str
             dst_name:
                 description:
                     - Remote proxy ID name. Source firewall.address.name firewall.addrgrp.name.
+                type: str
             dst_name6:
                 description:
                     - Remote proxy ID name. Source firewall.address6.name firewall.addrgrp6.name.
+                type: str
             dst_port:
                 description:
                     - Quick mode destination port (1 _ 65535 or 0 for all).
+                type: int
             dst_start_ip:
                 description:
                     - Remote proxy ID IPv4 start.
+                type: str
             dst_start_ip6:
                 description:
                     - Remote proxy ID IPv6 start.
+                type: str
             dst_subnet:
                 description:
                     - Remote proxy ID IPv4 subnet.
+                type: str
             dst_subnet6:
                 description:
                     - Remote proxy ID IPv6 subnet.
+                type: str
             encapsulation:
                 description:
                     - ESP encapsulation mode.
+                type: str
                 choices:
                     - tunnel-mode
                     - transport-mode
             keepalive:
                 description:
                     - Enable/disable keep alive.
+                type: str
                 choices:
                     - enable
                     - disable
             keylife_type:
                 description:
                     - Keylife type.
+                type: str
                 choices:
                     - seconds
                     - kbs
@@ -202,12 +222,15 @@ options:
             keylifekbs:
                 description:
                     - Phase2 key life in number of bytes of traffic (5120 _ 4294967295).
+                type: int
             keylifeseconds:
                 description:
                     - Phase2 key life in time in seconds (120 _ 172800).
+                type: int
             l2tp:
                 description:
                     - Enable/disable L2TP over IPsec.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -215,18 +238,22 @@ options:
                 description:
                     - IPsec tunnel name.
                 required: true
+                type: str
             pfs:
                 description:
                     - Enable/disable PFS feature.
+                type: str
                 choices:
                     - enable
                     - disable
             phase1name:
                 description:
                     - Phase 1 determines the options required for phase 2. Source vpn.ipsec.phase1-interface.name.
+                type: str
             proposal:
                 description:
                     - Phase2 proposal.
+                type: str
                 choices:
                     - null-md5
                     - null-sha1
@@ -242,15 +269,18 @@ options:
             protocol:
                 description:
                     - Quick mode protocol selector (1 _ 255 or 0 for all).
+                type: int
             replay:
                 description:
                     - Enable/disable replay detection.
+                type: str
                 choices:
                     - enable
                     - disable
             route_overlap:
                 description:
                     - Action for overlapping routes.
+                type: str
                 choices:
                     - use-old
                     - use-new
@@ -258,12 +288,14 @@ options:
             single_source:
                 description:
                     - Enable/disable single source IP restriction.
+                type: str
                 choices:
                     - enable
                     - disable
             src_addr_type:
                 description:
                     - Local proxy ID type.
+                type: str
                 choices:
                     - subnet
                     - range
@@ -276,30 +308,39 @@ options:
             src_end_ip:
                 description:
                     - Local proxy ID end.
+                type: str
             src_end_ip6:
                 description:
                     - Local proxy ID IPv6 end.
+                type: str
             src_name:
                 description:
                     - Local proxy ID name. Source firewall.address.name firewall.addrgrp.name.
+                type: str
             src_name6:
                 description:
                     - Local proxy ID name. Source firewall.address6.name firewall.addrgrp6.name.
+                type: str
             src_port:
                 description:
                     - Quick mode source port (1 _ 65535 or 0 for all).
+                type: int
             src_start_ip:
                 description:
                     - Local proxy ID start.
+                type: str
             src_start_ip6:
                 description:
                     - Local proxy ID IPv6 start.
+                type: str
             src_subnet:
                 description:
                     - Local proxy ID subnet.
+                type: str
             src_subnet6:
                 description:
                     - Local proxy ID IPv6 subnet.
+                type: str
 '''
 
 EXAMPLES = '''

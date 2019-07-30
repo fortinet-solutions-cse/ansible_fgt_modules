@@ -81,37 +81,46 @@ options:
             abbreviate_handshake:
                 description:
                     - Enable/disable use of SSL abbreviated handshake.
+                type: str
                 choices:
                     - enable
                     - disable
             cert_cache_capacity:
                 description:
                     - Maximum capacity of the host certificate cache (0 _ 500, default = 200).
+                type: int
             cert_cache_timeout:
                 description:
                     - Time limit to keep certificate cache (1 _ 120 min, default = 10).
+                type: int
             kxp_queue_threshold:
                 description:
                     - Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 _ 512, default =
                        16).
+                type: int
             no_matching_cipher_action:
                 description:
                     - Bypass or drop the connection when no matching cipher is found.
+                type: str
                 choices:
                     - bypass
                     - drop
             proxy_connect_timeout:
                 description:
                     - Time limit to make an internal connection to the appropriate proxy process (1 _ 60 sec, default = 30).
+                type: int
             session_cache_capacity:
                 description:
                     - Capacity of the SSL session cache (__Obsolete__) (1 _ 1000, default = 500).
+                type: int
             session_cache_timeout:
                 description:
                     - Time limit to keep SSL session state (1 _ 60 min, default = 20).
+                type: int
             ssl_dh_bits:
                 description:
                     - Bit_size of Diffie_Hellman (DH) prime used in DHE_RSA negotiation (default = 2048).
+                type: str
                 choices:
                     - 768
                     - 1024
@@ -121,9 +130,11 @@ options:
                 description:
                     - Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 _ 512, default =
                        32).
+                type: int
             ssl_send_empty_frags:
                 description:
                     - Enable/disable sending empty fragments to avoid attack on CBC IV (for SSL 3.0 and TLS 1.0 only).
+                type: str
                 choices:
                     - enable
                     - disable

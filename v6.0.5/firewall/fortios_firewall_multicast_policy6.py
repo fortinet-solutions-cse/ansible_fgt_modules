@@ -88,53 +88,66 @@ options:
             action:
                 description:
                     - Accept or deny traffic matching the policy.
+                type: str
                 choices:
                     - accept
                     - deny
             dstaddr:
                 description:
                     - IPv6 destination address name.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.multicast-address6.name.
                         required: true
+                        type: str
             dstintf:
                 description:
                     - IPv6 destination interface name. Source system.interface.name system.zone.name.
+                type: str
             end_port:
                 description:
                     - Integer value for ending TCP/UDP/SCTP destination port in range (1 _ 65535, default = 65535).
+                type: int
             id:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             logtraffic:
                 description:
                     - Enable/disable logging traffic accepted by this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             protocol:
                 description:
                     - Integer value for the protocol type as defined by IANA (0 _ 255, default = 0).
+                type: int
             srcaddr:
                 description:
                     - IPv6 source address name.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             srcintf:
                 description:
                     - IPv6 source interface name. Source system.interface.name system.zone.name.
+                type: str
             start_port:
                 description:
                     - Integer value for starting TCP/UDP/SCTP destination port in range (1 _ 65535, default = 1).
+                type: int
             status:
                 description:
                     - Enable/disable this policy.
+                type: str
                 choices:
                     - enable
                     - disable

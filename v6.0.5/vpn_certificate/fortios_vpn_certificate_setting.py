@@ -81,24 +81,31 @@ options:
             certname_dsa1024:
                 description:
                     - 1024 bit DSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             certname_dsa2048:
                 description:
                     - 2048 bit DSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             certname_ecdsa256:
                 description:
                     - 256 bit ECDSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             certname_ecdsa384:
                 description:
                     - 384 bit ECDSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             certname_rsa1024:
                 description:
                     - 1024 bit RSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             certname_rsa2048:
                 description:
                     - 2048 bit RSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                type: str
             check_ca_cert:
                 description:
                     - Enable/disable verification of the user certificate and pass authentication if any CA in the chain is trusted (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
@@ -106,33 +113,39 @@ options:
                 description:
                     - Enable/disable verification of the entire certificate chain and pass authentication only if the chain is complete and all of the CAs in
                        the chain are trusted (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             cmp_save_extra_certs:
                 description:
                     - Enable/disable saving extra certificates in CMP mode.
+                type: str
                 choices:
                     - enable
                     - disable
             cn_match:
                 description:
                     - When searching for a matching certificate, control how to find matches in the cn attribute of the certificate subject name.
+                type: str
                 choices:
                     - substring
                     - value
             ocsp_default_server:
                 description:
                     - Default OCSP server. Source vpn.certificate.ocsp-server.name.
+                type: str
             ocsp_status:
                 description:
                     - Enable/disable receiving certificates using the OCSP.
+                type: str
                 choices:
                     - enable
                     - disable
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -142,30 +155,35 @@ options:
             ssl_ocsp_option:
                 description:
                     - Specify whether the OCSP URL is from the certificate or the default OCSP server.
+                type: str
                 choices:
                     - certificate
                     - server
             ssl_ocsp_status:
                 description:
                     - Enable/disable SSL OCSP.
+                type: str
                 choices:
                     - enable
                     - disable
             strict_crl_check:
                 description:
                     - Enable/disable strict mode CRL checking.
+                type: str
                 choices:
                     - enable
                     - disable
             strict_ocsp_check:
                 description:
                     - Enable/disable strict mode OCSP checking.
+                type: str
                 choices:
                     - enable
                     - disable
             subject_match:
                 description:
                     - When searching for a matching certificate, control how to find matches in the certificate subject name.
+                type: str
                 choices:
                     - substring
                     - value

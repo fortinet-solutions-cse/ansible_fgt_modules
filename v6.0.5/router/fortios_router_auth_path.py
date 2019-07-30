@@ -88,13 +88,16 @@ options:
             device:
                 description:
                     - Outgoing interface. Source system.interface.name.
+                type: str
             gateway:
                 description:
                     - Gateway IP address.
+                type: str
             name:
                 description:
                     - Name of the entry.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,40 +88,51 @@ options:
             crl:
                 description:
                     - Certificate Revocation List as a PEM file.
+                type: str
             http_url:
                 description:
                     - HTTP server URL for CRL auto_update.
+                type: str
             last_updated:
                 description:
                     - Time at which CRL was last updated.
+                type: int
             ldap_password:
                 description:
                     - LDAP server user password.
+                type: str
             ldap_server:
                 description:
                     - LDAP server name for CRL auto_update.
+                type: str
             ldap_username:
                 description:
                     - LDAP server user name.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             range:
                 description:
                     - Either global or VDOM IP address range for the certificate.
+                type: str
                 choices:
                     - global
                     - vdom
             scep_cert:
                 description:
                     - Local certificate for SCEP communication for CRL auto_update. Source certificate.local.name.
+                type: str
             scep_url:
                 description:
                     - SCEP server URL for CRL auto_update.
+                type: str
             source:
                 description:
                     - Certificate source type.
+                type: str
                 choices:
                     - factory
                     - user
@@ -129,12 +140,15 @@ options:
             source_ip:
                 description:
                     - Source IP address for communications to a HTTP or SCEP CA server.
+                type: str
             update_interval:
                 description:
                     - Time in seconds before the FortiGate checks for an updated CRL. Set to 0 to update only when it expires.
+                type: int
             update_vdom:
                 description:
                     - VDOM for CRL update. Source system.vdom.name.
+                type: str
 '''
 
 EXAMPLES = '''

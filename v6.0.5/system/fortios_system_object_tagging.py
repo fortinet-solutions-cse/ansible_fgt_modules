@@ -88,6 +88,7 @@ options:
             address:
                 description:
                     - Address.
+                type: str
                 choices:
                     - disable
                     - mandatory
@@ -96,12 +97,15 @@ options:
                 description:
                     - Tag Category.
                 required: true
+                type: str
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             device:
                 description:
                     - Device.
+                type: str
                 choices:
                     - disable
                     - mandatory
@@ -109,6 +113,7 @@ options:
             interface:
                 description:
                     - Interface.
+                type: str
                 choices:
                     - disable
                     - mandatory
@@ -116,17 +121,20 @@ options:
             multiple:
                 description:
                     - Allow multiple tag selection.
+                type: str
                 choices:
                     - enable
                     - disable
             tags:
                 description:
                     - Tags.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Tag name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

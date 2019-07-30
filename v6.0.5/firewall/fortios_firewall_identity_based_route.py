@@ -88,32 +88,40 @@ options:
             comments:
                 description:
                     - Comments.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             rule:
                 description:
                     - Rule.
+                type: list
                 suboptions:
                     device:
                         description:
                             - Outgoing interface for the rule. Source system.interface.name.
+                        type: str
                     gateway:
                         description:
                             - "IPv4 address of the gateway (Format: xxx.xxx.xxx.xxx , Default: 0.0.0.0)."
+                        type: str
                     groups:
                         description:
                             - Select one or more group(s) from available groups that are allowed to use this route. Separate group names with a space.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Group name. Source user.group.name.
                                 required: true
+                                type: str
                     id:
                         description:
                             - Rule ID.
                         required: true
+                        type: int
 '''
 
 EXAMPLES = '''

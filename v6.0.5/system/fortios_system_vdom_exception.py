@@ -90,18 +90,22 @@ options:
                 description:
                     - Index <1_4096>.
                 required: true
+                type: int
             object:
                 description:
                     - Name of the configuration object that can be configured independently for all VDOMs.
+                type: str
                 choices:
                     - log.fortianalyzer.setting
                     - log.fortianalyzer.override-setting
             oid:
                 description:
                     - Object ID.
+                type: int
             scope:
                 description:
                     - Determine whether the configuration object can be configured separately for all VDOMs or if some VDOMs share the same configuration.
+                type: str
                 choices:
                     - all
                     - inclusive
@@ -109,11 +113,13 @@ options:
             vdom:
                 description:
                     - Names of the VDOMs.
+                type: list
                 suboptions:
                     name:
                         description:
                             - VDOM name. Source system.vdom.name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

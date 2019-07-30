@@ -89,13 +89,16 @@ options:
                 description:
                     - Community list name.
                 required: true
+                type: str
             rule:
                 description:
                     - Community list rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Permit or deny route_based operations, based on the route's COMMUNITY attribute.
+                        type: str
                         choices:
                             - deny
                             - permit
@@ -103,15 +106,19 @@ options:
                         description:
                             - ID.
                         required: true
+                        type: int
                     match:
                         description:
                             - Community specifications for matching a reserved community.
+                        type: str
                     regexp:
                         description:
                             - Ordered list of COMMUNITY attributes as a regular expression.
+                        type: str
             type:
                 description:
                     - Community list type (standard or expanded).
+                type: str
                 choices:
                     - standard
                     - expanded

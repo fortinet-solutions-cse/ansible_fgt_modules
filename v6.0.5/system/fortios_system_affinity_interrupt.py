@@ -88,13 +88,16 @@ options:
             affinity_cpumask:
                 description:
                     - Affinity setting for VM throughput (64_bit hexadecimal value in the format of 0xxxxxxxxxxxxxxxxx).
+                type: str
             id:
                 description:
                     - ID of the interrupt affinity setting.
                 required: true
+                type: int
             interrupt:
                 description:
                     - Interrupt name.
+                type: str
 '''
 
 EXAMPLES = '''

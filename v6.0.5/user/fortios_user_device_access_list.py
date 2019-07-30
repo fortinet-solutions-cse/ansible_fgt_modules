@@ -88,30 +88,36 @@ options:
             default_action:
                 description:
                     - Accept or deny unknown/unspecified devices.
+                type: str
                 choices:
                     - accept
                     - deny
             device_list:
                 description:
                     - Device list.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Allow or block device.
+                        type: str
                         choices:
                             - accept
                             - deny
                     device:
                         description:
                             - Firewall device or device group. Source user.device.alias user.device-group.name user.device-category.name.
+                        type: str
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
             name:
                 description:
                     - Device access list name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

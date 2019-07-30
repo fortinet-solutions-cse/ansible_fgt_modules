@@ -88,28 +88,35 @@ options:
             cert:
                 description:
                     - OCSP server certificate. Source vpn.certificate.remote.name vpn.certificate.ca.name.
+                type: str
             name:
                 description:
                     - OCSP server entry name.
                 required: true
+                type: str
             secondary_cert:
                 description:
                     - Secondary OCSP server certificate. Source vpn.certificate.remote.name vpn.certificate.ca.name.
+                type: str
             secondary_url:
                 description:
                     - Secondary OCSP server URL.
+                type: str
             source_ip:
                 description:
                     - Source IP address for communications to the OCSP server.
+                type: str
             unavail_action:
                 description:
                     - Action when server is unavailable (revoke the certificate or ignore the result of the check).
+                type: str
                 choices:
                     - revoke
                     - ignore
             url:
                 description:
                     - OCSP server URL.
+                type: str
 '''
 
 EXAMPLES = '''

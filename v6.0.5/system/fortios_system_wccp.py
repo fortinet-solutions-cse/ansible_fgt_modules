@@ -88,15 +88,18 @@ options:
             assignment_bucket_format:
                 description:
                     - Assignment bucket format for the WCCP cache engine.
+                type: str
                 choices:
                     - wccp-v2
                     - cisco-implementation
             assignment_dstaddr_mask:
                 description:
                     - Assignment destination address mask.
+                type: str
             assignment_method:
                 description:
                     - Hash key assignment preference.
+                type: str
                 choices:
                     - HASH
                     - MASK
@@ -104,27 +107,33 @@ options:
             assignment_srcaddr_mask:
                 description:
                     - Assignment source address mask.
+                type: str
             assignment_weight:
                 description:
                     - Assignment of hash weight/ratio for the WCCP cache engine.
+                type: int
             authentication:
                 description:
                     - Enable/disable MD5 authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             cache_engine_method:
                 description:
                     - Method used to forward traffic to the routers or to return to the cache engine.
+                type: str
                 choices:
                     - GRE
                     - L2
             cache_id:
                 description:
                     - IP address known to all routers. If the addresses are the same, use the default 0.0.0.0.
+                type: str
             forward_method:
                 description:
                     - Method used to forward traffic to the cache servers.
+                type: str
                 choices:
                     - GRE
                     - L2
@@ -132,21 +141,26 @@ options:
             group_address:
                 description:
                     - IP multicast address used by the cache routers. For the FortiGate to ignore multicast WCCP traffic, use the default 0.0.0.0.
+                type: str
             password:
                 description:
                     - Password for MD5 authentication.
+                type: str
             ports:
                 description:
                     - Service ports.
+                type: str
             ports_defined:
                 description:
                     - Match method.
+                type: str
                 choices:
                     - source
                     - destination
             primary_hash:
                 description:
                     - Hash method.
+                type: str
                 choices:
                     - src-ip
                     - dst-ip
@@ -155,12 +169,15 @@ options:
             priority:
                 description:
                     - Service priority.
+                type: int
             protocol:
                 description:
                     - Service protocol.
+                type: int
             return_method:
                 description:
                     -  Method used to decline a redirected packet and return it to the FortiGate.
+                type: str
                 choices:
                     - GRE
                     - L2
@@ -168,24 +185,30 @@ options:
             router_id:
                 description:
                     - IP address known to all cache engines. If all cache engines connect to the same FortiGate interface, use the default 0.0.0.0.
+                type: str
             router_list:
                 description:
                     - IP addresses of one or more WCCP routers.
+                type: str
             server_list:
                 description:
                     - IP addresses and netmasks for up to four cache servers.
+                type: str
             server_type:
                 description:
                     - Cache server type.
+                type: str
                 choices:
                     - forward
                     - proxy
             service_id:
                 description:
                     - Service ID.
+                type: str
             service_type:
                 description:
                     - WCCP service type used by the cache server for logical interception and redirection of traffic.
+                type: str
                 choices:
                     - auto
                     - standard

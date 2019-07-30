@@ -88,25 +88,31 @@ options:
             ip_address:
                 description:
                     - IPv4 address of the ICAP server.
+                type: str
             ip_version:
                 description:
                     - IP version.
+                type: str
                 choices:
                     - 4
                     - 6
             ip6_address:
                 description:
                     - IPv6 address of the ICAP server.
+                type: str
             max_connections:
                 description:
                     - Maximum number of concurrent connections to ICAP server.
+                type: int
             name:
                 description:
                     - Server name.
                 required: true
+                type: str
             port:
                 description:
                     - ICAP server port.
+                type: int
 '''
 
 EXAMPLES = '''

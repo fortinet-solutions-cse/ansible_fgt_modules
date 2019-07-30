@@ -81,36 +81,43 @@ options:
             auto_backup:
                 description:
                     - Enable/disable automatic backup.
+                type: str
                 choices:
                     - enable
                     - disable
             id:
                 description:
                     - ID.
+                type: str
             ip:
                 description:
                     - IP address.
+                type: str
             ipsec:
                 description:
                     - Enable/disable IPsec.
+                type: str
                 choices:
                     - enable
                     - disable
             scheduled_config_restore:
                 description:
                     - Enable/disable scheduled configuration restore.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable FM.
+                type: str
                 choices:
                     - enable
                     - disable
             vdom:
                 description:
                     - VDOM. Source system.vdom.name.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,36 +88,45 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             rule:
                 description:
                     - IPv6 prefix list rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Permit or deny packets that match this rule.
+                        type: str
                         choices:
                             - permit
                             - deny
                     flags:
                         description:
                             - Flags.
+                        type: int
                     ge:
                         description:
                             - Minimum prefix length to be matched (0 _ 128).
+                        type: int
                     id:
                         description:
                             - Rule ID.
                         required: true
+                        type: int
                     le:
                         description:
                             - Maximum prefix length to be matched (0 _ 128).
+                        type: int
                     prefix6:
                         description:
                             - IPv6 prefix to define regular filter criteria, such as "any" or subnets.
+                        type: str
 '''
 
 EXAMPLES = '''

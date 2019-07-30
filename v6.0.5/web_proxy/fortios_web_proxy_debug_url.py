@@ -88,6 +88,7 @@ options:
             exact:
                 description:
                     - Enable/disable matching the exact path.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -95,15 +96,18 @@ options:
                 description:
                     - Debug URL name.
                 required: true
+                type: str
             status:
                 description:
                     - Enable/disable this URL exemption.
+                type: str
                 choices:
                     - enable
                     - disable
             url_pattern:
                 description:
                     - URL exemption pattern.
+                type: str
 '''
 
 EXAMPLES = '''

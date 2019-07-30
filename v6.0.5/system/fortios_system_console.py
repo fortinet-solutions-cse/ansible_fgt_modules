@@ -81,6 +81,7 @@ options:
             baudrate:
                 description:
                     - Console baud rate.
+                type: str
                 choices:
                     - 9600
                     - 19200
@@ -90,18 +91,21 @@ options:
             login:
                 description:
                     - Enable/disable serial console and FortiExplorer.
+                type: str
                 choices:
                     - enable
                     - disable
             mode:
                 description:
                     - Console mode.
+                type: str
                 choices:
                     - batch
                     - line
             output:
                 description:
                     - Console output mode.
+                type: str
                 choices:
                     - standard
                     - more

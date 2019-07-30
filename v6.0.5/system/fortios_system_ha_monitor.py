@@ -81,15 +81,18 @@ options:
             monitor_vlan:
                 description:
                     - Enable/disable monitor VLAN interfaces.
+                type: str
                 choices:
                     - enable
                     - disable
             vlan_hb_interval:
                 description:
                     - Configure heartbeat interval (seconds).
+                type: int
             vlan_hb_lost_threshold:
                 description:
                     - VLAN lost heartbeat threshold (1 _ 60).
+                type: int
 '''
 
 EXAMPLES = '''

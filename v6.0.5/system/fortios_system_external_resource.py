@@ -88,28 +88,35 @@ options:
             category:
                 description:
                     - User resource category.
+                type: int
             comments:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - External resource name.
                 required: true
+                type: str
             refresh_rate:
                 description:
                     - Time interval to refresh external resource (1 _ 43200 min, default = 5 min).
+                type: int
             resource:
                 description:
                     - URI of external resource.
+                type: str
             status:
                 description:
                     - Enable/disable user resource.
+                type: str
                 choices:
                     - enable
                     - disable
             type:
                 description:
                     - User resource type.
+                type: str
                 choices:
                     - category
                     - address

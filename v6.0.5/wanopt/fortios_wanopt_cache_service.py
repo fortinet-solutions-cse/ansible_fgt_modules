@@ -81,40 +81,50 @@ options:
             acceptable_connections:
                 description:
                     - Set strategy when accepting cache collaboration connection.
+                type: str
                 choices:
                     - any
                     - peers
             collaboration:
                 description:
                     - Enable/disable cache_collaboration between cache_service clusters.
+                type: str
                 choices:
                     - enable
                     - disable
             device_id:
                 description:
                     - Set identifier for this cache device.
+                type: str
             dst_peer:
                 description:
                     - Modify cache_service destination peer list.
+                type: list
                 suboptions:
                     auth_type:
                         description:
                             - Set authentication type for this peer.
+                        type: int
                     device_id:
                         description:
                             - Device ID of this peer.
+                        type: str
                     encode_type:
                         description:
                             - Set encode type for this peer.
+                        type: int
                     ip:
                         description:
                             - Set cluster IP address of this peer.
+                        type: str
                     priority:
                         description:
                             - Set priority for this peer.
+                        type: int
             prefer_scenario:
                 description:
                     - Set the preferred cache behavior towards the balance between latency and hit_ratio.
+                type: str
                 choices:
                     - balance
                     - prefer-speed
@@ -122,22 +132,28 @@ options:
             src_peer:
                 description:
                     - Modify cache_service source peer list.
+                type: list
                 suboptions:
                     auth_type:
                         description:
                             - Set authentication type for this peer.
+                        type: int
                     device_id:
                         description:
                             - Device ID of this peer.
+                        type: str
                     encode_type:
                         description:
                             - Set encode type for this peer.
+                        type: int
                     ip:
                         description:
                             - Set cluster IP address of this peer.
+                        type: str
                     priority:
                         description:
                             - Set priority for this peer.
+                        type: int
 '''
 
 EXAMPLES = '''

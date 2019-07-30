@@ -88,38 +88,47 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             dns:
                 description:
                     - Configure DNS protocol options.
+                type: dict
                 suboptions:
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 53).
+                        type: int
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
             ftp:
                 description:
                     - Configure FTP protocol options.
+                type: dict
                 suboptions:
                     comfort_amount:
                         description:
                             - Amount of data to send in a transmission for client comforting (1 _ 10240 bytes, default = 1).
+                        type: int
                     comfort_interval:
                         description:
                             - Period of time between start, or last transmission, and the next client comfort transmission of data (1 _ 900 sec, default = 10).
+                        type: int
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - clientcomfort
                             - oversize
@@ -129,64 +138,79 @@ options:
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 21).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             http:
                 description:
                     - Configure HTTP protocol options.
+                type: dict
                 suboptions:
                     block_page_status_code:
                         description:
                             - Code number returned for blocked HTTP pages (non_FortiGuard only) (100 _ 599, default = 403).
+                        type: int
                     comfort_amount:
                         description:
                             - Amount of data to send in a transmission for client comforting (1 _ 10240 bytes, default = 1).
+                        type: int
                     comfort_interval:
                         description:
                             - Period of time between start, or last transmission, and the next client comfort transmission of data (1 _ 900 sec, default = 10).
+                        type: int
                     fortinet_bar:
                         description:
                             - Enable/disable Fortinet bar on HTML content.
+                        type: str
                         choices:
                             - enable
                             - disable
                     fortinet_bar_port:
                         description:
                             - Port for use by Fortinet Bar (1 _ 65535, default = 8011).
+                        type: int
                     http_policy:
                         description:
                             - Enable/disable HTTP policy check.
+                        type: str
                         choices:
                             - disable
                             - enable
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - clientcomfort
                             - servercomfort
@@ -195,12 +219,15 @@ options:
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 80).
+                        type: int
                     post_lang:
                         description:
                             - ID codes for character sets to be used to convert to UTF_8 for banned words and DLP on HTTP posts (maximum of 5 character sets).
+                        type: str
                         choices:
                             - jisx0201
                             - jisx0208
@@ -226,247 +253,301 @@ options:
                     range_block:
                         description:
                             - Enable/disable blocking of partial downloads.
+                        type: str
                         choices:
                             - disable
                             - enable
                     retry_count:
                         description:
                             - Number of attempts to retry HTTP connection (0 _ 100, default = 0).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     streaming_content_bypass:
                         description:
                             - Enable/disable bypassing of streaming content from buffering.
+                        type: str
                         choices:
                             - enable
                             - disable
                     strip_x_forwarded_for:
                         description:
                             - Enable/disable stripping of HTTP X_Forwarded_For header.
+                        type: str
                         choices:
                             - disable
                             - enable
                     switching_protocols:
                         description:
                             - Bypass from scanning, or block a connection that attempts to switch protocol.
+                        type: str
                         choices:
                             - bypass
                             - block
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             imap:
                 description:
                     - Configure IMAP protocol options.
+                type: dict
                 suboptions:
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - fragmail
                             - oversize
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 143).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             mail_signature:
                 description:
                     - Configure Mail signature.
+                type: dict
                 suboptions:
                     signature:
                         description:
                             - Email signature to be added to outgoing email (if the signature contains spaces, enclose with quotation marks).
+                        type: str
                     status:
                         description:
                             - Enable/disable adding an email signature to SMTP email messages as they pass through the FortiGate.
+                        type: str
                         choices:
                             - disable
                             - enable
             mapi:
                 description:
                     - Configure MAPI protocol options.
+                type: dict
                 suboptions:
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - fragmail
                             - oversize
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 135).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             nntp:
                 description:
                     - Configure NNTP protocol options.
+                type: dict
                 suboptions:
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - oversize
                             - splice
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 119).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             oversize_log:
                 description:
                     - Enable/disable logging for antivirus oversize file blocking.
+                type: str
                 choices:
                     - disable
                     - enable
             pop3:
                 description:
                     - Configure POP3 protocol options.
+                type: dict
                 suboptions:
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - fragmail
                             - oversize
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 110).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             replacemsg_group:
                 description:
                     - Name of the replacement message group to be used Source system.replacemsg-group.name.
+                type: str
             rpc_over_http:
                 description:
                     - Enable/disable inspection of RPC over HTTP.
+                type: str
                 choices:
                     - enable
                     - disable
             smtp:
                 description:
                     - Configure SMTP protocol options.
+                type: dict
                 suboptions:
                     inspect_all:
                         description:
                             - Enable/disable the inspection of all ports for the protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - One or more options that can be applied to the session.
+                        type: str
                         choices:
                             - fragmail
                             - oversize
@@ -474,36 +555,44 @@ options:
                     oversize_limit:
                         description:
                             - Maximum in_memory file size that can be scanned (1 _ 383 MB, default = 10).
+                        type: int
                     ports:
                         description:
                             - Ports to scan for content (1 _ 65535, default = 25).
+                        type: int
                     scan_bzip2:
                         description:
                             - Enable/disable scanning of BZip2 compressed files.
+                        type: str
                         choices:
                             - enable
                             - disable
                     server_busy:
                         description:
                             - Enable/disable SMTP server busy when server not available.
+                        type: str
                         choices:
                             - enable
                             - disable
                     status:
                         description:
                             - Enable/disable the active status of scanning for this protocol.
+                        type: str
                         choices:
                             - enable
                             - disable
                     uncompressed_nest_limit:
                         description:
                             - Maximum nested levels of compression that can be uncompressed and scanned (2 _ 100, default = 12).
+                        type: int
                     uncompressed_oversize_limit:
                         description:
                             - Maximum in_memory uncompressed file size that can be scanned (0 _ 383 MB, 0 = unlimited, default = 10).
+                        type: int
             switching_protocols_log:
                 description:
                     - Enable/disable logging for HTTP/HTTPS switching protocols.
+                type: str
                 choices:
                     - disable
                     - enable

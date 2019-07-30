@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Configure content types used by web filter.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action to take for this content type.
+                        type: str
                         choices:
                             - block
                             - allow
@@ -102,17 +105,21 @@ options:
                     category:
                         description:
                             - Categories that this content type applies to.
+                        type: str
                     pattern:
                         description:
                             - Content type (regular expression).
                         required: true
+                        type: str
             id:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -89,12 +89,15 @@ options:
                 description:
                     - Device alias.
                 required: true
+                type: str
             avatar:
                 description:
                     - Image file for avatar (maximum 4K base64 encoded).
+                type: str
             category:
                 description:
                     - Device category.
+                type: str
                 choices:
                     - none
                     - amazon-device
@@ -106,34 +109,43 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             mac:
                 description:
                     - Device MAC address.
+                type: str
             master_device:
                 description:
                     - Master device (optional). Source user.device.alias.
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
             type:
                 description:
                     - Device type.
+                type: str
                 choices:
                     - unknown
                     - android-phone
@@ -159,6 +171,7 @@ options:
             user:
                 description:
                     - User name.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,44 +81,56 @@ options:
             auth_blackout_time:
                 description:
                     - Time in seconds an IP address is denied access after failing to authenticate five times within one minute.
+                type: int
             auth_ca_cert:
                 description:
                     - HTTPS CA certificate for policy authentication. Source vpn.certificate.local.name.
+                type: str
             auth_cert:
                 description:
                     - HTTPS server certificate for policy authentication. Source vpn.certificate.local.name.
+                type: str
             auth_http_basic:
                 description:
                     - Enable/disable use of HTTP basic authentication for identity_based firewall policies.
+                type: str
                 choices:
                     - enable
                     - disable
             auth_invalid_max:
                 description:
                     - Maximum number of failed authentication attempts before the user is blocked.
+                type: int
             auth_lockout_duration:
                 description:
                     - Lockout period in seconds after too many login failures.
+                type: int
             auth_lockout_threshold:
                 description:
                     - Maximum number of failed login attempts before login lockout is triggered.
+                type: int
             auth_portal_timeout:
                 description:
                     - Time in minutes before captive portal user have to re_authenticate (1 _ 30 min, default 3 min).
+                type: int
             auth_ports:
                 description:
                     - Set up non_standard ports for authentication with HTTP, HTTPS, FTP, and TELNET.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     port:
                         description:
                             - Non_standard port for firewall user authentication.
+                        type: int
                     type:
                         description:
                             - Service type.
+                        type: str
                         choices:
                             - http
                             - https
@@ -127,27 +139,32 @@ options:
             auth_secure_http:
                 description:
                     - Enable/disable redirecting HTTP user authentication to more secure HTTPS.
+                type: str
                 choices:
                     - enable
                     - disable
             auth_src_mac:
                 description:
                     - Enable/disable source MAC for user identity.
+                type: str
                 choices:
                     - enable
                     - disable
             auth_ssl_allow_renegotiation:
                 description:
                     - Allow/forbid SSL re_negotiation for HTTPS authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             auth_timeout:
                 description:
                     - Time in minutes before the firewall user authentication timeout requires the user to re_authenticate.
+                type: int
             auth_timeout_type:
                 description:
                     - Control if authenticated users have to login again after a hard timeout, after an idle timeout, or after a session timeout.
+                type: str
                 choices:
                     - idle-timeout
                     - hard-timeout
@@ -155,6 +172,7 @@ options:
             auth_type:
                 description:
                     - Supported firewall policy authentication protocols/methods.
+                type: str
                 choices:
                     - http
                     - https
@@ -163,6 +181,7 @@ options:
             radius_ses_timeout_act:
                 description:
                     - Set the RADIUS session timeout to a hard timeout or to ignore RADIUS server session timeouts.
+                type: str
                 choices:
                     - hard-timeout
                     - ignore-timeout

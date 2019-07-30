@@ -88,6 +88,7 @@ options:
             action:
                 description:
                     - Action to be performed on traffic matching this policy (default = deny).
+                type: str
                 choices:
                     - accept
                     - deny
@@ -95,38 +96,47 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             schedule:
                 description:
                     - Schedule object from available options. Source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group
                       .name.
+                type: str
             service:
                 description:
                     - Service object(s) from available options. Separate multiple names with a space.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Service name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             srcaddr:
                 description:
                     - Source address object(s) from available options. Separate multiple names with a space.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             srcintf:
                 description:
                     - Source interface name from available interfaces. Source system.zone.name system.interface.name.
+                type: str
             status:
                 description:
                     - Enable/disable this TTL policy.
+                type: str
                 choices:
                     - enable
                     - disable
             ttl:
                 description:
                     - "Value/range to match against the packet's Time to Live value (format: ttl[ _ ttl_high], 1 _ 255)."
+                type: str
 '''
 
 EXAMPLES = '''

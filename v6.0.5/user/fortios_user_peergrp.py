@@ -88,15 +88,18 @@ options:
             member:
                 description:
                     - Peer group members.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Peer group member name. Source user.peer.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Peer group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

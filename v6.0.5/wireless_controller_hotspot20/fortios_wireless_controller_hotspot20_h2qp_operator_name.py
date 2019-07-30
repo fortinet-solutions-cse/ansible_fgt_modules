@@ -89,20 +89,25 @@ options:
                 description:
                     - Friendly name ID.
                 required: true
+                type: str
             value_list:
                 description:
                     - Name list.
+                type: list
                 suboptions:
                     index:
                         description:
                             - Value index.
                         required: true
+                        type: int
                     lang:
                         description:
                             - Language code.
+                        type: str
                     value:
                         description:
                             - Friendly name value.
+                        type: str
 '''
 
 EXAMPLES = '''

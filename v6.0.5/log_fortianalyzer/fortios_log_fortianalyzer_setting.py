@@ -81,15 +81,19 @@ options:
             __change_ip:
                 description:
                     - Hidden attribute.
+                type: int
             certificate:
                 description:
                     - Certificate used to communicate with FortiAnalyzer. Source certificate.local.name.
+                type: str
             conn_timeout:
                 description:
                     - FortiAnalyzer connection time_out in seconds (for status and log buffer).
+                type: int
             enc_algorithm:
                 description:
                     - Enable/disable sending FortiAnalyzer log data with SSL encryption.
+                type: str
                 choices:
                     - high-medium
                     - high
@@ -97,42 +101,52 @@ options:
             faz_type:
                 description:
                     - Hidden setting index of FortiAnalyzer.
+                type: int
             hmac_algorithm:
                 description:
                     - FortiAnalyzer IPsec tunnel HMAC algorithm.
+                type: str
                 choices:
                     - sha256
                     - sha1
             ips_archive:
                 description:
                     - Enable/disable IPS packet archive logging.
+                type: str
                 choices:
                     - enable
                     - disable
             mgmt_name:
                 description:
                     - Hidden management name of FortiAnalyzer.
+                type: str
             monitor_failure_retry_period:
                 description:
                     - Time between FortiAnalyzer connection retries in seconds (for status and log buffer).
+                type: int
             monitor_keepalive_period:
                 description:
                     - Time between OFTP keepalives in seconds (for status and log buffer).
+                type: int
             reliable:
                 description:
                     - Enable/disable reliable logging to FortiAnalyzer.
+                type: str
                 choices:
                     - enable
                     - disable
             server:
                 description:
                     - The remote FortiAnalyzer.
+                type: str
             source_ip:
                 description:
                     - Source IPv4 or IPv6 address used to communicate with FortiAnalyzer.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -142,15 +156,18 @@ options:
             status:
                 description:
                     - Enable/disable logging to FortiAnalyzer.
+                type: str
                 choices:
                     - enable
                     - disable
             upload_day:
                 description:
                     - Day of week (month) to upload logs.
+                type: str
             upload_interval:
                 description:
                     - Frequency to upload log files to FortiAnalyzer.
+                type: str
                 choices:
                     - daily
                     - weekly
@@ -158,6 +175,7 @@ options:
             upload_option:
                 description:
                     - Enable/disable logging to hard disk and then uploading to FortiAnalyzer.
+                type: str
                 choices:
                     - store-and-upload
                     - realtime
@@ -166,6 +184,7 @@ options:
             upload_time:
                 description:
                     - "Time to upload logs (hh:mm)."
+                type: str
 '''
 
 EXAMPLES = '''

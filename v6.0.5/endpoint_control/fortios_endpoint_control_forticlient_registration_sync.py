@@ -88,9 +88,11 @@ options:
             peer_ip:
                 description:
                     - IP address of the peer FortiGate for endpoint license synchronization.
+                type: str
             peer_name:
                 description:
                     - Peer name.
+                type: str
 '''
 
 EXAMPLES = '''

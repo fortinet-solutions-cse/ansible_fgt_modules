@@ -89,13 +89,16 @@ options:
                 description:
                     - AS path list name.
                 required: true
+                type: str
             rule:
                 description:
                     - AS path list rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Permit or deny route_based operations, based on the route's AS_PATH attribute.
+                        type: str
                         choices:
                             - deny
                             - permit
@@ -103,9 +106,11 @@ options:
                         description:
                             - ID.
                         required: true
+                        type: int
                     regexp:
                         description:
                             - Regular_expression to match the Border Gateway Protocol (BGP) AS paths.
+                        type: str
 '''
 
 EXAMPLES = '''

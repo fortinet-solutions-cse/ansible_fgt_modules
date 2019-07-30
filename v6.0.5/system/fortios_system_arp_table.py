@@ -89,15 +89,19 @@ options:
                 description:
                     - Unique integer ID of the entry.
                 required: true
+                type: int
             interface:
                 description:
                     - Interface name. Source system.interface.name.
+                type: str
             ip:
                 description:
                     - IP address.
+                type: str
             mac:
                 description:
                     - MAC address.
+                type: str
 '''
 
 EXAMPLES = '''

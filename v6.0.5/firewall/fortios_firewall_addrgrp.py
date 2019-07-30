@@ -88,52 +88,65 @@ options:
             allow_routing:
                 description:
                     - Enable/disable use of this group in the static route configuration.
+                type: str
                 choices:
                     - enable
                     - disable
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Address objects contained within the group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Address group name.
                 required: true
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
             visibility:
                 description:
                     - Enable/disable address visibility in the GUI.
+                type: str
                 choices:
                     - enable
                     - disable

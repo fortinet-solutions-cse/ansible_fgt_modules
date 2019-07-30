@@ -88,32 +88,39 @@ options:
             action:
                 description:
                     - Action names.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Action name. Source system.automation-action.name.
                         required: true
+                        type: str
             destination:
                 description:
                     - Serial number/HA group_name of destination devices.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Destination name. Source system.automation-destination.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             status:
                 description:
                     - Enable/disable this stitch.
+                type: str
                 choices:
                     - enable
                     - disable
             trigger:
                 description:
                     - Trigger name. Source system.automation-trigger.name.
+                type: str
 '''
 
 EXAMPLES = '''

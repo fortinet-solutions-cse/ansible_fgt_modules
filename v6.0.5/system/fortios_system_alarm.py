@@ -81,79 +81,102 @@ options:
             audible:
                 description:
                     - Enable/disable audible alarm.
+                type: str
                 choices:
                     - enable
                     - disable
             groups:
                 description:
                     - Alarm groups.
+                type: list
                 suboptions:
                     admin_auth_failure_threshold:
                         description:
                             - Admin authentication failure threshold.
+                        type: int
                     admin_auth_lockout_threshold:
                         description:
                             - Admin authentication lockout threshold.
+                        type: int
                     decryption_failure_threshold:
                         description:
                             - Decryption failure threshold.
+                        type: int
                     encryption_failure_threshold:
                         description:
                             - Encryption failure threshold.
+                        type: int
                     fw_policy_id:
                         description:
                             - Firewall policy ID.
+                        type: int
                     fw_policy_id_threshold:
                         description:
                             - Firewall policy ID threshold.
+                        type: int
                     fw_policy_violations:
                         description:
                             - Firewall policy violations.
+                        type: list
                         suboptions:
                             dst_ip:
                                 description:
                                     - Destination IP (0=all).
+                                type: str
                             dst_port:
                                 description:
                                     - Destination port (0=all).
+                                type: int
                             id:
                                 description:
                                     - Firewall policy violations ID.
                                 required: true
+                                type: int
                             src_ip:
                                 description:
                                     - Source IP (0=all).
+                                type: str
                             src_port:
                                 description:
                                     - Source port (0=all).
+                                type: int
                             threshold:
                                 description:
                                     - Firewall policy violation threshold.
+                                type: int
                     id:
                         description:
                             - Group ID.
                         required: true
+                        type: int
                     log_full_warning_threshold:
                         description:
                             - Log full warning threshold.
+                        type: int
                     period:
                         description:
                             - Time period in seconds (0 = from start up).
+                        type: int
                     replay_attempt_threshold:
                         description:
                             - Replay attempt threshold.
+                        type: int
                     self_test_failure_threshold:
                         description:
                             - Self_test failure threshold.
+                        type: int
                     user_auth_failure_threshold:
                         description:
                             - User authentication failure threshold.
+                        type: int
                     user_auth_lockout_threshold:
                         description:
                             - User authentication lockout threshold.
+                        type: int
             status:
                 description:
                     - Enable/disable alarm.
+                type: str
                 choices:
                     - enable
                     - disable

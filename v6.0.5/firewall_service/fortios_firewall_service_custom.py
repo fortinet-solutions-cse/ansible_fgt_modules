@@ -88,14 +88,17 @@ options:
             app_category:
                 description:
                     - Application category ID.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Application category id.
                         required: true
+                        type: int
             app_service_type:
                 description:
                     - Application service type.
+                type: str
                 choices:
                     - disable
                     - app-id
@@ -103,17 +106,21 @@ options:
             application:
                 description:
                     - Application ID.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Application id.
                         required: true
+                        type: int
             category:
                 description:
                     - Service category. Source firewall.service.category.name.
+                type: str
             check_reset_range:
                 description:
                     - Configure the type of ICMP error message verification.
+                type: str
                 choices:
                     - disable
                     - strict
@@ -121,15 +128,19 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             fqdn:
                 description:
                     - Fully qualified domain name.
+                type: str
             helper:
                 description:
                     - Helper name.
+                type: str
                 choices:
                     - auto
                     - disable
@@ -154,19 +165,24 @@ options:
             icmpcode:
                 description:
                     - ICMP code.
+                type: int
             icmptype:
                 description:
                     - ICMP type.
+                type: int
             iprange:
                 description:
                     - Start and end of the IP range associated with service.
+                type: str
             name:
                 description:
                     - Custom service name.
                 required: true
+                type: str
             protocol:
                 description:
                     - Protocol type based on IANA numbers.
+                type: str
                 choices:
                     - TCP/UDP/SCTP
                     - ICMP
@@ -181,39 +197,50 @@ options:
             protocol_number:
                 description:
                     - IP protocol number.
+                type: int
             proxy:
                 description:
                     - Enable/disable web proxy service.
+                type: str
                 choices:
                     - enable
                     - disable
             sctp_portrange:
                 description:
                     - Multiple SCTP port ranges.
+                type: str
             session_ttl:
                 description:
                     - Session TTL (300 _ 604800, 0 = default).
+                type: int
             tcp_halfclose_timer:
                 description:
                     - Wait time to close a TCP session waiting for an unanswered FIN packet (1 _ 86400 sec, 0 = default).
+                type: int
             tcp_halfopen_timer:
                 description:
                     - Wait time to close a TCP session waiting for an unanswered open session packet (1 _ 86400 sec, 0 = default).
+                type: int
             tcp_portrange:
                 description:
                     - Multiple TCP port ranges.
+                type: str
             tcp_timewait_timer:
                 description:
                     - Set the length of the TCP TIME_WAIT state in seconds (1 _ 300 sec, 0 = default).
+                type: int
             udp_idle_timer:
                 description:
                     - UDP half close timeout (0 _ 86400 sec, 0 = default).
+                type: int
             udp_portrange:
                 description:
                     - Multiple UDP port ranges.
+                type: str
             visibility:
                 description:
                     - Enable/disable the visibility of the service on the GUI.
+                type: str
                 choices:
                     - enable
                     - disable

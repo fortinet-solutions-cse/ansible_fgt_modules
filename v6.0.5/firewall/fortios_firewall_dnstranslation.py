@@ -89,17 +89,21 @@ options:
                 description:
                     - IPv4 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or
                        subnet on the external network, but number of addresses must equal number of mapped IP addresses in src.
+                type: str
             id:
                 description:
                     - ID.
                 required: true
+                type: int
             netmask:
                 description:
                     - If src and dst are subnets rather than single IP addresses, enter the netmask for both src and dst.
+                type: str
             src:
                 description:
                     - IPv4 address or subnet on the internal network to compare with the resolved address in DNS query replies. If the resolved address
                        matches, the resolved address is substituted with dst.
+                type: str
 '''
 
 EXAMPLES = '''

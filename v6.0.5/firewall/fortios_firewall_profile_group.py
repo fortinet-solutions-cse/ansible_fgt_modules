@@ -88,46 +88,60 @@ options:
             application_list:
                 description:
                     - Name of an existing Application list. Source application.list.name.
+                type: str
             av_profile:
                 description:
                     - Name of an existing Antivirus profile. Source antivirus.profile.name.
+                type: str
             dlp_sensor:
                 description:
                     - Name of an existing DLP sensor. Source dlp.sensor.name.
+                type: str
             dnsfilter_profile:
                 description:
                     - Name of an existing DNS filter profile. Source dnsfilter.profile.name.
+                type: str
             icap_profile:
                 description:
                     - Name of an existing ICAP profile. Source icap.profile.name.
+                type: str
             ips_sensor:
                 description:
                     - Name of an existing IPS sensor. Source ips.sensor.name.
+                type: str
             name:
                 description:
                     - Profile group name.
                 required: true
+                type: str
             profile_protocol_options:
                 description:
                     - Name of an existing Protocol options profile. Source firewall.profile-protocol-options.name.
+                type: str
             spamfilter_profile:
                 description:
                     - Name of an existing Spam filter profile. Source spamfilter.profile.name.
+                type: str
             ssh_filter_profile:
                 description:
                     - Name of an existing SSH filter profile. Source ssh-filter.profile.name.
+                type: str
             ssl_ssh_profile:
                 description:
                     - Name of an existing SSL SSH profile. Source firewall.ssl-ssh-profile.name.
+                type: str
             voip_profile:
                 description:
                     - Name of an existing VoIP profile. Source voip.profile.name.
+                type: str
             waf_profile:
                 description:
                     - Name of an existing Web application firewall profile. Source waf.profile.name.
+                type: str
             webfilter_profile:
                 description:
                     - Name of an existing Web filter profile. Source webfilter.profile.name.
+                type: str
 '''
 
 EXAMPLES = '''

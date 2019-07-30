@@ -88,27 +88,34 @@ options:
             account_key_filter:
                 description:
                     - Account key filter, using the UPN as the search filter.
+                type: str
             account_key_processing:
                 description:
                     - Account key processing operation, either keep or strip domain string of UPN in the token.
+                type: str
                 choices:
                     - same
                     - strip
             ca_cert:
                 description:
                     - CA certificate name. Source vpn.certificate.ca.name.
+                type: str
             cnid:
                 description:
                     - Common name identifier for the LDAP server. The common name identifier for most LDAP servers is "cn".
+                type: str
             dn:
                 description:
                     - Distinguished name used to look up entries on the LDAP server.
+                type: str
             group_filter:
                 description:
                     - Filter used for group matching.
+                type: str
             group_member_check:
                 description:
                     - Group member checking methods.
+                type: str
                 choices:
                     - user-attr
                     - group-object
@@ -116,40 +123,50 @@ options:
             group_object_filter:
                 description:
                     - Filter used for group searching.
+                type: str
             group_search_base:
                 description:
                     - Search base used for group searching.
+                type: str
             member_attr:
                 description:
                     - Name of attribute from which to get group membership.
+                type: str
             name:
                 description:
                     - LDAP server entry name.
                 required: true
+                type: str
             password:
                 description:
                     - Password for initial binding.
+                type: str
             password_expiry_warning:
                 description:
                     - Enable/disable password expiry warnings.
+                type: str
                 choices:
                     - enable
                     - disable
             password_renewal:
                 description:
                     - Enable/disable online password renewal.
+                type: str
                 choices:
                     - enable
                     - disable
             port:
                 description:
                     - Port to be used for communication with the LDAP server (default = 389).
+                type: int
             secondary_server:
                 description:
                     - Secondary LDAP server CN domain name or IP.
+                type: str
             secure:
                 description:
                     - Port to be used for authentication.
+                type: str
                 choices:
                     - disable
                     - starttls
@@ -157,18 +174,22 @@ options:
             server:
                 description:
                     - LDAP server CN domain name or IP.
+                type: str
             server_identity_check:
                 description:
                     - Enable/disable LDAP server identity check (verify server domain name/IP address against the server certificate).
+                type: str
                 choices:
                     - enable
                     - disable
             source_ip:
                 description:
                     - Source IP for communications to LDAP server.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -178,9 +199,11 @@ options:
             tertiary_server:
                 description:
                     - Tertiary LDAP server CN domain name or IP.
+                type: str
             type:
                 description:
                     - Authentication type for LDAP searches.
+                type: str
                 choices:
                     - simple
                     - anonymous
@@ -188,6 +211,7 @@ options:
             username:
                 description:
                     - Username (full DN) for initial binding.
+                type: str
 '''
 
 EXAMPLES = '''

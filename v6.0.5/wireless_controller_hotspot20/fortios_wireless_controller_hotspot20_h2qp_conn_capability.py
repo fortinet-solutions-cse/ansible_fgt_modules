@@ -88,6 +88,7 @@ options:
             esp_port:
                 description:
                     - Set ESP port service (used by IPsec VPNs) status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -95,6 +96,7 @@ options:
             ftp_port:
                 description:
                     - Set FTP port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -102,6 +104,7 @@ options:
             http_port:
                 description:
                     - Set HTTP port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -109,6 +112,7 @@ options:
             icmp_port:
                 description:
                     - Set ICMP port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -116,6 +120,7 @@ options:
             ikev2_port:
                 description:
                     - Set IKEv2 port service for IPsec VPN status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -123,6 +128,7 @@ options:
             ikev2_xx_port:
                 description:
                     - Set UDP port 4500 (which may be used by IKEv2 for IPsec VPN) service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -131,9 +137,11 @@ options:
                 description:
                     - Connection capability name.
                 required: true
+                type: str
             pptp_vpn_port:
                 description:
                     - Set Point to Point Tunneling Protocol (PPTP) VPN port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -141,6 +149,7 @@ options:
             ssh_port:
                 description:
                     - Set SSH port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -148,6 +157,7 @@ options:
             tls_port:
                 description:
                     - Set TLS VPN (HTTPS) port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -155,6 +165,7 @@ options:
             voip_tcp_port:
                 description:
                     - Set VoIP TCP port service status.
+                type: str
                 choices:
                     - closed
                     - open
@@ -162,6 +173,7 @@ options:
             voip_udp_port:
                 description:
                     - Set VoIP UDP port service status.
+                type: str
                 choices:
                     - closed
                     - open

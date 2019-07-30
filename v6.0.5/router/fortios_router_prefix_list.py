@@ -88,36 +88,45 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             rule:
                 description:
                     - IPv4 prefix list rule.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Permit or deny this IP address and netmask prefix.
+                        type: str
                         choices:
                             - permit
                             - deny
                     flags:
                         description:
                             - Flags.
+                        type: int
                     ge:
                         description:
                             - Minimum prefix length to be matched (0 _ 32).
+                        type: int
                     id:
                         description:
                             - Rule ID.
                         required: true
+                        type: int
                     le:
                         description:
                             - Maximum prefix length to be matched (0 _ 32).
+                        type: int
                     prefix:
                         description:
                             - IPv4 prefix to define regular filter criteria, such as "any" or subnets.
+                        type: str
 '''
 
 EXAMPLES = '''

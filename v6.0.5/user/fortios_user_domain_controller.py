@@ -88,19 +88,24 @@ options:
             domain_name:
                 description:
                     - Domain DNS name.
+                type: str
             ip_address:
                 description:
                     - Domain controller IP address.
+                type: str
             ldap_server:
                 description:
                     - LDAP server name. Source user.ldap.name.
+                type: str
             name:
                 description:
                     - Domain controller entry name.
                 required: true
+                type: str
             port:
                 description:
                     - Port to be used for communication with the domain controller (default = 445).
+                type: int
 '''
 
 EXAMPLES = '''

@@ -88,20 +88,25 @@ options:
             member:
                 description:
                     - Interfaces belong to the virtual_wire_pair.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
             name:
                 description:
                     - Virtual_wire_pair name. Must be a unique interface name.
                 required: true
+                type: str
             vlan_filter:
                 description:
                     - Set VLAN filters.
+                type: str
             wildcard_vlan:
                 description:
                     - Enable/disable wildcard VLAN.
+                type: str
                 choices:
                     - enable
                     - disable

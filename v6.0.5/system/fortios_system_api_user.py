@@ -88,59 +88,74 @@ options:
             accprofile:
                 description:
                     - Admin user access profile. Source system.accprofile.name.
+                type: str
             api_key:
                 description:
                     - Admin user password.
+                type: str
             comments:
                 description:
                     - Comment.
+                type: str
             cors_allow_origin:
                 description:
                     - Value for Access_Control_Allow_Origin on API responses. Avoid using '*' if possible.
+                type: str
             name:
                 description:
                     - User name.
                 required: true
+                type: str
             peer_auth:
                 description:
                     - Enable/disable peer authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             peer_group:
                 description:
                     - Peer group name.
+                type: str
             schedule:
                 description:
                     - Schedule name.
+                type: str
             trusthost:
                 description:
                     - Trusthost.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Table ID.
                         required: true
+                        type: int
                     ipv4_trusthost:
                         description:
                             - IPv4 trusted host address.
+                        type: str
                     ipv6_trusthost:
                         description:
                             - IPv6 trusted host address.
+                        type: str
                     type:
                         description:
                             - Trusthost type.
+                        type: str
                         choices:
                             - ipv4-trusthost
                             - ipv6-trusthost
             vdom:
                 description:
                     - Virtual domains.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Virtual domain name. Source system.vdom.name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

@@ -88,21 +88,26 @@ options:
             destination:
                 description:
                     - Destinations.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Destination.
                         required: true
+                        type: str
             ha_group_id:
                 description:
                     - Cluster group ID set for this destination (default = 0).
+                type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             type:
                 description:
                     - Destination type.
+                type: str
                 choices:
                     - fortigate
                     - ha-cluster

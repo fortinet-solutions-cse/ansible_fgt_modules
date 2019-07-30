@@ -81,15 +81,19 @@ options:
             fast_failover_max:
                 description:
                     - Maximum number of retransmissions for fast failover HA messages between peer wireless controllers (3 _ 64, default = 10).
+                type: int
             fast_failover_wait:
                 description:
                     - Minimum wait time before an AP transitions from secondary controller to primary controller (10 _ 86400 sec, default = 10).
+                type: int
             inter_controller_key:
                 description:
                     - Secret key for inter_controller communications.
+                type: str
             inter_controller_mode:
                 description:
                     - Configure inter_controller mode (disable, l2_roaming, 1+1, default = disable).
+                type: str
                 choices:
                     - disable
                     - l2-roaming
@@ -97,26 +101,32 @@ options:
             inter_controller_peer:
                 description:
                     - Fast failover peer wireless controller list.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     peer_ip:
                         description:
                             - Peer wireless controller's IP address.
+                        type: str
                     peer_port:
                         description:
                             - Port used by the wireless controller's for inter_controller communications (1024 _ 49150, default = 5246).
+                        type: int
                     peer_priority:
                         description:
                             - Peer wireless controller's priority (primary or secondary, default = primary).
+                        type: str
                         choices:
                             - primary
                             - secondary
             inter_controller_pri:
                 description:
                     - Configure inter_controller's priority (primary or secondary, default = primary).
+                type: str
                 choices:
                     - primary
                     - secondary

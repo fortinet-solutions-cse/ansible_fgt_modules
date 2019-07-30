@@ -81,17 +81,21 @@ options:
             application:
                 description:
                     - Application_control threat weight settings.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Application category.
+                        type: int
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     level:
                         description:
                             - Threat weight score for Application events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -101,6 +105,7 @@ options:
             blocked_connection:
                 description:
                     - Threat weight score for blocked connections.
+                type: str
                 choices:
                     - disable
                     - low
@@ -110,6 +115,7 @@ options:
             failed_connection:
                 description:
                     - Threat weight score for failed connections.
+                type: str
                 choices:
                     - disable
                     - low
@@ -119,17 +125,21 @@ options:
             geolocation:
                 description:
                     - Geolocation_based threat weight settings.
+                type: list
                 suboptions:
                     country:
                         description:
                             - Country code.
+                        type: str
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     level:
                         description:
                             - Threat weight score for Geolocation_based events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -139,10 +149,12 @@ options:
             ips:
                 description:
                     - IPS threat weight settings.
+                type: dict
                 suboptions:
                     critical_severity:
                         description:
                             - Threat weight score for IPS critical severity events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -152,6 +164,7 @@ options:
                     high_severity:
                         description:
                             - Threat weight score for IPS high severity events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -161,6 +174,7 @@ options:
                     info_severity:
                         description:
                             - Threat weight score for IPS info severity events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -170,6 +184,7 @@ options:
                     low_severity:
                         description:
                             - Threat weight score for IPS low severity events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -179,6 +194,7 @@ options:
                     medium_severity:
                         description:
                             - Threat weight score for IPS medium severity events.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -188,26 +204,33 @@ options:
             level:
                 description:
                     - Score mapping for threat weight levels.
+                type: dict
                 suboptions:
                     critical:
                         description:
                             - Critical level score value (1 _ 100).
+                        type: int
                     high:
                         description:
                             - High level score value (1 _ 100).
+                        type: int
                     low:
                         description:
                             - Low level score value (1 _ 100).
+                        type: int
                     medium:
                         description:
                             - Medium level score value (1 _ 100).
+                        type: int
             malware:
                 description:
                     - Anti_virus malware threat weight settings.
+                type: dict
                 suboptions:
                     botnet_connection:
                         description:
                             - Threat weight score for detected botnet connections.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -217,6 +240,7 @@ options:
                     command_blocked:
                         description:
                             - Threat weight score for blocked command detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -226,6 +250,7 @@ options:
                     content_disarm:
                         description:
                             - Threat weight score for virus (content disarm) detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -235,6 +260,7 @@ options:
                     mimefragmented:
                         description:
                             - Threat weight score for mimefragmented detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -244,6 +270,7 @@ options:
                     oversized:
                         description:
                             - Threat weight score for oversized file detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -253,6 +280,7 @@ options:
                     switch_proto:
                         description:
                             - Threat weight score for switch proto detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -262,6 +290,7 @@ options:
                     virus_blocked:
                         description:
                             - Threat weight score for virus (blocked) detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -271,6 +300,7 @@ options:
                     virus_file_type_executable:
                         description:
                             - Threat weight score for virus (filetype executable) detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -280,6 +310,7 @@ options:
                     virus_infected:
                         description:
                             - Threat weight score for virus (infected) detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -289,6 +320,7 @@ options:
                     virus_outbreak_prevention:
                         description:
                             - Threat weight score for virus (outbreak prevention) event.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -298,6 +330,7 @@ options:
                     virus_scan_error:
                         description:
                             - Threat weight score for virus (scan error) detected.
+                        type: str
                         choices:
                             - disable
                             - low
@@ -307,12 +340,14 @@ options:
             status:
                 description:
                     - Enable/disable the threat weight feature.
+                type: str
                 choices:
                     - enable
                     - disable
             url_block_detected:
                 description:
                     - Threat weight score for URL blocking.
+                type: str
                 choices:
                     - disable
                     - low
@@ -322,17 +357,21 @@ options:
             web:
                 description:
                     - Web filtering threat weight settings.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Threat weight score for web category filtering matches.
+                        type: int
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     level:
                         description:
                             - Threat weight score for web category filtering matches.
+                        type: str
                         choices:
                             - disable
                             - low

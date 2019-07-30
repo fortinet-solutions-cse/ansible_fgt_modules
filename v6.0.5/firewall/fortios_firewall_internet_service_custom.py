@@ -88,75 +88,95 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             disable_entry:
                 description:
                     - Disable entries in the Internet Service database.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Disable entry ID.
                         required: true
+                        type: int
                     ip_range:
                         description:
                             - IP ranges in the disable entry.
+                        type: list
                         suboptions:
                             end_ip:
                                 description:
                                     - End IP address.
+                                type: str
                             id:
                                 description:
                                     - Disable entry range ID.
                                 required: true
+                                type: int
                             start_ip:
                                 description:
                                     - Start IP address.
+                                type: str
                     port:
                         description:
                             - Integer value for the TCP/IP port (0 _ 65535).
+                        type: int
                     protocol:
                         description:
                             - Integer value for the protocol type as defined by IANA (0 _ 255).
+                        type: int
             entry:
                 description:
                     - Entries added to the Internet Service database and custom database.
+                type: list
                 suboptions:
                     dst:
                         description:
                             - Destination address or address group name.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Select the destination address or address group object from available options. Source firewall.address.name firewall
                                       .addrgrp.name.
                                 required: true
+                                type: str
                     id:
                         description:
                             - Entry ID(1_255).
                         required: true
+                        type: int
                     port_range:
                         description:
                             - Port ranges in the custom entry.
+                        type: list
                         suboptions:
                             end_port:
                                 description:
                                     - Integer value for ending TCP/UDP/SCTP destination port in range (1 to 65535).
+                                type: int
                             id:
                                 description:
                                     - Custom entry port range ID.
                                 required: true
+                                type: int
                             start_port:
                                 description:
                                     - Integer value for starting TCP/UDP/SCTP destination port in range (1 to 65535).
+                                type: int
                     protocol:
                         description:
                             - Integer value for the protocol type as defined by IANA (0 _ 255).
+                        type: int
             master_service_id:
                 description:
                     - Internet Service ID in the Internet Service database. Source firewall.internet-service.id.
+                type: int
             name:
                 description:
                     - Internet Service name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,23 +88,28 @@ options:
             auth_method:
                 description:
                     - Select certificate or pre_shared key authentication for this authentication group.
+                type: str
                 choices:
                     - cert
                     - psk
             cert:
                 description:
                     - Name of certificate to identify this peer. Source vpn.certificate.local.name.
+                type: str
             name:
                 description:
                     - Auth_group name.
                 required: true
+                type: str
             peer:
                 description:
                     - If peer_accept is set to one, select the name of one peer to add to this authentication group. The peer must have added with the wanopt
                        peer command. Source wanopt.peer.peer-host-id.
+                type: str
             peer_accept:
                 description:
                     - Determine if this auth group accepts, any peer, a list of defined peers, or just one peer.
+                type: str
                 choices:
                     - any
                     - defined
@@ -112,6 +117,7 @@ options:
             psk:
                 description:
                     - Pre_shared key used by the peers in this authentication group.
+                type: str
 '''
 
 EXAMPLES = '''

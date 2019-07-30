@@ -81,6 +81,7 @@ options:
             entropy_token:
                 description:
                     - Enable/disable/dynamic entropy token.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -88,12 +89,14 @@ options:
             key_generation_self_test:
                 description:
                     - Enable/disable self tests after key generation.
+                type: str
                 choices:
                     - enable
                     - disable
             self_test_period:
                 description:
                     - Self test period.
+                type: int
 '''
 
 EXAMPLES = '''

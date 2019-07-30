@@ -81,9 +81,11 @@ options:
             server:
                 description:
                     - Address of the remote WebTrends server.
+                type: str
             status:
                 description:
                     - Enable/disable logging to WebTrends.
+                type: str
                 choices:
                     - enable
                     - disable

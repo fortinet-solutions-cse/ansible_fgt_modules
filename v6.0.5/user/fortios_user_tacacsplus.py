@@ -88,6 +88,7 @@ options:
             authen_type:
                 description:
                     - Allowed authentication protocols/methods.
+                type: str
                 choices:
                     - mschap
                     - chap
@@ -97,37 +98,47 @@ options:
             authorization:
                 description:
                     - Enable/disable TACACS+ authorization.
+                type: str
                 choices:
                     - enable
                     - disable
             key:
                 description:
                     - Key to access the primary server.
+                type: str
             name:
                 description:
                     - TACACS+ server entry name.
                 required: true
+                type: str
             port:
                 description:
                     - Port number of the TACACS+ server.
+                type: int
             secondary_key:
                 description:
                     - Key to access the secondary server.
+                type: str
             secondary_server:
                 description:
                     - Secondary TACACS+ server CN domain name or IP address.
+                type: str
             server:
                 description:
                     - Primary TACACS+ server CN domain name or IP address.
+                type: str
             source_ip:
                 description:
                     - source IP for communications to TACACS+ server.
+                type: str
             tertiary_key:
                 description:
                     - Key to access the tertiary server.
+                type: str
             tertiary_server:
                 description:
                     - Tertiary TACACS+ server CN domain name or IP address.
+                type: str
 '''
 
 EXAMPLES = '''

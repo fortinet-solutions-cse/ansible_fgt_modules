@@ -89,53 +89,67 @@ options:
                 description:
                     - Interface associated with the address object. When setting up a policy, only addresses associated with this interface are available.
                        Source system.interface.name.
+                type: str
             color:
                 description:
                     - Integer value to determine the color of the icon in the GUI (1 _ 32, default = 0, which sets value to 1).
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             end_ip:
                 description:
                     - Final IPv4 address (inclusive) in the range for the address.
+                type: str
             name:
                 description:
                     - Multicast address name.
                 required: true
+                type: str
             start_ip:
                 description:
                     - First IPv4 address (inclusive) in the range for the address.
+                type: str
             subnet:
                 description:
                     - Broadcast address and subnet.
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
             type:
                 description:
                     - "Type of address object: multicast IP address range or broadcast IP/mask to be treated as a multicast address."
+                type: str
                 choices:
                     - multicastrange
                     - broadcastmask
             visibility:
                 description:
                     - Enable/disable visibility of the multicast address on the GUI.
+                type: str
                 choices:
                     - enable
                     - disable

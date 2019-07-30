@@ -89,18 +89,23 @@ options:
                 description:
                     - SSH proxy local key name.
                 required: true
+                type: str
             password:
                 description:
                     - Password for SSH private key.
+                type: str
             private_key:
                 description:
                     - SSH proxy private key, encrypted with a password.
+                type: str
             public_key:
                 description:
                     - SSH proxy public key.
+                type: str
             source:
                 description:
                     - SSH proxy local key source type.
+                type: str
                 choices:
                     - built-in
                     - user

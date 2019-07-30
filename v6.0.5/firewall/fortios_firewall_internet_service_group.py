@@ -88,18 +88,22 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             member:
                 description:
                     - Internet Service group member.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Internet Service ID. Source firewall.internet-service.id.
                         required: true
+                        type: int
             name:
                 description:
                     - Internet Service group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

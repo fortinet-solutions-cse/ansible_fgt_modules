@@ -88,47 +88,57 @@ options:
             action:
                 description:
                     - Accept or deny traffic matching the policy.
+                type: str
                 choices:
                     - accept
                     - deny
             comments:
                 description:
                     - Comment.
+                type: str
             dstaddr:
                 description:
                     - Destination address objects.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.vip46.name firewall.vipgrp46.name.
                         required: true
+                        type: str
             dstintf:
                 description:
                     - Destination interface name. Source system.interface.name system.zone.name.
+                type: str
             fixedport:
                 description:
                     - Enable/disable fixed port for this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             ippool:
                 description:
                     - Enable/disable use of IP Pools for source NAT.
+                type: str
                 choices:
                     - enable
                     - disable
             logtraffic:
                 description:
                     - Enable/disable traffic logging for this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             per_ip_shaper:
                 description:
                     - Per IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
+                type: str
             permit_any_host:
                 description:
                     - Enable/disable allowing any host.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -136,57 +146,72 @@ options:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             poolname:
                 description:
                     - IP Pool names.
+                type: list
                 suboptions:
                     name:
                         description:
                             - IP pool name. Source firewall.ippool6.name.
                         required: true
+                        type: str
             schedule:
                 description:
                     - Schedule name. Source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name.
+                type: str
             service:
                 description:
                     - Service name.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Service name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             srcaddr:
                 description:
                     - Source address objects.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             srcintf:
                 description:
                     - Source interface name. Source system.zone.name system.interface.name.
+                type: str
             status:
                 description:
                     - Enable/disable this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             tcp_mss_receiver:
                 description:
                     - TCP Maximum Segment Size value of receiver (0 _ 65535, default = 0)
+                type: int
             tcp_mss_sender:
                 description:
                     - TCP Maximum Segment Size value of sender (0 _ 65535, default = 0).
+                type: int
             traffic_shaper:
                 description:
                     - Traffic shaper. Source firewall.shaper.traffic-shaper.name.
+                type: str
             traffic_shaper_reverse:
                 description:
                     - Reverse traffic shaper. Source firewall.shaper.traffic-shaper.name.
+                type: str
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
 '''
 
 EXAMPLES = '''

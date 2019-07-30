@@ -88,52 +88,65 @@ options:
             color:
                 description:
                     - Integer value to determine the color of the icon in the GUI (1 _ 32, default = 0, which sets value to 1).
+                type: int
             comment:
                 description:
                     - Optional comments.
+                type: str
             member:
                 description:
                     - Members of address group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.proxy-address.name firewall.proxy-addrgrp.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Address group name.
                 required: true
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
             type:
                 description:
                     - Source or destination address group type.
+                type: str
                 choices:
                     - src
                     - dst
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
             visibility:
                 description:
                     - Enable/disable visibility of the object in the GUI.
+                type: str
                 choices:
                     - enable
                     - disable

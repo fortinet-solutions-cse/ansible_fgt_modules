@@ -88,18 +88,22 @@ options:
             auth_concurrent_override:
                 description:
                     - Enable/disable overriding the global number of concurrent authentication sessions for this user group.
+                type: str
                 choices:
                     - enable
                     - disable
             auth_concurrent_value:
                 description:
                     - Maximum number of concurrent authenticated connections per user (0 _ 100).
+                type: int
             authtimeout:
                 description:
                     - Authentication timeout in minutes for this user group. 0 to use the global user setting auth_timeout.
+                type: int
             company:
                 description:
                     - Set the action for the company guest user field.
+                type: str
                 choices:
                     - optional
                     - mandatory
@@ -107,21 +111,25 @@ options:
             email:
                 description:
                     - Enable/disable the guest user email address field.
+                type: str
                 choices:
                     - disable
                     - enable
             expire:
                 description:
                     - Time in seconds before guest user accounts expire. (1 _ 31536000 sec)
+                type: int
             expire_type:
                 description:
                     - Determine when the expiration countdown begins.
+                type: str
                 choices:
                     - immediately
                     - first-successful-login
             group_type:
                 description:
                     - Set the group to be for firewall authentication, FSSO, RSSO, or guest users.
+                type: str
                 choices:
                     - firewall
                     - fsso-service
@@ -130,75 +138,96 @@ options:
             guest:
                 description:
                     - Guest User.
+                type: list
                 suboptions:
                     comment:
                         description:
                             - Comment.
+                        type: str
                     company:
                         description:
                             - Set the action for the company guest user field.
+                        type: str
                     email:
                         description:
                             - Email.
+                        type: str
                     expiration:
                         description:
                             - Expire time.
+                        type: str
                     mobile_phone:
                         description:
                             - Mobile phone.
+                        type: str
                     name:
                         description:
                             - Guest name.
+                        type: str
                     password:
                         description:
                             - Guest password.
+                        type: str
                     sponsor:
                         description:
                             - Set the action for the sponsor guest user field.
+                        type: str
                     user_id:
                         description:
                             - Guest ID.
+                        type: str
             http_digest_realm:
                 description:
                     - Realm attribute for MD5_digest authentication.
+                type: str
             id:
                 description:
                     - Group ID.
+                type: int
             match:
                 description:
                     - Group matches.
+                type: list
                 suboptions:
                     group_name:
                         description:
                             - Name of matching group on remote authentication server.
+                        type: str
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     server_name:
                         description:
                             - Name of remote auth server. Source user.radius.name user.ldap.name user.tacacs+.name.
+                        type: str
             max_accounts:
                 description:
                     - Maximum number of guest accounts that can be created for this group (0 means unlimited).
+                type: int
             member:
                 description:
                     - Names of users, peers, LDAP severs, or RADIUS servers to add to the user group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Group member name. Source user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user
                               .pop3.name.
                         required: true
+                        type: str
             mobile_phone:
                 description:
                     - Enable/disable the guest user mobile phone number field.
+                type: str
                 choices:
                     - disable
                     - enable
             multiple_guest_add:
                 description:
                     - Enable/disable addition of multiple guests.
+                type: str
                 choices:
                     - disable
                     - enable
@@ -206,9 +235,11 @@ options:
                 description:
                     - Group name.
                 required: true
+                type: str
             password:
                 description:
                     - Guest user password type.
+                type: str
                 choices:
                     - auto-generate
                     - specify
@@ -216,15 +247,18 @@ options:
             sms_custom_server:
                 description:
                     - SMS server. Source system.sms-server.name.
+                type: str
             sms_server:
                 description:
                     - Send SMS through FortiGuard or other external server.
+                type: str
                 choices:
                     - fortiguard
                     - custom
             sponsor:
                 description:
                     - Set the action for the sponsor guest user field.
+                type: str
                 choices:
                     - optional
                     - mandatory
@@ -232,9 +266,11 @@ options:
             sso_attribute_value:
                 description:
                     - Name of the RADIUS user group that this local user group represents.
+                type: str
             user_id:
                 description:
                     - Guest user ID type.
+                type: str
                 choices:
                     - email
                     - auto-generate
@@ -242,6 +278,7 @@ options:
             user_name:
                 description:
                     - Enable/disable the guest user name entry.
+                type: str
                 choices:
                     - disable
                     - enable

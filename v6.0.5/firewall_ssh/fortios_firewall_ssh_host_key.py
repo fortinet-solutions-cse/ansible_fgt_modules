@@ -88,16 +88,20 @@ options:
             hostname:
                 description:
                     - Hostname of the SSH server.
+                type: str
             ip:
                 description:
                     - IP address of the SSH server.
+                type: str
             name:
                 description:
                     - SSH public key name.
                 required: true
+                type: str
             nid:
                 description:
                     - Set the nid of the ECDSA key.
+                type: str
                 choices:
                     - 256
                     - 384
@@ -105,18 +109,22 @@ options:
             port:
                 description:
                     - Port of the SSH server.
+                type: int
             public_key:
                 description:
                     - SSH public key.
+                type: str
             status:
                 description:
                     - Set the trust status of the public key.
+                type: str
                 choices:
                     - trusted
                     - revoked
             type:
                 description:
                     - Set the type of the public key.
+                type: str
                 choices:
                     - RSA
                     - DSA

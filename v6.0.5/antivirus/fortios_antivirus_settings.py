@@ -81,6 +81,7 @@ options:
             default_db:
                 description:
                     - Select the AV database to be used for AV scanning.
+                type: str
                 choices:
                     - normal
                     - extended
@@ -88,6 +89,7 @@ options:
             grayware:
                 description:
                     - Enable/disable grayware detection when an AntiVirus profile is applied to traffic.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -95,6 +97,7 @@ options:
                 description:
                     - Override the large file scan timeout value in seconds (30 _ 3600). Zero is the default value and is used to disable this command. When
                        disabled, the daemon adjusts the large file scan timeout based on the file size.
+                type: int
 '''
 
 EXAMPLES = '''

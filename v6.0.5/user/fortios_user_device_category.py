@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             desc:
                 description:
                     - Device category description.
+                type: str
             name:
                 description:
                     - Device category name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

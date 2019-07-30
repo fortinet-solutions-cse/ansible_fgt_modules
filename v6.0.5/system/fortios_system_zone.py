@@ -90,13 +90,16 @@ options:
             interface:
                 description:
                     - Add interfaces to this zone. Interfaces must not be assigned to another zone or have firewall policies defined.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Select two or more interfaces to add to the zone. Source system.interface.name.
+                        type: str
             intrazone:
                 description:
                     - Allow or deny traffic routing between different interfaces in the same zone (default = deny).
+                type: str
                 choices:
                     - allow
                     - deny
@@ -104,25 +107,31 @@ options:
                 description:
                     - Zone name.
                 required: true
+                type: str
             tagging:
                 description:
                     - Config object tagging.
+                type: list
                 suboptions:
                     category:
                         description:
                             - Tag category. Source system.object-tagging.category.
+                        type: str
                     name:
                         description:
                             - Tagging entry name.
                         required: true
+                        type: str
                     tags:
                         description:
                             - Tags.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Tag name. Source system.object-tagging.tags.name.
                                 required: true
+                                type: str
 '''
 
 EXAMPLES = '''

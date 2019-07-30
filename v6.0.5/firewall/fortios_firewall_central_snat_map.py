@@ -88,68 +88,85 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             dst_addr:
                 description:
                     - Destination address name from available addresses.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             dstintf:
                 description:
                     - Destination interface name from available interfaces.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Interface name. Source system.interface.name system.zone.name.
                         required: true
+                        type: str
             nat:
                 description:
                     - Enable/disable source NAT.
+                type: str
                 choices:
                     - disable
                     - enable
             nat_ippool:
                 description:
                     - Name of the IP pools to be used to translate addresses from available IP Pools.
+                type: list
                 suboptions:
                     name:
                         description:
                             - IP pool name. Source firewall.ippool.name.
                         required: true
+                        type: str
             nat_port:
                 description:
                     - Translated port or port range (0 to 65535).
+                type: str
             orig_addr:
                 description:
                     - Original address.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             orig_port:
                 description:
                     - Original TCP port (0 to 65535).
+                type: str
             policyid:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             protocol:
                 description:
                     - Integer value for the protocol type (0 _ 255).
+                type: int
             srcintf:
                 description:
                     - Source interface name from available interfaces.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Interface name. Source system.interface.name system.zone.name.
                         required: true
+                        type: str
             status:
                 description:
                     - Enable/disable the active status of this policy.
+                type: str
                 choices:
                     - enable
                     - disable

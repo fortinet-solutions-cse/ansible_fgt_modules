@@ -88,10 +88,12 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             name:
                 description:
                     - Service category name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

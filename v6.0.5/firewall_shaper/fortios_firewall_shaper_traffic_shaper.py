@@ -88,6 +88,7 @@ options:
             bandwidth_unit:
                 description:
                     - Unit of measurement for guaranteed and maximum bandwidth for this shaper (Kbps, Mbps or Gbps).
+                type: str
                 choices:
                     - kbps
                     - mbps
@@ -95,32 +96,39 @@ options:
             diffserv:
                 description:
                     - Enable/disable changing the DiffServ setting applied to traffic accepted by this shaper.
+                type: str
                 choices:
                     - enable
                     - disable
             diffservcode:
                 description:
                     - DiffServ setting to be applied to traffic accepted by this shaper.
+                type: str
             guaranteed_bandwidth:
                 description:
                     - Amount of bandwidth guaranteed for this shaper (0 _ 16776000). Units depend on the bandwidth_unit setting.
+                type: int
             maximum_bandwidth:
                 description:
                     - Upper bandwidth limit enforced by this shaper (0 _ 16776000). 0 means no limit. Units depend on the bandwidth_unit setting.
+                type: int
             name:
                 description:
                     - Traffic shaper name.
                 required: true
+                type: str
             per_policy:
                 description:
                     - Enable/disable applying a separate shaper for each policy. For example, if enabled the guaranteed bandwidth is applied separately for
                        each policy.
+                type: str
                 choices:
                     - disable
                     - enable
             priority:
                 description:
                     - Higher priority traffic is more likely to be forwarded without delays and without compromising the guaranteed bandwidth.
+                type: str
                 choices:
                     - low
                     - medium

@@ -88,16 +88,20 @@ options:
             affinity_cpumask:
                 description:
                     - Affinity setting for VM throughput (64_bit hexadecimal value in the format of 0xxxxxxxxxxxxxxxxx).
+                type: str
             id:
                 description:
                     - ID of the packet redistribution setting.
                 required: true
+                type: int
             interface:
                 description:
                     - Physical interface name on which to perform packet redistribution. Source system.interface.name.
+                type: str
             rxqid:
                 description:
                     - ID of the receive queue (when the interface has multiple queues) on which to perform packet redistribution.
+                type: int
 '''
 
 EXAMPLES = '''

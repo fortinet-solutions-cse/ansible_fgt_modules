@@ -81,27 +81,34 @@ options:
             default_gateway:
                 description:
                     - Default gateway for dedicated management interface.
+                type: str
             dhcp_end_ip:
                 description:
                     - DHCP end IP for dedicated management.
+                type: str
             dhcp_netmask:
                 description:
                     - DHCP netmask.
+                type: str
             dhcp_server:
                 description:
                     - Enable/disable DHCP server on management interface.
+                type: str
                 choices:
                     - enable
                     - disable
             dhcp_start_ip:
                 description:
                     - DHCP start IP for dedicated management.
+                type: str
             interface:
                 description:
                     - Dedicated management interface. Source system.interface.name.
+                type: str
             status:
                 description:
                     - Enable/disable dedicated management.
+                type: str
                 choices:
                     - enable
                     - disable

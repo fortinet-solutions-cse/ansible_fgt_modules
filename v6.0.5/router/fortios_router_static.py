@@ -88,78 +88,97 @@ options:
             bfd:
                 description:
                     - Enable/disable Bidirectional Forwarding Detection (BFD).
+                type: str
                 choices:
                     - enable
                     - disable
             blackhole:
                 description:
                     - Enable/disable black hole.
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Optional comments.
+                type: str
             device:
                 description:
                     - Gateway out interface or tunnel. Source system.interface.name.
+                type: str
             distance:
                 description:
                     - Administrative distance (1 _ 255).
+                type: int
             dst:
                 description:
                     - Destination IP and mask for this route.
+                type: str
             dstaddr:
                 description:
                     - Name of firewall address or address group. Source firewall.address.name firewall.addrgrp.name.
+                type: str
             dynamic_gateway:
                 description:
                     - Enable use of dynamic gateway retrieved from a DHCP or PPP server.
+                type: str
                 choices:
                     - enable
                     - disable
             gateway:
                 description:
                     - Gateway IP for this route.
+                type: str
             internet_service:
                 description:
                     - Application ID in the Internet service database. Source firewall.internet-service.id.
+                type: int
             internet_service_custom:
                 description:
                     - Application name in the Internet service custom database. Source firewall.internet-service-custom.name.
+                type: str
             link_monitor_exempt:
                 description:
                     - Enable/disable withdrawing this route when link monitor or health check is down.
+                type: str
                 choices:
                     - enable
                     - disable
             priority:
                 description:
                     - Administrative priority (0 _ 4294967295).
+                type: int
             seq_num:
                 description:
                     - Sequence number.
+                type: int
             src:
                 description:
                     - Source prefix for this route.
+                type: str
             status:
                 description:
                     - Enable/disable this static route.
+                type: str
                 choices:
                     - enable
                     - disable
             virtual_wan_link:
                 description:
                     - Enable/disable egress through the virtual_wan_link.
+                type: str
                 choices:
                     - enable
                     - disable
             vrf:
                 description:
                     - Virtual Routing Forwarding ID.
+                type: int
             weight:
                 description:
                     - Administrative weight (0 _ 255).
+                type: int
 '''
 
 EXAMPLES = '''

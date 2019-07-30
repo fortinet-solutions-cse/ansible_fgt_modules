@@ -88,9 +88,11 @@ options:
             ip:
                 description:
                     - Peer IP address.
+                type: str
             peer_host_id:
                 description:
                     - Peer host ID.
+                type: str
 '''
 
 EXAMPLES = '''

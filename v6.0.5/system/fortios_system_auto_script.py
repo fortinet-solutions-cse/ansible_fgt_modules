@@ -88,22 +88,28 @@ options:
             interval:
                 description:
                     - Repeat interval in seconds.
+                type: int
             name:
                 description:
                     - Auto script name.
                 required: true
+                type: str
             output_size:
                 description:
                     - Number of megabytes to limit script output to (10 _ 1024, default = 10).
+                type: int
             repeat:
                 description:
                     - Number of times to repeat this script (0 = infinite).
+                type: int
             script:
                 description:
                     - List of FortiOS CLI commands to repeat.
+                type: str
             start:
                 description:
                     - Script starting mode.
+                type: str
                 choices:
                     - manual
                     - auto

@@ -88,25 +88,30 @@ options:
             app_replacemsg:
                 description:
                     - Enable/disable replacement messages for blocked applications.
+                type: str
                 choices:
                     - disable
                     - enable
             comment:
                 description:
                     - comments
+                type: str
             deep_app_inspection:
                 description:
                     - Enable/disable deep application inspection.
+                type: str
                 choices:
                     - disable
                     - enable
             entries:
                 description:
                     - Application list entries.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Pass or block traffic, or reset connection for traffic from this application.
+                        type: str
                         choices:
                             - pass
                             - block
@@ -114,55 +119,68 @@ options:
                     application:
                         description:
                             - ID of allowed applications.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Application IDs.
                                 required: true
+                                type: int
                     behavior:
                         description:
                             - Application behavior filter.
+                        type: str
                     category:
                         description:
                             - Category ID list.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Application category ID.
                                 required: true
+                                type: int
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     log:
                         description:
                             - Enable/disable logging for this application list.
+                        type: str
                         choices:
                             - disable
                             - enable
                     log_packet:
                         description:
                             - Enable/disable packet logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     parameters:
                         description:
                             - Application parameters.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Parameter ID.
                                 required: true
+                                type: int
                             value:
                                 description:
                                     - Parameter value.
+                                type: str
                     per_ip_shaper:
                         description:
                             - Per_IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
+                        type: str
                     popularity:
                         description:
                             - Application popularity filter (1 _ 5, from least to most popular).
+                        type: str
                         choices:
                             - 1
                             - 2
@@ -172,36 +190,44 @@ options:
                     protocols:
                         description:
                             - Application protocol filter.
+                        type: str
                     quarantine:
                         description:
                             - Quarantine method.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
+                        type: str
                     quarantine_log:
                         description:
                             - Enable/disable quarantine logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     rate_count:
                         description:
                             - Count of the rate.
+                        type: int
                     rate_duration:
                         description:
                             - Duration (sec) of the rate.
+                        type: int
                     rate_mode:
                         description:
                             - Rate limit mode.
+                        type: str
                         choices:
                             - periodical
                             - continuous
                     rate_track:
                         description:
                             - Track the packet protocol field.
+                        type: str
                         choices:
                             - none
                             - src-ip
@@ -211,37 +237,47 @@ options:
                     risk:
                         description:
                             - Risk, or impact, of allowing traffic from this application to occur (1 _ 5; Low, Elevated, Medium, High, and Critical).
+                        type: list
                         suboptions:
                             level:
                                 description:
                                     - Risk, or impact, of allowing traffic from this application to occur (1 _ 5; Low, Elevated, Medium, High, and Critical).
                                 required: true
+                                type: int
                     session_ttl:
                         description:
                             - Session TTL (0 = default).
+                        type: int
                     shaper:
                         description:
                             - Traffic shaper. Source firewall.shaper.traffic-shaper.name.
+                        type: str
                     shaper_reverse:
                         description:
                             - Reverse traffic shaper. Source firewall.shaper.traffic-shaper.name.
+                        type: str
                     sub_category:
                         description:
                             - Application Sub_category ID list.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Application sub_category ID.
                                 required: true
+                                type: int
                     technology:
                         description:
                             - Application technology filter.
+                        type: str
                     vendor:
                         description:
                             - Application vendor filter.
+                        type: str
             extended_log:
                 description:
                     - Enable/disable extended logging.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -249,9 +285,11 @@ options:
                 description:
                     - List name.
                 required: true
+                type: str
             options:
                 description:
                     - Basic application protocol signatures allowed by default.
+                type: str
                 choices:
                     - allow-dns
                     - allow-icmp
@@ -261,18 +299,21 @@ options:
             other_application_action:
                 description:
                     - Action for other applications.
+                type: str
                 choices:
                     - pass
                     - block
             other_application_log:
                 description:
                     - Enable/disable logging for other applications.
+                type: str
                 choices:
                     - disable
                     - enable
             p2p_black_list:
                 description:
                     - P2P applications to be black listed.
+                type: str
                 choices:
                     - skype
                     - edonkey
@@ -280,15 +321,18 @@ options:
             replacemsg_group:
                 description:
                     - Replacement message group. Source system.replacemsg-group.name.
+                type: str
             unknown_application_action:
                 description:
                     - Pass or block traffic from unknown applications.
+                type: str
                 choices:
                     - pass
                     - block
             unknown_application_log:
                 description:
                     - Enable/disable logging for unknown applications.
+                type: str
                 choices:
                     - disable
                     - enable

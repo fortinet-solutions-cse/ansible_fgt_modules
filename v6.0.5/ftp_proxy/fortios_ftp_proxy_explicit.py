@@ -81,21 +81,26 @@ options:
             incoming_ip:
                 description:
                     - Accept incoming FTP requests from this IP address. An interface must have this IP address.
+                type: str
             incoming_port:
                 description:
                     - Accept incoming FTP requests on one or more ports.
+                type: str
             outgoing_ip:
                 description:
                     - Outgoing FTP requests will leave from this IP address. An interface must have this IP address.
+                type: str
             sec_default_action:
                 description:
                     - Accept or deny explicit FTP proxy sessions when no FTP proxy firewall policy exists.
+                type: str
                 choices:
                     - accept
                     - deny
             status:
                 description:
                     - Enable/disable the explicit FTP proxy.
+                type: str
                 choices:
                     - enable
                     - disable

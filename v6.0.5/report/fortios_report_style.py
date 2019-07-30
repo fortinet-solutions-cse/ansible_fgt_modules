@@ -88,6 +88,7 @@ options:
             align:
                 description:
                     - Alignment.
+                type: str
                 choices:
                     - left
                     - center
@@ -96,33 +97,42 @@ options:
             bg_color:
                 description:
                     - Background color.
+                type: str
             border_bottom:
                 description:
                     - Border bottom.
+                type: str
             border_left:
                 description:
                     - Border left.
+                type: str
             border_right:
                 description:
                     - Border right.
+                type: str
             border_top:
                 description:
                     - Border top.
+                type: str
             column_gap:
                 description:
                     - Column gap.
+                type: str
             column_span:
                 description:
                     - Column span.
+                type: str
                 choices:
                     - none
                     - all
             fg_color:
                 description:
                     - Foreground color.
+                type: str
             font_family:
                 description:
                     - Font family.
+                type: str
                 choices:
                     - Verdana
                     - Arial
@@ -132,43 +142,54 @@ options:
             font_size:
                 description:
                     - Font size.
+                type: str
             font_style:
                 description:
                     - Font style.
+                type: str
                 choices:
                     - normal
                     - italic
             font_weight:
                 description:
                     - Font weight.
+                type: str
                 choices:
                     - normal
                     - bold
             height:
                 description:
                     - Height.
+                type: str
             line_height:
                 description:
                     - Text line height.
+                type: str
             margin_bottom:
                 description:
                     - Margin bottom.
+                type: str
             margin_left:
                 description:
                     - Margin left.
+                type: str
             margin_right:
                 description:
                     - Margin right.
+                type: str
             margin_top:
                 description:
                     - Margin top.
+                type: str
             name:
                 description:
                     - Report style name.
                 required: true
+                type: str
             options:
                 description:
                     - Report style options.
+                type: str
                 choices:
                     - font
                     - text
@@ -182,18 +203,23 @@ options:
             padding_bottom:
                 description:
                     - Padding bottom.
+                type: str
             padding_left:
                 description:
                     - Padding left.
+                type: str
             padding_right:
                 description:
                     - Padding right.
+                type: str
             padding_top:
                 description:
                     - Padding top.
+                type: str
             width:
                 description:
                     - Width.
+                type: str
 '''
 
 EXAMPLES = '''

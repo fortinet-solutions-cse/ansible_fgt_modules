@@ -88,32 +88,39 @@ options:
             intra_switch_policy:
                 description:
                     - Allow any traffic between switch interfaces or require firewall policies to allow traffic between switch interfaces.
+                type: str
                 choices:
                     - implicit
                     - explicit
             member:
                 description:
                     - Names of the interfaces that belong to the virtual switch.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Physical interface name. Source system.interface.name.
+                        type: str
             name:
                 description:
                     - Interface name (name cannot be in use by any other interfaces, VLANs, or inter_VDOM links).
                 required: true
+                type: str
             span:
                 description:
                     - Enable/disable port spanning. Port spanning echoes traffic received by the software switch to the span destination port.
+                type: str
                 choices:
                     - disable
                     - enable
             span_dest_port:
                 description:
                     - SPAN destination port name. All traffic on the SPAN source ports is echoed to the SPAN destination port. Source system.interface.name.
+                type: str
             span_direction:
                 description:
                     - "The direction in which the SPAN port operates, either: rx, tx, or both."
+                type: str
                 choices:
                     - rx
                     - tx
@@ -121,19 +128,23 @@ options:
             span_source_port:
                 description:
                     - Physical interface name. Port spanning echoes all traffic on the SPAN source ports to the SPAN destination port.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Physical interface name. Source system.interface.name.
+                        type: str
             type:
                 description:
                     - "Type of switch based on functionality: switch for normal functionality, or hub to duplicate packets to all port members."
+                type: str
                 choices:
                     - switch
                     - hub
             vdom:
                 description:
                     - VDOM that the software switch belongs to. Source system.vdom.name.
+                type: str
 '''
 
 EXAMPLES = '''

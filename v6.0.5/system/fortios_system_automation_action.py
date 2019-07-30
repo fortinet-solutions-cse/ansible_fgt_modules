@@ -88,6 +88,7 @@ options:
             action_type:
                 description:
                     - Action type.
+                type: str
                 choices:
                     - email
                     - ios-notification
@@ -101,49 +102,63 @@ options:
             aws_api_id:
                 description:
                     - AWS API Gateway ID.
+                type: str
             aws_api_key:
                 description:
                     - AWS API Gateway API key.
+                type: str
             aws_api_path:
                 description:
                     - AWS API Gateway path.
+                type: str
             aws_api_stage:
                 description:
                     - AWS API Gateway deployment stage name.
+                type: str
             aws_domain:
                 description:
                     - AWS domain.
+                type: str
             aws_region:
                 description:
                     - AWS region.
+                type: str
             delay:
                 description:
                     - Delay before execution (in seconds).
+                type: int
             email_subject:
                 description:
                     - Email subject.
+                type: str
             email_to:
                 description:
                     - Email addresses.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Email address.
                         required: true
+                        type: str
             headers:
                 description:
                     - Request headers.
+                type: list
                 suboptions:
                     header:
                         description:
                             - Request header.
                         required: true
+                        type: str
             http_body:
                 description:
                     - Request body (if necessary). Should be serialized json string.
+                type: str
             method:
                 description:
                     - Request method (GET, POST or PUT).
+                type: str
                 choices:
                     - post
                     - put
@@ -151,28 +166,34 @@ options:
             minimum_interval:
                 description:
                     - Limit execution to no more than once in this interval (in seconds).
+                type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             port:
                 description:
                     - Protocol port.
+                type: int
             protocol:
                 description:
                     - Request protocol.
+                type: str
                 choices:
                     - http
                     - https
             required:
                 description:
                     - Required in action chain.
+                type: str
                 choices:
                     - enable
                     - disable
             uri:
                 description:
                     - Request API URI.
+                type: str
 '''
 
 EXAMPLES = '''

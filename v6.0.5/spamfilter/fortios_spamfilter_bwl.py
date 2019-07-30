@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Anti_spam black/white list entries.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Reject, mark as spam or good email.
+                        type: str
                         choices:
                             - reject
                             - spam
@@ -102,37 +105,45 @@ options:
                     addr_type:
                         description:
                             - IP address type.
+                        type: str
                         choices:
                             - ipv4
                             - ipv6
                     email_pattern:
                         description:
                             - Email address pattern.
+                        type: str
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     ip4_subnet:
                         description:
                             - IPv4 network address/subnet mask bits.
+                        type: str
                     ip6_subnet:
                         description:
                             - IPv6 network address/subnet mask bits.
+                        type: str
                     pattern_type:
                         description:
                             - Wildcard pattern or regular expression.
+                        type: str
                         choices:
                             - wildcard
                             - regexp
                     status:
                         description:
                             - Enable/disable status.
+                        type: str
                         choices:
                             - enable
                             - disable
                     type:
                         description:
                             - Entry type.
+                        type: str
                         choices:
                             - ip
                             - email
@@ -140,9 +151,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

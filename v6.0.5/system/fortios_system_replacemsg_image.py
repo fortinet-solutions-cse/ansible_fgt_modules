@@ -88,9 +88,11 @@ options:
             image_base64:
                 description:
                     - Image data.
+                type: str
             image_type:
                 description:
                     - Image type.
+                type: str
                 choices:
                     - gif
                     - jpg
@@ -100,6 +102,7 @@ options:
                 description:
                     - Image name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

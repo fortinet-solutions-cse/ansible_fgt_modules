@@ -88,52 +88,66 @@ options:
             arp_intf:
                 description:
                     - Select an interface from available options that will reply to ARP requests. (If blank, any is selected). Source system.interface.name.
+                type: str
             arp_reply:
                 description:
                     - Enable/disable replying to ARP requests when an IP Pool is added to a policy (default = enable).
+                type: str
                 choices:
                     - disable
                     - enable
             associated_interface:
                 description:
                     - Associated interface name. Source system.interface.name.
+                type: str
             block_size:
                 description:
                     -  Number of addresses in a block (64 to 4096, default = 128).
+                type: int
             comments:
                 description:
                     - Comment.
+                type: str
             endip:
                 description:
                     - "Final IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                type: str
             name:
                 description:
                     - IP pool name.
                 required: true
+                type: str
             num_blocks_per_user:
                 description:
                     - Number of addresses blocks that can be used by a user (1 to 128, default = 8).
+                type: int
             pba_timeout:
                 description:
                     - Port block allocation timeout (seconds).
+                type: int
             permit_any_host:
                 description:
                     - Enable/disable full cone NAT.
+                type: str
                 choices:
                     - disable
                     - enable
             source_endip:
                 description:
                     - "Final IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                type: str
             source_startip:
                 description:
                     - " First IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                type: str
             startip:
                 description:
                     - "First IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                type: str
             type:
                 description:
                     - IP pool type (overload, one_to_one, fixed port range, or port block allocation).
+                type: str
                 choices:
                     - overload
                     - one-to-one

@@ -88,9 +88,11 @@ options:
             device:
                 description:
                     - Partition device.
+                type: str
             media_status:
                 description:
                     - The physical status of current media.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -99,30 +101,37 @@ options:
                 description:
                     - Storage name.
                 required: true
+                type: str
             order:
                 description:
                     - Set storage order.
+                type: int
             partition:
                 description:
                     - Label of underlying partition.
+                type: str
             size:
                 description:
                     - Partition size.
+                type: int
             status:
                 description:
                     - Enable/disable storage.
+                type: str
                 choices:
                     - enable
                     - disable
             usage:
                 description:
                     - Use hard disk for logging or WAN Optimization (default = log).
+                type: str
                 choices:
                     - log
                     - wanopt
             wanopt_mode:
                 description:
                     - WAN Optimization mode (default = mix).
+                type: str
                 choices:
                     - mix
                     - wanopt

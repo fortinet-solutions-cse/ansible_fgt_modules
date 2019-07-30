@@ -81,30 +81,36 @@ options:
             destination_hostname_visibility:
                 description:
                     - Enable/disable logging of destination hostname visibility.
+                type: str
                 choices:
                     - disable
                     - enable
             destination_location:
                 description:
                     - Enable/disable logging of destination geographical location visibility.
+                type: str
                 choices:
                     - disable
                     - enable
             destination_visibility:
                 description:
                     - Enable/disable logging of destination visibility.
+                type: str
                 choices:
                     - disable
                     - enable
             hostname_limit:
                 description:
                     - Limit of the number of hostname table entries (0 _ 50000).
+                type: int
             hostname_ttl:
                 description:
                     - TTL of hostname table entries (60 _ 86400).
+                type: int
             source_location:
                 description:
                     - Enable/disable logging of source geographical location visibility.
+                type: str
                 choices:
                     - disable
                     - enable

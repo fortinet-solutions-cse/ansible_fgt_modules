@@ -81,9 +81,11 @@ options:
             email:
                 description:
                     - Notifier email address.
+                type: str
             enc_algorithm:
                 description:
                     - Configure the level of SSL protection for secure communication with FortiSandbox.
+                type: str
                 choices:
                     - default
                     - high
@@ -91,12 +93,15 @@ options:
             server:
                 description:
                     - IPv4 or IPv6 address of the remote FortiSandbox.
+                type: str
             source_ip:
                 description:
                     - Source IP address for communications to FortiSandbox.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -106,6 +111,7 @@ options:
             status:
                 description:
                     - Enable/disable FortiSandbox.
+                type: str
                 choices:
                     - enable
                     - disable

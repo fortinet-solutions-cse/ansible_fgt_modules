@@ -88,39 +88,48 @@ options:
             addr_type:
                 description:
                     - "Address type of the forwarding proxy server: IP or FQDN."
+                type: str
                 choices:
                     - ip
                     - fqdn
             comment:
                 description:
                     - Comment.
+                type: str
             fqdn:
                 description:
                     - Forward server Fully Qualified Domain Name (FQDN).
+                type: str
             healthcheck:
                 description:
                     - Enable/disable forward server health checking. Attempts to connect through the remote forwarding server to a destination to verify that
                        the forwarding server is operating normally.
+                type: str
                 choices:
                     - disable
                     - enable
             ip:
                 description:
                     - Forward proxy server IP address.
+                type: str
             monitor:
                 description:
                     - "URL for forward server health check monitoring (default = http://www.google.com)."
+                type: str
             name:
                 description:
                     - Server name.
                 required: true
+                type: str
             port:
                 description:
                     - Port number that the forwarding server expects to receive HTTP sessions on (1 _ 65535, default = 3128).
+                type: int
             server_down_option:
                 description:
                     - "Action to take when the forward server is found to be down: block sessions until the server is back up or pass sessions to their
                        destination."
+                type: str
                 choices:
                     - block
                     - pass

@@ -81,47 +81,58 @@ options:
             apply_to:
                 description:
                     - Guest administrator to which this password policy applies.
+                type: str
                 choices:
                     - guest-admin-password
             change_4_characters:
                 description:
                     - Enable/disable changing at least 4 characters for a new password (This attribute overrides reuse_password if both are enabled).
+                type: str
                 choices:
                     - enable
                     - disable
             expire_day:
                 description:
                     - Number of days after which passwords expire (1 _ 999 days, default = 90).
+                type: int
             expire_status:
                 description:
                     - Enable/disable password expiration.
+                type: str
                 choices:
                     - enable
                     - disable
             min_lower_case_letter:
                 description:
                     - Minimum number of lowercase characters in password (0 _ 128, default = 0).
+                type: int
             min_non_alphanumeric:
                 description:
                     - Minimum number of non_alphanumeric characters in password (0 _ 128, default = 0).
+                type: int
             min_number:
                 description:
                     - Minimum number of numeric characters in password (0 _ 128, default = 0).
+                type: int
             min_upper_case_letter:
                 description:
                     - Minimum number of uppercase characters in password (0 _ 128, default = 0).
+                type: int
             minimum_length:
                 description:
                     - Minimum password length (8 _ 128, default = 8).
+                type: int
             reuse_password:
                 description:
                     - Enable/disable reusing of password (if both reuse_password and change_4_characters are enabled, change_4_characters overrides).
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable setting a password policy for locally defined administrator passwords and IPsec VPN pre_shared keys.
+                type: str
                 choices:
                     - enable
                     - disable

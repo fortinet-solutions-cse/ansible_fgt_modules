@@ -89,9 +89,11 @@ options:
                 description:
                     - Name.
                 required: true
+                type: str
             server_name:
                 description:
                     - FSSO agent name. Source user.fsso.name.
+                type: str
 '''
 
 EXAMPLES = '''

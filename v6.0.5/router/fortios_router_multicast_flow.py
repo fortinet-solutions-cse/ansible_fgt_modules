@@ -88,24 +88,30 @@ options:
             comments:
                 description:
                     - Comment.
+                type: str
             flows:
                 description:
                     - Multicast_flow entries.
+                type: list
                 suboptions:
                     group_addr:
                         description:
                             - Multicast group IP address.
+                        type: str
                     id:
                         description:
                             - Flow ID.
                         required: true
+                        type: int
                     source_addr:
                         description:
                             - Multicast source IP address.
+                        type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

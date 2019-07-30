@@ -81,6 +81,7 @@ options:
             severity:
                 description:
                     - Severity of FortiSwitch logs that are added to the FortiGate event log.
+                type: str
                 choices:
                     - emergency
                     - alert
@@ -93,6 +94,7 @@ options:
             status:
                 description:
                     - Enable/disable adding FortiSwitch logs to FortiGate event log.
+                type: str
                 choices:
                     - enable
                     - disable

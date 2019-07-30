@@ -88,39 +88,48 @@ options:
             auth_fail_vlan:
                 description:
                     - Enable to allow limited access to clients that cannot authenticate.
+                type: str
                 choices:
                     - disable
                     - enable
             auth_fail_vlan_id:
                 description:
                     - VLAN ID on which authentication failed. Source system.interface.name.
+                type: str
             auth_fail_vlanid:
                 description:
                     - VLAN ID on which authentication failed.
+                type: int
             eap_passthru:
                 description:
                     - Enable/disable EAP pass_through mode, allowing protocols (such as LLDP) to pass through ports for more flexible authentication.
+                type: str
                 choices:
                     - disable
                     - enable
             guest_auth_delay:
                 description:
                     - Guest authentication delay (1 _ 900  sec, default = 30).
+                type: int
             guest_vlan:
                 description:
                     - Enable the guest VLAN feature to allow limited access to non_802.1X_compliant clients.
+                type: str
                 choices:
                     - disable
                     - enable
             guest_vlan_id:
                 description:
                     - Guest VLAN name. Source system.interface.name.
+                type: str
             guest_vlanid:
                 description:
                     - Guest VLAN ID.
+                type: int
             mac_auth_bypass:
                 description:
                     - Enable/disable MAB for this policy.
+                type: str
                 choices:
                     - disable
                     - enable
@@ -128,37 +137,44 @@ options:
                 description:
                     - Policy name.
                 required: true
+                type: str
             open_auth:
                 description:
                     - Enable/disable open authentication for this policy.
+                type: str
                 choices:
                     - disable
                     - enable
             policy_type:
                 description:
                     - Policy type.
+                type: str
                 choices:
                     - 802.1X
             radius_timeout_overwrite:
                 description:
                     - Enable to override the global RADIUS session timeout.
+                type: str
                 choices:
                     - disable
                     - enable
             security_mode:
                 description:
                     - Port or MAC based 802.1X security mode.
+                type: str
                 choices:
                     - 802.1X
                     - 802.1X-mac-based
             user_group:
                 description:
                     - Name of user_group to assign to this MAC Authentication Bypass (MAB) policy.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Group name. Source user.group.name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

@@ -88,6 +88,7 @@ options:
             header_client_ip:
                 description:
                     - "Action to take on the HTTP client_IP header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -95,6 +96,7 @@ options:
             header_front_end_https:
                 description:
                     - "Action to take on the HTTP front_end_HTTPS header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -102,6 +104,7 @@ options:
             header_via_request:
                 description:
                     - "Action to take on the HTTP via header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -109,6 +112,7 @@ options:
             header_via_response:
                 description:
                     - "Action to take on the HTTP via header in forwarded responses: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -116,6 +120,7 @@ options:
             header_x_authenticated_groups:
                 description:
                     - "Action to take on the HTTP x_authenticated_groups header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -123,6 +128,7 @@ options:
             header_x_authenticated_user:
                 description:
                     - "Action to take on the HTTP x_authenticated_user header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -130,6 +136,7 @@ options:
             header_x_forwarded_for:
                 description:
                     - "Action to take on the HTTP x_forwarded_for header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                type: str
                 choices:
                     - pass
                     - add
@@ -137,10 +144,12 @@ options:
             headers:
                 description:
                     - Configure HTTP forwarded requests headers.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action when HTTP the header forwarded.
+                        type: str
                         choices:
                             - add-to-request
                             - add-to-response
@@ -149,16 +158,20 @@ options:
                     content:
                         description:
                             - HTTP header's content.
+                        type: str
                     id:
                         description:
                             - HTTP forwarded header id.
                         required: true
+                        type: int
                     name:
                         description:
                             - HTTP forwarded header name.
+                        type: str
             log_header_change:
                 description:
                     - Enable/disable logging HTTP header changes.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -166,9 +179,11 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             strip_encoding:
                 description:
                     - Enable/disable stripping unsupported encoding from the request header.
+                type: str
                 choices:
                     - enable
                     - disable

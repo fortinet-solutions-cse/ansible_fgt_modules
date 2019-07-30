@@ -88,9 +88,11 @@ options:
             buffer:
                 description:
                     - Message string.
+                type: str
             format:
                 description:
                     - Format flag.
+                type: str
                 choices:
                     - none
                     - text
@@ -99,6 +101,7 @@ options:
             header:
                 description:
                     - Header flag.
+                type: str
                 choices:
                     - none
                     - http
@@ -106,6 +109,7 @@ options:
             msg_type:
                 description:
                     - Message type.
+                type: str
 '''
 
 EXAMPLES = '''

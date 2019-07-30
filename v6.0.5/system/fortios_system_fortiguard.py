@@ -81,76 +81,95 @@ options:
             antispam_cache:
                 description:
                     - Enable/disable FortiGuard antispam request caching. Uses a small amount of memory but improves performance.
+                type: str
                 choices:
                     - enable
                     - disable
             antispam_cache_mpercent:
                 description:
                     - Maximum percent of FortiGate memory the antispam cache is allowed to use (1 _ 15%).
+                type: int
             antispam_cache_ttl:
                 description:
                     - Time_to_live for antispam cache entries in seconds (300 _ 86400). Lower times reduce the cache size. Higher times may improve
                        performance since the cache will have more entries.
+                type: int
             antispam_expiration:
                 description:
                     - Expiration date of the FortiGuard antispam contract.
+                type: int
             antispam_force_off:
                 description:
                     - Enable/disable turning off the FortiGuard antispam service.
+                type: str
                 choices:
                     - enable
                     - disable
             antispam_license:
                 description:
                     - Interval of time between license checks for the FortiGuard antispam contract.
+                type: int
             antispam_timeout:
                 description:
                     - Antispam query time out (1 _ 30 sec, default = 7).
+                type: int
             auto_join_forticloud:
                 description:
                     - Automatically connect to and login to FortiCloud.
+                type: str
                 choices:
                     - enable
                     - disable
             ddns_server_ip:
                 description:
                     - IP address of the FortiDDNS server.
+                type: str
             ddns_server_port:
                 description:
                     - Port used to communicate with FortiDDNS servers.
+                type: int
             load_balance_servers:
                 description:
                     - Number of servers to alternate between as first FortiGuard option.
+                type: int
             outbreak_prevention_cache:
                 description:
                     - Enable/disable FortiGuard Virus Outbreak Prevention cache.
+                type: str
                 choices:
                     - enable
                     - disable
             outbreak_prevention_cache_mpercent:
                 description:
                     - Maximum percent of memory FortiGuard Virus Outbreak Prevention cache can use (1 _ 15%, default = 2).
+                type: int
             outbreak_prevention_cache_ttl:
                 description:
                     - Time_to_live for FortiGuard Virus Outbreak Prevention cache entries (300 _ 86400 sec, default = 300).
+                type: int
             outbreak_prevention_expiration:
                 description:
                     - Expiration date of FortiGuard Virus Outbreak Prevention contract.
+                type: int
             outbreak_prevention_force_off:
                 description:
                     - Turn off FortiGuard Virus Outbreak Prevention service.
+                type: str
                 choices:
                     - enable
                     - disable
             outbreak_prevention_license:
                 description:
                     - Interval of time between license checks for FortiGuard Virus Outbreak Prevention contract.
+                type: int
             outbreak_prevention_timeout:
                 description:
                     - FortiGuard Virus Outbreak Prevention time out (1 _ 30 sec, default = 7).
+                type: int
             port:
                 description:
                     - Port used to communicate with the FortiGuard servers.
+                type: str
                 choices:
                     - 53
                     - 8888
@@ -158,48 +177,60 @@ options:
             sdns_server_ip:
                 description:
                     - IP address of the FortiDNS server.
+                type: str
             sdns_server_port:
                 description:
                     - Port used to communicate with FortiDNS servers.
+                type: int
             service_account_id:
                 description:
                     - Service account ID.
+                type: str
             source_ip:
                 description:
                     - Source IPv4 address used to communicate with FortiGuard.
+                type: str
             source_ip6:
                 description:
                     - Source IPv6 address used to communicate with FortiGuard.
+                type: str
             update_server_location:
                 description:
                     - Signature update server location.
+                type: str
                 choices:
                     - usa
                     - any
             webfilter_cache:
                 description:
                     - Enable/disable FortiGuard web filter caching.
+                type: str
                 choices:
                     - enable
                     - disable
             webfilter_cache_ttl:
                 description:
                     - Time_to_live for web filter cache entries in seconds (300 _ 86400).
+                type: int
             webfilter_expiration:
                 description:
                     - Expiration date of the FortiGuard web filter contract.
+                type: int
             webfilter_force_off:
                 description:
                     - Enable/disable turning off the FortiGuard web filtering service.
+                type: str
                 choices:
                     - enable
                     - disable
             webfilter_license:
                 description:
                     - Interval of time between license checks for the FortiGuard web filter contract.
+                type: int
             webfilter_timeout:
                 description:
                     - Web filter query time out (1 _ 30 sec, default = 7).
+                type: int
 '''
 
 EXAMPLES = '''

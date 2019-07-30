@@ -88,16 +88,20 @@ options:
             bssid:
                 description:
                     - Access Point's (AP's) BSSID.
+                type: str
             id:
                 description:
                     - AP ID.
                 required: true
+                type: int
             ssid:
                 description:
                     - Access Point's (AP's) SSID.
+                type: str
             status:
                 description:
                     - "Access Point's (AP's) status: rogue, accepted, or supressed."
+                type: str
                 choices:
                     - rogue
                     - accepted

@@ -88,61 +88,80 @@ options:
             ldap_server:
                 description:
                     - LDAP server to get group information. Source user.ldap.name.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             password:
                 description:
                     - Password of the first FSSO collector agent.
+                type: str
             password2:
                 description:
                     - Password of the second FSSO collector agent.
+                type: str
             password3:
                 description:
                     - Password of the third FSSO collector agent.
+                type: str
             password4:
                 description:
                     - Password of the fourth FSSO collector agent.
+                type: str
             password5:
                 description:
                     - Password of the fifth FSSO collector agent.
+                type: str
             port:
                 description:
                     - Port of the first FSSO collector agent.
+                type: int
             port2:
                 description:
                     - Port of the second FSSO collector agent.
+                type: int
             port3:
                 description:
                     - Port of the third FSSO collector agent.
+                type: int
             port4:
                 description:
                     - Port of the fourth FSSO collector agent.
+                type: int
             port5:
                 description:
                     - Port of the fifth FSSO collector agent.
+                type: int
             server:
                 description:
                     - Domain name or IP address of the first FSSO collector agent.
+                type: str
             server2:
                 description:
                     - Domain name or IP address of the second FSSO collector agent.
+                type: str
             server3:
                 description:
                     - Domain name or IP address of the third FSSO collector agent.
+                type: str
             server4:
                 description:
                     - Domain name or IP address of the fourth FSSO collector agent.
+                type: str
             server5:
                 description:
                     - Domain name or IP address of the fifth FSSO collector agent.
+                type: str
             source_ip:
                 description:
                     - Source IP for communications to FSSO agent.
+                type: str
             source_ip6:
                 description:
                     - IPv6 source for communications to FSSO agent.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,9 +81,11 @@ options:
             hostname:
                 description:
                     - Hostname for this virtual domain router.
+                type: str
             show_filter:
                 description:
                     - Prefix_list as filter for showing routes. Source router.prefix-list.name.
+                type: str
 '''
 
 EXAMPLES = '''

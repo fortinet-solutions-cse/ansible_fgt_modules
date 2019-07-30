@@ -88,40 +88,50 @@ options:
             address:
                 description:
                     - Firewall address name. Source firewall.address.name.
+                type: str
             admin_password:
                 description:
                     - FortiClient EMS admin password.
+                type: str
             admin_type:
                 description:
                     - FortiClient EMS admin type.
+                type: str
                 choices:
                     - Windows
                     - LDAP
             admin_username:
                 description:
                     - FortiClient EMS admin username.
+                type: str
             https_port:
                 description:
                     - "FortiClient EMS HTTPS access port number. (1 _ 65535, default: 443)."
+                type: int
             listen_port:
                 description:
                     - "FortiClient EMS telemetry listen port number. (1 _ 65535, default: 8013)."
+                type: int
             name:
                 description:
                     - FortiClient Enterprise Management Server (EMS) name.
                 required: true
+                type: str
             rest_api_auth:
                 description:
                     - FortiClient EMS REST API authentication.
+                type: str
                 choices:
                     - disable
                     - userpass
             serial_number:
                 description:
                     - FortiClient EMS Serial Number.
+                type: str
             upload_port:
                 description:
                     - "FortiClient EMS telemetry upload port number. (1 _ 65535, default: 8014)."
+                type: int
 '''
 
 EXAMPLES = '''

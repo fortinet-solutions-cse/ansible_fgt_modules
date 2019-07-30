@@ -88,65 +88,81 @@ options:
             action:
                 description:
                     - Accept or deny traffic matching the policy.
+                type: str
                 choices:
                     - accept
                     - deny
             dnat:
                 description:
                     - IPv4 DNAT address used for multicast destination addresses.
+                type: str
             dstaddr:
                 description:
                     - Destination address objects.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Destination address objects. Source firewall.multicast-address.name.
                         required: true
+                        type: str
             dstintf:
                 description:
                     - Destination interface name. Source system.interface.name system.zone.name.
+                type: str
             end_port:
                 description:
                     -  Integer value for ending TCP/UDP/SCTP destination port in range (1 _ 65535, default = 1).
+                type: int
             id:
                 description:
                     - Policy ID.
                 required: true
+                type: int
             logtraffic:
                 description:
                     - Enable/disable logging traffic accepted by this policy.
+                type: str
                 choices:
                     - enable
                     - disable
             protocol:
                 description:
                     - Integer value for the protocol type as defined by IANA (0 _ 255, default = 0).
+                type: int
             snat:
                 description:
                     - Enable/disable substitution of the outgoing interface IP address for the original source IP address (called source NAT or SNAT).
+                type: str
                 choices:
                     - enable
                     - disable
             snat_ip:
                 description:
                     - IPv4 address to be used as the source address for NATed traffic.
+                type: str
             srcaddr:
                 description:
                     - Source address objects.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Source address objects. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             srcintf:
                 description:
                     - Source interface name. Source system.interface.name system.zone.name.
+                type: str
             start_port:
                 description:
                     - Integer value for starting TCP/UDP/SCTP destination port in range (1 _ 65535, default = 1).
+                type: int
             status:
                 description:
                     - Enable/disable this policy.
+                type: str
                 choices:
                     - enable
                     - disable

@@ -88,19 +88,24 @@ options:
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             end:
                 description:
                     - "Schedule end date and time, format hh:mm yyyy/mm/dd."
+                type: str
             expiration_days:
                 description:
                     - Write an event log message this many days before the schedule expires.
+                type: int
             name:
                 description:
                     - Onetime schedule name.
                 required: true
+                type: str
             start:
                 description:
                     - "Schedule start date and time, format hh:mm yyyy/mm/dd."
+                type: str
 '''
 
 EXAMPLES = '''

@@ -81,15 +81,19 @@ options:
             full_final_warning_threshold:
                 description:
                     - Log full final warning threshold as a percent (3 _ 100, default = 95).
+                type: int
             full_first_warning_threshold:
                 description:
                     - Log full first warning threshold as a percent (1 _ 98, default = 75).
+                type: int
             full_second_warning_threshold:
                 description:
                     - Log full second warning threshold as a percent (2 _ 99, default = 90).
+                type: int
             max_size:
                 description:
                     - Maximum amount of memory that can be used for memory logging in bytes.
+                type: int
 '''
 
 EXAMPLES = '''

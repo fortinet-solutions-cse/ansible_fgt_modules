@@ -89,12 +89,15 @@ options:
                 description:
                     - field ID <string>.
                 required: true
+                type: str
             name:
                 description:
                     - "Field name (max: 15 characters)."
+                type: str
             value:
                 description:
                     - "Field value (max: 15 characters)."
+                type: str
 '''
 
 EXAMPLES = '''

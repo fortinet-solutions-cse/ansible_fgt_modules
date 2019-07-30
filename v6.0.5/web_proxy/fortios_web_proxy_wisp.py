@@ -88,25 +88,32 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             max_connections:
                 description:
                     - Maximum number of web proxy WISP connections (4 _ 4096, default = 64).
+                type: int
             name:
                 description:
                     - Server name.
                 required: true
+                type: str
             outgoing_ip:
                 description:
                     - WISP outgoing IP address.
+                type: str
             server_ip:
                 description:
                     - WISP server IP address.
+                type: str
             server_port:
                 description:
                     - WISP server port (1 _ 65535, default = 15868).
+                type: int
             timeout:
                 description:
                     - Period of time before WISP requests time out (1 _ 15 sec, default = 5).
+                type: int
 '''
 
 EXAMPLES = '''

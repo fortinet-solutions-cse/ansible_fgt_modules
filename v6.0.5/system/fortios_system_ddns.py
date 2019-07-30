@@ -88,33 +88,41 @@ options:
             bound_ip:
                 description:
                     - Bound IP address.
+                type: str
             clear_text:
                 description:
                     - Enable/disable use of clear text connections.
+                type: str
                 choices:
                     - disable
                     - enable
             ddns_auth:
                 description:
                     - Enable/disable TSIG authentication for your DDNS server.
+                type: str
                 choices:
                     - disable
                     - tsig
             ddns_domain:
                 description:
                     - Your fully qualified domain name (for example, yourname.DDNS.com).
+                type: str
             ddns_key:
                 description:
                     - DDNS update key (base 64 encoding).
+                type: str
             ddns_keyname:
                 description:
                     - DDNS update key name.
+                type: str
             ddns_password:
                 description:
                     - DDNS password.
+                type: str
             ddns_server:
                 description:
                     - Select a DDNS service provider.
+                type: str
                 choices:
                     - dyndns.org
                     - dyns.net
@@ -130,38 +138,49 @@ options:
             ddns_server_ip:
                 description:
                     - Generic DDNS server IP.
+                type: str
             ddns_sn:
                 description:
                     - DDNS Serial Number.
+                type: str
             ddns_ttl:
                 description:
                     - Time_to_live for DDNS packets.
+                type: int
             ddns_username:
                 description:
                     - DDNS user name.
+                type: str
             ddns_zone:
                 description:
                     - Zone of your domain name (for example, DDNS.com).
+                type: str
             ddnsid:
                 description:
                     - DDNS ID.
                 required: true
+                type: int
             monitor_interface:
                 description:
                     - Monitored interface.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
             ssl_certificate:
                 description:
                     - Name of local certificate for SSL connections. Source certificate.local.name.
+                type: str
             update_interval:
                 description:
                     - DDNS update interval (60 _ 2592000 sec, default = 300).
+                type: int
             use_public_ip:
                 description:
                     - Enable/disable use of public IP address.
+                type: str
                 choices:
                     - disable
                     - enable

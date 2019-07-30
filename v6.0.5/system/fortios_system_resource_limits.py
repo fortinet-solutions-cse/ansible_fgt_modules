@@ -81,57 +81,75 @@ options:
             custom_service:
                 description:
                     - Maximum number of firewall custom services.
+                type: int
             dialup_tunnel:
                 description:
                     - Maximum number of dial_up tunnels.
+                type: int
             firewall_address:
                 description:
                     - Maximum number of firewall addresses (IPv4, IPv6, multicast).
+                type: int
             firewall_addrgrp:
                 description:
                     - Maximum number of firewall address groups (IPv4, IPv6).
+                type: int
             firewall_policy:
                 description:
                     - Maximum number of firewall policies (IPv4, IPv6, policy46, policy64, DoS_policy4, DoS_policy6, multicast).
+                type: int
             ipsec_phase1:
                 description:
                     - Maximum number of VPN IPsec phase1 tunnels.
+                type: int
             ipsec_phase1_interface:
                 description:
                     - Maximum number of VPN IPsec phase1 interface tunnels.
+                type: int
             ipsec_phase2:
                 description:
                     - Maximum number of VPN IPsec phase2 tunnels.
+                type: int
             ipsec_phase2_interface:
                 description:
                     - Maximum number of VPN IPsec phase2 interface tunnels.
+                type: int
             log_disk_quota:
                 description:
                     - Log disk quota in MB.
+                type: int
             onetime_schedule:
                 description:
                     - Maximum number of firewall one_time schedules.
+                type: int
             proxy:
                 description:
                     - Maximum number of concurrent proxy users.
+                type: int
             recurring_schedule:
                 description:
                     - Maximum number of firewall recurring schedules.
+                type: int
             service_group:
                 description:
                     - Maximum number of firewall service groups.
+                type: int
             session:
                 description:
                     - Maximum number of sessions.
+                type: int
             sslvpn:
                 description:
                     - Maximum number of SSL_VPN.
+                type: int
             user:
                 description:
                     - Maximum number of local users.
+                type: int
             user_group:
                 description:
                     - Maximum number of user groups.
+                type: int
 '''
 
 EXAMPLES = '''

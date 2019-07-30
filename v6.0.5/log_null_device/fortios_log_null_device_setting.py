@@ -81,6 +81,7 @@ options:
             status:
                 description:
                     - Enable/disable statistics collection for when no external logging destination, such as FortiAnalyzer, is present (data is not saved).
+                type: str
                 choices:
                     - enable
                     - disable

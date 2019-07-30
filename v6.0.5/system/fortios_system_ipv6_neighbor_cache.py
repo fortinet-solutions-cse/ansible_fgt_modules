@@ -89,15 +89,19 @@ options:
                 description:
                     - Unique integer ID of the entry.
                 required: true
+                type: int
             interface:
                 description:
                     - Select the associated interface name from available options. Source system.interface.name.
+                type: str
             ipv6:
                 description:
                     - "IPv6 address (format: xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx)."
+                type: str
             mac:
                 description:
                     - "MAC address (format: xx:xx:xx:xx:xx:xx)."
+                type: str
 '''
 
 EXAMPLES = '''

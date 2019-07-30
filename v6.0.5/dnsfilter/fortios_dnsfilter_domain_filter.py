@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - DNS domain filter entries.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action to take for domain filter matches.
+                        type: str
                         choices:
                             - block
                             - allow
@@ -102,19 +105,23 @@ options:
                     domain:
                         description:
                             - Domain entries to be filtered.
+                        type: str
                     id:
                         description:
                             - Id.
                         required: true
+                        type: int
                     status:
                         description:
                             - Enable/disable this domain filter.
+                        type: str
                         choices:
                             - enable
                             - disable
                     type:
                         description:
                             - DNS domain filter type.
+                        type: str
                         choices:
                             - simple
                             - regex
@@ -123,9 +130,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

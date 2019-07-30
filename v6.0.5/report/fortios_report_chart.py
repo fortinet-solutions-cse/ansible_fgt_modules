@@ -88,9 +88,11 @@ options:
             background:
                 description:
                     - Chart background.
+                type: str
             category:
                 description:
                     - Category.
+                type: str
                 choices:
                     - misc
                     - traffic
@@ -105,53 +107,68 @@ options:
             category_series:
                 description:
                     - Category series of pie chart.
+                type: dict
                 suboptions:
                     databind:
                         description:
                             - Category series value expression.
+                        type: str
                     font_size:
                         description:
                             - Font size of category_series title.
+                        type: int
             color_palette:
                 description:
                     - Color palette (system will pick color automatically by default).
+                type: str
             column:
                 description:
                     - Table column definition.
+                type: list
                 suboptions:
                     detail_unit:
                         description:
                             - Detail unit of column.
+                        type: str
                     detail_value:
                         description:
                             - Detail value of column.
+                        type: str
                     footer_unit:
                         description:
                             - Footer unit of column.
+                        type: str
                     footer_value:
                         description:
                             - Footer value of column.
+                        type: str
                     header_value:
                         description:
                             - Display name of table header.
+                        type: str
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     mapping:
                         description:
                             - Show detail in certain display value for certain condition.
+                        type: list
                         suboptions:
                             displayname:
                                 description:
                                     - Display name.
+                                type: str
                             id:
                                 description:
                                     - id
                                 required: true
+                                type: int
                             op:
                                 description:
                                     - Comparision operater.
+                                type: str
                                 choices:
                                     - none
                                     - greater
@@ -163,53 +180,65 @@ options:
                             value_type:
                                 description:
                                     - Value type.
+                                type: str
                                 choices:
                                     - integer
                                     - string
                             value1:
                                 description:
                                     - Value 1.
+                                type: str
                             value2:
                                 description:
                                     - Value 2.
+                                type: str
             comments:
                 description:
                     - Comment.
+                type: str
             dataset:
                 description:
                     - Bind dataset to chart.
+                type: str
             dimension:
                 description:
                     - Dimension.
+                type: str
                 choices:
                     - 2D
                     - 3D
             drill_down_charts:
                 description:
                     - Drill down charts.
+                type: list
                 suboptions:
                     chart_name:
                         description:
                             - Drill down chart name.
+                        type: str
                     id:
                         description:
                             - Drill down chart ID.
                         required: true
+                        type: int
                     status:
                         description:
                             - Enable/disable this drill down chart.
+                        type: str
                         choices:
                             - enable
                             - disable
             favorite:
                 description:
                     - Favorite.
+                type: str
                 choices:
                     - no
                     - yes
             graph_type:
                 description:
                     - Graph type.
+                type: str
                 choices:
                     - none
                     - bar
@@ -219,75 +248,93 @@ options:
             legend:
                 description:
                     - Enable/Disable Legend area.
+                type: str
                 choices:
                     - enable
                     - disable
             legend_font_size:
                 description:
                     - Font size of legend area.
+                type: int
             name:
                 description:
                     - Chart Widget Name
                 required: true
+                type: str
             period:
                 description:
                     - Time period.
+                type: str
                 choices:
                     - last24h
                     - last7d
             policy:
                 description:
                     - Used by monitor policy.
+                type: int
             style:
                 description:
                     - Style.
+                type: str
                 choices:
                     - auto
                     - manual
             title:
                 description:
                     - Chart title.
+                type: str
             title_font_size:
                 description:
                     - Font size of chart title.
+                type: int
             type:
                 description:
                     - Chart type.
+                type: str
                 choices:
                     - graph
                     - table
             value_series:
                 description:
                     - Value series of pie chart.
+                type: dict
                 suboptions:
                     databind:
                         description:
                             - Value series value expression.
+                        type: str
             x_series:
                 description:
                     - X_series of chart.
+                type: dict
                 suboptions:
                     caption:
                         description:
                             - X_series caption.
+                        type: str
                     caption_font_size:
                         description:
                             - X_series caption font size.
+                        type: int
                     databind:
                         description:
                             - X_series value expression.
+                        type: str
                     font_size:
                         description:
                             - X_series label font size.
+                        type: int
                     is_category:
                         description:
                             - X_series represent category or not.
+                        type: str
                         choices:
                             - yes
                             - no
                     label_angle:
                         description:
                             - X_series label angle.
+                        type: str
                         choices:
                             - 45-degree
                             - vertical
@@ -295,12 +342,14 @@ options:
                     scale_direction:
                         description:
                             - Scale increase or decrease.
+                        type: str
                         choices:
                             - decrease
                             - increase
                     scale_format:
                         description:
                             - Date/time format.
+                        type: str
                         choices:
                             - YYYY-MM-DD-HH-MM
                             - YYYY-MM-DD HH
@@ -312,9 +361,11 @@ options:
                     scale_step:
                         description:
                             - Scale step.
+                        type: int
                     scale_unit:
                         description:
                             - Scale unit.
+                        type: str
                         choices:
                             - minute
                             - hour
@@ -324,40 +375,51 @@ options:
                     unit:
                         description:
                             - X_series unit.
+                        type: str
             y_series:
                 description:
                     - Y_series of chart.
+                type: dict
                 suboptions:
                     caption:
                         description:
                             - Y_series caption.
+                        type: str
                     caption_font_size:
                         description:
                             - Y_series caption font size.
+                        type: int
                     databind:
                         description:
                             - Y_series value expression.
+                        type: str
                     extra_databind:
                         description:
                             - Extra Y_series value.
+                        type: str
                     extra_y:
                         description:
                             - Allow another Y_series value
+                        type: str
                         choices:
                             - enable
                             - disable
                     extra_y_legend:
                         description:
                             - Extra Y_series legend type/name.
+                        type: str
                     font_size:
                         description:
                             - Y_series label font size.
+                        type: int
                     group:
                         description:
                             - Y_series group option.
+                        type: str
                     label_angle:
                         description:
                             - Y_series label angle.
+                        type: str
                         choices:
                             - 45-degree
                             - vertical
@@ -365,9 +427,11 @@ options:
                     unit:
                         description:
                             - Y_series unit.
+                        type: str
                     y_legend:
                         description:
                             - First Y_series legend type/name.
+                        type: str
 '''
 
 EXAMPLES = '''

@@ -81,48 +81,59 @@ options:
             cache_mem_percent:
                 description:
                     - Maximum percentage of available memory allocated to caching (1 _ 15%).
+                type: int
             cache_mode:
                 description:
                     - Cache entry expiration mode.
+                type: str
                 choices:
                     - ttl
                     - db-ver
             cache_prefix_match:
                 description:
                     - Enable/disable prefix matching in the cache.
+                type: str
                 choices:
                     - enable
                     - disable
             close_ports:
                 description:
                     - Close ports used for HTTP/HTTPS override authentication and disable user overrides.
+                type: str
                 choices:
                     - enable
                     - disable
             ovrd_auth_https:
                 description:
                     - Enable/disable use of HTTPS for override authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             ovrd_auth_port:
                 description:
                     - Port to use for FortiGuard Web Filter override authentication.
+                type: int
             ovrd_auth_port_http:
                 description:
                     - Port to use for FortiGuard Web Filter HTTP override authentication
+                type: int
             ovrd_auth_port_https:
                 description:
                     - Port to use for FortiGuard Web Filter HTTPS override authentication.
+                type: int
             ovrd_auth_port_warning:
                 description:
                     - Port to use for FortiGuard Web Filter Warning override authentication.
+                type: int
             request_packet_size_limit:
                 description:
                     - Limit size of URL request packets sent to FortiGuard server (0 for default).
+                type: int
             warn_auth_https:
                 description:
                     - Enable/disable use of HTTPS for warning and authentication.
+                type: str
                 choices:
                     - enable
                     - disable

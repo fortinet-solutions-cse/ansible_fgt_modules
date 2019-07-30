@@ -81,12 +81,15 @@ options:
             ble_scan_report_intv:
                 description:
                     - Time between running Bluetooth Low Energy (BLE) reports (10 _ 3600 sec, default = 30).
+                type: int
             client_idle_timeout:
                 description:
                     - Time after which a client is considered idle and times out (20 _ 3600 sec, default = 300, 0 for no timeout).
+                type: int
             darrp_day:
                 description:
                     - Weekday on which to run DARRP optimization.
+                type: str
                 choices:
                     - sunday
                     - monday
@@ -98,44 +101,57 @@ options:
             darrp_optimize:
                 description:
                     - Time for running Dynamic Automatic Radio Resource Provisioning (DARRP) optimizations (0 _ 86400 sec, default = 1800).
+                type: int
             darrp_time:
                 description:
                     - Time at which DARRP optimizations run (you can add up to 8 times).
+                type: list
                 suboptions:
                     time:
                         description:
                             - Time.
                         required: true
+                        type: str
             discovery_interval:
                 description:
                     - Time between discovery requests (2 _ 180 sec, default = 5).
+                type: int
             echo_interval:
                 description:
                     - Time between echo requests sent by the managed WTP, AP, or FortiAP (1 _ 255 sec, default = 30).
+                type: int
             fake_ap_log:
                 description:
                     - Time between recording logs about fake APs if periodic fake AP logging is configured (0 _ 1440 min, default = 1).
+                type: int
             ipsec_intf_cleanup:
                 description:
                     - Time period to keep IPsec VPN interfaces up after WTP sessions are disconnected (30 _ 3600 sec, default = 120).
+                type: int
             radio_stats_interval:
                 description:
                     - Time between running radio reports (1 _ 255 sec, default = 15).
+                type: int
             rogue_ap_log:
                 description:
                     - Time between logging rogue AP messages if periodic rogue AP logging is configured (0 _ 1440 min, default = 0).
+                type: int
             sta_capability_interval:
                 description:
                     - Time between running station capability reports (1 _ 255 sec, default = 30).
+                type: int
             sta_locate_timer:
                 description:
                     - Time between running client presence flushes to remove clients that are listed but no longer present (0 _ 86400 sec, default = 1800).
+                type: int
             sta_stats_interval:
                 description:
                     - Time between running client (station) reports (1 _ 255 sec, default = 1).
+                type: int
             vap_stats_interval:
                 description:
                     - Time between running Virtual Access Point (VAP) reports (1 _ 255 sec, default = 15).
+                type: int
 '''
 
 EXAMPLES = '''

@@ -88,6 +88,7 @@ options:
             events:
                 description:
                     - SNMP trap events.
+                type: str
                 choices:
                     - cpu-high
                     - mem-low
@@ -127,16 +128,19 @@ options:
             hosts:
                 description:
                     - Configure IPv4 SNMP managers (hosts).
+                type: list
                 suboptions:
                     ha_direct:
                         description:
                             - Enable/disable direct management of HA cluster members.
+                        type: str
                         choices:
                             - enable
                             - disable
                     host_type:
                         description:
                             - Control whether the SNMP manager sends SNMP queries, receives SNMP traps, or both.
+                        type: str
                         choices:
                             - any
                             - query
@@ -145,25 +149,31 @@ options:
                         description:
                             - Host entry ID.
                         required: true
+                        type: int
                     ip:
                         description:
                             - IPv4 address of the SNMP manager (host).
+                        type: str
                     source_ip:
                         description:
                             - Source IPv4 address for SNMP traps.
+                        type: str
             hosts6:
                 description:
                     - Configure IPv6 SNMP managers.
+                type: list
                 suboptions:
                     ha_direct:
                         description:
                             - Enable/disable direct management of HA cluster members.
+                        type: str
                         choices:
                             - enable
                             - disable
                     host_type:
                         description:
                             - Control whether the SNMP manager sends SNMP queries, receives SNMP traps, or both.
+                        type: str
                         choices:
                             - any
                             - query
@@ -172,64 +182,80 @@ options:
                         description:
                             - Host6 entry ID.
                         required: true
+                        type: int
                     ipv6:
                         description:
                             - SNMP manager IPv6 address prefix.
+                        type: str
                     source_ipv6:
                         description:
                             - Source IPv6 address for SNMP traps.
+                        type: str
             id:
                 description:
                     - Community ID.
                 required: true
+                type: int
             name:
                 description:
                     - Community name.
+                type: str
             query_v1_port:
                 description:
                     - SNMP v1 query port (default = 161).
+                type: int
             query_v1_status:
                 description:
                     - Enable/disable SNMP v1 queries.
+                type: str
                 choices:
                     - enable
                     - disable
             query_v2c_port:
                 description:
                     - SNMP v2c query port (default = 161).
+                type: int
             query_v2c_status:
                 description:
                     - Enable/disable SNMP v2c queries.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable this SNMP community.
+                type: str
                 choices:
                     - enable
                     - disable
             trap_v1_lport:
                 description:
                     - SNMP v1 trap local port (default = 162).
+                type: int
             trap_v1_rport:
                 description:
                     - SNMP v1 trap remote port (default = 162).
+                type: int
             trap_v1_status:
                 description:
                     - Enable/disable SNMP v1 traps.
+                type: str
                 choices:
                     - enable
                     - disable
             trap_v2c_lport:
                 description:
                     - SNMP v2c trap local port (default = 162).
+                type: int
             trap_v2c_rport:
                 description:
                     - SNMP v2c trap remote port (default = 162).
+                type: int
             trap_v2c_status:
                 description:
                     - Enable/disable SNMP v2c traps.
+                type: str
                 choices:
                     - enable
                     - disable

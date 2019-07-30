@@ -81,13 +81,16 @@ options:
             neighbor:
                 description:
                     - Configure neighbor of IPv6 BFD.
+                type: list
                 suboptions:
                     interface:
                         description:
                             - Interface to the BFD neighbor. Source system.interface.name.
+                        type: str
                     ip6_address:
                         description:
                             - IPv6 address of the BFD neighbor.
+                        type: str
 '''
 
 EXAMPLES = '''

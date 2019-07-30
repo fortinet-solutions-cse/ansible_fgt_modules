@@ -88,35 +88,43 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Spam filter mime header content.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Mark spam or good.
+                        type: str
                         choices:
                             - spam
                             - clear
                     fieldbody:
                         description:
                             - Pattern for the header field body.
+                        type: str
                     fieldname:
                         description:
                             - Pattern for header field name.
+                        type: str
                     id:
                         description:
                             - Mime header entry ID.
                         required: true
+                        type: int
                     pattern_type:
                         description:
                             - Wildcard pattern or regular expression.
+                        type: str
                         choices:
                             - wildcard
                             - regexp
                     status:
                         description:
                             - Enable/disable status.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -124,9 +132,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

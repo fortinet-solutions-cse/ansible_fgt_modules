@@ -88,15 +88,18 @@ options:
             auth_proto:
                 description:
                     - Authentication protocol.
+                type: str
                 choices:
                     - md5
                     - sha
             auth_pwd:
                 description:
                     - Password for authentication protocol.
+                type: str
             events:
                 description:
                     - SNMP notifications (traps) to send.
+                type: list
                 choices:
                     - cpu-high
                     - mem-low
@@ -136,6 +139,7 @@ options:
             ha_direct:
                 description:
                     - Enable/disable direct management of HA cluster members.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -143,15 +147,19 @@ options:
                 description:
                     - SNMP user name.
                 required: true
+                type: str
             notify_hosts:
                 description:
                     - SNMP managers to send notifications (traps) to.
+                type: list
             notify_hosts6:
                 description:
                     - IPv6 SNMP managers to send notifications (traps) to.
+                type: list
             priv_proto:
                 description:
                     - Privacy (encryption) protocol.
+                type: str
                 choices:
                     - aes
                     - des
@@ -160,18 +168,22 @@ options:
             priv_pwd:
                 description:
                     - Password for privacy (encryption) protocol.
+                type: str
             queries:
                 description:
                     - Enable/disable SNMP queries for this user.
+                type: str
                 choices:
                     - enable
                     - disable
             query_port:
                 description:
                     - SNMPv3 query port (default = 161).
+                type: int
             security_level:
                 description:
                     - Security level for message authentication and encryption.
+                type: str
                 choices:
                     - no-auth-no-priv
                     - auth-no-priv
@@ -179,24 +191,30 @@ options:
             source_ip:
                 description:
                     - Source IP for SNMP trap.
+                type: str
             source_ipv6:
                 description:
                     - Source IPv6 for SNMP trap.
+                type: str
             status:
                 description:
                     - Enable/disable this SNMP user.
+                type: str
                 choices:
                     - enable
                     - disable
             trap_lport:
                 description:
                     - SNMPv3 local trap port (default = 162).
+                type: int
             trap_rport:
                 description:
                     - SNMPv3 trap remote port (default = 162).
+                type: int
             trap_status:
                 description:
                     - Enable/disable traps for this SNMP user.
+                type: str
                 choices:
                     - enable
                     - disable

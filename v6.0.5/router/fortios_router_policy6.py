@@ -88,45 +88,58 @@ options:
             comments:
                 description:
                     - Optional comments.
+                type: str
             dst:
                 description:
                     - Destination IPv6 prefix.
+                type: str
             end_port:
                 description:
                     - End destination port number (1 _ 65535).
+                type: int
             gateway:
                 description:
                     - IPv6 address of the gateway.
+                type: str
             input_device:
                 description:
                     - Incoming interface name. Source system.interface.name.
+                type: str
             output_device:
                 description:
                     - Outgoing interface name. Source system.interface.name.
+                type: str
             protocol:
                 description:
                     - Protocol number (0 _ 255).
+                type: int
             seq_num:
                 description:
                     - Sequence number.
+                type: int
             src:
                 description:
                     - Source IPv6 prefix.
+                type: str
             start_port:
                 description:
                     - Start destination port number (1 _ 65535).
+                type: int
             status:
                 description:
                     - Enable/disable this policy route.
+                type: str
                 choices:
                     - enable
                     - disable
             tos:
                 description:
                     - Type of service bit pattern.
+                type: str
             tos_mask:
                 description:
                     - Type of service evaluated bits.
+                type: str
 '''
 
 EXAMPLES = '''

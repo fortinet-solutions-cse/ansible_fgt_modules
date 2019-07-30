@@ -88,27 +88,34 @@ options:
             arp_reply:
                 description:
                     - Enable ARP reply.
+                type: str
                 choices:
                     - disable
                     - enable
             color:
                 description:
                     - Color of icon on the GUI.
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             extip:
                 description:
                     - Start_external_IP [_end_external_IP].
+                type: str
             extport:
                 description:
                     - External service port.
+                type: str
             id:
                 description:
                     - Custom defined id.
+                type: int
             ldb_method:
                 description:
                     - Load balance method.
+                type: str
                 choices:
                     - static
                     - round-robin
@@ -119,43 +126,53 @@ options:
             mappedip:
                 description:
                     - Start_mapped_IP [_end mapped_IP].
+                type: str
             mappedport:
                 description:
                     - Mapped service port.
+                type: str
             monitor:
                 description:
                     - Health monitors.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Health monitor name. Source firewall.ldb-monitor.name.
                         required: true
+                        type: str
             name:
                 description:
                     - VIP46 name.
                 required: true
+                type: str
             portforward:
                 description:
                     - Enable port forwarding.
+                type: str
                 choices:
                     - disable
                     - enable
             protocol:
                 description:
                     - Mapped port protocol.
+                type: str
                 choices:
                     - tcp
                     - udp
             realservers:
                 description:
                     - Real servers.
+                type: list
                 suboptions:
                     client_ip:
                         description:
                             - Restrict server to a client IP in this range.
+                        type: str
                     healthcheck:
                         description:
                             - Per server health check.
+                        type: str
                         choices:
                             - disable
                             - enable
@@ -163,25 +180,32 @@ options:
                     holddown_interval:
                         description:
                             - Hold down interval.
+                        type: int
                     id:
                         description:
                             - Real server ID.
                         required: true
+                        type: int
                     ip:
                         description:
                             - Mapped server IPv6.
+                        type: str
                     max_connections:
                         description:
                             - Maximum number of connections allowed to server.
+                        type: int
                     monitor:
                         description:
                             - Health monitors. Source firewall.ldb-monitor.name.
+                        type: str
                     port:
                         description:
                             - Mapped server port.
+                        type: int
                     status:
                         description:
                             - Server administrative status.
+                        type: str
                         choices:
                             - active
                             - standby
@@ -189,9 +213,11 @@ options:
                     weight:
                         description:
                             - weight
+                        type: int
             server_type:
                 description:
                     - Server type.
+                type: str
                 choices:
                     - http
                     - tcp
@@ -200,20 +226,24 @@ options:
             src_filter:
                 description:
                     - Source IP filter (x.x.x.x/x).
+                type: list
                 suboptions:
                     range:
                         description:
                             - Src_filter range.
                         required: true
+                        type: str
             type:
                 description:
                     - "VIP type: static NAT or server load balance."
+                type: str
                 choices:
                     - static-nat
                     - server-load-balance
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
 '''
 
 EXAMPLES = '''

@@ -89,12 +89,15 @@ options:
                 description:
                     - "String of commands to send to FortiSwitch devices (For example (%0a = return key): config switch trunk %0a edit myTrunk %0a set members
                        port1 port2 %0a end %0a)."
+                type: str
             command_name:
                 description:
                     - Command name called by the FortiGate switch controller in the execute command.
+                type: str
             description:
                 description:
                     - Description.
+                type: str
 '''
 
 EXAMPLES = '''

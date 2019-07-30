@@ -81,141 +81,171 @@ options:
             admin_login_logs:
                 description:
                     - Enable/disable administrator login/logout logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             alert_interval:
                 description:
                     - Alert alert interval in minutes.
+                type: int
             amc_interface_bypass_mode:
                 description:
                     - Enable/disable Fortinet Advanced Mezzanine Card (AMC) interface bypass mode logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             antivirus_logs:
                 description:
                     - Enable/disable antivirus logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             configuration_changes_logs:
                 description:
                     - Enable/disable configuration change logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             critical_interval:
                 description:
                     - Critical alert interval in minutes.
+                type: int
             debug_interval:
                 description:
                     - Debug alert interval in minutes.
+                type: int
             email_interval:
                 description:
                     - Interval between sending alert emails (1 _ 99999 min, default = 5).
+                type: int
             emergency_interval:
                 description:
                     - Emergency alert interval in minutes.
+                type: int
             error_interval:
                 description:
                     - Error alert interval in minutes.
+                type: int
             FDS_license_expiring_days:
                 description:
                     - Number of days to send alert email prior to FortiGuard license expiration (1 _ 100 days, default = 100).
+                type: int
             FDS_license_expiring_warning:
                 description:
                     - Enable/disable FortiGuard license expiration warnings in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             FDS_update_logs:
                 description:
                     - Enable/disable FortiGuard update logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             filter_mode:
                 description:
                     - How to filter log messages that are sent to alert emails.
+                type: str
                 choices:
                     - category
                     - threshold
             FIPS_CC_errors:
                 description:
                     - Enable/disable FIPS and Common Criteria error logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             firewall_authentication_failure_logs:
                 description:
                     - Enable/disable firewall authentication failure logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             fortiguard_log_quota_warning:
                 description:
                     - Enable/disable FortiCloud log quota warnings in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             FSSO_disconnect_logs:
                 description:
                     - Enable/disable logging of FSSO collector agent disconnect.
+                type: str
                 choices:
                     - enable
                     - disable
             HA_logs:
                 description:
                     - Enable/disable HA logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             information_interval:
                 description:
                     - Information alert interval in minutes.
+                type: int
             IPS_logs:
                 description:
                     - Enable/disable IPS logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             IPsec_errors_logs:
                 description:
                     - Enable/disable IPsec error logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             local_disk_usage:
                 description:
                     - Disk usage percentage at which to send alert email (1 _ 99 percent, default = 75).
+                type: int
             log_disk_usage_warning:
                 description:
                     - Enable/disable disk usage warnings in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             mailto1:
                 description:
                     - Email address to send alert email to (usually a system administrator) (max. 64 characters).
+                type: str
             mailto2:
                 description:
                     - Optional second email address to send alert email to (max. 64 characters).
+                type: str
             mailto3:
                 description:
                     - Optional third email address to send alert email to (max. 64 characters).
+                type: str
             notification_interval:
                 description:
                     - Notification alert interval in minutes.
+                type: int
             PPP_errors_logs:
                 description:
                     - Enable/disable PPP error logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             severity:
                 description:
                     - Lowest severity level to log.
+                type: str
                 choices:
                     - emergency
                     - alert
@@ -228,30 +258,36 @@ options:
             ssh_logs:
                 description:
                     - Enable/disable SSH logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             sslvpn_authentication_errors_logs:
                 description:
                     - Enable/disable SSL_VPN authentication error logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             username:
                 description:
                     - "Name that appears in the From: field of alert emails (max. 36 characters)."
+                type: str
             violation_traffic_logs:
                 description:
                     - Enable/disable violation traffic logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable
             warning_interval:
                 description:
                     - Warning alert interval in minutes.
+                type: int
             webfilter_logs:
                 description:
                     - Enable/disable web filter logs in alert email.
+                type: str
                 choices:
                     - enable
                     - disable

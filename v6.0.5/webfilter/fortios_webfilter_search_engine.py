@@ -88,22 +88,27 @@ options:
             charset:
                 description:
                     - Search engine charset.
+                type: str
                 choices:
                     - utf-8
                     - gb2312
             hostname:
                 description:
                     - Hostname (regular expression).
+                type: str
             name:
                 description:
                     - Search engine name.
                 required: true
+                type: str
             query:
                 description:
                     - Code used to prefix a query (must end with an equals character).
+                type: str
             safesearch:
                 description:
                     - Safe search method. You can disable safe search, add the safe search string to URLs, or insert a safe search header.
+                type: str
                 choices:
                     - disable
                     - url
@@ -111,9 +116,11 @@ options:
             safesearch_str:
                 description:
                     - Safe search parameter used in the URL.
+                type: str
             url:
                 description:
                     - URL (regular expression).
+                type: str
 '''
 
 EXAMPLES = '''

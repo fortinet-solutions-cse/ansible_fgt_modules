@@ -88,76 +88,91 @@ options:
             analytics_bl_filetype:
                 description:
                     - Only submit files matching this DLP file_pattern to FortiSandbox. Source dlp.filepattern.id.
+                type: int
             analytics_db:
                 description:
                     - Enable/disable using the FortiSandbox signature database to supplement the AV signature databases.
+                type: str
                 choices:
                     - disable
                     - enable
             analytics_max_upload:
                 description:
                     - Maximum size of files that can be uploaded to FortiSandbox (1 _ 395 MBytes, default = 10).
+                type: int
             analytics_wl_filetype:
                 description:
                     - Do not submit files matching this DLP file_pattern to FortiSandbox. Source dlp.filepattern.id.
+                type: int
             av_block_log:
                 description:
                     - Enable/disable logging for AntiVirus file blocking.
+                type: str
                 choices:
                     - enable
                     - disable
             av_virus_log:
                 description:
                     - Enable/disable AntiVirus logging.
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Comment.
+                type: str
             content_disarm:
                 description:
                     - AV Content Disarm and Reconstruction settings.
+                type: dict
                 suboptions:
                     cover_page:
                         description:
                             - Enable/disable inserting a cover page into the disarmed document.
+                        type: str
                         choices:
                             - disable
                             - enable
                     detect_only:
                         description:
                             - Enable/disable only detect disarmable files, do not alter content.
+                        type: str
                         choices:
                             - disable
                             - enable
                     office_embed:
                         description:
                             - Enable/disable stripping of embedded objects in Microsoft Office documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     office_hylink:
                         description:
                             - Enable/disable stripping of hyperlinks in Microsoft Office documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     office_linked:
                         description:
                             - Enable/disable stripping of linked objects in Microsoft Office documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     office_macro:
                         description:
                             - Enable/disable stripping of macros in Microsoft Office documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     original_file_destination:
                         description:
                             - Destination to send original file if active content is removed.
+                        type: str
                         choices:
                             - fortisandbox
                             - quarantine
@@ -165,66 +180,77 @@ options:
                     pdf_act_form:
                         description:
                             - Enable/disable stripping of actions that submit data to other targets in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_act_gotor:
                         description:
                             - Enable/disable stripping of links to other PDFs in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_act_java:
                         description:
                             - Enable/disable stripping of actions that execute JavaScript code in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_act_launch:
                         description:
                             - Enable/disable stripping of links to external applications in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_act_movie:
                         description:
                             - Enable/disable stripping of embedded movies in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_act_sound:
                         description:
                             - Enable/disable stripping of embedded sound files in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_embedfile:
                         description:
                             - Enable/disable stripping of embedded files in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_hyperlink:
                         description:
                             - Enable/disable stripping of hyperlinks from PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
                     pdf_javacode:
                         description:
                             - Enable/disable stripping of JavaScript code in PDF documents.
+                        type: str
                         choices:
                             - disable
                             - enable
             extended_log:
                 description:
                     - Enable/disable extended logging for antivirus.
+                type: str
                 choices:
                     - enable
                     - disable
             ftgd_analytics:
                 description:
                     - Settings to control which files are uploaded to FortiSandbox.
+                type: str
                 choices:
                     - disable
                     - suspicious
@@ -232,10 +258,12 @@ options:
             ftp:
                 description:
                     - Configure FTP AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -249,6 +277,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -262,12 +291,14 @@ options:
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - Enable/disable FTP AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -275,6 +306,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -282,10 +314,12 @@ options:
             http:
                 description:
                     - Configure HTTP AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -299,6 +333,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -312,18 +347,21 @@ options:
                     content_disarm:
                         description:
                             - Enable Content Disarm and Reconstruction for this protocol.
+                        type: str
                         choices:
                             - disable
                             - enable
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - Enable/disable HTTP AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -331,6 +369,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -338,10 +377,12 @@ options:
             imap:
                 description:
                     - Configure IMAP AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -355,6 +396,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -368,24 +410,28 @@ options:
                     content_disarm:
                         description:
                             - Enable Content Disarm and Reconstruction for this protocol.
+                        type: str
                         choices:
                             - disable
                             - enable
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     executables:
                         description:
                             - Treat Windows executable files as viruses for the purpose of blocking or monitoring.
+                        type: str
                         choices:
                             - default
                             - virus
                     options:
                         description:
                             - Enable/disable IMAP AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -393,6 +439,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -400,16 +447,19 @@ options:
             inspection_mode:
                 description:
                     - Inspection mode.
+                type: str
                 choices:
                     - proxy
                     - flow-based
             mapi:
                 description:
                     - Configure MAPI AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -423,6 +473,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -436,18 +487,21 @@ options:
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     executables:
                         description:
                             - Treat Windows executable files as viruses for the purpose of blocking or monitoring.
+                        type: str
                         choices:
                             - default
                             - virus
                     options:
                         description:
                             - Enable/disable MAPI AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -455,6 +509,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -462,25 +517,30 @@ options:
             mobile_malware_db:
                 description:
                     - Enable/disable using the mobile malware signature database.
+                type: str
                 choices:
                     - disable
                     - enable
             nac_quar:
                 description:
                     - Configure AntiVirus quarantine settings.
+                type: dict
                 suboptions:
                     expiry:
                         description:
                             - Duration of quarantine.
+                        type: str
                     infected:
                         description:
                             - Enable/Disable quarantining infected hosts to the banned user list.
+                        type: str
                         choices:
                             - none
                             - quar-src-ip
                     log:
                         description:
                             - Enable/disable AntiVirus quarantine logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -488,13 +548,16 @@ options:
                 description:
                     - Profile name.
                 required: true
+                type: str
             nntp:
                 description:
                     - Configure NNTP AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -508,6 +571,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -521,12 +585,14 @@ options:
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - Enable/disable NNTP AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -534,6 +600,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -541,10 +608,12 @@ options:
             pop3:
                 description:
                     - Configure POP3 AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -558,6 +627,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -571,24 +641,28 @@ options:
                     content_disarm:
                         description:
                             - Enable Content Disarm and Reconstruction for this protocol.
+                        type: str
                         choices:
                             - disable
                             - enable
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     executables:
                         description:
                             - Treat Windows executable files as viruses for the purpose of blocking or monitoring.
+                        type: str
                         choices:
                             - default
                             - virus
                     options:
                         description:
                             - Enable/disable POP3 AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -596,6 +670,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -603,19 +678,23 @@ options:
             replacemsg_group:
                 description:
                     - Replacement message group customized for this profile. Source system.replacemsg-group.name.
+                type: str
             scan_mode:
                 description:
                     - Choose between full scan mode and quick scan mode.
+                type: str
                 choices:
                     - quick
                     - full
             smb:
                 description:
                     - Configure SMB AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -629,6 +708,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -642,12 +722,14 @@ options:
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     options:
                         description:
                             - Enable/disable SMB AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -655,6 +737,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files
@@ -662,10 +745,12 @@ options:
             smtp:
                 description:
                     - Configure SMTP AntiVirus options.
+                type: dict
                 suboptions:
                     archive_block:
                         description:
                             - Select the archive types to block.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -679,6 +764,7 @@ options:
                     archive_log:
                         description:
                             - Select the archive types to log.
+                        type: str
                         choices:
                             - encrypted
                             - corrupted
@@ -692,24 +778,28 @@ options:
                     content_disarm:
                         description:
                             - Enable Content Disarm and Reconstruction for this protocol.
+                        type: str
                         choices:
                             - disable
                             - enable
                     emulator:
                         description:
                             - Enable/disable the virus emulator.
+                        type: str
                         choices:
                             - enable
                             - disable
                     executables:
                         description:
                             - Treat Windows executable files as viruses for the purpose of blocking or monitoring.
+                        type: str
                         choices:
                             - default
                             - virus
                     options:
                         description:
                             - Enable/disable SMTP AntiVirus scanning, monitoring, and quarantine.
+                        type: str
                         choices:
                             - scan
                             - avmonitor
@@ -717,6 +807,7 @@ options:
                     outbreak_prevention:
                         description:
                             - Enable FortiGuard Virus Outbreak Prevention service.
+                        type: str
                         choices:
                             - disabled
                             - files

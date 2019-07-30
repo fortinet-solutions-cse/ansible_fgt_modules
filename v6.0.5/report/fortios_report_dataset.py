@@ -88,20 +88,25 @@ options:
             field:
                 description:
                     - Fields.
+                type: list
                 suboptions:
                     displayname:
                         description:
                             - Display name.
+                        type: str
                     id:
                         description:
                             - Field ID (1 to number of columns in SQL result).
                         required: true
+                        type: int
                     name:
                         description:
                             - Name.
+                        type: str
                     type:
                         description:
                             - Field type.
+                        type: str
                         choices:
                             - text
                             - integer
@@ -110,13 +115,16 @@ options:
                 description:
                     - Name.
                 required: true
+                type: str
             parameters:
                 description:
                     - Parameters.
+                type: list
                 suboptions:
                     data_type:
                         description:
                             - Data type.
+                        type: str
                         choices:
                             - text
                             - integer
@@ -126,19 +134,24 @@ options:
                     display_name:
                         description:
                             - Display name.
+                        type: str
                     field:
                         description:
                             - SQL field name.
+                        type: str
                     id:
                         description:
                             - Parameter ID (1 to number of columns in SQL result).
                         required: true
+                        type: int
             policy:
                 description:
                     - Used by monitor policy.
+                type: int
             query:
                 description:
                     - SQL query statement.
+                type: str
 '''
 
 EXAMPLES = '''

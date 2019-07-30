@@ -88,27 +88,32 @@ options:
             3gpp_plmn:
                 description:
                     - 3GPP PLMN name. Source wireless-controller.hotspot20.anqp-3gpp-cellular.name.
+                type: str
             access_network_asra:
                 description:
                     - Enable/disable additional step required for access (ASRA).
+                type: str
                 choices:
                     - enable
                     - disable
             access_network_esr:
                 description:
                     - Enable/disable emergency services reachable (ESR).
+                type: str
                 choices:
                     - enable
                     - disable
             access_network_internet:
                 description:
                     - Enable/disable connectivity to the Internet.
+                type: str
                 choices:
                     - enable
                     - disable
             access_network_type:
                 description:
                     - Access network type.
+                type: str
                 choices:
                     - private-network
                     - private-network-with-guest-access
@@ -121,96 +126,120 @@ options:
             access_network_uesa:
                 description:
                     - Enable/disable unauthenticated emergency service accessible (UESA).
+                type: str
                 choices:
                     - enable
                     - disable
             anqp_domain_id:
                 description:
                     - ANQP Domain ID (0_65535).
+                type: int
             bss_transition:
                 description:
                     - Enable/disable basic service set (BSS) transition Support.
+                type: str
                 choices:
                     - enable
                     - disable
             conn_cap:
                 description:
                     - Connection capability name. Source wireless-controller.hotspot20.h2qp-conn-capability.name.
+                type: str
             deauth_request_timeout:
                 description:
                     - Deauthentication request timeout (in seconds).
+                type: int
             dgaf:
                 description:
                     - Enable/disable downstream group_addressed forwarding (DGAF).
+                type: str
                 choices:
                     - enable
                     - disable
             domain_name:
                 description:
                     - Domain name.
+                type: str
             gas_comeback_delay:
                 description:
                     - GAS comeback delay (0 or 100 _ 4000 milliseconds, default = 500).
+                type: int
             gas_fragmentation_limit:
                 description:
                     - GAS fragmentation limit (512 _ 4096, default = 1024).
+                type: int
             hessid:
                 description:
                     - Homogeneous extended service set identifier (HESSID).
+                type: str
             ip_addr_type:
                 description:
                     - IP address type name. Source wireless-controller.hotspot20.anqp-ip-address-type.name.
+                type: str
             l2tif:
                 description:
                     - Enable/disable Layer 2 traffic inspection and filtering.
+                type: str
                 choices:
                     - enable
                     - disable
             nai_realm:
                 description:
                     - NAI realm list name. Source wireless-controller.hotspot20.anqp-nai-realm.name.
+                type: str
             name:
                 description:
                     - Hotspot profile name.
                 required: true
+                type: str
             network_auth:
                 description:
                     - Network authentication name. Source wireless-controller.hotspot20.anqp-network-auth-type.name.
+                type: str
             oper_friendly_name:
                 description:
                     - Operator friendly name. Source wireless-controller.hotspot20.h2qp-operator-name.name.
+                type: str
             osu_provider:
                 description:
                     - Manually selected list of OSU provider(s).
+                type: list
                 suboptions:
                     name:
                         description:
                             - OSU provider name. Source wireless-controller.hotspot20.h2qp-osu-provider.name.
                         required: true
+                        type: str
             osu_ssid:
                 description:
                     - Online sign up (OSU) SSID.
+                type: str
             pame_bi:
                 description:
                     - Enable/disable Pre_Association Message Exchange BSSID Independent (PAME_BI).
+                type: str
                 choices:
                     - disable
                     - enable
             proxy_arp:
                 description:
                     - Enable/disable Proxy ARP.
+                type: str
                 choices:
                     - enable
                     - disable
             qos_map:
                 description:
                     - QoS MAP set ID. Source wireless-controller.hotspot20.qos-map.name.
+                type: str
             roaming_consortium:
                 description:
                     - Roaming consortium list name. Source wireless-controller.hotspot20.anqp-roaming-consortium.name.
+                type: str
             venue_group:
                 description:
                     - Venue group.
+                type: str
                 choices:
                     - unspecified
                     - assembly
@@ -227,9 +256,11 @@ options:
             venue_name:
                 description:
                     - Venue name. Source wireless-controller.hotspot20.anqp-venue-name.name.
+                type: str
             venue_type:
                 description:
                     - Venue type.
+                type: str
                 choices:
                     - unspecified
                     - arena
@@ -289,9 +320,11 @@ options:
             wan_metrics:
                 description:
                     - WAN metric name. Source wireless-controller.hotspot20.h2qp-wan-metric.name.
+                type: str
             wnm_sleep_mode:
                 description:
                     - Enable/disable wireless network management (WNM) sleep mode.
+                type: str
                 choices:
                     - enable
                     - disable

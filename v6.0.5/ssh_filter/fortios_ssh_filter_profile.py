@@ -88,6 +88,7 @@ options:
             block:
                 description:
                     - SSH blocking options.
+                type: str
                 choices:
                     - x11
                     - shell
@@ -99,12 +100,14 @@ options:
             default_command_log:
                 description:
                     - Enable/disable logging unmatched shell commands.
+                type: str
                 choices:
                     - enable
                     - disable
             log:
                 description:
                     - SSH logging options.
+                type: str
                 choices:
                     - x11
                     - shell
@@ -117,19 +120,23 @@ options:
                 description:
                     - SSH filter profile name.
                 required: true
+                type: str
             shell_commands:
                 description:
                     - SSH command filter.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action to take for URL filter matches.
+                        type: str
                         choices:
                             - block
                             - allow
                     alert:
                         description:
                             - Enable/disable alert.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -137,18 +144,22 @@ options:
                         description:
                             - Id.
                         required: true
+                        type: int
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     pattern:
                         description:
                             - SSH shell command pattern.
+                        type: str
                     severity:
                         description:
                             - Log severity.
+                        type: str
                         choices:
                             - low
                             - medium
@@ -157,6 +168,7 @@ options:
                     type:
                         description:
                             - Matching type.
+                        type: str
                         choices:
                             - simple
                             - regex

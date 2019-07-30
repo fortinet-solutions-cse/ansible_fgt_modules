@@ -81,6 +81,7 @@ options:
             broadcast:
                 description:
                     - Enable/disable storm control to drop broadcast traffic.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -88,15 +89,18 @@ options:
                 description:
                     - Rate in packets per second at which storm traffic is controlled (1 _ 10000000, default = 500). Storm control drops excess traffic data
                        rates beyond this threshold.
+                type: int
             unknown_multicast:
                 description:
                     - Enable/disable storm control to drop unknown multicast traffic.
+                type: str
                 choices:
                     - enable
                     - disable
             unknown_unicast:
                 description:
                     - Enable/disable storm control to drop unknown unicast traffic.
+                type: str
                 choices:
                     - enable
                     - disable

@@ -81,18 +81,21 @@ options:
             fortiview:
                 description:
                     - Enable/disable historical FortiView.
+                type: str
                 choices:
                     - enable
                     - disable
             pdf_report:
                 description:
                     - Enable/disable PDF report.
+                type: str
                 choices:
                     - enable
                     - disable
             report_source:
                 description:
                     - Report log source.
+                type: str
                 choices:
                     - forward-traffic
                     - sniffer-traffic
@@ -100,9 +103,11 @@ options:
             top_n:
                 description:
                     - Number of items to populate (100 _ 4000).
+                type: int
             web_browsing_threshold:
                 description:
                     - Web browsing time calculation threshold (3 _ 15 min).
+                type: int
 '''
 
 EXAMPLES = '''

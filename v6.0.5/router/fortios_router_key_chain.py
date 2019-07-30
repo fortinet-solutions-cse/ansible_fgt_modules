@@ -88,24 +88,30 @@ options:
             key:
                 description:
                     - Configuration method to edit key settings.
+                type: list
                 suboptions:
                     accept_lifetime:
                         description:
                             - "Lifetime of received authentication key (format: hh:mm:ss day month year)."
+                        type: str
                     id:
                         description:
                             - Key ID (0 _ 2147483647).
                         required: true
+                        type: str
                     key_string:
                         description:
                             - Password for the key (max. = 35 characters).
+                        type: str
                     send_lifetime:
                         description:
                             - "Lifetime of sent authentication key (format: hh:mm:ss day month year)."
+                        type: str
             name:
                 description:
                     - Key_chain name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

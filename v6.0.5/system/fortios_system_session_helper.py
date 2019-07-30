@@ -89,9 +89,11 @@ options:
                 description:
                     - Session helper ID.
                 required: true
+                type: int
             name:
                 description:
                     - Helper name.
+                type: str
                 choices:
                     - ftp
                     - tftp
@@ -114,9 +116,11 @@ options:
             port:
                 description:
                     - Protocol port.
+                type: int
             protocol:
                 description:
                     - Protocol number.
+                type: int
 '''
 
 EXAMPLES = '''

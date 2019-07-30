@@ -81,15 +81,18 @@ options:
             spam_submit_force:
                 description:
                     - Enable/disable force insertion of a new mime entity for the submission text.
+                type: str
                 choices:
                     - enable
                     - disable
             spam_submit_srv:
                 description:
                     - Hostname of the spam submission server.
+                type: str
             spam_submit_txt2htm:
                 description:
                     - Enable/disable conversion of text email to HTML email.
+                type: str
                 choices:
                     - enable
                     - disable

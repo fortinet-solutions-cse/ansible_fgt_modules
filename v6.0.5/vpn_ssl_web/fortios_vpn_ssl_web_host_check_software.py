@@ -88,10 +88,12 @@ options:
             check_item_list:
                 description:
                     - Check item list.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action.
+                        type: str
                         choices:
                             - require
                             - deny
@@ -99,20 +101,25 @@ options:
                         description:
                             - ID (0 _ 4294967295).
                         required: true
+                        type: int
                     md5s:
                         description:
                             - MD5 checksum.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Hex string of MD5 checksum.
                                 required: true
+                                type: str
                     target:
                         description:
                             - Target.
+                        type: str
                     type:
                         description:
                             - Type.
+                        type: str
                         choices:
                             - file
                             - registry
@@ -120,28 +127,34 @@ options:
                     version:
                         description:
                             - Version.
+                        type: str
             guid:
                 description:
                     - Globally unique ID.
+                type: str
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             os_type:
                 description:
                     - OS type.
+                type: str
                 choices:
                     - windows
                     - macos
             type:
                 description:
                     - Type.
+                type: str
                 choices:
                     - av
                     - fw
             version:
                 description:
                     - Version.
+                type: str
 '''
 
 EXAMPLES = '''

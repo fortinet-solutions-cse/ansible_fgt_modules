@@ -89,12 +89,15 @@ options:
                 description:
                     - Name of the VDOM that you are adding the RADIUS server to. Source system.vdom.name.
                 required: true
+                type: str
             radius_server_vdom:
                 description:
                     - Use this option to select another VDOM containing a VDOM RSSO RADIUS server to use for the current VDOM. Source system.vdom.name.
+                type: str
             status:
                 description:
                     - Enable/disable the RSSO RADIUS server for this VDOM.
+                type: str
                 choices:
                     - enable
                     - disable

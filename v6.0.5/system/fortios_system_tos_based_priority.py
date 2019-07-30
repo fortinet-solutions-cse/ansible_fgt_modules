@@ -89,9 +89,11 @@ options:
                 description:
                     - Item ID.
                 required: true
+                type: int
             priority:
                 description:
                     - ToS based priority level to low, medium or high (these priorities match firewall traffic shaping priorities) (default = medium).
+                type: str
                 choices:
                     - low
                     - medium
@@ -100,6 +102,7 @@ options:
                 description:
                     - "Value of the ToS byte in the IP datagram header (0_15, 8: minimize delay, 4: maximize throughput, 2: maximize reliability, 1: minimize
                        monetary cost, and 0: default service)."
+                type: int
 '''
 
 EXAMPLES = '''

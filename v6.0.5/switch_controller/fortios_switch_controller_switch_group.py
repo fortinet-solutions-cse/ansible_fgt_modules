@@ -88,18 +88,22 @@ options:
             description:
                 description:
                     - Optional switch group description.
+                type: str
             members:
                 description:
                     - FortiSwitch members belonging to this switch group.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Managed device ID. Source switch-controller.managed-switch.switch-id.
                         required: true
+                        type: str
             name:
                 description:
                     - Switch group name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

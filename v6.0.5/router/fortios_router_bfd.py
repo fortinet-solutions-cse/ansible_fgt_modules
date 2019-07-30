@@ -81,14 +81,17 @@ options:
             neighbor:
                 description:
                     - neighbor
+                type: list
                 suboptions:
                     interface:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
                     ip:
                         description:
                             - IPv4 address of the BFD neighbor.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

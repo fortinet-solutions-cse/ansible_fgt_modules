@@ -81,65 +81,77 @@ options:
             anomaly:
                 description:
                     - Enable/disable anomaly logging.
+                type: str
                 choices:
                     - enable
                     - disable
             dlp_archive:
                 description:
                     - Enable/disable DLP archive logging.
+                type: str
                 choices:
                     - enable
                     - disable
             dns:
                 description:
                     - Enable/disable detailed DNS event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             filter:
                 description:
                     - FortiAnalyzer 3 log filter.
+                type: str
             filter_type:
                 description:
                     - Include/exclude logs that match the filter.
+                type: str
                 choices:
                     - include
                     - exclude
             forward_traffic:
                 description:
                     - Enable/disable forward traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             gtp:
                 description:
                     - Enable/disable GTP messages logging.
+                type: str
                 choices:
                     - enable
                     - disable
             local_traffic:
                 description:
                     - Enable/disable local in or out traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             multicast_traffic:
                 description:
                     - Enable/disable multicast traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             netscan_discovery:
                 description:
                     - Enable/disable netscan discovery event logging.
+                type: str
                 choices:
             netscan_vulnerability:
                 description:
                     - Enable/disable netscan vulnerability event logging.
+                type: str
                 choices:
             severity:
                 description:
                     - Lowest severity level to log.
+                type: str
                 choices:
                     - emergency
                     - alert
@@ -152,18 +164,21 @@ options:
             sniffer_traffic:
                 description:
                     - Enable/disable sniffer traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ssh:
                 description:
                     - Enable/disable SSH logging.
+                type: str
                 choices:
                     - enable
                     - disable
             voip:
                 description:
                     - Enable/disable VoIP logging.
+                type: str
                 choices:
                     - enable
                     - disable

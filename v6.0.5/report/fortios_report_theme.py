@@ -88,9 +88,11 @@ options:
             bullet_list_style:
                 description:
                     - Bullet list style.
+                type: str
             column_count:
                 description:
                     - Report page column count.
+                type: str
                 choices:
                     - 1
                     - 2
@@ -98,91 +100,119 @@ options:
             default_html_style:
                 description:
                     - Default HTML report style.
+                type: str
             default_pdf_style:
                 description:
                     - Default PDF report style.
+                type: str
             graph_chart_style:
                 description:
                     - Graph chart style.
+                type: str
             heading1_style:
                 description:
                     - Report heading style.
+                type: str
             heading2_style:
                 description:
                     - Report heading style.
+                type: str
             heading3_style:
                 description:
                     - Report heading style.
+                type: str
             heading4_style:
                 description:
                     - Report heading style.
+                type: str
             hline_style:
                 description:
                     - Horizontal line style.
+                type: str
             image_style:
                 description:
                     - Image style.
+                type: str
             name:
                 description:
                     - Report theme name.
                 required: true
+                type: str
             normal_text_style:
                 description:
                     - Normal text style.
+                type: str
             numbered_list_style:
                 description:
                     - Numbered list style.
+                type: str
             page_footer_style:
                 description:
                     - Report page footer style.
+                type: str
             page_header_style:
                 description:
                     - Report page header style.
+                type: str
             page_orient:
                 description:
                     - Report page orientation.
+                type: str
                 choices:
                     - portrait
                     - landscape
             page_style:
                 description:
                     - Report page style.
+                type: str
             report_subtitle_style:
                 description:
                     - Report subtitle style.
+                type: str
             report_title_style:
                 description:
                     - Report title style.
+                type: str
             table_chart_caption_style:
                 description:
                     - Table chart caption style.
+                type: str
             table_chart_even_row_style:
                 description:
                     - Table chart even row style.
+                type: str
             table_chart_head_style:
                 description:
                     - Table chart head row style.
+                type: str
             table_chart_odd_row_style:
                 description:
                     - Table chart odd row style.
+                type: str
             table_chart_style:
                 description:
                     - Table chart style.
+                type: str
             toc_heading1_style:
                 description:
                     - Table of contents heading style.
+                type: str
             toc_heading2_style:
                 description:
                     - Table of contents heading style.
+                type: str
             toc_heading3_style:
                 description:
                     - Table of contents heading style.
+                type: str
             toc_heading4_style:
                 description:
                     - Table of contents heading style.
+                type: str
             toc_title_style:
                 description:
                     - Table of contents title style.
+                type: str
 '''
 
 EXAMPLES = '''

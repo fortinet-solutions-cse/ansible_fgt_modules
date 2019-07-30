@@ -89,12 +89,15 @@ options:
                 description:
                     - POP3 server entry name.
                 required: true
+                type: str
             port:
                 description:
                     - POP3 service port number.
+                type: int
             secure:
                 description:
                     - SSL connection.
+                type: str
                 choices:
                     - none
                     - starttls
@@ -102,9 +105,11 @@ options:
             server:
                 description:
                     - {<name_str|ip_str>} server domain name or IP.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3

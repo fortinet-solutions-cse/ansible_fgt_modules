@@ -88,30 +88,39 @@ options:
             activation_code:
                 description:
                     - Mobile token user activation_code.
+                type: str
             activation_expire:
                 description:
                     - Mobile token user activation_code expire time.
+                type: int
             comments:
                 description:
                     - Comment.
+                type: str
             license:
                 description:
                     - Mobile token license.
+                type: str
             os_ver:
                 description:
                     - Device Mobile Version.
+                type: str
             reg_id:
                 description:
                     - Device Reg ID.
+                type: str
             seed:
                 description:
                     - Token seed.
+                type: str
             serial_number:
                 description:
                     - Serial number.
+                type: str
             status:
                 description:
                     - Status
+                type: str
                 choices:
                     - active
                     - lock

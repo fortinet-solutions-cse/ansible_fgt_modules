@@ -88,12 +88,15 @@ options:
             aaa_shared_secret:
                 description:
                     - AAA shared secret.
+                type: str
             access_point_name:
                 description:
                     - Access point name(APN).
+                type: str
             admin:
                 description:
                     - FortiExtender Administration (enable or disable).
+                type: str
                 choices:
                     - disable
                     - discovered
@@ -101,64 +104,81 @@ options:
             at_dial_script:
                 description:
                     - Initialization AT commands specific to the MODEM.
+                type: str
             billing_start_day:
                 description:
                     - Billing start day.
+                type: int
             cdma_aaa_spi:
                 description:
                     - CDMA AAA SPI.
+                type: str
             cdma_ha_spi:
                 description:
                     - CDMA HA SPI.
+                type: str
             cdma_nai:
                 description:
                     - NAI for CDMA MODEMS.
+                type: str
             conn_status:
                 description:
                     - Connection status.
+                type: int
             description:
                 description:
                     - Description.
+                type: str
             dial_mode:
                 description:
                     - Dial mode (dial_on_demand or always_connect).
+                type: str
                 choices:
                     - dial-on-demand
                     - always-connect
             dial_status:
                 description:
                     - Dial status.
+                type: int
             ext_name:
                 description:
                     - FortiExtender name.
+                type: str
             ha_shared_secret:
                 description:
                     - HA shared secret.
+                type: str
             id:
                 description:
                     - FortiExtender serial number.
                 required: true
+                type: str
             ifname:
                 description:
                     - FortiExtender interface name.
+                type: str
             initiated_update:
                 description:
                     - Allow/disallow network initiated updates to the MODEM.
+                type: str
                 choices:
                     - enable
                     - disable
             mode:
                 description:
                     - FortiExtender mode.
+                type: str
                 choices:
                     - standalone
                     - redundant
             modem_passwd:
                 description:
                     - MODEM password.
+                type: str
             modem_type:
                 description:
                     - MODEM type (CDMA, GSM/LTE or WIMAX).
+                type: str
                 choices:
                     - cdma
                     - gsm/lte
@@ -166,6 +186,7 @@ options:
             multi_mode:
                 description:
                     - MODEM mode of operation(3G,LTE,etc).
+                type: str
                 choices:
                     - auto
                     - auto-3g
@@ -175,6 +196,7 @@ options:
             ppp_auth_protocol:
                 description:
                     - PPP authentication protocol (PAP,CHAP or auto).
+                type: str
                 choices:
                     - auto
                     - pap
@@ -182,24 +204,30 @@ options:
             ppp_echo_request:
                 description:
                     - Enable/disable PPP echo request.
+                type: str
                 choices:
                     - enable
                     - disable
             ppp_password:
                 description:
                     - PPP password.
+                type: str
             ppp_username:
                 description:
                     - PPP username.
+                type: str
             primary_ha:
                 description:
                     - Primary HA.
+                type: str
             quota_limit_mb:
                 description:
                     - Monthly quota limit (MB).
+                type: int
             redial:
                 description:
                     - Number of redials allowed based on failed attempts.
+                type: str
                 choices:
                     - none
                     - 1
@@ -215,15 +243,18 @@ options:
             redundant_intf:
                 description:
                     - Redundant interface.
+                type: str
             roaming:
                 description:
                     - Enable/disable MODEM roaming.
+                type: str
                 choices:
                     - enable
                     - disable
             role:
                 description:
                     - FortiExtender work role(Primary, Secondary, None).
+                type: str
                 choices:
                     - none
                     - primary
@@ -231,24 +262,30 @@ options:
             secondary_ha:
                 description:
                     - Secondary HA.
+                type: str
             sim_pin:
                 description:
                     - SIM PIN.
+                type: str
             vdom:
                 description:
                     - VDOM
+                type: int
             wimax_auth_protocol:
                 description:
                     - WiMax authentication protocol(TLS or TTLS).
+                type: str
                 choices:
                     - tls
                     - ttls
             wimax_carrier:
                 description:
                     - WiMax carrier.
+                type: str
             wimax_realm:
                 description:
                     - WiMax realm.
+                type: str
 '''
 
 EXAMPLES = '''

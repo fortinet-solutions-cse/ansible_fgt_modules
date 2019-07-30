@@ -88,10 +88,12 @@ options:
             command:
                 description:
                     - Command list to execute.
+                type: str
             name:
                 description:
                     - Alias command name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

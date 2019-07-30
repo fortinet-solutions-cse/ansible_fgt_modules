@@ -88,18 +88,22 @@ options:
             member:
                 description:
                     - Names of up to 3 VPN tunnels to add to the concentrator.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Member name. Source vpn.ipsec.manualkey.name vpn.ipsec.phase1.name.
                         required: true
+                        type: str
             name:
                 description:
                     - Concentrator name.
                 required: true
+                type: str
             src_check:
                 description:
                     - Enable to check source address of phase 2 selector. Disable to check only the destination selector.
+                type: str
                 choices:
                     - disable
                     - enable

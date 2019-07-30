@@ -88,6 +88,7 @@ options:
             allowaccess:
                 description:
                     - Control management access to the managed WTP, FortiAP, or AP. Separate entries with a space.
+                type: str
                 choices:
                     - telnet
                     - http
@@ -96,6 +97,7 @@ options:
             ap_country:
                 description:
                     - Country in which this WTP, FortiAP or AP will operate (default = NA, automatically use the country configured for the current VDOM).
+                type: str
                 choices:
                     - NA
                     - AL
@@ -228,12 +230,15 @@ options:
             ble_profile:
                 description:
                     - Bluetooth Low Energy profile name. Source wireless-controller.ble-profile.name.
+                type: str
             comment:
                 description:
                     - Comment.
+                type: str
             control_message_offload:
                 description:
                     - Enable/disable CAPWAP control message data channel offload.
+                type: str
                 choices:
                     - ebp-frame
                     - aeroscout-tag
@@ -245,23 +250,28 @@ options:
             deny_mac_list:
                 description:
                     - List of MAC addresses that are denied access to this WTP, FortiAP, or AP.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     mac:
                         description:
                             - A WiFi device with this MAC address is denied access to this WTP, FortiAP or AP.
+                        type: str
             dtls_in_kernel:
                 description:
                     - Enable/disable data channel DTLS in kernel.
+                type: str
                 choices:
                     - enable
                     - disable
             dtls_policy:
                 description:
                     - WTP data channel DTLS policy (default = clear_text).
+                type: str
                 choices:
                     - clear-text
                     - dtls-enabled
@@ -269,40 +279,48 @@ options:
             energy_efficient_ethernet:
                 description:
                     - Enable/disable use of energy efficient Ethernet on WTP.
+                type: str
                 choices:
                     - enable
                     - disable
             ext_info_enable:
                 description:
                     - Enable/disable station/VAP/radio extension information.
+                type: str
                 choices:
                     - enable
                     - disable
             handoff_roaming:
                 description:
                     - Enable/disable client load balancing during roaming to avoid roaming delay (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             handoff_rssi:
                 description:
                     - Minimum received signal strength indicator (RSSI) value for handoff (20 _ 30, default = 25).
+                type: int
             handoff_sta_thresh:
                 description:
                     - Threshold value for AP handoff.
+                type: int
             ip_fragment_preventing:
                 description:
                     - Select how to prevent IP fragmentation for CAPWAP tunneled control and data packets (default = tcp_mss_adjust).
+                type: str
                 choices:
                     - tcp-mss-adjust
                     - icmp-unreachable
             lan:
                 description:
                     - WTP LAN port mapping.
+                type: dict
                 suboptions:
                     port_mode:
                         description:
                             - LAN port mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -311,9 +329,11 @@ options:
                     port_ssid:
                         description:
                             - Bridge LAN port to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port1_mode:
                         description:
                             - LAN port 1 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -322,9 +342,11 @@ options:
                     port1_ssid:
                         description:
                             - Bridge LAN port 1 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port2_mode:
                         description:
                             - LAN port 2 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -333,9 +355,11 @@ options:
                     port2_ssid:
                         description:
                             - Bridge LAN port 2 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port3_mode:
                         description:
                             - LAN port 3 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -344,9 +368,11 @@ options:
                     port3_ssid:
                         description:
                             - Bridge LAN port 3 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port4_mode:
                         description:
                             - LAN port 4 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -355,9 +381,11 @@ options:
                     port4_ssid:
                         description:
                             - Bridge LAN port 4 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port5_mode:
                         description:
                             - LAN port 5 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -366,9 +394,11 @@ options:
                     port5_ssid:
                         description:
                             - Bridge LAN port 5 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port6_mode:
                         description:
                             - LAN port 6 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -377,9 +407,11 @@ options:
                     port6_ssid:
                         description:
                             - Bridge LAN port 6 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port7_mode:
                         description:
                             - LAN port 7 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -388,9 +420,11 @@ options:
                     port7_ssid:
                         description:
                             - Bridge LAN port 7 to SSID. Source wireless-controller.vap.name.
+                        type: str
                     port8_mode:
                         description:
                             - LAN port 8 mode.
+                        type: str
                         choices:
                             - offline
                             - nat-to-wan
@@ -399,65 +433,80 @@ options:
                     port8_ssid:
                         description:
                             - Bridge LAN port 8 to SSID. Source wireless-controller.vap.name.
+                        type: str
             lbs:
                 description:
                     - Set various location based service (LBS) options.
+                type: dict
                 suboptions:
                     aeroscout:
                         description:
                             - Enable/disable AeroScout Real Time Location Service (RTLS) support (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_ap_mac:
                         description:
                             - Use BSSID or board MAC address as AP MAC address in AeroScout AP messages (default = bssid).
+                        type: str
                         choices:
                             - bssid
                             - board-mac
                     aeroscout_mmu_report:
                         description:
                             - Enable/disable compounded AeroScout tag and MU report (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_mu:
                         description:
                             - Enable/disable AeroScout Mobile Unit (MU) support (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_mu_factor:
                         description:
                             - AeroScout MU mode dilution factor (default = 20).
+                        type: int
                     aeroscout_mu_timeout:
                         description:
                             - AeroScout MU mode timeout (0 _ 65535 sec, default = 5).
+                        type: int
                     aeroscout_server_ip:
                         description:
                             - IP address of AeroScout server.
+                        type: str
                     aeroscout_server_port:
                         description:
                             - AeroScout server UDP listening port.
+                        type: int
                     ekahau_blink_mode:
                         description:
                             - Enable/disable Ekahau blink mode (now known as AiRISTA Flow) to track and locate WiFi tags (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ekahau_tag:
                         description:
                             - WiFi frame MAC address or WiFi Tag.
+                        type: str
                     erc_server_ip:
                         description:
                             - IP address of Ekahau RTLS Controller (ERC).
+                        type: str
                     erc_server_port:
                         description:
                             - Ekahau RTLS Controller (ERC) UDP listening port.
+                        type: int
                     fortipresence:
                         description:
                             - Enable/disable FortiPresence to monitor the location and activity of WiFi clients even if they don't connect to this WiFi
                                network (default = disable).
+                        type: str
                         choices:
                             - foreign
                             - both
@@ -465,33 +514,41 @@ options:
                     fortipresence_frequency:
                         description:
                             - FortiPresence report transmit frequency (5 _ 65535 sec, default = 30).
+                        type: int
                     fortipresence_port:
                         description:
                             - FortiPresence server UDP listening port (default = 3000).
+                        type: int
                     fortipresence_project:
                         description:
                             - FortiPresence project name (max. 16 characters, default = fortipresence).
+                        type: str
                     fortipresence_rogue:
                         description:
                             - Enable/disable FortiPresence finding and reporting rogue APs.
+                        type: str
                         choices:
                             - enable
                             - disable
                     fortipresence_secret:
                         description:
                             - FortiPresence secret password (max. 16 characters).
+                        type: str
                     fortipresence_server:
                         description:
                             - FortiPresence server IP address.
+                        type: str
                     fortipresence_unassoc:
                         description:
                             - Enable/disable FortiPresence finding and reporting unassociated stations.
+                        type: str
                         choices:
                             - enable
                             - disable
                     station_locate:
                         description:
                             - Enable/disable client station locating services for all clients, whether associated or not (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -499,29 +556,35 @@ options:
                 description:
                     - Recurring firewall schedules for illuminating LEDs on the FortiAP. If led_state is enabled, LEDs will be visible when at least one of
                        the schedules is valid. Separate multiple schedule names with a space.
+                type: list
                 suboptions:
                     name:
                         description:
                             - LED schedule name. Source firewall.schedule.group.name firewall.schedule.recurring.name.
                         required: true
+                        type: str
             led_state:
                 description:
                     - Enable/disable use of LEDs on WTP (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             lldp:
                 description:
                     - Enable/disable Link Layer Discovery Protocol (LLDP) for the WTP, FortiAP, or AP (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             login_passwd:
                 description:
                     - Set the managed WTP, FortiAP, or AP's administrator password.
+                type: str
             login_passwd_change:
                 description:
                     - Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no, default = no).
+                type: str
                 choices:
                     - yes
                     - default
@@ -529,18 +592,22 @@ options:
             max_clients:
                 description:
                     - Maximum number of stations (STAs) supported by the WTP (default = 0, meaning no client limitation).
+                type: int
             name:
                 description:
                     - WTP (or FortiAP or AP) profile name.
                 required: true
+                type: str
             platform:
                 description:
                     - WTP, FortiAP, or AP platform.
+                type: dict
                 suboptions:
                     type:
                         description:
                             - WTP, FortiAP or AP platform type. There are built_in WTP profiles for all supported FortiAP models. You can select a built_in
                                profile and customize it or create a new profile.
+                        type: str
                         choices:
                             - AP-11N
                             - 220B
@@ -597,6 +664,7 @@ options:
             poe_mode:
                 description:
                     - Set the WTP, FortiAP, or AP's PoE mode.
+                type: str
                 choices:
                     - auto
                     - 8023af
@@ -605,73 +673,88 @@ options:
             radio_1:
                 description:
                     - Configuration options for radio 1.
+                type: dict
                 suboptions:
                     amsdu:
                         description:
                             - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_handoff:
                         description:
                             - Enable/disable AP handoff of clients to other APs (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_addr:
                         description:
                             - MAC address to monitor.
+                        type: str
                     ap_sniffer_bufsize:
                         description:
                             - Sniffer buffer size (1 _ 32 MB, default = 16).
+                        type: int
                     ap_sniffer_chan:
                         description:
                             - Channel on which to operate the sniffer (default = 6).
+                        type: int
                     ap_sniffer_ctl:
                         description:
                             - Enable/disable sniffer on WiFi control frame (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_data:
                         description:
                             - Enable/disable sniffer on WiFi data frame (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_beacon:
                         description:
                             - Enable/disable sniffer on WiFi management Beacon frames (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_other:
                         description:
                             - Enable/disable sniffer on WiFi management other frames  (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_probe:
                         description:
                             - Enable/disable sniffer on WiFi management probe frames (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     auto_power_high:
                         description:
                             - Automatic transmit power high limit in dBm (the actual range of transmit power depends on the AP platform type).
+                        type: int
                     auto_power_level:
                         description:
                             - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     auto_power_low:
                         description:
                             - Automatic transmission power low limit in dBm (the actual range of transmit power depends on the AP platform type).
+                        type: int
                     band:
                         description:
                             - WiFi band that Radio 1 operates on.
+                        type: str
                         choices:
                             - 802.11a
                             - 802.11b
@@ -689,37 +772,45 @@ options:
                         description:
                             - Enable/disable WiFi multimedia (WMM) bandwidth admission control to optimize WiFi bandwidth use. A request to join the wireless
                                network is only allowed if the access point has enough bandwidth to support it.
+                        type: str
                         choices:
                             - enable
                             - disable
                     bandwidth_capacity:
                         description:
                             - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                        type: int
                     beacon_interval:
                         description:
                             - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type,
                                default = 100).
+                        type: int
                     call_admission_control:
                         description:
                             - Enable/disable WiFi multimedia (WMM) call admission control to optimize WiFi bandwidth use for VoIP calls. New VoIP calls are
                                only accepted if there is enough bandwidth available to support them.
+                        type: str
                         choices:
                             - enable
                             - disable
                     call_capacity:
                         description:
                             - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 _ 60, default = 10).
+                        type: int
                     channel:
                         description:
                             - Selected list of wireless radio channels.
+                        type: list
                         suboptions:
                             chan:
                                 description:
                                     - Channel number.
                                 required: true
+                                type: str
                     channel_bonding:
                         description:
                             - "Channel bandwidth: 80, 40, or 20MHz. Channels may use both 20 and 40 by enabling coexistence."
+                        type: str
                         choices:
                             - 80MHz
                             - 40MHz
@@ -727,12 +818,14 @@ options:
                     channel_utilization:
                         description:
                             - Enable/disable measuring channel utilization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     coexistence:
                         description:
                             - Enable/disable allowing both HT20 and HT40 on the same radio (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -740,6 +833,7 @@ options:
                         description:
                             - Enable/disable Distributed Automatic Radio Resource Provisioning (DARRP) to make sure the radio is always using the most optimal
                                channel (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -747,24 +841,30 @@ options:
                         description:
                             - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 _ 255, default = 1).
                                Set higher to save client battery life.
+                        type: int
                     frag_threshold:
                         description:
                             - Maximum packet size that can be sent without fragmentation (800 _ 2346 bytes, default = 2346).
+                        type: int
                     frequency_handoff:
                         description:
                             - Enable/disable frequency handoff of clients to other channels (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     max_clients:
                         description:
                             - Maximum number of stations (STAs) or WiFi clients supported by the radio. Range depends on the hardware.
+                        type: int
                     max_distance:
                         description:
                             - Maximum expected distance between the AP and clients (0 _ 54000 m, default = 0).
+                        type: int
                     mode:
                         description:
                             - Mode of radio 1. Radio 1 can be disabled, configured as an access point, a rogue AP monitor, or a sniffer.
+                        type: str
                         choices:
                             - disabled
                             - ap
@@ -773,9 +873,11 @@ options:
                     power_level:
                         description:
                             - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                        type: int
                     powersave_optimize:
                         description:
                             - Enable client power_saving features such as TIM, AC VO, and OBSS etc.
+                        type: str
                         choices:
                             - tim
                             - ac-vo
@@ -785,6 +887,7 @@ options:
                     protection_mode:
                         description:
                             - Enable/disable 802.11g protection modes to support backwards compatibility with older clients (rtscts, ctsonly, disable).
+                        type: str
                         choices:
                             - rtscts
                             - ctsonly
@@ -792,19 +895,23 @@ options:
                     radio_id:
                         description:
                             - radio_id
+                        type: int
                     rts_threshold:
                         description:
                             - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 _ 2346 bytes,
                                default = 2346).
+                        type: int
                     short_guard_interval:
                         description:
                             - Use either the short guard interval (Short GI) of 400 ns or the long guard interval (Long GI) of 800 ns.
+                        type: str
                         choices:
                             - enable
                             - disable
                     spectrum_analysis:
                         description:
                             - Enable/disable spectrum analysis to find interference that would negatively impact wireless performance.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -812,6 +919,7 @@ options:
                         description:
                             - Packet transmission optimization options including power saving, aggregation limiting, retry limiting, etc. All are enabled by
                                default.
+                        type: str
                         choices:
                             - disable
                             - power-save
@@ -821,90 +929,109 @@ options:
                     vap_all:
                         description:
                             - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     vaps:
                         description:
                             - Manually selected list of Virtual Access Points (VAPs).
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Virtual Access Point (VAP) name. Source wireless-controller.vap-group.name wireless-controller.vap.name.
                                 required: true
+                                type: str
                     wids_profile:
                         description:
                             - Wireless Intrusion Detection System (WIDS) profile name to assign to the radio. Source wireless-controller.wids-profile.name.
+                        type: str
             radio_2:
                 description:
                     - Configuration options for radio 2.
+                type: dict
                 suboptions:
                     amsdu:
                         description:
                             - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_handoff:
                         description:
                             - Enable/disable AP handoff of clients to other APs (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_addr:
                         description:
                             - MAC address to monitor.
+                        type: str
                     ap_sniffer_bufsize:
                         description:
                             - Sniffer buffer size (1 _ 32 MB, default = 16).
+                        type: int
                     ap_sniffer_chan:
                         description:
                             - Channel on which to operate the sniffer (default = 6).
+                        type: int
                     ap_sniffer_ctl:
                         description:
                             - Enable/disable sniffer on WiFi control frame (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_data:
                         description:
                             - Enable/disable sniffer on WiFi data frame (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_beacon:
                         description:
                             - Enable/disable sniffer on WiFi management Beacon frames (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_other:
                         description:
                             - Enable/disable sniffer on WiFi management other frames  (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_probe:
                         description:
                             - Enable/disable sniffer on WiFi management probe frames (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     auto_power_high:
                         description:
                             - Automatic transmit power high limit in dBm (the actual range of transmit power depends on the AP platform type).
+                        type: int
                     auto_power_level:
                         description:
                             - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     auto_power_low:
                         description:
                             - Automatic transmission power low limit in dBm (the actual range of transmit power depends on the AP platform type).
+                        type: int
                     band:
                         description:
                             - WiFi band that Radio 2 operates on.
+                        type: str
                         choices:
                             - 802.11a
                             - 802.11b
@@ -922,37 +1049,45 @@ options:
                         description:
                             - Enable/disable WiFi multimedia (WMM) bandwidth admission control to optimize WiFi bandwidth use. A request to join the wireless
                                network is only allowed if the access point has enough bandwidth to support it.
+                        type: str
                         choices:
                             - enable
                             - disable
                     bandwidth_capacity:
                         description:
                             - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                        type: int
                     beacon_interval:
                         description:
                             - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type,
                                default = 100).
+                        type: int
                     call_admission_control:
                         description:
                             - Enable/disable WiFi multimedia (WMM) call admission control to optimize WiFi bandwidth use for VoIP calls. New VoIP calls are
                                only accepted if there is enough bandwidth available to support them.
+                        type: str
                         choices:
                             - enable
                             - disable
                     call_capacity:
                         description:
                             - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 _ 60, default = 10).
+                        type: int
                     channel:
                         description:
                             - Selected list of wireless radio channels.
+                        type: list
                         suboptions:
                             chan:
                                 description:
                                     - Channel number.
                                 required: true
+                                type: str
                     channel_bonding:
                         description:
                             - "Channel bandwidth: 80, 40, or 20MHz. Channels may use both 20 and 40 by enabling coexistence."
+                        type: str
                         choices:
                             - 80MHz
                             - 40MHz
@@ -960,12 +1095,14 @@ options:
                     channel_utilization:
                         description:
                             - Enable/disable measuring channel utilization.
+                        type: str
                         choices:
                             - enable
                             - disable
                     coexistence:
                         description:
                             - Enable/disable allowing both HT20 and HT40 on the same radio (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -973,6 +1110,7 @@ options:
                         description:
                             - Enable/disable Distributed Automatic Radio Resource Provisioning (DARRP) to make sure the radio is always using the most optimal
                                channel (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -980,24 +1118,30 @@ options:
                         description:
                             - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 _ 255, default = 1).
                                Set higher to save client battery life.
+                        type: int
                     frag_threshold:
                         description:
                             - Maximum packet size that can be sent without fragmentation (800 _ 2346 bytes, default = 2346).
+                        type: int
                     frequency_handoff:
                         description:
                             - Enable/disable frequency handoff of clients to other channels (default = disable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     max_clients:
                         description:
                             - Maximum number of stations (STAs) or WiFi clients supported by the radio. Range depends on the hardware.
+                        type: int
                     max_distance:
                         description:
                             - Maximum expected distance between the AP and clients (0 _ 54000 m, default = 0).
+                        type: int
                     mode:
                         description:
                             - Mode of radio 2. Radio 2 can be disabled, configured as an access point, a rogue AP monitor, or a sniffer.
+                        type: str
                         choices:
                             - disabled
                             - ap
@@ -1006,9 +1150,11 @@ options:
                     power_level:
                         description:
                             - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                        type: int
                     powersave_optimize:
                         description:
                             - Enable client power_saving features such as TIM, AC VO, and OBSS etc.
+                        type: str
                         choices:
                             - tim
                             - ac-vo
@@ -1018,6 +1164,7 @@ options:
                     protection_mode:
                         description:
                             - Enable/disable 802.11g protection modes to support backwards compatibility with older clients (rtscts, ctsonly, disable).
+                        type: str
                         choices:
                             - rtscts
                             - ctsonly
@@ -1025,19 +1172,23 @@ options:
                     radio_id:
                         description:
                             - radio_id
+                        type: int
                     rts_threshold:
                         description:
                             - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 _ 2346 bytes,
                                default = 2346).
+                        type: int
                     short_guard_interval:
                         description:
                             - Use either the short guard interval (Short GI) of 400 ns or the long guard interval (Long GI) of 800 ns.
+                        type: str
                         choices:
                             - enable
                             - disable
                     spectrum_analysis:
                         description:
                             - Enable/disable spectrum analysis to find interference that would negatively impact wireless performance.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -1045,6 +1196,7 @@ options:
                         description:
                             - Packet transmission optimization options including power saving, aggregation limiting, retry limiting, etc. All are enabled by
                                default.
+                        type: str
                         choices:
                             - disable
                             - power-save
@@ -1054,52 +1206,64 @@ options:
                     vap_all:
                         description:
                             - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                        type: str
                         choices:
                             - enable
                             - disable
                     vaps:
                         description:
                             - Manually selected list of Virtual Access Points (VAPs).
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Virtual Access Point (VAP) name. Source wireless-controller.vap-group.name wireless-controller.vap.name.
                                 required: true
+                                type: str
                     wids_profile:
                         description:
                             - Wireless Intrusion Detection System (WIDS) profile name to assign to the radio. Source wireless-controller.wids-profile.name.
+                        type: str
             split_tunneling_acl:
                 description:
                     - Split tunneling ACL filter list.
+                type: list
                 suboptions:
                     dest_ip:
                         description:
                             - Destination IP and mask for the split_tunneling subnet.
+                        type: str
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
             split_tunneling_acl_local_ap_subnet:
                 description:
                     - Enable/disable automatically adding local subnetwork of FortiAP to split_tunneling ACL (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             split_tunneling_acl_path:
                 description:
                     - Split tunneling ACL path is local/tunnel.
+                type: str
                 choices:
                     - tunnel
                     - local
             tun_mtu_downlink:
                 description:
                     - Downlink CAPWAP tunnel MTU (0, 576, or 1500 bytes, default = 0).
+                type: int
             tun_mtu_uplink:
                 description:
                     - Uplink CAPWAP tunnel MTU (0, 576, or 1500 bytes, default = 0).
+                type: int
             wan_port_mode:
                 description:
                     - Enable/disable using a WAN port as a LAN port.
+                type: str
                 choices:
                     - wan-lan
                     - wan-only

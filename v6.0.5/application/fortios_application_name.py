@@ -88,54 +88,70 @@ options:
             behavior:
                 description:
                     - Application behavior.
+                type: str
             category:
                 description:
                     - Application category ID.
+                type: int
             id:
                 description:
                     - Application ID.
+                type: int
             metadata:
                 description:
                     - Meta data.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     metaid:
                         description:
                             - Meta ID.
+                        type: int
                     valueid:
                         description:
                             - Value ID.
+                        type: int
             name:
                 description:
                     - Application name.
                 required: true
+                type: str
             parameter:
                 description:
                     - Application parameter name.
+                type: str
             popularity:
                 description:
                     - Application popularity.
+                type: int
             protocol:
                 description:
                     - Application protocol.
+                type: str
             risk:
                 description:
                     - Application risk.
+                type: int
             sub_category:
                 description:
                     - Application sub_category ID.
+                type: int
             technology:
                 description:
                     - Application technology.
+                type: str
             vendor:
                 description:
                     - Application vendor.
+                type: str
             weight:
                 description:
                     - Application weight.
+                type: int
 '''
 
 EXAMPLES = '''

@@ -81,27 +81,32 @@ options:
             fast_policy_match:
                 description:
                     - Enable/disable fast matching algorithm for explicit and transparent proxy policy.
+                type: str
                 choices:
                     - enable
                     - disable
             forward_proxy_auth:
                 description:
                     - Enable/disable forwarding proxy authentication headers.
+                type: str
                 choices:
                     - enable
                     - disable
             forward_server_affinity_timeout:
                 description:
                     - Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 _ 60 min, default = 30).
+                type: int
             learn_client_ip:
                 description:
                     - Enable/disable learning the client's IP address from headers.
+                type: str
                 choices:
                     - enable
                     - disable
             learn_client_ip_from_header:
                 description:
                     - Learn client IP address from the specified headers.
+                type: str
                 choices:
                     - true-client-ip
                     - x-real-ip
@@ -109,46 +114,57 @@ options:
             learn_client_ip_srcaddr:
                 description:
                     - Source address name (srcaddr or srcaddr6 must be set).
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address.name firewall.addrgrp.name.
                         required: true
+                        type: str
             learn_client_ip_srcaddr6:
                 description:
                     - IPv6 Source address name (srcaddr or srcaddr6 must be set).
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             max_message_length:
                 description:
                     - Maximum length of HTTP message, not including body (16 _ 256 Kbytes, default = 32).
+                type: int
             max_request_length:
                 description:
                     - Maximum length of HTTP request line (2 _ 64 Kbytes, default = 4).
+                type: int
             max_waf_body_cache_length:
                 description:
                     - Maximum length of HTTP messages processed by Web Application Firewall (WAF) (10 _ 1024 Kbytes, default = 32).
+                type: int
             proxy_fqdn:
                 description:
                     - Fully Qualified Domain Name (FQDN) that clients connect to (default = default.fqdn) to connect to the explicit web proxy.
+                type: str
             strict_web_check:
                 description:
                     - Enable/disable strict web checking to block web sites that send incorrect headers that don't conform to HTTP 1.1.
+                type: str
                 choices:
                     - enable
                     - disable
             tunnel_non_http:
                 description:
                     - Enable/disable allowing non_HTTP traffic. Allowed non_HTTP traffic is tunneled.
+                type: str
                 choices:
                     - enable
                     - disable
             unknown_http_version:
                 description:
                     - "Action to take when an unknown version of HTTP is encountered: reject, allow (tunnel), or proceed with best_effort."
+                type: str
                 choices:
                     - reject
                     - tunnel
@@ -157,6 +173,7 @@ options:
                 description:
                     - Name of the web proxy profile to apply when explicit proxy traffic is allowed by default and traffic is accepted that does not match an
                        explicit proxy policy. Source web-proxy.profile.name.
+                type: str
 '''
 
 EXAMPLES = '''

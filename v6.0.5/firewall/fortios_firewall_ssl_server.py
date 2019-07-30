@@ -88,25 +88,31 @@ options:
             add_header_x_forwarded_proto:
                 description:
                     - Enable/disable adding an X_Forwarded_Proto header to forwarded requests.
+                type: str
                 choices:
                     - enable
                     - disable
             ip:
                 description:
                     - IPv4 address of the SSL server.
+                type: str
             mapped_port:
                 description:
                     - Mapped server service port (1 _ 65535, default = 80).
+                type: int
             name:
                 description:
                     - Server name.
                 required: true
+                type: str
             port:
                 description:
                     - Server service port (1 _ 65535, default = 443).
+                type: int
             ssl_algorithm:
                 description:
                     - Relative strength of encryption algorithms accepted in negotiation.
+                type: str
                 choices:
                     - high
                     - medium
@@ -114,9 +120,11 @@ options:
             ssl_cert:
                 description:
                     - Name of certificate for SSL connections to this server (default = "Fortinet_CA_SSL"). Source vpn.certificate.local.name.
+                type: str
             ssl_client_renegotiation:
                 description:
                     - Allow or block client renegotiation by server.
+                type: str
                 choices:
                     - allow
                     - deny
@@ -124,6 +132,7 @@ options:
             ssl_dh_bits:
                 description:
                     - Bit_size of Diffie_Hellman (DH) prime used in DHE_RSA negotiation (default = 2048).
+                type: str
                 choices:
                     - 768
                     - 1024
@@ -132,6 +141,7 @@ options:
             ssl_max_version:
                 description:
                     - Highest SSL/TLS version to negotiate.
+                type: str
                 choices:
                     - tls-1.0
                     - tls-1.1
@@ -139,6 +149,7 @@ options:
             ssl_min_version:
                 description:
                     - Lowest SSL/TLS version to negotiate.
+                type: str
                 choices:
                     - tls-1.0
                     - tls-1.1
@@ -146,18 +157,21 @@ options:
             ssl_mode:
                 description:
                     - SSL/TLS mode for encryption and decryption of traffic.
+                type: str
                 choices:
                     - half
                     - full
             ssl_send_empty_frags:
                 description:
                     - Enable/disable sending empty fragments to avoid attack on CBC IV.
+                type: str
                 choices:
                     - enable
                     - disable
             url_rewrite:
                 description:
                     - Enable/disable rewriting the URL.
+                type: str
                 choices:
                     - enable
                     - disable

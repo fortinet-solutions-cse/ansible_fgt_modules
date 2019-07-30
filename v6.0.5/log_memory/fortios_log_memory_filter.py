@@ -81,125 +81,147 @@ options:
             admin:
                 description:
                     - Enable/disable admin login/logout logging.
+                type: str
                 choices:
                     - enable
                     - disable
             anomaly:
                 description:
                     - Enable/disable anomaly logging.
+                type: str
                 choices:
                     - enable
                     - disable
             auth:
                 description:
                     - Enable/disable firewall authentication logging.
+                type: str
                 choices:
                     - enable
                     - disable
             cpu_memory_usage:
                 description:
                     - Enable/disable CPU & memory usage logging every 5 minutes.
+                type: str
                 choices:
                     - enable
                     - disable
             dhcp:
                 description:
                     - Enable/disable DHCP service messages logging.
+                type: str
                 choices:
                     - enable
                     - disable
             dns:
                 description:
                     - Enable/disable detailed DNS event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             event:
                 description:
                     - Enable/disable event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             filter:
                 description:
                     - Memory log filter.
+                type: str
             filter_type:
                 description:
                     - Include/exclude logs that match the filter.
+                type: str
                 choices:
                     - include
                     - exclude
             forward_traffic:
                 description:
                     - Enable/disable forward traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             gtp:
                 description:
                     - Enable/disable GTP messages logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ha:
                 description:
                     - Enable/disable HA logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ipsec:
                 description:
                     - Enable/disable IPsec negotiation messages logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ldb_monitor:
                 description:
                     - Enable/disable VIP real server health monitoring logging.
+                type: str
                 choices:
                     - enable
                     - disable
             local_traffic:
                 description:
                     - Enable/disable local in or out traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             multicast_traffic:
                 description:
                     - Enable/disable multicast traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             netscan_discovery:
                 description:
                     - Enable/disable netscan discovery event logging.
+                type: str
                 choices:
             netscan_vulnerability:
                 description:
                     - Enable/disable netscan vulnerability event logging.
+                type: str
                 choices:
             pattern:
                 description:
                     - Enable/disable pattern update logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ppp:
                 description:
                     - Enable/disable L2TP/PPTP/PPPoE logging.
+                type: str
                 choices:
                     - enable
                     - disable
             radius:
                 description:
                     - Enable/disable RADIUS messages logging.
+                type: str
                 choices:
                     - enable
                     - disable
             severity:
                 description:
                     - Log every message above and including this severity level.
+                type: str
                 choices:
                     - emergency
                     - alert
@@ -212,60 +234,70 @@ options:
             sniffer_traffic:
                 description:
                     - Enable/disable sniffer traffic logging.
+                type: str
                 choices:
                     - enable
                     - disable
             ssh:
                 description:
                     - Enable/disable SSH logging.
+                type: str
                 choices:
                     - enable
                     - disable
             sslvpn_log_adm:
                 description:
                     - Enable/disable SSL administrator login logging.
+                type: str
                 choices:
                     - enable
                     - disable
             sslvpn_log_auth:
                 description:
                     - Enable/disable SSL user authentication logging.
+                type: str
                 choices:
                     - enable
                     - disable
             sslvpn_log_session:
                 description:
                     - Enable/disable SSL session logging.
+                type: str
                 choices:
                     - enable
                     - disable
             system:
                 description:
                     - Enable/disable system activity logging.
+                type: str
                 choices:
                     - enable
                     - disable
             vip_ssl:
                 description:
                     - Enable/disable VIP SSL logging.
+                type: str
                 choices:
                     - enable
                     - disable
             voip:
                 description:
                     - Enable/disable VoIP logging.
+                type: str
                 choices:
                     - enable
                     - disable
             wan_opt:
                 description:
                     - Enable/disable WAN optimization event logging.
+                type: str
                 choices:
                     - enable
                     - disable
             wireless_activity:
                 description:
                     - Enable/disable wireless activity event logging.
+                type: str
                 choices:
                     - enable
                     - disable

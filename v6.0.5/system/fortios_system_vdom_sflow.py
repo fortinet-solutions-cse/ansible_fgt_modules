@@ -83,16 +83,20 @@ options:
             collector_ip:
                 description:
                     - IP address of the sFlow collector that sFlow agents added to interfaces in this VDOM send sFlow datagrams to (default = 0.0.0.0).
+                type: str
             collector_port:
                 description:
                     - UDP port number used for sending sFlow datagrams (configure only if required by your sFlow collector or your network configuration) (0 _
                        65535, default = 6343).
+                type: int
             source_ip:
                 description:
                     - Source IP address for sFlow agent.
+                type: str
             vdom_sflow:
                 description:
                     - Enable/disable the sFlow configuration for the current VDOM.
+                type: str
                 choices:
                     - enable
                     - disable

@@ -88,29 +88,36 @@ options:
             application:
                 description:
                     - Application ID list.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Application IDs.
                         required: true
+                        type: int
             category:
                 description:
                     - Application category ID list.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Category IDs.
                         required: true
+                        type: int
             comment:
                 description:
                     - Comment
+                type: str
             name:
                 description:
                     - Application group name.
                 required: true
+                type: str
             type:
                 description:
                     - Application group type.
+                type: str
                 choices:
                     - application
                     - category

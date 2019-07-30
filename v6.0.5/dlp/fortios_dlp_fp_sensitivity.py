@@ -90,6 +90,7 @@ options:
                 description:
                     - DLP Sensitivity Levels.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

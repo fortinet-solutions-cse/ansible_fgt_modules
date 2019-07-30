@@ -88,9 +88,11 @@ options:
             rating:
                 description:
                     - Local rating.
+                type: str
             status:
                 description:
                     - Enable/disable local rating.
+                type: str
                 choices:
                     - enable
                     - disable
@@ -98,6 +100,7 @@ options:
                 description:
                     - URL to rate locally.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

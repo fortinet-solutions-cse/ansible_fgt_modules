@@ -81,9 +81,11 @@ options:
             http_probe_value:
                 description:
                     - Value to respond to the monitoring server.
+                type: str
             mode:
                 description:
                     - SLA response mode.
+                type: str
                 choices:
                     - none
                     - http-probe
@@ -91,21 +93,26 @@ options:
             password:
                 description:
                     - Twamp respondor password in authentication mode
+                type: str
             port:
                 description:
                     - Port number to response.
+                type: int
             security_mode:
                 description:
                     - Twamp respondor security mode.
+                type: str
                 choices:
                     - none
                     - authentication
             timeout:
                 description:
                     - An inactivity timer for a twamp test session.
+                type: int
             ttl_mode:
                 description:
                     - Mode for TWAMP packet TTL modification.
+                type: str
                 choices:
                     - reinit
                     - decrease

@@ -88,6 +88,7 @@ options:
             ipv4_address_type:
                 description:
                     - IPv4 address type.
+                type: str
                 choices:
                     - not-available
                     - public
@@ -100,6 +101,7 @@ options:
             ipv6_address_type:
                 description:
                     - IPv6 address type.
+                type: str
                 choices:
                     - not-available
                     - available
@@ -108,6 +110,7 @@ options:
                 description:
                     - IP type name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

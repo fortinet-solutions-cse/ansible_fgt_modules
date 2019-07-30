@@ -88,19 +88,23 @@ options:
             nai_list:
                 description:
                     - NAI list.
+                type: list
                 suboptions:
                     eap_method:
                         description:
                             - EAP Methods.
+                        type: list
                         suboptions:
                             auth_param:
                                 description:
                                     - EAP auth param.
+                                type: str
                                 choices:
                                 suboptions:
                                     id:
                                         description:
                                             - ID of authentication parameter.
+                                        type: str
                                         choices:
                                             - non-eap-inner-auth
                                             - inner-auth-eap
@@ -110,9 +114,11 @@ options:
                                         description:
                                             - Param index.
                                         required: true
+                                        type: int
                                     val:
                                         description:
                                             - Value of authentication parameter.
+                                        type: str
                                         choices:
                                             - eap-identity
                                             - eap-md5
@@ -148,9 +154,11 @@ options:
                                 description:
                                     - EAP method index.
                                 required: true
+                                type: int
                             method:
                                 description:
                                     - EAP method type.
+                                type: str
                                 choices:
                                     - eap-identity
                                     - eap-md5
@@ -163,20 +171,24 @@ options:
                     encoding:
                         description:
                             - Enable/disable format in accordance with IETF RFC 4282.
+                        type: str
                         choices:
                             - disable
                             - enable
                     nai_realm:
                         description:
                             - Configure NAI realms (delimited by a semi_colon character).
+                        type: str
                     name:
                         description:
                             - NAI realm name.
                         required: true
+                        type: str
             name:
                 description:
                     - NAI realm list name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

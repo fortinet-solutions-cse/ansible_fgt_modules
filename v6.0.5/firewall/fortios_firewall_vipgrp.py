@@ -88,27 +88,34 @@ options:
             color:
                 description:
                     - Integer value to determine the color of the icon in the GUI (range 1 to 32, default = 0, which sets the value to 1).
+                type: int
             comments:
                 description:
                     - Comment.
+                type: str
             interface:
                 description:
                     - interface Source system.interface.name.
+                type: str
             member:
                 description:
                     - Member VIP objects of the group (Separate multiple objects with a space).
+                type: list
                 suboptions:
                     name:
                         description:
                             - VIP name. Source firewall.vip.name.
                         required: true
+                        type: str
             name:
                 description:
                     - VIP group name.
                 required: true
+                type: str
             uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
 '''
 
 EXAMPLES = '''

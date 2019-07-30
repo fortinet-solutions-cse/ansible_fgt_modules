@@ -89,9 +89,11 @@ options:
                 description:
                     - IPv6 address of DNS server.
                 required: true
+                type: str
             status:
                 description:
                     - Enable/disable this server for IPv6 DNS queries.
+                type: str
                 choices:
                     - enable
                     - disable

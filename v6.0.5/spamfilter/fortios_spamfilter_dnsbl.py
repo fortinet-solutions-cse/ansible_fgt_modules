@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Spam filter DNSBL and ORBL server.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Reject connection or mark as spam email.
+                        type: str
                         choices:
                             - reject
                             - spam
@@ -102,12 +105,15 @@ options:
                         description:
                             - DNSBL/ORBL entry ID.
                         required: true
+                        type: int
                     server:
                         description:
                             - DNSBL or ORBL server name.
+                        type: str
                     status:
                         description:
                             - Enable/disable status.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -115,9 +121,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

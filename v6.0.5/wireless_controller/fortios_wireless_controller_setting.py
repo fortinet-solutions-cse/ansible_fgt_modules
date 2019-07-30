@@ -81,9 +81,11 @@ options:
             account_id:
                 description:
                     - FortiCloud customer account ID.
+                type: str
             country:
                 description:
                     - Country or region in which the FortiGate is located. The country determines the 802.11 bands and channels that are available.
+                type: str
                 choices:
                     - NA
                     - AL
@@ -216,12 +218,14 @@ options:
             duplicate_ssid:
                 description:
                     - Enable/disable allowing Virtual Access Points (VAPs) to use the same SSID name in the same VDOM.
+                type: str
                 choices:
                     - enable
                     - disable
             fapc_compatibility:
                 description:
                     - Enable/disable FAP_C series compatibility.
+                type: str
                 choices:
                     - enable
                     - disable

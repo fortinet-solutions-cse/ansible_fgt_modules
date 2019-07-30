@@ -89,18 +89,22 @@ options:
                 description:
                     - Name.
                 required: true
+                type: str
             range:
                 description:
                     - Either the global or VDOM IP address range for the remote certificate.
+                type: str
                 choices:
                     - global
                     - vdom
             remote:
                 description:
                     - Remote certificate.
+                type: str
             source:
                 description:
                     - Remote certificate source type.
+                type: str
                 choices:
                     - factory
                     - user

@@ -88,16 +88,19 @@ options:
             anomaly:
                 description:
                     - Configuration method to edit Denial of Service (DoS) anomaly settings.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action taken when the threshold is reached.
+                        type: str
                         choices:
                             - pass
                             - block
                     log:
                         description:
                             - Enable/disable anomaly logging.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -105,101 +108,123 @@ options:
                         description:
                             - Anomaly name.
                         required: true
+                        type: str
                     quarantine:
                         description:
                             - Quarantine method.
+                        type: str
                         choices:
                             - none
                             - attacker
                     quarantine_expiry:
                         description:
                             - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
+                        type: str
                     quarantine_log:
                         description:
                             - Enable/disable quarantine logging.
+                        type: str
                         choices:
                             - disable
                             - enable
                     status:
                         description:
                             - Enable/disable this anomaly.
+                        type: str
                         choices:
                             - disable
                             - enable
                     threshold:
                         description:
                             - Anomaly threshold. Number of detected instances per minute that triggers the anomaly action.
+                        type: int
                     threshold(default):
                         description:
                             - Number of detected instances per minute which triggers action (1 _ 2147483647, default = 1000). Note that each anomaly has a
                                different threshold value assigned to it.
+                        type: int
             application_list:
                 description:
                     - Name of an existing application list. Source application.list.name.
+                type: str
             application_list_status:
                 description:
                     - Enable/disable application control profile.
+                type: str
                 choices:
                     - enable
                     - disable
             av_profile:
                 description:
                     - Name of an existing antivirus profile. Source antivirus.profile.name.
+                type: str
             av_profile_status:
                 description:
                     - Enable/disable antivirus profile.
+                type: str
                 choices:
                     - enable
                     - disable
             dlp_sensor:
                 description:
                     - Name of an existing DLP sensor. Source dlp.sensor.name.
+                type: str
             dlp_sensor_status:
                 description:
                     - Enable/disable DLP sensor.
+                type: str
                 choices:
                     - enable
                     - disable
             dsri:
                 description:
                     - Enable/disable DSRI.
+                type: str
                 choices:
                     - enable
                     - disable
             host:
                 description:
                     - "Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0_4.4.4.240)."
+                type: str
             id:
                 description:
                     - Sniffer ID.
                 required: true
+                type: int
             interface:
                 description:
                     - Interface name that traffic sniffing will take place on. Source system.interface.name.
+                type: str
             ips_dos_status:
                 description:
                     - Enable/disable IPS DoS anomaly detection.
+                type: str
                 choices:
                     - enable
                     - disable
             ips_sensor:
                 description:
                     - Name of an existing IPS sensor. Source ips.sensor.name.
+                type: str
             ips_sensor_status:
                 description:
                     - Enable/disable IPS sensor.
+                type: str
                 choices:
                     - enable
                     - disable
             ipv6:
                 description:
                     - Enable/disable sniffing IPv6 packets.
+                type: str
                 choices:
                     - enable
                     - disable
             logtraffic:
                 description:
                     - Either log all sessions, only sessions that have a security profile applied, or disable all logging for this policy.
+                type: str
                 choices:
                     - all
                     - utm
@@ -207,21 +232,26 @@ options:
             max_packet_count:
                 description:
                     - Maximum packet count (1 _ 1000000, default = 10000).
+                type: int
             non_ip:
                 description:
                     - Enable/disable sniffing non_IP packets.
+                type: str
                 choices:
                     - enable
                     - disable
             port:
                 description:
                     - "Ports to sniff (Format examples: 10, :20, 30:40, 50_, 100_200)."
+                type: str
             protocol:
                 description:
                     - Integer value for the protocol type as defined by IANA (0 _ 255).
+                type: str
             scan_botnet_connections:
                 description:
                     - Enable/disable scanning of connections to Botnet servers.
+                type: str
                 choices:
                     - disable
                     - block
@@ -229,27 +259,33 @@ options:
             spamfilter_profile:
                 description:
                     - Name of an existing spam filter profile. Source spamfilter.profile.name.
+                type: str
             spamfilter_profile_status:
                 description:
                     - Enable/disable spam filter.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable the active status of the sniffer.
+                type: str
                 choices:
                     - enable
                     - disable
             vlan:
                 description:
                     - List of VLANs to sniff.
+                type: str
             webfilter_profile:
                 description:
                     - Name of an existing web filter profile. Source webfilter.profile.name.
+                type: str
             webfilter_profile_status:
                 description:
                     - Enable/disable web filter profile.
+                type: str
                 choices:
                     - enable
                     - disable

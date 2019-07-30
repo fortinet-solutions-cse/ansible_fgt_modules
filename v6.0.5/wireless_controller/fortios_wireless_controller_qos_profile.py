@@ -88,93 +88,115 @@ options:
             bandwidth_admission_control:
                 description:
                     - Enable/disable WMM bandwidth admission control.
+                type: str
                 choices:
                     - enable
                     - disable
             bandwidth_capacity:
                 description:
                     - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                type: int
             burst:
                 description:
                     - Enable/disable client rate burst.
+                type: str
                 choices:
                     - enable
                     - disable
             call_admission_control:
                 description:
                     - Enable/disable WMM call admission control.
+                type: str
                 choices:
                     - enable
                     - disable
             call_capacity:
                 description:
                     - Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 _ 60, default = 10).
+                type: int
             comment:
                 description:
                     - Comment.
+                type: str
             downlink:
                 description:
                     - Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                type: int
             downlink_sta:
                 description:
                     - Maximum downlink bandwidth for clients (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                type: int
             dscp_wmm_be:
                 description:
                     - DSCP mapping for best effort access (default = 0 24).
+                type: list
                 suboptions:
                     id:
                         description:
                             - DSCP WMM mapping numbers (0 _ 63).
                         required: true
+                        type: int
             dscp_wmm_bk:
                 description:
                     - DSCP mapping for background access (default = 8 16).
+                type: list
                 suboptions:
                     id:
                         description:
                             - DSCP WMM mapping numbers (0 _ 63).
                         required: true
+                        type: int
             dscp_wmm_mapping:
                 description:
                     - Enable/disable Differentiated Services Code Point (DSCP) mapping.
+                type: str
                 choices:
                     - enable
                     - disable
             dscp_wmm_vi:
                 description:
                     - DSCP mapping for video access (default = 32 40).
+                type: list
                 suboptions:
                     id:
                         description:
                             - DSCP WMM mapping numbers (0 _ 63).
                         required: true
+                        type: int
             dscp_wmm_vo:
                 description:
                     - DSCP mapping for voice access (default = 48 56).
+                type: list
                 suboptions:
                     id:
                         description:
                             - DSCP WMM mapping numbers (0 _ 63).
                         required: true
+                        type: int
             name:
                 description:
                     - WiFi QoS profile name.
                 required: true
+                type: str
             uplink:
                 description:
                     - Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                type: int
             uplink_sta:
                 description:
                     - Maximum uplink bandwidth for clients (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                type: int
             wmm:
                 description:
                     - Enable/disable WiFi multi_media (WMM) control.
+                type: str
                 choices:
                     - enable
                     - disable
             wmm_uapsd:
                 description:
                     - Enable/disable WMM Unscheduled Automatic Power Save Delivery (U_APSD) power save mode.
+                type: str
                 choices:
                     - enable
                     - disable

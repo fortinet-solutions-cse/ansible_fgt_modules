@@ -88,21 +88,26 @@ options:
             mcc_mnc_list:
                 description:
                     - Mobile Country Code and Mobile Network Code configuration.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     mcc:
                         description:
                             - Mobile country code.
+                        type: str
                     mnc:
                         description:
                             - Mobile network code.
+                        type: str
             name:
                 description:
                     - 3GPP PLMN name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

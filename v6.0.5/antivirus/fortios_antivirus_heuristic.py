@@ -81,6 +81,7 @@ options:
             mode:
                 description:
                     - Enable/disable heuristics and determine how the system behaves if heuristics detects a problem.
+                type: str
                 choices:
                     - pass
                     - block

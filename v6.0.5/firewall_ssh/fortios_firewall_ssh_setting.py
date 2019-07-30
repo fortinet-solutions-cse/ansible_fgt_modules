@@ -81,33 +81,42 @@ options:
             caname:
                 description:
                     - CA certificate used by SSH Inspection. Source firewall.ssh.local-ca.name.
+                type: str
             host_trusted_checking:
                 description:
                     - Enable/disable host trusted checking.
+                type: str
                 choices:
                     - enable
                     - disable
             hostkey_dsa1024:
                 description:
                     - DSA certificate used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             hostkey_ecdsa256:
                 description:
                     - ECDSA nid256 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             hostkey_ecdsa384:
                 description:
                     - ECDSA nid384 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             hostkey_ecdsa521:
                 description:
                     - ECDSA nid384 certificate used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             hostkey_ed25519:
                 description:
                     - ED25519 hostkey used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             hostkey_rsa2048:
                 description:
                     - RSA certificate used by SSH proxy. Source firewall.ssh.local-key.name.
+                type: str
             untrusted_caname:
                 description:
                     - Untrusted CA certificate used by SSH Inspection. Source firewall.ssh.local-ca.name.
+                type: str
 '''
 
 EXAMPLES = '''

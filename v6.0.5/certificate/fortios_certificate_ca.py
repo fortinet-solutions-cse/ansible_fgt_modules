@@ -88,31 +88,39 @@ options:
             auto_update_days:
                 description:
                     - Number of days to wait before requesting an updated CA certificate (0 _ 4294967295, 0 = disabled).
+                type: int
             auto_update_days_warning:
                 description:
                     - Number of days before an expiry_warning message is generated (0 _ 4294967295, 0 = disabled).
+                type: int
             ca:
                 description:
                     - CA certificate as a PEM file.
+                type: str
             last_updated:
                 description:
                     - Time at which CA was last updated.
+                type: int
             name:
                 description:
                     - Name.
                 required: true
+                type: str
             range:
                 description:
                     - Either global or VDOM IP address range for the CA certificate.
+                type: str
                 choices:
                     - global
                     - vdom
             scep_url:
                 description:
                     - URL of the SCEP server.
+                type: str
             source:
                 description:
                     - CA certificate source type.
+                type: str
                 choices:
                     - factory
                     - user
@@ -120,9 +128,11 @@ options:
             source_ip:
                 description:
                     - Source IP address for communications to the SCEP server.
+                type: str
             trusted:
                 description:
                     - Enable/disable as a trusted CA.
+                type: str
                 choices:
                     - enable
                     - disable

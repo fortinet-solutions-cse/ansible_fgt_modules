@@ -88,22 +88,28 @@ options:
             antivirus_profile:
                 description:
                     - AntiVirus profile name. Source antivirus.profile.name.
+                type: str
             application_list:
                 description:
                     - Application control list name. Source application.list.name.
+                type: str
             comment:
                 description:
                     - Comment.
+                type: str
             ips_sensor:
                 description:
                     - IPS sensor name. Source ips.sensor.name.
+                type: str
             name:
                 description:
                     - UTM profile name.
                 required: true
+                type: str
             scan_botnet_connections:
                 description:
                     - Block or monitor connections to Botnet servers or disable Botnet scanning.
+                type: str
                 choices:
                     - disable
                     - monitor
@@ -111,12 +117,14 @@ options:
             utm_log:
                 description:
                     - Enable/disable UTM logging.
+                type: str
                 choices:
                     - enable
                     - disable
             webfilter_profile:
                 description:
                     - WebFilter profile name. Source webfilter.profile.name.
+                type: str
 '''
 
 EXAMPLES = '''

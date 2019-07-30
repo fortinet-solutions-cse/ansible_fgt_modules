@@ -88,10 +88,12 @@ options:
             mail_server:
                 description:
                     - Email_to_SMS server domain name.
+                type: str
             name:
                 description:
                     - Name of SMS server.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

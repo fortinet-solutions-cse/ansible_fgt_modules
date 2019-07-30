@@ -81,60 +81,74 @@ options:
             download_custom_link:
                 description:
                     - Customized URL for downloading FortiClient.
+                type: str
             download_location:
                 description:
                     - FortiClient download location (FortiGuard or custom).
+                type: str
                 choices:
                     - fortiguard
                     - custom
             forticlient_avdb_update_interval:
                 description:
                     - Period of time between FortiClient AntiVirus database updates (0 _ 24 hours, default = 8).
+                type: int
             forticlient_dereg_unsupported_client:
                 description:
                     - Enable/disable deregistering unsupported FortiClient endpoints.
+                type: str
                 choices:
                     - enable
                     - disable
             forticlient_ems_rest_api_call_timeout:
                 description:
                     - FortiClient EMS call timeout in milliseconds (500 _ 30000 milliseconds, default = 5000).
+                type: int
             forticlient_keepalive_interval:
                 description:
                     - Interval between two KeepAlive messages from FortiClient (20 _ 300 sec, default = 60).
+                type: int
             forticlient_offline_grace:
                 description:
                     - Enable/disable grace period for offline registered clients.
+                type: str
                 choices:
                     - enable
                     - disable
             forticlient_offline_grace_interval:
                 description:
                     - Grace period for offline registered FortiClient (60 _ 600 sec, default = 120).
+                type: int
             forticlient_reg_key:
                 description:
                     - FortiClient registration key.
+                type: str
             forticlient_reg_key_enforce:
                 description:
                     - Enable/disable requiring or enforcing FortiClient registration keys.
+                type: str
                 choices:
                     - enable
                     - disable
             forticlient_reg_timeout:
                 description:
                     - FortiClient registration license timeout (days, min = 1, max = 180, 0 means unlimited).
+                type: int
             forticlient_sys_update_interval:
                 description:
                     - Interval between two system update messages from FortiClient (30 _ 1440 min, default = 720).
+                type: int
             forticlient_user_avatar:
                 description:
                     - Enable/disable uploading FortiClient user avatars.
+                type: str
                 choices:
                     - enable
                     - disable
             forticlient_warning_interval:
                 description:
                     - Period of time between FortiClient portal warnings (0 _ 24 hours, default = 1).
+                type: int
 '''
 
 EXAMPLES = '''

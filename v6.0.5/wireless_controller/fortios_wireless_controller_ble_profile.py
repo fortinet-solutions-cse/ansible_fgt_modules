@@ -88,6 +88,7 @@ options:
             advertising:
                 description:
                     - Advertising type.
+                type: str
                 choices:
                     - ibeacon
                     - eddystone-uid
@@ -95,43 +96,55 @@ options:
             beacon_interval:
                 description:
                     - Beacon interval (default = 100 msec).
+                type: int
             ble_scanning:
                 description:
                     - Enable/disable Bluetooth Low Energy (BLE) scanning.
+                type: str
                 choices:
                     - enable
                     - disable
             comment:
                 description:
                     - Comment.
+                type: str
             eddystone_instance:
                 description:
                     - Eddystone instance ID.
+                type: str
             eddystone_namespace:
                 description:
                     - Eddystone namespace ID.
+                type: str
             eddystone_url:
                 description:
                     - Eddystone URL.
+                type: str
             eddystone_url_encode_hex:
                 description:
                     - Eddystone encoded URL hexadecimal string
+                type: str
             ibeacon_uuid:
                 description:
                     - Universally Unique Identifier (UUID; automatically assigned but can be manually reset).
+                type: str
             major_id:
                 description:
                     - Major ID.
+                type: int
             minor_id:
                 description:
                     - Minor ID.
+                type: int
             name:
                 description:
                     - Bluetooth Low Energy profile name.
                 required: true
+                type: str
             txpower:
                 description:
                     - Transmit power level (default = 0).
+                type: str
                 choices:
                     - 0
                     - 1

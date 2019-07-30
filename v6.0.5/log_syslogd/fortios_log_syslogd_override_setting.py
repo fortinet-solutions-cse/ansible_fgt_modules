@@ -81,23 +81,29 @@ options:
             certificate:
                 description:
                     - Certificate used to communicate with Syslog server. Source certificate.local.name.
+                type: str
             custom_field_name:
                 description:
                     - Custom field name for CEF format logging.
+                type: list
                 suboptions:
                     custom:
                         description:
                             - Field custom name.
+                        type: str
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     name:
                         description:
                             - Field name.
+                        type: str
             enc_algorithm:
                 description:
                     - Enable/disable reliable syslogging with TLS encryption.
+                type: str
                 choices:
                     - high-medium
                     - high
@@ -106,6 +112,7 @@ options:
             facility:
                 description:
                     - Remote syslog facility.
+                type: str
                 choices:
                     - kernel
                     - user
@@ -134,6 +141,7 @@ options:
             format:
                 description:
                     - Log format.
+                type: str
                 choices:
                     - default
                     - csv
@@ -141,6 +149,7 @@ options:
             mode:
                 description:
                     - Remote syslog logging over UDP/Reliable TCP.
+                type: str
                 choices:
                     - udp
                     - legacy-reliable
@@ -148,21 +157,26 @@ options:
             override:
                 description:
                     - Enable/disable override syslog settings.
+                type: str
                 choices:
                     - enable
                     - disable
             port:
                 description:
                     - Server listen port.
+                type: int
             server:
                 description:
                     - Address of remote syslog server.
+                type: str
             source_ip:
                 description:
                     - Source IP address of syslog.
+                type: str
             ssl_min_proto_version:
                 description:
                     - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                type: str
                 choices:
                     - default
                     - SSLv3
@@ -172,6 +186,7 @@ options:
             status:
                 description:
                     - Enable/disable remote syslog logging.
+                type: str
                 choices:
                     - enable
                     - disable

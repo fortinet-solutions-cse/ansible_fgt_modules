@@ -81,15 +81,19 @@ options:
             local_cache_id:
                 description:
                     - ID that this device uses to connect to the remote device.
+                type: str
             remote_cache_id:
                 description:
                     - ID of the remote device to which the device connects.
+                type: str
             remote_cache_ip:
                 description:
                     - IP address of the remote device to which the device connects.
+                type: str
             status:
                 description:
                     - Enable/disable using remote device as Web cache storage.
+                type: str
                 choices:
                     - disable
                     - enable

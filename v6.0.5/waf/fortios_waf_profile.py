@@ -88,24 +88,29 @@ options:
             address_list:
                 description:
                     - Black address list and white address list.
+                type: dict
                 suboptions:
                     blocked_address:
                         description:
                             - Blocked address.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Address name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
+                                type: str
                     blocked_log:
                         description:
                             - Enable/disable logging on blocked addresses.
+                        type: str
                         choices:
                             - enable
                             - disable
                     severity:
                         description:
                             - Severity.
+                        type: str
                         choices:
                             - high
                             - medium
@@ -113,46 +118,56 @@ options:
                     status:
                         description:
                             - Status.
+                        type: str
                         choices:
                             - enable
                             - disable
                     trusted_address:
                         description:
                             - Trusted address.
+                        type: list
                         suboptions:
                             name:
                                 description:
                                     - Address name. Source firewall.address.name firewall.addrgrp.name.
                                 required: true
+                                type: str
             comment:
                 description:
                     - Comment.
+                type: str
             constraint:
                 description:
                     - WAF HTTP protocol restrictions.
+                type: dict
                 suboptions:
                     content_length:
                         description:
                             - HTTP content length in request.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             length:
                                 description:
                                     - Length of HTTP content in bytes (0 to 2147483647).
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -160,31 +175,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     exception:
                         description:
                             - HTTP constraint exception.
+                        type: list
                         suboptions:
                             address:
                                 description:
                                     - Host address. Source firewall.address.name firewall.addrgrp.name.
+                                type: str
                             content_length:
                                 description:
                                     - HTTP content length in request.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             header_length:
                                 description:
                                     - HTTP header length in request.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             hostname:
                                 description:
                                     - Enable/disable hostname check.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
@@ -192,97 +213,115 @@ options:
                                 description:
                                     - Exception ID.
                                 required: true
+                                type: int
                             line_length:
                                 description:
                                     - HTTP line length in request.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             malformed:
                                 description:
                                     - Enable/disable malformed HTTP request check.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_cookie:
                                 description:
                                     - Maximum number of cookies in HTTP request.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_header_line:
                                 description:
                                     - Maximum number of HTTP header line.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_range_segment:
                                 description:
                                     - Maximum number of range segments in HTTP range line.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_url_param:
                                 description:
                                     - Maximum number of parameters in URL.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             method:
                                 description:
                                     - Enable/disable HTTP method check.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             param_length:
                                 description:
                                     - Maximum length of parameter in URL, HTTP POST request or HTTP body.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             pattern:
                                 description:
                                     - URL pattern.
+                                type: str
                             regex:
                                 description:
                                     - Enable/disable regular expression based pattern match.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             url_param_length:
                                 description:
                                     - Maximum length of parameter in URL.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             version:
                                 description:
                                     - Enable/disable HTTP version check.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     header_length:
                         description:
                             - HTTP header length in request.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             length:
                                 description:
                                     - Length of HTTP header in bytes (0 to 2147483647).
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -290,28 +329,33 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     hostname:
                         description:
                             - Enable/disable hostname check.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -319,31 +363,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     line_length:
                         description:
                             - HTTP line length in request.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             length:
                                 description:
                                     - Length of HTTP line in bytes (0 to 2147483647).
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -351,28 +401,33 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     malformed:
                         description:
                             - Enable/disable malformed HTTP request check.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -380,31 +435,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     max_cookie:
                         description:
                             - Maximum number of cookies in HTTP request.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_cookie:
                                 description:
                                     - Maximum number of cookies in HTTP request (0 to 2147483647).
+                                type: int
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -412,31 +473,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     max_header_line:
                         description:
                             - Maximum number of HTTP header line.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_header_line:
                                 description:
                                     - Maximum number HTTP header lines (0 to 2147483647).
+                                type: int
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -444,31 +511,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     max_range_segment:
                         description:
                             - Maximum number of range segments in HTTP range line.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_range_segment:
                                 description:
                                     - Maximum number of range segments in HTTP range line (0 to 2147483647).
+                                type: int
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -476,31 +549,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     max_url_param:
                         description:
                             - Maximum number of parameters in URL.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             max_url_param:
                                 description:
                                     - Maximum number of parameters in URL (0 to 2147483647).
+                                type: int
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -508,28 +587,33 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     method:
                         description:
                             - Enable/disable HTTP method check.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -537,31 +621,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     param_length:
                         description:
                             - Maximum length of parameter in URL, HTTP POST request or HTTP body.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             length:
                                 description:
                                     - Maximum length of parameter in URL, HTTP POST request or HTTP body in bytes (0 to 2147483647).
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -569,31 +659,37 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     url_param_length:
                         description:
                             - Maximum length of parameter in URL.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             length:
                                 description:
                                     - Maximum length of URL parameter in bytes (0 to 2147483647).
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -601,28 +697,33 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     version:
                         description:
                             - Enable/disable HTTP version check.
+                        type: dict
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -630,28 +731,33 @@ options:
                             status:
                                 description:
                                     - Enable/disable the constraint.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
             extended_log:
                 description:
                     - Enable/disable extended logging.
+                type: str
                 choices:
                     - enable
                     - disable
             external:
                 description:
                     - Disable/Enable external HTTP Inspection.
+                type: str
                 choices:
                     - disable
                     - enable
             method:
                 description:
                     - Method restriction.
+                type: dict
                 suboptions:
                     default_allowed_methods:
                         description:
                             - Methods.
+                        type: str
                         choices:
                             - get
                             - post
@@ -665,19 +771,23 @@ options:
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     method_policy:
                         description:
                             - HTTP method policy.
+                        type: list
                         suboptions:
                             address:
                                 description:
                                     - Host address. Source firewall.address.name firewall.addrgrp.name.
+                                type: str
                             allowed_methods:
                                 description:
                                     - Allowed Methods.
+                                type: str
                                 choices:
                                     - get
                                     - post
@@ -692,18 +802,22 @@ options:
                                 description:
                                     - HTTP method policy ID.
                                 required: true
+                                type: int
                             pattern:
                                 description:
                                     - URL pattern.
+                                type: str
                             regex:
                                 description:
                                     - Enable/disable regular expression based pattern match.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                     severity:
                         description:
                             - Severity.
+                        type: str
                         choices:
                             - high
                             - medium
@@ -711,6 +825,7 @@ options:
                     status:
                         description:
                             - Status.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -718,20 +833,25 @@ options:
                 description:
                     - WAF Profile name.
                 required: true
+                type: str
             signature:
                 description:
                     - WAF signatures.
+                type: dict
                 suboptions:
                     credit_card_detection_threshold:
                         description:
                             - The minimum number of Credit cards to detect violation.
+                        type: int
                     custom_signature:
                         description:
                             - Custom signature.
+                        type: list
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
@@ -739,18 +859,21 @@ options:
                             case_sensitivity:
                                 description:
                                     - Case sensitivity in pattern.
+                                type: str
                                 choices:
                                     - disable
                                     - enable
                             direction:
                                 description:
                                     - Traffic direction.
+                                type: str
                                 choices:
                                     - request
                                     - response
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
@@ -758,12 +881,15 @@ options:
                                 description:
                                     - Signature name.
                                 required: true
+                                type: str
                             pattern:
                                 description:
                                     - Match pattern.
+                                type: str
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -771,12 +897,14 @@ options:
                             status:
                                 description:
                                     - Status.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             target:
                                 description:
                                     - Match HTTP target.
+                                type: str
                                 choices:
                                     - arg
                                     - arg-name
@@ -794,26 +922,32 @@ options:
                     disabled_signature:
                         description:
                             - Disabled signatures
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Signature ID. Source waf.signature.id.
                                 required: true
+                                type: int
                     disabled_sub_class:
                         description:
                             - Disabled signature subclasses.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - Signature subclass ID. Source waf.sub-class.id.
                                 required: true
+                                type: int
                     main_class:
                         description:
                             - Main signature class.
+                        type: list
                         suboptions:
                             action:
                                 description:
                                     - Action.
+                                type: str
                                 choices:
                                     - allow
                                     - block
@@ -822,15 +956,18 @@ options:
                                 description:
                                     - Main signature class ID. Source waf.main-class.id.
                                 required: true
+                                type: int
                             log:
                                 description:
                                     - Enable/disable logging.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             severity:
                                 description:
                                     - Severity.
+                                type: str
                                 choices:
                                     - high
                                     - medium
@@ -838,42 +975,51 @@ options:
                             status:
                                 description:
                                     - Status.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
             url_access:
                 description:
                     - URL access list
+                type: list
                 suboptions:
                     access_pattern:
                         description:
                             - URL access pattern.
+                        type: list
                         suboptions:
                             id:
                                 description:
                                     - URL access pattern ID.
                                 required: true
+                                type: int
                             negate:
                                 description:
                                     - Enable/disable match negation.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             pattern:
                                 description:
                                     - URL pattern.
+                                type: str
                             regex:
                                 description:
                                     - Enable/disable regular expression based pattern match.
+                                type: str
                                 choices:
                                     - enable
                                     - disable
                             srcaddr:
                                 description:
                                     - Source address. Source firewall.address.name firewall.addrgrp.name.
+                                type: str
                     action:
                         description:
                             - Action.
+                        type: str
                         choices:
                             - bypass
                             - permit
@@ -881,19 +1027,23 @@ options:
                     address:
                         description:
                             - Host address. Source firewall.address.name firewall.addrgrp.name.
+                        type: str
                     id:
                         description:
                             - URL access ID.
                         required: true
+                        type: int
                     log:
                         description:
                             - Enable/disable logging.
+                        type: str
                         choices:
                             - enable
                             - disable
                     severity:
                         description:
                             - Severity.
+                        type: str
                         choices:
                             - high
                             - medium

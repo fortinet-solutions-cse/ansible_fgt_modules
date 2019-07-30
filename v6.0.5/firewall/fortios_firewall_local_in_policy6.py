@@ -88,50 +88,62 @@ options:
             action:
                 description:
                     - Action performed on traffic matching the policy (default = deny).
+                type: str
                 choices:
                     - accept
                     - deny
             comments:
                 description:
                     - Comment.
+                type: str
             dstaddr:
                 description:
                     - Destination address object from available options.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             intf:
                 description:
                     - Incoming interface name from available options. Source system.zone.name system.interface.name.
+                type: str
             policyid:
                 description:
                     - User defined local in policy ID.
                 required: true
+                type: int
             schedule:
                 description:
                     - Schedule object from available options. Source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group
                       .name.
+                type: str
             service:
                 description:
                     - Service object from available options. Separate names with a space.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Service name. Source firewall.service.custom.name firewall.service.group.name.
                         required: true
+                        type: str
             srcaddr:
                 description:
                     - Source address object from available options.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Address name. Source firewall.address6.name firewall.addrgrp6.name.
                         required: true
+                        type: str
             status:
                 description:
                     - Enable/disable this local_in policy.
+                type: str
                 choices:
                     - enable
                     - disable

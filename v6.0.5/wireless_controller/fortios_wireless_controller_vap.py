@@ -88,12 +88,15 @@ options:
             acct_interim_interval:
                 description:
                     - WiFi RADIUS accounting interim interval (60 _ 86400 sec, default = 0).
+                type: int
             alias:
                 description:
                     - Alias.
+                type: str
             auth:
                 description:
                     - Authentication protocol.
+                type: str
                 choices:
                     - psk
                     - radius
@@ -101,6 +104,7 @@ options:
             broadcast_ssid:
                 description:
                     - Enable/disable broadcasting the SSID (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
@@ -108,6 +112,7 @@ options:
                 description:
                     - Optional suppression of broadcast messages. For example, you can keep DHCP messages, ARP broadcasts, and so on off of the wireless
                        network.
+                type: str
                 choices:
                     - dhcp-up
                     - dhcp-down
@@ -125,27 +130,35 @@ options:
             captive_portal_ac_name:
                 description:
                     - Local_bridging captive portal ac_name.
+                type: str
             captive_portal_macauth_radius_secret:
                 description:
                     - Secret key to access the macauth RADIUS server.
+                type: str
             captive_portal_macauth_radius_server:
                 description:
                     - Captive portal external RADIUS server domain name or IP address.
+                type: str
             captive_portal_radius_secret:
                 description:
                     - Secret key to access the RADIUS server.
+                type: str
             captive_portal_radius_server:
                 description:
                     - Captive portal RADIUS server domain name or IP address.
+                type: str
             captive_portal_session_timeout_interval:
                 description:
                     - Session timeout interval (0 _ 864000 sec, default = 0).
+                type: int
             dhcp_lease_time:
                 description:
                     - DHCP lease time in seconds for NAT IP address.
+                type: int
             dhcp_option82_circuit_id_insertion:
                 description:
                     - Enable/disable DHCP option 82 circuit_id insert (default = disable).
+                type: str
                 choices:
                     - style-1
                     - style-2
@@ -153,39 +166,46 @@ options:
             dhcp_option82_insertion:
                 description:
                     - Enable/disable DHCP option 82 insert (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             dhcp_option82_remote_id_insertion:
                 description:
                     - Enable/disable DHCP option 82 remote_id insert (default = disable).
+                type: str
                 choices:
                     - style-1
                     - disable
             dynamic_vlan:
                 description:
                     - Enable/disable dynamic VLAN assignment.
+                type: str
                 choices:
                     - enable
                     - disable
             eap_reauth:
                 description:
                     - Enable/disable EAP re_authentication for WPA_Enterprise security.
+                type: str
                 choices:
                     - enable
                     - disable
             eap_reauth_intv:
                 description:
                     - EAP re_authentication interval (1800 _ 864000 sec, default = 86400).
+                type: int
             eapol_key_retries:
                 description:
                     - Enable/disable retransmission of EAPOL_Key frames (message 3/4 and group message 1/2) (default = enable).
+                type: str
                 choices:
                     - disable
                     - enable
             encrypt:
                 description:
                     - Encryption protocol to use (only available when security is set to a WPA type).
+                type: str
                 choices:
                     - TKIP
                     - AES
@@ -193,69 +213,85 @@ options:
             external_fast_roaming:
                 description:
                     - Enable/disable fast roaming or pre_authentication with external APs not managed by the FortiGate (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             external_logout:
                 description:
                     - URL of external authentication logout server.
+                type: str
             external_web:
                 description:
                     - URL of external authentication web server.
+                type: str
             fast_bss_transition:
                 description:
                     - Enable/disable 802.11r Fast BSS Transition (FT) (default = disable).
+                type: str
                 choices:
                     - disable
                     - enable
             fast_roaming:
                 description:
                     - Enable/disable fast_roaming, or pre_authentication, where supported by clients (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             ft_mobility_domain:
                 description:
                     - Mobility domain identifier in FT (1 _ 65535, default = 1000).
+                type: int
             ft_over_ds:
                 description:
                     - Enable/disable FT over the Distribution System (DS).
+                type: str
                 choices:
                     - disable
                     - enable
             ft_r0_key_lifetime:
                 description:
                     - Lifetime of the PMK_R0 key in FT, 1_65535 minutes.
+                type: int
             gtk_rekey:
                 description:
                     - Enable/disable GTK rekey for WPA security.
+                type: str
                 choices:
                     - enable
                     - disable
             gtk_rekey_intv:
                 description:
                     - GTK rekey interval (1800 _ 864000 sec, default = 86400).
+                type: int
             hotspot20_profile:
                 description:
                     - Hotspot 2.0 profile name.
+                type: str
             intra_vap_privacy:
                 description:
                     - Enable/disable blocking communication between clients on the same SSID (called intra_SSID privacy) (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             ip:
                 description:
                     - IP address and subnet mask for the local standalone NAT subnet.
+                type: str
             key:
                 description:
                     - WEP Key.
+                type: str
             keyindex:
                 description:
                     - WEP key index (1 _ 4).
+                type: int
             ldpc:
                 description:
                     - VAP low_density parity_check (LDPC) coding configuration.
+                type: str
                 choices:
                     - disable
                     - rx
@@ -264,118 +300,143 @@ options:
             local_authentication:
                 description:
                     - Enable/disable AP local authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             local_bridging:
                 description:
                     - Enable/disable bridging of wireless and Ethernet interfaces on the FortiAP (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             local_lan:
                 description:
                     - Allow/deny traffic destined for a Class A, B, or C private IP address (default = allow).
+                type: str
                 choices:
                     - allow
                     - deny
             local_standalone:
                 description:
                     - Enable/disable AP local standalone (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             local_standalone_nat:
                 description:
                     - Enable/disable AP local standalone NAT mode.
+                type: str
                 choices:
                     - enable
                     - disable
             mac_auth_bypass:
                 description:
                     - Enable/disable MAC authentication bypass.
+                type: str
                 choices:
                     - enable
                     - disable
             mac_filter:
                 description:
                     - Enable/disable MAC filtering to block wireless clients by mac address.
+                type: str
                 choices:
                     - enable
                     - disable
             mac_filter_list:
                 description:
                     - Create a list of MAC addresses for MAC address filtering.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     mac:
                         description:
                             - MAC address.
+                        type: str
                     mac_filter_policy:
                         description:
                             - Deny or allow the client with this MAC address.
+                        type: str
                         choices:
                             - allow
                             - deny
             mac_filter_policy_other:
                 description:
                     - Allow or block clients with MAC addresses that are not in the filter list.
+                type: str
                 choices:
                     - allow
                     - deny
             max_clients:
                 description:
                     - Maximum number of clients that can connect simultaneously to the VAP (default = 0, meaning no limitation).
+                type: int
             max_clients_ap:
                 description:
                     - Maximum number of clients that can connect simultaneously to each radio (default = 0, meaning no limitation).
+                type: int
             me_disable_thresh:
                 description:
                     - Disable multicast enhancement when this many clients are receiving multicast traffic.
+                type: int
             mesh_backhaul:
                 description:
                     - Enable/disable using this VAP as a WiFi mesh backhaul (default = disable). This entry is only available when security is set to a WPA
                        type or open.
+                type: str
                 choices:
                     - enable
                     - disable
             mpsk:
                 description:
                     - Enable/disable multiple pre_shared keys (PSKs.)
+                type: str
                 choices:
                     - enable
                     - disable
             mpsk_concurrent_clients:
                 description:
                     - Number of pre_shared keys (PSKs) to allow if multiple pre_shared keys are enabled.
+                type: int
             mpsk_key:
                 description:
                     - Pre_shared keys that can be used to connect to this virtual access point.
+                type: list
                 suboptions:
                     comment:
                         description:
                             - Comment.
+                        type: str
                     concurrent_clients:
                         description:
                             - Number of clients that can connect using this pre_shared key.
+                        type: str
                     key_name:
                         description:
                             - Pre_shared key name.
+                        type: str
                     passphrase:
                         description:
                             - WPA Pre_shared key.
+                        type: str
             multicast_enhance:
                 description:
                     - Enable/disable converting multicast to unicast to improve performance (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             multicast_rate:
                 description:
                     - Multicast rate (0, 6000, 12000, or 24000 kbps, default = 0).
+                type: str
                 choices:
                     - 0
                     - 6000
@@ -385,18 +446,22 @@ options:
                 description:
                     - Virtual AP name.
                 required: true
+                type: str
             okc:
                 description:
                     - Enable/disable Opportunistic Key Caching (OKC) (default = enable).
+                type: str
                 choices:
                     - disable
                     - enable
             passphrase:
                 description:
                     - WPA pre_shard key (PSK) to be used to authenticate WiFi users.
+                type: str
             pmf:
                 description:
                     - Protected Management Frames (PMF) support (default = disable).
+                type: str
                 choices:
                     - disable
                     - enable
@@ -404,31 +469,40 @@ options:
             pmf_assoc_comeback_timeout:
                 description:
                     - Protected Management Frames (PMF) comeback maximum timeout (1_20 sec).
+                type: int
             pmf_sa_query_retry_timeout:
                 description:
                     - Protected Management Frames (PMF) SA query retry timeout interval (1 _ 5 100s of msec).
+                type: int
             portal_message_override_group:
                 description:
                     - Replacement message group for this VAP (only available when security is set to a captive portal type).
+                type: str
             portal_message_overrides:
                 description:
                     - Individual message overrides.
+                type: dict
                 suboptions:
                     auth_disclaimer_page:
                         description:
                             - Override auth_disclaimer_page message with message from portal_message_overrides group.
+                        type: str
                     auth_login_failed_page:
                         description:
                             - Override auth_login_failed_page message with message from portal_message_overrides group.
+                        type: str
                     auth_login_page:
                         description:
                             - Override auth_login_page message with message from portal_message_overrides group.
+                        type: str
                     auth_reject_page:
                         description:
                             - Override auth_reject_page message with message from portal_message_overrides group.
+                        type: str
             portal_type:
                 description:
                     - Captive portal functionality. Configure how the captive portal authenticates users and whether it includes a disclaimer.
+                type: str
                 choices:
                     - auth
                     - auth+disclaimer
@@ -440,65 +514,80 @@ options:
             probe_resp_suppression:
                 description:
                     - Enable/disable probe response suppression (to ignore weak signals) (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             probe_resp_threshold:
                 description:
                     - Minimum signal level/threshold in dBm required for the AP response to probe requests (_95 to _20, default = _80).
+                type: str
             ptk_rekey:
                 description:
                     - Enable/disable PTK rekey for WPA_Enterprise security.
+                type: str
                 choices:
                     - enable
                     - disable
             ptk_rekey_intv:
                 description:
                     - PTK rekey interval (1800 _ 864000 sec, default = 86400).
+                type: int
             qos_profile:
                 description:
                     - Quality of service profile name.
+                type: str
             quarantine:
                 description:
                     - Enable/disable station quarantine (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
             radio_2g_threshold:
                 description:
                     - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (_95 to _20, default = _79).
+                type: str
             radio_5g_threshold:
                 description:
                     - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(_95 to _20, default = _76).
+                type: str
             radio_sensitivity:
                 description:
                     - Enable/disable software radio sensitivity (to ignore weak signals) (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             radius_mac_auth:
                 description:
                     - Enable/disable RADIUS_based MAC authentication of clients (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             radius_mac_auth_server:
                 description:
                     - RADIUS_based MAC authentication server.
+                type: str
             radius_mac_auth_usergroups:
                 description:
                     - Selective user groups that are permitted for RADIUS mac authentication.
+                type: list
                 suboptions:
                     name:
                         description:
                             - User group name.
                         required: true
+                        type: str
             radius_server:
                 description:
                     - RADIUS server to be used to authenticate WiFi users.
+                type: str
             rates_11a:
                 description:
                     - Allowed data rates for 802.11a.
+                type: str
                 choices:
                     - 1
                     - 1-basic
@@ -527,6 +616,7 @@ options:
             rates_11ac_ss12:
                 description:
                     - Allowed data rates for 802.11ac with 1 or 2 spatial streams.
+                type: str
                 choices:
                     - mcs0/1
                     - mcs1/1
@@ -555,6 +645,7 @@ options:
             rates_11ac_ss34:
                 description:
                     - Allowed data rates for 802.11ac with 3 or 4 spatial streams.
+                type: str
                 choices:
                     - mcs0/3
                     - mcs1/3
@@ -583,6 +674,7 @@ options:
             rates_11bg:
                 description:
                     - Allowed data rates for 802.11b/g.
+                type: str
                 choices:
                     - 1
                     - 1-basic
@@ -611,6 +703,7 @@ options:
             rates_11n_ss12:
                 description:
                     - Allowed data rates for 802.11n with 1 or 2 spatial streams.
+                type: str
                 choices:
                     - mcs0/1
                     - mcs1/1
@@ -631,6 +724,7 @@ options:
             rates_11n_ss34:
                 description:
                     - Allowed data rates for 802.11n with 3 or 4 spatial streams.
+                type: str
                 choices:
                     - mcs16/3
                     - mcs17/3
@@ -651,9 +745,11 @@ options:
             schedule:
                 description:
                     - VAP schedule name.
+                type: str
             security:
                 description:
                     - Security mode for the wireless interface (default = wpa2_only_personal).
+                type: str
                 choices:
                     - open
                     - captive-portal
@@ -672,26 +768,32 @@ options:
             security_exempt_list:
                 description:
                     - Optional security exempt list for captive portal authentication.
+                type: str
             security_obsolete_option:
                 description:
                     - Enable/disable obsolete security options.
+                type: str
                 choices:
                     - enable
                     - disable
             security_redirect_url:
                 description:
                     - Optional URL for redirecting users after they pass captive portal authentication.
+                type: str
             selected_usergroups:
                 description:
                     - Selective user groups that are permitted to authenticate.
+                type: list
                 suboptions:
                     name:
                         description:
                             - User group name.
                         required: true
+                        type: str
             split_tunneling:
                 description:
                     - Enable/disable split tunneling (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
@@ -699,47 +801,58 @@ options:
                 description:
                     - IEEE 802.11 service set identifier (SSID) for the wireless interface. Users who wish to use the wireless network must configure their
                        computers to access this SSID name.
+                type: str
             tkip_counter_measure:
                 description:
                     - Enable/disable TKIP counter measure.
+                type: str
                 choices:
                     - enable
                     - disable
             usergroup:
                 description:
                     - Firewall user group to be used to authenticate WiFi users.
+                type: list
                 suboptions:
                     name:
                         description:
                             - User group name.
                         required: true
+                        type: str
             utm_profile:
                 description:
                     - UTM profile name.
+                type: str
             vdom:
                 description:
                     - Name of the VDOM that the Virtual AP has been added to. Source system.vdom.name.
+                type: str
             vlan_auto:
                 description:
                     - Enable/disable automatic management of SSID VLAN interface.
+                type: str
                 choices:
                     - enable
                     - disable
             vlan_pool:
                 description:
                     - VLAN pool.
+                type: list
                 suboptions:
                     id:
                         description:
                             - ID.
                         required: true
+                        type: int
                     wtp_group:
                         description:
                             - WTP group name.
+                        type: str
             vlan_pooling:
                 description:
                     - Enable/disable VLAN pooling, to allow grouping of multiple wireless controller VLANs into VLAN pools (default = disable). When set to
                        wtp_group, VLAN pooling occurs with VLAN assignment by wtp_group.
+                type: str
                 choices:
                     - wtp-group
                     - round-robin
@@ -748,9 +861,11 @@ options:
             vlanid:
                 description:
                     - Optional VLAN ID.
+                type: int
             voice_enterprise:
                 description:
                     - Enable/disable 802.11k and 802.11v assisted Voice_Enterprise roaming (default = disable).
+                type: str
                 choices:
                     - disable
                     - enable

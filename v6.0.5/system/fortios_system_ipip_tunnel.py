@@ -88,16 +88,20 @@ options:
             interface:
                 description:
                     - Interface name that is associated with the incoming traffic from available options. Source system.interface.name.
+                type: str
             local_gw:
                 description:
                     - IPv4 address for the local gateway.
+                type: str
             name:
                 description:
                     - IPIP Tunnel name.
                 required: true
+                type: str
             remote_gw:
                 description:
                     - IPv4 address for the remote gateway.
+                type: str
 '''
 
 EXAMPLES = '''

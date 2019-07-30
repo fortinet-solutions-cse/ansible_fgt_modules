@@ -81,47 +81,59 @@ options:
             aggregate_address:
                 description:
                     - Aggregate address.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Aggregate address entry ID.
                         required: true
+                        type: int
                     prefix6:
                         description:
                             - Aggregate address prefix.
+                        type: str
             default_information_originate:
                 description:
                     - Enable/disable generation of default route.
+                type: str
                 choices:
                     - enable
                     - disable
             default_metric:
                 description:
                     - Default metric.
+                type: int
             distance:
                 description:
                     - distance
+                type: list
                 suboptions:
                     access_list6:
                         description:
                             - Access list for route destination. Source router.access-list6.name.
+                        type: str
                     distance:
                         description:
                             - Distance (1 _ 255).
+                        type: int
                     id:
                         description:
                             - Distance ID.
                         required: true
+                        type: int
                     prefix6:
                         description:
                             - Distance prefix6.
+                        type: str
             distribute_list:
                 description:
                     - Distribute list.
+                type: list
                 suboptions:
                     direction:
                         description:
                             - Distribute list direction.
+                        type: str
                         choices:
                             - in
                             - out
@@ -129,82 +141,103 @@ options:
                         description:
                             - Distribute list ID.
                         required: true
+                        type: int
                     interface:
                         description:
                             - Distribute list interface name. Source system.interface.name.
+                        type: str
                     listname:
                         description:
                             - Distribute access/prefix list name. Source router.access-list6.name router.prefix-list6.name.
+                        type: str
                     status:
                         description:
                             - status
+                        type: str
                         choices:
                             - enable
                             - disable
             garbage_timer:
                 description:
                     - Garbage timer.
+                type: int
             interface:
                 description:
                     - RIPng interface configuration.
+                type: list
                 suboptions:
                     flags:
                         description:
                             - Flags.
+                        type: int
                     name:
                         description:
                             - Interface name. Source system.interface.name.
                         required: true
+                        type: str
                     split_horizon:
                         description:
                             - Enable/disable split horizon.
+                        type: str
                         choices:
                             - poisoned
                             - regular
                     split_horizon_status:
                         description:
                             - Enable/disable split horizon.
+                        type: str
                         choices:
                             - enable
                             - disable
             max_out_metric:
                 description:
                     - Maximum metric allowed to output(0 means 'not set').
+                type: int
             neighbor:
                 description:
                     - neighbor
+                type: list
                 suboptions:
                     id:
                         description:
                             - Neighbor entry ID.
                         required: true
+                        type: int
                     interface:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
                     ip6:
                         description:
                             - IPv6 link_local address.
+                        type: str
             network:
                 description:
                     - Network.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Network entry ID.
                         required: true
+                        type: int
                     prefix:
                         description:
                             - Network IPv6 link_local prefix.
+                        type: str
             offset_list:
                 description:
                     - Offset list.
+                type: list
                 suboptions:
                     access_list6:
                         description:
                             - IPv6 access list name. Source router.access-list6.name.
+                        type: str
                     direction:
                         description:
                             - Offset list direction.
+                        type: str
                         choices:
                             - in
                             - out
@@ -212,52 +245,65 @@ options:
                         description:
                             - Offset_list ID.
                         required: true
+                        type: int
                     interface:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
                     offset:
                         description:
                             - offset
+                        type: int
                     status:
                         description:
                             - status
+                        type: str
                         choices:
                             - enable
                             - disable
             passive_interface:
                 description:
                     - Passive interface configuration.
+                type: list
                 suboptions:
                     name:
                         description:
                             - Passive interface name. Source system.interface.name.
                         required: true
+                        type: str
             redistribute:
                 description:
                     - Redistribute configuration.
+                type: list
                 suboptions:
                     metric:
                         description:
                             - Redistribute metric setting.
+                        type: int
                     name:
                         description:
                             - Redistribute name.
                         required: true
+                        type: str
                     routemap:
                         description:
                             - Route map name. Source router.route-map.name.
+                        type: str
                     status:
                         description:
                             - status
+                        type: str
                         choices:
                             - enable
                             - disable
             timeout_timer:
                 description:
                     - Timeout timer.
+                type: int
             update_timer:
                 description:
                     - Update timer.
+                type: int
 '''
 
 EXAMPLES = '''

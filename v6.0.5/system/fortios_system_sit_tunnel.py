@@ -88,19 +88,24 @@ options:
             destination:
                 description:
                     - Destination IP address of the tunnel.
+                type: str
             interface:
                 description:
                     - Interface name. Source system.interface.name.
+                type: str
             ip6:
                 description:
                     - IPv6 address of the tunnel.
+                type: str
             name:
                 description:
                     - Tunnel name.
                 required: true
+                type: str
             source:
                 description:
                     - Source IP address of the tunnel.
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,9 +88,11 @@ options:
             dnsfilter_profile:
                 description:
                     - DNS filter profile. Source dnsfilter.profile.name.
+                type: str
             mode:
                 description:
                     - DNS server mode.
+                type: str
                 choices:
                     - recursive
                     - non-recursive
@@ -99,6 +101,7 @@ options:
                 description:
                     - DNS server name. Source system.interface.name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

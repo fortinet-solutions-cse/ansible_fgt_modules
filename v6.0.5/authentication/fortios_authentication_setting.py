@@ -81,30 +81,38 @@ options:
             active_auth_scheme:
                 description:
                     - Active authentication method (scheme name). Source authentication.scheme.name.
+                type: str
             captive_portal:
                 description:
                     - Captive portal host name. Source firewall.address.name.
+                type: str
             captive_portal_ip:
                 description:
                     - Captive portal IP address.
+                type: str
             captive_portal_ip6:
                 description:
                     - Captive portal IPv6 address.
+                type: str
             captive_portal_port:
                 description:
                     - Captive portal port number (1 _ 65535, default = 0).
+                type: int
             captive_portal_type:
                 description:
                     - Captive portal type.
+                type: str
                 choices:
                     - fqdn
                     - ip
             captive_portal6:
                 description:
                     - IPv6 captive portal host name. Source firewall.address6.name.
+                type: str
             sso_auth_scheme:
                 description:
                     - Single_Sign_On authentication method (scheme name). Source authentication.scheme.name.
+                type: str
 '''
 
 EXAMPLES = '''

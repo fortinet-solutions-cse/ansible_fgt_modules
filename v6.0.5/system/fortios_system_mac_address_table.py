@@ -88,13 +88,16 @@ options:
             interface:
                 description:
                     - Interface name. Source system.interface.name.
+                type: str
             mac:
                 description:
                     - MAC address.
                 required: true
+                type: str
             reply_substitute:
                 description:
                     - New MAC for reply traffic.
+                type: str
 '''
 
 EXAMPLES = '''

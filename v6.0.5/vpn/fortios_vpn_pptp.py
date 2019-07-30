@@ -81,27 +81,33 @@ options:
             eip:
                 description:
                     - End IP.
+                type: str
             ip_mode:
                 description:
                     - IP assignment mode for PPTP client.
+                type: str
                 choices:
                     - range
                     - usrgrp
             local_ip:
                 description:
                     - Local IP to be used for peer's remote IP.
+                type: str
             sip:
                 description:
                     - Start IP.
+                type: str
             status:
                 description:
                     - Enable/disable FortiGate as a PPTP gateway.
+                type: str
                 choices:
                     - enable
                     - disable
             usrgrp:
                 description:
                     - User group. Source user.group.name.
+                type: str
 '''
 
 EXAMPLES = '''

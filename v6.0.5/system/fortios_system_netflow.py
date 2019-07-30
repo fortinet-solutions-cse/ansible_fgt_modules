@@ -81,24 +81,31 @@ options:
             active_flow_timeout:
                 description:
                     - Timeout to report active flows (1 _ 60 min, default = 30).
+                type: int
             collector_ip:
                 description:
                     - Collector IP.
+                type: str
             collector_port:
                 description:
                     - NetFlow collector port number.
+                type: int
             inactive_flow_timeout:
                 description:
                     - Timeout for periodic report of finished flows (10 _ 600 sec, default = 15).
+                type: int
             source_ip:
                 description:
                     - Source IP address for communication with the NetFlow agent.
+                type: str
             template_tx_counter:
                 description:
                     - Counter of flowset records before resending a template flowset record.
+                type: int
             template_tx_timeout:
                 description:
                     - Timeout for periodic template flowset transmission (1 _ 1440 min, default = 30).
+                type: int
 '''
 
 EXAMPLES = '''

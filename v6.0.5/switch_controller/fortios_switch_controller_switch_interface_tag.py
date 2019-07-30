@@ -89,6 +89,7 @@ options:
                 description:
                     - Tag name.
                 required: true
+                type: str
 '''
 
 EXAMPLES = '''

@@ -88,16 +88,20 @@ options:
             destination:
                 description:
                     - Remote IPv6 address of the tunnel.
+                type: str
             interface:
                 description:
                     - Interface name. Source system.interface.name.
+                type: str
             name:
                 description:
                     - IPv6 tunnel name.
                 required: true
+                type: str
             source:
                 description:
                     - Local IPv6 address of the tunnel.
+                type: str
 '''
 
 EXAMPLES = '''

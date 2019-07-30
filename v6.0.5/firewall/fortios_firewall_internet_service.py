@@ -88,12 +88,14 @@ options:
             database:
                 description:
                     - Database name this Internet Service belongs to.
+                type: str
                 choices:
                     - isdb
                     - irdb
             direction:
                 description:
                     - How this service may be used in a firewall policy (source, destination or both).
+                type: str
                 choices:
                     - src
                     - dst
@@ -101,42 +103,54 @@ options:
             entry:
                 description:
                     - Entries in the Internet Service database.
+                type: list
                 suboptions:
                     id:
                         description:
                             - Entry ID.
                         required: true
+                        type: int
                     ip_number:
                         description:
                             - Total number of IP addresses.
+                        type: int
                     ip_range_number:
                         description:
                             - Total number of IP ranges.
+                        type: int
                     port:
                         description:
                             - Integer value for the TCP/IP port (0 _ 65535).
+                        type: int
                     protocol:
                         description:
                             - Integer value for the protocol type as defined by IANA (0 _ 255).
+                        type: int
             icon_id:
                 description:
                     - Icon ID of Internet Service.
+                type: int
             id:
                 description:
                     - Internet Service ID.
                 required: true
+                type: int
             name:
                 description:
                     - Internet Service name.
+                type: str
             offset:
                 description:
                     - Offset of Internet Service ID.
+                type: int
             reputation:
                 description:
                     - Reputation level of the Internet Service.
+                type: int
             sld_id:
                 description:
                     - Second Level Domain.
+                type: int
 '''
 
 EXAMPLES = '''

@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Spam filter trusted IP addresses.
+                type: list
                 suboptions:
                     addr_type:
                         description:
                             - Type of address.
+                        type: str
                         choices:
                             - ipv4
                             - ipv6
@@ -102,15 +105,19 @@ options:
                         description:
                             - Trusted IP entry ID.
                         required: true
+                        type: int
                     ip4_subnet:
                         description:
                             - IPv4 network address or network address/subnet mask bits.
+                        type: str
                     ip6_subnet:
                         description:
                             - IPv6 network address/subnet mask bits.
+                        type: str
                     status:
                         description:
                             - Enable/disable status.
+                        type: str
                         choices:
                             - enable
                             - disable
@@ -118,9 +125,11 @@ options:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table.
+                type: str
 '''
 
 EXAMPLES = '''

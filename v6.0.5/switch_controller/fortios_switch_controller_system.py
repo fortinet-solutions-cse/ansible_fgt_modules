@@ -81,9 +81,11 @@ options:
             parallel_process:
                 description:
                     - Maximum number of parallel processes (1 _ 300, default = 1).
+                type: int
             parallel_process_override:
                 description:
                     - Enable/disable parallel process override.
+                type: str
                 choices:
                     - disable
                     - enable

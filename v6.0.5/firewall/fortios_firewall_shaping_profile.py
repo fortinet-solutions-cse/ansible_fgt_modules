@@ -88,32 +88,41 @@ options:
             comment:
                 description:
                     - Comment.
+                type: str
             default_class_id:
                 description:
                     - Default class ID to handle unclassified packets (including all local traffic).
+                type: int
             profile_name:
                 description:
                     - Shaping profile name.
+                type: str
             shaping_entries:
                 description:
                     - Define shaping entries of this shaping profile.
+                type: list
                 suboptions:
                     class_id:
                         description:
                             - Class ID.
+                        type: int
                     guaranteed_bandwidth_percentage:
                         description:
                             - Guaranteed bandwith in percentage.
+                        type: int
                     id:
                         description:
                             - ID number.
                         required: true
+                        type: int
                     maximum_bandwidth_percentage:
                         description:
                             - Maximum bandwith in percentage.
+                        type: int
                     priority:
                         description:
                             - Priority.
+                        type: str
                         choices:
                             - high
                             - medium

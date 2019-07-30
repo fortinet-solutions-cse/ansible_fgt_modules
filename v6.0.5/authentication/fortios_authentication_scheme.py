@@ -88,21 +88,26 @@ options:
             domain_controller:
                 description:
                     - Domain controller setting. Source user.domain-controller.name.
+                type: str
             fsso_agent_for_ntlm:
                 description:
                     - FSSO agent to use for NTLM authentication. Source user.fsso.name.
+                type: str
             fsso_guest:
                 description:
                     - Enable/disable user fsso_guest authentication (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             kerberos_keytab:
                 description:
                     - Kerberos keytab setting. Source user.krb-keytab.name.
+                type: str
             method:
                 description:
                     - Authentication methods (default = basic).
+                type: str
                 choices:
                     - ntlm
                     - basic
@@ -116,29 +121,35 @@ options:
                 description:
                     - Authentication scheme name.
                 required: true
+                type: str
             negotiate_ntlm:
                 description:
                     - Enable/disable negotiate authentication for NTLM (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             require_tfa:
                 description:
                     - Enable/disable two_factor authentication (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             ssh_ca:
                 description:
                     - SSH CA name. Source firewall.ssh.local-ca.name.
+                type: str
             user_database:
                 description:
                     - Authentication server to contain user information; "local" (default) or "123" (for LDAP).
+                type: list
                 suboptions:
                     name:
                         description:
                             - Authentication server name. Source system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name.
                         required: true
+                        type: str
 '''
 
 EXAMPLES = '''

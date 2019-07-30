@@ -81,45 +81,53 @@ options:
             auth:
                 description:
                     - Enable/disable blocking packets with the Authentication header (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             dest_opt:
                 description:
                     - Enable/disable blocking packets with Destination Options headers (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             fragment:
                 description:
                     - Enable/disable blocking packets with the Fragment header (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             hdopt_type:
                 description:
                     - Block specific Hop_by_Hop and/or Destination Option types (max. 7 types, each between 0 and 255, default = 0).
+                type: int
             hop_opt:
                 description:
                     - Enable/disable blocking packets with the Hop_by_Hop Options header (default = disable).
+                type: str
                 choices:
                     - enable
                     - disable
             no_next:
                 description:
                     - Enable/disable blocking packets with the No Next header (default = disable)
+                type: str
                 choices:
                     - enable
                     - disable
             routing:
                 description:
                     - Enable/disable blocking packets with Routing headers (default = enable).
+                type: str
                 choices:
                     - enable
                     - disable
             routing_type:
                 description:
                     - Block specific Routing header types (max. 7 types, each between 0 and 255, default =  0).
+                type: int
 '''
 
 EXAMPLES = '''

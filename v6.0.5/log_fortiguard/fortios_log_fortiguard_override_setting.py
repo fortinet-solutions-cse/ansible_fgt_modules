@@ -81,21 +81,25 @@ options:
             override:
                 description:
                     - Overriding FortiCloud settings for this VDOM or use global settings.
+                type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
                     - Enable/disable logging to FortiCloud.
+                type: str
                 choices:
                     - enable
                     - disable
             upload_day:
                 description:
                     - Day of week to roll logs.
+                type: str
             upload_interval:
                 description:
                     - Frequency of uploading log files to FortiCloud.
+                type: str
                 choices:
                     - daily
                     - weekly
@@ -103,6 +107,7 @@ options:
             upload_option:
                 description:
                     - Configure how log messages are sent to FortiCloud.
+                type: str
                 choices:
                     - store-and-upload
                     - realtime
@@ -111,6 +116,7 @@ options:
             upload_time:
                 description:
                     - "Time of day to roll logs (hh:mm)."
+                type: str
 '''
 
 EXAMPLES = '''

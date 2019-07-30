@@ -81,18 +81,22 @@ options:
             auth_password:
                 description:
                     - Password to connect to FSSO Agent.
+                type: str
             authentication:
                 description:
                     - Enable/disable FSSO Agent Authentication.
+                type: str
                 choices:
                     - enable
                     - disable
             listening_port:
                 description:
                     - Listening port to accept clients (1 _ 65535).
+                type: int
             status:
                 description:
                     - Enable/disable FSSO Polling Mode.
+                type: str
                 choices:
                     - enable
                     - disable

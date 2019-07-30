@@ -81,13 +81,16 @@ options:
             member:
                 description:
                     - Interfaces using the neighbor discovery proxy.
+                type: list
                 suboptions:
                     interface_name:
                         description:
                             - Interface name. Source system.interface.name.
+                        type: str
             status:
                 description:
                     - Enable/disable neighbor discovery proxy.
+                type: str
                 choices:
                     - enable
                     - disable

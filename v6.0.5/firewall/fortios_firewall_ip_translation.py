@@ -88,19 +88,24 @@ options:
             endip:
                 description:
                     - "Final IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                type: str
             map_startip:
                 description:
                     - "Address to be used as the starting point for translation in the range (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                type: str
             startip:
                 description:
                     - "First IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                type: str
             transid:
                 description:
                     - IP translation ID.
                 required: true
+                type: int
             type:
                 description:
                     - "IP translation type (option: SCTP)."
+                type: str
                 choices:
                     - SCTP
 '''

@@ -88,22 +88,28 @@ options:
             ad_groups:
                 description:
                     - Endpoint client AD logon groups.
+                type: str
             ftcl_uid:
                 description:
                     - Endpoint FortiClient UID.
+                type: str
             id:
                 description:
                     - Endpoint client ID.
                 required: true
+                type: int
             info:
                 description:
                     - Endpoint client information.
+                type: str
             src_ip:
                 description:
                     - Endpoint client IP address.
+                type: str
             src_mac:
                 description:
                     - Endpoint client MAC address.
+                type: str
 '''
 
 EXAMPLES = '''

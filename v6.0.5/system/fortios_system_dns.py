@@ -81,44 +81,56 @@ options:
             cache_notfound_responses:
                 description:
                     - Enable/disable response from the DNS server when a record is not in cache.
+                type: str
                 choices:
                     - disable
                     - enable
             dns_cache_limit:
                 description:
                     - Maximum number of records in the DNS cache.
+                type: int
             dns_cache_ttl:
                 description:
                     - Duration in seconds that the DNS cache retains information.
+                type: int
             domain:
                 description:
                     - Search suffix list for hostname lookup.
+                type: list
                 suboptions:
                     domain:
                         description:
                             - DNS search domain list separated by space (maximum 8 domains)
                         required: true
+                        type: str
             ip6_primary:
                 description:
                     - Primary DNS server IPv6 address.
+                type: str
             ip6_secondary:
                 description:
                     - Secondary DNS server IPv6 address.
+                type: str
             primary:
                 description:
                     - Primary DNS server IP address.
+                type: str
             retry:
                 description:
                     - Number of times to retry (0 _ 5).
+                type: int
             secondary:
                 description:
                     - Secondary DNS server IP address.
+                type: str
             source_ip:
                 description:
                     - IP address used by the DNS server as its source IP.
+                type: str
             timeout:
                 description:
                     - DNS query timeout interval in seconds (1 _ 10).
+                type: int
 '''
 
 EXAMPLES = '''

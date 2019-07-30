@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - Configure file patterns used by DLP blocking.
+                type: list
                 suboptions:
                     file_type:
                         description:
                             - Select a file type.
+                        type: str
                         choices:
                             - 7z
                             - arj
@@ -158,6 +161,7 @@ options:
                     filter_type:
                         description:
                             - Filter by file name pattern or by file type.
+                        type: str
                         choices:
                             - pattern
                             - type
@@ -165,13 +169,16 @@ options:
                         description:
                             - Add a file name pattern.
                         required: true
+                        type: str
             id:
                 description:
                     - ID.
                 required: true
+                type: int
             name:
                 description:
                     - Name of table containing the file pattern list.
+                type: str
 '''
 
 EXAMPLES = '''

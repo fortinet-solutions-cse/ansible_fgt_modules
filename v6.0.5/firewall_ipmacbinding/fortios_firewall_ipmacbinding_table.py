@@ -88,18 +88,23 @@ options:
             ip:
                 description:
                     - "IPv4 address portion of the pair (format: xxx.xxx.xxx.xxx)."
+                type: str
             mac:
                 description:
                     - "MAC address portion of the pair (format: xx:xx:xx:xx:xx:xx in hexidecimal)."
+                type: str
             name:
                 description:
                     - Name of the pair (optional, default = no name).
+                type: str
             seq_num:
                 description:
                     - Entry number.
+                type: int
             status:
                 description:
                     - Enable/disable this IP_mac binding pair.
+                type: str
                 choices:
                     - enable
                     - disable

@@ -88,13 +88,16 @@ options:
             comment:
                 description:
                     - Optional comments.
+                type: str
             entries:
                 description:
                     - URL filter entries.
+                type: list
                 suboptions:
                     action:
                         description:
                             - Action to take for URL filter matches.
+                        type: str
                         choices:
                             - exempt
                             - block
@@ -103,6 +106,7 @@ options:
                     dns_address_family:
                         description:
                             - Resolve IPv4 address, IPv6 address, or both from DNS server.
+                        type: str
                         choices:
                             - ipv4
                             - ipv6
@@ -110,6 +114,7 @@ options:
                     exempt:
                         description:
                             - If action is set to exempt, select the security profile operations that exempt URLs skip. Separate multiple options with a space.
+                        type: str
                         choices:
                             - av
                             - web-content
@@ -123,18 +128,22 @@ options:
                         description:
                             - Id.
                         required: true
+                        type: int
                     referrer_host:
                         description:
                             - Referrer host name.
+                        type: str
                     status:
                         description:
                             - Enable/disable this URL filter.
+                        type: str
                         choices:
                             - enable
                             - disable
                     type:
                         description:
                             - Filter type (simple, regex, or wildcard).
+                        type: str
                         choices:
                             - simple
                             - regex
@@ -142,25 +151,31 @@ options:
                     url:
                         description:
                             - URL to be filtered.
+                        type: str
                     web_proxy_profile:
                         description:
                             - Web proxy profile. Source web-proxy.profile.name.
+                        type: str
             id:
                 description:
                     - ID.
                 required: true
+                type: int
             ip_addr_block:
                 description:
                     - Enable/disable blocking URLs when the hostname appears as an IP address.
+                type: str
                 choices:
                     - enable
                     - disable
             name:
                 description:
                     - Name of URL filter list.
+                type: str
             one_arm_ips_urlfilter:
                 description:
                     - Enable/disable DNS resolver for one_arm IPS URL filter operation.
+                type: str
                 choices:
                     - enable
                     - disable

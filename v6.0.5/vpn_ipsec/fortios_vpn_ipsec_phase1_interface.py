@@ -30,7 +30,7 @@ description:
       user to set and modify vpn_ipsec feature and phase1_interface category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     vpn_ipsec_phase1_interface:
         description:
             - Configure VPN remote gateway.
@@ -150,28 +152,28 @@ options:
                 type: str
             auto_discovery_forwarder:
                 description:
-                    - Enable/disable forwarding auto_discovery short_cut messages.
+                    - Enable/disable forwarding auto-discovery short-cut messages.
                 type: str
                 choices:
                     - enable
                     - disable
             auto_discovery_psk:
                 description:
-                    - Enable/disable use of pre_shared secrets for authentication of auto_discovery tunnels.
+                    - Enable/disable use of pre-shared secrets for authentication of auto-discovery tunnels.
                 type: str
                 choices:
                     - enable
                     - disable
             auto_discovery_receiver:
                 description:
-                    - Enable/disable accepting auto_discovery short_cut messages.
+                    - Enable/disable accepting auto-discovery short-cut messages.
                 type: str
                 choices:
                     - enable
                     - disable
             auto_discovery_sender:
                 description:
-                    - Enable/disable sending auto_discovery short_cut messages.
+                    - Enable/disable sending auto-discovery short-cut messages.
                 type: str
                 choices:
                     - enable
@@ -277,7 +279,7 @@ options:
                     - disable
             distance:
                 description:
-                    - Distance for routes added by IKE (1 _ 255).
+                    - Distance for routes added by IKE (1 - 255).
                 type: int
             dns_mode:
                 description:
@@ -384,14 +386,14 @@ options:
                     - disable
             fragmentation:
                 description:
-                    - Enable/disable fragment IKE message on re_transmission.
+                    - Enable/disable fragment IKE message on re-transmission.
                 type: str
                 choices:
                     - enable
                     - disable
             fragmentation_mtu:
                 description:
-                    - IKE fragmentation MTU (500 _ 16000).
+                    - IKE fragmentation MTU (500 - 16000).
                 type: int
             group_authentication:
                 description:
@@ -420,7 +422,7 @@ options:
                     - disable
             idle_timeoutinterval:
                 description:
-                    - IPsec tunnel idle timeout in minutes (5 _ 43200).
+                    - IPsec tunnel idle timeout in minutes (5 - 43200).
                 type: int
             ike_version:
                 description:
@@ -495,7 +497,7 @@ options:
                 type: str
             ipv4_split_include:
                 description:
-                    - IPv4 split_include subnets. Source firewall.address.name firewall.addrgrp.name.
+                    - IPv4 split-include subnets. Source firewall.address.name firewall.addrgrp.name.
                 type: str
             ipv4_start_ip:
                 description:
@@ -557,7 +559,7 @@ options:
                 type: str
             ipv6_split_include:
                 description:
-                    - IPv6 split_include subnets. Source firewall.address6.name firewall.addrgrp6.name.
+                    - IPv6 split-include subnets. Source firewall.address6.name firewall.addrgrp6.name.
                 type: str
             ipv6_start_ip:
                 description:
@@ -565,7 +567,7 @@ options:
                 type: str
             keepalive:
                 description:
-                    - NAT_T keep alive interval.
+                    - NAT-T keep alive interval.
                 type: int
             keylife:
                 description:
@@ -622,15 +624,15 @@ options:
                 type: str
             monitor_hold_down_delay:
                 description:
-                    - Time to wait in seconds before recovery once primary re_establishes.
+                    - Time to wait in seconds before recovery once primary re-establishes.
                 type: int
             monitor_hold_down_time:
                 description:
-                    - Time of day at which to fail back to primary after it re_establishes.
+                    - Time of day at which to fail back to primary after it re-establishes.
                 type: str
             monitor_hold_down_type:
                 description:
-                    - Recovery time method when primary interface re_establishes.
+                    - Recovery time method when primary interface re-establishes.
                 type: str
                 choices:
                     - immediate
@@ -638,7 +640,7 @@ options:
                     - time
             monitor_hold_down_weekday:
                 description:
-                    - Day of the week to recover once primary re_establishes.
+                    - Day of the week to recover once primary re-establishes.
                 type: str
                 choices:
                     - everyday
@@ -664,7 +666,7 @@ options:
                     - forced
             negotiate_timeout:
                 description:
-                    - IKE SA negotiation timeout in seconds (1 _ 300).
+                    - IKE SA negotiation timeout in seconds (1 - 300).
                 type: int
             net_device:
                 description:
@@ -720,7 +722,7 @@ options:
                 type: str
             priority:
                 description:
-                    - Priority for routes added by IKE (0 _ 4294967295).
+                    - Priority for routes added by IKE (0 - 4294967295).
                 type: int
             proposal:
                 description:
@@ -734,15 +736,15 @@ options:
                     - des-sha512
             psksecret:
                 description:
-                    - Pre_shared secret for PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).
+                    - Pre-shared secret for PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).
                 type: str
             psksecret_remote:
                 description:
-                    - Pre_shared secret for remote side PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).
+                    - Pre-shared secret for remote side PSK authentication (ASCII string or hexadecimal encoded with a leading 0x).
                 type: str
             reauth:
                 description:
-                    - Enable/disable re_authentication upon IKE SA lifetime expiration.
+                    - Enable/disable re-authentication upon IKE SA lifetime expiration.
                 type: str
                 choices:
                     - disable
@@ -798,11 +800,11 @@ options:
                     - sha2-512
             split_include_service:
                 description:
-                    - Split_include services. Source firewall.service.group.name firewall.service.custom.name.
+                    - Split-include services. Source firewall.service.group.name firewall.service.custom.name.
                 type: str
             suite_b:
                 description:
-                    - Use Suite_B.
+                    - Use Suite-B.
                 type: str
                 choices:
                     - disable
@@ -1215,7 +1217,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ipsec_phase1_interface": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "acct_verify": {"required": False, "type": "str",
                                 "choices": ["enable", "disable"]},

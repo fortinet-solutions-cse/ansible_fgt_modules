@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_vdom_dns
-short_description: Configure DNS servers for a non_management VDOM in Fortinet's FortiOS and FortiGate.
+short_description: Configure DNS servers for a non-management VDOM in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify system feature and vdom_dns category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,7 +74,7 @@ options:
         default: true
     system_vdom_dns:
         description:
-            - Configure DNS servers for a non_management VDOM.
+            - Configure DNS servers for a non-management VDOM.
         default: null
         type: dict
         suboptions:
@@ -116,7 +116,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure DNS servers for a non_management VDOM.
+  - name: Configure DNS servers for a non-management VDOM.
     fortios_system_vdom_dns:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -272,7 +272,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_vdom_dns": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ip6_primary": {"required": False, "type": "str"},
                 "ip6_secondary": {"required": False, "type": "str"},

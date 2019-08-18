@@ -30,7 +30,7 @@ description:
       user to set and modify firewall_ssl feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     firewall_ssl_setting:
         description:
             - SSL proxy settings.
@@ -87,15 +88,15 @@ options:
                     - disable
             cert_cache_capacity:
                 description:
-                    - Maximum capacity of the host certificate cache (0 _ 500, default = 200).
+                    - Maximum capacity of the host certificate cache (0 - 500, default = 200).
                 type: int
             cert_cache_timeout:
                 description:
-                    - Time limit to keep certificate cache (1 _ 120 min, default = 10).
+                    - Time limit to keep certificate cache (1 - 120 min, default = 10).
                 type: int
             kxp_queue_threshold:
                 description:
-                    - Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 _ 512, default =
+                    - Maximum length of the CP KXP queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default =
                        16).
                 type: int
             no_matching_cipher_action:
@@ -107,19 +108,19 @@ options:
                     - drop
             proxy_connect_timeout:
                 description:
-                    - Time limit to make an internal connection to the appropriate proxy process (1 _ 60 sec, default = 30).
+                    - Time limit to make an internal connection to the appropriate proxy process (1 - 60 sec, default = 30).
                 type: int
             session_cache_capacity:
                 description:
-                    - Capacity of the SSL session cache (__Obsolete__) (1 _ 1000, default = 500).
+                    - Capacity of the SSL session cache (--Obsolete--) (1 - 1000, default = 500).
                 type: int
             session_cache_timeout:
                 description:
-                    - Time limit to keep SSL session state (1 _ 60 min, default = 20).
+                    - Time limit to keep SSL session state (1 - 60 min, default = 20).
                 type: int
             ssl_dh_bits:
                 description:
-                    - Bit_size of Diffie_Hellman (DH) prime used in DHE_RSA negotiation (default = 2048).
+                    - Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).
                 type: str
                 choices:
                     - 768
@@ -128,7 +129,7 @@ options:
                     - 2048
             ssl_queue_threshold:
                 description:
-                    - Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 _ 512, default =
+                    - Maximum length of the CP SSL queue. When the queue becomes full, the proxy switches cipher functions to the main CPU (0 - 512, default =
                        32).
                 type: int
             ssl_send_empty_frags:
@@ -312,7 +313,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "firewall_ssl_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "abbreviate_handshake": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},

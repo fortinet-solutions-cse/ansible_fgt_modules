@@ -30,7 +30,7 @@ description:
       user to set and modify ips feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     ips_settings:
         description:
             - Configure IPS VDOM parameter.
@@ -84,15 +85,15 @@ options:
                 type: int
             packet_log_history:
                 description:
-                    - Number of packets to capture before and including the one in which the IPS signature is detected (1 _ 255).
+                    - Number of packets to capture before and including the one in which the IPS signature is detected (1 - 255).
                 type: int
             packet_log_memory:
                 description:
-                    - Maximum memory can be used by packet log (64 _ 8192 kB).
+                    - Maximum memory can be used by packet log (64 - 8192 kB).
                 type: int
             packet_log_post_attack:
                 description:
-                    - Number of packets to log after the IPS signature is detected (0 _ 255).
+                    - Number of packets to log after the IPS signature is detected (0 - 255).
                 type: int
 '''
 
@@ -259,7 +260,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "ips_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ips_packet_quota": {"required": False, "type": "int"},
                 "packet_log_history": {"required": False, "type": "int"},

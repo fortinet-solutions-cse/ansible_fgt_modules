@@ -30,7 +30,7 @@ description:
       user to set and modify vpn_ssl_web feature and portal category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     vpn_ssl_web_portal:
         description:
             - Portal.
@@ -87,7 +89,7 @@ options:
         suboptions:
             allow_user_access:
                 description:
-                    - Allow user access to SSL_VPN applications.
+                    - Allow user access to SSL-VPN applications.
                 type: str
                 choices:
                     - web
@@ -163,7 +165,7 @@ options:
                                 type: str
                             listening_port:
                                 description:
-                                    - Listening port (0 _ 65535).
+                                    - Listening port (0 - 65535).
                                 type: int
                             load_balancing_info:
                                 description:
@@ -192,11 +194,11 @@ options:
                                 type: str
                             preconnection_id:
                                 description:
-                                    - The numeric ID of the RDP source (0_2147483648).
+                                    - The numeric ID of the RDP source (0-2147483648).
                                 type: int
                             remote_port:
                                 description:
-                                    - Remote port (0 _ 65535).
+                                    - Remote port (0 - 65535).
                                 type: int
                             security:
                                 description:
@@ -233,7 +235,7 @@ options:
                                     - disable
                             sso:
                                 description:
-                                    - Single Sign_On.
+                                    - Single Sign-On.
                                 type: str
                                 choices:
                                     - disable
@@ -241,14 +243,14 @@ options:
                                     - auto
                             sso_credential:
                                 description:
-                                    - Single sign_on credentials.
+                                    - Single sign-on credentials.
                                 type: str
                                 choices:
                                     - sslvpn-login
                                     - alternative
                             sso_credential_sent_once:
                                 description:
-                                    - Single sign_on credentials are only sent once to remote server.
+                                    - Single sign-on credentials are only sent once to remote server.
                                 type: str
                                 choices:
                                     - enable
@@ -272,8 +274,8 @@ options:
                         type: str
             custom_lang:
                 description:
-                    - Change the web portal display language. Overrides config system global set language. You can use config system custom_language and
-                       execute system custom_language to add custom language files. Source system.custom-language.name.
+                    - Change the web portal display language. Overrides config system global set language. You can use config system custom-language and
+                       execute system custom-language to add custom language files. Source system.custom-language.name.
                 type: str
             customize_forticlient_download_url:
                 description:
@@ -380,14 +382,14 @@ options:
                         type: str
             ip_mode:
                 description:
-                    - Method by which users of this SSL_VPN tunnel obtain IP addresses.
+                    - Method by which users of this SSL-VPN tunnel obtain IP addresses.
                 type: str
                 choices:
                     - range
                     - user-group
             ip_pools:
                 description:
-                    - IPv4 firewall source address objects reserved for SSL_VPN tunnel mode clients.
+                    - IPv4 firewall source address objects reserved for SSL-VPN tunnel mode clients.
                 type: list
                 suboptions:
                     name:
@@ -412,7 +414,7 @@ options:
                     - disable
             ipv6_pools:
                 description:
-                    - IPv4 firewall source address objects reserved for SSL_VPN tunnel mode clients.
+                    - IPv4 firewall source address objects reserved for SSL-VPN tunnel mode clients.
                 type: list
                 suboptions:
                     name:
@@ -436,7 +438,7 @@ options:
                     - disable
             ipv6_split_tunneling_routing_address:
                 description:
-                    - IPv6 SSL_VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split_tunneling access.
+                    - IPv6 SSL-VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split-tunneling access.
                 type: list
                 suboptions:
                     name:
@@ -446,7 +448,7 @@ options:
                         type: str
             ipv6_tunnel_mode:
                 description:
-                    - Enable/disable IPv6 SSL_VPN tunnel mode.
+                    - Enable/disable IPv6 SSL-VPN tunnel mode.
                 type: str
                 choices:
                     - enable
@@ -468,7 +470,7 @@ options:
                     - disable
             limit_user_logins:
                 description:
-                    - Enable to limit each user to one SSL_VPN session at a time.
+                    - Enable to limit each user to one SSL-VPN session at a time.
                 type: str
                 choices:
                     - enable
@@ -614,7 +616,7 @@ options:
                         type: str
                     domains:
                         description:
-                            - Split DNS domains used for SSL_VPN clients separated by comma(,).
+                            - Split DNS domains used for SSL-VPN clients separated by comma(,).
                         type: str
                     id:
                         description:
@@ -638,7 +640,7 @@ options:
                     - disable
             split_tunneling_routing_address:
                 description:
-                    - IPv4 SSL_VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split_tunneling access.
+                    - IPv4 SSL-VPN tunnel mode firewall address objects that override firewall policy destination addresses to control split-tunneling access.
                 type: list
                 suboptions:
                     name:
@@ -658,7 +660,7 @@ options:
                     - mariner
             tunnel_mode:
                 description:
-                    - Enable/disable IPv4 SSL_VPN tunnel mode.
+                    - Enable/disable IPv4 SSL-VPN tunnel mode.
                 type: str
                 choices:
                     - enable
@@ -1004,7 +1006,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ssl_web_portal": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "allow_user_access": {"required": False, "type": "str",
                                       "choices": ["web", "ftp", "smb",

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -115,7 +115,7 @@ options:
                         type: str
             fixed_key:
                 description:
-                    - Auto_generated fixed key used when this device is the root. (Will automatically be generated if not set.)
+                    - Auto-generated fixed key used when this device is the root. (Will automatically be generated if not set.)
                 type: str
             group_name:
                 description:
@@ -142,7 +142,7 @@ options:
                     - disable
             trusted_list:
                 description:
-                    - Pre_authorized and blocked security fabric nodes.
+                    - Pre-authorized and blocked security fabric nodes.
                 type: list
                 suboptions:
                     action:
@@ -361,7 +361,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_csf": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "configuration_sync": {"required": False, "type": "str",
                                        "choices": ["default", "local"]},

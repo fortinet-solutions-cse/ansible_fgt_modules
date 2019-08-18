@@ -30,7 +30,7 @@ description:
       user to set and modify log feature and custom_field category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     log_custom_field:
         description:
             - Configure custom log fields.
@@ -272,7 +274,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "log_custom_field": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "id": {"required": True, "type": "str"},
                 "name": {"required": False, "type": "str"},

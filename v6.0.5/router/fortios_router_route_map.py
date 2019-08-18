@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -128,7 +128,7 @@ options:
                             - disable
                     match_flags:
                         description:
-                            - BGP flag value to match (0 _ 65535)
+                            - BGP flag value to match (0 - 65535)
                         type: int
                     match_interface:
                         description:
@@ -136,19 +136,19 @@ options:
                         type: str
                     match_ip_address:
                         description:
-                            - Match IP address permitted by access_list or prefix_list. Source router.access-list.name router.prefix-list.name.
+                            - Match IP address permitted by access-list or prefix-list. Source router.access-list.name router.prefix-list.name.
                         type: str
                     match_ip_nexthop:
                         description:
-                            - Match next hop IP address passed by access_list or prefix_list. Source router.access-list.name router.prefix-list.name.
+                            - Match next hop IP address passed by access-list or prefix-list. Source router.access-list.name router.prefix-list.name.
                         type: str
                     match_ip6_address:
                         description:
-                            - Match IPv6 address permitted by access_list6 or prefix_list6. Source router.access-list6.name router.prefix-list6.name.
+                            - Match IPv6 address permitted by access-list6 or prefix-list6. Source router.access-list6.name router.prefix-list6.name.
                         type: str
                     match_ip6_nexthop:
                         description:
-                            - Match next hop IPv6 address passed by access_list6 or prefix_list6. Source router.access-list6.name router.prefix-list6.name.
+                            - Match next hop IPv6 address passed by access-list6 or prefix-list6. Source router.access-list6.name router.prefix-list6.name.
                         type: str
                     match_metric:
                         description:
@@ -190,13 +190,13 @@ options:
                         suboptions:
                             as:
                                 description:
-                                    - "AS number (0 _ 42949672). NOTE: Use quotes for repeating numbers, e.g.: "1 1 2"
+                                    - "AS number (0 - 42949672). NOTE: Use quotes for repeating numbers, e.g.: "1 1 2"
                     "
                                 required: true
                                 type: str
                     set_aspath_action:
                         description:
-                            - Specify preferred action of set_aspath.
+                            - Specify preferred action of set-aspath.
                         type: str
                         choices:
                             - prepend
@@ -215,12 +215,12 @@ options:
                         suboptions:
                             community:
                                 description:
-                                    - "Attribute: AA|AA:NN|internet|local_AS|no_advertise|no_export."
+                                    - "Attribute: AA|AA:NN|internet|local-AS|no-advertise|no-export."
                                 required: true
                                 type: str
                     set_community_additive:
                         description:
-                            - Enable/disable adding set_community to existing community.
+                            - Enable/disable adding set-community to existing community.
                         type: str
                         choices:
                             - enable
@@ -231,23 +231,23 @@ options:
                         type: str
                     set_dampening_max_suppress:
                         description:
-                            - Maximum duration to suppress a route (1 _ 255 min, 0 = unset).
+                            - Maximum duration to suppress a route (1 - 255 min, 0 = unset).
                         type: int
                     set_dampening_reachability_half_life:
                         description:
-                            - Reachability half_life time for the penalty (1 _ 45 min, 0 = unset).
+                            - Reachability half-life time for the penalty (1 - 45 min, 0 = unset).
                         type: int
                     set_dampening_reuse:
                         description:
-                            - Value to start reusing a route (1 _ 20000, 0 = unset).
+                            - Value to start reusing a route (1 - 20000, 0 = unset).
                         type: int
                     set_dampening_suppress:
                         description:
-                            - Value to start suppressing a route (1 _ 20000, 0 = unset).
+                            - Value to start suppressing a route (1 - 20000, 0 = unset).
                         type: int
                     set_dampening_unreachability_half_life:
                         description:
-                            - Unreachability Half_life time for the penalty (1 _ 45 min, 0 = unset)
+                            - Unreachability Half-life time for the penalty (1 - 45 min, 0 = unset)
                         type: int
                     set_extcommunity_rt:
                         description:
@@ -261,7 +261,7 @@ options:
                                 type: str
                     set_extcommunity_soo:
                         description:
-                            - Site_of_Origin extended community.
+                            - Site-of-Origin extended community.
                         type: list
                         suboptions:
                             community:
@@ -271,7 +271,7 @@ options:
                                 type: str
                     set_flags:
                         description:
-                            - BGP flags value (0 _ 65535)
+                            - BGP flags value (0 - 65535)
                         type: int
                     set_ip_nexthop:
                         description:
@@ -551,7 +551,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_route_map": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comments": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},

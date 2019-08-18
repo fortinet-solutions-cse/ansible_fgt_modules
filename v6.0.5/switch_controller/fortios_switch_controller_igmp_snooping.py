@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,7 +80,7 @@ options:
         suboptions:
             aging_time:
                 description:
-                    - Maximum number of seconds to retain a multicast snooping entry for which no packets have been seen (15 _ 3600 sec, default = 300).
+                    - Maximum number of seconds to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec, default = 300).
                 type: int
             flood_unknown_multicast:
                 description:
@@ -251,7 +251,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_igmp_snooping": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "aging_time": {"required": False, "type": "int"},
                 "flood_unknown_multicast": {"required": False, "type": "str",

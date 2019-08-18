@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -88,8 +88,8 @@ options:
         suboptions:
             affinity:
                 description:
-                    - Enable/disable affinity, attaching a source_ip's traffic to the assigned forwarding server until the forward_server_affinity_timeout is
-                       reached (under web_proxy global).
+                    - Enable/disable affinity, attaching a source-ip's traffic to the assigned forwarding server until the forward-server-affinity-timeout is
+                       reached (under web-proxy global).
                 type: str
                 choices:
                     - enable
@@ -104,7 +104,7 @@ options:
                     - pass
             ldb_method:
                 description:
-                    - "Load balance method: weighted or least_session."
+                    - "Load balance method: weighted or least-session."
                 type: str
                 choices:
                     - weighted
@@ -126,7 +126,7 @@ options:
                         type: str
                     weight:
                         description:
-                            - Optionally assign a weight of the forwarding server for weighted load balancing (1 _ 100, default = 10)
+                            - Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100, default = 10)
                         type: int
 '''
 
@@ -308,7 +308,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "web_proxy_forward_server_group": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "affinity": {"required": False, "type": "str",
                              "choices": ["enable", "disable"]},

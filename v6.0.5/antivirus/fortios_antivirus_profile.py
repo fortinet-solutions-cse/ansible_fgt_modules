@@ -30,7 +30,7 @@ description:
       user to set and modify antivirus feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     antivirus_profile:
         description:
             - Configure AntiVirus profiles.
@@ -87,7 +89,7 @@ options:
         suboptions:
             analytics_bl_filetype:
                 description:
-                    - Only submit files matching this DLP file_pattern to FortiSandbox. Source dlp.filepattern.id.
+                    - Only submit files matching this DLP file-pattern to FortiSandbox. Source dlp.filepattern.id.
                 type: int
             analytics_db:
                 description:
@@ -98,11 +100,11 @@ options:
                     - enable
             analytics_max_upload:
                 description:
-                    - Maximum size of files that can be uploaded to FortiSandbox (1 _ 395 MBytes, default = 10).
+                    - Maximum size of files that can be uploaded to FortiSandbox (1 - 395 MBytes, default = 10).
                 type: int
             analytics_wl_filetype:
                 description:
-                    - Do not submit files matching this DLP file_pattern to FortiSandbox. Source dlp.filepattern.id.
+                    - Do not submit files matching this DLP file-pattern to FortiSandbox. Source dlp.filepattern.id.
                 type: int
             av_block_log:
                 description:
@@ -1081,7 +1083,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "antivirus_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "analytics_bl_filetype": {"required": False, "type": "int"},
                 "analytics_db": {"required": False, "type": "str",

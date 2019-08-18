@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -112,7 +112,7 @@ options:
                         type: int
                     ge:
                         description:
-                            - Minimum prefix length to be matched (0 _ 128).
+                            - Minimum prefix length to be matched (0 - 128).
                         type: int
                     id:
                         description:
@@ -121,7 +121,7 @@ options:
                         type: int
                     le:
                         description:
-                            - Maximum prefix length to be matched (0 _ 128).
+                            - Maximum prefix length to be matched (0 - 128).
                         type: int
                     prefix6:
                         description:
@@ -308,7 +308,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_prefix_list6": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comments": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},

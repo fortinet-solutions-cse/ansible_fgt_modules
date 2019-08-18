@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -136,7 +136,7 @@ options:
                         type: str
                     listening_port:
                         description:
-                            - Listening port (0 _ 65535).
+                            - Listening port (0 - 65535).
                         type: int
                     load_balancing_info:
                         description:
@@ -165,11 +165,11 @@ options:
                         type: str
                     preconnection_id:
                         description:
-                            - The numeric ID of the RDP source (0_2147483648).
+                            - The numeric ID of the RDP source (0-2147483648).
                         type: int
                     remote_port:
                         description:
-                            - Remote port (0 _ 65535).
+                            - Remote port (0 - 65535).
                         type: int
                     security:
                         description:
@@ -206,7 +206,7 @@ options:
                             - disable
                     sso:
                         description:
-                            - Single Sign_On.
+                            - Single Sign-On.
                         type: str
                         choices:
                             - disable
@@ -214,14 +214,14 @@ options:
                             - auto
                     sso_credential:
                         description:
-                            - Single sign_on credentials.
+                            - Single sign-on credentials.
                         type: str
                         choices:
                             - sslvpn-login
                             - alternative
                     sso_credential_sent_once:
                         description:
-                            - Single sign_on credentials are only sent once to remote server.
+                            - Single sign-on credentials are only sent once to remote server.
                         type: str
                         choices:
                             - enable
@@ -449,7 +449,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ssl_web_user_bookmark": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "bookmarks": {"required": False, "type": "list",
                               "options": {

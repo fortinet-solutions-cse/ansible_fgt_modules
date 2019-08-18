@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and lldp_profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     switch_controller_lldp_profile:
         description:
             - Configure FortiSwitch LLDP profiles.
@@ -99,22 +101,22 @@ options:
                     - max-frame-size
             auto_isl:
                 description:
-                    - Enable/disable auto inter_switch LAG.
+                    - Enable/disable auto inter-switch LAG.
                 type: str
                 choices:
                     - disable
                     - enable
             auto_isl_hello_timer:
                 description:
-                    - Auto inter_switch LAG hello timer duration (1 _ 30 sec, default = 3).
+                    - Auto inter-switch LAG hello timer duration (1 - 30 sec, default = 3).
                 type: int
             auto_isl_port_group:
                 description:
-                    - Auto inter_switch LAG port group ID (0 _ 9).
+                    - Auto inter-switch LAG port group ID (0 - 9).
                 type: int
             auto_isl_receive_timeout:
                 description:
-                    - Auto inter_switch LAG timeout if no response is received (3 _ 90 sec, default = 9).
+                    - Auto inter-switch LAG timeout if no response is received (3 - 90 sec, default = 9).
                 type: int
             custom_tlvs:
                 description:
@@ -123,7 +125,7 @@ options:
                 suboptions:
                     information_string:
                         description:
-                            - Organizationally defined information string (0 _ 507 hexadecimal bytes).
+                            - Organizationally defined information string (0 - 507 hexadecimal bytes).
                         type: str
                     name:
                         description:
@@ -132,15 +134,15 @@ options:
                         type: str
                     oui:
                         description:
-                            - Organizationally unique identifier (OUI), a 3_byte hexadecimal number, for this TLV.
+                            - Organizationally unique identifier (OUI), a 3-byte hexadecimal number, for this TLV.
                         type: str
                     subtype:
                         description:
-                            - Organizationally defined subtype (0 _ 255).
+                            - Organizationally defined subtype (0 - 255).
                         type: int
             med_network_policy:
                 description:
-                    - Configuration method to edit Media Endpoint Discovery (MED) network policy type_length_value (TLV) categories.
+                    - Configuration method to edit Media Endpoint Discovery (MED) network policy type-length-value (TLV) categories.
                 type: list
                 suboptions:
                     dscp:
@@ -155,7 +157,7 @@ options:
                         type: str
                     priority:
                         description:
-                            - Advertised Layer 2 priority (0 _ 7; from lowest to highest priority).
+                            - Advertised Layer 2 priority (0 - 7; from lowest to highest priority).
                         type: int
                     status:
                         description:
@@ -166,11 +168,11 @@ options:
                             - enable
                     vlan:
                         description:
-                            - ID of VLAN to advertise, if configured on port (0 _ 4094, 0 = priority tag).
+                            - ID of VLAN to advertise, if configured on port (0 - 4094, 0 = priority tag).
                         type: int
             med_tlvs:
                 description:
-                    - "Transmitted LLDP_MED TLVs (type_length_value descriptions): inventory management TLV and/or network policy TLV."
+                    - "Transmitted LLDP-MED TLVs (type-length-value descriptions): inventory management TLV and/or network policy TLV."
                 type: str
                 choices:
                     - inventory-management
@@ -375,7 +377,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_lldp_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "802.1_tlvs": {"required": False, "type": "str",
                                "choices": ["port-vlan-id"]},

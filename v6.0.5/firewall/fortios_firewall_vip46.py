@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and vip46 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_vip46:
         description:
             - Configure IPv4 to IPv6 virtual IPs.
@@ -102,7 +104,7 @@ options:
                 type: str
             extip:
                 description:
-                    - Start_external_IP [_end_external_IP].
+                    - Start-external-IP [-end-external-IP].
                 type: str
             extport:
                 description:
@@ -125,7 +127,7 @@ options:
                     - first-alive
             mappedip:
                 description:
-                    - Start_mapped_IP [_end mapped_IP].
+                    - Start-mapped-IP [-end mapped-IP].
                 type: str
             mappedport:
                 description:
@@ -230,7 +232,7 @@ options:
                 suboptions:
                     range:
                         description:
-                            - Src_filter range.
+                            - Src-filter range.
                         required: true
                         type: str
             type:
@@ -453,7 +455,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_vip46": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "arp_reply": {"required": False, "type": "str",
                               "choices": ["disable", "enable"]},

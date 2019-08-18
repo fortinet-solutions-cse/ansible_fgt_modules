@@ -30,7 +30,7 @@ description:
       user to set and modify log_fortianalyzer feature and override_setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_fortianalyzer_override_setting:
         description:
             - Override FortiAnalyzer settings.
@@ -88,7 +89,7 @@ options:
                 type: str
             conn_timeout:
                 description:
-                    - FortiAnalyzer connection time_out in seconds (for status and log buffer).
+                    - FortiAnalyzer connection time-out in seconds (for status and log buffer).
                 type: int
             enc_algorithm:
                 description:
@@ -386,7 +387,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_fortianalyzer_override_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "__change_ip": {"required": False, "type": "int"},
                 "certificate": {"required": False, "type": "str"},

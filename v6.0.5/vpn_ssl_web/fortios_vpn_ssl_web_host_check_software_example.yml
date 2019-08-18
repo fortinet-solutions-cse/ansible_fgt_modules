@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: SSL_VPN host check software.
+  - name: SSL-VPN host check software.
     fortios_vpn_ssl_web_host_check_software:
       host:  "{{ host }}"
       username: "{{ username }}"

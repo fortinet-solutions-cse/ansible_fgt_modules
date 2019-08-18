@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and vip category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_vip:
         description:
             - Configure virtual IP for IPv4.
@@ -156,7 +158,7 @@ options:
                 type: str
             http_cookie_share:
                 description:
-                    - Control sharing of cookies across virtual servers. same_ip means a cookie from one virtual server can be used by another. Disable stops
+                    - Control sharing of cookies across virtual servers. same-ip means a cookie from one virtual server can be used by another. Disable stops
                        cookie sharing.
                 type: str
                 choices:
@@ -164,7 +166,7 @@ options:
                     - same-ip
             http_ip_header:
                 description:
-                    - For HTTP multiplexing, enable to add the original client IP address in the XForwarded_For HTTP header.
+                    - For HTTP multiplexing, enable to add the original client IP address in the XForwarded-For HTTP header.
                 type: str
                 choices:
                     - enable
@@ -172,7 +174,7 @@ options:
             http_ip_header_name:
                 description:
                     - For HTTP multiplexing, enter a custom HTTPS header name. The original client IP address is added to this header. If empty,
-                       X_Forwarded_For is used.
+                       X-Forwarded-For is used.
                 type: str
             http_multiplex:
                 description:
@@ -250,7 +252,7 @@ options:
                     - enable
             outlook_web_access:
                 description:
-                    - Enable to add the Front_End_Https header for Microsoft Outlook Web Access.
+                    - Enable to add the Front-End-Https header for Microsoft Outlook Web Access.
                 type: str
                 choices:
                     - disable
@@ -371,12 +373,12 @@ options:
                         type: str
             src_filter:
                 description:
-                    - Source address filter. Each address must be either an IP/subnet (x.x.x.x/n) or a range (x.x.x.x_y.y.y.y). Separate addresses with spaces.
+                    - Source address filter. Each address must be either an IP/subnet (x.x.x.x/n) or a range (x.x.x.x-y.y.y.y). Separate addresses with spaces.
                 type: list
                 suboptions:
                     range:
                         description:
-                            - Source_filter range.
+                            - Source-filter range.
                         required: true
                         type: str
             srcintf_filter:
@@ -462,7 +464,7 @@ options:
                     - both
             ssl_dh_bits:
                 description:
-                    - Number of bits to use in the Diffie_Hellman exchange for RSA encryption of SSL sessions.
+                    - Number of bits to use in the Diffie-Hellman exchange for RSA encryption of SSL sessions.
                 type: str
                 choices:
                     - 768
@@ -979,7 +981,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_vip": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "arp_reply": {"required": False, "type": "str",
                               "choices": ["disable", "enable"]},

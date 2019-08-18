@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,18 +80,18 @@ options:
         suboptions:
             link_down_auth:
                 description:
-                    - Interface_reauthentication state to set if a link is down.
+                    - Interface-reauthentication state to set if a link is down.
                 type: str
                 choices:
                     - set-unauth
                     - no-action
             max_reauth_attempt:
                 description:
-                    - Maximum number of authentication attempts (0 _ 15, default = 3).
+                    - Maximum number of authentication attempts (0 - 15, default = 3).
                 type: int
             reauth_period:
                 description:
-                    - Period of time to allow for reauthentication (1 _ 1440 sec, default = 60, 0 = disable reauthentication).
+                    - Period of time to allow for reauthentication (1 - 1440 sec, default = 60, 0 = disable reauthentication).
                 type: int
 '''
 
@@ -256,7 +256,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_802_1X_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "link_down_auth": {"required": False, "type": "str",
                                    "choices": ["set-unauth", "no-action"]},

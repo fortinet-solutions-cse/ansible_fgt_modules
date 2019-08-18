@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -94,7 +94,7 @@ options:
                     - youtube
             comment:
                 description:
-                    - Comment about this CDN_rule.
+                    - Comment about this CDN-rule.
                 type: str
             host_domain_name_suffix:
                 description:
@@ -144,14 +144,14 @@ options:
                         suboptions:
                             end_direction:
                                 description:
-                                    - Search direction from end_str match.
+                                    - Search direction from end-str match.
                                 type: str
                                 choices:
                                     - forward
                                     - backward
                             end_skip:
                                 description:
-                                    - Number of characters in URL to skip after end_str has been matched.
+                                    - Number of characters in URL to skip after end-str has been matched.
                                 type: int
                             end_str:
                                 description:
@@ -163,14 +163,14 @@ options:
                                 type: str
                             start_direction:
                                 description:
-                                    - Search direction from start_str match.
+                                    - Search direction from start-str match.
                                 type: str
                                 choices:
                                     - forward
                                     - backward
                             start_skip:
                                 description:
-                                    - Number of characters in URL to skip after start_str has been matched.
+                                    - Number of characters in URL to skip after start-str has been matched.
                                 type: int
                             start_str:
                                 description:
@@ -267,7 +267,7 @@ options:
                                     - youku-id
                     skip_rule_mode:
                         description:
-                            - Skip mode when evaluating skip_rules.
+                            - Skip mode when evaluating skip-rules.
                         type: str
                         choices:
                             - all
@@ -314,7 +314,7 @@ EXAMPLES = '''
       state: "present"
       wanopt_content_delivery_network_rule:
         category: "vcache"
-        comment: "Comment about this CDN_rule."
+        comment: "Comment about this CDN-rule."
         host_domain_name_suffix:
          -
             name: "default_name_6"
@@ -507,7 +507,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wanopt_content_delivery_network_rule": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "category": {"required": False, "type": "str",
                              "choices": ["vcache", "youtube"]},

@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_switch_controller_system
-short_description: Configure system_wide switch controller settings in Fortinet's FortiOS and FortiGate.
+short_description: Configure system-wide switch controller settings in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify switch_controller feature and system category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,13 +74,13 @@ options:
         default: true
     switch_controller_system:
         description:
-            - Configure system_wide switch controller settings.
+            - Configure system-wide switch controller settings.
         default: null
         type: dict
         suboptions:
             parallel_process:
                 description:
-                    - Maximum number of parallel processes (1 _ 300, default = 1).
+                    - Maximum number of parallel processes (1 - 300, default = 1).
                 type: int
             parallel_process_override:
                 description:
@@ -100,7 +100,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure system_wide switch controller settings.
+  - name: Configure system-wide switch controller settings.
     fortios_switch_controller_system:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -251,7 +251,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_system": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "parallel_process": {"required": False, "type": "int"},
                 "parallel_process_override": {"required": False, "type": "str",

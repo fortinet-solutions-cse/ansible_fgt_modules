@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and policy64 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_policy64:
         description:
             - Configure IPv6 to IPv4 policies.
@@ -133,7 +135,7 @@ options:
                     - disable
             per_ip_shaper:
                 description:
-                    - Per_IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
+                    - Per-IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
                 type: str
             permit_any_host:
                 description:
@@ -418,7 +420,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_policy64": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -92,7 +92,7 @@ options:
                 type: str
             auth_http_basic:
                 description:
-                    - Enable/disable use of HTTP basic authentication for identity_based firewall policies.
+                    - Enable/disable use of HTTP basic authentication for identity-based firewall policies.
                 type: str
                 choices:
                     - enable
@@ -111,11 +111,11 @@ options:
                 type: int
             auth_portal_timeout:
                 description:
-                    - Time in minutes before captive portal user have to re_authenticate (1 _ 30 min, default 3 min).
+                    - Time in minutes before captive portal user have to re-authenticate (1 - 30 min, default 3 min).
                 type: int
             auth_ports:
                 description:
-                    - Set up non_standard ports for authentication with HTTP, HTTPS, FTP, and TELNET.
+                    - Set up non-standard ports for authentication with HTTP, HTTPS, FTP, and TELNET.
                 type: list
                 suboptions:
                     id:
@@ -125,7 +125,7 @@ options:
                         type: int
                     port:
                         description:
-                            - Non_standard port for firewall user authentication.
+                            - Non-standard port for firewall user authentication.
                         type: int
                     type:
                         description:
@@ -152,14 +152,14 @@ options:
                     - disable
             auth_ssl_allow_renegotiation:
                 description:
-                    - Allow/forbid SSL re_negotiation for HTTPS authentication.
+                    - Allow/forbid SSL re-negotiation for HTTPS authentication.
                 type: str
                 choices:
                     - enable
                     - disable
             auth_timeout:
                 description:
-                    - Time in minutes before the firewall user authentication timeout requires the user to re_authenticate.
+                    - Time in minutes before the firewall user authentication timeout requires the user to re-authenticate.
                 type: int
             auth_timeout_type:
                 description:
@@ -370,7 +370,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "user_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_blackout_time": {"required": False, "type": "int"},
                 "auth_ca_cert": {"required": False, "type": "str"},

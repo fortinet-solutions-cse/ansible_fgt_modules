@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_password_policy
-short_description: Configure password policy for locally defined administrator passwords and IPsec VPN pre_shared keys in Fortinet's FortiOS and FortiGate.
+short_description: Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify system feature and password_policy category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,27 +74,27 @@ options:
         default: true
     system_password_policy:
         description:
-            - Configure password policy for locally defined administrator passwords and IPsec VPN pre_shared keys.
+            - Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys.
         default: null
         type: dict
         suboptions:
             apply_to:
                 description:
-                    - Apply password policy to administrator passwords or IPsec pre_shared keys or both. Separate entries with a space.
+                    - Apply password policy to administrator passwords or IPsec pre-shared keys or both. Separate entries with a space.
                 type: str
                 choices:
                     - admin-password
                     - ipsec-preshared-key
             change_4_characters:
                 description:
-                    - Enable/disable changing at least 4 characters for a new password (This attribute overrides reuse_password if both are enabled).
+                    - Enable/disable changing at least 4 characters for a new password (This attribute overrides reuse-password if both are enabled).
                 type: str
                 choices:
                     - enable
                     - disable
             expire_day:
                 description:
-                    - Number of days after which passwords expire (1 _ 999 days, default = 90).
+                    - Number of days after which passwords expire (1 - 999 days, default = 90).
                 type: int
             expire_status:
                 description:
@@ -105,34 +105,34 @@ options:
                     - disable
             min_lower_case_letter:
                 description:
-                    - Minimum number of lowercase characters in password (0 _ 128, default = 0).
+                    - Minimum number of lowercase characters in password (0 - 128, default = 0).
                 type: int
             min_non_alphanumeric:
                 description:
-                    - Minimum number of non_alphanumeric characters in password (0 _ 128, default = 0).
+                    - Minimum number of non-alphanumeric characters in password (0 - 128, default = 0).
                 type: int
             min_number:
                 description:
-                    - Minimum number of numeric characters in password (0 _ 128, default = 0).
+                    - Minimum number of numeric characters in password (0 - 128, default = 0).
                 type: int
             min_upper_case_letter:
                 description:
-                    - Minimum number of uppercase characters in password (0 _ 128, default = 0).
+                    - Minimum number of uppercase characters in password (0 - 128, default = 0).
                 type: int
             minimum_length:
                 description:
-                    - Minimum password length (8 _ 128, default = 8).
+                    - Minimum password length (8 - 128, default = 8).
                 type: int
             reuse_password:
                 description:
-                    - Enable/disable reusing of password (if both reuse_password and change_4_characters are enabled, change_4_characters overrides).
+                    - Enable/disable reusing of password (if both reuse-password and change-4-characters are enabled, change-4-characters overrides).
                 type: str
                 choices:
                     - enable
                     - disable
             status:
                 description:
-                    - Enable/disable setting a password policy for locally defined administrator passwords and IPsec VPN pre_shared keys.
+                    - Enable/disable setting a password policy for locally defined administrator passwords and IPsec VPN pre-shared keys.
                 type: str
                 choices:
                     - enable
@@ -148,7 +148,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure password policy for locally defined administrator passwords and IPsec VPN pre_shared keys.
+  - name: Configure password policy for locally defined administrator passwords and IPsec VPN pre-shared keys.
     fortios_system_password_policy:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -311,7 +311,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_password_policy": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "apply_to": {"required": False, "type": "str",
                              "choices": ["admin-password", "ipsec-preshared-key"]},

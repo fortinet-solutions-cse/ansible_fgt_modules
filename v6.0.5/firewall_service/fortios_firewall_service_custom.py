@@ -30,7 +30,7 @@ description:
       user to set and modify firewall_service feature and custom category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_service_custom:
         description:
             - Configure custom services.
@@ -211,15 +213,15 @@ options:
                 type: str
             session_ttl:
                 description:
-                    - Session TTL (300 _ 604800, 0 = default).
+                    - Session TTL (300 - 604800, 0 = default).
                 type: int
             tcp_halfclose_timer:
                 description:
-                    - Wait time to close a TCP session waiting for an unanswered FIN packet (1 _ 86400 sec, 0 = default).
+                    - Wait time to close a TCP session waiting for an unanswered FIN packet (1 - 86400 sec, 0 = default).
                 type: int
             tcp_halfopen_timer:
                 description:
-                    - Wait time to close a TCP session waiting for an unanswered open session packet (1 _ 86400 sec, 0 = default).
+                    - Wait time to close a TCP session waiting for an unanswered open session packet (1 - 86400 sec, 0 = default).
                 type: int
             tcp_portrange:
                 description:
@@ -227,11 +229,11 @@ options:
                 type: str
             tcp_timewait_timer:
                 description:
-                    - Set the length of the TCP TIME_WAIT state in seconds (1 _ 300 sec, 0 = default).
+                    - Set the length of the TCP TIME-WAIT state in seconds (1 - 300 sec, 0 = default).
                 type: int
             udp_idle_timer:
                 description:
-                    - UDP half close timeout (0 _ 86400 sec, 0 = default).
+                    - UDP half close timeout (0 - 86400 sec, 0 = default).
                 type: int
             udp_portrange:
                 description:
@@ -452,7 +454,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_service_custom": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "app_category": {"required": False, "type": "list",
                                  "options": {

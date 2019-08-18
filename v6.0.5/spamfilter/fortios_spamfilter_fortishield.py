@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_spamfilter_fortishield
-short_description: Configure FortiGuard _ AntiSpam in Fortinet's FortiOS and FortiGate.
+short_description: Configure FortiGuard - AntiSpam in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify spamfilter feature and fortishield category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,7 +74,7 @@ options:
         default: true
     spamfilter_fortishield:
         description:
-            - Configure FortiGuard _ AntiSpam.
+            - Configure FortiGuard - AntiSpam.
         default: null
         type: dict
         suboptions:
@@ -107,7 +107,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure FortiGuard _ AntiSpam.
+  - name: Configure FortiGuard - AntiSpam.
     fortios_spamfilter_fortishield:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -259,7 +259,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "spamfilter_fortishield": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "spam_submit_force": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,7 +80,7 @@ options:
         suboptions:
             dns_timeout:
                 description:
-                    - DNS query time out (1 _ 30 sec).
+                    - DNS query time out (1 - 30 sec).
                 type: int
 '''
 
@@ -243,7 +243,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "spamfilter_options": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "dns_timeout": {"required": False, "type": "int"}
 

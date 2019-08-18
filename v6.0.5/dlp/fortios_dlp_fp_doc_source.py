@@ -31,7 +31,7 @@ description:
       user to set and modify dlp feature and fp_doc_source category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -73,6 +73,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -80,6 +81,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     dlp_fp_doc_source:
         description:
             - Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints.
@@ -88,7 +90,7 @@ options:
         suboptions:
             date:
                 description:
-                    - Day of the month on which to scan the server (1 _ 31).
+                    - Day of the month on which to scan the server (1 - 31).
                 type: int
             file_path:
                 description:
@@ -146,7 +148,7 @@ options:
                     - disable
             sensitivity:
                 description:
-                    - Select a sensitivity or threat level for matches with this fingerprint database. Add sensitivities using fp_sensitivity. Source dlp
+                    - Select a sensitivity or threat level for matches with this fingerprint database. Add sensitivities using fp-sensitivity. Source dlp
                       .fp-sensitivity.name.
                 type: str
             server:
@@ -161,11 +163,11 @@ options:
                     - samba
             tod_hour:
                 description:
-                    - Hour of the day on which to scan the server (0 _ 23, default = 1).
+                    - Hour of the day on which to scan the server (0 - 23, default = 1).
                 type: int
             tod_min:
                 description:
-                    - Minute of the hour on which to scan the server (0 _ 59).
+                    - Minute of the hour on which to scan the server (0 - 59).
                 type: int
             username:
                 description:
@@ -384,7 +386,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "dlp_fp_doc_source": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "date": {"required": False, "type": "int"},
                 "file_path": {"required": False, "type": "str"},

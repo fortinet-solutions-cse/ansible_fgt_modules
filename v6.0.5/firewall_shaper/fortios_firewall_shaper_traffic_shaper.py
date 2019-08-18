@@ -30,7 +30,7 @@ description:
       user to set and modify firewall_shaper feature and traffic_shaper category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_shaper_traffic_shaper:
         description:
             - Configure shared traffic shaper.
@@ -106,11 +108,11 @@ options:
                 type: str
             guaranteed_bandwidth:
                 description:
-                    - Amount of bandwidth guaranteed for this shaper (0 _ 16776000). Units depend on the bandwidth_unit setting.
+                    - Amount of bandwidth guaranteed for this shaper (0 - 16776000). Units depend on the bandwidth-unit setting.
                 type: int
             maximum_bandwidth:
                 description:
-                    - Upper bandwidth limit enforced by this shaper (0 _ 16776000). 0 means no limit. Units depend on the bandwidth_unit setting.
+                    - Upper bandwidth limit enforced by this shaper (0 - 16776000). 0 means no limit. Units depend on the bandwidth-unit setting.
                 type: int
             name:
                 description:
@@ -314,7 +316,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_shaper_traffic_shaper": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "bandwidth_unit": {"required": False, "type": "str",
                                    "choices": ["kbps", "mbps", "gbps"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -94,7 +94,7 @@ options:
                     - disable
             bandwidth_capacity:
                 description:
-                    - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                    - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
                 type: int
             burst:
                 description:
@@ -112,7 +112,7 @@ options:
                     - disable
             call_capacity:
                 description:
-                    - Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 _ 60, default = 10).
+                    - Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 - 60, default = 10).
                 type: int
             comment:
                 description:
@@ -120,11 +120,11 @@ options:
                 type: str
             downlink:
                 description:
-                    - Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).
                 type: int
             downlink_sta:
                 description:
-                    - Maximum downlink bandwidth for clients (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum downlink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).
                 type: int
             dscp_wmm_be:
                 description:
@@ -133,7 +133,7 @@ options:
                 suboptions:
                     id:
                         description:
-                            - DSCP WMM mapping numbers (0 _ 63).
+                            - DSCP WMM mapping numbers (0 - 63).
                         required: true
                         type: int
             dscp_wmm_bk:
@@ -143,7 +143,7 @@ options:
                 suboptions:
                     id:
                         description:
-                            - DSCP WMM mapping numbers (0 _ 63).
+                            - DSCP WMM mapping numbers (0 - 63).
                         required: true
                         type: int
             dscp_wmm_mapping:
@@ -160,7 +160,7 @@ options:
                 suboptions:
                     id:
                         description:
-                            - DSCP WMM mapping numbers (0 _ 63).
+                            - DSCP WMM mapping numbers (0 - 63).
                         required: true
                         type: int
             dscp_wmm_vo:
@@ -170,7 +170,7 @@ options:
                 suboptions:
                     id:
                         description:
-                            - DSCP WMM mapping numbers (0 _ 63).
+                            - DSCP WMM mapping numbers (0 - 63).
                         required: true
                         type: int
             name:
@@ -180,22 +180,22 @@ options:
                 type: str
             uplink:
                 description:
-                    - Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).
                 type: int
             uplink_sta:
                 description:
-                    - Maximum uplink bandwidth for clients (0 _ 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum uplink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).
                 type: int
             wmm:
                 description:
-                    - Enable/disable WiFi multi_media (WMM) control.
+                    - Enable/disable WiFi multi-media (WMM) control.
                 type: str
                 choices:
                     - enable
                     - disable
             wmm_uapsd:
                 description:
-                    - Enable/disable WMM Unscheduled Automatic Power Save Delivery (U_APSD) power save mode.
+                    - Enable/disable WMM Unscheduled Automatic Power Save Delivery (U-APSD) power save mode.
                 type: str
                 choices:
                     - enable
@@ -402,7 +402,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_qos_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "bandwidth_admission_control": {"required": False, "type": "str",
                                                 "choices": ["enable", "disable"]},

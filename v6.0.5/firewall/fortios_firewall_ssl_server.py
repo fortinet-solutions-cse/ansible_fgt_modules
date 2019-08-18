@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and ssl_server category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_ssl_server:
         description:
             - Configure SSL servers.
@@ -87,7 +89,7 @@ options:
         suboptions:
             add_header_x_forwarded_proto:
                 description:
-                    - Enable/disable adding an X_Forwarded_Proto header to forwarded requests.
+                    - Enable/disable adding an X-Forwarded-Proto header to forwarded requests.
                 type: str
                 choices:
                     - enable
@@ -98,7 +100,7 @@ options:
                 type: str
             mapped_port:
                 description:
-                    - Mapped server service port (1 _ 65535, default = 80).
+                    - Mapped server service port (1 - 65535, default = 80).
                 type: int
             name:
                 description:
@@ -107,7 +109,7 @@ options:
                 type: str
             port:
                 description:
-                    - Server service port (1 _ 65535, default = 443).
+                    - Server service port (1 - 65535, default = 443).
                 type: int
             ssl_algorithm:
                 description:
@@ -131,7 +133,7 @@ options:
                     - secure
             ssl_dh_bits:
                 description:
-                    - Bit_size of Diffie_Hellman (DH) prime used in DHE_RSA negotiation (default = 2048).
+                    - Bit-size of Diffie-Hellman (DH) prime used in DHE-RSA negotiation (default = 2048).
                 type: str
                 choices:
                     - 768
@@ -364,7 +366,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_ssl_server": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "add_header_x_forwarded_proto": {"required": False, "type": "str",
                                                  "choices": ["enable", "disable"]},

@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and mac_sync_settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     switch_controller_mac_sync_settings:
         description:
             - Configure global MAC synchronization settings.
@@ -80,7 +81,7 @@ options:
         suboptions:
             mac_sync_interval:
                 description:
-                    - Time interval between MAC synchronizations (30 _ 1800 sec, default = 60, 0 = disable MAC synchronization).
+                    - Time interval between MAC synchronizations (30 - 1800 sec, default = 60, 0 = disable MAC synchronization).
                 type: int
 '''
 
@@ -243,7 +244,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_mac_sync_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "mac_sync_interval": {"required": False, "type": "int"}
 

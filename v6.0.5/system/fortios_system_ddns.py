@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -145,7 +145,7 @@ options:
                 type: str
             ddns_ttl:
                 description:
-                    - Time_to_live for DDNS packets.
+                    - Time-to-live for DDNS packets.
                 type: int
             ddns_username:
                 description:
@@ -175,7 +175,7 @@ options:
                 type: str
             update_interval:
                 description:
-                    - DDNS update interval (60 _ 2592000 sec, default = 300).
+                    - DDNS update interval (60 - 2592000 sec, default = 300).
                 type: int
             use_public_ip:
                 description:
@@ -380,7 +380,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_ddns": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "bound_ip": {"required": False, "type": "str"},
                 "clear_text": {"required": False, "type": "str",

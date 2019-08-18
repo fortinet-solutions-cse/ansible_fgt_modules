@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -141,7 +141,7 @@ options:
                 type: str
             passwd:
                 description:
-                    - Peer's password used for two_factor authentication.
+                    - Peer's password used for two-factor authentication.
                 type: str
             subject:
                 description:
@@ -149,7 +149,7 @@ options:
                 type: str
             two_factor:
                 description:
-                    - Enable/disable two_factor authentication, applying certificate and password_based authentication.
+                    - Enable/disable two-factor authentication, applying certificate and password-based authentication.
                 type: str
                 choices:
                     - enable
@@ -342,7 +342,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "user_peer": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ca": {"required": False, "type": "str"},
                 "cn": {"required": False, "type": "str"},

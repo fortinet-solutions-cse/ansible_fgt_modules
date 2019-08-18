@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             keytab:
                 description:
-                    - base64 coded keytab file containing a pre_shared key.
+                    - base64 coded keytab file containing a pre-shared key.
                 type: str
             ldap_server:
                 description:
@@ -278,7 +278,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "user_krb_keytab": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "keytab": {"required": False, "type": "str"},
                 "ldap_server": {"required": False, "type": "str"},

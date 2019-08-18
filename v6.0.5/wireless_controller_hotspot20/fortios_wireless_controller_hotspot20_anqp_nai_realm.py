@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -99,7 +99,6 @@ options:
                                 description:
                                     - EAP auth param.
                                 type: str
-                                choices:
                                 suboptions:
                                     id:
                                         description:
@@ -177,7 +176,7 @@ options:
                             - enable
                     nai_realm:
                         description:
-                            - Configure NAI realms (delimited by a semi_colon character).
+                            - Configure NAI realms (delimited by a semi-colon character).
                         type: str
                     name:
                         description:
@@ -375,14 +374,13 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_hotspot20_anqp_nai_realm": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "nai_list": {"required": False, "type": "list",
                              "options": {
                                  "eap_method": {"required": False, "type": "list",
                                                 "options": {
                                                     "auth_param": {"required": False, "type": "str",
-                                                                   "choices": [],
                                                                    "options": {
                                                                        "id": {"required": False, "type": "str",
                                                                               "choices": ["non-eap-inner-auth", "inner-auth-eap", "credential",

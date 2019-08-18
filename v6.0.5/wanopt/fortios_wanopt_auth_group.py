@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             auth_method:
                 description:
-                    - Select certificate or pre_shared key authentication for this authentication group.
+                    - Select certificate or pre-shared key authentication for this authentication group.
                 type: str
                 choices:
                     - cert
@@ -98,12 +98,12 @@ options:
                 type: str
             name:
                 description:
-                    - Auth_group name.
+                    - Auth-group name.
                 required: true
                 type: str
             peer:
                 description:
-                    - If peer_accept is set to one, select the name of one peer to add to this authentication group. The peer must have added with the wanopt
+                    - If peer-accept is set to one, select the name of one peer to add to this authentication group. The peer must have added with the wanopt
                        peer command. Source wanopt.peer.peer-host-id.
                 type: str
             peer_accept:
@@ -116,7 +116,7 @@ options:
                     - one
             psk:
                 description:
-                    - Pre_shared key used by the peers in this authentication group.
+                    - Pre-shared key used by the peers in this authentication group.
                 type: str
 '''
 
@@ -296,7 +296,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wanopt_auth_group": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_method": {"required": False, "type": "str",
                                 "choices": ["cert", "psk"]},

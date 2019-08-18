@@ -24,13 +24,13 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_virtual_wan_link
-short_description: Configure redundant internet connections using SD_WAN (formerly virtual WAN link) in Fortinet's FortiOS and FortiGate.
+short_description: Configure redundant internet connections using SD-WAN (formerly virtual WAN link) in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify system feature and virtual_wan_link category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,9 +72,10 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     system_virtual_wan_link:
         description:
-            - Configure redundant internet connections using SD_WAN (formerly virtual WAN link).
+            - Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
         default: null
         type: dict
         suboptions:
@@ -90,14 +91,14 @@ options:
                         type: str
             fail_detect:
                 description:
-                    - Enable/disable SD_WAN Internet connection status checking (failure detection).
+                    - Enable/disable SD-WAN Internet connection status checking (failure detection).
                 type: str
                 choices:
                     - enable
                     - disable
             health_check:
                 description:
-                    - SD_WAN status checking or health checking. Identify a server on the Internet and determine how SD_WAN verifies that the FortiGate can
+                    - SD-WAN status checking or health checking. Identify a server on the Internet and determine how SD-WAN verifies that the FortiGate can
                        communicate with it.
                 type: list
                 suboptions:
@@ -110,11 +111,11 @@ options:
                             - ipv6
                     failtime:
                         description:
-                            - Number of failures before server is considered lost (1 _ 3600, default = 5).
+                            - Number of failures before server is considered lost (1 - 3600, default = 5).
                         type: int
                     http_agent:
                         description:
-                            - String in the http_agent field in the HTTP header.
+                            - String in the http-agent field in the HTTP header.
                         type: str
                     http_get:
                         description:
@@ -126,7 +127,7 @@ options:
                         type: str
                     interval:
                         description:
-                            - Status check interval, or the time between attempting to connect to the server (1 _ 3600 sec, default = 5).
+                            - Status check interval, or the time between attempting to connect to the server (1 - 3600 sec, default = 5).
                         type: int
                     members:
                         description:
@@ -167,7 +168,7 @@ options:
                             - ping6
                     recoverytime:
                         description:
-                            - Number of successful responses received before server is considered recovered (1 _ 3600, default = 5).
+                            - Number of successful responses received before server is considered recovered (1 - 3600, default = 5).
                         type: int
                     security_mode:
                         description:
@@ -192,11 +193,11 @@ options:
                                 type: int
                             jitter_threshold:
                                 description:
-                                    - Jitter for SLA to make decision in milliseconds. (0 _ 10000000, default = 5).
+                                    - Jitter for SLA to make decision in milliseconds. (0 - 10000000, default = 5).
                                 type: int
                             latency_threshold:
                                 description:
-                                    - Latency for SLA to make decision in milliseconds. (0 _ 10000000, default = 5).
+                                    - Latency for SLA to make decision in milliseconds. (0 - 10000000, default = 5).
                                 type: int
                             link_cost_factor:
                                 description:
@@ -208,7 +209,7 @@ options:
                                     - packet-loss
                             packetloss_threshold:
                                 description:
-                                    - Packet loss for SLA to make decision in percentage. (0 _ 100, default = 0).
+                                    - Packet loss for SLA to make decision in percentage. (0 - 100, default = 0).
                                 type: int
                     threshold_alert_jitter:
                         description:
@@ -250,7 +251,7 @@ options:
                             - disable
             load_balance_mode:
                 description:
-                    - Algorithm or mode to use for load balancing Internet traffic to SD_WAN members.
+                    - Algorithm or mode to use for load balancing Internet traffic to SD-WAN members.
                 type: str
                 choices:
                     - source-ip-based
@@ -260,7 +261,7 @@ options:
                     - measured-volume-based
             members:
                 description:
-                    - Physical FortiGate interfaces added to the virtual_wan_link.
+                    - Physical FortiGate interfaces added to the virtual-wan-link.
                 type: list
                 suboptions:
                     comment:
@@ -278,8 +279,8 @@ options:
                         type: str
                     ingress_spillover_threshold:
                         description:
-                            - Ingress spillover threshold for this interface (0 _ 16776000 kbit/s). When this traffic volume threshold is reached, new
-                               sessions spill over to other interfaces in the SD_WAN.
+                            - Ingress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new
+                               sessions spill over to other interfaces in the SD-WAN.
                         type: int
                     interface:
                         description:
@@ -287,44 +288,44 @@ options:
                         type: str
                     priority:
                         description:
-                            - Priority of the interface (0 _ 4294967295). Used for SD_WAN rules or priority rules.
+                            - Priority of the interface (0 - 4294967295). Used for SD-WAN rules or priority rules.
                         type: int
                     seq_num:
                         description:
-                            - Sequence number(1_255).
+                            - Sequence number(1-255).
                         type: int
                     source:
                         description:
-                            - Source IP address used in the health_check packet to the server.
+                            - Source IP address used in the health-check packet to the server.
                         type: str
                     source6:
                         description:
-                            - Source IPv6 address used in the health_check packet to the server.
+                            - Source IPv6 address used in the health-check packet to the server.
                         type: str
                     spillover_threshold:
                         description:
-                            - Egress spillover threshold for this interface (0 _ 16776000 kbit/s). When this traffic volume threshold is reached, new sessions
-                               spill over to other interfaces in the SD_WAN.
+                            - Egress spillover threshold for this interface (0 - 16776000 kbit/s). When this traffic volume threshold is reached, new sessions
+                               spill over to other interfaces in the SD-WAN.
                         type: int
                     status:
                         description:
-                            - Enable/disable this interface in the SD_WAN.
+                            - Enable/disable this interface in the SD-WAN.
                         type: str
                         choices:
                             - disable
                             - enable
                     volume_ratio:
                         description:
-                            - Measured volume ratio (this value / sum of all values = percentage of link volume, 0 _ 255).
+                            - Measured volume ratio (this value / sum of all values = percentage of link volume, 0 - 255).
                         type: int
                     weight:
                         description:
-                            - Weight of this interface for weighted load balancing. (0 _ 255) More traffic is directed to interfaces with higher weights.
+                            - Weight of this interface for weighted load balancing. (0 - 255) More traffic is directed to interfaces with higher weights.
                         type: int
             service:
                 description:
-                    - Create SD_WAN rules or priority rules (also called services) to control how sessions are distributed to physical interfaces in the
-                       SD_WAN.
+                    - Create SD-WAN rules or priority rules (also called services) to control how sessions are distributed to physical interfaces in the
+                       SD-WAN.
                 type: list
                 suboptions:
                     addr_mode:
@@ -336,11 +337,11 @@ options:
                             - ipv6
                     bandwidth_weight:
                         description:
-                            - Coefficient of reciprocal of available bidirectional bandwidth in the formula of custom_profile_1.
+                            - Coefficient of reciprocal of available bidirectional bandwidth in the formula of custom-profile-1.
                         type: int
                     default:
                         description:
-                            - Enable/disable use of SD_WAN as default service.
+                            - Enable/disable use of SD-WAN as default service.
                         type: str
                         choices:
                             - enable
@@ -400,7 +401,7 @@ options:
                         type: int
                     gateway:
                         description:
-                            - Enable/disable SD_WAN service gateway.
+                            - Enable/disable SD-WAN service gateway.
                         type: str
                         choices:
                             - enable
@@ -421,11 +422,11 @@ options:
                         type: str
                     hold_down_time:
                         description:
-                            - Waiting period in seconds when switching from the back_up member to the primary member (0 _ 10000000, default = 0).
+                            - Waiting period in seconds when switching from the back-up member to the primary member (0 - 10000000, default = 0).
                         type: int
                     id:
                         description:
-                            - Priority rule ID (1 _ 4000).
+                            - Priority rule ID (1 - 4000).
                         required: true
                         type: int
                     input_device:
@@ -440,29 +441,29 @@ options:
                                 type: str
                     internet_service:
                         description:
-                            - Enable/disable use of Internet service for application_based load balancing.
+                            - Enable/disable use of Internet service for application-based load balancing.
                         type: str
                         choices:
                             - enable
                             - disable
                     internet_service_ctrl:
                         description:
-                            - Control_based Internet Service ID list.
+                            - Control-based Internet Service ID list.
                         type: list
                         suboptions:
                             id:
                                 description:
-                                    - Control_based Internet Service ID.
+                                    - Control-based Internet Service ID.
                                 required: true
                                 type: int
                     internet_service_ctrl_group:
                         description:
-                            - Control_based Internet Service group list.
+                            - Control-based Internet Service group list.
                         type: list
                         suboptions:
                             name:
                                 description:
-                                    - Control_based Internet Service group name. Source application.group.name.
+                                    - Control-based Internet Service group name. Source application.group.name.
                                 required: true
                                 type: str
                     internet_service_custom:
@@ -507,11 +508,11 @@ options:
                                 type: int
                     jitter_weight:
                         description:
-                            - Coefficient of jitter in the formula of custom_profile_1.
+                            - Coefficient of jitter in the formula of custom-profile-1.
                         type: int
                     latency_weight:
                         description:
-                            - Coefficient of latency in the formula of custom_profile_1.
+                            - Coefficient of latency in the formula of custom-profile-1.
                         type: int
                     link_cost_factor:
                         description:
@@ -527,7 +528,7 @@ options:
                             - custom-profile-1
                     link_cost_threshold:
                         description:
-                            - Percentage threshold change of link cost values that will result in policy route regeneration (0 _ 10000000, default = 10).
+                            - Percentage threshold change of link cost values that will result in policy route regeneration (0 - 10000000, default = 10).
                         type: int
                     member:
                         description:
@@ -535,7 +536,7 @@ options:
                         type: int
                     mode:
                         description:
-                            - Control how the priority rule sets the priority of interfaces in the SD_WAN.
+                            - Control how the priority rule sets the priority of interfaces in the SD-WAN.
                         type: str
                         choices:
                             - auto
@@ -548,7 +549,7 @@ options:
                         type: str
                     packet_loss_weight:
                         description:
-                            - Coefficient of packet_loss in the formula of custom_profile_1.
+                            - Coefficient of packet-loss in the formula of custom-profile-1.
                         type: int
                     priority_members:
                         description:
@@ -569,7 +570,7 @@ options:
                         type: int
                     route_tag:
                         description:
-                            - IPv4 route map route_tag.
+                            - IPv4 route map route-tag.
                         type: int
                     sla:
                         description:
@@ -578,7 +579,7 @@ options:
                         suboptions:
                             health_check:
                                 description:
-                                    - Virtual WAN Link health_check. Source system.virtual-wan-link.health-check.name.
+                                    - Virtual WAN Link health-check. Source system.virtual-wan-link.health-check.name.
                                 type: str
                             id:
                                 description:
@@ -617,7 +618,7 @@ options:
                         type: int
                     status:
                         description:
-                            - Enable/disable SD_WAN service.
+                            - Enable/disable SD-WAN service.
                         type: str
                         choices:
                             - enable
@@ -642,7 +643,7 @@ options:
                                 type: str
             status:
                 description:
-                    - Enable/disable SD_WAN.
+                    - Enable/disable SD-WAN.
                 type: str
                 choices:
                     - disable
@@ -658,7 +659,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure redundant internet connections using SD_WAN (formerly virtual WAN link).
+  - name: Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
     fortios_system_virtual_wan_link:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -942,7 +943,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_virtual_wan_link": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "fail_alert_interfaces": {"required": False, "type": "list",
                                           "options": {

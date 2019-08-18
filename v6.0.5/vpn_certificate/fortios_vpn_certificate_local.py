@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -107,7 +107,7 @@ options:
                 type: str
             cmp_regeneration_method:
                 description:
-                    - CMP auto_regeneration method.
+                    - CMP auto-regeneration method.
                 type: str
                 choices:
                     - keyupate
@@ -158,7 +158,7 @@ options:
                 type: str
             name_encoding:
                 description:
-                    - Name encoding method for auto_regeneration.
+                    - Name encoding method for auto-regeneration.
                 type: str
                 choices:
                     - printable
@@ -180,7 +180,7 @@ options:
                     - vdom
             scep_password:
                 description:
-                    - SCEP server challenge password for auto_regeneration.
+                    - SCEP server challenge password for auto-regeneration.
                 type: str
             scep_url:
                 description:
@@ -404,7 +404,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_certificate_local": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auto_regenerate_days": {"required": False, "type": "int"},
                 "auto_regenerate_days_warning": {"required": False, "type": "int"},

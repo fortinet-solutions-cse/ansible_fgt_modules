@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and global category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     switch_controller_global:
         description:
             - Configure FortiSwitch global settings.
@@ -87,7 +88,7 @@ options:
                     - disable
             default_virtual_switch_vlan:
                 description:
-                    - Default VLAN for ports when added to the virtual_switch. Source system.interface.name.
+                    - Default VLAN for ports when added to the virtual-switch. Source system.interface.name.
                 type: str
             disable_discovery:
                 description:
@@ -115,7 +116,7 @@ options:
                     - disable
             mac_aging_interval:
                 description:
-                    - Time after which an inactive MAC is aged out (10 _ 1000000 sec, default = 300, 0 = disable).
+                    - Time after which an inactive MAC is aged out (10 - 1000000 sec, default = 300, 0 = disable).
                 type: int
             mac_retention_period:
                 description:
@@ -297,7 +298,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_global": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "allow_multiple_interfaces": {"required": False, "type": "str",
                                               "choices": ["enable", "disable"]},

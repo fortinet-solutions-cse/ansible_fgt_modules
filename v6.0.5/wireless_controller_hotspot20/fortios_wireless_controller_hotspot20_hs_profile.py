@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -132,7 +132,7 @@ options:
                     - disable
             anqp_domain_id:
                 description:
-                    - ANQP Domain ID (0_65535).
+                    - ANQP Domain ID (0-65535).
                 type: int
             bss_transition:
                 description:
@@ -151,7 +151,7 @@ options:
                 type: int
             dgaf:
                 description:
-                    - Enable/disable downstream group_addressed forwarding (DGAF).
+                    - Enable/disable downstream group-addressed forwarding (DGAF).
                 type: str
                 choices:
                     - enable
@@ -162,11 +162,11 @@ options:
                 type: str
             gas_comeback_delay:
                 description:
-                    - GAS comeback delay (0 or 100 _ 4000 milliseconds, default = 500).
+                    - GAS comeback delay (0 or 100 - 4000 milliseconds, default = 500).
                 type: int
             gas_fragmentation_limit:
                 description:
-                    - GAS fragmentation limit (512 _ 4096, default = 1024).
+                    - GAS fragmentation limit (512 - 4096, default = 1024).
                 type: int
             hessid:
                 description:
@@ -216,7 +216,7 @@ options:
                 type: str
             pame_bi:
                 description:
-                    - Enable/disable Pre_Association Message Exchange BSSID Independent (PAME_BI).
+                    - Enable/disable Pre-Association Message Exchange BSSID Independent (PAME-BI).
                 type: str
                 choices:
                     - disable
@@ -543,7 +543,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_hotspot20_hs_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "3gpp_plmn": {"required": False, "type": "str"},
                 "access_network_asra": {"required": False, "type": "str",

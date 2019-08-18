@@ -30,7 +30,7 @@ description:
       user to set and modify spamfilter feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     spamfilter_profile:
         description:
             - Configure AntiSpam profiles.
@@ -98,7 +100,7 @@ options:
                     - disable
             flow_based:
                 description:
-                    - Enable/disable flow_based spam filtering.
+                    - Enable/disable flow-based spam filtering.
                 type: str
                 choices:
                     - enable
@@ -281,11 +283,11 @@ options:
                             - spaminfo
             spam_bwl_table:
                 description:
-                    - Anti_spam black/white list table ID. Source spamfilter.bwl.id.
+                    - Anti-spam black/white list table ID. Source spamfilter.bwl.id.
                 type: int
             spam_bword_table:
                 description:
-                    - Anti_spam banned word table ID. Source spamfilter.bword.id.
+                    - Anti-spam banned word table ID. Source spamfilter.bword.id.
                 type: int
             spam_bword_threshold:
                 description:
@@ -300,7 +302,7 @@ options:
                     - disable
             spam_iptrust_table:
                 description:
-                    - Anti_spam IP trust table ID. Source spamfilter.iptrust.id.
+                    - Anti-spam IP trust table ID. Source spamfilter.iptrust.id.
                 type: int
             spam_log:
                 description:
@@ -318,11 +320,11 @@ options:
                     - enable
             spam_mheader_table:
                 description:
-                    - Anti_spam MIME header table ID. Source spamfilter.mheader.id.
+                    - Anti-spam MIME header table ID. Source spamfilter.mheader.id.
                 type: int
             spam_rbl_table:
                 description:
-                    - Anti_spam DNSBL table ID. Source spamfilter.dnsbl.id.
+                    - Anti-spam DNSBL table ID. Source spamfilter.dnsbl.id.
                 type: int
             yahoo_mail:
                 description:
@@ -571,7 +573,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "spamfilter_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "external": {"required": False, "type": "str",

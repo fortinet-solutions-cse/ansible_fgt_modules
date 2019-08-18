@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -98,7 +98,7 @@ options:
                         type: int
                     protocol:
                         description:
-                            - Protocol (0 _ 255).
+                            - Protocol (0 - 255).
                         type: int
                     start_port:
                         description:
@@ -276,7 +276,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_session_ttl": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "default": {"required": False, "type": "str"},
                 "port": {"required": False, "type": "list",

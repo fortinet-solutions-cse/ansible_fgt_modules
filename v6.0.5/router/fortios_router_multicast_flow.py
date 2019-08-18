@@ -24,13 +24,13 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_multicast_flow
-short_description: Configure multicast_flow in Fortinet's FortiOS and FortiGate.
+short_description: Configure multicast-flow in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify router feature and multicast_flow category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,9 +80,10 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     router_multicast_flow:
         description:
-            - Configure multicast_flow.
+            - Configure multicast-flow.
         default: null
         type: dict
         suboptions:
@@ -91,7 +93,7 @@ options:
                 type: str
             flows:
                 description:
-                    - Multicast_flow entries.
+                    - Multicast-flow entries.
                 type: list
                 suboptions:
                     group_addr:
@@ -123,7 +125,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure multicast_flow.
+  - name: Configure multicast-flow.
     fortios_router_multicast_flow:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -290,7 +292,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_multicast_flow": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comments": {"required": False, "type": "str"},
                 "flows": {"required": False, "type": "list",

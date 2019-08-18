@@ -30,7 +30,7 @@ description:
       user to set and modify wireless_controller feature and global category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     wireless_controller_global:
         description:
             - Configure wireless controller global settings.
@@ -118,7 +119,7 @@ options:
                 type: str
             fiapp_eth_type:
                 description:
-                    - Ethernet type for Fortinet Inter_Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 _ 65535, default = 5252).
+                    - Ethernet type for Fortinet Inter-Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 - 65535, default = 5252).
                 type: int
             image_download:
                 description:
@@ -148,11 +149,11 @@ options:
                 type: int
             max_retransmit:
                 description:
-                    - Maximum number of tunnel packet retransmissions (0 _ 64, default = 3).
+                    - Maximum number of tunnel packet retransmissions (0 - 64, default = 3).
                 type: int
             mesh_eth_type:
                 description:
-                    - Mesh Ethernet identifier included in backhaul packets (0 _ 65535, default = 8755).
+                    - Mesh Ethernet identifier included in backhaul packets (0 - 65535, default = 8755).
                 type: int
             name:
                 description:
@@ -160,7 +161,7 @@ options:
                 type: str
             rogue_scan_mac_adjacency:
                 description:
-                    - Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 _ 31, default = 7).
+                    - Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 - 31, default = 7).
                 type: int
             wtp_share:
                 description:
@@ -351,7 +352,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "wireless_controller_global": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ap_log_server": {"required": False, "type": "str",
                                   "choices": ["enable", "disable"]},

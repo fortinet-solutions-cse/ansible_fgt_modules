@@ -30,7 +30,7 @@ description:
       user to set and modify authentication feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     authentication_setting:
         description:
             - Configure authentication setting.
@@ -96,7 +97,7 @@ options:
                 type: str
             captive_portal_port:
                 description:
-                    - Captive portal port number (1 _ 65535, default = 0).
+                    - Captive portal port number (1 - 65535, default = 0).
                 type: int
             captive_portal_type:
                 description:
@@ -111,7 +112,7 @@ options:
                 type: str
             sso_auth_scheme:
                 description:
-                    - Single_Sign_On authentication method (scheme name). Source authentication.scheme.name.
+                    - Single-Sign-On authentication method (scheme name). Source authentication.scheme.name.
                 type: str
 '''
 
@@ -283,7 +284,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "authentication_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "active_auth_scheme": {"required": False, "type": "str"},
                 "captive_portal": {"required": False, "type": "str"},

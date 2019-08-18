@@ -30,7 +30,7 @@ description:
       user to set and modify antivirus feature and quarantine category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     antivirus_quarantine:
         description:
             - Configure quarantine options.
@@ -80,7 +81,7 @@ options:
         suboptions:
             agelimit:
                 description:
-                    - Age limit for quarantined files (0 _ 479 hours, 0 means forever).
+                    - Age limit for quarantined files (0 - 479 hours, 0 means forever).
                 type: int
             destination:
                 description:
@@ -165,11 +166,11 @@ options:
                     - ovrw-old
             maxfilesize:
                 description:
-                    - Maximum file size to quarantine (0 _ 500 Mbytes, 0 means unlimited).
+                    - Maximum file size to quarantine (0 - 500 Mbytes, 0 means unlimited).
                 type: int
             quarantine_quota:
                 description:
-                    - The amount of disk space to reserve for quarantining files (0 _ 4294967295 Mbytes, depends on disk space).
+                    - The amount of disk space to reserve for quarantining files (0 - 4294967295 Mbytes, depends on disk space).
                 type: int
             store_blocked:
                 description:
@@ -410,7 +411,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "antivirus_quarantine": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "agelimit": {"required": False, "type": "int"},
                 "destination": {"required": False, "type": "str",

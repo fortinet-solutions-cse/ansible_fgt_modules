@@ -30,7 +30,7 @@ description:
       user to set and modify ips feature and global category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     ips_global:
         description:
             - Configure IPS global parameter.
@@ -80,14 +81,14 @@ options:
         suboptions:
             anomaly_mode:
                 description:
-                    - Global blocking mode for rate_based anomalies.
+                    - Global blocking mode for rate-based anomalies.
                 type: str
                 choices:
                     - periodical
                     - continuous
             database:
                 description:
-                    - Regular or extended IPS database. Regular protects against the latest common and in_the_wild attacks. Extended includes protection from
+                    - Regular or extended IPS database. Regular protects against the latest common and in-the-wild attacks. Extended includes protection from
                        legacy attacks.
                 type: str
                 choices:
@@ -95,11 +96,11 @@ options:
                     - extended
             deep_app_insp_db_limit:
                 description:
-                    - Limit on number of entries in deep application inspection database (1 _ 2147483647, 0 = use recommended setting)
+                    - Limit on number of entries in deep application inspection database (1 - 2147483647, 0 = use recommended setting)
                 type: int
             deep_app_insp_timeout:
                 description:
-                    - Timeout for Deep application inspection (1 _ 2147483647 sec., 0 = use recommended setting).
+                    - Timeout for Deep application inspection (1 - 2147483647 sec., 0 = use recommended setting).
                 type: int
             engine_count:
                 description:
@@ -141,7 +142,7 @@ options:
                 type: str
             socket_size:
                 description:
-                    - IPS socket buffer size (0 _ 256 MB). Default depends on available memory. Can be changed to tune performance.
+                    - IPS socket buffer size (0 - 256 MB). Default depends on available memory. Can be changed to tune performance.
                 type: int
             sync_session_ttl:
                 description:
@@ -334,7 +335,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "ips_global": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "anomaly_mode": {"required": False, "type": "str",
                                  "choices": ["periodical", "continuous"]},

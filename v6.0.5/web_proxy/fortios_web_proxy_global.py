@@ -30,7 +30,7 @@ description:
       user to set and modify web_proxy feature and global category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     web_proxy_global:
         description:
             - Configure Web proxy global settings.
@@ -94,7 +95,7 @@ options:
                     - disable
             forward_server_affinity_timeout:
                 description:
-                    - Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 _ 60 min, default = 30).
+                    - Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 - 60 min, default = 30).
                 type: int
             learn_client_ip:
                 description:
@@ -133,15 +134,15 @@ options:
                         type: str
             max_message_length:
                 description:
-                    - Maximum length of HTTP message, not including body (16 _ 256 Kbytes, default = 32).
+                    - Maximum length of HTTP message, not including body (16 - 256 Kbytes, default = 32).
                 type: int
             max_request_length:
                 description:
-                    - Maximum length of HTTP request line (2 _ 64 Kbytes, default = 4).
+                    - Maximum length of HTTP request line (2 - 64 Kbytes, default = 4).
                 type: int
             max_waf_body_cache_length:
                 description:
-                    - Maximum length of HTTP messages processed by Web Application Firewall (WAF) (10 _ 1024 Kbytes, default = 32).
+                    - Maximum length of HTTP messages processed by Web Application Firewall (WAF) (10 - 1024 Kbytes, default = 32).
                 type: int
             proxy_fqdn:
                 description:
@@ -156,14 +157,14 @@ options:
                     - disable
             tunnel_non_http:
                 description:
-                    - Enable/disable allowing non_HTTP traffic. Allowed non_HTTP traffic is tunneled.
+                    - Enable/disable allowing non-HTTP traffic. Allowed non-HTTP traffic is tunneled.
                 type: str
                 choices:
                     - enable
                     - disable
             unknown_http_version:
                 description:
-                    - "Action to take when an unknown version of HTTP is encountered: reject, allow (tunnel), or proceed with best_effort."
+                    - "Action to take when an unknown version of HTTP is encountered: reject, allow (tunnel), or proceed with best-effort."
                 type: str
                 choices:
                     - reject
@@ -357,7 +358,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "web_proxy_global": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "fast_policy_match": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},

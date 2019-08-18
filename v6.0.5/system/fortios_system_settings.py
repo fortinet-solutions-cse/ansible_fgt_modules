@@ -30,7 +30,7 @@ description:
       user to set and modify system feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     system_settings:
         description:
             - Configure VDOM settings.
@@ -122,18 +123,18 @@ options:
                     - disable
             bfd:
                 description:
-                    - Enable/disable Bi_directional Forwarding Detection (BFD) on all interfaces.
+                    - Enable/disable Bi-directional Forwarding Detection (BFD) on all interfaces.
                 type: str
                 choices:
                     - enable
                     - disable
             bfd_desired_min_tx:
                 description:
-                    - BFD desired minimal transmit interval (1 _ 100000 ms, default = 50).
+                    - BFD desired minimal transmit interval (1 - 100000 ms, default = 50).
                 type: int
             bfd_detect_mult:
                 description:
-                    - BFD detection multiplier (1 _ 50, default = 3).
+                    - BFD detection multiplier (1 - 50, default = 3).
                 type: int
             bfd_dont_enforce_src_port:
                 description:
@@ -144,7 +145,7 @@ options:
                     - disable
             bfd_required_min_rx:
                 description:
-                    - BFD required minimal receive interval (1 _ 100000 ms, default = 50).
+                    - BFD required minimal receive interval (1 - 100000 ms, default = 50).
                 type: int
             block_land_attack:
                 description:
@@ -206,11 +207,11 @@ options:
                 type: str
             discovered_device_timeout:
                 description:
-                    - Timeout for discovered devices (1 _ 365 days, default = 28).
+                    - Timeout for discovered devices (1 - 365 days, default = 28).
                 type: int
             ecmp_max_paths:
                 description:
-                    - Maximum number of Equal Cost Multi_Path (ECMP) next_hops. Set to 1 to disable ECMP routing (1 _ 100, default = 10).
+                    - Maximum number of Equal Cost Multi-Path (ECMP) next-hops. Set to 1 to disable ECMP routing (1 - 100, default = 10).
                 type: int
             email_portal_check_dns:
                 description:
@@ -415,7 +416,7 @@ options:
                     - disable
             gui_local_in_policy:
                 description:
-                    - Enable/disable Local_In policies on the GUI.
+                    - Enable/disable Local-In policies on the GUI.
                 type: str
                 choices:
                     - enable
@@ -464,7 +465,7 @@ options:
                     - disable
             gui_policy_based_ipsec:
                 description:
-                    - Enable/disable policy_based IPsec VPN on the GUI.
+                    - Enable/disable policy-based IPsec VPN on the GUI.
                 type: str
                 choices:
                     - enable
@@ -492,14 +493,14 @@ options:
                     - disable
             gui_sslvpn_personal_bookmarks:
                 description:
-                    - Enable/disable SSL_VPN personal bookmark management on the GUI.
+                    - Enable/disable SSL-VPN personal bookmark management on the GUI.
                 type: str
                 choices:
                     - enable
                     - disable
             gui_sslvpn_realms:
                 description:
-                    - Enable/disable SSL_VPN realms on the GUI.
+                    - Enable/disable SSL-VPN realms on the GUI.
                 type: str
                 choices:
                     - enable
@@ -548,7 +549,7 @@ options:
                     - disable
             gui_wan_load_balancing:
                 description:
-                    - Enable/disable SD_WAN on the GUI.
+                    - Enable/disable SD-WAN on the GUI.
                 type: str
                 choices:
                     - enable
@@ -618,7 +619,7 @@ options:
                     - disable
             inspection_mode:
                 description:
-                    - Inspection mode (proxy_based or flow_based).
+                    - Inspection mode (proxy-based or flow-based).
                 type: str
                 choices:
                     - proxy
@@ -648,7 +649,7 @@ options:
                     - global
             mac_ttl:
                 description:
-                    - Duration of MAC addresses in Transparent mode (300 _ 8640000 sec, default = 300).
+                    - Duration of MAC addresses in Transparent mode (300 - 8640000 sec, default = 300).
                 type: int
             manageip:
                 description:
@@ -702,7 +703,7 @@ options:
                     - disable
             sccp_port:
                 description:
-                    - TCP port the SCCP proxy monitors for SCCP traffic (0 _ 65535, default = 2000).
+                    - TCP port the SCCP proxy monitors for SCCP traffic (0 - 65535, default = 2000).
                 type: int
             ses_denied_traffic:
                 description:
@@ -728,15 +729,15 @@ options:
                     - disable
             sip_ssl_port:
                 description:
-                    - TCP port the SIP proxy monitors for SIP SSL/TLS traffic (0 _ 65535, default = 5061).
+                    - TCP port the SIP proxy monitors for SIP SSL/TLS traffic (0 - 65535, default = 5061).
                 type: int
             sip_tcp_port:
                 description:
-                    - TCP port the SIP proxy monitors for SIP traffic (0 _ 65535, default = 5060).
+                    - TCP port the SIP proxy monitors for SIP traffic (0 - 65535, default = 5060).
                 type: int
             sip_udp_port:
                 description:
-                    - UDP port the SIP proxy monitors for SIP traffic (0 _ 65535, default = 5060).
+                    - UDP port the SIP proxy monitors for SIP traffic (0 - 65535, default = 5060).
                 type: int
             snat_hairpin_traffic:
                 description:
@@ -772,14 +773,14 @@ options:
                     - disable
             utf8_spam_tagging:
                 description:
-                    - Enable/disable converting antispam tags to UTF_8 for better non_ASCII character support.
+                    - Enable/disable converting antispam tags to UTF-8 for better non-ASCII character support.
                 type: str
                 choices:
                     - enable
                     - disable
             v4_ecmp_mode:
                 description:
-                    - IPv4 Equal_cost multi_path (ECMP) routing and load balancing mode.
+                    - IPv4 Equal-cost multi-path (ECMP) routing and load balancing mode.
                 type: str
                 choices:
                     - source-ip-based
@@ -797,7 +798,7 @@ options:
                     - ssl
             vpn_stats_period:
                 description:
-                    - Period to send VPN log statistics (60 _ 86400 sec).
+                    - Period to send VPN log statistics (60 - 86400 sec).
                 type: int
             wccp_cache_engine:
                 description:
@@ -1117,7 +1118,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "allow_linkdown_path": {"required": False, "type": "str",
                                         "choices": ["enable", "disable"]},

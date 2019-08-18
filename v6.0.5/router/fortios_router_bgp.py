@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and bgp category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     router_bgp:
         description:
             - Configure BGP.
@@ -85,7 +86,7 @@ options:
                 suboptions:
                     distance:
                         description:
-                            - Administrative distance to apply (1 _ 255).
+                            - Administrative distance to apply (1 - 255).
                         type: int
                     id:
                         description:
@@ -204,7 +205,7 @@ options:
                     - disable
             client_to_client_reflection:
                 description:
-                    - Enable/disable client_to_client route reflection.
+                    - Enable/disable client-to-client route reflection.
                 type: str
                 choices:
                     - enable
@@ -229,7 +230,7 @@ options:
                         type: str
             dampening:
                 description:
-                    - Enable/disable route_flap dampening.
+                    - Enable/disable route-flap dampening.
                 type: str
                 choices:
                     - enable
@@ -240,7 +241,7 @@ options:
                 type: int
             dampening_reachability_half_life:
                 description:
-                    - Reachability half_life time for penalty (min).
+                    - Reachability half-life time for penalty (min).
                 type: int
             dampening_reuse:
                 description:
@@ -256,7 +257,7 @@ options:
                 type: int
             dampening_unreachability_half_life:
                 description:
-                    - Unreachability half_life time for penalty (min).
+                    - Unreachability half-life time for penalty (min).
                 type: int
             default_local_preference:
                 description:
@@ -283,7 +284,7 @@ options:
                 type: int
             ebgp_multipath:
                 description:
-                    - Enable/disable EBGP multi_path.
+                    - Enable/disable EBGP multi-path.
                 type: str
                 choices:
                     - enable
@@ -334,7 +335,7 @@ options:
                 type: int
             ibgp_multipath:
                 description:
-                    - Enable/disable IBGP multi_path.
+                    - Enable/disable IBGP multi-path.
                 type: str
                 choices:
                     - enable
@@ -560,7 +561,7 @@ options:
                             - disable
                     ebgp_enforce_multihop:
                         description:
-                            - Enable/disable allow multi_hop EBGP neighbors.
+                            - Enable/disable allow multi-hop EBGP neighbors.
                         type: str
                         choices:
                             - enable
@@ -615,14 +616,14 @@ options:
                         type: int
                     local_as_no_prepend:
                         description:
-                            - Do not prepend local_as to incoming updates.
+                            - Do not prepend local-as to incoming updates.
                         type: str
                         choices:
                             - enable
                             - disable
                     local_as_replace_as:
                         description:
-                            - Replace real AS with local_as in outgoing updates.
+                            - Replace real AS with local-as in outgoing updates.
                         type: str
                         choices:
                             - enable
@@ -633,11 +634,11 @@ options:
                         type: int
                     maximum_prefix_threshold:
                         description:
-                            - Maximum IPv4 prefix threshold value (1 _ 100 percent).
+                            - Maximum IPv4 prefix threshold value (1 - 100 percent).
                         type: int
                     maximum_prefix_threshold6:
                         description:
-                            - Maximum IPv6 prefix threshold value (1 _ 100 percent).
+                            - Maximum IPv6 prefix threshold value (1 - 100 percent).
                         type: int
                     maximum_prefix_warning_only:
                         description:
@@ -659,14 +660,14 @@ options:
                         type: int
                     next_hop_self:
                         description:
-                            - Enable/disable IPv4 next_hop calculation for this neighbor.
+                            - Enable/disable IPv4 next-hop calculation for this neighbor.
                         type: str
                         choices:
                             - enable
                             - disable
                     next_hop_self6:
                         description:
-                            - Enable/disable IPv6 next_hop calculation for this neighbor.
+                            - Enable/disable IPv6 next-hop calculation for this neighbor.
                         type: str
                         choices:
                             - enable
@@ -1027,7 +1028,7 @@ options:
                             - disable
                     ebgp_enforce_multihop:
                         description:
-                            - Enable/disable allow multi_hop EBGP neighbors.
+                            - Enable/disable allow multi-hop EBGP neighbors.
                         type: str
                         choices:
                             - enable
@@ -1077,14 +1078,14 @@ options:
                         type: int
                     local_as_no_prepend:
                         description:
-                            - Do not prepend local_as to incoming updates.
+                            - Do not prepend local-as to incoming updates.
                         type: str
                         choices:
                             - enable
                             - disable
                     local_as_replace_as:
                         description:
-                            - Replace real AS with local_as in outgoing updates.
+                            - Replace real AS with local-as in outgoing updates.
                         type: str
                         choices:
                             - enable
@@ -1095,11 +1096,11 @@ options:
                         type: int
                     maximum_prefix_threshold:
                         description:
-                            - Maximum IPv4 prefix threshold value (1 _ 100 percent).
+                            - Maximum IPv4 prefix threshold value (1 - 100 percent).
                         type: int
                     maximum_prefix_threshold6:
                         description:
-                            - Maximum IPv6 prefix threshold value (1 _ 100 percent).
+                            - Maximum IPv6 prefix threshold value (1 - 100 percent).
                         type: int
                     maximum_prefix_warning_only:
                         description:
@@ -1126,14 +1127,14 @@ options:
                         type: str
                     next_hop_self:
                         description:
-                            - Enable/disable IPv4 next_hop calculation for this neighbor.
+                            - Enable/disable IPv4 next-hop calculation for this neighbor.
                         type: str
                         choices:
                             - enable
                             - disable
                     next_hop_self6:
                         description:
-                            - Enable/disable IPv6 next_hop calculation for this neighbor.
+                            - Enable/disable IPv6 next-hop calculation for this neighbor.
                         type: str
                         choices:
                             - enable
@@ -1907,7 +1908,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_bgp": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "admin_distance": {"required": False, "type": "list",
                                    "options": {

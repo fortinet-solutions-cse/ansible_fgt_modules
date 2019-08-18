@@ -30,7 +30,7 @@ description:
       user to set and modify vpn_ipsec feature and phase2 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     vpn_ipsec_phase2:
         description:
             - Configure VPN autokey tunnel.
@@ -95,7 +97,7 @@ options:
                     - disable
             auto_negotiate:
                 description:
-                    - Enable/disable IPsec SA auto_negotiation.
+                    - Enable/disable IPsec SA auto-negotiation.
                 type: str
                 choices:
                     - enable
@@ -106,7 +108,7 @@ options:
                 type: str
             dhcp_ipsec:
                 description:
-                    - Enable/disable DHCP_IPsec.
+                    - Enable/disable DHCP-IPsec.
                 type: str
                 choices:
                     - enable
@@ -159,7 +161,7 @@ options:
                 type: str
             dst_port:
                 description:
-                    - Quick mode destination port (1 _ 65535 or 0 for all).
+                    - Quick mode destination port (1 - 65535 or 0 for all).
                 type: int
             dst_start_ip:
                 description:
@@ -201,11 +203,11 @@ options:
                     - both
             keylifekbs:
                 description:
-                    - Phase2 key life in number of bytes of traffic (5120 _ 4294967295).
+                    - Phase2 key life in number of bytes of traffic (5120 - 4294967295).
                 type: int
             keylifeseconds:
                 description:
-                    - Phase2 key life in time in seconds (120 _ 172800).
+                    - Phase2 key life in time in seconds (120 - 172800).
                 type: int
             l2tp:
                 description:
@@ -248,7 +250,7 @@ options:
                     - des-sha512
             protocol:
                 description:
-                    - Quick mode protocol selector (1 _ 255 or 0 for all).
+                    - Quick mode protocol selector (1 - 255 or 0 for all).
                 type: int
             replay:
                 description:
@@ -307,7 +309,7 @@ options:
                 type: str
             src_port:
                 description:
-                    - Quick mode source port (1 _ 65535 or 0 for all).
+                    - Quick mode source port (1 - 65535 or 0 for all).
                 type: int
             src_start_ip:
                 description:
@@ -557,7 +559,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ipsec_phase2": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "add_route": {"required": False, "type": "str",
                               "choices": ["phase1", "enable", "disable"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -94,7 +94,7 @@ options:
                     - ipv6
             failtime:
                 description:
-                    - Number of retry attempts before the server is considered down (1 _ 10, default = 5)
+                    - Number of retry attempts before the server is considered down (1 - 10, default = 5)
                 type: int
             gateway_ip:
                 description:
@@ -106,23 +106,23 @@ options:
                 type: str
             ha_priority:
                 description:
-                    - HA election priority (1 _ 50).
+                    - HA election priority (1 - 50).
                 type: int
             http_agent:
                 description:
-                    - String in the http_agent field in the HTTP header.
+                    - String in the http-agent field in the HTTP header.
                 type: str
             http_get:
                 description:
-                    - If you are monitoring an HTML server you can send an HTTP_GET request with a custom string. Use this option to define the string.
+                    - If you are monitoring an HTML server you can send an HTTP-GET request with a custom string. Use this option to define the string.
                 type: str
             http_match:
                 description:
-                    - String that you expect to see in the HTTP_GET requests of the traffic to be monitored.
+                    - String that you expect to see in the HTTP-GET requests of the traffic to be monitored.
                 type: str
             interval:
                 description:
-                    - Detection interval (1 _ 3600 sec, default = 5).
+                    - Detection interval (1 - 3600 sec, default = 5).
                 type: int
             name:
                 description:
@@ -154,7 +154,7 @@ options:
                     - ping6
             recoverytime:
                 description:
-                    - Number of successful responses received before server is considered recovered (1 _ 10, default = 5).
+                    - Number of successful responses received before server is considered recovered (1 - 10, default = 5).
                 type: int
             security_mode:
                 description:
@@ -409,7 +409,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_link_monitor": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "addr_mode": {"required": False, "type": "str",
                               "choices": ["ipv4", "ipv6"]},

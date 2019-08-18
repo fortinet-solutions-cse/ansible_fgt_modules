@@ -16,7 +16,7 @@
       state: "present"
       wanopt_content_delivery_network_rule:
         category: "vcache"
-        comment: "Comment about this CDN_rule."
+        comment: "Comment about this CDN-rule."
         host_domain_name_suffix:
          -
             name: "default_name_6"

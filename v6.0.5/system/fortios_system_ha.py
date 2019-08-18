@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,11 +80,11 @@ options:
         suboptions:
             arps:
                 description:
-                    - Number of gratuitous ARPs (1 _ 60). Lower to reduce traffic. Higher to reduce failover time.
+                    - Number of gratuitous ARPs (1 - 60). Lower to reduce traffic. Higher to reduce failover time.
                 type: int
             arps_interval:
                 description:
-                    - Time between gratuitous ARPs  (1 _ 20 sec). Lower to reduce failover time. Higher to reduce traffic.
+                    - Time between gratuitous ARPs  (1 - 20 sec). Lower to reduce failover time. Higher to reduce traffic.
                 type: int
             authentication:
                 description:
@@ -110,14 +110,14 @@ options:
                 type: str
             gratuitous_arps:
                 description:
-                    - Enable/disable gratuitous ARPs. Disable if link_failed_signal enabled.
+                    - Enable/disable gratuitous ARPs. Disable if link-failed-signal enabled.
                 type: str
                 choices:
                     - enable
                     - disable
             group_id:
                 description:
-                    - Cluster group ID  (0 _ 255). Must be the same for all members.
+                    - Cluster group ID  (0 - 255). Must be the same for all members.
                 type: int
             group_name:
                 description:
@@ -125,14 +125,14 @@ options:
                 type: str
             ha_direct:
                 description:
-                    - Enable/disable using ha_mgmt interface for syslog, SNMP, remote authentication (RADIUS), FortiAnalyzer, and FortiSandbox.
+                    - Enable/disable using ha-mgmt interface for syslog, SNMP, remote authentication (RADIUS), FortiAnalyzer, and FortiSandbox.
                 type: str
                 choices:
                     - enable
                     - disable
             ha_eth_type:
                 description:
-                    - HA heartbeat packet Ethertype (4_digit hex).
+                    - HA heartbeat packet Ethertype (4-digit hex).
                 type: str
             ha_mgmt_interfaces:
                 description:
@@ -173,11 +173,11 @@ options:
                 type: int
             hb_interval:
                 description:
-                    - Time between sending heartbeat packets (1 _ 20 (100*ms)). Increase to reduce false positives.
+                    - Time between sending heartbeat packets (1 - 20 (100*ms)). Increase to reduce false positives.
                 type: int
             hb_lost_threshold:
                 description:
-                    - Number of lost heartbeats to signal a failure (1 _ 60). Increase to reduce false positives.
+                    - Number of lost heartbeats to signal a failure (1 - 60). Increase to reduce false positives.
                 type: int
             hbdev:
                 description:
@@ -185,11 +185,11 @@ options:
                 type: str
             hc_eth_type:
                 description:
-                    - Transparent mode HA heartbeat packet Ethertype (4_digit hex).
+                    - Transparent mode HA heartbeat packet Ethertype (4-digit hex).
                 type: str
             hello_holddown:
                 description:
-                    - Time to wait before changing from hello to work state (5 _ 300 sec).
+                    - Time to wait before changing from hello to work state (5 - 300 sec).
                 type: int
             http_proxy_threshold:
                 description:
@@ -212,7 +212,7 @@ options:
                 type: str
             l2ep_eth_type:
                 description:
-                    - Telnet session HA heartbeat packet Ethertype (4_digit hex).
+                    - Telnet session HA heartbeat packet Ethertype (4-digit hex).
                 type: str
             link_failed_signal:
                 description:
@@ -253,7 +253,7 @@ options:
                 type: str
             multicast_ttl:
                 description:
-                    - HA multicast TTL on master (5 _ 3600 sec).
+                    - HA multicast TTL on master (5 - 3600 sec).
                 type: int
             nntp_proxy_threshold:
                 description:
@@ -268,7 +268,7 @@ options:
                     - disable
             override_wait_time:
                 description:
-                    - Delay negotiating if override is enabled (0 _ 3600 sec). Reduces how often the cluster negotiates.
+                    - Delay negotiating if override is enabled (0 - 3600 sec). Reduces how often the cluster negotiates.
                 type: int
             password:
                 description:
@@ -276,7 +276,7 @@ options:
                 type: str
             pingserver_failover_threshold:
                 description:
-                    - Remote IP monitoring failover threshold (0 _ 50).
+                    - Remote IP monitoring failover threshold (0 - 50).
                 type: int
             pingserver_flip_timeout:
                 description:
@@ -299,23 +299,23 @@ options:
                 type: str
             priority:
                 description:
-                    - Increase the priority to select the primary unit (0 _ 255).
+                    - Increase the priority to select the primary unit (0 - 255).
                 type: int
             route_hold:
                 description:
-                    - Time to wait between routing table updates to the cluster (0 _ 3600 sec).
+                    - Time to wait between routing table updates to the cluster (0 - 3600 sec).
                 type: int
             route_ttl:
                 description:
-                    - TTL for primary unit routes (5 _ 3600 sec). Increase to maintain active routes during failover.
+                    - TTL for primary unit routes (5 - 3600 sec). Increase to maintain active routes during failover.
                 type: int
             route_wait:
                 description:
-                    - Time to wait before sending new routes to the cluster (0 _ 3600 sec).
+                    - Time to wait before sending new routes to the cluster (0 - 3600 sec).
                 type: int
             schedule:
                 description:
-                    - Type of A_A load balancing. Use none if you have external load balancers.
+                    - Type of A-A load balancing. Use none if you have external load balancers.
                 type: str
                 choices:
                     - none
@@ -344,11 +344,11 @@ options:
                             - disable
                     override_wait_time:
                         description:
-                            - Delay negotiating if override is enabled (0 _ 3600 sec). Reduces how often the cluster negotiates.
+                            - Delay negotiating if override is enabled (0 - 3600 sec). Reduces how often the cluster negotiates.
                         type: int
                     pingserver_failover_threshold:
                         description:
-                            - Remote IP monitoring failover threshold (0 _ 50).
+                            - Remote IP monitoring failover threshold (0 - 50).
                         type: int
                     pingserver_monitor_interface:
                         description:
@@ -363,7 +363,7 @@ options:
                             - disable
                     priority:
                         description:
-                            - Increase the priority to select the primary unit (0 _ 255).
+                            - Increase the priority to select the primary unit (0 - 255).
                         type: int
                     vcluster_id:
                         description:
@@ -483,7 +483,7 @@ options:
                 type: str
             weight:
                 description:
-                    - Weight_round_robin weight for each cluster unit. Syntax <priority> <weight>.
+                    - Weight-round-robin weight for each cluster unit. Syntax <priority> <weight>.
                 type: str
 '''
 
@@ -746,7 +746,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_ha": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "arps": {"required": False, "type": "int"},
                 "arps_interval": {"required": False, "type": "int"},

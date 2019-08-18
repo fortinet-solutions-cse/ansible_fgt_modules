@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -97,11 +97,11 @@ options:
                         type: str
             hb_interval:
                 description:
-                    - Heartbeat interval (1 _ 10 sec).
+                    - Heartbeat interval (1 - 10 sec).
                 type: int
             hb_lost_threshold:
                 description:
-                    - Lost heartbeat threshold (1 _ 10).
+                    - Lost heartbeat threshold (1 - 10).
                 type: int
             peerip:
                 description:
@@ -384,7 +384,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_cluster_sync": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "down_intfs_before_sess_sync": {"required": False, "type": "list",
                                                 "options": {

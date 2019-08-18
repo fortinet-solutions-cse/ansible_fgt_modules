@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,11 +87,11 @@ options:
         suboptions:
             description:
                 description:
-                    - Description of the ip_dscp map name.
+                    - Description of the ip-dscp map name.
                 type: str
             map:
                 description:
-                    - Maps between IP_DSCP value to COS queue.
+                    - Maps between IP-DSCP value to COS queue.
                 type: list
                 suboptions:
                     cos_queue:
@@ -144,7 +144,7 @@ options:
                         type: str
                     value:
                         description:
-                            - Raw values of DSCP (0 _ 63).
+                            - Raw values of DSCP (0 - 63).
                         type: str
             name:
                 description:
@@ -331,7 +331,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_qos_ip_dscp_map": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "description": {"required": False, "type": "str"},
                 "map": {"required": False, "type": "list",

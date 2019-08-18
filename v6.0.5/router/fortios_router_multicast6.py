@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and multicast6 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     router_multicast6:
         description:
             - Configure IPv6 multicast.
@@ -85,11 +86,11 @@ options:
                 suboptions:
                     hello_holdtime:
                         description:
-                            - Time before old neighbour information expires (1 _ 65535 sec, default = 105).
+                            - Time before old neighbour information expires (1 - 65535 sec, default = 105).
                         type: int
                     hello_interval:
                         description:
-                            - Interval between sending PIM hello messages  (1 _ 65535 sec, default = 30)..
+                            - Interval between sending PIM hello messages  (1 - 65535 sec, default = 30)..
                         type: int
                     name:
                         description:
@@ -112,7 +113,7 @@ options:
                     - disable
             pim_sm_global:
                 description:
-                    - PIM sparse_mode global settings.
+                    - PIM sparse-mode global settings.
                 type: dict
                 suboptions:
                     register_rate_limit:
@@ -307,7 +308,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_multicast6": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "interface": {"required": False, "type": "list",
                               "options": {

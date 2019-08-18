@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and proxy_policy category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_proxy_policy:
         description:
             - Configure proxy policies.
@@ -159,7 +161,7 @@ options:
                         type: str
             global_label:
                 description:
-                    - Global web_based manager visible label.
+                    - Global web-based manager visible label.
                 type: str
             groups:
                 description:
@@ -222,7 +224,7 @@ options:
                 type: str
             label:
                 description:
-                    - VDOM_specific GUI visible label.
+                    - VDOM-specific GUI visible label.
                 type: str
             logtraffic:
                 description:
@@ -419,7 +421,7 @@ options:
                     - disable
             webcache_https:
                 description:
-                    - Enable/disable web caching for HTTPS (Requires deep_inspection enabled in ssl_ssh_profile).
+                    - Enable/disable web caching for HTTPS (Requires deep-inspection enabled in ssl-ssh-profile).
                 type: str
                 choices:
                     - disable
@@ -704,7 +706,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_proxy_policy": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny", "redirect"]},

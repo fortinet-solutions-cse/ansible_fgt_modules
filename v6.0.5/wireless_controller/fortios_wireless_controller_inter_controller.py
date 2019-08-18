@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,19 +80,19 @@ options:
         suboptions:
             fast_failover_max:
                 description:
-                    - Maximum number of retransmissions for fast failover HA messages between peer wireless controllers (3 _ 64, default = 10).
+                    - Maximum number of retransmissions for fast failover HA messages between peer wireless controllers (3 - 64, default = 10).
                 type: int
             fast_failover_wait:
                 description:
-                    - Minimum wait time before an AP transitions from secondary controller to primary controller (10 _ 86400 sec, default = 10).
+                    - Minimum wait time before an AP transitions from secondary controller to primary controller (10 - 86400 sec, default = 10).
                 type: int
             inter_controller_key:
                 description:
-                    - Secret key for inter_controller communications.
+                    - Secret key for inter-controller communications.
                 type: str
             inter_controller_mode:
                 description:
-                    - Configure inter_controller mode (disable, l2_roaming, 1+1, default = disable).
+                    - Configure inter-controller mode (disable, l2-roaming, 1+1, default = disable).
                 type: str
                 choices:
                     - disable
@@ -114,7 +114,7 @@ options:
                         type: str
                     peer_port:
                         description:
-                            - Port used by the wireless controller's for inter_controller communications (1024 _ 49150, default = 5246).
+                            - Port used by the wireless controller's for inter-controller communications (1024 - 49150, default = 5246).
                         type: int
                     peer_priority:
                         description:
@@ -125,7 +125,7 @@ options:
                             - secondary
             inter_controller_pri:
                 description:
-                    - Configure inter_controller's priority (primary or secondary, default = primary).
+                    - Configure inter-controller's priority (primary or secondary, default = primary).
                 type: str
                 choices:
                     - primary
@@ -302,7 +302,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "wireless_controller_inter_controller": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "fast_failover_max": {"required": False, "type": "int"},
                 "fast_failover_wait": {"required": False, "type": "int"},

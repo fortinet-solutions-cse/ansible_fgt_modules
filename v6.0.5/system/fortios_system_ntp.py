@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -89,7 +89,7 @@ options:
                         type: str
             ntpserver:
                 description:
-                    - Configure the FortiGate to connect to any available third_party NTP server.
+                    - Configure the FortiGate to connect to any available third-party NTP server.
                 type: list
                 suboptions:
                     authentication:
@@ -148,7 +148,7 @@ options:
                 type: str
             syncinterval:
                 description:
-                    - NTP synchronization interval (1 _ 1440 min).
+                    - NTP synchronization interval (1 - 1440 min).
                 type: int
             type:
                 description:
@@ -336,7 +336,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_ntp": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "interface": {"required": False, "type": "list",
                               "options": {

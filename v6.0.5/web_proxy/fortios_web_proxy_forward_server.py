@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_web_proxy_forward_server
-short_description: Configure forward_server addresses in Fortinet's FortiOS and FortiGate.
+short_description: Configure forward-server addresses in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify web_proxy feature and forward_server category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -81,7 +81,7 @@ options:
             - absent
     web_proxy_forward_server:
         description:
-            - Configure forward_server addresses.
+            - Configure forward-server addresses.
         default: null
         type: dict
         suboptions:
@@ -123,7 +123,7 @@ options:
                 type: str
             port:
                 description:
-                    - Port number that the forwarding server expects to receive HTTP sessions on (1 _ 65535, default = 3128).
+                    - Port number that the forwarding server expects to receive HTTP sessions on (1 - 65535, default = 3128).
                 type: int
             server_down_option:
                 description:
@@ -144,7 +144,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure forward_server addresses.
+  - name: Configure forward-server addresses.
     fortios_web_proxy_forward_server:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -315,7 +315,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "web_proxy_forward_server": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "addr_type": {"required": False, "type": "str",
                               "choices": ["ip", "fqdn"]},

@@ -30,7 +30,7 @@ description:
       user to set and modify wanopt feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     wanopt_profile:
         description:
             - Configure WAN optimization profiles.
@@ -97,7 +99,7 @@ options:
                 suboptions:
                     byte_caching:
                         description:
-                            - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
                         type: str
                         choices:
@@ -117,14 +119,14 @@ options:
                         type: int
                     prefer_chunking:
                         description:
-                            - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                            - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
                         type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
-                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
                         type: str
                         choices:
                             - enable
@@ -138,7 +140,7 @@ options:
                             - disable
                     tunnel_sharing:
                         description:
-                            - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                            - Tunnel sharing mode for aggressive/non-aggressive and/or interactive/non-interactive protocols.
                         type: str
                         choices:
                             - private
@@ -155,7 +157,7 @@ options:
                 suboptions:
                     byte_caching:
                         description:
-                            - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
                         type: str
                         choices:
@@ -175,14 +177,14 @@ options:
                         type: int
                     prefer_chunking:
                         description:
-                            - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                            - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
                         type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
-                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
                         type: str
                         choices:
                             - enable
@@ -196,7 +198,7 @@ options:
                             - disable
                     tunnel_sharing:
                         description:
-                            - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                            - Tunnel sharing mode for aggressive/non-aggressive and/or interactive/non-interactive protocols.
                         type: str
                         choices:
                             - private
@@ -209,7 +211,7 @@ options:
                 suboptions:
                     byte_caching:
                         description:
-                            - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
                         type: str
                         choices:
@@ -229,14 +231,14 @@ options:
                         type: int
                     prefer_chunking:
                         description:
-                            - Select dynamic or fixed_size data chunking for HTTP WAN Optimization.
+                            - Select dynamic or fixed-size data chunking for HTTP WAN Optimization.
                         type: str
                         choices:
                             - dynamic
                             - fix
                     secure_tunnel:
                         description:
-                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
                         type: str
                         choices:
                             - enable
@@ -261,15 +263,15 @@ options:
                             - disable
                     tunnel_non_http:
                         description:
-                            - Configure how to process non_HTTP traffic when a profile configured for HTTP traffic accepts a non_HTTP session. Can occur if an
-                               application sends non_HTTP traffic using an HTTP destination port.
+                            - Configure how to process non-HTTP traffic when a profile configured for HTTP traffic accepts a non-HTTP session. Can occur if an
+                               application sends non-HTTP traffic using an HTTP destination port.
                         type: str
                         choices:
                             - enable
                             - disable
                     tunnel_sharing:
                         description:
-                            - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                            - Tunnel sharing mode for aggressive/non-aggressive and/or interactive/non-interactive protocols.
                         type: str
                         choices:
                             - private
@@ -290,7 +292,7 @@ options:
                 suboptions:
                     byte_caching:
                         description:
-                            - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
                         type: str
                         choices:
@@ -310,7 +312,7 @@ options:
                         type: int
                     secure_tunnel:
                         description:
-                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
                         type: str
                         choices:
                             - enable
@@ -324,7 +326,7 @@ options:
                             - disable
                     tunnel_sharing:
                         description:
-                            - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                            - Tunnel sharing mode for aggressive/non-aggressive and/or interactive/non-interactive protocols.
                         type: str
                         choices:
                             - private
@@ -342,7 +344,7 @@ options:
                 suboptions:
                     byte_caching:
                         description:
-                            - Enable/disable byte_caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
+                            - Enable/disable byte-caching for HTTP. Byte caching reduces the amount of traffic by caching file data sent across the WAN and in
                                future serving if from the cache.
                         type: str
                         choices:
@@ -350,7 +352,7 @@ options:
                             - disable
                     byte_caching_opt:
                         description:
-                            - Select whether TCP byte_caching uses system memory only or both memory and disk space.
+                            - Select whether TCP byte-caching uses system memory only or both memory and disk space.
                         type: str
                         choices:
                             - mem-only
@@ -369,7 +371,7 @@ options:
                         type: str
                     secure_tunnel:
                         description:
-                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non_secure tunnels use the same TCP port (7810).
+                            - Enable/disable securing the WAN Opt tunnel using SSL. Secure and non-secure tunnels use the same TCP port (7810).
                         type: str
                         choices:
                             - enable
@@ -394,7 +396,7 @@ options:
                             - disable
                     tunnel_sharing:
                         description:
-                            - Tunnel sharing mode for aggressive/non_aggressive and/or interactive/non_interactive protocols.
+                            - Tunnel sharing mode for aggressive/non-aggressive and/or interactive/non-interactive protocols.
                         type: str
                         choices:
                             - private
@@ -629,7 +631,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wanopt_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_group": {"required": False, "type": "str"},
                 "cifs": {"required": False, "type": "dict",

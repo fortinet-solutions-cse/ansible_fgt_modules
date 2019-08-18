@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure FortiGuard _ AntiSpam.
+  - name: Configure FortiGuard - AntiSpam.
     fortios_spamfilter_fortishield:
       host:  "{{ host }}"
       username: "{{ username }}"

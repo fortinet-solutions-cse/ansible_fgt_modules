@@ -30,7 +30,7 @@ description:
       user to set and modify wireless_controller feature and wtp category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     wireless_controller_wtp:
         description:
             - Configure Wireless Termination Points (WTPs), that is, FortiAPs or APs to be managed by FortiGate.
@@ -138,11 +140,11 @@ options:
                     - disable
             index:
                 description:
-                    - Index (0 _ 4294967295).
+                    - Index (0 - 4294967295).
                 type: int
             ip_fragment_preventing:
                 description:
-                    - Method by which IP fragmentation is prevented for CAPWAP tunneled control and data packets (default = tcp_mss_adjust).
+                    - Method by which IP fragmentation is prevented for CAPWAP tunneled control and data packets (default = tcp-mss-adjust).
                 type: str
                 choices:
                     - tcp-mss-adjust
@@ -328,7 +330,7 @@ options:
                     - disable
             override_led_state:
                 description:
-                    - Enable to override the profile LED state setting for this FortiAP. You must enable this option to use the led_state command to turn off
+                    - Enable to override the profile LED state setting for this FortiAP. You must enable this option to use the led-state command to turn off
                        the FortiAP's LEDs.
                 type: str
                 choices:
@@ -336,7 +338,7 @@ options:
                     - disable
             override_login_passwd_change:
                 description:
-                    - Enable to override the WTP profile login_password (administrator password) setting.
+                    - Enable to override the WTP profile login-password (administrator password) setting.
                 type: str
                 choices:
                     - enable
@@ -350,7 +352,7 @@ options:
                     - disable
             override_wan_port_mode:
                 description:
-                    - Enable/disable overriding the wan_port_mode in the WTP profile.
+                    - Enable/disable overriding the wan-port-mode in the WTP profile.
                 type: str
                 choices:
                     - enable
@@ -362,12 +364,12 @@ options:
                 suboptions:
                     auto_power_high:
                         description:
-                            - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 _ 17
+                            - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 - 17
                                dBm, default = 17).
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = enable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).
                         type: str
                         choices:
                             - enable
@@ -440,11 +442,11 @@ options:
                             - disable
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
                         type: int
                     radio_id:
                         description:
-                            - radio_id
+                            - radio-id
                         type: int
                     spectrum_analysis:
                         description:
@@ -477,12 +479,12 @@ options:
                 suboptions:
                     auto_power_high:
                         description:
-                            - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 _ 17
+                            - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 - 17
                                dBm, default = 17).
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = enable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).
                         type: str
                         choices:
                             - enable
@@ -555,11 +557,11 @@ options:
                             - disable
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
                         type: int
                     radio_id:
                         description:
-                            - radio_id
+                            - radio-id
                         type: int
                     spectrum_analysis:
                         description:
@@ -592,7 +594,7 @@ options:
                 suboptions:
                     dest_ip:
                         description:
-                            - Destination IP and mask for the split_tunneling subnet.
+                            - Destination IP and mask for the split-tunneling subnet.
                         type: str
                     id:
                         description:
@@ -601,7 +603,7 @@ options:
                         type: int
             split_tunneling_acl_local_ap_subnet:
                 description:
-                    - Enable/disable automatically adding local subnetwork of FortiAP to split_tunneling ACL (default = disable).
+                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL (default = disable).
                 type: str
                 choices:
                     - enable
@@ -619,7 +621,7 @@ options:
                 type: int
             tun_mtu_uplink:
                 description:
-                    - Uplink tunnel maximum transmission unit (MTU) in octets (eight_bit bytes). Set the value to either 0 (by default), 576, or 1500.
+                    - Uplink tunnel maximum transmission unit (MTU) in octets (eight-bit bytes). Set the value to either 0 (by default), 576, or 1500.
                 type: int
             wan_port_mode:
                 description:
@@ -635,7 +637,7 @@ options:
             wtp_mode:
                 description:
                     - WTP, AP, or FortiAP operating mode; normal (by default) or remote. A tunnel mode SSID can be assigned to an AP in normal mode but not
-                       remote mode, while a local_bridge mode SSID can be assigned to an AP in either normal mode or remote mode.
+                       remote mode, while a local-bridge mode SSID can be assigned to an AP in either normal mode or remote mode.
                 type: str
                 choices:
                     - normal
@@ -921,7 +923,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_wtp": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "admin": {"required": False, "type": "str",
                           "choices": ["discovered", "disable", "enable"]},

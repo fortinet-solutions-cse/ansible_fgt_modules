@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -94,11 +94,11 @@ options:
                     - disable
             auth_concurrent_value:
                 description:
-                    - Maximum number of concurrent authenticated connections per user (0 _ 100).
+                    - Maximum number of concurrent authenticated connections per user (0 - 100).
                 type: int
             authtimeout:
                 description:
-                    - Authentication timeout in minutes for this user group. 0 to use the global user setting auth_timeout.
+                    - Authentication timeout in minutes for this user group. 0 to use the global user setting auth-timeout.
                 type: int
             company:
                 description:
@@ -117,7 +117,7 @@ options:
                     - enable
             expire:
                 description:
-                    - Time in seconds before guest user accounts expire. (1 _ 31536000 sec)
+                    - Time in seconds before guest user accounts expire. (1 - 31536000 sec)
                 type: int
             expire_type:
                 description:
@@ -178,7 +178,7 @@ options:
                         type: str
             http_digest_realm:
                 description:
-                    - Realm attribute for MD5_digest authentication.
+                    - Realm attribute for MD5-digest authentication.
                 type: str
             id:
                 description:
@@ -500,7 +500,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "user_group": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_concurrent_override": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},

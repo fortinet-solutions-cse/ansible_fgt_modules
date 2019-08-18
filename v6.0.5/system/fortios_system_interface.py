@@ -30,7 +30,7 @@ description:
       user to set and modify system feature and interface category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     system_interface:
         description:
             - Configure interfaces.
@@ -218,7 +220,7 @@ options:
                 type: str
             detected_peer_mtu:
                 description:
-                    - MTU of detected peer (0 _ 4294967295).
+                    - MTU of detected peer (0 - 4294967295).
                 type: int
             detectprotocol:
                 description:
@@ -299,7 +301,7 @@ options:
                     - ipsec
             dhcp_renew_time:
                 description:
-                    - DHCP renew time in seconds (300_604800), 0 means use the renew time provided by the server.
+                    - DHCP renew time in seconds (300-604800), 0 means use the renew time provided by the server.
                 type: int
             disc_retry_timeout:
                 description:
@@ -394,7 +396,7 @@ options:
                         type: str
             fail_alert_method:
                 description:
-                    - Select link_failed_signal or link_down method to alert about a failed link.
+                    - Select link-failed-signal or link-down method to alert about a failed link.
                 type: str
                 choices:
                     - link-failed-signal
@@ -441,7 +443,7 @@ options:
                     - disable
             fortilink_stacking:
                 description:
-                    - Enable/disable FortiLink switch_stacking on this interface.
+                    - Enable/disable FortiLink switch-stacking on this interface.
                 type: str
                 choices:
                     - enable
@@ -488,11 +490,11 @@ options:
                 type: int
             inbandwidth:
                 description:
-                    - Bandwidth limit for incoming traffic (0 _ 16776000 kbps), 0 means unlimited.
+                    - Bandwidth limit for incoming traffic (0 - 16776000 kbps), 0 means unlimited.
                 type: int
             ingress_spillover_threshold:
                 description:
-                    - Ingress Spillover threshold (0 _ 16776000 kbps).
+                    - Ingress Spillover threshold (0 - 16776000 kbps).
                 type: int
             interface:
                 description:
@@ -515,7 +517,7 @@ options:
                     - disable
             ips_sniffer_mode:
                 description:
-                    - Enable/disable the use of this interface as a one_armed sniffer.
+                    - Enable/disable the use of this interface as a one-armed sniffer.
                 type: str
                 choices:
                     - enable
@@ -793,19 +795,19 @@ options:
                             - SEND-compatible
                     nd_security_level:
                         description:
-                            - Neighbor discovery security level (0 _ 7; 0 = least secure, default = 0).
+                            - Neighbor discovery security level (0 - 7; 0 = least secure, default = 0).
                         type: int
                     nd_timestamp_delta:
                         description:
-                            - Neighbor discovery timestamp delta value (1 _ 3600 sec; default = 300).
+                            - Neighbor discovery timestamp delta value (1 - 3600 sec; default = 300).
                         type: int
                     nd_timestamp_fuzz:
                         description:
-                            - Neighbor discovery timestamp fuzz factor (1 _ 60 sec; default = 1).
+                            - Neighbor discovery timestamp fuzz factor (1 - 60 sec; default = 1).
                         type: int
                     vrip6_link_local:
                         description:
-                            - Link_local IPv6 address of virtual router.
+                            - Link-local IPv6 address of virtual router.
                         type: str
                     vrrp_virtual_mac6:
                         description:
@@ -828,7 +830,7 @@ options:
                                     - disable
                             adv_interval:
                                 description:
-                                    - Advertisement interval (1 _ 255 seconds).
+                                    - Advertisement interval (1 - 255 seconds).
                                 type: int
                             preempt:
                                 description:
@@ -839,11 +841,11 @@ options:
                                     - disable
                             priority:
                                 description:
-                                    - Priority of the virtual router (1 _ 255).
+                                    - Priority of the virtual router (1 - 255).
                                 type: int
                             start_time:
                                 description:
-                                    - Startup time (1 _ 255 seconds).
+                                    - Startup time (1 - 255 seconds).
                                 type: int
                             status:
                                 description:
@@ -858,11 +860,11 @@ options:
                                 type: str
                             vrgrp:
                                 description:
-                                    - VRRP group ID (1 _ 65535).
+                                    - VRRP group ID (1 - 65535).
                                 type: int
                             vrid:
                                 description:
-                                    - Virtual router identifier (1 _ 255).
+                                    - Virtual router identifier (1 - 255).
                                 required: true
                                 type: int
                             vrip6:
@@ -934,7 +936,7 @@ options:
                         type: str
             management_ip:
                 description:
-                    - High Availability in_band management IP address of this interface.
+                    - High Availability in-band management IP address of this interface.
                 type: str
             member:
                 description:
@@ -1005,7 +1007,7 @@ options:
                     - both
             outbandwidth:
                 description:
-                    - Bandwidth limit for outgoing traffic (0 _ 16776000 kbps).
+                    - Bandwidth limit for outgoing traffic (0 - 16776000 kbps).
                 type: int
             padt_retry_timeout:
                 description:
@@ -1021,7 +1023,7 @@ options:
                 type: int
             polling_interval:
                 description:
-                    - sFlow polling interval (1 _ 255 sec).
+                    - sFlow polling interval (1 - 255 sec).
                 type: int
             pppoe_unnumbered_negotiate:
                 description:
@@ -1119,7 +1121,7 @@ options:
                     - both
             sample_rate:
                 description:
-                    - sFlow sample rate (10 _ 99999).
+                    - sFlow sample rate (10 - 99999).
                 type: int
             scan_botnet_connections:
                 description:
@@ -1195,7 +1197,7 @@ options:
                         type: int
             security_exempt_list:
                 description:
-                    - Name of security_exempt_list.
+                    - Name of security-exempt-list.
                 type: str
             security_external_logout:
                 description:
@@ -1264,7 +1266,7 @@ options:
                     - 1000auto
             spillover_threshold:
                 description:
-                    - Egress Spillover threshold (0 _ 16776000 kbps), 0 means unlimited.
+                    - Egress Spillover threshold (0 - 16776000 kbps), 0 means unlimited.
                 type: int
             src_check:
                 description:
@@ -1312,7 +1314,7 @@ options:
                 type: str
             switch_controller_access_vlan:
                 description:
-                    - Block FortiSwitch port_to_port traffic.
+                    - Block FortiSwitch port-to-port traffic.
                 type: str
                 choices:
                     - enable
@@ -1354,7 +1356,7 @@ options:
                     - disable
             switch_controller_learning_limit:
                 description:
-                    - Limit the number of dynamic MAC addresses on this VLAN (1 _ 128, 0 = no limit, default).
+                    - Limit the number of dynamic MAC addresses on this VLAN (1 - 128, 0 = no limit, default).
                 type: int
             tagging:
                 description:
@@ -1449,7 +1451,7 @@ options:
                     - disable
             vlanid:
                 description:
-                    - VLAN ID (1 _ 4094).
+                    - VLAN ID (1 - 4094).
                 type: int
             vrf:
                 description:
@@ -1469,7 +1471,7 @@ options:
                             - disable
                     adv_interval:
                         description:
-                            - Advertisement interval (1 _ 255 seconds).
+                            - Advertisement interval (1 - 255 seconds).
                         type: int
                     ignore_default_route:
                         description:
@@ -1487,7 +1489,7 @@ options:
                             - disable
                     priority:
                         description:
-                            - Priority of the virtual router (1 _ 255).
+                            - Priority of the virtual router (1 - 255).
                         type: int
                     proxy_arp:
                         description:
@@ -1505,7 +1507,7 @@ options:
                                 type: str
                     start_time:
                         description:
-                            - Startup time (1 _ 255 seconds).
+                            - Startup time (1 - 255 seconds).
                         type: int
                     status:
                         description:
@@ -1527,15 +1529,15 @@ options:
                         type: str
                     vrdst_priority:
                         description:
-                            - Priority of the virtual router when the virtual router destination becomes unreachable (0 _ 254).
+                            - Priority of the virtual router when the virtual router destination becomes unreachable (0 - 254).
                         type: int
                     vrgrp:
                         description:
-                            - VRRP group ID (1 _ 65535).
+                            - VRRP group ID (1 - 65535).
                         type: int
                     vrid:
                         description:
-                            - Virtual router identifier (1 _ 255).
+                            - Virtual router identifier (1 - 255).
                         required: true
                         type: int
                     vrip:
@@ -2083,7 +2085,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_interface": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ac_name": {"required": False, "type": "str"},
                 "aggregate": {"required": False, "type": "str"},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             member:
                 description:
-                    - Interfaces belong to the virtual_wire_pair.
+                    - Interfaces belong to the virtual-wire-pair.
                 type: list
                 suboptions:
                     interface_name:
@@ -96,7 +96,7 @@ options:
                         type: str
             name:
                 description:
-                    - Virtual_wire_pair name. Must be a unique interface name.
+                    - Virtual-wire-pair name. Must be a unique interface name.
                 required: true
                 type: str
             vlan_filter:
@@ -288,7 +288,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_virtual_wire_pair": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "member": {"required": False, "type": "list",
                            "options": {

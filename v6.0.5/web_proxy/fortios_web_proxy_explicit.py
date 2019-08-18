@@ -30,7 +30,7 @@ description:
       user to set and modify web_proxy feature and explicit category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     web_proxy_explicit:
         description:
             - Configure explicit Web proxy settings.
@@ -80,22 +81,22 @@ options:
         suboptions:
             ftp_incoming_port:
                 description:
-                    - Accept incoming FTP_over_HTTP requests on one or more ports (0 _ 65535, default = 0; use the same as HTTP).
+                    - Accept incoming FTP-over-HTTP requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).
                 type: str
             ftp_over_http:
                 description:
-                    - Enable to proxy FTP_over_HTTP sessions sent from a web browser.
+                    - Enable to proxy FTP-over-HTTP sessions sent from a web browser.
                 type: str
                 choices:
                     - enable
                     - disable
             http_incoming_port:
                 description:
-                    - Accept incoming HTTP requests on one or more ports (0 _ 65535, default = 8080).
+                    - Accept incoming HTTP requests on one or more ports (0 - 65535, default = 8080).
                 type: str
             https_incoming_port:
                 description:
-                    - Accept incoming HTTPS requests on one or more ports (0 _ 65535, default = 0, use the same as HTTP).
+                    - Accept incoming HTTPS requests on one or more ports (0 - 65535, default = 0, use the same as HTTP).
                 type: str
             https_replacement_message:
                 description:
@@ -144,12 +145,12 @@ options:
                 type: str
             pac_file_server_port:
                 description:
-                    - Port number that PAC traffic from client web browsers uses to connect to the explicit web proxy (0 _ 65535, default = 0; use the same as
+                    - Port number that PAC traffic from client web browsers uses to connect to the explicit web proxy (0 - 65535, default = 0; use the same as
                        HTTP).
                 type: str
             pac_file_server_status:
                 description:
-                    - Enable/disable Proxy Auto_Configuration (PAC) for users of this explicit proxy profile.
+                    - Enable/disable Proxy Auto-Configuration (PAC) for users of this explicit proxy profile.
                 type: str
                 choices:
                     - enable
@@ -244,7 +245,7 @@ options:
                     - disable
             socks_incoming_port:
                 description:
-                    - Accept incoming SOCKS proxy requests on one or more ports (0 _ 65535, default = 0; use the same as HTTP).
+                    - Accept incoming SOCKS proxy requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).
                 type: str
             ssl_algorithm:
                 description:
@@ -268,7 +269,7 @@ options:
                     - disable
             trace_auth_no_rsp:
                 description:
-                    - Enable/disable logging timed_out authentication requests.
+                    - Enable/disable logging timed-out authentication requests.
                 type: str
                 choices:
                     - enable
@@ -490,7 +491,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "web_proxy_explicit": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ftp_incoming_port": {"required": False, "type": "str"},
                 "ftp_over_http": {"required": False, "type": "str",

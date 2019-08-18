@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and policy category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_policy:
         description:
             - Configure IPv4 policies.
@@ -133,14 +135,14 @@ options:
                 type: str
             auth_path:
                 description:
-                    - Enable/disable authentication_based routing.
+                    - Enable/disable authentication-based routing.
                 type: str
                 choices:
                     - enable
                     - disable
             auth_redirect_addr:
                 description:
-                    - HTTP_to_HTTPS redirect address for firewall authentication.
+                    - HTTP-to-HTTPS redirect address for firewall authentication.
                 type: str
             av_profile:
                 description:
@@ -182,7 +184,7 @@ options:
                         type: str
             delay_tcp_npu_session:
                 description:
-                    - Enable TCP NPU session delay to guarantee packet order of 3_way handshake.
+                    - Enable TCP NPU session delay to guarantee packet order of 3-way handshake.
                 type: str
                 choices:
                     - enable
@@ -199,14 +201,14 @@ options:
                         type: str
             diffserv_forward:
                 description:
-                    - Enable to change packet's DiffServ values to the specified diffservcode_forward value.
+                    - Enable to change packet's DiffServ values to the specified diffservcode-forward value.
                 type: str
                 choices:
                     - enable
                     - disable
             diffserv_reverse:
                 description:
-                    - Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode_rev value.
+                    - Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode-rev value.
                 type: str
                 choices:
                     - enable
@@ -302,7 +304,7 @@ options:
                     - disable
             fsso:
                 description:
-                    - Enable/disable Fortinet Single Sign_On.
+                    - Enable/disable Fortinet Single Sign-On.
                 type: str
                 choices:
                     - enable
@@ -331,11 +333,11 @@ options:
                 type: str
             identity_based_route:
                 description:
-                    - Name of identity_based routing rule. Source firewall.identity-based-route.name.
+                    - Name of identity-based routing rule. Source firewall.identity-based-route.name.
                 type: str
             inbound:
                 description:
-                    - "Policy_based IPsec VPN: only traffic from the remote network can initiate a VPN."
+                    - "Policy-based IPsec VPN: only traffic from the remote network can initiate a VPN."
                 type: str
                 choices:
                     - enable
@@ -369,7 +371,7 @@ options:
                         type: int
             internet_service_negate:
                 description:
-                    - When enabled internet_service specifies what the service must NOT be.
+                    - When enabled internet-service specifies what the service must NOT be.
                 type: str
                 choices:
                     - enable
@@ -403,7 +405,7 @@ options:
                         type: int
             internet_service_src_negate:
                 description:
-                    - When enabled internet_service_src specifies what the service must NOT be.
+                    - When enabled internet-service-src specifies what the service must NOT be.
                 type: str
                 choices:
                     - enable
@@ -465,18 +467,18 @@ options:
                     - disable
             natinbound:
                 description:
-                    - "Policy_based IPsec VPN: apply destination NAT to inbound traffic."
+                    - "Policy-based IPsec VPN: apply destination NAT to inbound traffic."
                 type: str
                 choices:
                     - enable
                     - disable
             natip:
                 description:
-                    - "Policy_based IPsec VPN: source NAT IP address for outgoing traffic."
+                    - "Policy-based IPsec VPN: source NAT IP address for outgoing traffic."
                 type: str
             natoutbound:
                 description:
-                    - "Policy_based IPsec VPN: apply source NAT to outbound traffic."
+                    - "Policy-based IPsec VPN: apply source NAT to outbound traffic."
                 type: str
                 choices:
                     - enable
@@ -490,7 +492,7 @@ options:
                     - disable
             ntlm_enabled_browsers:
                 description:
-                    - HTTP_User_Agent value of supported browsers.
+                    - HTTP-User-Agent value of supported browsers.
                 type: list
                 suboptions:
                     user_agent_string:
@@ -506,14 +508,14 @@ options:
                     - disable
             outbound:
                 description:
-                    - "Policy_based IPsec VPN: only traffic from the internal network can initiate a VPN."
+                    - "Policy-based IPsec VPN: only traffic from the internal network can initiate a VPN."
                 type: str
                 choices:
                     - enable
                     - disable
             per_ip_shaper:
                 description:
-                    - Per_IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
+                    - Per-IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
                 type: str
             permit_any_host:
                 description:
@@ -576,7 +578,7 @@ options:
                 type: str
             rsso:
                 description:
-                    - Enable/disable RADIUS single sign_on (RSSO).
+                    - Enable/disable RADIUS single sign-on (RSSO).
                 type: str
                 choices:
                     - enable
@@ -788,7 +790,7 @@ options:
                 type: str
             vpntunnel:
                 description:
-                    - "Policy_based IPsec VPN: name of the IPsec VPN Phase 1. Source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name."
+                    - "Policy-based IPsec VPN: name of the IPsec VPN Phase 1. Source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name."
                 type: str
             waf_profile:
                 description:
@@ -803,7 +805,7 @@ options:
                     - disable
             wanopt_detection:
                 description:
-                    - WAN optimization auto_detection mode.
+                    - WAN optimization auto-detection mode.
                 type: str
                 choices:
                     - active
@@ -1228,7 +1230,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_policy": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny", "ipsec"]},

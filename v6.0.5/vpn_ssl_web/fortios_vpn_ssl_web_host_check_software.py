@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_vpn_ssl_web_host_check_software
-short_description: SSL_VPN host check software in Fortinet's FortiOS and FortiGate.
+short_description: SSL-VPN host check software in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify vpn_ssl_web feature and host_check_software category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -81,7 +81,7 @@ options:
             - absent
     vpn_ssl_web_host_check_software:
         description:
-            - SSL_VPN host check software.
+            - SSL-VPN host check software.
         default: null
         type: dict
         suboptions:
@@ -99,7 +99,7 @@ options:
                             - deny
                     id:
                         description:
-                            - ID (0 _ 4294967295).
+                            - ID (0 - 4294967295).
                         required: true
                         type: int
                     md5s:
@@ -166,7 +166,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: SSL_VPN host check software.
+  - name: SSL-VPN host check software.
     fortios_vpn_ssl_web_host_check_software:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -342,7 +342,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ssl_web_host_check_software": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "check_item_list": {"required": False, "type": "list",
                                     "options": {

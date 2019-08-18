@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and lldp_settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     switch_controller_lldp_settings:
         description:
             - Configure FortiSwitch LLDP settings.
@@ -80,7 +81,7 @@ options:
         suboptions:
             fast_start_interval:
                 description:
-                    - Frequency of LLDP PDU transmission from FortiSwitch for the first 4 packets when the link is up (2 _ 5 sec, default = 2, 0 = disable
+                    - Frequency of LLDP PDU transmission from FortiSwitch for the first 4 packets when the link is up (2 - 5 sec, default = 2, 0 = disable
                        fast start).
                 type: int
             management_interface:
@@ -99,11 +100,11 @@ options:
                     - disable
             tx_hold:
                 description:
-                    - Number of tx_intervals before local LLDP data expires (1 _ 16, default = 4). Packet TTL is tx_hold * tx_interval.
+                    - Number of tx-intervals before local LLDP data expires (1 - 16, default = 4). Packet TTL is tx-hold * tx-interval.
                 type: int
             tx_interval:
                 description:
-                    - Frequency of LLDP PDU transmission from FortiSwitch (5 _ 4095 sec, default = 30). Packet TTL is tx_hold * tx_interval.
+                    - Frequency of LLDP PDU transmission from FortiSwitch (5 - 4095 sec, default = 30). Packet TTL is tx-hold * tx-interval.
                 type: int
 '''
 
@@ -271,7 +272,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_lldp_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "fast_start_interval": {"required": False, "type": "int"},
                 "management_interface": {"required": False, "type": "str",

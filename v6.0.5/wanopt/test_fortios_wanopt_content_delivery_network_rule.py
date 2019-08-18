@@ -49,7 +49,7 @@ def test_wanopt_content_delivery_network_rule_creation(mocker):
         'state': 'present',
         'wanopt_content_delivery_network_rule': {
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -64,7 +64,7 @@ def test_wanopt_content_delivery_network_rule_creation(mocker):
 
     expected_data = {
         'category': 'vcache',
-        'comment': 'Comment about this CDN_rule.',
+        'comment': 'Comment about this CDN-rule.',
         'name': 'default_name_5',
                 'request-cache-control': 'enable',
                 'response-cache-control': 'enable',
@@ -93,7 +93,7 @@ def test_wanopt_content_delivery_network_rule_creation_fails(mocker):
         'state': 'present',
         'wanopt_content_delivery_network_rule': {
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -108,7 +108,7 @@ def test_wanopt_content_delivery_network_rule_creation_fails(mocker):
 
     expected_data = {
         'category': 'vcache',
-        'comment': 'Comment about this CDN_rule.',
+        'comment': 'Comment about this CDN-rule.',
         'name': 'default_name_5',
                 'request-cache-control': 'enable',
                 'response-cache-control': 'enable',
@@ -137,7 +137,7 @@ def test_wanopt_content_delivery_network_rule_removal(mocker):
         'state': 'absent',
         'wanopt_content_delivery_network_rule': {
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -169,7 +169,7 @@ def test_wanopt_content_delivery_network_rule_deletion_fails(mocker):
         'state': 'absent',
         'wanopt_content_delivery_network_rule': {
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -201,7 +201,7 @@ def test_wanopt_content_delivery_network_rule_idempotent(mocker):
         'state': 'present',
         'wanopt_content_delivery_network_rule': {
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -216,7 +216,7 @@ def test_wanopt_content_delivery_network_rule_idempotent(mocker):
 
     expected_data = {
         'category': 'vcache',
-        'comment': 'Comment about this CDN_rule.',
+        'comment': 'Comment about this CDN-rule.',
         'name': 'default_name_5',
                 'request-cache-control': 'enable',
                 'response-cache-control': 'enable',
@@ -246,7 +246,7 @@ def test_wanopt_content_delivery_network_rule_filter_foreign_attributes(mocker):
         'wanopt_content_delivery_network_rule': {
             'random_attribute_not_valid': 'tag',
             'category': 'vcache',
-            'comment': 'Comment about this CDN_rule.',
+            'comment': 'Comment about this CDN-rule.',
             'name': 'default_name_5',
             'request_cache_control': 'enable',
             'response_cache_control': 'enable',
@@ -261,7 +261,7 @@ def test_wanopt_content_delivery_network_rule_filter_foreign_attributes(mocker):
 
     expected_data = {
         'category': 'vcache',
-        'comment': 'Comment about this CDN_rule.',
+        'comment': 'Comment about this CDN-rule.',
         'name': 'default_name_5',
                 'request-cache-control': 'enable',
                 'response-cache-control': 'enable',

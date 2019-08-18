@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -100,7 +100,7 @@ options:
                     - high
             tos:
                 description:
-                    - "Value of the ToS byte in the IP datagram header (0_15, 8: minimize delay, 4: maximize throughput, 2: maximize reliability, 1: minimize
+                    - "Value of the ToS byte in the IP datagram header (0-15, 8: minimize delay, 4: maximize throughput, 2: maximize reliability, 1: minimize
                        monetary cost, and 0: default service)."
                 type: int
 '''
@@ -277,7 +277,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_tos_based_priority": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "id": {"required": True, "type": "int"},
                 "priority": {"required": False, "type": "str",

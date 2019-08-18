@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -103,11 +103,11 @@ options:
                             - weighted-random-early-detection
                     max_rate:
                         description:
-                            - Maximum rate (0 _ 4294967295 kbps, 0 to disable).
+                            - Maximum rate (0 - 4294967295 kbps, 0 to disable).
                         type: int
                     min_rate:
                         description:
-                            - Minimum rate (0 _ 4294967295 kbps, 0 to disable).
+                            - Minimum rate (0 - 4294967295 kbps, 0 to disable).
                         type: int
                     name:
                         description:
@@ -312,7 +312,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_qos_queue_policy": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "cos_queue": {"required": False, "type": "list",
                               "options": {

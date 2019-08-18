@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     router_setting:
         description:
             - Configure router settings.
@@ -84,7 +85,7 @@ options:
                 type: str
             show_filter:
                 description:
-                    - Prefix_list as filter for showing routes. Source router.prefix-list.name.
+                    - Prefix-list as filter for showing routes. Source router.prefix-list.name.
                 type: str
 '''
 
@@ -248,7 +249,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "hostname": {"required": False, "type": "str"},
                 "show_filter": {"required": False, "type": "str"}

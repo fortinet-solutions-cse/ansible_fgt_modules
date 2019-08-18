@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -103,7 +103,7 @@ options:
                         type: str
             name:
                 description:
-                    - Interface name (name cannot be in use by any other interfaces, VLANs, or inter_VDOM links).
+                    - Interface name (name cannot be in use by any other interfaces, VLANs, or inter-VDOM links).
                 required: true
                 type: str
             span:
@@ -331,7 +331,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_switch_interface": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "intra_switch_policy": {"required": False, "type": "str",
                                         "choices": ["implicit", "explicit"]},

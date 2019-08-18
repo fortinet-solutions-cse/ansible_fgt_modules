@@ -30,7 +30,7 @@ description:
       user to set and modify dlp feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     dlp_settings:
         description:
             - Designate logical storage for DLP fingerprint database.
@@ -80,7 +81,7 @@ options:
         suboptions:
             cache_mem_percent:
                 description:
-                    - Maximum percentage of available memory allocated to caching (1 _ 15%).
+                    - Maximum percentage of available memory allocated to caching (1 - 15%).
                 type: int
             chunk_size:
                 description:
@@ -268,7 +269,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "dlp_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "cache_mem_percent": {"required": False, "type": "int"},
                 "chunk_size": {"required": False, "type": "int"},

@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and auth_portal category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     firewall_auth_portal:
         description:
             - Configure firewall authentication portals.
@@ -90,7 +91,7 @@ options:
                         type: str
             identity_based_route:
                 description:
-                    - Name of the identity_based route that applies to this portal. Source firewall.identity-based-route.name.
+                    - Name of the identity-based route that applies to this portal. Source firewall.identity-based-route.name.
                 type: str
             portal_addr:
                 description:
@@ -267,7 +268,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "firewall_auth_portal": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "groups": {"required": False, "type": "list",
                            "options": {

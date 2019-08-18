@@ -30,7 +30,7 @@ description:
       user to set and modify antivirus feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     antivirus_settings:
         description:
             - Configure AntiVirus settings.
@@ -95,7 +96,7 @@ options:
                     - disable
             override_timeout:
                 description:
-                    - Override the large file scan timeout value in seconds (30 _ 3600). Zero is the default value and is used to disable this command. When
+                    - Override the large file scan timeout value in seconds (30 - 3600). Zero is the default value and is used to disable this command. When
                        disabled, the daemon adjusts the large file scan timeout based on the file size.
                 type: int
 '''
@@ -261,7 +262,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "antivirus_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "default_db": {"required": False, "type": "str",
                                "choices": ["normal", "extended", "extreme"]},

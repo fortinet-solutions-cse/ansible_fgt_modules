@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,19 +80,19 @@ options:
         suboptions:
             forward_time:
                 description:
-                    - Period of time a port is in listening and learning state (4 _ 30 sec, default = 15).
+                    - Period of time a port is in listening and learning state (4 - 30 sec, default = 15).
                 type: int
             hello_time:
                 description:
-                    - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 _ 10 sec, default = 2).
+                    - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 - 10 sec, default = 2).
                 type: int
             max_age:
                 description:
-                    - Maximum time before a bridge port saves its configuration BPDU information (6 _ 40 sec, default = 20).
+                    - Maximum time before a bridge port saves its configuration BPDU information (6 - 40 sec, default = 20).
                 type: int
             max_hops:
                 description:
-                    - Maximum number of hops between the root bridge and the furthest bridge (1_ 40, default = 20).
+                    - Maximum number of hops between the root bridge and the furthest bridge (1- 40, default = 20).
                 type: int
             name:
                 description:
@@ -100,11 +100,11 @@ options:
                 type: str
             pending_timer:
                 description:
-                    - Pending time (1 _ 15 sec, default = 4).
+                    - Pending time (1 - 15 sec, default = 4).
                 type: int
             revision:
                 description:
-                    - STP revision number (0 _ 65535).
+                    - STP revision number (0 - 65535).
                 type: int
             status:
                 description:
@@ -283,7 +283,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_stp_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "forward_time": {"required": False, "type": "int"},
                 "hello_time": {"required": False, "type": "int"},

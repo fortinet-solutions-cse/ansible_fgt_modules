@@ -30,7 +30,7 @@ description:
       user to set and modify wireless_controller feature and wids_profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     wireless_controller_wids_profile:
         description:
             - Configure wireless intrusion detection system (WIDS) profiles.
@@ -87,7 +89,7 @@ options:
         suboptions:
             ap_auto_suppress:
                 description:
-                    - Enable/disable on_wire rogue AP auto_suppression (default = disable).
+                    - Enable/disable on-wire rogue AP auto-suppression (default = disable).
                 type: str
                 choices:
                     - enable
@@ -106,35 +108,35 @@ options:
                     - saturday
             ap_bgscan_disable_end:
                 description:
-                    - "End time, using a 24_hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
+                    - "End time, using a 24-hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
                 type: str
             ap_bgscan_disable_start:
                 description:
-                    - "Start time, using a 24_hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
+                    - "Start time, using a 24-hour clock in the format of hh:mm, for disabling background scanning (default = 00:00)."
                 type: str
             ap_bgscan_duration:
                 description:
-                    - Listening time on a scanning channel (10 _ 1000 msec, default = 20).
+                    - Listening time on a scanning channel (10 - 1000 msec, default = 20).
                 type: int
             ap_bgscan_idle:
                 description:
-                    - Waiting time for channel inactivity before scanning this channel (0 _ 1000 msec, default = 0).
+                    - Waiting time for channel inactivity before scanning this channel (0 - 1000 msec, default = 0).
                 type: int
             ap_bgscan_intv:
                 description:
-                    - Period of time between scanning two channels (1 _ 600 sec, default = 1).
+                    - Period of time between scanning two channels (1 - 600 sec, default = 1).
                 type: int
             ap_bgscan_period:
                 description:
-                    - Period of time between background scans (60 _ 3600 sec, default = 600).
+                    - Period of time between background scans (60 - 3600 sec, default = 600).
                 type: int
             ap_bgscan_report_intv:
                 description:
-                    - Period of time between background scan reports (15 _ 600 sec, default = 30).
+                    - Period of time between background scan reports (15 - 600 sec, default = 30).
                 type: int
             ap_fgscan_report_intv:
                 description:
-                    - Period of time between foreground scan reports (15 _ 600 sec, default = 15).
+                    - Period of time between foreground scan reports (15 - 600 sec, default = 15).
                 type: int
             ap_scan:
                 description:
@@ -193,7 +195,7 @@ options:
                 type: str
             deauth_broadcast:
                 description:
-                    - Enable/disable broadcasting de_authentication detection (default = disable).
+                    - Enable/disable broadcasting de-authentication detection (default = disable).
                 type: str
                 choices:
                     - enable
@@ -204,93 +206,93 @@ options:
                 type: int
             eapol_fail_flood:
                 description:
-                    - Enable/disable EAPOL_Failure flooding (to AP) detection (default = disable).
+                    - Enable/disable EAPOL-Failure flooding (to AP) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_fail_intv:
                 description:
-                    - The detection interval for EAPOL_Failure flooding (1 _ 3600 sec).
+                    - The detection interval for EAPOL-Failure flooding (1 - 3600 sec).
                 type: int
             eapol_fail_thresh:
                 description:
-                    - The threshold value for EAPOL_Failure flooding in specified interval.
+                    - The threshold value for EAPOL-Failure flooding in specified interval.
                 type: int
             eapol_logoff_flood:
                 description:
-                    - Enable/disable EAPOL_Logoff flooding (to AP) detection (default = disable).
+                    - Enable/disable EAPOL-Logoff flooding (to AP) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_logoff_intv:
                 description:
-                    - The detection interval for EAPOL_Logoff flooding (1 _ 3600 sec).
+                    - The detection interval for EAPOL-Logoff flooding (1 - 3600 sec).
                 type: int
             eapol_logoff_thresh:
                 description:
-                    - The threshold value for EAPOL_Logoff flooding in specified interval.
+                    - The threshold value for EAPOL-Logoff flooding in specified interval.
                 type: int
             eapol_pre_fail_flood:
                 description:
-                    - Enable/disable premature EAPOL_Failure flooding (to STA) detection (default = disable).
+                    - Enable/disable premature EAPOL-Failure flooding (to STA) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_pre_fail_intv:
                 description:
-                    - The detection interval for premature EAPOL_Failure flooding (1 _ 3600 sec).
+                    - The detection interval for premature EAPOL-Failure flooding (1 - 3600 sec).
                 type: int
             eapol_pre_fail_thresh:
                 description:
-                    - The threshold value for premature EAPOL_Failure flooding in specified interval.
+                    - The threshold value for premature EAPOL-Failure flooding in specified interval.
                 type: int
             eapol_pre_succ_flood:
                 description:
-                    - Enable/disable premature EAPOL_Success flooding (to STA) detection (default = disable).
+                    - Enable/disable premature EAPOL-Success flooding (to STA) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_pre_succ_intv:
                 description:
-                    - The detection interval for premature EAPOL_Success flooding (1 _ 3600 sec).
+                    - The detection interval for premature EAPOL-Success flooding (1 - 3600 sec).
                 type: int
             eapol_pre_succ_thresh:
                 description:
-                    - The threshold value for premature EAPOL_Success flooding in specified interval.
+                    - The threshold value for premature EAPOL-Success flooding in specified interval.
                 type: int
             eapol_start_flood:
                 description:
-                    - Enable/disable EAPOL_Start flooding (to AP) detection (default = disable).
+                    - Enable/disable EAPOL-Start flooding (to AP) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_start_intv:
                 description:
-                    - The detection interval for EAPOL_Start flooding (1 _ 3600 sec).
+                    - The detection interval for EAPOL-Start flooding (1 - 3600 sec).
                 type: int
             eapol_start_thresh:
                 description:
-                    - The threshold value for EAPOL_Start flooding in specified interval.
+                    - The threshold value for EAPOL-Start flooding in specified interval.
                 type: int
             eapol_succ_flood:
                 description:
-                    - Enable/disable EAPOL_Success flooding (to AP) detection (default = disable).
+                    - Enable/disable EAPOL-Success flooding (to AP) detection (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             eapol_succ_intv:
                 description:
-                    - The detection interval for EAPOL_Success flooding (1 _ 3600 sec).
+                    - The detection interval for EAPOL-Success flooding (1 - 3600 sec).
                 type: int
             eapol_succ_thresh:
                 description:
-                    - The threshold value for EAPOL_Success flooding in specified interval.
+                    - The threshold value for EAPOL-Success flooding in specified interval.
                 type: int
             invalid_mac_oui:
                 description:
@@ -308,7 +310,7 @@ options:
                     - disable
             long_duration_thresh:
                 description:
-                    - Threshold value for long duration attack detection (1000 _ 32767 usec, default = 8200).
+                    - Threshold value for long duration attack detection (1000 - 32767 usec, default = 8200).
                 type: int
             name:
                 description:
@@ -332,7 +334,7 @@ options:
                     - both
             spoofed_deauth:
                 description:
-                    - Enable/disable spoofed de_authentication attack detection (default = disable).
+                    - Enable/disable spoofed de-authentication attack detection (default = disable).
                 type: str
                 choices:
                     - enable
@@ -587,7 +589,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_wids_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ap_auto_suppress": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},

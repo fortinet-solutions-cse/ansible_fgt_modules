@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,11 +87,11 @@ options:
         suboptions:
             activation_code:
                 description:
-                    - Mobile token user activation_code.
+                    - Mobile token user activation-code.
                 type: str
             activation_expire:
                 description:
-                    - Mobile token user activation_code expire time.
+                    - Mobile token user activation-code expire time.
                 type: int
             comments:
                 description:
@@ -306,7 +306,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "user_fortitoken": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "activation_code": {"required": False, "type": "str"},
                 "activation_expire": {"required": False, "type": "int"},

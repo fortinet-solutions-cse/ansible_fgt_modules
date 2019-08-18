@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -88,7 +88,7 @@ options:
         suboptions:
             id:
                 description:
-                    - Index <1_4096>.
+                    - Index <1-4096>.
                 required: true
                 type: int
             object:
@@ -299,7 +299,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_vdom_exception": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "id": {"required": True, "type": "int"},
                 "object": {"required": False, "type": "str",

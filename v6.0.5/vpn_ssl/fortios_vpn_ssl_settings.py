@@ -30,7 +30,7 @@ description:
       user to set and modify vpn_ssl feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     vpn_ssl_settings:
         description:
             - Configure SSL VPN.
@@ -80,7 +81,7 @@ options:
         suboptions:
             auth_timeout:
                 description:
-                    - SSL_VPN authentication timeout (1 _ 259200 sec (3 days), 0 for no timeout).
+                    - SSL-VPN authentication timeout (1 - 259200 sec (3 days), 0 for no timeout).
                 type: int
             authentication_rule:
                 description:
@@ -124,7 +125,7 @@ options:
                                 type: str
                     id:
                         description:
-                            - ID (0 _ 4294967295).
+                            - ID (0 - 4294967295).
                         required: true
                         type: int
                     portal:
@@ -191,14 +192,14 @@ options:
                                 type: str
             auto_tunnel_static_route:
                 description:
-                    - Enable to auto_create static routes for the SSL_VPN tunnel IP addresses.
+                    - Enable to auto-create static routes for the SSL-VPN tunnel IP addresses.
                 type: str
                 choices:
                     - enable
                     - disable
             banned_cipher:
                 description:
-                    - Select one or more cipher technologies that cannot be used in SSL_VPN negotiations.
+                    - Select one or more cipher technologies that cannot be used in SSL-VPN negotiations.
                 type: str
                 choices:
                     - RSA
@@ -233,7 +234,7 @@ options:
                 type: int
             deflate_min_data_size:
                 description:
-                    - Minimum amount of data that triggers compression (200 _ 65535 bytes).
+                    - Minimum amount of data that triggers compression (200 - 65535 bytes).
                 type: int
             dns_server1:
                 description:
@@ -245,11 +246,11 @@ options:
                 type: str
             dns_suffix:
                 description:
-                    - DNS suffix used for SSL_VPN clients.
+                    - DNS suffix used for SSL-VPN clients.
                 type: str
             dtls_hello_timeout:
                 description:
-                    - SSLVPN maximum DTLS hello timeout (10 _ 60 sec, default = 10).
+                    - SSLVPN maximum DTLS hello timeout (10 - 60 sec, default = 10).
                 type: int
             dtls_tunnel:
                 description:
@@ -260,7 +261,7 @@ options:
                     - disable
             force_two_factor_auth:
                 description:
-                    - Enable to force two_factor authentication for all SSL_VPNs.
+                    - Enable to force two-factor authentication for all SSL-VPNs.
                 type: str
                 choices:
                     - enable
@@ -275,29 +276,29 @@ options:
                     - remove
             http_compression:
                 description:
-                    - Enable to allow HTTP compression over SSL_VPN tunnels.
+                    - Enable to allow HTTP compression over SSL-VPN tunnels.
                 type: str
                 choices:
                     - enable
                     - disable
             http_only_cookie:
                 description:
-                    - Enable/disable SSL_VPN support for HttpOnly cookies.
+                    - Enable/disable SSL-VPN support for HttpOnly cookies.
                 type: str
                 choices:
                     - enable
                     - disable
             http_request_body_timeout:
                 description:
-                    - SSL_VPN session is disconnected if an HTTP request body is not received within this time (1 _ 60 sec, default = 20).
+                    - SSL-VPN session is disconnected if an HTTP request body is not received within this time (1 - 60 sec, default = 20).
                 type: int
             http_request_header_timeout:
                 description:
-                    - SSL_VPN session is disconnected if an HTTP request header is not received within this time (1 _ 60 sec, default = 20).
+                    - SSL-VPN session is disconnected if an HTTP request header is not received within this time (1 - 60 sec, default = 20).
                 type: int
             https_redirect:
                 description:
-                    - Enable/disable redirect of port 80 to SSL_VPN port.
+                    - Enable/disable redirect of port 80 to SSL-VPN port.
                 type: str
                 choices:
                     - enable
@@ -324,44 +325,44 @@ options:
                 type: str
             login_attempt_limit:
                 description:
-                    - SSL VPN maximum login attempt times before block (0 _ 10, default = 2, 0 = no limit).
+                    - SSL VPN maximum login attempt times before block (0 - 10, default = 2, 0 = no limit).
                 type: int
             login_block_time:
                 description:
-                    - Time for which a user is blocked from logging in after too many failed login attempts (0 _ 86400 sec, default = 60).
+                    - Time for which a user is blocked from logging in after too many failed login attempts (0 - 86400 sec, default = 60).
                 type: int
             login_timeout:
                 description:
-                    - SSLVPN maximum login timeout (10 _ 180 sec, default = 30).
+                    - SSLVPN maximum login timeout (10 - 180 sec, default = 30).
                 type: int
             port:
                 description:
-                    - SSL_VPN access port (1 _ 65535).
+                    - SSL-VPN access port (1 - 65535).
                 type: int
             port_precedence:
                 description:
-                    - Enable means that if SSL_VPN connections are allowed on an interface admin GUI connections are blocked on that interface.
+                    - Enable means that if SSL-VPN connections are allowed on an interface admin GUI connections are blocked on that interface.
                 type: str
                 choices:
                     - enable
                     - disable
             reqclientcert:
                 description:
-                    - Enable to require client certificates for all SSL_VPN users.
+                    - Enable to require client certificates for all SSL-VPN users.
                 type: str
                 choices:
                     - enable
                     - disable
             route_source_interface:
                 description:
-                    - Enable to allow SSL_VPN sessions to bypass routing and bind to the incoming interface.
+                    - Enable to allow SSL-VPN sessions to bypass routing and bind to the incoming interface.
                 type: str
                 choices:
                     - enable
                     - disable
             servercert:
                 description:
-                    - Name of the server certificate to be used for SSL_VPNs. Source vpn.certificate.local.name.
+                    - Name of the server certificate to be used for SSL-VPNs. Source vpn.certificate.local.name.
                 type: str
             source_address:
                 description:
@@ -464,7 +465,7 @@ options:
                         type: str
             unsafe_legacy_renegotiation:
                 description:
-                    - Enable/disable unsafe legacy re_negotiation.
+                    - Enable/disable unsafe legacy re-negotiation.
                 type: str
                 choices:
                     - enable
@@ -486,7 +487,7 @@ options:
                 type: str
             x_content_type_options:
                 description:
-                    - Add HTTP X_Content_Type_Options header.
+                    - Add HTTP X-Content-Type-Options header.
                 type: str
                 choices:
                     - enable
@@ -751,7 +752,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "vpn_ssl_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_timeout": {"required": False, "type": "int"},
                 "authentication_rule": {"required": False, "type": "list",

@@ -30,7 +30,7 @@ description:
       user to set and modify wireless_controller feature and wtp_profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     wireless_controller_wtp_profile:
         description:
             - Configure WTP profiles or FortiAP profiles that define radio settings for manageable FortiAP platforms.
@@ -270,7 +272,7 @@ options:
                     - disable
             dtls_policy:
                 description:
-                    - WTP data channel DTLS policy (default = clear_text).
+                    - WTP data channel DTLS policy (default = clear-text).
                 type: str
                 choices:
                     - clear-text
@@ -299,7 +301,7 @@ options:
                     - disable
             handoff_rssi:
                 description:
-                    - Minimum received signal strength indicator (RSSI) value for handoff (20 _ 30, default = 25).
+                    - Minimum received signal strength indicator (RSSI) value for handoff (20 - 30, default = 25).
                 type: int
             handoff_sta_thresh:
                 description:
@@ -307,7 +309,7 @@ options:
                 type: int
             ip_fragment_preventing:
                 description:
-                    - Select how to prevent IP fragmentation for CAPWAP tunneled control and data packets (default = tcp_mss_adjust).
+                    - Select how to prevent IP fragmentation for CAPWAP tunneled control and data packets (default = tcp-mss-adjust).
                 type: str
                 choices:
                     - tcp-mss-adjust
@@ -473,7 +475,7 @@ options:
                         type: int
                     aeroscout_mu_timeout:
                         description:
-                            - AeroScout MU mode timeout (0 _ 65535 sec, default = 5).
+                            - AeroScout MU mode timeout (0 - 65535 sec, default = 5).
                         type: int
                     aeroscout_server_ip:
                         description:
@@ -513,7 +515,7 @@ options:
                             - disable
                     fortipresence_frequency:
                         description:
-                            - FortiPresence report transmit frequency (5 _ 65535 sec, default = 30).
+                            - FortiPresence report transmit frequency (5 - 65535 sec, default = 30).
                         type: int
                     fortipresence_port:
                         description:
@@ -554,7 +556,7 @@ options:
                             - disable
             led_schedules:
                 description:
-                    - Recurring firewall schedules for illuminating LEDs on the FortiAP. If led_state is enabled, LEDs will be visible when at least one of
+                    - Recurring firewall schedules for illuminating LEDs on the FortiAP. If led-state is enabled, LEDs will be visible when at least one of
                        the schedules is valid. Separate multiple schedule names with a space.
                 type: list
                 suboptions:
@@ -605,7 +607,7 @@ options:
                 suboptions:
                     type:
                         description:
-                            - WTP, FortiAP or AP platform type. There are built_in WTP profiles for all supported FortiAP models. You can select a built_in
+                            - WTP, FortiAP or AP platform type. There are built-in WTP profiles for all supported FortiAP models. You can select a built-in
                                profile and customize it or create a new profile.
                         type: str
                         choices:
@@ -695,7 +697,7 @@ options:
                         type: str
                     ap_sniffer_bufsize:
                         description:
-                            - Sniffer buffer size (1 _ 32 MB, default = 16).
+                            - Sniffer buffer size (1 - 32 MB, default = 16).
                         type: int
                     ap_sniffer_chan:
                         description:
@@ -742,7 +744,7 @@ options:
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = disable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = disable).
                         type: str
                         choices:
                             - enable
@@ -778,7 +780,7 @@ options:
                             - disable
                     bandwidth_capacity:
                         description:
-                            - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
                         type: int
                     beacon_interval:
                         description:
@@ -795,7 +797,7 @@ options:
                             - disable
                     call_capacity:
                         description:
-                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 _ 60, default = 10).
+                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60, default = 10).
                         type: int
                     channel:
                         description:
@@ -839,12 +841,12 @@ options:
                             - disable
                     dtim:
                         description:
-                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 _ 255, default = 1).
+                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255, default = 1).
                                Set higher to save client battery life.
                         type: int
                     frag_threshold:
                         description:
-                            - Maximum packet size that can be sent without fragmentation (800 _ 2346 bytes, default = 2346).
+                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes, default = 2346).
                         type: int
                     frequency_handoff:
                         description:
@@ -859,7 +861,7 @@ options:
                         type: int
                     max_distance:
                         description:
-                            - Maximum expected distance between the AP and clients (0 _ 54000 m, default = 0).
+                            - Maximum expected distance between the AP and clients (0 - 54000 m, default = 0).
                         type: int
                     mode:
                         description:
@@ -872,11 +874,11 @@ options:
                             - sniffer
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
                         type: int
                     powersave_optimize:
                         description:
-                            - Enable client power_saving features such as TIM, AC VO, and OBSS etc.
+                            - Enable client power-saving features such as TIM, AC VO, and OBSS etc.
                         type: str
                         choices:
                             - tim
@@ -894,11 +896,11 @@ options:
                             - disable
                     radio_id:
                         description:
-                            - radio_id
+                            - radio-id
                         type: int
                     rts_threshold:
                         description:
-                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 _ 2346 bytes,
+                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes,
                                default = 2346).
                         type: int
                     short_guard_interval:
@@ -972,7 +974,7 @@ options:
                         type: str
                     ap_sniffer_bufsize:
                         description:
-                            - Sniffer buffer size (1 _ 32 MB, default = 16).
+                            - Sniffer buffer size (1 - 32 MB, default = 16).
                         type: int
                     ap_sniffer_chan:
                         description:
@@ -1019,7 +1021,7 @@ options:
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power_level adjustment to prevent co_channel interference (default = disable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = disable).
                         type: str
                         choices:
                             - enable
@@ -1055,7 +1057,7 @@ options:
                             - disable
                     bandwidth_capacity:
                         description:
-                            - Maximum bandwidth capacity allowed (1 _ 600000 Kbps, default = 2000).
+                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
                         type: int
                     beacon_interval:
                         description:
@@ -1072,7 +1074,7 @@ options:
                             - disable
                     call_capacity:
                         description:
-                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 _ 60, default = 10).
+                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60, default = 10).
                         type: int
                     channel:
                         description:
@@ -1116,12 +1118,12 @@ options:
                             - disable
                     dtim:
                         description:
-                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 _ 255, default = 1).
+                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255, default = 1).
                                Set higher to save client battery life.
                         type: int
                     frag_threshold:
                         description:
-                            - Maximum packet size that can be sent without fragmentation (800 _ 2346 bytes, default = 2346).
+                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes, default = 2346).
                         type: int
                     frequency_handoff:
                         description:
@@ -1136,7 +1138,7 @@ options:
                         type: int
                     max_distance:
                         description:
-                            - Maximum expected distance between the AP and clients (0 _ 54000 m, default = 0).
+                            - Maximum expected distance between the AP and clients (0 - 54000 m, default = 0).
                         type: int
                     mode:
                         description:
@@ -1149,11 +1151,11 @@ options:
                             - sniffer
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 _ 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
                         type: int
                     powersave_optimize:
                         description:
-                            - Enable client power_saving features such as TIM, AC VO, and OBSS etc.
+                            - Enable client power-saving features such as TIM, AC VO, and OBSS etc.
                         type: str
                         choices:
                             - tim
@@ -1171,11 +1173,11 @@ options:
                             - disable
                     radio_id:
                         description:
-                            - radio_id
+                            - radio-id
                         type: int
                     rts_threshold:
                         description:
-                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 _ 2346 bytes,
+                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes,
                                default = 2346).
                         type: int
                     short_guard_interval:
@@ -1231,7 +1233,7 @@ options:
                 suboptions:
                     dest_ip:
                         description:
-                            - Destination IP and mask for the split_tunneling subnet.
+                            - Destination IP and mask for the split-tunneling subnet.
                         type: str
                     id:
                         description:
@@ -1240,7 +1242,7 @@ options:
                         type: int
             split_tunneling_acl_local_ap_subnet:
                 description:
-                    - Enable/disable automatically adding local subnetwork of FortiAP to split_tunneling ACL (default = disable).
+                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL (default = disable).
                 type: str
                 choices:
                     - enable
@@ -1619,7 +1621,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_wtp_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "allowaccess": {"required": False, "type": "str",
                                 "choices": ["telnet", "http", "https",

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,7 +80,7 @@ options:
         suboptions:
             active_flow_timeout:
                 description:
-                    - Timeout to report active flows (1 _ 60 min, default = 30).
+                    - Timeout to report active flows (1 - 60 min, default = 30).
                 type: int
             collector_ip:
                 description:
@@ -92,7 +92,7 @@ options:
                 type: int
             inactive_flow_timeout:
                 description:
-                    - Timeout for periodic report of finished flows (10 _ 600 sec, default = 15).
+                    - Timeout for periodic report of finished flows (10 - 600 sec, default = 15).
                 type: int
             source_ip:
                 description:
@@ -104,7 +104,7 @@ options:
                 type: int
             template_tx_timeout:
                 description:
-                    - Timeout for periodic template flowset transmission (1 _ 1440 min, default = 30).
+                    - Timeout for periodic template flowset transmission (1 - 1440 min, default = 30).
                 type: int
 '''
 
@@ -275,7 +275,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_netflow": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "active_flow_timeout": {"required": False, "type": "int"},
                 "collector_ip": {"required": False, "type": "str"},

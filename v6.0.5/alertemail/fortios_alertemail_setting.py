@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -120,7 +120,7 @@ options:
                 type: int
             email_interval:
                 description:
-                    - Interval between sending alert emails (1 _ 99999 min, default = 5).
+                    - Interval between sending alert emails (1 - 99999 min, default = 5).
                 type: int
             emergency_interval:
                 description:
@@ -132,7 +132,7 @@ options:
                 type: int
             FDS_license_expiring_days:
                 description:
-                    - Number of days to send alert email prior to FortiGuard license expiration (1 _ 100 days, default = 100).
+                    - Number of days to send alert email prior to FortiGuard license expiration (1 - 100 days, default = 100).
                 type: int
             FDS_license_expiring_warning:
                 description:
@@ -210,7 +210,7 @@ options:
                     - disable
             local_disk_usage:
                 description:
-                    - Disk usage percentage at which to send alert email (1 _ 99 percent, default = 75).
+                    - Disk usage percentage at which to send alert email (1 - 99 percent, default = 75).
                 type: int
             log_disk_usage_warning:
                 description:
@@ -264,7 +264,7 @@ options:
                     - disable
             sslvpn_authentication_errors_logs:
                 description:
-                    - Enable/disable SSL_VPN authentication error logs in alert email.
+                    - Enable/disable SSL-VPN authentication error logs in alert email.
                 type: str
                 choices:
                     - enable
@@ -498,7 +498,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "alertemail_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "admin_login_logs": {"required": False, "type": "str",
                                      "choices": ["enable", "disable"]},

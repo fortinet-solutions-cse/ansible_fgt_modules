@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             affinity_cpumask:
                 description:
-                    - Affinity setting for VM throughput (64_bit hexadecimal value in the format of 0xxxxxxxxxxxxxxxxx).
+                    - Affinity setting for VM throughput (64-bit hexadecimal value in the format of 0xxxxxxxxxxxxxxxxx).
                 type: str
             id:
                 description:
@@ -278,7 +278,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_affinity_packet_redistribution": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "affinity_cpumask": {"required": False, "type": "str"},
                 "id": {"required": True, "type": "int"},

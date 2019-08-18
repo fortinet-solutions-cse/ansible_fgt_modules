@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure multicast_flow.
+  - name: Configure multicast-flow.
     fortios_router_multicast_flow:
       host:  "{{ host }}"
       username: "{{ username }}"

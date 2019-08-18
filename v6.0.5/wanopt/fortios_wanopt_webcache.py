@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -101,7 +101,7 @@ options:
                     - disable
             cache_expired:
                 description:
-                    - Enable/disable caching type_1 objects that are already expired on arrival.
+                    - Enable/disable caching type-1 objects that are already expired on arrival.
                 type: str
                 choices:
                     - enable
@@ -120,7 +120,7 @@ options:
                     - disable
             fresh_factor:
                 description:
-                    - Frequency that the server is checked to see if any objects have expired (1 _ 100, default = 100). The higher the fresh factor, the less
+                    - Frequency that the server is checked to see if any objects have expired (1 - 100, default = 100). The higher the fresh factor, the less
                        often the checks occur.
                 type: int
             host_validate:
@@ -132,35 +132,35 @@ options:
                     - disable
             ignore_conditional:
                 description:
-                    - Enable/disable controlling the behavior of cache_control HTTP 1.1 header values.
+                    - Enable/disable controlling the behavior of cache-control HTTP 1.1 header values.
                 type: str
                 choices:
                     - enable
                     - disable
             ignore_ie_reload:
                 description:
-                    - "Enable/disable ignoring the PNC_interpretation of Internet Explorer's Accept: / header."
+                    - "Enable/disable ignoring the PNC-interpretation of Internet Explorer's Accept: / header."
                 type: str
                 choices:
                     - enable
                     - disable
             ignore_ims:
                 description:
-                    - Enable/disable ignoring the if_modified_since (IMS) header.
+                    - Enable/disable ignoring the if-modified-since (IMS) header.
                 type: str
                 choices:
                     - enable
                     - disable
             ignore_pnc:
                 description:
-                    - Enable/disable ignoring the pragma no_cache (PNC) header.
+                    - Enable/disable ignoring the pragma no-cache (PNC) header.
                 type: str
                 choices:
                     - enable
                     - disable
             max_object_size:
                 description:
-                    - Maximum cacheable object size in kB (1 _ 2147483 kb (2GB). All objects that exceed this are delivered to the client but not stored in
+                    - Maximum cacheable object size in kB (1 - 2147483 kb (2GB). All objects that exceed this are delivered to the client but not stored in
                        the web cache.
                 type: int
             max_ttl:
@@ -175,11 +175,11 @@ options:
                 type: int
             neg_resp_time:
                 description:
-                    - Time in minutes to cache negative responses or errors (0 _ 4294967295, default = 0  which means negative responses are not cached).
+                    - Time in minutes to cache negative responses or errors (0 - 4294967295, default = 0  which means negative responses are not cached).
                 type: int
             reval_pnc:
                 description:
-                    - Enable/disable revalidation of pragma_no_cache (PNC) to address bandwidth concerns.
+                    - Enable/disable revalidation of pragma-no-cache (PNC) to address bandwidth concerns.
                 type: str
                 choices:
                     - enable
@@ -366,7 +366,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "wanopt_webcache": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "always_revalidate": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},

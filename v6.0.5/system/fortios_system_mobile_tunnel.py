@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -102,7 +102,7 @@ options:
                 type: str
             lifetime:
                 description:
-                    - NMMO HA registration request lifetime (180 _ 65535 sec, default = 65535).
+                    - NMMO HA registration request lifetime (180 - 65535 sec, default = 65535).
                 type: int
             n_mhae_key:
                 description:
@@ -144,7 +144,7 @@ options:
                         type: str
             reg_interval:
                 description:
-                    - NMMO HA registration interval (5 _ 300, default = 5).
+                    - NMMO HA registration interval (5 - 300, default = 5).
                 type: int
             reg_retry:
                 description:
@@ -152,7 +152,7 @@ options:
                 type: int
             renew_interval:
                 description:
-                    - Time before lifetime expiraton to send NMMO HA re_registration (5 _ 60, default = 60).
+                    - Time before lifetime expiraton to send NMMO HA re-registration (5 - 60, default = 60).
                 type: int
             roaming_interface:
                 description:
@@ -365,7 +365,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_mobile_tunnel": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "hash_algorithm": {"required": False, "type": "str",
                                    "choices": ["hmac-md5"]},

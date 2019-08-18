@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -84,7 +84,7 @@ options:
                 type: int
             dialup_tunnel:
                 description:
-                    - Maximum number of dial_up tunnels.
+                    - Maximum number of dial-up tunnels.
                 type: int
             firewall_address:
                 description:
@@ -96,7 +96,7 @@ options:
                 type: int
             firewall_policy:
                 description:
-                    - Maximum number of firewall policies (IPv4, IPv6, policy46, policy64, DoS_policy4, DoS_policy6, multicast).
+                    - Maximum number of firewall policies (IPv4, IPv6, policy46, policy64, DoS-policy4, DoS-policy6, multicast).
                 type: int
             ipsec_phase1:
                 description:
@@ -120,7 +120,7 @@ options:
                 type: int
             onetime_schedule:
                 description:
-                    - Maximum number of firewall one_time schedules.
+                    - Maximum number of firewall one-time schedules.
                 type: int
             proxy:
                 description:
@@ -140,7 +140,7 @@ options:
                 type: int
             sslvpn:
                 description:
-                    - Maximum number of SSL_VPN.
+                    - Maximum number of SSL-VPN.
                 type: int
             user:
                 description:
@@ -333,7 +333,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_resource_limits": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "custom_service": {"required": False, "type": "int"},
                 "dialup_tunnel": {"required": False, "type": "int"},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -114,7 +114,7 @@ options:
                         type: str
                     distance:
                         description:
-                            - Distance (1 _ 255).
+                            - Distance (1 - 255).
                         type: int
                     id:
                         description:
@@ -209,7 +209,7 @@ options:
                         type: str
                     ip6:
                         description:
-                            - IPv6 link_local address.
+                            - IPv6 link-local address.
                         type: str
             network:
                 description:
@@ -223,7 +223,7 @@ options:
                         type: int
                     prefix:
                         description:
-                            - Network IPv6 link_local prefix.
+                            - Network IPv6 link-local prefix.
                         type: str
             offset_list:
                 description:
@@ -243,7 +243,7 @@ options:
                             - out
                     id:
                         description:
-                            - Offset_list ID.
+                            - Offset-list ID.
                         required: true
                         type: int
                     interface:
@@ -523,7 +523,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_ripng": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "aggregate_address": {"required": False, "type": "list",
                                       "options": {

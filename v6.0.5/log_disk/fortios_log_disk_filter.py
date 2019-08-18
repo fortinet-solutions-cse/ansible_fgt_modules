@@ -31,7 +31,7 @@ description:
       user to set and modify log_disk feature and filter category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -73,6 +73,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_disk_filter:
         description:
             - Configure filters for local disk logging. Use these filters to determine the log messages to record according to severity and type.
@@ -199,12 +200,10 @@ options:
                 description:
                     - Enable/disable netscan discovery event logging.
                 type: str
-                choices:
             netscan_vulnerability:
                 description:
                     - Enable/disable netscan vulnerability event logging.
                 type: str
-                choices:
             pattern:
                 description:
                     - Enable/disable pattern update logging.
@@ -512,7 +511,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_disk_filter": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "admin": {"required": False, "type": "str",
                           "choices": ["enable", "disable"]},
@@ -547,10 +546,8 @@ def main():
                                   "choices": ["enable", "disable"]},
                 "multicast_traffic": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
-                "netscan_discovery": {"required": False, "type": "str",
-                                      "choices": []},
-                "netscan_vulnerability": {"required": False, "type": "str",
-                                          "choices": []},
+                "netscan_discovery": {"required": False, "type": "str"},
+                "netscan_vulnerability": {"required": False, "type": "str"},
                 "pattern": {"required": False, "type": "str",
                             "choices": ["enable", "disable"]},
                 "ppp": {"required": False, "type": "str",

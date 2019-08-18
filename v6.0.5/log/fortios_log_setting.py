@@ -30,7 +30,7 @@ description:
       user to set and modify log feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_setting:
         description:
             - Configure general log settings.
@@ -124,28 +125,28 @@ options:
                     - disable
             local_in_allow:
                 description:
-                    - Enable/disable local_in_allow logging.
+                    - Enable/disable local-in-allow logging.
                 type: str
                 choices:
                     - enable
                     - disable
             local_in_deny_broadcast:
                 description:
-                    - Enable/disable local_in_deny_broadcast logging.
+                    - Enable/disable local-in-deny-broadcast logging.
                 type: str
                 choices:
                     - enable
                     - disable
             local_in_deny_unicast:
                 description:
-                    - Enable/disable local_in_deny_unicast logging.
+                    - Enable/disable local-in-deny-unicast logging.
                 type: str
                 choices:
                     - enable
                     - disable
             local_out:
                 description:
-                    - Enable/disable local_out logging.
+                    - Enable/disable local-out logging.
                 type: str
                 choices:
                     - enable
@@ -173,7 +174,7 @@ options:
                     - disable
             log_user_in_upper:
                 description:
-                    - Enable/disable logs with user_in_upper.
+                    - Enable/disable logs with user-in-upper.
                 type: str
                 choices:
                     - enable
@@ -391,7 +392,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "brief_traffic_format": {"required": False, "type": "str",
                                          "choices": ["enable", "disable"]},

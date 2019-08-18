@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             ds:
                 description:
-                    - DSCP(DiffServ) DS value (0 _ 63).
+                    - DSCP(DiffServ) DS value (0 - 63).
                 type: int
             id:
                 description:
@@ -276,7 +276,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_dscp_based_priority": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ds": {"required": False, "type": "int"},
                 "id": {"required": True, "type": "int"},

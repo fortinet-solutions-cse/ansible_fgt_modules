@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and policy6 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_policy6:
         description:
             - Configure IPv6 policies.
@@ -156,14 +158,14 @@ options:
                         type: str
             diffserv_forward:
                 description:
-                    - Enable to change packet's DiffServ values to the specified diffservcode_forward value.
+                    - Enable to change packet's DiffServ values to the specified diffservcode-forward value.
                 type: str
                 choices:
                     - enable
                     - disable
             diffserv_reverse:
                 description:
-                    - Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode_rev value.
+                    - Enable to change packet's reverse (reply) DiffServ values to the specified diffservcode-rev value.
                 type: str
                 choices:
                     - enable
@@ -266,7 +268,7 @@ options:
                 type: str
             inbound:
                 description:
-                    - "Policy_based IPsec VPN: only traffic from the remote network can initiate a VPN."
+                    - "Policy-based IPsec VPN: only traffic from the remote network can initiate a VPN."
                 type: str
                 choices:
                     - enable
@@ -314,28 +316,28 @@ options:
                     - disable
             natinbound:
                 description:
-                    - "Policy_based IPsec VPN: apply destination NAT to inbound traffic."
+                    - "Policy-based IPsec VPN: apply destination NAT to inbound traffic."
                 type: str
                 choices:
                     - enable
                     - disable
             natoutbound:
                 description:
-                    - "Policy_based IPsec VPN: apply source NAT to outbound traffic."
+                    - "Policy-based IPsec VPN: apply source NAT to outbound traffic."
                 type: str
                 choices:
                     - enable
                     - disable
             outbound:
                 description:
-                    - "Policy_based IPsec VPN: only traffic from the internal network can initiate a VPN."
+                    - "Policy-based IPsec VPN: only traffic from the internal network can initiate a VPN."
                 type: str
                 choices:
                     - enable
                     - disable
             per_ip_shaper:
                 description:
-                    - Per_IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
+                    - Per-IP traffic shaper. Source firewall.shaper.per-ip-shaper.name.
                 type: str
             policyid:
                 description:
@@ -373,7 +375,7 @@ options:
                 type: str
             rsso:
                 description:
-                    - Enable/disable RADIUS single sign_on (RSSO).
+                    - Enable/disable RADIUS single sign-on (RSSO).
                 type: str
                 choices:
                     - enable
@@ -384,7 +386,7 @@ options:
                 type: str
             send_deny_packet:
                 description:
-                    - Enable/disable return of deny_packet.
+                    - Enable/disable return of deny-packet.
                 type: str
                 choices:
                     - enable
@@ -553,7 +555,7 @@ options:
                 type: str
             vpntunnel:
                 description:
-                    - "Policy_based IPsec VPN: name of the IPsec VPN Phase 1. Source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name."
+                    - "Policy-based IPsec VPN: name of the IPsec VPN Phase 1. Source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name."
                 type: str
             webfilter_profile:
                 description:
@@ -859,7 +861,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_policy6": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny", "ipsec"]},

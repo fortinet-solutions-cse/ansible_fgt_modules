@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure firewall IP_translation.
+  - name: Configure firewall IP-translation.
     fortios_firewall_ip_translation:
       host:  "{{ host }}"
       username: "{{ username }}"

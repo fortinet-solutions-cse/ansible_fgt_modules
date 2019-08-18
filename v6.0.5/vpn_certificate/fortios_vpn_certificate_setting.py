@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -80,27 +80,27 @@ options:
         suboptions:
             certname_dsa1024:
                 description:
-                    - 1024 bit DSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 1024 bit DSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             certname_dsa2048:
                 description:
-                    - 2048 bit DSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 2048 bit DSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             certname_ecdsa256:
                 description:
-                    - 256 bit ECDSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 256 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             certname_ecdsa384:
                 description:
-                    - 384 bit ECDSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 384 bit ECDSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             certname_rsa1024:
                 description:
-                    - 1024 bit RSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 1024 bit RSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             certname_rsa2048:
                 description:
-                    - 2048 bit RSA key certificate for re_signing server certificates for SSL inspection. Source vpn.certificate.local.name.
+                    - 2048 bit RSA key certificate for re-signing server certificates for SSL inspection. Source vpn.certificate.local.name.
                 type: str
             check_ca_cert:
                 description:
@@ -370,7 +370,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "vpn_certificate_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "certname_dsa1024": {"required": False, "type": "str"},
                 "certname_dsa2048": {"required": False, "type": "str"},

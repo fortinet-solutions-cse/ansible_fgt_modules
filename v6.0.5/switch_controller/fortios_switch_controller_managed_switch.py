@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and managed_switch category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     switch_controller_managed_switch:
         description:
             - Configure FortiSwitch devices that are managed by this FortiGate.
@@ -106,11 +108,11 @@ options:
                             - disable
                     max_reauth_attempt:
                         description:
-                            - Maximum number of authentication attempts (0 _ 15, default = 3).
+                            - Maximum number of authentication attempts (0 - 15, default = 3).
                         type: int
                     reauth_period:
                         description:
-                            - Reauthentication time interval (1 _ 1440 min, default = 60, 0 = disable).
+                            - Reauthentication time interval (1 - 1440 min, default = 60, 0 = disable).
                         type: int
             custom_command:
                 description:
@@ -124,7 +126,7 @@ options:
                         type: str
                     command_name:
                         description:
-                            - Names of commands to be pushed to this FortiSwitch device, as configured under config switch_controller custom_command. Source
+                            - Names of commands to be pushed to this FortiSwitch device, as configured under config switch-controller custom-command. Source
                                switch-controller.custom-command.command-name.
                         type: str
             delayed_restart_trigger:
@@ -179,7 +181,7 @@ options:
                 suboptions:
                     aging_time:
                         description:
-                            - Maximum time to retain a multicast snooping entry for which no packets have been seen (15 _ 3600 sec, default = 300).
+                            - Maximum time to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec, default = 300).
                         type: int
                     flood_unknown_multicast:
                         description:
@@ -249,7 +251,7 @@ options:
                             - disable
             name:
                 description:
-                    - Managed_switch name.
+                    - Managed-switch name.
                 type: str
             owner_vdom:
                 description:
@@ -261,14 +263,14 @@ options:
                 type: int
             poe_pre_standard_detection:
                 description:
-                    - Enable/disable PoE pre_standard detection.
+                    - Enable/disable PoE pre-standard detection.
                 type: str
                 choices:
                     - enable
                     - disable
             ports:
                 description:
-                    - Managed_switch port list.
+                    - Managed-switch port list.
                 type: list
                 suboptions:
                     allowed_vlans:
@@ -296,7 +298,7 @@ options:
                             - trusted
                     bundle:
                         description:
-                            - Enable/disable Link Aggregation Group (LAG) bundling for non_FortiLink interfaces.
+                            - Enable/disable Link Aggregation Group (LAG) bundling for non-FortiLink interfaces.
                         type: str
                         choices:
                             - enable
@@ -307,14 +309,14 @@ options:
                         type: str
                     dhcp_snoop_option82_trust:
                         description:
-                            - Enable/disable allowance of DHCP with option_82 on untrusted interface.
+                            - Enable/disable allowance of DHCP with option-82 on untrusted interface.
                         type: str
                         choices:
                             - enable
                             - disable
                     dhcp_snooping:
                         description:
-                            - Trusted or untrusted DHCP_snooping interface.
+                            - Trusted or untrusted DHCP-snooping interface.
                         type: str
                         choices:
                             - untrusted
@@ -345,15 +347,15 @@ options:
                                 type: str
                     export_to:
                         description:
-                            - Export managed_switch port to a tenant VDOM. Source system.vdom.name.
+                            - Export managed-switch port to a tenant VDOM. Source system.vdom.name.
                         type: str
                     export_to_pool:
                         description:
-                            - Switch controller export port to pool_list. Source switch-controller.virtual-port-pool.name.
+                            - Switch controller export port to pool-list. Source switch-controller.virtual-port-pool.name.
                         type: str
                     export_to_pool_flag:
                         description:
-                            - Switch controller export port to pool_list.
+                            - Switch controller export port to pool-list.
                         type: int
                     fgt_peer_device_name:
                         description:
@@ -365,7 +367,7 @@ options:
                         type: str
                     fiber_port:
                         description:
-                            - Fiber_port.
+                            - Fiber-port.
                         type: int
                     flags:
                         description:
@@ -384,7 +386,7 @@ options:
                             - disable
                     igmps_flood_reports:
                         description:
-                            - Enable/disable flooding of IGMP reports to this interface when igmp_snooping enabled.
+                            - Enable/disable flooding of IGMP reports to this interface when igmp-snooping enabled.
                         type: str
                         choices:
                             - enable
@@ -417,7 +419,7 @@ options:
                             - fast
                     learning_limit:
                         description:
-                            - Limit the number of dynamic MAC addresses on this Port (1 _ 128, 0 = no limit, default).
+                            - Limit the number of dynamic MAC addresses on this Port (1 - 128, 0 = no limit, default).
                         type: int
                     lldp_profile:
                         description:
@@ -434,22 +436,22 @@ options:
                             - tx-rx
                     loop_guard:
                         description:
-                            - Enable/disable loop_guard on this interface, an STP optimization used to prevent network loops.
+                            - Enable/disable loop-guard on this interface, an STP optimization used to prevent network loops.
                         type: str
                         choices:
                             - enabled
                             - disabled
                     loop_guard_timeout:
                         description:
-                            - Loop_guard timeout (0 _ 120 min, default = 45).
+                            - Loop-guard timeout (0 - 120 min, default = 45).
                         type: int
                     max_bundle:
                         description:
-                            - Maximum size of LAG bundle (1 _ 24, default = 24)
+                            - Maximum size of LAG bundle (1 - 24, default = 24)
                         type: int
                     mclag:
                         description:
-                            - Enable/disable multi_chassis link aggregation (MCLAG).
+                            - Enable/disable multi-chassis link aggregation (MCLAG).
                         type: str
                         choices:
                             - enable
@@ -472,7 +474,7 @@ options:
                                 type: str
                     min_bundle:
                         description:
-                            - Minimum size of LAG bundle (1 _ 24, default = 1)
+                            - Minimum size of LAG bundle (1 - 24, default = 1)
                         type: int
                     mode:
                         description:
@@ -488,7 +490,7 @@ options:
                         type: int
                     poe_pre_standard_detection:
                         description:
-                            - Enable/disable PoE pre_standard detection.
+                            - Enable/disable PoE pre-standard detection.
                         type: str
                         choices:
                             - enable
@@ -546,11 +548,11 @@ options:
                             - both
                     sflow_counter_interval:
                         description:
-                            - sFlow sampler counter polling interval (1 _ 255 sec).
+                            - sFlow sampler counter polling interval (1 - 255 sec).
                         type: int
                     sflow_sample_rate:
                         description:
-                            - sFlow sampler sample rate (0 _ 99999 p/sec).
+                            - sFlow sampler sample rate (0 - 99999 p/sec).
                         type: int
                     sflow_sampler:
                         description:
@@ -605,7 +607,7 @@ options:
                             - disabled
                     stp_bpdu_guard_timeout:
                         description:
-                            - BPDU Guard disabling protection (0 _ 120 min).
+                            - BPDU Guard disabling protection (0 - 120 min).
                         type: int
                     stp_root_guard:
                         description:
@@ -651,7 +653,7 @@ options:
                         type: str
             pre_provisioned:
                 description:
-                    - Pre_provisioned managed switch.
+                    - Pre-provisioned managed switch.
                 type: int
             staged_image_version:
                 description:
@@ -678,7 +680,7 @@ options:
                             - disable
                     rate:
                         description:
-                            - Rate in packets per second at which storm traffic is controlled (1 _ 10000000, default = 500). Storm control drops excess
+                            - Rate in packets per second at which storm traffic is controlled (1 - 10000000, default = 500). Storm control drops excess
                                traffic data rates beyond this threshold.
                         type: int
                     unknown_multicast:
@@ -702,11 +704,11 @@ options:
                 suboptions:
                     forward_time:
                         description:
-                            - Period of time a port is in listening and learning state (4 _ 30 sec, default = 15).
+                            - Period of time a port is in listening and learning state (4 - 30 sec, default = 15).
                         type: int
                     hello_time:
                         description:
-                            - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 _ 10 sec, default = 2).
+                            - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 - 10 sec, default = 2).
                         type: int
                     local_override:
                         description:
@@ -717,11 +719,11 @@ options:
                             - disable
                     max_age:
                         description:
-                            - Maximum time before a bridge port saves its configuration BPDU information (6 _ 40 sec, default = 20).
+                            - Maximum time before a bridge port saves its configuration BPDU information (6 - 40 sec, default = 20).
                         type: int
                     max_hops:
                         description:
-                            - Maximum number of hops between the root bridge and the furthest bridge (1_ 40, default = 20).
+                            - Maximum number of hops between the root bridge and the furthest bridge (1- 40, default = 20).
                         type: int
                     name:
                         description:
@@ -729,11 +731,11 @@ options:
                         type: str
                     pending_timer:
                         description:
-                            - Pending time (1 _ 15 sec, default = 4).
+                            - Pending time (1 - 15 sec, default = 4).
                         type: int
                     revision:
                         description:
-                            - STP revision number (0 _ 65535).
+                            - STP revision number (0 - 65535).
                         type: int
                     status:
                         description:
@@ -748,7 +750,7 @@ options:
                 type: str
             switch_id:
                 description:
-                    - Managed_switch id.
+                    - Managed-switch id.
                 type: str
             switch_log:
                 description:
@@ -1131,7 +1133,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_managed_switch": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "802_1X_settings": {"required": False, "type": "dict",
                                     "options": {

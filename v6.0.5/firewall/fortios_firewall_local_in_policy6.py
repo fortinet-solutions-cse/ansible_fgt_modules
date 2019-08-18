@@ -24,13 +24,13 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_firewall_local_in_policy6
-short_description: Configure user defined IPv6 local_in policies in Fortinet's FortiOS and FortiGate.
+short_description: Configure user defined IPv6 local-in policies in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify firewall feature and local_in_policy6 category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,9 +80,10 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_local_in_policy6:
         description:
-            - Configure user defined IPv6 local_in policies.
+            - Configure user defined IPv6 local-in policies.
         default: null
         type: dict
         suboptions:
@@ -142,7 +144,7 @@ options:
                         type: str
             status:
                 description:
-                    - Enable/disable this local_in policy.
+                    - Enable/disable this local-in policy.
                 type: str
                 choices:
                     - enable
@@ -158,7 +160,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure user defined IPv6 local_in policies.
+  - name: Configure user defined IPv6 local-in policies.
     fortios_firewall_local_in_policy6:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -335,7 +337,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_local_in_policy6": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "str",
                            "choices": ["accept", "deny"]},

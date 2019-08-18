@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -112,11 +112,11 @@ options:
                     - disable
             disc_retry_timeout:
                 description:
-                    - PPPoE discovery init timeout value in (0_4294967295 sec).
+                    - PPPoE discovery init timeout value in (0-4294967295 sec).
                 type: int
             idle_timeout:
                 description:
-                    - PPPoE auto disconnect after idle timeout (0_4294967295 sec).
+                    - PPPoE auto disconnect after idle timeout (0-4294967295 sec).
                 type: int
             ipunnumbered:
                 description:
@@ -131,11 +131,11 @@ options:
                     - disable
             lcp_echo_interval:
                 description:
-                    - PPPoE LCP echo interval in (0_4294967295 sec, default = 5).
+                    - PPPoE LCP echo interval in (0-4294967295 sec, default = 5).
                 type: int
             lcp_max_echo_fails:
                 description:
-                    - Maximum missed LCP echo messages before disconnect (0_4294967295, default = 3).
+                    - Maximum missed LCP echo messages before disconnect (0-4294967295, default = 3).
                 type: int
             name:
                 description:
@@ -144,7 +144,7 @@ options:
                 type: str
             padt_retry_timeout:
                 description:
-                    - PPPoE terminate timeout value in (0_4294967295 sec).
+                    - PPPoE terminate timeout value in (0-4294967295 sec).
                 type: int
             password:
                 description:
@@ -357,7 +357,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_pppoe_interface": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "ac_name": {"required": False, "type": "str"},
                 "auth_type": {"required": False, "type": "str",

@@ -30,7 +30,7 @@ description:
       user to set and modify log feature and threat_weight category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_threat_weight:
         description:
             - Configure threat weight settings.
@@ -80,7 +81,7 @@ options:
         suboptions:
             application:
                 description:
-                    - Application_control threat weight settings.
+                    - Application-control threat weight settings.
                 type: list
                 suboptions:
                     category:
@@ -124,7 +125,7 @@ options:
                     - critical
             geolocation:
                 description:
-                    - Geolocation_based threat weight settings.
+                    - Geolocation-based threat weight settings.
                 type: list
                 suboptions:
                     country:
@@ -138,7 +139,7 @@ options:
                         type: int
                     level:
                         description:
-                            - Threat weight score for Geolocation_based events.
+                            - Threat weight score for Geolocation-based events.
                         type: str
                         choices:
                             - disable
@@ -208,23 +209,23 @@ options:
                 suboptions:
                     critical:
                         description:
-                            - Critical level score value (1 _ 100).
+                            - Critical level score value (1 - 100).
                         type: int
                     high:
                         description:
-                            - High level score value (1 _ 100).
+                            - High level score value (1 - 100).
                         type: int
                     low:
                         description:
-                            - Low level score value (1 _ 100).
+                            - Low level score value (1 - 100).
                         type: int
                     medium:
                         description:
-                            - Medium level score value (1 _ 100).
+                            - Medium level score value (1 - 100).
                         type: int
             malware:
                 description:
-                    - Anti_virus malware threat weight settings.
+                    - Anti-virus malware threat weight settings.
                 type: dict
                 suboptions:
                     botnet_connection:
@@ -583,7 +584,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_threat_weight": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "application": {"required": False, "type": "list",
                                 "options": {

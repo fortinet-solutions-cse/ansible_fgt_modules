@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and ipv6_eh_filter category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     firewall_ipv6_eh_filter:
         description:
             - Configure IPv6 extension header filter.
@@ -101,11 +102,11 @@ options:
                     - disable
             hdopt_type:
                 description:
-                    - Block specific Hop_by_Hop and/or Destination Option types (max. 7 types, each between 0 and 255, default = 0).
+                    - Block specific Hop-by-Hop and/or Destination Option types (max. 7 types, each between 0 and 255, default = 0).
                 type: int
             hop_opt:
                 description:
-                    - Enable/disable blocking packets with the Hop_by_Hop Options header (default = disable).
+                    - Enable/disable blocking packets with the Hop-by-Hop Options header (default = disable).
                 type: str
                 choices:
                     - enable
@@ -298,7 +299,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "firewall_ipv6_eh_filter": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth": {"required": False, "type": "str",
                          "choices": ["enable", "disable"]},

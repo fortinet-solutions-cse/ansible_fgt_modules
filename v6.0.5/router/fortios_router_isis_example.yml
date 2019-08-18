@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure IS_IS.
+  - name: Configure IS-IS.
     fortios_router_isis:
       host:  "{{ host }}"
       username: "{{ username }}"

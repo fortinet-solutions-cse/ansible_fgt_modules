@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure redundant internet connections using SD_WAN (formerly virtual WAN link).
+  - name: Configure redundant internet connections using SD-WAN (formerly virtual WAN link).
     fortios_system_virtual_wan_link:
       host:  "{{ host }}"
       username: "{{ username }}"

@@ -30,7 +30,7 @@ description:
       user to set and modify wireless_controller feature and vap category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     wireless_controller_vap:
         description:
             - Configure Virtual Access Points (VAPs).
@@ -87,7 +89,7 @@ options:
         suboptions:
             acct_interim_interval:
                 description:
-                    - WiFi RADIUS accounting interim interval (60 _ 86400 sec, default = 0).
+                    - WiFi RADIUS accounting interim interval (60 - 86400 sec, default = 0).
                 type: int
             alias:
                 description:
@@ -129,7 +131,7 @@ options:
                     - all-other-bc
             captive_portal_ac_name:
                 description:
-                    - Local_bridging captive portal ac_name.
+                    - Local-bridging captive portal ac-name.
                 type: str
             captive_portal_macauth_radius_secret:
                 description:
@@ -149,7 +151,7 @@ options:
                 type: str
             captive_portal_session_timeout_interval:
                 description:
-                    - Session timeout interval (0 _ 864000 sec, default = 0).
+                    - Session timeout interval (0 - 864000 sec, default = 0).
                 type: int
             dhcp_lease_time:
                 description:
@@ -157,7 +159,7 @@ options:
                 type: int
             dhcp_option82_circuit_id_insertion:
                 description:
-                    - Enable/disable DHCP option 82 circuit_id insert (default = disable).
+                    - Enable/disable DHCP option 82 circuit-id insert (default = disable).
                 type: str
                 choices:
                     - style-1
@@ -172,7 +174,7 @@ options:
                     - disable
             dhcp_option82_remote_id_insertion:
                 description:
-                    - Enable/disable DHCP option 82 remote_id insert (default = disable).
+                    - Enable/disable DHCP option 82 remote-id insert (default = disable).
                 type: str
                 choices:
                     - style-1
@@ -186,18 +188,18 @@ options:
                     - disable
             eap_reauth:
                 description:
-                    - Enable/disable EAP re_authentication for WPA_Enterprise security.
+                    - Enable/disable EAP re-authentication for WPA-Enterprise security.
                 type: str
                 choices:
                     - enable
                     - disable
             eap_reauth_intv:
                 description:
-                    - EAP re_authentication interval (1800 _ 864000 sec, default = 86400).
+                    - EAP re-authentication interval (1800 - 864000 sec, default = 86400).
                 type: int
             eapol_key_retries:
                 description:
-                    - Enable/disable retransmission of EAPOL_Key frames (message 3/4 and group message 1/2) (default = enable).
+                    - Enable/disable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2) (default = enable).
                 type: str
                 choices:
                     - disable
@@ -212,7 +214,7 @@ options:
                     - TKIP-AES
             external_fast_roaming:
                 description:
-                    - Enable/disable fast roaming or pre_authentication with external APs not managed by the FortiGate (default = disable).
+                    - Enable/disable fast roaming or pre-authentication with external APs not managed by the FortiGate (default = disable).
                 type: str
                 choices:
                     - enable
@@ -234,14 +236,14 @@ options:
                     - enable
             fast_roaming:
                 description:
-                    - Enable/disable fast_roaming, or pre_authentication, where supported by clients (default = disable).
+                    - Enable/disable fast-roaming, or pre-authentication, where supported by clients (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             ft_mobility_domain:
                 description:
-                    - Mobility domain identifier in FT (1 _ 65535, default = 1000).
+                    - Mobility domain identifier in FT (1 - 65535, default = 1000).
                 type: int
             ft_over_ds:
                 description:
@@ -252,7 +254,7 @@ options:
                     - enable
             ft_r0_key_lifetime:
                 description:
-                    - Lifetime of the PMK_R0 key in FT, 1_65535 minutes.
+                    - Lifetime of the PMK-R0 key in FT, 1-65535 minutes.
                 type: int
             gtk_rekey:
                 description:
@@ -263,7 +265,7 @@ options:
                     - disable
             gtk_rekey_intv:
                 description:
-                    - GTK rekey interval (1800 _ 864000 sec, default = 86400).
+                    - GTK rekey interval (1800 - 864000 sec, default = 86400).
                 type: int
             hotspot20_profile:
                 description:
@@ -271,7 +273,7 @@ options:
                 type: str
             intra_vap_privacy:
                 description:
-                    - Enable/disable blocking communication between clients on the same SSID (called intra_SSID privacy) (default = disable).
+                    - Enable/disable blocking communication between clients on the same SSID (called intra-SSID privacy) (default = disable).
                 type: str
                 choices:
                     - enable
@@ -286,11 +288,11 @@ options:
                 type: str
             keyindex:
                 description:
-                    - WEP key index (1 _ 4).
+                    - WEP key index (1 - 4).
                 type: int
             ldpc:
                 description:
-                    - VAP low_density parity_check (LDPC) coding configuration.
+                    - VAP low-density parity-check (LDPC) coding configuration.
                 type: str
                 choices:
                     - disable
@@ -396,18 +398,18 @@ options:
                     - disable
             mpsk:
                 description:
-                    - Enable/disable multiple pre_shared keys (PSKs.)
+                    - Enable/disable multiple pre-shared keys (PSKs.)
                 type: str
                 choices:
                     - enable
                     - disable
             mpsk_concurrent_clients:
                 description:
-                    - Number of pre_shared keys (PSKs) to allow if multiple pre_shared keys are enabled.
+                    - Number of pre-shared keys (PSKs) to allow if multiple pre-shared keys are enabled.
                 type: int
             mpsk_key:
                 description:
-                    - Pre_shared keys that can be used to connect to this virtual access point.
+                    - Pre-shared keys that can be used to connect to this virtual access point.
                 type: list
                 suboptions:
                     comment:
@@ -416,15 +418,15 @@ options:
                         type: str
                     concurrent_clients:
                         description:
-                            - Number of clients that can connect using this pre_shared key.
+                            - Number of clients that can connect using this pre-shared key.
                         type: str
                     key_name:
                         description:
-                            - Pre_shared key name.
+                            - Pre-shared key name.
                         type: str
                     passphrase:
                         description:
-                            - WPA Pre_shared key.
+                            - WPA Pre-shared key.
                         type: str
             multicast_enhance:
                 description:
@@ -456,7 +458,7 @@ options:
                     - enable
             passphrase:
                 description:
-                    - WPA pre_shard key (PSK) to be used to authenticate WiFi users.
+                    - WPA pre-shard key (PSK) to be used to authenticate WiFi users.
                 type: str
             pmf:
                 description:
@@ -468,11 +470,11 @@ options:
                     - optional
             pmf_assoc_comeback_timeout:
                 description:
-                    - Protected Management Frames (PMF) comeback maximum timeout (1_20 sec).
+                    - Protected Management Frames (PMF) comeback maximum timeout (1-20 sec).
                 type: int
             pmf_sa_query_retry_timeout:
                 description:
-                    - Protected Management Frames (PMF) SA query retry timeout interval (1 _ 5 100s of msec).
+                    - Protected Management Frames (PMF) SA query retry timeout interval (1 - 5 100s of msec).
                 type: int
             portal_message_override_group:
                 description:
@@ -485,19 +487,19 @@ options:
                 suboptions:
                     auth_disclaimer_page:
                         description:
-                            - Override auth_disclaimer_page message with message from portal_message_overrides group.
+                            - Override auth-disclaimer-page message with message from portal-message-overrides group.
                         type: str
                     auth_login_failed_page:
                         description:
-                            - Override auth_login_failed_page message with message from portal_message_overrides group.
+                            - Override auth-login-failed-page message with message from portal-message-overrides group.
                         type: str
                     auth_login_page:
                         description:
-                            - Override auth_login_page message with message from portal_message_overrides group.
+                            - Override auth-login-page message with message from portal-message-overrides group.
                         type: str
                     auth_reject_page:
                         description:
-                            - Override auth_reject_page message with message from portal_message_overrides group.
+                            - Override auth-reject-page message with message from portal-message-overrides group.
                         type: str
             portal_type:
                 description:
@@ -520,18 +522,18 @@ options:
                     - disable
             probe_resp_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to probe requests (_95 to _20, default = _80).
+                    - Minimum signal level/threshold in dBm required for the AP response to probe requests (-95 to -20, default = -80).
                 type: str
             ptk_rekey:
                 description:
-                    - Enable/disable PTK rekey for WPA_Enterprise security.
+                    - Enable/disable PTK rekey for WPA-Enterprise security.
                 type: str
                 choices:
                     - enable
                     - disable
             ptk_rekey_intv:
                 description:
-                    - PTK rekey interval (1800 _ 864000 sec, default = 86400).
+                    - PTK rekey interval (1800 - 864000 sec, default = 86400).
                 type: int
             qos_profile:
                 description:
@@ -546,11 +548,11 @@ options:
                     - disable
             radio_2g_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (_95 to _20, default = _79).
+                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (-95 to -20, default = -79).
                 type: str
             radio_5g_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(_95 to _20, default = _76).
+                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(-95 to -20, default = -76).
                 type: str
             radio_sensitivity:
                 description:
@@ -561,14 +563,14 @@ options:
                     - disable
             radius_mac_auth:
                 description:
-                    - Enable/disable RADIUS_based MAC authentication of clients (default = disable).
+                    - Enable/disable RADIUS-based MAC authentication of clients (default = disable).
                 type: str
                 choices:
                     - enable
                     - disable
             radius_mac_auth_server:
                 description:
-                    - RADIUS_based MAC authentication server.
+                    - RADIUS-based MAC authentication server.
                 type: str
             radius_mac_auth_usergroups:
                 description:
@@ -748,7 +750,7 @@ options:
                 type: str
             security:
                 description:
-                    - Security mode for the wireless interface (default = wpa2_only_personal).
+                    - Security mode for the wireless interface (default = wpa2-only-personal).
                 type: str
                 choices:
                     - open
@@ -851,7 +853,7 @@ options:
             vlan_pooling:
                 description:
                     - Enable/disable VLAN pooling, to allow grouping of multiple wireless controller VLANs into VLAN pools (default = disable). When set to
-                       wtp_group, VLAN pooling occurs with VLAN assignment by wtp_group.
+                       wtp-group, VLAN pooling occurs with VLAN assignment by wtp-group.
                 type: str
                 choices:
                     - wtp-group
@@ -864,7 +866,7 @@ options:
                 type: int
             voice_enterprise:
                 description:
-                    - Enable/disable 802.11k and 802.11v assisted Voice_Enterprise roaming (default = disable).
+                    - Enable/disable 802.11k and 802.11v assisted Voice-Enterprise roaming (default = disable).
                 type: str
                 choices:
                     - disable
@@ -1193,7 +1195,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_vap": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "acct_interim_interval": {"required": False, "type": "int"},
                 "alias": {"required": False, "type": "str"},

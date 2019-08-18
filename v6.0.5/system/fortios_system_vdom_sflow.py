@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -86,7 +86,7 @@ options:
                 type: str
             collector_port:
                 description:
-                    - UDP port number used for sending sFlow datagrams (configure only if required by your sFlow collector or your network configuration) (0 _
+                    - UDP port number used for sending sFlow datagrams (configure only if required by your sFlow collector or your network configuration) (0 -
                        65535, default = 6343).
                 type: int
             source_ip:
@@ -266,7 +266,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_vdom_sflow": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "collector_ip": {"required": False, "type": "str"},
                 "collector_port": {"required": False, "type": "int"},

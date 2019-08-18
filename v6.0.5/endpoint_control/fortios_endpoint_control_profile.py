@@ -30,7 +30,7 @@ description:
       user to set and modify endpoint_control feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     endpoint_control_profile:
         description:
             - Configure FortiClient endpoint control profiles.
@@ -148,7 +150,7 @@ options:
                                 type: str
                             preshared_key:
                                 description:
-                                    - Pre_shared secret for PSK authentication.
+                                    - Pre-shared secret for PSK authentication.
                                 type: str
                             remote_gw:
                                 description:
@@ -156,7 +158,7 @@ options:
                                 type: str
                             sslvpn_access_port:
                                 description:
-                                    - SSL VPN access port (1 _ 65535).
+                                    - SSL VPN access port (1 - 65535).
                                 type: int
                             sslvpn_require_certificate:
                                 description:
@@ -214,7 +216,7 @@ options:
                                 type: str
                             preshared_key:
                                 description:
-                                    - Pre_shared secret for PSK authentication.
+                                    - Pre-shared secret for PSK authentication.
                                 type: str
                             remote_gw:
                                 description:
@@ -222,7 +224,7 @@ options:
                                 type: str
                             sslvpn_access_port:
                                 description:
-                                    - SSL VPN access port (1 _ 65535).
+                                    - SSL VPN access port (1 - 65535).
                                 type: int
                             sslvpn_require_certificate:
                                 description:
@@ -286,7 +288,7 @@ options:
                 suboptions:
                     av_realtime_protection:
                         description:
-                            - Enable/disable FortiClient AntiVirus real_time protection.
+                            - Enable/disable FortiClient AntiVirus real-time protection.
                         type: str
                         choices:
                             - enable
@@ -557,7 +559,7 @@ options:
                             - info
                     forticlient_vuln_scan_enforce_grace:
                         description:
-                            - FortiClient vulnerability scan enforcement grace period (0 _ 30 days, default = 1).
+                            - FortiClient vulnerability scan enforcement grace period (0 - 30 days, default = 1).
                         type: int
                     forticlient_vuln_scan_exempt:
                         description:
@@ -601,7 +603,7 @@ options:
                             - disable
             on_net_addr:
                 description:
-                    - Addresses for on_net detection.
+                    - Addresses for on-net detection.
                 type: list
                 suboptions:
                     name:
@@ -933,7 +935,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "endpoint_control_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "description": {"required": False, "type": "str"},
                 "device_groups": {"required": False, "type": "list",

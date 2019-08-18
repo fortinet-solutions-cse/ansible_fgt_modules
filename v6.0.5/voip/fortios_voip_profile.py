@@ -30,7 +30,7 @@ description:
       user to set and modify voip feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     voip_profile:
         description:
             - Configure VoIP profiles.
@@ -191,7 +193,7 @@ options:
                             - enable
                     block_long_lines:
                         description:
-                            - Enable/disable block requests with headers exceeding max_line_length.
+                            - Enable/disable block requests with headers exceeding max-line-length.
                         type: str
                         choices:
                             - disable
@@ -338,7 +340,7 @@ options:
                             - respond
                     malformed_header_call_id:
                         description:
-                            - Action for malformed Call_ID header.
+                            - Action for malformed Call-ID header.
                         type: str
                         choices:
                             - discard
@@ -354,7 +356,7 @@ options:
                             - respond
                     malformed_header_content_length:
                         description:
-                            - Action for malformed Content_Length header.
+                            - Action for malformed Content-Length header.
                         type: str
                         choices:
                             - discard
@@ -362,7 +364,7 @@ options:
                             - respond
                     malformed_header_content_type:
                         description:
-                            - Action for malformed Content_Type header.
+                            - Action for malformed Content-Type header.
                         type: str
                         choices:
                             - discard
@@ -394,7 +396,7 @@ options:
                             - respond
                     malformed_header_max_forwards:
                         description:
-                            - Action for malformed Max_Forwards header.
+                            - Action for malformed Max-Forwards header.
                         type: str
                         choices:
                             - discard
@@ -402,7 +404,7 @@ options:
                             - respond
                     malformed_header_p_asserted_identity:
                         description:
-                            - Action for malformed P_Asserted_Identity header.
+                            - Action for malformed P-Asserted-Identity header.
                         type: str
                         choices:
                             - discard
@@ -418,7 +420,7 @@ options:
                             - respond
                     malformed_header_record_route:
                         description:
-                            - Action for malformed Record_Route header.
+                            - Action for malformed Record-Route header.
                         type: str
                         choices:
                             - discard
@@ -574,7 +576,7 @@ options:
                         type: int
                     max_line_length:
                         description:
-                            - Maximum SIP header line length (78_4096).
+                            - Maximum SIP header line length (78-4096).
                         type: int
                     message_rate:
                         description:
@@ -589,7 +591,7 @@ options:
                             - enable
                     no_sdp_fixup:
                         description:
-                            - Enable/disable no SDP fix_up.
+                            - Enable/disable no SDP fix-up.
                         type: str
                         choices:
                             - disable
@@ -600,14 +602,14 @@ options:
                         type: int
                     open_contact_pinhole:
                         description:
-                            - Enable/disable open pinhole for non_REGISTER Contact port.
+                            - Enable/disable open pinhole for non-REGISTER Contact port.
                         type: str
                         choices:
                             - disable
                             - enable
                     open_record_route_pinhole:
                         description:
-                            - Enable/disable open pinhole for Record_Route port.
+                            - Enable/disable open pinhole for Record-Route port.
                         type: str
                         choices:
                             - disable
@@ -643,7 +645,7 @@ options:
                             - enable
                     provisional_invite_expiry_time:
                         description:
-                            - Expiry time for provisional INVITE (10 _ 3600 sec).
+                            - Expiry time for provisional INVITE (10 - 3600 sec).
                         type: int
                     publish_rate:
                         description:
@@ -1058,7 +1060,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "voip_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},

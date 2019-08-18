@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_isis
-short_description: Configure IS_IS in Fortinet's FortiOS and FortiGate.
+short_description: Configure IS-IS in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify router feature and isis category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,7 +74,7 @@ options:
         default: true
     router_isis:
         description:
-            - Configure IS_IS.
+            - Configure IS-IS.
         default: null
         type: dict
         suboptions:
@@ -94,25 +94,25 @@ options:
                     - disable
             adv_passive_only:
                 description:
-                    - Enable/disable IS_IS advertisement of passive interfaces only.
+                    - Enable/disable IS-IS advertisement of passive interfaces only.
                 type: str
                 choices:
                     - enable
                     - disable
             adv_passive_only6:
                 description:
-                    - Enable/disable IPv6 IS_IS advertisement of passive interfaces only.
+                    - Enable/disable IPv6 IS-IS advertisement of passive interfaces only.
                 type: str
                 choices:
                     - enable
                     - disable
             auth_keychain_l1:
                 description:
-                    - Authentication key_chain for level 1 PDUs. Source router.key-chain.name.
+                    - Authentication key-chain for level 1 PDUs. Source router.key-chain.name.
                 type: str
             auth_keychain_l2:
                 description:
-                    - Authentication key_chain for level 2 PDUs. Source router.key-chain.name.
+                    - Authentication key-chain for level 2 PDUs. Source router.key-chain.name.
                 type: str
             auth_mode_l1:
                 description:
@@ -138,14 +138,14 @@ options:
                 type: str
             auth_sendonly_l1:
                 description:
-                    - Enable/disable level 1 authentication send_only.
+                    - Enable/disable level 1 authentication send-only.
                 type: str
                 choices:
                     - enable
                     - disable
             auth_sendonly_l2:
                 description:
-                    - Enable/disable level 2 authentication send_only.
+                    - Enable/disable level 2 authentication send-only.
                 type: str
                 choices:
                     - enable
@@ -188,16 +188,16 @@ options:
                     - level-2-only
             isis_interface:
                 description:
-                    - IS_IS interface configuration.
+                    - IS-IS interface configuration.
                 type: list
                 suboptions:
                     auth_keychain_l1:
                         description:
-                            - Authentication key_chain for level 1 PDUs. Source router.key-chain.name.
+                            - Authentication key-chain for level 1 PDUs. Source router.key-chain.name.
                         type: str
                     auth_keychain_l2:
                         description:
-                            - Authentication key_chain for level 2 PDUs. Source router.key-chain.name.
+                            - Authentication key-chain for level 2 PDUs. Source router.key-chain.name.
                         type: str
                     auth_mode_l1:
                         description:
@@ -223,21 +223,21 @@ options:
                         type: str
                     auth_send_only_l1:
                         description:
-                            - Enable/disable authentication send_only for level 1 PDUs.
+                            - Enable/disable authentication send-only for level 1 PDUs.
                         type: str
                         choices:
                             - enable
                             - disable
                     auth_send_only_l2:
                         description:
-                            - Enable/disable authentication send_only for level 2 PDUs.
+                            - Enable/disable authentication send-only for level 2 PDUs.
                         type: str
                         choices:
                             - enable
                             - disable
                     circuit_type:
                         description:
-                            - IS_IS interface's circuit type
+                            - IS-IS interface's circuit type
                         type: str
                         choices:
                             - level-1-2
@@ -269,7 +269,7 @@ options:
                         type: int
                     hello_padding:
                         description:
-                            - Enable/disable padding to IS_IS hello packets.
+                            - Enable/disable padding to IS-IS hello packets.
                         type: str
                         choices:
                             - enable
@@ -284,14 +284,14 @@ options:
                         type: int
                     mesh_group:
                         description:
-                            - Enable/disable IS_IS mesh group.
+                            - Enable/disable IS-IS mesh group.
                         type: str
                         choices:
                             - enable
                             - disable
                     mesh_group_id:
                         description:
-                            - "Mesh group ID <0_4294967295>, 0: mesh_group blocked."
+                            - "Mesh group ID <0-4294967295>, 0: mesh-group blocked."
                         type: int
                     metric_l1:
                         description:
@@ -303,12 +303,12 @@ options:
                         type: int
                     name:
                         description:
-                            - IS_IS interface name. Source system.interface.name.
+                            - IS-IS interface name. Source system.interface.name.
                         required: true
                         type: str
                     network_type:
                         description:
-                            - IS_IS interface's network type
+                            - IS-IS interface's network type
                         type: str
                         choices:
                             - broadcast
@@ -324,14 +324,14 @@ options:
                         type: int
                     status:
                         description:
-                            - Enable/disable interface for IS_IS.
+                            - Enable/disable interface for IS-IS.
                         type: str
                         choices:
                             - enable
                             - disable
                     status6:
                         description:
-                            - Enable/disable IPv6 interface for IS_IS.
+                            - Enable/disable IPv6 interface for IS-IS.
                         type: str
                         choices:
                             - enable
@@ -346,17 +346,17 @@ options:
                         type: int
             isis_net:
                 description:
-                    - IS_IS net configuration.
+                    - IS-IS net configuration.
                 type: list
                 suboptions:
                     id:
                         description:
-                            - isis_net ID.
+                            - isis-net ID.
                         required: true
                         type: int
                     net:
                         description:
-                            - IS_IS net xx.xxxx. ... .xxxx.xx.
+                            - IS-IS net xx.xxxx. ... .xxxx.xx.
                         type: str
             lsp_gen_interval_l1:
                 description:
@@ -376,7 +376,7 @@ options:
                 type: int
             metric_style:
                 description:
-                    - Use old_style (ISO 10589) or new_style packet formats
+                    - Use old-style (ISO 10589) or new-style packet formats
                 type: str
                 choices:
                     - narrow
@@ -401,18 +401,18 @@ options:
                     - disable
             overload_bit_on_startup:
                 description:
-                    - Overload_bit only temporarily after reboot.
+                    - Overload-bit only temporarily after reboot.
                 type: int
             overload_bit_suppress:
                 description:
-                    - Suppress overload_bit for the specific prefixes.
+                    - Suppress overload-bit for the specific prefixes.
                 type: str
                 choices:
                     - external
                     - interlevel
             redistribute:
                 description:
-                    - IS_IS redistribute protocols.
+                    - IS-IS redistribute protocols.
                 type: list
                 suboptions:
                     level:
@@ -459,7 +459,7 @@ options:
                     - disable
             redistribute_l1_list:
                 description:
-                    - Access_list for route redistribution from l1 to l2. Source router.access-list.name.
+                    - Access-list for route redistribution from l1 to l2. Source router.access-list.name.
                 type: str
             redistribute_l2:
                 description:
@@ -470,11 +470,11 @@ options:
                     - disable
             redistribute_l2_list:
                 description:
-                    - Access_list for route redistribution from l2 to l1. Source router.access-list.name.
+                    - Access-list for route redistribution from l2 to l1. Source router.access-list.name.
                 type: str
             redistribute6:
                 description:
-                    - IS_IS IPv6 redistribution for routing protocols.
+                    - IS-IS IPv6 redistribution for routing protocols.
                 type: list
                 suboptions:
                     level:
@@ -521,7 +521,7 @@ options:
                     - disable
             redistribute6_l1_list:
                 description:
-                    - Access_list for IPv6 route redistribution from l1 to l2. Source router.access-list6.name.
+                    - Access-list for IPv6 route redistribution from l1 to l2. Source router.access-list6.name.
                 type: str
             redistribute6_l2:
                 description:
@@ -532,7 +532,7 @@ options:
                     - disable
             redistribute6_l2_list:
                 description:
-                    - Access_list for IPv6 route redistribution from l2 to l1. Source router.access-list6.name.
+                    - Access-list for IPv6 route redistribution from l2 to l1. Source router.access-list6.name.
                 type: str
             spf_interval_exp_l1:
                 description:
@@ -544,7 +544,7 @@ options:
                 type: str
             summary_address:
                 description:
-                    - IS_IS summary addresses.
+                    - IS-IS summary addresses.
                 type: list
                 suboptions:
                     id:
@@ -566,7 +566,7 @@ options:
                         type: str
             summary_address6:
                 description:
-                    - IS_IS IPv6 summary address.
+                    - IS-IS IPv6 summary address.
                 type: list
                 suboptions:
                     id:
@@ -597,7 +597,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure IS_IS.
+  - name: Configure IS-IS.
     fortios_router_isis:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -856,7 +856,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_isis": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "adjacency_check": {"required": False, "type": "str",
                                     "choices": ["enable", "disable"]},

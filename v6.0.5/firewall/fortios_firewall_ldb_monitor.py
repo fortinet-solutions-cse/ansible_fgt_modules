@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and ldb_monitor category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_ldb_monitor:
         description:
             - Configure server load balancing health monitors.
@@ -91,15 +93,15 @@ options:
                 type: str
             http_match:
                 description:
-                    - String to match the value expected in response to an HTTP_GET request.
+                    - String to match the value expected in response to an HTTP-GET request.
                 type: str
             http_max_redirects:
                 description:
-                    - The maximum number of HTTP redirects to be allowed (0 _ 5, default = 0).
+                    - The maximum number of HTTP redirects to be allowed (0 - 5, default = 0).
                 type: int
             interval:
                 description:
-                    - Time between health checks (5 _ 65635 sec, default = 10).
+                    - Time between health checks (5 - 65635 sec, default = 10).
                 type: int
             name:
                 description:
@@ -108,16 +110,16 @@ options:
                 type: str
             port:
                 description:
-                    - Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 _ 65635, default =
+                    - Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 - 65635, default =
                        0).
                 type: int
             retry:
                 description:
-                    - Number health check attempts before the server is considered down (1 _ 255, default = 3).
+                    - Number health check attempts before the server is considered down (1 - 255, default = 3).
                 type: int
             timeout:
                 description:
-                    - Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 _ 255 sec,
+                    - Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 - 255 sec,
                        default = 2).
                 type: int
             type:
@@ -311,7 +313,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_ldb_monitor": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "http_get": {"required": False, "type": "str"},
                 "http_match": {"required": False, "type": "str"},

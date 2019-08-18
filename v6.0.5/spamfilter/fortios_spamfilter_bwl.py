@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_spamfilter_bwl
-short_description: Configure anti_spam black/white list in Fortinet's FortiOS and FortiGate.
+short_description: Configure anti-spam black/white list in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify spamfilter feature and bwl category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -81,7 +81,7 @@ options:
             - absent
     spamfilter_bwl:
         description:
-            - Configure anti_spam black/white list.
+            - Configure anti-spam black/white list.
         default: null
         type: dict
         suboptions:
@@ -91,7 +91,7 @@ options:
                 type: str
             entries:
                 description:
-                    - Anti_spam black/white list entries.
+                    - Anti-spam black/white list entries.
                 type: list
                 suboptions:
                     action:
@@ -167,7 +167,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure anti_spam black/white list.
+  - name: Configure anti-spam black/white list.
     fortios_spamfilter_bwl:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -342,7 +342,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "spamfilter_bwl": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "entries": {"required": False, "type": "list",

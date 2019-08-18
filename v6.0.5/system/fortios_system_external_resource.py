@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -100,7 +100,7 @@ options:
                 type: str
             refresh_rate:
                 description:
-                    - Time interval to refresh external resource (1 _ 43200 min, default = 5 min).
+                    - Time interval to refresh external resource (1 - 43200 min, default = 5 min).
                 type: int
             resource:
                 description:
@@ -301,7 +301,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_external_resource": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "category": {"required": False, "type": "int"},
                 "comments": {"required": False, "type": "str"},

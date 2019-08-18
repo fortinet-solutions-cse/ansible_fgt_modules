@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,11 +87,11 @@ options:
                     - disable
             antispam_cache_mpercent:
                 description:
-                    - Maximum percent of FortiGate memory the antispam cache is allowed to use (1 _ 15%).
+                    - Maximum percent of FortiGate memory the antispam cache is allowed to use (1 - 15%).
                 type: int
             antispam_cache_ttl:
                 description:
-                    - Time_to_live for antispam cache entries in seconds (300 _ 86400). Lower times reduce the cache size. Higher times may improve
+                    - Time-to-live for antispam cache entries in seconds (300 - 86400). Lower times reduce the cache size. Higher times may improve
                        performance since the cache will have more entries.
                 type: int
             antispam_expiration:
@@ -111,7 +111,7 @@ options:
                 type: int
             antispam_timeout:
                 description:
-                    - Antispam query time out (1 _ 30 sec, default = 7).
+                    - Antispam query time out (1 - 30 sec, default = 7).
                 type: int
             auto_join_forticloud:
                 description:
@@ -141,11 +141,11 @@ options:
                     - disable
             outbreak_prevention_cache_mpercent:
                 description:
-                    - Maximum percent of memory FortiGuard Virus Outbreak Prevention cache can use (1 _ 15%, default = 2).
+                    - Maximum percent of memory FortiGuard Virus Outbreak Prevention cache can use (1 - 15%, default = 2).
                 type: int
             outbreak_prevention_cache_ttl:
                 description:
-                    - Time_to_live for FortiGuard Virus Outbreak Prevention cache entries (300 _ 86400 sec, default = 300).
+                    - Time-to-live for FortiGuard Virus Outbreak Prevention cache entries (300 - 86400 sec, default = 300).
                 type: int
             outbreak_prevention_expiration:
                 description:
@@ -164,7 +164,7 @@ options:
                 type: int
             outbreak_prevention_timeout:
                 description:
-                    - FortiGuard Virus Outbreak Prevention time out (1 _ 30 sec, default = 7).
+                    - FortiGuard Virus Outbreak Prevention time out (1 - 30 sec, default = 7).
                 type: int
             port:
                 description:
@@ -210,7 +210,7 @@ options:
                     - disable
             webfilter_cache_ttl:
                 description:
-                    - Time_to_live for web filter cache entries in seconds (300 _ 86400).
+                    - Time-to-live for web filter cache entries in seconds (300 - 86400).
                 type: int
             webfilter_expiration:
                 description:
@@ -229,7 +229,7 @@ options:
                 type: int
             webfilter_timeout:
                 description:
-                    - Web filter query time out (1 _ 30 sec, default = 7).
+                    - Web filter query time out (1 - 30 sec, default = 7).
                 type: int
 '''
 
@@ -432,7 +432,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_fortiguard": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "antispam_cache": {"required": False, "type": "str",
                                    "choices": ["enable", "disable"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -91,7 +91,7 @@ options:
                 type: str
             http_url:
                 description:
-                    - HTTP server URL for CRL auto_update.
+                    - HTTP server URL for CRL auto-update.
                 type: str
             last_updated:
                 description:
@@ -103,7 +103,7 @@ options:
                 type: str
             ldap_server:
                 description:
-                    - LDAP server name for CRL auto_update.
+                    - LDAP server name for CRL auto-update.
                 type: str
             ldap_username:
                 description:
@@ -123,11 +123,11 @@ options:
                     - vdom
             scep_cert:
                 description:
-                    - Local certificate for SCEP communication for CRL auto_update. Source vpn.certificate.local.name.
+                    - Local certificate for SCEP communication for CRL auto-update. Source vpn.certificate.local.name.
                 type: str
             scep_url:
                 description:
-                    - SCEP server URL for CRL auto_update.
+                    - SCEP server URL for CRL auto-update.
                 type: str
             source:
                 description:
@@ -338,7 +338,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_certificate_crl": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "crl": {"required": False, "type": "str"},
                 "http_url": {"required": False, "type": "str"},

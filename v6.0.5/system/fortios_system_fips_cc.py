@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_fips_cc
-short_description: Configure FIPS_CC mode in Fortinet's FortiOS and FortiGate.
+short_description: Configure FIPS-CC mode in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify system feature and fips_cc category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,7 +74,7 @@ options:
         default: true
     system_fips_cc:
         description:
-            - Configure FIPS_CC mode.
+            - Configure FIPS-CC mode.
         default: null
         type: dict
         suboptions:
@@ -108,7 +108,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure FIPS_CC mode.
+  - name: Configure FIPS-CC mode.
     fortios_system_fips_cc:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -260,7 +260,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_fips_cc": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "entropy_token": {"required": False, "type": "str",
                                   "choices": ["enable", "disable", "dynamic"]},

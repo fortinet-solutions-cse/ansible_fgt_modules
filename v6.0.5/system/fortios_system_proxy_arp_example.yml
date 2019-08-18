@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure proxy_ARP.
+  - name: Configure proxy-ARP.
     fortios_system_proxy_arp:
       host:  "{{ host }}"
       username: "{{ username }}"

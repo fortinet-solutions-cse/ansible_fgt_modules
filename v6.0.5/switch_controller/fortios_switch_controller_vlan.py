@@ -30,7 +30,7 @@ description:
       user to set and modify switch_controller feature and vlan category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     switch_controller_vlan:
         description:
             - Configure VLANs for switch controller.
@@ -116,19 +118,19 @@ options:
                 suboptions:
                     auth_disclaimer_page:
                         description:
-                            - Override auth_disclaimer_page message with message from portal_message_overrides group.
+                            - Override auth-disclaimer-page message with message from portal-message-overrides group.
                         type: str
                     auth_login_failed_page:
                         description:
-                            - Override auth_login_failed_page message with message from portal_message_overrides group.
+                            - Override auth-login-failed-page message with message from portal-message-overrides group.
                         type: str
                     auth_login_page:
                         description:
-                            - Override auth_login_page message with message from portal_message_overrides group.
+                            - Override auth-login-page message with message from portal-message-overrides group.
                         type: str
                     auth_reject_page:
                         description:
-                            - Override auth_reject_page message with message from portal_message_overrides group.
+                            - Override auth-reject-page message with message from portal-message-overrides group.
                         type: str
             radius_server:
                 description:
@@ -356,7 +358,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_vlan": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth": {"required": False, "type": "str",
                          "choices": ["radius", "usergroup"]},

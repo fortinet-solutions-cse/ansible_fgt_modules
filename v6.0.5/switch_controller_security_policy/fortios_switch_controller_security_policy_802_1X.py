@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -102,18 +102,18 @@ options:
                 type: int
             eap_passthru:
                 description:
-                    - Enable/disable EAP pass_through mode, allowing protocols (such as LLDP) to pass through ports for more flexible authentication.
+                    - Enable/disable EAP pass-through mode, allowing protocols (such as LLDP) to pass through ports for more flexible authentication.
                 type: str
                 choices:
                     - disable
                     - enable
             guest_auth_delay:
                 description:
-                    - Guest authentication delay (1 _ 900  sec, default = 30).
+                    - Guest authentication delay (1 - 900  sec, default = 30).
                 type: int
             guest_vlan:
                 description:
-                    - Enable the guest VLAN feature to allow limited access to non_802.1X_compliant clients.
+                    - Enable the guest VLAN feature to allow limited access to non-802.1X-compliant clients.
                 type: str
                 choices:
                     - disable
@@ -167,7 +167,7 @@ options:
                     - 802.1X-mac-based
             user_group:
                 description:
-                    - Name of user_group to assign to this MAC Authentication Bypass (MAB) policy.
+                    - Name of user-group to assign to this MAC Authentication Bypass (MAB) policy.
                 type: list
                 suboptions:
                     name:
@@ -367,7 +367,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "switch_controller_security_policy_802_1X": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_fail_vlan": {"required": False, "type": "str",
                                    "choices": ["disable", "enable"]},

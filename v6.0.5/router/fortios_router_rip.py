@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and rip category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     router_rip:
         description:
             - Configure RIP.
@@ -100,7 +101,7 @@ options:
                         type: str
                     distance:
                         description:
-                            - Distance (1 _ 255).
+                            - Distance (1 - 255).
                         type: int
                     id:
                         description:
@@ -154,7 +155,7 @@ options:
                 suboptions:
                     auth_keychain:
                         description:
-                            - Authentication key_chain name. Source router.key-chain.name.
+                            - Authentication key-chain name. Source router.key-chain.name.
                         type: str
                     auth_mode:
                         description:
@@ -262,7 +263,7 @@ options:
                             - out
                     id:
                         description:
-                            - Offset_list ID.
+                            - Offset-list ID.
                         required: true
                         type: int
                     interface:
@@ -557,7 +558,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_rip": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "default_information_originate": {"required": False, "type": "str",
                                                   "choices": ["enable", "disable"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,11 +87,11 @@ options:
         suboptions:
             auto_update_days:
                 description:
-                    - Number of days to wait before requesting an updated CA certificate (0 _ 4294967295, 0 = disabled).
+                    - Number of days to wait before requesting an updated CA certificate (0 - 4294967295, 0 = disabled).
                 type: int
             auto_update_days_warning:
                 description:
-                    - Number of days before an expiry_warning message is generated (0 _ 4294967295, 0 = disabled).
+                    - Number of days before an expiry-warning message is generated (0 - 4294967295, 0 = disabled).
                 type: int
             ca:
                 description:
@@ -320,7 +320,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "certificate_ca": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auto_update_days": {"required": False, "type": "int"},
                 "auto_update_days_warning": {"required": False, "type": "int"},

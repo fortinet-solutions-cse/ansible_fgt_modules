@@ -30,7 +30,7 @@ description:
       user to set and modify authentication feature and scheme category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     authentication_scheme:
         description:
             - Configure Authentication Schemes.
@@ -95,7 +97,7 @@ options:
                 type: str
             fsso_guest:
                 description:
-                    - Enable/disable user fsso_guest authentication (default = disable).
+                    - Enable/disable user fsso-guest authentication (default = disable).
                 type: str
                 choices:
                     - enable
@@ -131,7 +133,7 @@ options:
                     - disable
             require_tfa:
                 description:
-                    - Enable/disable two_factor authentication (default = disable).
+                    - Enable/disable two-factor authentication (default = disable).
                 type: str
                 choices:
                     - enable
@@ -336,7 +338,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "authentication_scheme": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "domain_controller": {"required": False, "type": "str"},
                 "fsso_agent_for_ntlm": {"required": False, "type": "str"},

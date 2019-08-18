@@ -30,7 +30,7 @@ description:
       user to set and modify system feature and admin category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     system_admin:
         description:
             - Configure admin users.
@@ -446,17 +448,17 @@ options:
                 type: str
             ssh_public_key1:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public_private key pair in the
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
                        SSH client application.
                 type: str
             ssh_public_key2:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public_private key pair in the
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
                        SSH client application.
                 type: str
             ssh_public_key3:
                 description:
-                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public_private key pair in the
+                    - Public key of an SSH client. The client is authenticated without being asked for credentials. Create the public-private key pair in the
                        SSH client application.
                 type: str
             trusthost1:
@@ -511,7 +513,7 @@ options:
                 type: str
             two_factor:
                 description:
-                    - Enable/disable two_factor authentication.
+                    - Enable/disable two-factor authentication.
                 type: str
                 choices:
                     - disable
@@ -820,7 +822,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_admin": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "accprofile": {"required": False, "type": "str"},
                 "accprofile_override": {"required": False, "type": "str",

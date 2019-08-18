@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,15 +87,15 @@ options:
         suboptions:
             login_page:
                 description:
-                    - Replacement HTML for SSL_VPN login page.
+                    - Replacement HTML for SSL-VPN login page.
                 type: str
             max_concurrent_user:
                 description:
-                    - Maximum concurrent users (0 _ 65535, 0 means unlimited).
+                    - Maximum concurrent users (0 - 65535, 0 means unlimited).
                 type: int
             url_path:
                 description:
-                    - URL path to access SSL_VPN login page.
+                    - URL path to access SSL-VPN login page.
                 type: str
             virtual_host:
                 description:
@@ -277,7 +277,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ssl_web_realm": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "login_page": {"required": False, "type": "str"},
                 "max_concurrent_user": {"required": False, "type": "int"},

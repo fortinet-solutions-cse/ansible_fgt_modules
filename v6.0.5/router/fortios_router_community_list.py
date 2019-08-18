@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -97,7 +97,7 @@ options:
                 suboptions:
                     action:
                         description:
-                            - Permit or deny route_based operations, based on the route's COMMUNITY attribute.
+                            - Permit or deny route-based operations, based on the route's COMMUNITY attribute.
                         type: str
                         choices:
                             - deny
@@ -301,7 +301,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_community_list": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "name": {"required": True, "type": "str"},
                 "rule": {"required": False, "type": "list",

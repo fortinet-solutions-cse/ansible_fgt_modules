@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -107,7 +107,7 @@ options:
                         type: str
                     from_vlan:
                         description:
-                            - VLAN ID from which the Bonjour service is advertised (0 _ 4094, default = 0).
+                            - VLAN ID from which the Bonjour service is advertised (0 - 4094, default = 0).
                         type: str
                     policy_id:
                         description:
@@ -132,7 +132,7 @@ options:
                             - chromecast
                     to_vlan:
                         description:
-                            - VLAN ID to which the Bonjour service is made available (0 _ 4094, default = all).
+                            - VLAN ID to which the Bonjour service is made available (0 - 4094, default = all).
                         type: str
 '''
 
@@ -315,7 +315,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "wireless_controller_bonjour_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"},

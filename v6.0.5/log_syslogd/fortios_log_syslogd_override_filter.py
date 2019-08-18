@@ -30,7 +30,7 @@ description:
       user to set and modify log_syslogd feature and override_filter category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_syslogd_override_filter:
         description:
             - Override filters for remote system server.
@@ -135,12 +136,10 @@ options:
                 description:
                     - Enable/disable netscan discovery event logging.
                 type: str
-                choices:
             netscan_vulnerability:
                 description:
                     - Enable/disable netscan vulnerability event logging.
                 type: str
-                choices:
             severity:
                 description:
                     - Lowest severity level to log.
@@ -353,7 +352,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_syslogd_override_filter": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "anomaly": {"required": False, "type": "str",
                             "choices": ["enable", "disable"]},
@@ -370,10 +369,8 @@ def main():
                                   "choices": ["enable", "disable"]},
                 "multicast_traffic": {"required": False, "type": "str",
                                       "choices": ["enable", "disable"]},
-                "netscan_discovery": {"required": False, "type": "str",
-                                      "choices": []},
-                "netscan_vulnerability": {"required": False, "type": "str",
-                                          "choices": []},
+                "netscan_discovery": {"required": False, "type": "str"},
+                "netscan_vulnerability": {"required": False, "type": "str"},
                 "severity": {"required": False, "type": "str",
                              "choices": ["emergency", "alert", "critical",
                                          "error", "warning", "notification",

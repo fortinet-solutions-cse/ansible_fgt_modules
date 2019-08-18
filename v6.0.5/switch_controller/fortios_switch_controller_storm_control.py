@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
                     - disable
             rate:
                 description:
-                    - Rate in packets per second at which storm traffic is controlled (1 _ 10000000, default = 500). Storm control drops excess traffic data
+                    - Rate in packets per second at which storm traffic is controlled (1 - 10000000, default = 500). Storm control drops excess traffic data
                        rates beyond this threshold.
                 type: int
             unknown_multicast:
@@ -269,7 +269,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "switch_controller_storm_control": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "broadcast": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]},

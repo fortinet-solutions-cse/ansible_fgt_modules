@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure system_wide switch controller settings.
+  - name: Configure system-wide switch controller settings.
     fortios_switch_controller_system:
       host:  "{{ host }}"
       username: "{{ username }}"

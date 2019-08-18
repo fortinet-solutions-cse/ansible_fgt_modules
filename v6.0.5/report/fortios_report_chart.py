@@ -30,7 +30,7 @@ description:
       user to set and modify report feature and chart category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     report_chart:
         description:
             - Report chart widget configuration.
@@ -115,7 +117,7 @@ options:
                         type: str
                     font_size:
                         description:
-                            - Font size of category_series title.
+                            - Font size of category-series title.
                         type: int
             color_palette:
                 description:
@@ -305,35 +307,35 @@ options:
                         type: str
             x_series:
                 description:
-                    - X_series of chart.
+                    - X-series of chart.
                 type: dict
                 suboptions:
                     caption:
                         description:
-                            - X_series caption.
+                            - X-series caption.
                         type: str
                     caption_font_size:
                         description:
-                            - X_series caption font size.
+                            - X-series caption font size.
                         type: int
                     databind:
                         description:
-                            - X_series value expression.
+                            - X-series value expression.
                         type: str
                     font_size:
                         description:
-                            - X_series label font size.
+                            - X-series label font size.
                         type: int
                     is_category:
                         description:
-                            - X_series represent category or not.
+                            - X-series represent category or not.
                         type: str
                         choices:
                             - yes
                             - no
                     label_angle:
                         description:
-                            - X_series label angle.
+                            - X-series label angle.
                         type: str
                         choices:
                             - 45-degree
@@ -374,51 +376,51 @@ options:
                             - year
                     unit:
                         description:
-                            - X_series unit.
+                            - X-series unit.
                         type: str
             y_series:
                 description:
-                    - Y_series of chart.
+                    - Y-series of chart.
                 type: dict
                 suboptions:
                     caption:
                         description:
-                            - Y_series caption.
+                            - Y-series caption.
                         type: str
                     caption_font_size:
                         description:
-                            - Y_series caption font size.
+                            - Y-series caption font size.
                         type: int
                     databind:
                         description:
-                            - Y_series value expression.
+                            - Y-series value expression.
                         type: str
                     extra_databind:
                         description:
-                            - Extra Y_series value.
+                            - Extra Y-series value.
                         type: str
                     extra_y:
                         description:
-                            - Allow another Y_series value
+                            - Allow another Y-series value
                         type: str
                         choices:
                             - enable
                             - disable
                     extra_y_legend:
                         description:
-                            - Extra Y_series legend type/name.
+                            - Extra Y-series legend type/name.
                         type: str
                     font_size:
                         description:
-                            - Y_series label font size.
+                            - Y-series label font size.
                         type: int
                     group:
                         description:
-                            - Y_series group option.
+                            - Y-series group option.
                         type: str
                     label_angle:
                         description:
-                            - Y_series label angle.
+                            - Y-series label angle.
                         type: str
                         choices:
                             - 45-degree
@@ -426,11 +428,11 @@ options:
                             - horizontal
                     unit:
                         description:
-                            - Y_series unit.
+                            - Y-series unit.
                         type: str
                     y_legend:
                         description:
-                            - First Y_series legend type/name.
+                            - First Y-series legend type/name.
                         type: str
 '''
 
@@ -677,7 +679,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "report_chart": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "background": {"required": False, "type": "str"},
                 "category": {"required": False, "type": "str",

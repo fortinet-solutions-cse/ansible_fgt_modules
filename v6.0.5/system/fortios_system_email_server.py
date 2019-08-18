@@ -45,12 +45,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -97,7 +97,7 @@ options:
                 type: int
             reply_to:
                 description:
-                    - Reply_To email address.
+                    - Reply-To email address.
                 type: str
             security:
                 description:
@@ -322,7 +322,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_email_server": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "authenticate": {"required": False, "type": "str",
                                  "choices": ["enable", "disable"]},

@@ -30,7 +30,7 @@ description:
       user to set and modify system_dhcp feature and server category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     system_dhcp_server:
         description:
             - Configure DHCP servers.
@@ -189,7 +191,7 @@ options:
                 type: str
             forticlient_on_net_status:
                 description:
-                    - Enable/disable FortiClient_On_Net service for this DHCP server.
+                    - Enable/disable FortiClient-On-Net service for this DHCP server.
                 type: str
                 choices:
                     - disable
@@ -230,7 +232,7 @@ options:
                         type: str
             ipsec_lease_hold:
                 description:
-                    - DHCP over IPsec leases expire this many seconds after tunnel down (0 to disable forced_expiry).
+                    - DHCP over IPsec leases expire this many seconds after tunnel down (0 to disable forced-expiry).
                 type: int
             lease_time:
                 description:
@@ -748,7 +750,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_dhcp_server": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auto_configuration": {"required": False, "type": "str",
                                        "choices": ["disable", "enable"]},

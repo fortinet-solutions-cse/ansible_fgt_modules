@@ -30,7 +30,7 @@ description:
       user to set and modify dlp feature and sensor category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     dlp_sensor:
         description:
             - Configure DLP sensors.
@@ -134,7 +136,7 @@ options:
                         type: str
                     file_size:
                         description:
-                            - Match files this size or larger (0 _ 4294967295 kbytes).
+                            - Match files this size or larger (0 - 4294967295 kbytes).
                         type: int
                     file_type:
                         description:
@@ -170,7 +172,7 @@ options:
                         type: int
                     match_percentage:
                         description:
-                            - Percentage of fingerprints in the fingerprint databases designated with the selected fp_sensitivity to match.
+                            - Percentage of fingerprints in the fingerprint databases designated with the selected fp-sensitivity to match.
                         type: int
                     name:
                         description:
@@ -216,7 +218,7 @@ options:
                             - message
             flow_based:
                 description:
-                    - Enable/disable flow_based DLP.
+                    - Enable/disable flow-based DLP.
                 type: str
                 choices:
                     - enable
@@ -254,7 +256,6 @@ options:
                 description:
                     - Configure DLP options.
                 type: str
-                choices:
             replacemsg_group:
                 description:
                     - Replacement message group used by this DLP sensor. Source system.replacemsg-group.name.
@@ -479,7 +480,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "dlp_sensor": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "dlp_log": {"required": False, "type": "str",
@@ -530,8 +531,7 @@ def main():
                 "nac_quar_log": {"required": False, "type": "str",
                                  "choices": ["enable", "disable"]},
                 "name": {"required": True, "type": "str"},
-                "options": {"required": False, "type": "str",
-                            "choices": []},
+                "options": {"required": False, "type": "str"},
                 "replacemsg_group": {"required": False, "type": "str"},
                 "summary_proto": {"required": False, "type": "str",
                                   "choices": ["smtp", "pop3", "imap",

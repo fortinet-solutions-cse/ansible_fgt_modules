@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and sniffer category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_sniffer:
         description:
             - Configure sniffer.
@@ -140,7 +142,7 @@ options:
                         type: int
                     threshold(default):
                         description:
-                            - Number of detected instances per minute which triggers action (1 _ 2147483647, default = 1000). Note that each anomaly has a
+                            - Number of detected instances per minute which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a
                                different threshold value assigned to it.
                         type: int
             application_list:
@@ -185,7 +187,7 @@ options:
                     - disable
             host:
                 description:
-                    - "Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0_4.4.4.240)."
+                    - "Hosts to filter for in sniffer traffic (Format examples: 1.1.1.1, 2.2.2.0/24, 3.3.3.3/255.255.255.0, 4.4.4.0-4.4.4.240)."
                 type: str
             id:
                 description:
@@ -231,22 +233,22 @@ options:
                     - disable
             max_packet_count:
                 description:
-                    - Maximum packet count (1 _ 1000000, default = 10000).
+                    - Maximum packet count (1 - 1000000, default = 10000).
                 type: int
             non_ip:
                 description:
-                    - Enable/disable sniffing non_IP packets.
+                    - Enable/disable sniffing non-IP packets.
                 type: str
                 choices:
                     - enable
                     - disable
             port:
                 description:
-                    - "Ports to sniff (Format examples: 10, :20, 30:40, 50_, 100_200)."
+                    - "Ports to sniff (Format examples: 10, :20, 30:40, 50-, 100-200)."
                 type: str
             protocol:
                 description:
-                    - Integer value for the protocol type as defined by IANA (0 _ 255).
+                    - Integer value for the protocol type as defined by IANA (0 - 255).
                 type: str
             scan_botnet_connections:
                 description:
@@ -505,7 +507,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_sniffer": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "anomaly": {"required": False, "type": "list",
                             "options": {

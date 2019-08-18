@@ -30,7 +30,7 @@ description:
       user to set and modify report feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     report_setting:
         description:
             - Report setting configuration.
@@ -102,11 +103,11 @@ options:
                     - local-deny-traffic
             top_n:
                 description:
-                    - Number of items to populate (100 _ 4000).
+                    - Number of items to populate (100 - 4000).
                 type: int
             web_browsing_threshold:
                 description:
-                    - Web browsing time calculation threshold (3 _ 15 min).
+                    - Web browsing time calculation threshold (3 - 15 min).
                 type: int
 '''
 
@@ -274,7 +275,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "report_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "fortiview": {"required": False, "type": "str",
                               "choices": ["enable", "disable"]},

@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_system_proxy_arp
-short_description: Configure proxy_ARP in Fortinet's FortiOS and FortiGate.
+short_description: Configure proxy-ARP in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify system feature and proxy_arp category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -81,7 +81,7 @@ options:
             - absent
     system_proxy_arp:
         description:
-            - Configure proxy_ARP.
+            - Configure proxy-ARP.
         default: null
         type: dict
         suboptions:
@@ -96,7 +96,7 @@ options:
                 type: int
             interface:
                 description:
-                    - Interface acting proxy_ARP. Source system.interface.name.
+                    - Interface acting proxy-ARP. Source system.interface.name.
                 type: str
             ip:
                 description:
@@ -113,7 +113,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure proxy_ARP.
+  - name: Configure proxy-ARP.
     fortios_system_proxy_arp:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -278,7 +278,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_proxy_arp": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "end_ip": {"required": False, "type": "str"},
                 "id": {"required": True, "type": "int"},

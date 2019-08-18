@@ -6,7 +6,7 @@
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure forward_server addresses.
+  - name: Configure forward-server addresses.
     fortios_web_proxy_forward_server:
       host:  "{{ host }}"
       username: "{{ username }}"

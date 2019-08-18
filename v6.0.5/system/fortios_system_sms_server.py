@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             mail_server:
                 description:
-                    - Email_to_SMS server domain name.
+                    - Email-to-SMS server domain name.
                 type: str
             name:
                 description:
@@ -267,7 +267,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_sms_server": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "mail_server": {"required": False, "type": "str"},
                 "name": {"required": True, "type": "str"}

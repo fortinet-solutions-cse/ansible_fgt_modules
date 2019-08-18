@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -91,7 +91,7 @@ options:
                 type: int
             vlan_hb_lost_threshold:
                 description:
-                    - VLAN lost heartbeat threshold (1 _ 60).
+                    - VLAN lost heartbeat threshold (1 - 60).
                 type: int
 '''
 
@@ -256,7 +256,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_ha_monitor": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "monitor_vlan": {"required": False, "type": "str",
                                  "choices": ["enable", "disable"]},

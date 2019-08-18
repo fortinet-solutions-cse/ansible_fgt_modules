@@ -30,7 +30,7 @@ description:
       user to set and modify firewall feature and ssl_ssh_profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     firewall_ssl_ssh_profile:
         description:
             - Configure SSL/SSH protocol options.
@@ -115,7 +117,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     status:
                         description:
@@ -162,7 +164,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     status:
                         description:
@@ -210,7 +212,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     status:
                         description:
@@ -269,7 +271,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     status:
                         description:
@@ -307,7 +309,7 @@ options:
                 type: str
             server_cert_mode:
                 description:
-                    - Re_sign or replace the server's certificate.
+                    - Re-sign or replace the server's certificate.
                 type: str
                 choices:
                     - re-sign
@@ -334,7 +336,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     status:
                         description:
@@ -373,7 +375,7 @@ options:
                             - deep-inspection
                     ports:
                         description:
-                            - Ports to use for scanning (1 _ 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535, default = 443).
                         type: int
                     ssh_algorithm:
                         description:
@@ -845,7 +847,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_ssl_ssh_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "caname": {"required": False, "type": "str"},
                 "comment": {"required": False, "type": "str"},

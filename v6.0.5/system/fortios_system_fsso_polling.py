@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -91,7 +91,7 @@ options:
                     - disable
             listening_port:
                 description:
-                    - Listening port to accept clients (1 _ 65535).
+                    - Listening port to accept clients (1 - 65535).
                 type: int
             status:
                 description:
@@ -265,7 +265,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_fsso_polling": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_password": {"required": False, "type": "str"},
                 "authentication": {"required": False, "type": "str",

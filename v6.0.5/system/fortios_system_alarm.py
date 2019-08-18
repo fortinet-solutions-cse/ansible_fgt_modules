@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -163,7 +163,7 @@ options:
                         type: int
                     self_test_failure_threshold:
                         description:
-                            - Self_test failure threshold.
+                            - Self-test failure threshold.
                         type: int
                     user_auth_failure_threshold:
                         description:
@@ -365,7 +365,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_alarm": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "audible": {"required": False, "type": "str",
                             "choices": ["enable", "disable"]},

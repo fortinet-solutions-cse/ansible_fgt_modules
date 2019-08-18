@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_router_key_chain
-short_description: Configure key_chain in Fortinet's FortiOS and FortiGate.
+short_description: Configure key-chain in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify router feature and key_chain category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -81,7 +81,7 @@ options:
             - absent
     router_key_chain:
         description:
-            - Configure key_chain.
+            - Configure key-chain.
         default: null
         type: dict
         suboptions:
@@ -96,7 +96,7 @@ options:
                         type: str
                     id:
                         description:
-                            - Key ID (0 _ 2147483647).
+                            - Key ID (0 - 2147483647).
                         required: true
                         type: str
                     key_string:
@@ -109,7 +109,7 @@ options:
                         type: str
             name:
                 description:
-                    - Key_chain name.
+                    - Key-chain name.
                 required: true
                 type: str
 '''
@@ -123,7 +123,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Configure key_chain.
+  - name: Configure key-chain.
     fortios_router_key_chain:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -290,7 +290,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_key_chain": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "key": {"required": False, "type": "list",
                         "options": {

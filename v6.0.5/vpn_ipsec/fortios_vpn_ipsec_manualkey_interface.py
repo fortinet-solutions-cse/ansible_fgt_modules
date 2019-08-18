@@ -30,7 +30,7 @@ description:
       user to set and modify vpn_ipsec feature and manualkey_interface category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     vpn_ipsec_manualkey_interface:
         description:
             - Configure IPsec manual keys.
@@ -105,7 +107,7 @@ options:
                     - sha512
             auth_key:
                 description:
-                    - Hexadecimal authentication key in 16_digit (8_byte) segments separated by hyphens.
+                    - Hexadecimal authentication key in 16-digit (8-byte) segments separated by hyphens.
                 type: str
             enc_alg:
                 description:
@@ -116,7 +118,7 @@ options:
                     - des
             enc_key:
                 description:
-                    - Hexadecimal encryption key in 16_digit (8_byte) segments separated by hyphens.
+                    - Hexadecimal encryption key in 16-digit (8-byte) segments separated by hyphens.
                 type: str
             interface:
                 description:
@@ -139,7 +141,7 @@ options:
                 type: str
             local_spi:
                 description:
-                    - Local SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                    - Local SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.
                 type: str
             name:
                 description:
@@ -156,7 +158,7 @@ options:
                 type: str
             remote_spi:
                 description:
-                    - Remote SPI, a hexadecimal 8_digit (4_byte) tag. Discerns between two traffic streams with different encryption rules.
+                    - Remote SPI, a hexadecimal 8-digit (4-byte) tag. Discerns between two traffic streams with different encryption rules.
                 type: str
 '''
 
@@ -347,7 +349,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "vpn_ipsec_manualkey_interface": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "addr_type": {"required": False, "type": "str",
                               "choices": ["4", "6"]},

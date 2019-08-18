@@ -30,7 +30,7 @@ description:
       user to set and modify endpoint_control feature and forticlient_ems category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     endpoint_control_forticlient_ems:
         description:
             - Configure FortiClient Enterprise Management Server (EMS) entries.
@@ -106,11 +108,11 @@ options:
                 type: str
             https_port:
                 description:
-                    - "FortiClient EMS HTTPS access port number. (1 _ 65535, default: 443)."
+                    - "FortiClient EMS HTTPS access port number. (1 - 65535, default: 443)."
                 type: int
             listen_port:
                 description:
-                    - "FortiClient EMS telemetry listen port number. (1 _ 65535, default: 8013)."
+                    - "FortiClient EMS telemetry listen port number. (1 - 65535, default: 8013)."
                 type: int
             name:
                 description:
@@ -130,7 +132,7 @@ options:
                 type: str
             upload_port:
                 description:
-                    - "FortiClient EMS telemetry upload port number. (1 _ 65535, default: 8014)."
+                    - "FortiClient EMS telemetry upload port number. (1 - 65535, default: 8014)."
                 type: int
 '''
 
@@ -316,7 +318,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "endpoint_control_forticlient_ems": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "address": {"required": False, "type": "str"},
                 "admin_password": {"required": False, "type": "str"},

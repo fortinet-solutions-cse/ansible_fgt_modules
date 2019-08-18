@@ -24,7 +24,7 @@ ANSIBLE_METADATA = {'status': ['preview'],
 DOCUMENTATION = '''
 ---
 module: fortios_wanopt_cache_service
-short_description: Designate cache_service for wan_optimization and webcache in Fortinet's FortiOS and FortiGate.
+short_description: Designate cache-service for wan-optimization and webcache in Fortinet's FortiOS and FortiGate.
 description:
     - This module is able to configure a FortiGate or FortiOS device by allowing the
       user to set and modify wanopt feature and cache_service category.
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -74,7 +74,7 @@ options:
         default: true
     wanopt_cache_service:
         description:
-            - Designate cache_service for wan_optimization and webcache.
+            - Designate cache-service for wan-optimization and webcache.
         default: null
         type: dict
         suboptions:
@@ -87,7 +87,7 @@ options:
                     - peers
             collaboration:
                 description:
-                    - Enable/disable cache_collaboration between cache_service clusters.
+                    - Enable/disable cache-collaboration between cache-service clusters.
                 type: str
                 choices:
                     - enable
@@ -98,7 +98,7 @@ options:
                 type: str
             dst_peer:
                 description:
-                    - Modify cache_service destination peer list.
+                    - Modify cache-service destination peer list.
                 type: list
                 suboptions:
                     auth_type:
@@ -123,7 +123,7 @@ options:
                         type: int
             prefer_scenario:
                 description:
-                    - Set the preferred cache behavior towards the balance between latency and hit_ratio.
+                    - Set the preferred cache behavior towards the balance between latency and hit-ratio.
                 type: str
                 choices:
                     - balance
@@ -131,7 +131,7 @@ options:
                     - prefer-cache
             src_peer:
                 description:
-                    - Modify cache_service source peer list.
+                    - Modify cache-service source peer list.
                 type: list
                 suboptions:
                     auth_type:
@@ -165,7 +165,7 @@ EXAMPLES = '''
    vdom: "root"
    ssl_verify: "False"
   tasks:
-  - name: Designate cache_service for wan_optimization and webcache.
+  - name: Designate cache-service for wan-optimization and webcache.
     fortios_wanopt_cache_service:
       host:  "{{ host }}"
       username: "{{ username }}"
@@ -333,7 +333,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "wanopt_cache_service": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "acceptable_connections": {"required": False, "type": "str",
                                            "choices": ["any", "peers"]},

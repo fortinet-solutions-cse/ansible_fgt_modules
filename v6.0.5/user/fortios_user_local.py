@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             auth_concurrent_override:
                 description:
-                    - Enable/disable overriding the policy_auth_concurrent under config system global.
+                    - Enable/disable overriding the policy-auth-concurrent under config system global.
                 type: str
                 choices:
                     - enable
@@ -102,11 +102,11 @@ options:
                 type: int
             email_to:
                 description:
-                    - Two_factor recipient's email address.
+                    - Two-factor recipient's email address.
                 type: str
             fortitoken:
                 description:
-                    - Two_factor recipient's FortiToken serial number. Source user.fortitoken.serial-number.
+                    - Two-factor recipient's FortiToken serial number. Source user.fortitoken.serial-number.
                 type: str
             id:
                 description:
@@ -127,7 +127,7 @@ options:
                 type: str
             passwd_policy:
                 description:
-                    - Password policy to apply to this user, as defined in config user password_policy. Source user.password-policy.name.
+                    - Password policy to apply to this user, as defined in config user password-policy. Source user.password-policy.name.
                 type: str
             passwd_time:
                 description:
@@ -147,11 +147,11 @@ options:
                 type: str
             sms_custom_server:
                 description:
-                    - Two_factor recipient's SMS server. Source system.sms-server.name.
+                    - Two-factor recipient's SMS server. Source system.sms-server.name.
                 type: str
             sms_phone:
                 description:
-                    - Two_factor recipient's mobile phone number.
+                    - Two-factor recipient's mobile phone number.
                 type: str
             sms_server:
                 description:
@@ -173,7 +173,7 @@ options:
                 type: str
             two_factor:
                 description:
-                    - Enable/disable two_factor authentication.
+                    - Enable/disable two-factor authentication.
                 type: str
                 choices:
                     - disable
@@ -393,7 +393,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "user_local": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "auth_concurrent_override": {"required": False, "type": "str",
                                              "choices": ["enable", "disable"]},

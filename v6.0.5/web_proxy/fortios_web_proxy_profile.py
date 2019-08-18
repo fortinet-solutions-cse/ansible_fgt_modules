@@ -30,7 +30,7 @@ description:
       user to set and modify web_proxy feature and profile category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     web_proxy_profile:
         description:
             - Configure web proxy profiles.
@@ -87,7 +89,7 @@ options:
         suboptions:
             header_client_ip:
                 description:
-                    - "Action to take on the HTTP client_IP header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                    - "Action to take on the HTTP client-IP header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
                 type: str
                 choices:
                     - pass
@@ -95,7 +97,7 @@ options:
                     - remove
             header_front_end_https:
                 description:
-                    - "Action to take on the HTTP front_end_HTTPS header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                    - "Action to take on the HTTP front-end-HTTPS header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
                 type: str
                 choices:
                     - pass
@@ -119,7 +121,7 @@ options:
                     - remove
             header_x_authenticated_groups:
                 description:
-                    - "Action to take on the HTTP x_authenticated_groups header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                    - "Action to take on the HTTP x-authenticated-groups header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
                 type: str
                 choices:
                     - pass
@@ -127,7 +129,7 @@ options:
                     - remove
             header_x_authenticated_user:
                 description:
-                    - "Action to take on the HTTP x_authenticated_user header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                    - "Action to take on the HTTP x-authenticated-user header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
                 type: str
                 choices:
                     - pass
@@ -135,7 +137,7 @@ options:
                     - remove
             header_x_forwarded_for:
                 description:
-                    - "Action to take on the HTTP x_forwarded_for header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
+                    - "Action to take on the HTTP x-forwarded-for header in forwarded requests: forwards (pass), adds, or removes the HTTP header."
                 type: str
                 choices:
                     - pass
@@ -377,7 +379,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "web_proxy_profile": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "header_client_ip": {"required": False, "type": "str",
                                      "choices": ["pass", "add", "remove"]},

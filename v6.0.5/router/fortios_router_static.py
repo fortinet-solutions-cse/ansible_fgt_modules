@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and static category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     state:
         description:
             - Indicates whether to create or remove the object.
@@ -79,6 +80,7 @@ options:
         choices:
             - present
             - absent
+        version_added: 2.9
     router_static:
         description:
             - Configure IPv4 static routing tables.
@@ -109,7 +111,7 @@ options:
                 type: str
             distance:
                 description:
-                    - Administrative distance (1 _ 255).
+                    - Administrative distance (1 - 255).
                 type: int
             dst:
                 description:
@@ -147,7 +149,7 @@ options:
                     - disable
             priority:
                 description:
-                    - Administrative priority (0 _ 4294967295).
+                    - Administrative priority (0 - 4294967295).
                 type: int
             seq_num:
                 description:
@@ -166,7 +168,7 @@ options:
                     - disable
             virtual_wan_link:
                 description:
-                    - Enable/disable egress through the virtual_wan_link.
+                    - Enable/disable egress through the virtual-wan-link.
                 type: str
                 choices:
                     - enable
@@ -177,7 +179,7 @@ options:
                 type: int
             weight:
                 description:
-                    - Administrative weight (0 _ 255).
+                    - Administrative weight (0 - 255).
                 type: int
 '''
 
@@ -375,7 +377,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "router_static": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "bfd": {"required": False, "type": "str",
                         "choices": ["enable", "disable"]},

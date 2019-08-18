@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -97,7 +97,7 @@ options:
                         type: str
             destination:
                 description:
-                    - Serial number/HA group_name of destination devices.
+                    - Serial number/HA group-name of destination devices.
                 type: list
                 suboptions:
                     name:
@@ -302,7 +302,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_automation_stitch": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "action": {"required": False, "type": "list",
                            "options": {

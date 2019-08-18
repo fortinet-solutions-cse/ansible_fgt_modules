@@ -30,7 +30,7 @@ description:
       user to set and modify endpoint_control feature and settings category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     endpoint_control_settings:
         description:
             - Configure endpoint control settings.
@@ -91,7 +92,7 @@ options:
                     - custom
             forticlient_avdb_update_interval:
                 description:
-                    - Period of time between FortiClient AntiVirus database updates (0 _ 24 hours, default = 8).
+                    - Period of time between FortiClient AntiVirus database updates (0 - 24 hours, default = 8).
                 type: int
             forticlient_dereg_unsupported_client:
                 description:
@@ -102,11 +103,11 @@ options:
                     - disable
             forticlient_ems_rest_api_call_timeout:
                 description:
-                    - FortiClient EMS call timeout in milliseconds (500 _ 30000 milliseconds, default = 5000).
+                    - FortiClient EMS call timeout in milliseconds (500 - 30000 milliseconds, default = 5000).
                 type: int
             forticlient_keepalive_interval:
                 description:
-                    - Interval between two KeepAlive messages from FortiClient (20 _ 300 sec, default = 60).
+                    - Interval between two KeepAlive messages from FortiClient (20 - 300 sec, default = 60).
                 type: int
             forticlient_offline_grace:
                 description:
@@ -117,7 +118,7 @@ options:
                     - disable
             forticlient_offline_grace_interval:
                 description:
-                    - Grace period for offline registered FortiClient (60 _ 600 sec, default = 120).
+                    - Grace period for offline registered FortiClient (60 - 600 sec, default = 120).
                 type: int
             forticlient_reg_key:
                 description:
@@ -136,7 +137,7 @@ options:
                 type: int
             forticlient_sys_update_interval:
                 description:
-                    - Interval between two system update messages from FortiClient (30 _ 1440 min, default = 720).
+                    - Interval between two system update messages from FortiClient (30 - 1440 min, default = 720).
                 type: int
             forticlient_user_avatar:
                 description:
@@ -147,7 +148,7 @@ options:
                     - disable
             forticlient_warning_interval:
                 description:
-                    - Period of time between FortiClient portal warnings (0 _ 24 hours, default = 1).
+                    - Period of time between FortiClient portal warnings (0 - 24 hours, default = 1).
                 type: int
 '''
 
@@ -327,7 +328,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "endpoint_control_settings": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "download_custom_link": {"required": False, "type": "str"},
                 "download_location": {"required": False, "type": "str",

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -119,19 +119,19 @@ options:
                     - 6
             keepalive_failtimes:
                 description:
-                    - Number of consecutive unreturned keepalive messages before a GRE connection is considered down (1 _ 255).
+                    - Number of consecutive unreturned keepalive messages before a GRE connection is considered down (1 - 255).
                 type: int
             keepalive_interval:
                 description:
-                    - Keepalive message interval (0 _ 32767, 0 = disabled).
+                    - Keepalive message interval (0 - 32767, 0 = disabled).
                 type: int
             key_inbound:
                 description:
-                    - Require received GRE packets contain this key (0 _ 4294967295).
+                    - Require received GRE packets contain this key (0 - 4294967295).
                 type: int
             key_outbound:
                 description:
-                    - Include this key in transmitted GRE packets (0 _ 4294967295).
+                    - Include this key in transmitted GRE packets (0 - 4294967295).
                 type: int
             local_gw:
                 description:
@@ -360,7 +360,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_gre_tunnel": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "checksum_reception": {"required": False, "type": "str",
                                        "choices": ["disable", "enable"]},

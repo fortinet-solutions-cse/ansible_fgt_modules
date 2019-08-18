@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -101,11 +101,11 @@ options:
                     - enable
             hostname_limit:
                 description:
-                    - Limit of the number of hostname table entries (0 _ 50000).
+                    - Limit of the number of hostname table entries (0 - 50000).
                 type: int
             hostname_ttl:
                 description:
-                    - TTL of hostname table entries (60 _ 86400).
+                    - TTL of hostname table entries (60 - 86400).
                 type: int
             source_location:
                 description:
@@ -281,7 +281,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "system_network_visibility": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "destination_hostname_visibility": {"required": False, "type": "str",
                                                     "choices": ["disable", "enable"]},

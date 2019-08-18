@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -91,7 +91,7 @@ options:
                 type: str
             max_connections:
                 description:
-                    - Maximum number of web proxy WISP connections (4 _ 4096, default = 64).
+                    - Maximum number of web proxy WISP connections (4 - 4096, default = 64).
                 type: int
             name:
                 description:
@@ -108,11 +108,11 @@ options:
                 type: str
             server_port:
                 description:
-                    - WISP server port (1 _ 65535, default = 15868).
+                    - WISP server port (1 - 65535, default = 15868).
                 type: int
             timeout:
                 description:
-                    - Period of time before WISP requests time out (1 _ 15 sec, default = 5).
+                    - Period of time before WISP requests time out (1 - 15 sec, default = 5).
                 type: int
 '''
 
@@ -294,7 +294,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "web_proxy_wisp": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "comment": {"required": False, "type": "str"},
                 "max_connections": {"required": False, "type": "int"},

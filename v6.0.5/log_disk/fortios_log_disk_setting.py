@@ -30,7 +30,7 @@ description:
       user to set and modify log_disk feature and setting category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     log_disk_setting:
         description:
             - Settings for local disk logging.
@@ -92,15 +93,15 @@ options:
                 type: int
             full_final_warning_threshold:
                 description:
-                    - Log full final warning threshold as a percent (3 _ 100, default = 95).
+                    - Log full final warning threshold as a percent (3 - 100, default = 95).
                 type: int
             full_first_warning_threshold:
                 description:
-                    - Log full first warning threshold as a percent (1 _ 98, default = 75).
+                    - Log full first warning threshold as a percent (1 - 98, default = 75).
                 type: int
             full_second_warning_threshold:
                 description:
-                    - Log full second warning threshold as a percent (2 _ 99, default = 90).
+                    - Log full second warning threshold as a percent (2 - 99, default = 90).
                 type: int
             ips_archive:
                 description:
@@ -115,7 +116,7 @@ options:
                 type: int
             max_log_file_size:
                 description:
-                    - Maximum log file size before rolling (1 _ 100 Mbytes).
+                    - Maximum log file size before rolling (1 - 100 Mbytes).
                 type: int
             max_policy_packet_capture_size:
                 description:
@@ -440,7 +441,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "log_disk_setting": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "diskfull": {"required": False, "type": "str",
                              "choices": ["overwrite", "nolog"]},

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -104,7 +104,7 @@ options:
                         type: str
                     id:
                         description:
-                            - ID number for individual entry in the IP_Range table.
+                            - ID number for individual entry in the IP-Range table.
                         required: true
                         type: int
                     start_ip:
@@ -296,7 +296,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_geoip_override": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "country_id": {"required": False, "type": "str"},
                 "description": {"required": False, "type": "str"},

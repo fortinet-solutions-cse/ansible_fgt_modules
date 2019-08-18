@@ -30,7 +30,7 @@ description:
       user to set and modify router feature and ospf category.
       Examples include all parameters and values need to be adjusted to datasources before usage.
       Tested with FOS v6.0.5
-version_added: "2.9"
+version_added: "2.8"
 author:
     - Miguel Angel Munoz (@mamunozgonzalez)
     - Nicolas Thomas (@thomnico)
@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -72,6 +72,7 @@ options:
             - Ensures FortiGate certificate must be verified by a proper CA.
         type: bool
         default: true
+        version_added: 2.9
     router_ospf:
         description:
             - Configure OSPF.
@@ -106,7 +107,7 @@ options:
                         type: int
                     filter_list:
                         description:
-                            - OSPF area filter_list configuration.
+                            - OSPF area filter-list configuration.
                         type: list
                         suboptions:
                             direction:
@@ -123,7 +124,7 @@ options:
                                 type: int
                             list:
                                 description:
-                                    - Access_list or prefix_list name. Source router.access-list.name router.prefix-list.name.
+                                    - Access-list or prefix-list name. Source router.access-list.name router.prefix-list.name.
                                 type: str
                     id:
                         description:
@@ -132,7 +133,7 @@ options:
                         type: str
                     nssa_default_information_originate:
                         description:
-                            - Redistribute, advertise, or do not originate Type_7 default route into NSSA area.
+                            - Redistribute, advertise, or do not originate Type-7 default route into NSSA area.
                         type: str
                         choices:
                             - enable
@@ -328,11 +329,11 @@ options:
                 type: int
             distance_inter_area:
                 description:
-                    - Administrative inter_area distance.
+                    - Administrative inter-area distance.
                 type: int
             distance_intra_area:
                 description:
-                    - Administrative intra_area distance.
+                    - Administrative intra-area distance.
                 type: int
             distribute_list:
                 description:
@@ -362,7 +363,7 @@ options:
                 type: str
             distribute_route_map_in:
                 description:
-                    - Filter incoming external routes by route_map. Source router.route-map.name.
+                    - Filter incoming external routes by route-map. Source router.route-map.name.
                 type: str
             log_neighbour_changes:
                 description:
@@ -373,12 +374,12 @@ options:
                     - disable
             neighbor:
                 description:
-                    - OSPF neighbor configuration are used when OSPF runs on non_broadcast media
+                    - OSPF neighbor configuration are used when OSPF runs on non-broadcast media
                 type: list
                 suboptions:
                     cost:
                         description:
-                            - Cost of the interface, value range from 0 to 65535, 0 means auto_cost.
+                            - Cost of the interface, value range from 0 to 65535, 0 means auto-cost.
                         type: int
                     id:
                         description:
@@ -442,7 +443,7 @@ options:
                             - disable
                     cost:
                         description:
-                            - Cost of the interface, value range from 0 to 65535, 0 means auto_cost.
+                            - Cost of the interface, value range from 0 to 65535, 0 means auto-cost.
                         type: int
                     database_filter_out:
                         description:
@@ -912,7 +913,7 @@ def main():
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
         "router_ospf": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "abr_type": {"required": False, "type": "str",
                              "choices": ["cisco", "ibm", "shortcut",

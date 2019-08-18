@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -130,7 +130,7 @@ options:
                         type: str
                     preference:
                         description:
-                            - DNS entry preference, 0 is the highest preference (0 _ 65535, default = 10)
+                            - DNS entry preference, 0 is the highest preference (0 - 65535, default = 10)
                         type: int
                     status:
                         description:
@@ -141,7 +141,7 @@ options:
                             - disable
                     ttl:
                         description:
-                            - Time_to_live for this entry (0 to 2147483647 sec, default = 0).
+                            - Time-to-live for this entry (0 to 2147483647 sec, default = 0).
                         type: int
                     type:
                         description:
@@ -189,7 +189,7 @@ options:
                     - disable
             ttl:
                 description:
-                    - Default time_to_live value for the entries of this DNS zone (0 _ 2147483647 sec, default = 86400).
+                    - Default time-to-live value for the entries of this DNS zone (0 - 2147483647 sec, default = 86400).
                 type: int
             type:
                 description:
@@ -404,7 +404,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_dns_database": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "allow_transfer": {"required": False, "type": "str"},
                 "authoritative": {"required": False, "type": "str",

@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -87,7 +87,7 @@ options:
         suboptions:
             dstport:
                 description:
-                    - VXLAN destination port (1 _ 65535, default = 4789).
+                    - VXLAN destination port (1 - 65535, default = 4789).
                 type: int
             interface:
                 description:
@@ -104,7 +104,7 @@ options:
                     - ipv6-multicast
             multicast_ttl:
                 description:
-                    - VXLAN multicast TTL (1_255, default = 0).
+                    - VXLAN multicast TTL (1-255, default = 0).
                 type: int
             name:
                 description:
@@ -320,7 +320,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_vxlan": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "dstport": {"required": False, "type": "int"},
                 "interface": {"required": False, "type": "str"},

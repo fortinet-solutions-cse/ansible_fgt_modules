@@ -44,12 +44,12 @@ options:
         description:
             - FortiOS or FortiGate IP address.
         type: str
-        required: true
+        required: false
     username:
         description:
             - FortiOS or FortiGate username.
         type: str
-        required: true
+        required: false
     password:
         description:
             - FortiOS or FortiGate password.
@@ -95,7 +95,7 @@ options:
                 type: str
             dialup_tunnel:
                 description:
-                    - Maximum guaranteed number of dial_up tunnels.
+                    - Maximum guaranteed number of dial-up tunnels.
                 type: str
             firewall_address:
                 description:
@@ -107,7 +107,7 @@ options:
                 type: str
             firewall_policy:
                 description:
-                    - Maximum guaranteed number of firewall policies (IPv4, IPv6, policy46, policy64, DoS_policy4, DoS_policy6, multicast).
+                    - Maximum guaranteed number of firewall policies (IPv4, IPv6, policy46, policy64, DoS-policy4, DoS-policy6, multicast).
                 type: str
             ipsec_phase1:
                 description:
@@ -136,7 +136,7 @@ options:
                 type: str
             onetime_schedule:
                 description:
-                    - Maximum guaranteed number of firewall one_time schedules.
+                    - Maximum guaranteed number of firewall one-time schedules.
                 type: str
             proxy:
                 description:
@@ -156,11 +156,11 @@ options:
                 type: str
             snmp_index:
                 description:
-                    - Permanent SNMP Index of the virtual domain (0 _ 4294967295).
+                    - Permanent SNMP Index of the virtual domain (0 - 4294967295).
                 type: int
             sslvpn:
                 description:
-                    - Maximum guaranteed number of SSL_VPNs.
+                    - Maximum guaranteed number of SSL-VPNs.
                 type: str
             user:
                 description:
@@ -368,7 +368,7 @@ def main():
         "state": {"required": True, "type": "str",
                   "choices": ["present", "absent"]},
         "system_vdom_property": {
-            "required": False, "type": "dict",
+            "required": False, "type": "dict", "default": None,
             "options": {
                 "custom_service": {"required": False, "type": "str"},
                 "description": {"required": False, "type": "str"},

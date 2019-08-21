@@ -92,7 +92,7 @@ options:
                 type: str
             max_connections:
                 description:
-                    - Maximum number of web proxy WISP connections (4 - 4096, default = 64).
+                    - Maximum number of web proxy WISP connections (4 - 4096).
                 type: int
             name:
                 description:
@@ -109,11 +109,11 @@ options:
                 type: str
             server_port:
                 description:
-                    - WISP server port (1 - 65535, default = 15868).
+                    - WISP server port (1 - 65535).
                 type: int
             timeout:
                 description:
-                    - Period of time before WISP requests time out (1 - 15 sec, default = 5).
+                    - Period of time before WISP requests time out (1 - 15 sec).
                 type: int
 '''
 

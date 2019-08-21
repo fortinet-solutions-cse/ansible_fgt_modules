@@ -105,7 +105,7 @@ options:
                 type: str
             dns_mapping_ttl:
                 description:
-                    - DNS mapping TTL (Set to zero to use TTL in DNS response, default = 0).
+                    - DNS mapping TTL (Set to zero to use TTL in DNS response).
                 type: int
             extaddr:
                 description:

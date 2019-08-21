@@ -796,15 +796,15 @@ options:
                             - SEND-compatible
                     nd_security_level:
                         description:
-                            - Neighbor discovery security level (0 - 7; 0 = least secure, default = 0).
+                            - Neighbor discovery security level (0 - 7; 0 = least secure).
                         type: int
                     nd_timestamp_delta:
                         description:
-                            - Neighbor discovery timestamp delta value (1 - 3600 sec; default = 300).
+                            - Neighbor discovery timestamp delta value (1 - 3600 sec; ).
                         type: int
                     nd_timestamp_fuzz:
                         description:
-                            - Neighbor discovery timestamp fuzz factor (1 - 60 sec; default = 1).
+                            - Neighbor discovery timestamp fuzz factor (1 - 60 sec; ).
                         type: int
                     vrip6_link_local:
                         description:

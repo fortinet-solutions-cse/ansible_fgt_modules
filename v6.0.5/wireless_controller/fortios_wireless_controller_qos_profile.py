@@ -95,7 +95,7 @@ options:
                     - disable
             bandwidth_capacity:
                 description:
-                    - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
+                    - Maximum bandwidth capacity allowed (1 - 600000 Kbps).
                 type: int
             burst:
                 description:
@@ -113,7 +113,7 @@ options:
                     - disable
             call_capacity:
                 description:
-                    - Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 - 60, default = 10).
+                    - Maximum number of Voice over WLAN (VoWLAN) phones allowed (0 - 60).
                 type: int
             comment:
                 description:
@@ -121,15 +121,15 @@ options:
                 type: str
             downlink:
                 description:
-                    - Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum downlink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps).
                 type: int
             downlink_sta:
                 description:
-                    - Maximum downlink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum downlink bandwidth for clients (0 - 2097152 Kbps).
                 type: int
             dscp_wmm_be:
                 description:
-                    - DSCP mapping for best effort access (default = 0 24).
+                    - DSCP mapping for best effort access .
                 type: list
                 suboptions:
                     id:
@@ -139,7 +139,7 @@ options:
                         type: int
             dscp_wmm_bk:
                 description:
-                    - DSCP mapping for background access (default = 8 16).
+                    - DSCP mapping for background access .
                 type: list
                 suboptions:
                     id:
@@ -156,7 +156,7 @@ options:
                     - disable
             dscp_wmm_vi:
                 description:
-                    - DSCP mapping for video access (default = 32 40).
+                    - DSCP mapping for video access .
                 type: list
                 suboptions:
                     id:
@@ -166,7 +166,7 @@ options:
                         type: int
             dscp_wmm_vo:
                 description:
-                    - DSCP mapping for voice access (default = 48 56).
+                    - DSCP mapping for voice access .
                 type: list
                 suboptions:
                     id:
@@ -181,11 +181,11 @@ options:
                 type: str
             uplink:
                 description:
-                    - Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum uplink bandwidth for Virtual Access Points (VAPs) (0 - 2097152 Kbps).
                 type: int
             uplink_sta:
                 description:
-                    - Maximum uplink bandwidth for clients (0 - 2097152 Kbps, default = 0, 0 means no limit).
+                    - Maximum uplink bandwidth for clients (0 - 2097152 Kbps).
                 type: int
             wmm:
                 description:

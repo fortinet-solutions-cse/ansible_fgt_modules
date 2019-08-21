@@ -101,7 +101,7 @@ options:
                     - enable
             analytics_max_upload:
                 description:
-                    - Maximum size of files that can be uploaded to FortiSandbox (1 - 395 MBytes, default = 10).
+                    - Maximum size of files that can be uploaded to FortiSandbox (1 - 395 MBytes).
                 type: int
             analytics_wl_filetype:
                 description:

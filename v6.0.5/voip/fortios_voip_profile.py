@@ -639,7 +639,7 @@ options:
                         type: int
                     preserve_override:
                         description:
-                            - "Override i line to preserve original IPS (default: append)."
+                            - "Override i line to preserve original IPS ."
                         type: str
                         choices:
                             - disable

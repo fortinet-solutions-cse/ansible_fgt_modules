@@ -88,7 +88,7 @@ options:
         suboptions:
             dstport:
                 description:
-                    - VXLAN destination port (1 - 65535, default = 4789).
+                    - VXLAN destination port (1 - 65535).
                 type: int
             interface:
                 description:
@@ -105,7 +105,7 @@ options:
                     - ipv6-multicast
             multicast_ttl:
                 description:
-                    - VXLAN multicast TTL (1-255, default = 0).
+                    - VXLAN multicast TTL (1-255).
                 type: int
             name:
                 description:

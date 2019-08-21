@@ -108,7 +108,7 @@ options:
                         type: str
                     from_vlan:
                         description:
-                            - VLAN ID from which the Bonjour service is advertised (0 - 4094, default = 0).
+                            - VLAN ID from which the Bonjour service is advertised (0 - 4094).
                         type: str
                     policy_id:
                         description:
@@ -133,7 +133,7 @@ options:
                             - chromecast
                     to_vlan:
                         description:
-                            - VLAN ID to which the Bonjour service is made available (0 - 4094, default = all).
+                            - VLAN ID to which the Bonjour service is made available (0 - 4094).
                         type: str
 '''
 

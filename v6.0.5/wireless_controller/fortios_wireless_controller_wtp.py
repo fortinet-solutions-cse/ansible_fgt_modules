@@ -145,7 +145,7 @@ options:
                 type: int
             ip_fragment_preventing:
                 description:
-                    - Method by which IP fragmentation is prevented for CAPWAP tunneled control and data packets (default = tcp-mss-adjust).
+                    - Method by which IP fragmentation is prevented for CAPWAP tunneled control and data packets .
                 type: str
                 choices:
                     - tcp-mss-adjust
@@ -290,7 +290,7 @@ options:
                 type: str
             login_passwd_change:
                 description:
-                    - Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no, default = no).
+                    - Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no).
                 type: str
                 choices:
                     - yes
@@ -366,11 +366,11 @@ options:
                     auto_power_high:
                         description:
                             - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 - 17
-                               dBm, default = 17).
+                               dBm).
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference .
                         type: str
                         choices:
                             - enable
@@ -443,7 +443,7 @@ options:
                             - disable
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100).
                         type: int
                     radio_id:
                         description:
@@ -458,7 +458,7 @@ options:
                             - disable
                     vap_all:
                         description:
-                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) .
                         type: str
                         choices:
                             - enable
@@ -481,11 +481,11 @@ options:
                     auto_power_high:
                         description:
                             - Automatic transmission power high limit in decibels (dB) of the measured power referenced to one milliwatt (mW), or dBm (10 - 17
-                               dBm, default = 17).
+                               dBm).
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = enable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference .
                         type: str
                         choices:
                             - enable
@@ -558,7 +558,7 @@ options:
                             - disable
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100).
                         type: int
                     radio_id:
                         description:
@@ -573,7 +573,7 @@ options:
                             - disable
                     vap_all:
                         description:
-                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) .
                         type: str
                         choices:
                             - enable
@@ -604,7 +604,7 @@ options:
                         type: int
             split_tunneling_acl_local_ap_subnet:
                 description:
-                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL (default = disable).
+                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL .
                 type: str
                 choices:
                     - enable

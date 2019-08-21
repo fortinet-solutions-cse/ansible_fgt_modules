@@ -96,7 +96,7 @@ options:
                     - eddystone-url
             beacon_interval:
                 description:
-                    - Beacon interval (default = 100 msec).
+                    - Beacon interval .
                 type: int
             ble_scanning:
                 description:
@@ -144,7 +144,7 @@ options:
                 type: str
             txpower:
                 description:
-                    - Transmit power level (default = 0).
+                    - Transmit power level .
                 type: str
                 choices:
                     - 0

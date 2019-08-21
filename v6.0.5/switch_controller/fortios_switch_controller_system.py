@@ -80,7 +80,7 @@ options:
         suboptions:
             parallel_process:
                 description:
-                    - Maximum number of parallel processes (1 - 300, default = 1).
+                    - Maximum number of parallel processes (1 - 300).
                 type: int
             parallel_process_override:
                 description:

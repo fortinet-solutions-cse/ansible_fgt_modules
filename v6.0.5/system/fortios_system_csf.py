@@ -174,7 +174,7 @@ options:
                 type: str
             upstream_port:
                 description:
-                    - The port number to use to communicate with the FortiGate upstream from this FortiGate in the Security Fabric (default = 8013).
+                    - The port number to use to communicate with the FortiGate upstream from this FortiGate in the Security Fabric .
                 type: int
 '''
 

@@ -81,7 +81,7 @@ options:
         suboptions:
             ftp_incoming_port:
                 description:
-                    - Accept incoming FTP-over-HTTP requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).
+                    - Accept incoming FTP-over-HTTP requests on one or more ports (0 - 65535).
                 type: str
             ftp_over_http:
                 description:
@@ -92,11 +92,11 @@ options:
                     - disable
             http_incoming_port:
                 description:
-                    - Accept incoming HTTP requests on one or more ports (0 - 65535, default = 8080).
+                    - Accept incoming HTTP requests on one or more ports (0 - 65535).
                 type: str
             https_incoming_port:
                 description:
-                    - Accept incoming HTTPS requests on one or more ports (0 - 65535, default = 0, use the same as HTTP).
+                    - Accept incoming HTTPS requests on one or more ports (0 - 65535).
                 type: str
             https_replacement_message:
                 description:
@@ -145,8 +145,7 @@ options:
                 type: str
             pac_file_server_port:
                 description:
-                    - Port number that PAC traffic from client web browsers uses to connect to the explicit web proxy (0 - 65535, default = 0; use the same as
-                       HTTP).
+                    - Port number that PAC traffic from client web browsers uses to connect to the explicit web proxy (0 - 65535).
                 type: str
             pac_file_server_status:
                 description:
@@ -220,7 +219,7 @@ options:
                             - disable
             pref_dns_result:
                 description:
-                    - Prefer resolving addresses using the configured IPv4 or IPv6 DNS server (default = ipv4).
+                    - Prefer resolving addresses using the configured IPv4 or IPv6 DNS server .
                 type: str
                 choices:
                     - ipv4
@@ -245,7 +244,7 @@ options:
                     - disable
             socks_incoming_port:
                 description:
-                    - Accept incoming SOCKS proxy requests on one or more ports (0 - 65535, default = 0; use the same as HTTP).
+                    - Accept incoming SOCKS proxy requests on one or more ports (0 - 65535).
                 type: str
             ssl_algorithm:
                 description:

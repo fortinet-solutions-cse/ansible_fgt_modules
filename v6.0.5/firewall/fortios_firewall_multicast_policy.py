@@ -115,7 +115,7 @@ options:
                 type: str
             end_port:
                 description:
-                    -  Integer value for ending TCP/UDP/SCTP destination port in range (1 - 65535, default = 1).
+                    -  Integer value for ending TCP/UDP/SCTP destination port in range (1 - 65535).
                 type: int
             id:
                 description:
@@ -131,7 +131,7 @@ options:
                     - disable
             protocol:
                 description:
-                    - Integer value for the protocol type as defined by IANA (0 - 255, default = 0).
+                    - Integer value for the protocol type as defined by IANA (0 - 255).
                 type: int
             snat:
                 description:
@@ -160,7 +160,7 @@ options:
                 type: str
             start_port:
                 description:
-                    - Integer value for starting TCP/UDP/SCTP destination port in range (1 - 65535, default = 1).
+                    - Integer value for starting TCP/UDP/SCTP destination port in range (1 - 65535).
                 type: int
             status:
                 description:

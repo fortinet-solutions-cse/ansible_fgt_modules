@@ -560,7 +560,7 @@ options:
                             - info
                     forticlient_vuln_scan_enforce_grace:
                         description:
-                            - FortiClient vulnerability scan enforcement grace period (0 - 30 days, default = 1).
+                            - FortiClient vulnerability scan enforcement grace period (0 - 30 days).
                         type: int
                     forticlient_vuln_scan_exempt:
                         description:

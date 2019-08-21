@@ -98,11 +98,11 @@ options:
                 type: str
             http_max_redirects:
                 description:
-                    - The maximum number of HTTP redirects to be allowed (0 - 5, default = 0).
+                    - The maximum number of HTTP redirects to be allowed (0 - 5).
                 type: int
             interval:
                 description:
-                    - Time between health checks (5 - 65635 sec, default = 10).
+                    - Time between health checks (5 - 65635 sec).
                 type: int
             name:
                 description:
@@ -111,17 +111,15 @@ options:
                 type: str
             port:
                 description:
-                    - Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 - 65635, default =
-                       0).
+                    - Service port used to perform the health check. If 0, health check monitor inherits port configured for the server (0 - 65635).
                 type: int
             retry:
                 description:
-                    - Number health check attempts before the server is considered down (1 - 255, default = 3).
+                    - Number health check attempts before the server is considered down (1 - 255).
                 type: int
             timeout:
                 description:
-                    - Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 - 255 sec,
-                       default = 2).
+                    - Time to wait to receive response to a health check from a server. Reaching the timeout means the health check failed (1 - 255 sec).
                 type: int
             type:
                 description:

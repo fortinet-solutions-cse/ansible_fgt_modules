@@ -120,7 +120,7 @@ options:
                 type: int
             email_interval:
                 description:
-                    - Interval between sending alert emails (1 - 99999 min, default = 5).
+                    - Interval between sending alert emails (1 - 99999 min).
                 type: int
             emergency_interval:
                 description:
@@ -132,7 +132,7 @@ options:
                 type: int
             FDS_license_expiring_days:
                 description:
-                    - Number of days to send alert email prior to FortiGuard license expiration (1 - 100 days, default = 100).
+                    - Number of days to send alert email prior to FortiGuard license expiration (1 - 100 days).
                 type: int
             FDS_license_expiring_warning:
                 description:
@@ -210,7 +210,7 @@ options:
                     - disable
             local_disk_usage:
                 description:
-                    - Disk usage percentage at which to send alert email (1 - 99 percent, default = 75).
+                    - Disk usage percentage at which to send alert email (1 - 99 percent).
                 type: int
             log_disk_usage_warning:
                 description:

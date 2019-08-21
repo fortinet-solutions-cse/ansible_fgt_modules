@@ -99,7 +99,7 @@ options:
                     - ssh
             ap_country:
                 description:
-                    - Country in which this WTP, FortiAP or AP will operate (default = NA, automatically use the country configured for the current VDOM).
+                    - Country in which this WTP, FortiAP or AP will operate .
                 type: str
                 choices:
                     - NA
@@ -273,7 +273,7 @@ options:
                     - disable
             dtls_policy:
                 description:
-                    - WTP data channel DTLS policy (default = clear-text).
+                    - WTP data channel DTLS policy .
                 type: str
                 choices:
                     - clear-text
@@ -295,14 +295,14 @@ options:
                     - disable
             handoff_roaming:
                 description:
-                    - Enable/disable client load balancing during roaming to avoid roaming delay (default = disable).
+                    - Enable/disable client load balancing during roaming to avoid roaming delay .
                 type: str
                 choices:
                     - enable
                     - disable
             handoff_rssi:
                 description:
-                    - Minimum received signal strength indicator (RSSI) value for handoff (20 - 30, default = 25).
+                    - Minimum received signal strength indicator (RSSI) value for handoff (20 - 30).
                 type: int
             handoff_sta_thresh:
                 description:
@@ -310,7 +310,7 @@ options:
                 type: int
             ip_fragment_preventing:
                 description:
-                    - Select how to prevent IP fragmentation for CAPWAP tunneled control and data packets (default = tcp-mss-adjust).
+                    - Select how to prevent IP fragmentation for CAPWAP tunneled control and data packets .
                 type: str
                 choices:
                     - tcp-mss-adjust
@@ -444,39 +444,39 @@ options:
                 suboptions:
                     aeroscout:
                         description:
-                            - Enable/disable AeroScout Real Time Location Service (RTLS) support (default = disable).
+                            - Enable/disable AeroScout Real Time Location Service (RTLS) support .
                         type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_ap_mac:
                         description:
-                            - Use BSSID or board MAC address as AP MAC address in AeroScout AP messages (default = bssid).
+                            - Use BSSID or board MAC address as AP MAC address in AeroScout AP messages .
                         type: str
                         choices:
                             - bssid
                             - board-mac
                     aeroscout_mmu_report:
                         description:
-                            - Enable/disable compounded AeroScout tag and MU report (default = enable).
+                            - Enable/disable compounded AeroScout tag and MU report .
                         type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_mu:
                         description:
-                            - Enable/disable AeroScout Mobile Unit (MU) support (default = disable).
+                            - Enable/disable AeroScout Mobile Unit (MU) support .
                         type: str
                         choices:
                             - enable
                             - disable
                     aeroscout_mu_factor:
                         description:
-                            - AeroScout MU mode dilution factor (default = 20).
+                            - AeroScout MU mode dilution factor .
                         type: int
                     aeroscout_mu_timeout:
                         description:
-                            - AeroScout MU mode timeout (0 - 65535 sec, default = 5).
+                            - AeroScout MU mode timeout (0 - 65535 sec).
                         type: int
                     aeroscout_server_ip:
                         description:
@@ -488,7 +488,7 @@ options:
                         type: int
                     ekahau_blink_mode:
                         description:
-                            - Enable/disable Ekahau blink mode (now known as AiRISTA Flow) to track and locate WiFi tags (default = disable).
+                            - Enable/disable Ekahau blink mode (now known as AiRISTA Flow) to track and locate WiFi tags .
                         type: str
                         choices:
                             - enable
@@ -508,7 +508,7 @@ options:
                     fortipresence:
                         description:
                             - Enable/disable FortiPresence to monitor the location and activity of WiFi clients even if they don't connect to this WiFi
-                               network (default = disable).
+                               network .
                         type: str
                         choices:
                             - foreign
@@ -516,15 +516,15 @@ options:
                             - disable
                     fortipresence_frequency:
                         description:
-                            - FortiPresence report transmit frequency (5 - 65535 sec, default = 30).
+                            - FortiPresence report transmit frequency (5 - 65535 sec).
                         type: int
                     fortipresence_port:
                         description:
-                            - FortiPresence server UDP listening port (default = 3000).
+                            - FortiPresence server UDP listening port .
                         type: int
                     fortipresence_project:
                         description:
-                            - FortiPresence project name (max. 16 characters, default = fortipresence).
+                            - FortiPresence project name (max. 16 characters).
                         type: str
                     fortipresence_rogue:
                         description:
@@ -550,7 +550,7 @@ options:
                             - disable
                     station_locate:
                         description:
-                            - Enable/disable client station locating services for all clients, whether associated or not (default = disable).
+                            - Enable/disable client station locating services for all clients, whether associated or not .
                         type: str
                         choices:
                             - enable
@@ -568,14 +568,14 @@ options:
                         type: str
             led_state:
                 description:
-                    - Enable/disable use of LEDs on WTP (default = disable).
+                    - Enable/disable use of LEDs on WTP .
                 type: str
                 choices:
                     - enable
                     - disable
             lldp:
                 description:
-                    - Enable/disable Link Layer Discovery Protocol (LLDP) for the WTP, FortiAP, or AP (default = disable).
+                    - Enable/disable Link Layer Discovery Protocol (LLDP) for the WTP, FortiAP, or AP .
                 type: str
                 choices:
                     - enable
@@ -586,7 +586,7 @@ options:
                 type: str
             login_passwd_change:
                 description:
-                    - Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no, default = no).
+                    - Change or reset the administrator password of a managed WTP, FortiAP or AP (yes, default, or no).
                 type: str
                 choices:
                     - yes
@@ -594,7 +594,7 @@ options:
                     - no
             max_clients:
                 description:
-                    - Maximum number of stations (STAs) supported by the WTP (default = 0, meaning no client limitation).
+                    - Maximum number of stations (STAs) supported by the WTP .
                 type: int
             name:
                 description:
@@ -680,14 +680,14 @@ options:
                 suboptions:
                     amsdu:
                         description:
-                            - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients (default = enable).
+                            - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_handoff:
                         description:
-                            - Enable/disable AP handoff of clients to other APs (default = disable).
+                            - Enable/disable AP handoff of clients to other APs .
                         type: str
                         choices:
                             - enable
@@ -698,43 +698,43 @@ options:
                         type: str
                     ap_sniffer_bufsize:
                         description:
-                            - Sniffer buffer size (1 - 32 MB, default = 16).
+                            - Sniffer buffer size (1 - 32 MB).
                         type: int
                     ap_sniffer_chan:
                         description:
-                            - Channel on which to operate the sniffer (default = 6).
+                            - Channel on which to operate the sniffer .
                         type: int
                     ap_sniffer_ctl:
                         description:
-                            - Enable/disable sniffer on WiFi control frame (default = enable).
+                            - Enable/disable sniffer on WiFi control frame .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_data:
                         description:
-                            - Enable/disable sniffer on WiFi data frame (default = enable).
+                            - Enable/disable sniffer on WiFi data frame .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_beacon:
                         description:
-                            - Enable/disable sniffer on WiFi management Beacon frames (default = enable).
+                            - Enable/disable sniffer on WiFi management Beacon frames .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_other:
                         description:
-                            - Enable/disable sniffer on WiFi management other frames  (default = enable).
+                            - Enable/disable sniffer on WiFi management other frames  .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_probe:
                         description:
-                            - Enable/disable sniffer on WiFi management probe frames (default = enable).
+                            - Enable/disable sniffer on WiFi management probe frames .
                         type: str
                         choices:
                             - enable
@@ -745,7 +745,7 @@ options:
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = disable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference .
                         type: str
                         choices:
                             - enable
@@ -781,12 +781,11 @@ options:
                             - disable
                     bandwidth_capacity:
                         description:
-                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
+                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps).
                         type: int
                     beacon_interval:
                         description:
-                            - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type,
-                               default = 100).
+                            - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type).
                         type: int
                     call_admission_control:
                         description:
@@ -798,7 +797,7 @@ options:
                             - disable
                     call_capacity:
                         description:
-                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60, default = 10).
+                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60).
                         type: int
                     channel:
                         description:
@@ -827,7 +826,7 @@ options:
                             - disable
                     coexistence:
                         description:
-                            - Enable/disable allowing both HT20 and HT40 on the same radio (default = enable).
+                            - Enable/disable allowing both HT20 and HT40 on the same radio .
                         type: str
                         choices:
                             - enable
@@ -835,23 +834,23 @@ options:
                     darrp:
                         description:
                             - Enable/disable Distributed Automatic Radio Resource Provisioning (DARRP) to make sure the radio is always using the most optimal
-                               channel (default = disable).
+                               channel .
                         type: str
                         choices:
                             - enable
                             - disable
                     dtim:
                         description:
-                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255, default = 1).
-                               Set higher to save client battery life.
+                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255). Set higher to
+                               save client battery life.
                         type: int
                     frag_threshold:
                         description:
-                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes, default = 2346).
+                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes).
                         type: int
                     frequency_handoff:
                         description:
-                            - Enable/disable frequency handoff of clients to other channels (default = disable).
+                            - Enable/disable frequency handoff of clients to other channels .
                         type: str
                         choices:
                             - enable
@@ -862,7 +861,7 @@ options:
                         type: int
                     max_distance:
                         description:
-                            - Maximum expected distance between the AP and clients (0 - 54000 m, default = 0).
+                            - Maximum expected distance between the AP and clients (0 - 54000 m).
                         type: int
                     mode:
                         description:
@@ -875,7 +874,7 @@ options:
                             - sniffer
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100).
                         type: int
                     powersave_optimize:
                         description:
@@ -901,8 +900,7 @@ options:
                         type: int
                     rts_threshold:
                         description:
-                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes,
-                               default = 2346).
+                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes).
                         type: int
                     short_guard_interval:
                         description:
@@ -931,7 +929,7 @@ options:
                             - send-bar
                     vap_all:
                         description:
-                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) .
                         type: str
                         choices:
                             - enable
@@ -957,14 +955,14 @@ options:
                 suboptions:
                     amsdu:
                         description:
-                            - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients (default = enable).
+                            - Enable/disable 802.11n AMSDU support. AMSDU can improve performance if supported by your WiFi clients .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_handoff:
                         description:
-                            - Enable/disable AP handoff of clients to other APs (default = disable).
+                            - Enable/disable AP handoff of clients to other APs .
                         type: str
                         choices:
                             - enable
@@ -975,43 +973,43 @@ options:
                         type: str
                     ap_sniffer_bufsize:
                         description:
-                            - Sniffer buffer size (1 - 32 MB, default = 16).
+                            - Sniffer buffer size (1 - 32 MB).
                         type: int
                     ap_sniffer_chan:
                         description:
-                            - Channel on which to operate the sniffer (default = 6).
+                            - Channel on which to operate the sniffer .
                         type: int
                     ap_sniffer_ctl:
                         description:
-                            - Enable/disable sniffer on WiFi control frame (default = enable).
+                            - Enable/disable sniffer on WiFi control frame .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_data:
                         description:
-                            - Enable/disable sniffer on WiFi data frame (default = enable).
+                            - Enable/disable sniffer on WiFi data frame .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_beacon:
                         description:
-                            - Enable/disable sniffer on WiFi management Beacon frames (default = enable).
+                            - Enable/disable sniffer on WiFi management Beacon frames .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_other:
                         description:
-                            - Enable/disable sniffer on WiFi management other frames  (default = enable).
+                            - Enable/disable sniffer on WiFi management other frames  .
                         type: str
                         choices:
                             - enable
                             - disable
                     ap_sniffer_mgmt_probe:
                         description:
-                            - Enable/disable sniffer on WiFi management probe frames (default = enable).
+                            - Enable/disable sniffer on WiFi management probe frames .
                         type: str
                         choices:
                             - enable
@@ -1022,7 +1020,7 @@ options:
                         type: int
                     auto_power_level:
                         description:
-                            - Enable/disable automatic power-level adjustment to prevent co-channel interference (default = disable).
+                            - Enable/disable automatic power-level adjustment to prevent co-channel interference .
                         type: str
                         choices:
                             - enable
@@ -1058,12 +1056,11 @@ options:
                             - disable
                     bandwidth_capacity:
                         description:
-                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps, default = 2000).
+                            - Maximum bandwidth capacity allowed (1 - 600000 Kbps).
                         type: int
                     beacon_interval:
                         description:
-                            - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type,
-                               default = 100).
+                            - Beacon interval. The time between beacon frames in msec (the actual range of beacon interval depends on the AP platform type).
                         type: int
                     call_admission_control:
                         description:
@@ -1075,7 +1072,7 @@ options:
                             - disable
                     call_capacity:
                         description:
-                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60, default = 10).
+                            - Maximum number of Voice over WLAN (VoWLAN) phones supported by the radio (0 - 60).
                         type: int
                     channel:
                         description:
@@ -1104,7 +1101,7 @@ options:
                             - disable
                     coexistence:
                         description:
-                            - Enable/disable allowing both HT20 and HT40 on the same radio (default = enable).
+                            - Enable/disable allowing both HT20 and HT40 on the same radio .
                         type: str
                         choices:
                             - enable
@@ -1112,23 +1109,23 @@ options:
                     darrp:
                         description:
                             - Enable/disable Distributed Automatic Radio Resource Provisioning (DARRP) to make sure the radio is always using the most optimal
-                               channel (default = disable).
+                               channel .
                         type: str
                         choices:
                             - enable
                             - disable
                     dtim:
                         description:
-                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255, default = 1).
-                               Set higher to save client battery life.
+                            - DTIM interval. The frequency to transmit Delivery Traffic Indication Message (or Map) (DTIM) messages (1 - 255). Set higher to
+                               save client battery life.
                         type: int
                     frag_threshold:
                         description:
-                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes, default = 2346).
+                            - Maximum packet size that can be sent without fragmentation (800 - 2346 bytes).
                         type: int
                     frequency_handoff:
                         description:
-                            - Enable/disable frequency handoff of clients to other channels (default = disable).
+                            - Enable/disable frequency handoff of clients to other channels .
                         type: str
                         choices:
                             - enable
@@ -1139,7 +1136,7 @@ options:
                         type: int
                     max_distance:
                         description:
-                            - Maximum expected distance between the AP and clients (0 - 54000 m, default = 0).
+                            - Maximum expected distance between the AP and clients (0 - 54000 m).
                         type: int
                     mode:
                         description:
@@ -1152,7 +1149,7 @@ options:
                             - sniffer
                     power_level:
                         description:
-                            - Radio power level as a percentage of the maximum transmit power (0 - 100, default = 100).
+                            - Radio power level as a percentage of the maximum transmit power (0 - 100).
                         type: int
                     powersave_optimize:
                         description:
@@ -1178,8 +1175,7 @@ options:
                         type: int
                     rts_threshold:
                         description:
-                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes,
-                               default = 2346).
+                            - Maximum packet size for RTS transmissions, specifying the maximum size of a data packet before RTS/CTS (256 - 2346 bytes).
                         type: int
                     short_guard_interval:
                         description:
@@ -1208,7 +1204,7 @@ options:
                             - send-bar
                     vap_all:
                         description:
-                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) (default = enable).
+                            - Enable/disable the automatic inheritance of all Virtual Access Points (VAPs) .
                         type: str
                         choices:
                             - enable
@@ -1243,7 +1239,7 @@ options:
                         type: int
             split_tunneling_acl_local_ap_subnet:
                 description:
-                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL (default = disable).
+                    - Enable/disable automatically adding local subnetwork of FortiAP to split-tunneling ACL .
                 type: str
                 choices:
                     - enable
@@ -1257,11 +1253,11 @@ options:
                     - local
             tun_mtu_downlink:
                 description:
-                    - Downlink CAPWAP tunnel MTU (0, 576, or 1500 bytes, default = 0).
+                    - Downlink CAPWAP tunnel MTU (0, 576, or 1500 bytes).
                 type: int
             tun_mtu_uplink:
                 description:
-                    - Uplink CAPWAP tunnel MTU (0, 576, or 1500 bytes, default = 0).
+                    - Uplink CAPWAP tunnel MTU (0, 576, or 1500 bytes).
                 type: int
             wan_port_mode:
                 description:

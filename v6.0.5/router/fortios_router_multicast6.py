@@ -86,11 +86,11 @@ options:
                 suboptions:
                     hello_holdtime:
                         description:
-                            - Time before old neighbour information expires (1 - 65535 sec, default = 105).
+                            - Time before old neighbour information expires (1 - 65535 sec).
                         type: int
                     hello_interval:
                         description:
-                            - Interval between sending PIM hello messages  (1 - 65535 sec, default = 30)..
+                            - Interval between sending PIM hello messages  (1 - 65535 sec)..
                         type: int
                     name:
                         description:

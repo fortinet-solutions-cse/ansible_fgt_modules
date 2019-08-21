@@ -132,11 +132,11 @@ options:
                     - disable
             lcp_echo_interval:
                 description:
-                    - PPPoE LCP echo interval in (0-4294967295 sec, default = 5).
+                    - PPPoE LCP echo interval in (0-4294967295 sec).
                 type: int
             lcp_max_echo_fails:
                 description:
-                    - Maximum missed LCP echo messages before disconnect (0-4294967295, default = 3).
+                    - Maximum missed LCP echo messages before disconnect (0-4294967295).
                 type: int
             name:
                 description:

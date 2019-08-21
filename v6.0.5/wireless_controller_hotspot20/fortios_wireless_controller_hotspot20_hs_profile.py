@@ -163,11 +163,11 @@ options:
                 type: str
             gas_comeback_delay:
                 description:
-                    - GAS comeback delay (0 or 100 - 4000 milliseconds, default = 500).
+                    - GAS comeback delay (0 or 100 - 4000 milliseconds).
                 type: int
             gas_fragmentation_limit:
                 description:
-                    - GAS fragmentation limit (512 - 4096, default = 1024).
+                    - GAS fragmentation limit (512 - 4096).
                 type: int
             hessid:
                 description:

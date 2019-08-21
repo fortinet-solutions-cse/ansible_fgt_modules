@@ -95,7 +95,7 @@ options:
                     - ipv6
             failtime:
                 description:
-                    - Number of retry attempts before the server is considered down (1 - 10, default = 5)
+                    - Number of retry attempts before the server is considered down (1 - 10)
                 type: int
             gateway_ip:
                 description:
@@ -123,7 +123,7 @@ options:
                 type: str
             interval:
                 description:
-                    - Detection interval (1 - 3600 sec, default = 5).
+                    - Detection interval (1 - 3600 sec).
                 type: int
             name:
                 description:
@@ -155,7 +155,7 @@ options:
                     - ping6
             recoverytime:
                 description:
-                    - Number of successful responses received before server is considered recovered (1 - 10, default = 5).
+                    - Number of successful responses received before server is considered recovered (1 - 10).
                 type: int
             security_mode:
                 description:

@@ -94,7 +94,7 @@ options:
                 type: str
             arp_reply:
                 description:
-                    - Enable/disable replying to ARP requests when an IP Pool is added to a policy (default = enable).
+                    - Enable/disable replying to ARP requests when an IP Pool is added to a policy .
                 type: str
                 choices:
                     - disable
@@ -105,7 +105,7 @@ options:
                 type: str
             block_size:
                 description:
-                    -  Number of addresses in a block (64 to 4096, default = 128).
+                    -  Number of addresses in a block (64 to 4096).
                 type: int
             comments:
                 description:
@@ -113,7 +113,7 @@ options:
                 type: str
             endip:
                 description:
-                    - "Final IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                    - "Final IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx)."
                 type: str
             name:
                 description:
@@ -122,7 +122,7 @@ options:
                 type: str
             num_blocks_per_user:
                 description:
-                    - Number of addresses blocks that can be used by a user (1 to 128, default = 8).
+                    - Number of addresses blocks that can be used by a user (1 to 128).
                 type: int
             pba_timeout:
                 description:
@@ -137,15 +137,15 @@ options:
                     - enable
             source_endip:
                 description:
-                    - "Final IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                    - "Final IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx)."
                 type: str
             source_startip:
                 description:
-                    - " First IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                    - " First IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx.xxx.xxx.xxx)."
                 type: str
             startip:
                 description:
-                    - "First IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx, Default: 0.0.0.0)."
+                    - "First IPv4 address (inclusive) in the range for the address pool (format xxx.xxx.xxx.xxx)."
                 type: str
             type:
                 description:

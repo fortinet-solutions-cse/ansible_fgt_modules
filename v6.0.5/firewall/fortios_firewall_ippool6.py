@@ -94,7 +94,7 @@ options:
                 type: str
             endip:
                 description:
-                    - "Final IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, Default: ::)."
+                    - "Final IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx)."
                 type: str
             name:
                 description:
@@ -103,7 +103,7 @@ options:
                 type: str
             startip:
                 description:
-                    - "First IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx, Default: ::)."
+                    - "First IPv6 address (inclusive) in the range for the address pool (format xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx)."
                 type: str
 '''
 

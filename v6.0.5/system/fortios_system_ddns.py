@@ -176,7 +176,7 @@ options:
                 type: str
             update_interval:
                 description:
-                    - DDNS update interval (60 - 2592000 sec, default = 300).
+                    - DDNS update interval (60 - 2592000 sec).
                 type: int
             use_public_ip:
                 description:

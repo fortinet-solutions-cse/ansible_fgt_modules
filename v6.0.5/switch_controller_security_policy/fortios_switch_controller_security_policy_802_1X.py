@@ -110,7 +110,7 @@ options:
                     - enable
             guest_auth_delay:
                 description:
-                    - Guest authentication delay (1 - 900  sec, default = 30).
+                    - Guest authentication delay (1 - 900  sec).
                 type: int
             guest_vlan:
                 description:

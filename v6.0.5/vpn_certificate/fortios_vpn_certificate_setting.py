@@ -104,7 +104,7 @@ options:
                 type: str
             check_ca_cert:
                 description:
-                    - Enable/disable verification of the user certificate and pass authentication if any CA in the chain is trusted (default = enable).
+                    - Enable/disable verification of the user certificate and pass authentication if any CA in the chain is trusted .
                 type: str
                 choices:
                     - enable
@@ -112,7 +112,7 @@ options:
             check_ca_chain:
                 description:
                     - Enable/disable verification of the entire certificate chain and pass authentication only if the chain is complete and all of the CAs in
-                       the chain are trusted (default = disable).
+                       the chain are trusted .
                 type: str
                 choices:
                     - enable
@@ -144,7 +144,7 @@ options:
                     - disable
             ssl_min_proto_version:
                 description:
-                    - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                    - Minimum supported protocol version for SSL/TLS connections .
                 type: str
                 choices:
                     - default

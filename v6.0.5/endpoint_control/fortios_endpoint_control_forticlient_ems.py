@@ -109,11 +109,11 @@ options:
                 type: str
             https_port:
                 description:
-                    - "FortiClient EMS HTTPS access port number. (1 - 65535, default: 443)."
+                    - "FortiClient EMS HTTPS access port number. (1 - 65535)."
                 type: int
             listen_port:
                 description:
-                    - "FortiClient EMS telemetry listen port number. (1 - 65535, default: 8013)."
+                    - "FortiClient EMS telemetry listen port number. (1 - 65535)."
                 type: int
             name:
                 description:
@@ -133,7 +133,7 @@ options:
                 type: str
             upload_port:
                 description:
-                    - "FortiClient EMS telemetry upload port number. (1 - 65535, default: 8014)."
+                    - "FortiClient EMS telemetry upload port number. (1 - 65535)."
                 type: int
 '''
 

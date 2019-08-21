@@ -282,7 +282,7 @@ options:
                     - openstack
             update_interval:
                 description:
-                    - Dynamic object update interval (0 - 3600 sec, 0 means disabled, default = 60).
+                    - Dynamic object update interval (0 - 3600 sec, 0 means disabled).
                 type: int
             use_metadata_iam:
                 description:

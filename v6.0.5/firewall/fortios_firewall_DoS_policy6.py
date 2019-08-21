@@ -121,7 +121,7 @@ options:
                             - attacker
                     quarantine_expiry:
                         description:
-                            - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m, default = 5m). Requires quarantine set to attacker.
+                            - Duration of quarantine. (Format ###d##h##m, minimum 1m, maximum 364d23h59m). Requires quarantine set to attacker.
                         type: str
                     quarantine_log:
                         description:
@@ -143,8 +143,8 @@ options:
                         type: int
                     threshold(default):
                         description:
-                            - Number of detected instances per minute which triggers action (1 - 2147483647, default = 1000). Note that each anomaly has a
-                               different threshold value assigned to it.
+                            - Number of detected instances per minute which triggers action (1 - 2147483647). Note that each anomaly has a different threshold
+                               value assigned to it.
                         type: int
             comments:
                 description:

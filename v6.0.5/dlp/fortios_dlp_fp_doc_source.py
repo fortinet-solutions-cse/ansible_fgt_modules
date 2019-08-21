@@ -164,7 +164,7 @@ options:
                     - samba
             tod_hour:
                 description:
-                    - Hour of the day on which to scan the server (0 - 23, default = 1).
+                    - Hour of the day on which to scan the server (0 - 23).
                 type: int
             tod_min:
                 description:

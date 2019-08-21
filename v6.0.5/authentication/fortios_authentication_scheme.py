@@ -98,7 +98,7 @@ options:
                 type: str
             fsso_guest:
                 description:
-                    - Enable/disable user fsso-guest authentication (default = disable).
+                    - Enable/disable user fsso-guest authentication .
                 type: str
                 choices:
                     - enable
@@ -109,7 +109,7 @@ options:
                 type: str
             method:
                 description:
-                    - Authentication methods (default = basic).
+                    - Authentication methods .
                 type: str
                 choices:
                     - ntlm
@@ -127,14 +127,14 @@ options:
                 type: str
             negotiate_ntlm:
                 description:
-                    - Enable/disable negotiate authentication for NTLM (default = disable).
+                    - Enable/disable negotiate authentication for NTLM .
                 type: str
                 choices:
                     - enable
                     - disable
             require_tfa:
                 description:
-                    - Enable/disable two-factor authentication (default = disable).
+                    - Enable/disable two-factor authentication .
                 type: str
                 choices:
                     - enable

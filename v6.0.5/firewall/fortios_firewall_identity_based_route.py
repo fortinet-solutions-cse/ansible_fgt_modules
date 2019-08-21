@@ -108,7 +108,7 @@ options:
                         type: str
                     gateway:
                         description:
-                            - "IPv4 address of the gateway (Format: xxx.xxx.xxx.xxx , Default: 0.0.0.0)."
+                            - "IPv4 address of the gateway (Format: xxx.xxx.xxx.xxx )."
                         type: str
                     groups:
                         description:

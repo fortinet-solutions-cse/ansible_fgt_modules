@@ -80,7 +80,7 @@ options:
         suboptions:
             active_flow_timeout:
                 description:
-                    - Timeout to report active flows (1 - 60 min, default = 30).
+                    - Timeout to report active flows (1 - 60 min).
                 type: int
             collector_ip:
                 description:
@@ -92,7 +92,7 @@ options:
                 type: int
             inactive_flow_timeout:
                 description:
-                    - Timeout for periodic report of finished flows (10 - 600 sec, default = 15).
+                    - Timeout for periodic report of finished flows (10 - 600 sec).
                 type: int
             source_ip:
                 description:
@@ -104,7 +104,7 @@ options:
                 type: int
             template_tx_timeout:
                 description:
-                    - Timeout for periodic template flowset transmission (1 - 1440 min, default = 30).
+                    - Timeout for periodic template flowset transmission (1 - 1440 min).
                 type: int
 '''
 

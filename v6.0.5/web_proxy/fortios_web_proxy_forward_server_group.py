@@ -127,7 +127,7 @@ options:
                         type: str
                     weight:
                         description:
-                            - Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100, default = 10)
+                            - Optionally assign a weight of the forwarding server for weighted load balancing (1 - 100)
                         type: int
 '''
 

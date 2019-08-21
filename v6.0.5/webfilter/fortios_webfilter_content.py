@@ -132,7 +132,7 @@ options:
                             - regexp
                     score:
                         description:
-                            - Score, to be applied every time the word appears on a web page (0 - 4294967295, default = 10).
+                            - Score, to be applied every time the word appears on a web page (0 - 4294967295).
                         type: int
                     status:
                         description:

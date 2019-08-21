@@ -111,7 +111,7 @@ options:
                 type: int
             antispam_timeout:
                 description:
-                    - Antispam query time out (1 - 30 sec, default = 7).
+                    - Antispam query time out (1 - 30 sec).
                 type: int
             auto_join_forticloud:
                 description:
@@ -141,11 +141,11 @@ options:
                     - disable
             outbreak_prevention_cache_mpercent:
                 description:
-                    - Maximum percent of memory FortiGuard Virus Outbreak Prevention cache can use (1 - 15%, default = 2).
+                    - Maximum percent of memory FortiGuard Virus Outbreak Prevention cache can use (1 - 15%).
                 type: int
             outbreak_prevention_cache_ttl:
                 description:
-                    - Time-to-live for FortiGuard Virus Outbreak Prevention cache entries (300 - 86400 sec, default = 300).
+                    - Time-to-live for FortiGuard Virus Outbreak Prevention cache entries (300 - 86400 sec).
                 type: int
             outbreak_prevention_expiration:
                 description:
@@ -164,7 +164,7 @@ options:
                 type: int
             outbreak_prevention_timeout:
                 description:
-                    - FortiGuard Virus Outbreak Prevention time out (1 - 30 sec, default = 7).
+                    - FortiGuard Virus Outbreak Prevention time out (1 - 30 sec).
                 type: int
             port:
                 description:
@@ -229,7 +229,7 @@ options:
                 type: int
             webfilter_timeout:
                 description:
-                    - Web filter query time out (1 - 30 sec, default = 7).
+                    - Web filter query time out (1 - 30 sec).
                 type: int
 '''
 

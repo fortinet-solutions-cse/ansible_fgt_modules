@@ -90,7 +90,7 @@ options:
         suboptions:
             color:
                 description:
-                    - Integer value to determine the color of the icon in the GUI (1 - 32, default = 0, which sets value to 1).
+                    - Integer value to determine the color of the icon in the GUI (1 - 32).
                 type: int
             comment:
                 description:

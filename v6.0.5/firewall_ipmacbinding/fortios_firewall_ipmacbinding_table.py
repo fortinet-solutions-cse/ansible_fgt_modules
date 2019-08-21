@@ -98,7 +98,7 @@ options:
                 type: str
             name:
                 description:
-                    - Name of the pair (optional, default = no name).
+                    - Name of the pair (optional).
                 type: str
             seq_num:
                 description:

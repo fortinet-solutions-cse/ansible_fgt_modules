@@ -118,7 +118,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     status:
                         description:
@@ -165,7 +165,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     status:
                         description:
@@ -213,7 +213,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     status:
                         description:
@@ -272,7 +272,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     status:
                         description:
@@ -337,7 +337,7 @@ options:
                             - block
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     status:
                         description:
@@ -376,7 +376,7 @@ options:
                             - deep-inspection
                     ports:
                         description:
-                            - Ports to use for scanning (1 - 65535, default = 443).
+                            - Ports to use for scanning (1 - 65535).
                         type: int
                     ssh_algorithm:
                         description:

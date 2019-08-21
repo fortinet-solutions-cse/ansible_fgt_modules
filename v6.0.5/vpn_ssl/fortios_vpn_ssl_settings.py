@@ -250,7 +250,7 @@ options:
                 type: str
             dtls_hello_timeout:
                 description:
-                    - SSLVPN maximum DTLS hello timeout (10 - 60 sec, default = 10).
+                    - SSLVPN maximum DTLS hello timeout (10 - 60 sec).
                 type: int
             dtls_tunnel:
                 description:
@@ -290,11 +290,11 @@ options:
                     - disable
             http_request_body_timeout:
                 description:
-                    - SSL-VPN session is disconnected if an HTTP request body is not received within this time (1 - 60 sec, default = 20).
+                    - SSL-VPN session is disconnected if an HTTP request body is not received within this time (1 - 60 sec).
                 type: int
             http_request_header_timeout:
                 description:
-                    - SSL-VPN session is disconnected if an HTTP request header is not received within this time (1 - 60 sec, default = 20).
+                    - SSL-VPN session is disconnected if an HTTP request header is not received within this time (1 - 60 sec).
                 type: int
             https_redirect:
                 description:
@@ -325,15 +325,15 @@ options:
                 type: str
             login_attempt_limit:
                 description:
-                    - SSL VPN maximum login attempt times before block (0 - 10, default = 2, 0 = no limit).
+                    - SSL VPN maximum login attempt times before block (0 - 10).
                 type: int
             login_block_time:
                 description:
-                    - Time for which a user is blocked from logging in after too many failed login attempts (0 - 86400 sec, default = 60).
+                    - Time for which a user is blocked from logging in after too many failed login attempts (0 - 86400 sec).
                 type: int
             login_timeout:
                 description:
-                    - SSLVPN maximum login timeout (10 - 180 sec, default = 30).
+                    - SSLVPN maximum login timeout (10 - 180 sec).
                 type: int
             port:
                 description:

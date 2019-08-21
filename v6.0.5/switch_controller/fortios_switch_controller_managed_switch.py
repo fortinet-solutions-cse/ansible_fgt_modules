@@ -109,11 +109,11 @@ options:
                             - disable
                     max_reauth_attempt:
                         description:
-                            - Maximum number of authentication attempts (0 - 15, default = 3).
+                            - Maximum number of authentication attempts (0 - 15).
                         type: int
                     reauth_period:
                         description:
-                            - Reauthentication time interval (1 - 1440 min, default = 60, 0 = disable).
+                            - Reauthentication time interval (1 - 1440 min).
                         type: int
             custom_command:
                 description:
@@ -182,7 +182,7 @@ options:
                 suboptions:
                     aging_time:
                         description:
-                            - Maximum time to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec, default = 300).
+                            - Maximum time to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec).
                         type: int
                     flood_unknown_multicast:
                         description:
@@ -444,11 +444,11 @@ options:
                             - disabled
                     loop_guard_timeout:
                         description:
-                            - Loop-guard timeout (0 - 120 min, default = 45).
+                            - Loop-guard timeout (0 - 120 min).
                         type: int
                     max_bundle:
                         description:
-                            - Maximum size of LAG bundle (1 - 24, default = 24)
+                            - Maximum size of LAG bundle (1 - 24)
                         type: int
                     mclag:
                         description:
@@ -475,7 +475,7 @@ options:
                                 type: str
                     min_bundle:
                         description:
-                            - Minimum size of LAG bundle (1 - 24, default = 1)
+                            - Minimum size of LAG bundle (1 - 24)
                         type: int
                     mode:
                         description:
@@ -681,8 +681,8 @@ options:
                             - disable
                     rate:
                         description:
-                            - Rate in packets per second at which storm traffic is controlled (1 - 10000000, default = 500). Storm control drops excess
-                               traffic data rates beyond this threshold.
+                            - Rate in packets per second at which storm traffic is controlled (1 - 10000000). Storm control drops excess traffic data rates
+                               beyond this threshold.
                         type: int
                     unknown_multicast:
                         description:
@@ -705,11 +705,11 @@ options:
                 suboptions:
                     forward_time:
                         description:
-                            - Period of time a port is in listening and learning state (4 - 30 sec, default = 15).
+                            - Period of time a port is in listening and learning state (4 - 30 sec).
                         type: int
                     hello_time:
                         description:
-                            - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 - 10 sec, default = 2).
+                            - Period of time between successive STP frame Bridge Protocol Data Units (BPDUs) sent on a port (1 - 10 sec).
                         type: int
                     local_override:
                         description:
@@ -720,11 +720,11 @@ options:
                             - disable
                     max_age:
                         description:
-                            - Maximum time before a bridge port saves its configuration BPDU information (6 - 40 sec, default = 20).
+                            - Maximum time before a bridge port saves its configuration BPDU information (6 - 40 sec).
                         type: int
                     max_hops:
                         description:
-                            - Maximum number of hops between the root bridge and the furthest bridge (1- 40, default = 20).
+                            - Maximum number of hops between the root bridge and the furthest bridge (1- 40).
                         type: int
                     name:
                         description:
@@ -732,7 +732,7 @@ options:
                         type: str
                     pending_timer:
                         description:
-                            - Pending time (1 - 15 sec, default = 4).
+                            - Pending time (1 - 15 sec).
                         type: int
                     revision:
                         description:

@@ -111,7 +111,7 @@ options:
                 type: int
             auth_portal_timeout:
                 description:
-                    - Time in minutes before captive portal user have to re-authenticate (1 - 30 min, default 3 min).
+                    - Time in minutes before captive portal user have to re-authenticate (1 - 30 min).
                 type: int
             auth_ports:
                 description:

@@ -81,15 +81,15 @@ options:
         suboptions:
             full_final_warning_threshold:
                 description:
-                    - Log full final warning threshold as a percent (3 - 100, default = 95).
+                    - Log full final warning threshold as a percent (3 - 100).
                 type: int
             full_first_warning_threshold:
                 description:
-                    - Log full first warning threshold as a percent (1 - 98, default = 75).
+                    - Log full first warning threshold as a percent (1 - 98).
                 type: int
             full_second_warning_threshold:
                 description:
-                    - Log full second warning threshold as a percent (2 - 99, default = 90).
+                    - Log full second warning threshold as a percent (2 - 99).
                 type: int
             max_size:
                 description:

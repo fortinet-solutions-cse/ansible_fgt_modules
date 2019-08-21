@@ -81,8 +81,7 @@ options:
         suboptions:
             diskfull:
                 description:
-                    - Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full (default =
-                       overwrite).
+                    - Action to take when disk is full. The system can overwrite the oldest log messages or stop logging when the disk is full .
                 type: str
                 choices:
                     - overwrite
@@ -93,15 +92,15 @@ options:
                 type: int
             full_final_warning_threshold:
                 description:
-                    - Log full final warning threshold as a percent (3 - 100, default = 95).
+                    - Log full final warning threshold as a percent (3 - 100).
                 type: int
             full_first_warning_threshold:
                 description:
-                    - Log full first warning threshold as a percent (1 - 98, default = 75).
+                    - Log full first warning threshold as a percent (1 - 98).
                 type: int
             full_second_warning_threshold:
                 description:
-                    - Log full second warning threshold as a percent (2 - 99, default = 90).
+                    - Log full second warning threshold as a percent (2 - 99).
                 type: int
             ips_archive:
                 description:
@@ -173,7 +172,7 @@ options:
                     - disable
             upload_delete_files:
                 description:
-                    - Delete log files after uploading (default = enable).
+                    - Delete log files after uploading .
                 type: str
                 choices:
                     - enable
@@ -207,11 +206,11 @@ options:
                 type: str
             uploadport:
                 description:
-                    - TCP port to use for communicating with the FTP server (default = 21).
+                    - TCP port to use for communicating with the FTP server .
                 type: int
             uploadsched:
                 description:
-                    - Set the schedule for uploading log files to the FTP server (default = disable = upload when rolling).
+                    - Set the schedule for uploading log files to the FTP server .
                 type: str
                 choices:
                     - disable

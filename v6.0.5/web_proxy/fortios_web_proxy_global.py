@@ -95,7 +95,7 @@ options:
                     - disable
             forward_server_affinity_timeout:
                 description:
-                    - Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 - 60 min, default = 30).
+                    - Period of time before the source IP's traffic is no longer assigned to the forwarding server (6 - 60 min).
                 type: int
             learn_client_ip:
                 description:
@@ -134,19 +134,19 @@ options:
                         type: str
             max_message_length:
                 description:
-                    - Maximum length of HTTP message, not including body (16 - 256 Kbytes, default = 32).
+                    - Maximum length of HTTP message, not including body (16 - 256 Kbytes).
                 type: int
             max_request_length:
                 description:
-                    - Maximum length of HTTP request line (2 - 64 Kbytes, default = 4).
+                    - Maximum length of HTTP request line (2 - 64 Kbytes).
                 type: int
             max_waf_body_cache_length:
                 description:
-                    - Maximum length of HTTP messages processed by Web Application Firewall (WAF) (10 - 1024 Kbytes, default = 32).
+                    - Maximum length of HTTP messages processed by Web Application Firewall (WAF) (10 - 1024 Kbytes).
                 type: int
             proxy_fqdn:
                 description:
-                    - Fully Qualified Domain Name (FQDN) that clients connect to (default = default.fqdn) to connect to the explicit web proxy.
+                    - Fully Qualified Domain Name (FQDN) that clients connect to  to connect to the explicit web proxy.
                 type: str
             strict_web_check:
                 description:

@@ -115,7 +115,7 @@ options:
                 type: str
             monitor:
                 description:
-                    - "URL for forward server health check monitoring (default = http://www.google.com)."
+                    - "URL for forward server health check monitoring ."
                 type: str
             name:
                 description:
@@ -124,7 +124,7 @@ options:
                 type: str
             port:
                 description:
-                    - Port number that the forwarding server expects to receive HTTP sessions on (1 - 65535, default = 3128).
+                    - Port number that the forwarding server expects to receive HTTP sessions on (1 - 65535).
                 type: int
             server_down_option:
                 description:

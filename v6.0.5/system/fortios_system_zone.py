@@ -99,7 +99,7 @@ options:
                         type: str
             intrazone:
                 description:
-                    - Allow or deny traffic routing between different interfaces in the same zone (default = deny).
+                    - Allow or deny traffic routing between different interfaces in the same zone .
                 type: str
                 choices:
                     - allow

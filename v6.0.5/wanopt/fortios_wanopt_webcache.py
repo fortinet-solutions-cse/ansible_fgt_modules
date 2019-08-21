@@ -108,8 +108,7 @@ options:
                     - disable
             default_ttl:
                 description:
-                    - Default object expiry time (default = 1440 min (1 day); maximum = 5256000 min (10 years)). This only applies to those objects that do
-                       not have an expiry time set by the web server.
+                    - Default object expiry time . This only applies to those objects that do not have an expiry time set by the web server.
                 type: int
             external:
                 description:
@@ -120,8 +119,8 @@ options:
                     - disable
             fresh_factor:
                 description:
-                    - Frequency that the server is checked to see if any objects have expired (1 - 100, default = 100). The higher the fresh factor, the less
-                       often the checks occur.
+                    - Frequency that the server is checked to see if any objects have expired (1 - 100). The higher the fresh factor, the less often the
+                       checks occur.
                 type: int
             host_validate:
                 description:
@@ -165,17 +164,15 @@ options:
                 type: int
             max_ttl:
                 description:
-                    - Maximum time an object can stay in the web cache without checking to see if it has expired on the server (default = 7200 min (5 days);
-                       maximum = 5256000 min (10 years)).
+                    - Maximum time an object can stay in the web cache without checking to see if it has expired on the server .
                 type: int
             min_ttl:
                 description:
-                    - Minimum time an object can stay in the web cache without checking to see if it has expired on the server (default = 5 min; maximum =
-                       5256000 (10 years)).
+                    - Minimum time an object can stay in the web cache without checking to see if it has expired on the server .
                 type: int
             neg_resp_time:
                 description:
-                    - Time in minutes to cache negative responses or errors (0 - 4294967295, default = 0  which means negative responses are not cached).
+                    - Time in minutes to cache negative responses or errors (0 - 4294967295).
                 type: int
             reval_pnc:
                 description:

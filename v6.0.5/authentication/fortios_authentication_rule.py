@@ -110,8 +110,7 @@ options:
                 type: str
             protocol:
                 description:
-                    - Select the protocol to use for authentication (default = http). Users connect to the FortiGate using this protocol and are asked to
-                       authenticate.
+                    - Select the protocol to use for authentication . Users connect to the FortiGate using this protocol and are asked to authenticate.
                 type: str
                 choices:
                     - http
@@ -151,14 +150,14 @@ options:
                     - disable
             transaction_based:
                 description:
-                    - Enable/disable transaction based authentication (default = disable).
+                    - Enable/disable transaction based authentication .
                 type: str
                 choices:
                     - enable
                     - disable
             web_auth_cookie:
                 description:
-                    - Enable/disable Web authentication cookies (default = disable).
+                    - Enable/disable Web authentication cookies .
                 type: str
                 choices:
                     - enable

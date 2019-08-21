@@ -170,7 +170,7 @@ options:
                 type: str
             logtraffic:
                 description:
-                    - "Logging type to be used in this policy (Options: all | utm | disable, Default: utm)."
+                    - "Logging type to be used in this policy (Options: all | utm | disable)."
                 type: str
                 choices:
                     - all

@@ -146,7 +146,7 @@ options:
                 type: str
             ssl_min_proto_version:
                 description:
-                    - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                    - Minimum supported protocol version for SSL/TLS connections .
                 type: str
                 choices:
                     - default

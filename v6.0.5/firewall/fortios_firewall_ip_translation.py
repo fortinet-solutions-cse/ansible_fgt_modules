@@ -90,15 +90,15 @@ options:
         suboptions:
             endip:
                 description:
-                    - "Final IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                    - "Final IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx)."
                 type: str
             map_startip:
                 description:
-                    - "Address to be used as the starting point for translation in the range (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                    - "Address to be used as the starting point for translation in the range (format xxx.xxx.xxx.xxx)."
                 type: str
             startip:
                 description:
-                    - "First IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx, default: 0.0.0.0)."
+                    - "First IPv4 address (inclusive) in the range of the addresses to be translated (format xxx.xxx.xxx.xxx)."
                 type: str
             transid:
                 description:

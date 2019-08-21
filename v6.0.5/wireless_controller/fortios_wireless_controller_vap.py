@@ -90,7 +90,7 @@ options:
         suboptions:
             acct_interim_interval:
                 description:
-                    - WiFi RADIUS accounting interim interval (60 - 86400 sec, default = 0).
+                    - WiFi RADIUS accounting interim interval (60 - 86400 sec).
                 type: int
             alias:
                 description:
@@ -106,7 +106,7 @@ options:
                     - usergroup
             broadcast_ssid:
                 description:
-                    - Enable/disable broadcasting the SSID (default = enable).
+                    - Enable/disable broadcasting the SSID .
                 type: str
                 choices:
                     - enable
@@ -152,7 +152,7 @@ options:
                 type: str
             captive_portal_session_timeout_interval:
                 description:
-                    - Session timeout interval (0 - 864000 sec, default = 0).
+                    - Session timeout interval (0 - 864000 sec).
                 type: int
             dhcp_lease_time:
                 description:
@@ -160,7 +160,7 @@ options:
                 type: int
             dhcp_option82_circuit_id_insertion:
                 description:
-                    - Enable/disable DHCP option 82 circuit-id insert (default = disable).
+                    - Enable/disable DHCP option 82 circuit-id insert .
                 type: str
                 choices:
                     - style-1
@@ -168,14 +168,14 @@ options:
                     - disable
             dhcp_option82_insertion:
                 description:
-                    - Enable/disable DHCP option 82 insert (default = disable).
+                    - Enable/disable DHCP option 82 insert .
                 type: str
                 choices:
                     - enable
                     - disable
             dhcp_option82_remote_id_insertion:
                 description:
-                    - Enable/disable DHCP option 82 remote-id insert (default = disable).
+                    - Enable/disable DHCP option 82 remote-id insert .
                 type: str
                 choices:
                     - style-1
@@ -196,11 +196,11 @@ options:
                     - disable
             eap_reauth_intv:
                 description:
-                    - EAP re-authentication interval (1800 - 864000 sec, default = 86400).
+                    - EAP re-authentication interval (1800 - 864000 sec).
                 type: int
             eapol_key_retries:
                 description:
-                    - Enable/disable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2) (default = enable).
+                    - Enable/disable retransmission of EAPOL-Key frames (message 3/4 and group message 1/2) .
                 type: str
                 choices:
                     - disable
@@ -215,7 +215,7 @@ options:
                     - TKIP-AES
             external_fast_roaming:
                 description:
-                    - Enable/disable fast roaming or pre-authentication with external APs not managed by the FortiGate (default = disable).
+                    - Enable/disable fast roaming or pre-authentication with external APs not managed by the FortiGate .
                 type: str
                 choices:
                     - enable
@@ -230,21 +230,21 @@ options:
                 type: str
             fast_bss_transition:
                 description:
-                    - Enable/disable 802.11r Fast BSS Transition (FT) (default = disable).
+                    - Enable/disable 802.11r Fast BSS Transition (FT) .
                 type: str
                 choices:
                     - disable
                     - enable
             fast_roaming:
                 description:
-                    - Enable/disable fast-roaming, or pre-authentication, where supported by clients (default = disable).
+                    - Enable/disable fast-roaming, or pre-authentication, where supported by clients .
                 type: str
                 choices:
                     - enable
                     - disable
             ft_mobility_domain:
                 description:
-                    - Mobility domain identifier in FT (1 - 65535, default = 1000).
+                    - Mobility domain identifier in FT (1 - 65535).
                 type: int
             ft_over_ds:
                 description:
@@ -266,7 +266,7 @@ options:
                     - disable
             gtk_rekey_intv:
                 description:
-                    - GTK rekey interval (1800 - 864000 sec, default = 86400).
+                    - GTK rekey interval (1800 - 864000 sec).
                 type: int
             hotspot20_profile:
                 description:
@@ -274,7 +274,7 @@ options:
                 type: str
             intra_vap_privacy:
                 description:
-                    - Enable/disable blocking communication between clients on the same SSID (called intra-SSID privacy) (default = disable).
+                    - Enable/disable blocking communication between clients on the same SSID (called intra-SSID privacy) .
                 type: str
                 choices:
                     - enable
@@ -309,21 +309,21 @@ options:
                     - disable
             local_bridging:
                 description:
-                    - Enable/disable bridging of wireless and Ethernet interfaces on the FortiAP (default = disable).
+                    - Enable/disable bridging of wireless and Ethernet interfaces on the FortiAP .
                 type: str
                 choices:
                     - enable
                     - disable
             local_lan:
                 description:
-                    - Allow/deny traffic destined for a Class A, B, or C private IP address (default = allow).
+                    - Allow/deny traffic destined for a Class A, B, or C private IP address .
                 type: str
                 choices:
                     - allow
                     - deny
             local_standalone:
                 description:
-                    - Enable/disable AP local standalone (default = disable).
+                    - Enable/disable AP local standalone .
                 type: str
                 choices:
                     - enable
@@ -379,11 +379,11 @@ options:
                     - deny
             max_clients:
                 description:
-                    - Maximum number of clients that can connect simultaneously to the VAP (default = 0, meaning no limitation).
+                    - Maximum number of clients that can connect simultaneously to the VAP .
                 type: int
             max_clients_ap:
                 description:
-                    - Maximum number of clients that can connect simultaneously to each radio (default = 0, meaning no limitation).
+                    - Maximum number of clients that can connect simultaneously to each radio .
                 type: int
             me_disable_thresh:
                 description:
@@ -391,8 +391,7 @@ options:
                 type: int
             mesh_backhaul:
                 description:
-                    - Enable/disable using this VAP as a WiFi mesh backhaul (default = disable). This entry is only available when security is set to a WPA
-                       type or open.
+                    - Enable/disable using this VAP as a WiFi mesh backhaul . This entry is only available when security is set to a WPA type or open.
                 type: str
                 choices:
                     - enable
@@ -431,14 +430,14 @@ options:
                         type: str
             multicast_enhance:
                 description:
-                    - Enable/disable converting multicast to unicast to improve performance (default = disable).
+                    - Enable/disable converting multicast to unicast to improve performance .
                 type: str
                 choices:
                     - enable
                     - disable
             multicast_rate:
                 description:
-                    - Multicast rate (0, 6000, 12000, or 24000 kbps, default = 0).
+                    - Multicast rate (0, 6000, 12000, or 24000 kbps).
                 type: str
                 choices:
                     - 0
@@ -452,7 +451,7 @@ options:
                 type: str
             okc:
                 description:
-                    - Enable/disable Opportunistic Key Caching (OKC) (default = enable).
+                    - Enable/disable Opportunistic Key Caching (OKC) .
                 type: str
                 choices:
                     - disable
@@ -463,7 +462,7 @@ options:
                 type: str
             pmf:
                 description:
-                    - Protected Management Frames (PMF) support (default = disable).
+                    - Protected Management Frames (PMF) support .
                 type: str
                 choices:
                     - disable
@@ -516,14 +515,14 @@ options:
                     - auth-mac
             probe_resp_suppression:
                 description:
-                    - Enable/disable probe response suppression (to ignore weak signals) (default = disable).
+                    - Enable/disable probe response suppression (to ignore weak signals) .
                 type: str
                 choices:
                     - enable
                     - disable
             probe_resp_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to probe requests (-95 to -20, default = -80).
+                    - Minimum signal level/threshold in dBm required for the AP response to probe requests (-95 to -20).
                 type: str
             ptk_rekey:
                 description:
@@ -534,7 +533,7 @@ options:
                     - disable
             ptk_rekey_intv:
                 description:
-                    - PTK rekey interval (1800 - 864000 sec, default = 86400).
+                    - PTK rekey interval (1800 - 864000 sec).
                 type: int
             qos_profile:
                 description:
@@ -542,29 +541,29 @@ options:
                 type: str
             quarantine:
                 description:
-                    - Enable/disable station quarantine (default = enable).
+                    - Enable/disable station quarantine .
                 type: str
                 choices:
                     - enable
                     - disable
             radio_2g_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (-95 to -20, default = -79).
+                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 2.4G band (-95 to -20).
                 type: str
             radio_5g_threshold:
                 description:
-                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(-95 to -20, default = -76).
+                    - Minimum signal level/threshold in dBm required for the AP response to receive a packet in 5G band(-95 to -20).
                 type: str
             radio_sensitivity:
                 description:
-                    - Enable/disable software radio sensitivity (to ignore weak signals) (default = disable).
+                    - Enable/disable software radio sensitivity (to ignore weak signals) .
                 type: str
                 choices:
                     - enable
                     - disable
             radius_mac_auth:
                 description:
-                    - Enable/disable RADIUS-based MAC authentication of clients (default = disable).
+                    - Enable/disable RADIUS-based MAC authentication of clients .
                 type: str
                 choices:
                     - enable
@@ -751,7 +750,7 @@ options:
                 type: str
             security:
                 description:
-                    - Security mode for the wireless interface (default = wpa2-only-personal).
+                    - Security mode for the wireless interface .
                 type: str
                 choices:
                     - open
@@ -795,7 +794,7 @@ options:
                         type: str
             split_tunneling:
                 description:
-                    - Enable/disable split tunneling (default = disable).
+                    - Enable/disable split tunneling .
                 type: str
                 choices:
                     - enable
@@ -853,8 +852,8 @@ options:
                         type: str
             vlan_pooling:
                 description:
-                    - Enable/disable VLAN pooling, to allow grouping of multiple wireless controller VLANs into VLAN pools (default = disable). When set to
-                       wtp-group, VLAN pooling occurs with VLAN assignment by wtp-group.
+                    - Enable/disable VLAN pooling, to allow grouping of multiple wireless controller VLANs into VLAN pools . When set to wtp-group, VLAN
+                       pooling occurs with VLAN assignment by wtp-group.
                 type: str
                 choices:
                     - wtp-group
@@ -867,7 +866,7 @@ options:
                 type: int
             voice_enterprise:
                 description:
-                    - Enable/disable 802.11k and 802.11v assisted Voice-Enterprise roaming (default = disable).
+                    - Enable/disable 802.11k and 802.11v assisted Voice-Enterprise roaming .
                 type: str
                 choices:
                     - disable

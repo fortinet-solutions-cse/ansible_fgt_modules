@@ -118,7 +118,7 @@ options:
                 type: int
             admin_login_max:
                 description:
-                    - Maximum number of administrators who can be logged in at the same time (1 - 100, default = 100)
+                    - Maximum number of administrators who can be logged in at the same time (1 - 100)
                 type: int
             admin_maintainer:
                 description:
@@ -130,11 +130,11 @@ options:
                     - disable
             admin_port:
                 description:
-                    - Administrative access port for HTTP. (1 - 65535, default = 80).
+                    - Administrative access port for HTTP. (1 - 65535).
                 type: int
             admin_restrict_local:
                 description:
-                    - Enable/disable local admin authentication restriction when remote authenticator is up and running. (default = disable)
+                    - Enable/disable local admin authentication restriction when remote authenticator is up and running.
                 type: str
                 choices:
                     - enable
@@ -152,12 +152,11 @@ options:
                 type: str
             admin_sport:
                 description:
-                    - Administrative access port for HTTPS. (1 - 65535, default = 443).
+                    - Administrative access port for HTTPS. (1 - 65535).
                 type: int
             admin_ssh_grace_time:
                 description:
-                    - Maximum time in seconds permitted between making an SSH connection to the FortiGate unit and authenticating (10 - 3600 sec (1 hour),
-                       default 120).
+                    - Maximum time in seconds permitted between making an SSH connection to the FortiGate unit and authenticating (10 - 3600 sec (1 hour)).
                 type: int
             admin_ssh_password:
                 description:
@@ -168,7 +167,7 @@ options:
                     - disable
             admin_ssh_port:
                 description:
-                    - Administrative access port for SSH. (1 - 65535, default = 22).
+                    - Administrative access port for SSH. (1 - 65535).
                 type: int
             admin_ssh_v1:
                 description:
@@ -179,12 +178,11 @@ options:
                     - disable
             admin_telnet_port:
                 description:
-                    - Administrative access port for TELNET. (1 - 65535, default = 23).
+                    - Administrative access port for TELNET. (1 - 65535).
                 type: int
             admintimeout:
                 description:
-                    - Number of minutes before an idle administrator session times out (5 - 480 minutes (8 hours), default = 5). A shorter idle timeout is
-                       more secure.
+                    - Number of minutes before an idle administrator session times out (5 - 480 minutes (8 hours)). A shorter idle timeout is more secure.
                 type: int
             alias:
                 description:
@@ -207,7 +205,7 @@ options:
                     - strict
             arp_max_entry:
                 description:
-                    - Maximum number of dynamically learned MAC addresses that can be added to the ARP table (131072 - 2147483647, default = 131072).
+                    - Maximum number of dynamically learned MAC addresses that can be added to the ARP table (131072 - 2147483647).
                 type: int
             asymroute:
                 description:
@@ -222,11 +220,11 @@ options:
                 type: str
             auth_http_port:
                 description:
-                    - User authentication HTTP port. (1 - 65535, default = 80).
+                    - User authentication HTTP port. (1 - 65535).
                 type: int
             auth_https_port:
                 description:
-                    - User authentication HTTPS port. (1 - 65535, default = 443).
+                    - User authentication HTTPS port. (1 - 65535).
                 type: int
             auth_keepalive:
                 description:
@@ -278,7 +276,7 @@ options:
                     - disable
             block_session_timer:
                 description:
-                    - Duration in seconds for blocked sessions (1 - 300 sec  (5 minutes), default = 30).
+                    - Duration in seconds for blocked sessions (1 - 300 sec  (5 minutes)).
                 type: int
             br_fdb_max_entry:
                 description:
@@ -342,7 +340,7 @@ options:
                 type: str
             cpu_use_threshold:
                 description:
-                    - Threshold at which CPU usage is reported. (% of total CPU, default = 90).
+                    - Threshold at which CPU usage is reported. (% of total CPU).
                 type: int
             csr_ca_attribute:
                 description:
@@ -360,12 +358,11 @@ options:
                     - disable
             device_identification_active_scan_delay:
                 description:
-                    - Number of seconds to passively scan a device before performing an active scan. (20 - 3600 sec, (20 sec to 1 hour), default = 90).
+                    - Number of seconds to passively scan a device before performing an active scan. (20 - 3600 sec, (20 sec to 1 hour)).
                 type: int
             device_idle_timeout:
                 description:
-                    - Time in seconds that a device must be idle to automatically log the device user out. (30 - 31536000 sec (30 sec to 1 year), default =
-                       300).
+                    - Time in seconds that a device must be idle to automatically log the device user out. (30 - 31536000 sec (30 sec to 1 year)).
                 type: int
             dh_params:
                 description:
@@ -415,7 +412,7 @@ options:
                     - disable
             fds_statistics_period:
                 description:
-                    - FortiGuard statistics collection period in minutes. (1 - 1440 min (1 min to 24 hours), default = 60).
+                    - FortiGuard statistics collection period in minutes. (1 - 1440 min (1 min to 24 hours)).
                 type: int
             fgd_alert_subscription:
                 description:
@@ -437,7 +434,7 @@ options:
                     - disable
             fortiextender_data_port:
                 description:
-                    - FortiExtender data port (1024 - 49150, default = 25246).
+                    - FortiExtender data port (1024 - 49150).
                 type: int
             fortiextender_vlan_mode:
                 description:
@@ -448,8 +445,7 @@ options:
                     - disable
             fortiservice_port:
                 description:
-                    - FortiService port (1 - 65535, default = 8013). Used by FortiClient endpoint compliance. Older versions of FortiClient used a different
-                       port.
+                    - FortiService port (1 - 65535). Used by FortiClient endpoint compliance. Older versions of FortiClient used a different port.
                 type: int
             gui_certificates:
                 description:
@@ -532,7 +528,7 @@ options:
                 type: str
             igmp_state_limit:
                 description:
-                    - Maximum number of IGMP memberships (96 - 64000, default = 3200).
+                    - Maximum number of IGMP memberships (96 - 64000).
                 type: int
             interval:
                 description:
@@ -595,7 +591,7 @@ options:
                     - korean
             ldapconntimeout:
                 description:
-                    - Global timeout for connections with remote LDAP servers in milliseconds (1 - 300000, default 500).
+                    - Global timeout for connections with remote LDAP servers in milliseconds (1 - 300000).
                 type: int
             lldp_transmission:
                 description:
@@ -655,15 +651,15 @@ options:
                     - disable
             memory_use_threshold_extreme:
                 description:
-                    - Threshold at which memory usage is considered extreme (new sessions are dropped) (% of total RAM, default = 95).
+                    - Threshold at which memory usage is considered extreme (new sessions are dropped) (% of total RAM).
                 type: int
             memory_use_threshold_green:
                 description:
-                    - Threshold at which memory usage forces the FortiGate to exit conserve mode (% of total RAM, default = 82).
+                    - Threshold at which memory usage forces the FortiGate to exit conserve mode (% of total RAM).
                 type: int
             memory_use_threshold_red:
                 description:
-                    - Threshold at which memory usage forces the FortiGate to enter conserve mode (% of total RAM, default = 88).
+                    - Threshold at which memory usage forces the FortiGate to enter conserve mode (% of total RAM).
                 type: int
             miglog_affinity:
                 description:
@@ -676,7 +672,7 @@ options:
                 type: int
             multi_factor_authentication:
                 description:
-                    - Enforce all login methods to require an additional authentication factor (default = optional).
+                    - Enforce all login methods to require an additional authentication factor .
                 type: str
                 choices:
                     - optional
@@ -701,7 +697,7 @@ options:
                     - disable
             policy_auth_concurrent:
                 description:
-                    - Number of concurrent firewall use logins from the same user (1 - 100, default = 0 means no limit).
+                    - Number of concurrent firewall use logins from the same user (1 - 100).
                 type: int
             post_login_banner:
                 description:
@@ -734,11 +730,11 @@ options:
                     - disable
             proxy_auth_lifetime_timeout:
                 description:
-                    - Lifetime timeout in minutes for authenticated users (5  - 65535 min, default=480 (8 hours)).
+                    - Lifetime timeout in minutes for authenticated users (5  - 65535 min).
                 type: int
             proxy_auth_timeout:
                 description:
-                    - Authentication timeout in minutes for authenticated users (1 - 300 min, default = 10).
+                    - Authentication timeout in minutes for authenticated users (1 - 300 min).
                 type: int
             proxy_cipher_hardware_acceleration:
                 description:
@@ -784,8 +780,7 @@ options:
                 type: int
             remoteauthtimeout:
                 description:
-                    - Number of seconds that the FortiGate waits for responses from remote RADIUS, LDAP, or TACACS+ authentication servers. (0-300 sec,
-                       default = 5, 0 means no timeout).
+                    - Number of seconds that the FortiGate waits for responses from remote RADIUS, LDAP, or TACACS+ authentication servers. (0-300 sec).
                 type: int
             reset_sessionless_tcp:
                 description:
@@ -859,7 +854,7 @@ options:
                 type: int
             ssd_trim_freq:
                 description:
-                    - How often to run SSD Trim (default = weekly). SSD Trim prevents SSD drive data loss by finding and isolating errors.
+                    - How often to run SSD Trim . SSD Trim prevents SSD drive data loss by finding and isolating errors.
                 type: str
                 choices:
                     - never
@@ -869,7 +864,7 @@ options:
                     - monthly
             ssd_trim_hour:
                 description:
-                    - Hour of the day on which to run SSD Trim (0 - 23, default = 1).
+                    - Hour of the day on which to run SSD Trim (0 - 23).
                 type: int
             ssd_trim_min:
                 description:
@@ -910,7 +905,7 @@ options:
                     - disable
             ssl_min_proto_version:
                 description:
-                    - Minimum supported protocol version for SSL/TLS connections (default = TLSv1.2).
+                    - Minimum supported protocol version for SSL/TLS connections .
                 type: str
                 choices:
                     - SSLv3
@@ -978,17 +973,17 @@ options:
                 type: str
             sys_perf_log_interval:
                 description:
-                    - Time in minutes between updates of performance statistics logging. (1 - 15 min, default = 5, 0 = disabled).
+                    - Time in minutes between updates of performance statistics logging. (1 - 15 min).
                 type: int
             tcp_halfclose_timer:
                 description:
                     - Number of seconds the FortiGate unit should wait to close a session after one peer has sent a FIN packet but the other has not responded
-                       (1 - 86400 sec (1 day), default = 120).
+                       (1 - 86400 sec (1 day)).
                 type: int
             tcp_halfopen_timer:
                 description:
                     - Number of seconds the FortiGate unit should wait to close a session after one peer has sent an open session packet but the other has not
-                       responded (1 - 86400 sec (1 day), default = 10).
+                       responded (1 - 86400 sec (1 day)).
                 type: int
             tcp_option:
                 description:
@@ -1126,28 +1121,27 @@ options:
                     - high
             two_factor_email_expiry:
                 description:
-                    - Email-based two-factor authentication session timeout (30 - 300 seconds (5 minutes), default = 60).
+                    - Email-based two-factor authentication session timeout (30 - 300 seconds (5 minutes)).
                 type: int
             two_factor_fac_expiry:
                 description:
-                    - FortiAuthenticator token authentication session timeout (10 - 3600 seconds (1 hour), default = 60).
+                    - FortiAuthenticator token authentication session timeout (10 - 3600 seconds (1 hour)).
                 type: int
             two_factor_ftk_expiry:
                 description:
-                    - FortiToken authentication session timeout (60 - 600 sec (10 minutes), default = 60).
+                    - FortiToken authentication session timeout (60 - 600 sec (10 minutes)).
                 type: int
             two_factor_ftm_expiry:
                 description:
-                    - FortiToken Mobile session timeout (1 - 168 hours (7 days), default = 72).
+                    - FortiToken Mobile session timeout (1 - 168 hours (7 days)).
                 type: int
             two_factor_sms_expiry:
                 description:
-                    - SMS-based two-factor authentication session timeout (30 - 300 sec, default = 60).
+                    - SMS-based two-factor authentication session timeout (30 - 300 sec).
                 type: int
             udp_idle_timer:
                 description:
-                    - UDP connection session timeout. This command can be useful in managing CPU and memory resources (1 - 86400 seconds (1 day), default =
-                       60).
+                    - UDP connection session timeout. This command can be useful in managing CPU and memory resources (1 - 86400 seconds (1 day)).
                 type: int
             user_server_cert:
                 description:
@@ -1227,7 +1221,7 @@ options:
             wireless_controller_port:
                 description:
                     - Port used for the control channel in wireless controller mode (wireless-mode is ac). The data channel port is the control channel port
-                       number plus one (1024 - 49150, default = 5246).
+                       number plus one (1024 - 49150).
                 type: int
 '''
 

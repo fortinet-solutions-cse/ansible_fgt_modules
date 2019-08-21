@@ -84,7 +84,7 @@ options:
                 type: str
             server_port:
                 description:
-                    - Port to communicate with FortiToken Mobile push services server (1 - 65535, default = 4433).
+                    - Port to communicate with FortiToken Mobile push services server (1 - 65535).
                 type: int
             status:
                 description:

@@ -116,7 +116,7 @@ options:
                     - disable
             mac_aging_interval:
                 description:
-                    - Time after which an inactive MAC is aged out (10 - 1000000 sec, default = 300, 0 = disable).
+                    - Time after which an inactive MAC is aged out (10 - 1000000 sec).
                 type: int
             mac_retention_period:
                 description:

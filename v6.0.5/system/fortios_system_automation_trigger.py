@@ -135,7 +135,7 @@ options:
                 type: int
             trigger_frequency:
                 description:
-                    - Scheduled trigger frequency (default = daily).
+                    - Scheduled trigger frequency .
                 type: str
                 choices:
                     - hourly
@@ -144,7 +144,7 @@ options:
                     - monthly
             trigger_hour:
                 description:
-                    - Hour of the day on which to trigger (0 - 23, default = 1).
+                    - Hour of the day on which to trigger (0 - 23).
                 type: int
             trigger_minute:
                 description:

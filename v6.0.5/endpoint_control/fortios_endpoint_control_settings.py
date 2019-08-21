@@ -92,7 +92,7 @@ options:
                     - custom
             forticlient_avdb_update_interval:
                 description:
-                    - Period of time between FortiClient AntiVirus database updates (0 - 24 hours, default = 8).
+                    - Period of time between FortiClient AntiVirus database updates (0 - 24 hours).
                 type: int
             forticlient_dereg_unsupported_client:
                 description:
@@ -103,11 +103,11 @@ options:
                     - disable
             forticlient_ems_rest_api_call_timeout:
                 description:
-                    - FortiClient EMS call timeout in milliseconds (500 - 30000 milliseconds, default = 5000).
+                    - FortiClient EMS call timeout in milliseconds (500 - 30000 milliseconds).
                 type: int
             forticlient_keepalive_interval:
                 description:
-                    - Interval between two KeepAlive messages from FortiClient (20 - 300 sec, default = 60).
+                    - Interval between two KeepAlive messages from FortiClient (20 - 300 sec).
                 type: int
             forticlient_offline_grace:
                 description:
@@ -118,7 +118,7 @@ options:
                     - disable
             forticlient_offline_grace_interval:
                 description:
-                    - Grace period for offline registered FortiClient (60 - 600 sec, default = 120).
+                    - Grace period for offline registered FortiClient (60 - 600 sec).
                 type: int
             forticlient_reg_key:
                 description:
@@ -137,7 +137,7 @@ options:
                 type: int
             forticlient_sys_update_interval:
                 description:
-                    - Interval between two system update messages from FortiClient (30 - 1440 min, default = 720).
+                    - Interval between two system update messages from FortiClient (30 - 1440 min).
                 type: int
             forticlient_user_avatar:
                 description:
@@ -148,7 +148,7 @@ options:
                     - disable
             forticlient_warning_interval:
                 description:
-                    - Period of time between FortiClient portal warnings (0 - 24 hours, default = 1).
+                    - Period of time between FortiClient portal warnings (0 - 24 hours).
                 type: int
 '''
 

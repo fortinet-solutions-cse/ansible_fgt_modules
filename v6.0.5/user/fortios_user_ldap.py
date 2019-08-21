@@ -158,7 +158,7 @@ options:
                     - disable
             port:
                 description:
-                    - Port to be used for communication with the LDAP server (default = 389).
+                    - Port to be used for communication with the LDAP server .
                 type: int
             secondary_server:
                 description:
@@ -189,7 +189,7 @@ options:
                 type: str
             ssl_min_proto_version:
                 description:
-                    - Minimum supported protocol version for SSL/TLS connections (default is to follow system global setting).
+                    - Minimum supported protocol version for SSL/TLS connections .
                 type: str
                 choices:
                     - default

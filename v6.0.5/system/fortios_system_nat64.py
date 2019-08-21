@@ -80,7 +80,7 @@ options:
         suboptions:
             always_synthesize_aaaa_record:
                 description:
-                    - Enable/disable AAAA record synthesis (default = enable).
+                    - Enable/disable AAAA record synthesis .
                 type: str
                 choices:
                     - enable
@@ -101,7 +101,7 @@ options:
                     - disable
             nat64_prefix:
                 description:
-                    - "NAT64 prefix must be ::/96 (default = 64:ff9b::/96)."
+                    - "NAT64 prefix must be ::/96 ."
                 type: str
             secondary_prefix:
                 description:
@@ -126,7 +126,7 @@ options:
                     - disable
             status:
                 description:
-                    - Enable/disable NAT64 (default = disable).
+                    - Enable/disable NAT64 .
                 type: str
                 choices:
                     - enable

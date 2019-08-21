@@ -97,7 +97,7 @@ options:
                 type: str
             output_size:
                 description:
-                    - Number of megabytes to limit script output to (10 - 1024, default = 10).
+                    - Number of megabytes to limit script output to (10 - 1024).
                 type: int
             repeat:
                 description:

@@ -94,7 +94,7 @@ options:
                 type: int
             color:
                 description:
-                    - Integer value to determine the color of the icon in the GUI (range 1 to 32, default = 0, which sets the value to 1).
+                    - Integer value to determine the color of the icon in the GUI (range 1 to 32).
                 type: int
             comment:
                 description:
@@ -203,7 +203,7 @@ options:
                 type: str
             type:
                 description:
-                    - Type of IPv6 address object (default = ipprefix).
+                    - Type of IPv6 address object .
                 type: str
                 choices:
                     - ipprefix

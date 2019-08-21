@@ -131,7 +131,7 @@ options:
                         type: str
                     preference:
                         description:
-                            - DNS entry preference, 0 is the highest preference (0 - 65535, default = 10)
+                            - DNS entry preference, 0 is the highest preference (0 - 65535)
                         type: int
                     status:
                         description:
@@ -142,7 +142,7 @@ options:
                             - disable
                     ttl:
                         description:
-                            - Time-to-live for this entry (0 to 2147483647 sec, default = 0).
+                            - Time-to-live for this entry (0 to 2147483647 sec).
                         type: int
                     type:
                         description:
@@ -190,7 +190,7 @@ options:
                     - disable
             ttl:
                 description:
-                    - Default time-to-live value for the entries of this DNS zone (0 - 2147483647 sec, default = 86400).
+                    - Default time-to-live value for the entries of this DNS zone (0 - 2147483647 sec).
                 type: int
             type:
                 description:

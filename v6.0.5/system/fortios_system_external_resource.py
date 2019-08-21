@@ -101,7 +101,7 @@ options:
                 type: str
             refresh_rate:
                 description:
-                    - Time interval to refresh external resource (1 - 43200 min, default = 5 min).
+                    - Time interval to refresh external resource (1 - 43200 min).
                 type: int
             resource:
                 description:

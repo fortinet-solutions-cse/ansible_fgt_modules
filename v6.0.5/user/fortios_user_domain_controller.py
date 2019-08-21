@@ -105,7 +105,7 @@ options:
                 type: str
             port:
                 description:
-                    - Port to be used for communication with the domain controller (default = 445).
+                    - Port to be used for communication with the domain controller .
                 type: int
 '''
 

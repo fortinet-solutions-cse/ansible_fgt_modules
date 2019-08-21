@@ -103,7 +103,7 @@ options:
                 type: str
             lifetime:
                 description:
-                    - NMMO HA registration request lifetime (180 - 65535 sec, default = 65535).
+                    - NMMO HA registration request lifetime (180 - 65535 sec).
                 type: int
             n_mhae_key:
                 description:
@@ -118,7 +118,7 @@ options:
                     - base64
             n_mhae_spi:
                 description:
-                    - "NEMO authentication SPI (default: 256)."
+                    - "NEMO authentication SPI ."
                 type: int
             name:
                 description:
@@ -145,15 +145,15 @@ options:
                         type: str
             reg_interval:
                 description:
-                    - NMMO HA registration interval (5 - 300, default = 5).
+                    - NMMO HA registration interval (5 - 300).
                 type: int
             reg_retry:
                 description:
-                    - Maximum number of NMMO HA registration retries (1 to 30, default = 3).
+                    - Maximum number of NMMO HA registration retries (1 to 30).
                 type: int
             renew_interval:
                 description:
-                    - Time before lifetime expiraton to send NMMO HA re-registration (5 - 60, default = 60).
+                    - Time before lifetime expiraton to send NMMO HA re-registration (5 - 60).
                 type: int
             roaming_interface:
                 description:

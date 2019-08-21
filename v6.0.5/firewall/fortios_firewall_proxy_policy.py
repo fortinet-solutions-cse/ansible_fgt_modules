@@ -322,7 +322,7 @@ options:
                     - disable
             session_ttl:
                 description:
-                    - TTL in seconds for sessions accepted by this policy (0 means use the system default session TTL).
+                    - TTL in seconds for sessions accepted by this policy (0 means use the system ).
                 type: int
             spamfilter_profile:
                 description:

@@ -197,11 +197,11 @@ options:
                     - disable
             tcp_mss_receiver:
                 description:
-                    - TCP Maximum Segment Size value of receiver (0 - 65535, default = 0)
+                    - TCP Maximum Segment Size value of receiver (0 - 65535)
                 type: int
             tcp_mss_sender:
                 description:
-                    - TCP Maximum Segment Size value of sender (0 - 65535, default = 0).
+                    - TCP Maximum Segment Size value of sender (0 - 65535).
                 type: int
             traffic_shaper:
                 description:

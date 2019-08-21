@@ -98,7 +98,7 @@ options:
                         type: str
             ha_group_id:
                 description:
-                    - Cluster group ID set for this destination (default = 0).
+                    - Cluster group ID set for this destination .
                 type: int
             name:
                 description:

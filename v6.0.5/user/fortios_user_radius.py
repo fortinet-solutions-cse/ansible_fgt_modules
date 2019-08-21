@@ -123,7 +123,7 @@ options:
                             - disable
             acct_all_servers:
                 description:
-                    - Enable/disable sending of accounting messages to all configured servers (default = disable).
+                    - Enable/disable sending of accounting messages to all configured servers .
                 type: str
                 choices:
                     - enable

@@ -109,7 +109,7 @@ options:
                     - enable
             auto_isl_hello_timer:
                 description:
-                    - Auto inter-switch LAG hello timer duration (1 - 30 sec, default = 3).
+                    - Auto inter-switch LAG hello timer duration (1 - 30 sec).
                 type: int
             auto_isl_port_group:
                 description:
@@ -117,7 +117,7 @@ options:
                 type: int
             auto_isl_receive_timeout:
                 description:
-                    - Auto inter-switch LAG timeout if no response is received (3 - 90 sec, default = 9).
+                    - Auto inter-switch LAG timeout if no response is received (3 - 90 sec).
                 type: int
             custom_tlvs:
                 description:

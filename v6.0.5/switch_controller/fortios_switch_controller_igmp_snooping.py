@@ -80,7 +80,7 @@ options:
         suboptions:
             aging_time:
                 description:
-                    - Maximum number of seconds to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec, default = 300).
+                    - Maximum number of seconds to retain a multicast snooping entry for which no packets have been seen (15 - 3600 sec).
                 type: int
             flood_unknown_multicast:
                 description:

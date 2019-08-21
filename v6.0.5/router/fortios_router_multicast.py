@@ -104,11 +104,11 @@ options:
                         type: int
                     hello_holdtime:
                         description:
-                            - Time before old neighbor information expires (0 - 65535 sec, default = 105).
+                            - Time before old neighbor information expires (0 - 65535 sec).
                         type: int
                     hello_interval:
                         description:
-                            - Interval between sending PIM hello messages (0 - 65535 sec, default = 30).
+                            - Interval between sending PIM hello messages (0 - 65535 sec).
                         type: int
                     igmp:
                         description:
@@ -125,23 +125,23 @@ options:
                                 type: str
                             last_member_query_count:
                                 description:
-                                    - Number of group specific queries before removing group (2 - 7, default = 2).
+                                    - Number of group specific queries before removing group (2 - 7).
                                 type: int
                             last_member_query_interval:
                                 description:
-                                    - Timeout between IGMPv2 leave and removing group (1 - 65535 msec, default = 1000).
+                                    - Timeout between IGMPv2 leave and removing group (1 - 65535 msec).
                                 type: int
                             query_interval:
                                 description:
-                                    - Interval between queries to IGMP hosts (1 - 65535 sec, default = 125).
+                                    - Interval between queries to IGMP hosts (1 - 65535 sec).
                                 type: int
                             query_max_response_time:
                                 description:
-                                    - Maximum time to wait for a IGMP query response (1 - 25 sec, default = 10).
+                                    - Maximum time to wait for a IGMP query response (1 - 25 sec).
                                 type: int
                             query_timeout:
                                 description:
-                                    - Timeout between queries before becoming querier for network (60 - 900, default = 255).
+                                    - Timeout between queries before becoming querier for network (60 - 900).
                                 type: int
                             router_alert_check:
                                 description:
@@ -197,7 +197,7 @@ options:
                             - dense-mode
                     propagation_delay:
                         description:
-                            - Delay flooding packets on this interface (100 - 5000 msec, default = 500).
+                            - Delay flooding packets on this interface (100 - 5000 msec).
                         type: int
                     rp_candidate:
                         description:
@@ -212,7 +212,7 @@ options:
                         type: str
                     rp_candidate_interval:
                         description:
-                            - RP candidate advertisement interval (1 - 16383 sec, default = 60).
+                            - RP candidate advertisement interval (1 - 16383 sec).
                         type: int
                     rp_candidate_priority:
                         description:
@@ -220,7 +220,7 @@ options:
                         type: int
                     state_refresh_interval:
                         description:
-                            - Interval between sending state-refresh packets (1 - 100 sec, default = 60).
+                            - Interval between sending state-refresh packets (1 - 100 sec).
                         type: int
                     static_group:
                         description:
@@ -228,7 +228,7 @@ options:
                         type: str
                     ttl_threshold:
                         description:
-                            - Minimum TTL of multicast packets that will be forwarded (applied only to new multicast routes) (1 - 255, default = 1).
+                            - Minimum TTL of multicast packets that will be forwarded (applied only to new multicast routes) (1 - 255).
                         type: int
             multicast_routing:
                 description:
@@ -266,7 +266,7 @@ options:
                             - disable
                     bsr_hash:
                         description:
-                            - BSR hash length (0 - 32, default = 10).
+                            - BSR hash length (0 - 32).
                         type: int
                     bsr_interface:
                         description:
@@ -274,7 +274,7 @@ options:
                         type: str
                     bsr_priority:
                         description:
-                            - BSR priority (0 - 255, default = 0).
+                            - BSR priority (0 - 255).
                         type: int
                     cisco_crp_prefix:
                         description:
@@ -303,19 +303,19 @@ options:
                         type: str
                     join_prune_holdtime:
                         description:
-                            - Join/prune holdtime (1 - 65535, default = 210).
+                            - Join/prune holdtime (1 - 65535).
                         type: int
                     message_interval:
                         description:
-                            - Period of time between sending periodic PIM join/prune messages in seconds (1 - 65535, default = 60).
+                            - Period of time between sending periodic PIM join/prune messages in seconds (1 - 65535).
                         type: int
                     null_register_retries:
                         description:
-                            - Maximum retries of null register (1 - 20, default = 1).
+                            - Maximum retries of null register (1 - 20).
                         type: int
                     register_rate_limit:
                         description:
-                            - Limit of packets/sec per source registered through this RP (0 - 65535, default = 0 which means unlimited).
+                            - Limit of packets/sec per source registered through this RP (0 - 65535).
                         type: int
                     register_rp_reachability:
                         description:
@@ -342,7 +342,7 @@ options:
                         type: str
                     register_supression:
                         description:
-                            - Period of time to honor register-stop message (1 - 65535 sec, default = 60).
+                            - Period of time to honor register-stop message (1 - 65535 sec).
                         type: int
                     rp_address:
                         description:
@@ -364,7 +364,7 @@ options:
                                 type: str
                     rp_register_keepalive:
                         description:
-                            - Timeout for RP receiving data on (S,G) tree (1 - 65535 sec, default = 185).
+                            - Timeout for RP receiving data on (S,G) tree (1 - 65535 sec).
                         type: int
                     spt_threshold:
                         description:

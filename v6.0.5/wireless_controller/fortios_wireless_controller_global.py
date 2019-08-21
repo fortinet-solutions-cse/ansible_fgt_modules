@@ -81,7 +81,7 @@ options:
         suboptions:
             ap_log_server:
                 description:
-                    - Enable/disable configuring APs or FortiAPs to send log messages to a syslog server (default = disable).
+                    - Enable/disable configuring APs or FortiAPs to send log messages to a syslog server .
                 type: str
                 choices:
                     - enable
@@ -108,18 +108,18 @@ options:
                     - aeroscout-mu
             data_ethernet_II:
                 description:
-                    - Configure the wireless controller to use Ethernet II or 802.3 frames with 802.3 data tunnel mode (default = disable).
+                    - Configure the wireless controller to use Ethernet II or 802.3 frames with 802.3 data tunnel mode .
                 type: str
                 choices:
                     - enable
                     - disable
             discovery_mc_addr:
                 description:
-                    - Multicast IP address for AP discovery (default = 244.0.1.140).
+                    - Multicast IP address for AP discovery .
                 type: str
             fiapp_eth_type:
                 description:
-                    - Ethernet type for Fortinet Inter-Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 - 65535, default = 5252).
+                    - Ethernet type for Fortinet Inter-Access Point Protocol (IAPP), or IEEE 802.11f, packets (0 - 65535).
                 type: int
             image_download:
                 description:
@@ -130,11 +130,11 @@ options:
                     - disable
             ipsec_base_ip:
                 description:
-                    - Base IP address for IPsec VPN tunnels between the access points and the wireless controller (default = 169.254.0.1).
+                    - Base IP address for IPsec VPN tunnels between the access points and the wireless controller .
                 type: str
             link_aggregation:
                 description:
-                    - Enable/disable calculating the CAPWAP transmit hash to load balance sessions to link aggregation nodes (default = disable).
+                    - Enable/disable calculating the CAPWAP transmit hash to load balance sessions to link aggregation nodes .
                 type: str
                 choices:
                     - enable
@@ -145,15 +145,15 @@ options:
                 type: str
             max_clients:
                 description:
-                    - Maximum number of clients that can connect simultaneously (default = 0, meaning no limitation).
+                    - Maximum number of clients that can connect simultaneously .
                 type: int
             max_retransmit:
                 description:
-                    - Maximum number of tunnel packet retransmissions (0 - 64, default = 3).
+                    - Maximum number of tunnel packet retransmissions (0 - 64).
                 type: int
             mesh_eth_type:
                 description:
-                    - Mesh Ethernet identifier included in backhaul packets (0 - 65535, default = 8755).
+                    - Mesh Ethernet identifier included in backhaul packets (0 - 65535).
                 type: int
             name:
                 description:
@@ -161,7 +161,7 @@ options:
                 type: str
             rogue_scan_mac_adjacency:
                 description:
-                    - Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 - 31, default = 7).
+                    - Maximum numerical difference between an AP's Ethernet and wireless MAC values to match for rogue detection (0 - 31).
                 type: int
             wtp_share:
                 description:

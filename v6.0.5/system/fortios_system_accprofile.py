@@ -90,7 +90,7 @@ options:
         suboptions:
             admintimeout:
                 description:
-                    - Administrator timeout for this access profile (0 - 480 min, default = 10, 0 means never timeout).
+                    - Administrator timeout for this access profile (0 - 480 min).
                 type: int
             admintimeout_override:
                 description:

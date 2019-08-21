@@ -81,8 +81,7 @@ options:
         suboptions:
             fast_start_interval:
                 description:
-                    - Frequency of LLDP PDU transmission from FortiSwitch for the first 4 packets when the link is up (2 - 5 sec, default = 2, 0 = disable
-                       fast start).
+                    - Frequency of LLDP PDU transmission from FortiSwitch for the first 4 packets when the link is up (2 - 5 sec).
                 type: int
             management_interface:
                 description:
@@ -100,11 +99,11 @@ options:
                     - disable
             tx_hold:
                 description:
-                    - Number of tx-intervals before local LLDP data expires (1 - 16, default = 4). Packet TTL is tx-hold * tx-interval.
+                    - Number of tx-intervals before local LLDP data expires (1 - 16). Packet TTL is tx-hold * tx-interval.
                 type: int
             tx_interval:
                 description:
-                    - Frequency of LLDP PDU transmission from FortiSwitch (5 - 4095 sec, default = 30). Packet TTL is tx-hold * tx-interval.
+                    - Frequency of LLDP PDU transmission from FortiSwitch (5 - 4095 sec). Packet TTL is tx-hold * tx-interval.
                 type: int
 '''
 

@@ -94,7 +94,7 @@ options:
                     - disable
             expire_day:
                 description:
-                    - Number of days after which passwords expire (1 - 999 days, default = 90).
+                    - Number of days after which passwords expire (1 - 999 days).
                 type: int
             expire_status:
                 description:
@@ -105,23 +105,23 @@ options:
                     - disable
             min_lower_case_letter:
                 description:
-                    - Minimum number of lowercase characters in password (0 - 128, default = 0).
+                    - Minimum number of lowercase characters in password (0 - 128).
                 type: int
             min_non_alphanumeric:
                 description:
-                    - Minimum number of non-alphanumeric characters in password (0 - 128, default = 0).
+                    - Minimum number of non-alphanumeric characters in password (0 - 128).
                 type: int
             min_number:
                 description:
-                    - Minimum number of numeric characters in password (0 - 128, default = 0).
+                    - Minimum number of numeric characters in password (0 - 128).
                 type: int
             min_upper_case_letter:
                 description:
-                    - Minimum number of uppercase characters in password (0 - 128, default = 0).
+                    - Minimum number of uppercase characters in password (0 - 128).
                 type: int
             minimum_length:
                 description:
-                    - Minimum password length (8 - 128, default = 8).
+                    - Minimum password length (8 - 128).
                 type: int
             reuse_password:
                 description:

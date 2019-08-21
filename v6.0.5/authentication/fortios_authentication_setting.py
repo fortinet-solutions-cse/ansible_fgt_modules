@@ -97,7 +97,7 @@ options:
                 type: str
             captive_portal_port:
                 description:
-                    - Captive portal port number (1 - 65535, default = 0).
+                    - Captive portal port number (1 - 65535).
                 type: int
             captive_portal_type:
                 description:

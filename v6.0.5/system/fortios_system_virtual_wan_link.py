@@ -111,7 +111,7 @@ options:
                             - ipv6
                     failtime:
                         description:
-                            - Number of failures before server is considered lost (1 - 3600, default = 5).
+                            - Number of failures before server is considered lost (1 - 3600).
                         type: int
                     http_agent:
                         description:
@@ -127,7 +127,7 @@ options:
                         type: str
                     interval:
                         description:
-                            - Status check interval, or the time between attempting to connect to the server (1 - 3600 sec, default = 5).
+                            - Status check interval, or the time between attempting to connect to the server (1 - 3600 sec).
                         type: int
                     members:
                         description:
@@ -168,7 +168,7 @@ options:
                             - ping6
                     recoverytime:
                         description:
-                            - Number of successful responses received before server is considered recovered (1 - 3600, default = 5).
+                            - Number of successful responses received before server is considered recovered (1 - 3600).
                         type: int
                     security_mode:
                         description:
@@ -193,11 +193,11 @@ options:
                                 type: int
                             jitter_threshold:
                                 description:
-                                    - Jitter for SLA to make decision in milliseconds. (0 - 10000000, default = 5).
+                                    - Jitter for SLA to make decision in milliseconds. (0 - 10000000).
                                 type: int
                             latency_threshold:
                                 description:
-                                    - Latency for SLA to make decision in milliseconds. (0 - 10000000, default = 5).
+                                    - Latency for SLA to make decision in milliseconds. (0 - 10000000).
                                 type: int
                             link_cost_factor:
                                 description:
@@ -209,31 +209,31 @@ options:
                                     - packet-loss
                             packetloss_threshold:
                                 description:
-                                    - Packet loss for SLA to make decision in percentage. (0 - 100, default = 0).
+                                    - Packet loss for SLA to make decision in percentage. (0 - 100).
                                 type: int
                     threshold_alert_jitter:
                         description:
-                            - Alert threshold for jitter (ms, default = 0).
+                            - Alert threshold for jitter (ms).
                         type: int
                     threshold_alert_latency:
                         description:
-                            - Alert threshold for latency (ms, default = 0).
+                            - Alert threshold for latency (ms).
                         type: int
                     threshold_alert_packetloss:
                         description:
-                            - Alert threshold for packet loss (percentage, default = 0).
+                            - Alert threshold for packet loss (percentage).
                         type: int
                     threshold_warning_jitter:
                         description:
-                            - Warning threshold for jitter (ms, default = 0).
+                            - Warning threshold for jitter (ms).
                         type: int
                     threshold_warning_latency:
                         description:
-                            - Warning threshold for latency (ms, default = 0).
+                            - Warning threshold for latency (ms).
                         type: int
                     threshold_warning_packetloss:
                         description:
-                            - Warning threshold for packet loss (percentage, default = 0).
+                            - Warning threshold for packet loss (percentage).
                         type: int
                     update_cascade_interface:
                         description:
@@ -422,7 +422,7 @@ options:
                         type: str
                     hold_down_time:
                         description:
-                            - Waiting period in seconds when switching from the back-up member to the primary member (0 - 10000000, default = 0).
+                            - Waiting period in seconds when switching from the back-up member to the primary member (0 - 10000000).
                         type: int
                     id:
                         description:
@@ -528,7 +528,7 @@ options:
                             - custom-profile-1
                     link_cost_threshold:
                         description:
-                            - Percentage threshold change of link cost values that will result in policy route regeneration (0 - 10000000, default = 10).
+                            - Percentage threshold change of link cost values that will result in policy route regeneration (0 - 10000000).
                         type: int
                     member:
                         description:

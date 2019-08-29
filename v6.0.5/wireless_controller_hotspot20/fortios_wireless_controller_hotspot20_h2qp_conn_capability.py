@@ -324,7 +324,7 @@ def wireless_controller_hotspot20_h2qp_conn_capability(data, fos):
     vdom = data['vdom']
     state = data['state']
     wireless_controller_hotspot20_h2qp_conn_capability_data = data['wireless_controller_hotspot20_h2qp_conn_capability']
-    filtered_data = \ \ \ \ \
+    filtered_data = \
     underscore_to_hyphen(filter_wireless_controller_hotspot20_h2qp_conn_capability_data(wireless_controller_hotspot20_h2qp_conn_capability_data))
 
     if state == "present":

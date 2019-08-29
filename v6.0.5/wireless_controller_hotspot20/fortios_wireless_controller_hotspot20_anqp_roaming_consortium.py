@@ -245,7 +245,7 @@ def wireless_controller_hotspot20_anqp_roaming_consortium(data, fos):
     vdom = data['vdom']
     state = data['state']
     wireless_controller_hotspot20_anqp_roaming_consortium_data = data['wireless_controller_hotspot20_anqp_roaming_consortium']
-    filtered_data = \ \ \ \ \
+    filtered_data = \
     underscore_to_hyphen(filter_wireless_controller_hotspot20_anqp_roaming_consortium_data(wireless_controller_hotspot20_anqp_roaming_consortium_data))
 
     if state == "present":

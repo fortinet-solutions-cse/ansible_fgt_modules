@@ -76,8 +76,10 @@ options:
     state:
         description:
             - Indicates whether to create or remove the object.
+              This attribute was present already in previous version in a deeper level.
+              It has been moved out to this outer level.
         type: str
-        required: true
+        required: false
         choices:
             - present
             - absent
@@ -88,6 +90,17 @@ options:
         default: null
         type: dict
         suboptions:
+            state:
+                description:
+                    - B(Deprecated)
+                    - Starting with Ansible 2.9 we recommend using the top-level 'state' parameter.
+                    - HORIZONTALLINE
+                    - Indicates whether to create or remove the object.
+                type: str
+                required: false
+                choices:
+                    - present
+                    - absent
             address_type:
                 description:
                     - Policy address type (IPv4 or IPv6).
@@ -403,7 +416,12 @@ def underscore_to_hyphen(data):
 
 def firewall_interface_policy6(data, fos):
     vdom = data['vdom']
-    state = data['state']
+    if 'state' in data and data['state']:
+        state = data['state']
+    elif 'state' in data['firewall_interface_policy6'] and data['firewall_interface_policy6']:
+        state = data['firewall_interface_policy6']['state']
+    else:
+        state = True
     firewall_interface_policy6_data = data['firewall_interface_policy6']
     filtered_data = underscore_to_hyphen(filter_firewall_interface_policy6_data(firewall_interface_policy6_data))
 
@@ -443,11 +461,13 @@ def main():
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
-        "state": {"required": True, "type": "str",
+        "state": {"required": False, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_interface_policy6": {
             "required": False, "type": "dict", "default": None,
             "options": {
+                "state": {"required": False, "type": "str",
+                          "choices": ["present", "absent"]},
                 "address_type": {"required": False, "type": "str",
                                  "choices": ["ipv4", "ipv6"]},
                 "application_list": {"required": False, "type": "str"},

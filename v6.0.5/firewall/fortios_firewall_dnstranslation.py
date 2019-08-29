@@ -76,8 +76,10 @@ options:
     state:
         description:
             - Indicates whether to create or remove the object.
+              This attribute was present already in previous version in a deeper level.
+              It has been moved out to this outer level.
         type: str
-        required: true
+        required: false
         choices:
             - present
             - absent
@@ -88,6 +90,17 @@ options:
         default: null
         type: dict
         suboptions:
+            state:
+                description:
+                    - B(Deprecated)
+                    - Starting with Ansible 2.9 we recommend using the top-level 'state' parameter.
+                    - HORIZONTALLINE
+                    - Indicates whether to create or remove the object.
+                type: str
+                required: false
+                choices:
+                    - present
+                    - absent
             dst:
                 description:
                     - IPv4 address or subnet on the external network to substitute for the resolved address in DNS query replies. Can be single IP address or
@@ -240,7 +253,12 @@ def underscore_to_hyphen(data):
 
 def firewall_dnstranslation(data, fos):
     vdom = data['vdom']
-    state = data['state']
+    if 'state' in data and data['state']:
+        state = data['state']
+    elif 'state' in data['firewall_dnstranslation'] and data['firewall_dnstranslation']:
+        state = data['firewall_dnstranslation']['state']
+    else:
+        state = True
     firewall_dnstranslation_data = data['firewall_dnstranslation']
     filtered_data = underscore_to_hyphen(filter_firewall_dnstranslation_data(firewall_dnstranslation_data))
 
@@ -280,11 +298,13 @@ def main():
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
-        "state": {"required": True, "type": "str",
+        "state": {"required": False, "type": "str",
                   "choices": ["present", "absent"]},
         "firewall_dnstranslation": {
             "required": False, "type": "dict", "default": None,
             "options": {
+                "state": {"required": False, "type": "str",
+                          "choices": ["present", "absent"]},
                 "dst": {"required": False, "type": "str"},
                 "id": {"required": True, "type": "int"},
                 "netmask": {"required": False, "type": "str"},

@@ -76,8 +76,10 @@ options:
     state:
         description:
             - Indicates whether to create or remove the object.
+              This attribute was present already in previous version in a deeper level.
+              It has been moved out to this outer level.
         type: str
-        required: true
+        required: false
         choices:
             - present
             - absent
@@ -88,6 +90,17 @@ options:
         default: null
         type: dict
         suboptions:
+            state:
+                description:
+                    - B(Deprecated)
+                    - Starting with Ansible 2.9 we recommend using the top-level 'state' parameter.
+                    - HORIZONTALLINE
+                    - Indicates whether to create or remove the object.
+                type: str
+                required: false
+                choices:
+                    - present
+                    - absent
             app_replacemsg:
                 description:
                     - Enable/disable replacement messages for blocked applications.
@@ -521,7 +534,12 @@ def underscore_to_hyphen(data):
 
 def application_list(data, fos):
     vdom = data['vdom']
-    state = data['state']
+    if 'state' in data and data['state']:
+        state = data['state']
+    elif 'state' in data['application_list'] and data['application_list']:
+        state = data['application_list']['state']
+    else:
+        state = True
     application_list_data = data['application_list']
     filtered_data = underscore_to_hyphen(filter_application_list_data(application_list_data))
 
@@ -561,11 +579,13 @@ def main():
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
-        "state": {"required": True, "type": "str",
+        "state": {"required": False, "type": "str",
                   "choices": ["present", "absent"]},
         "application_list": {
             "required": False, "type": "dict", "default": None,
             "options": {
+                "state": {"required": False, "type": "str",
+                          "choices": ["present", "absent"]},
                 "app_replacemsg": {"required": False, "type": "str",
                                    "choices": ["disable", "enable"]},
                 "comment": {"required": False, "type": "str"},

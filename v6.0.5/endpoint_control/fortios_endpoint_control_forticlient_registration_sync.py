@@ -76,8 +76,10 @@ options:
     state:
         description:
             - Indicates whether to create or remove the object.
+              This attribute was present already in previous version in a deeper level.
+              It has been moved out to this outer level.
         type: str
-        required: true
+        required: false
         choices:
             - present
             - absent
@@ -88,6 +90,17 @@ options:
         default: null
         type: dict
         suboptions:
+            state:
+                description:
+                    - B(Deprecated)
+                    - Starting with Ansible 2.9 we recommend using the top-level 'state' parameter.
+                    - HORIZONTALLINE
+                    - Indicates whether to create or remove the object.
+                type: str
+                required: false
+                choices:
+                    - present
+                    - absent
             peer_ip:
                 description:
                     - IP address of the peer FortiGate for endpoint license synchronization.
@@ -226,7 +239,12 @@ def underscore_to_hyphen(data):
 
 def endpoint_control_forticlient_registration_sync(data, fos):
     vdom = data['vdom']
-    state = data['state']
+    if 'state' in data and data['state']:
+        state = data['state']
+    elif 'state' in data['endpoint_control_forticlient_registration_sync'] and data['endpoint_control_forticlient_registration_sync']:
+        state = data['endpoint_control_forticlient_registration_sync']['state']
+    else:
+        state = True
     endpoint_control_forticlient_registration_sync_data = data['endpoint_control_forticlient_registration_sync']
     filtered_data = underscore_to_hyphen(filter_endpoint_control_forticlient_registration_sync_data(endpoint_control_forticlient_registration_sync_data))
 
@@ -266,11 +284,13 @@ def main():
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
-        "state": {"required": True, "type": "str",
+        "state": {"required": False, "type": "str",
                   "choices": ["present", "absent"]},
         "endpoint_control_forticlient_registration_sync": {
             "required": False, "type": "dict", "default": None,
             "options": {
+                "state": {"required": False, "type": "str",
+                          "choices": ["present", "absent"]},
                 "peer_ip": {"required": False, "type": "str"},
                 "peer_name": {"required": False, "type": "str"}
 

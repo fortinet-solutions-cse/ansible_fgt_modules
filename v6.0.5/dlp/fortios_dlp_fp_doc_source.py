@@ -77,8 +77,10 @@ options:
     state:
         description:
             - Indicates whether to create or remove the object.
+              This attribute was present already in previous version in a deeper level.
+              It has been moved out to this outer level.
         type: str
-        required: true
+        required: false
         choices:
             - present
             - absent
@@ -89,6 +91,17 @@ options:
         default: null
         type: dict
         suboptions:
+            state:
+                description:
+                    - B(Deprecated)
+                    - Starting with Ansible 2.9 we recommend using the top-level 'state' parameter.
+                    - HORIZONTALLINE
+                    - Indicates whether to create or remove the object.
+                type: str
+                required: false
+                choices:
+                    - present
+                    - absent
             date:
                 description:
                     - Day of the month on which to scan the server (1 - 31).
@@ -344,7 +357,12 @@ def underscore_to_hyphen(data):
 
 def dlp_fp_doc_source(data, fos):
     vdom = data['vdom']
-    state = data['state']
+    if 'state' in data and data['state']:
+        state = data['state']
+    elif 'state' in data['dlp_fp_doc_source'] and data['dlp_fp_doc_source']:
+        state = data['dlp_fp_doc_source']['state']
+    else:
+        state = True
     dlp_fp_doc_source_data = data['dlp_fp_doc_source']
     filtered_data = underscore_to_hyphen(filter_dlp_fp_doc_source_data(dlp_fp_doc_source_data))
 
@@ -384,11 +402,13 @@ def main():
         "vdom": {"required": False, "type": "str", "default": "root"},
         "https": {"required": False, "type": "bool", "default": True},
         "ssl_verify": {"required": False, "type": "bool", "default": True},
-        "state": {"required": True, "type": "str",
+        "state": {"required": False, "type": "str",
                   "choices": ["present", "absent"]},
         "dlp_fp_doc_source": {
             "required": False, "type": "dict", "default": None,
             "options": {
+                "state": {"required": False, "type": "str",
+                          "choices": ["present", "absent"]},
                 "date": {"required": False, "type": "int"},
                 "file_path": {"required": False, "type": "str"},
                 "file_pattern": {"required": False, "type": "str"},

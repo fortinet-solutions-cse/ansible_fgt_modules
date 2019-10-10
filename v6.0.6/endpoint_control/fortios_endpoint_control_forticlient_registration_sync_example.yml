@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure FortiClient registration synchronization settings.
+    fortios_endpoint_control_forticlient_registration_sync:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      endpoint_control_forticlient_registration_sync:
+        peer_ip: "<your_own_value>"
+        peer_name: "<your_own_value>"

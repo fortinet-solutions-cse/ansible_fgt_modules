@@ -1,0 +1,35 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure multicast NAT policies.
+    fortios_firewall_multicast_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_multicast_policy:
+        action: "accept"
+        dnat: "<your_own_value>"
+        dstaddr:
+         -
+            name: "default_name_6 (source firewall.multicast-address.name)"
+        dstintf: "<your_own_value> (source system.interface.name system.zone.name)"
+        end_port: "8"
+        id:  "9"
+        logtraffic: "enable"
+        protocol: "11"
+        snat: "enable"
+        snat_ip: "<your_own_value>"
+        srcaddr:
+         -
+            name: "default_name_15 (source firewall.address.name firewall.addrgrp.name)"
+        srcintf: "<your_own_value> (source system.interface.name system.zone.name)"
+        start_port: "17"
+        status: "enable"

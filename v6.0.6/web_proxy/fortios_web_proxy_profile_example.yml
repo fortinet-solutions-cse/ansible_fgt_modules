@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure web proxy profiles.
+    fortios_web_proxy_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      web_proxy_profile:
+        header_client_ip: "pass"
+        header_front_end_https: "pass"
+        header_via_request: "pass"
+        header_via_response: "pass"
+        header_x_authenticated_groups: "pass"
+        header_x_authenticated_user: "pass"
+        header_x_forwarded_for: "pass"
+        headers:
+         -
+            action: "add-to-request"
+            content: "<your_own_value>"
+            id:  "13"
+            name: "default_name_14"
+        log_header_change: "enable"
+        name: "default_name_16"
+        strip_encoding: "enable"

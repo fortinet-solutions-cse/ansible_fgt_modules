@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure endpoint control settings.
+    fortios_endpoint_control_settings:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      endpoint_control_settings:
+        download_custom_link: "<your_own_value>"
+        download_location: "fortiguard"
+        forticlient_avdb_update_interval: "5"
+        forticlient_dereg_unsupported_client: "enable"
+        forticlient_ems_rest_api_call_timeout: "7"
+        forticlient_keepalive_interval: "8"
+        forticlient_offline_grace: "enable"
+        forticlient_offline_grace_interval: "10"
+        forticlient_reg_key: "<your_own_value>"
+        forticlient_reg_key_enforce: "enable"
+        forticlient_reg_timeout: "13"
+        forticlient_sys_update_interval: "14"
+        forticlient_user_avatar: "enable"
+        forticlient_warning_interval: "16"

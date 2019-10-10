@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure forward-server addresses.
+    fortios_web_proxy_forward_server:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      web_proxy_forward_server:
+        addr_type: "ip"
+        comment: "Comment."
+        fqdn: "<your_own_value>"
+        healthcheck: "disable"
+        ip: "<your_own_value>"
+        monitor: "<your_own_value>"
+        name: "default_name_9"
+        port: "10"
+        server_down_option: "block"

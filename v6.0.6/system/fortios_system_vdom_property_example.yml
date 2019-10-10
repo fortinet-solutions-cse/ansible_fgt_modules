@@ -1,0 +1,38 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure VDOM property.
+    fortios_system_vdom_property:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_vdom_property:
+        custom_service: "<your_own_value>"
+        description: "<your_own_value>"
+        dialup_tunnel: "<your_own_value>"
+        firewall_address: "<your_own_value>"
+        firewall_addrgrp: "<your_own_value>"
+        firewall_policy: "<your_own_value>"
+        ipsec_phase1: "<your_own_value>"
+        ipsec_phase1_interface: "<your_own_value>"
+        ipsec_phase2: "<your_own_value>"
+        ipsec_phase2_interface: "<your_own_value>"
+        log_disk_quota: "<your_own_value>"
+        name: "default_name_14 (source system.vdom.name)"
+        onetime_schedule: "<your_own_value>"
+        proxy: "<your_own_value>"
+        recurring_schedule: "<your_own_value>"
+        service_group: "<your_own_value>"
+        session: "<your_own_value>"
+        snmp_index: "20"
+        sslvpn: "<your_own_value>"
+        user: "<your_own_value>"
+        user_group: "<your_own_value>"

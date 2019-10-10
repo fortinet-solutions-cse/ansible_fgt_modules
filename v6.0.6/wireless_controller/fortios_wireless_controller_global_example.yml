@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure wireless controller global settings.
+    fortios_wireless_controller_global:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wireless_controller_global:
+        ap_log_server: "enable"
+        ap_log_server_ip: "<your_own_value>"
+        ap_log_server_port: "5"
+        control_message_offload: "ebp-frame"
+        data_ethernet_II: "enable"
+        discovery_mc_addr: "<your_own_value>"
+        fiapp_eth_type: "9"
+        image_download: "enable"
+        ipsec_base_ip: "<your_own_value>"
+        link_aggregation: "enable"
+        location: "<your_own_value>"
+        max_clients: "14"
+        max_retransmit: "15"
+        mesh_eth_type: "16"
+        name: "default_name_17"
+        rogue_scan_mac_adjacency: "18"
+        wtp_share: "enable"

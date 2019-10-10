@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure how log messages are displayed on the GUI.
+    fortios_log_gui_display:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_gui_display:
+        fortiview_unscanned_apps: "enable"
+        resolve_apps: "enable"
+        resolve_hosts: "enable"

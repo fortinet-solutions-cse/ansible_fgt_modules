@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Concentrator configuration.
+    fortios_vpn_ipsec_concentrator:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      vpn_ipsec_concentrator:
+        member:
+         -
+            name: "default_name_4 (source vpn.ipsec.manualkey.name vpn.ipsec.phase1.name)"
+        name: "default_name_5"
+        src_check: "disable"

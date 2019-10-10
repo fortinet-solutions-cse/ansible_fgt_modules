@@ -1,0 +1,41 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure alarm.
+    fortios_system_alarm:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_alarm:
+        audible: "enable"
+        groups:
+         -
+            admin_auth_failure_threshold: "5"
+            admin_auth_lockout_threshold: "6"
+            decryption_failure_threshold: "7"
+            encryption_failure_threshold: "8"
+            fw_policy_id: "9"
+            fw_policy_id_threshold: "10"
+            fw_policy_violations:
+             -
+                dst_ip: "<your_own_value>"
+                dst_port: "13"
+                id:  "14"
+                src_ip: "<your_own_value>"
+                src_port: "16"
+                threshold: "17"
+            id:  "18"
+            log_full_warning_threshold: "19"
+            period: "20"
+            replay_attempt_threshold: "21"
+            self_test_failure_threshold: "22"
+            user_auth_failure_threshold: "23"
+            user_auth_lockout_threshold: "24"
+        status: "enable"

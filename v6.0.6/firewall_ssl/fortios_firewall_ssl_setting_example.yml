@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: SSL proxy settings.
+    fortios_firewall_ssl_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      firewall_ssl_setting:
+        abbreviate_handshake: "enable"
+        cert_cache_capacity: "4"
+        cert_cache_timeout: "5"
+        kxp_queue_threshold: "6"
+        no_matching_cipher_action: "bypass"
+        proxy_connect_timeout: "8"
+        session_cache_capacity: "9"
+        session_cache_timeout: "10"
+        ssl_dh_bits: "768"
+        ssl_queue_threshold: "12"
+        ssl_send_empty_frags: "enable"

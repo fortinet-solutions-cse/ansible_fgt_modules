@@ -1,0 +1,35 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure VLANs for switch controller.
+    fortios_switch_controller_vlan:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      switch_controller_vlan:
+        auth: "radius"
+        color: "4"
+        comments: "<your_own_value>"
+        name: "default_name_6"
+        portal_message_override_group: "<your_own_value>"
+        portal_message_overrides:
+            auth_disclaimer_page: "<your_own_value>"
+            auth_login_failed_page: "<your_own_value>"
+            auth_login_page: "<your_own_value>"
+            auth_reject_page: "<your_own_value>"
+        radius_server: "<your_own_value> (source user.radius.name)"
+        security: "open"
+        selected_usergroups:
+         -
+            name: "default_name_16 (source user.group.name)"
+        usergroup: "<your_own_value> (source user.group.name)"
+        vdom: "<your_own_value>"
+        vlanid: "19"

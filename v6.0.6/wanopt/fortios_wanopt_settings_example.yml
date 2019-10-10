@@ -1,0 +1,19 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure WAN optimization settings.
+    fortios_wanopt_settings:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wanopt_settings:
+        auto_detect_algorithm: "simple"
+        host_id: "myhostname"
+        tunnel_ssl_algorithm: "low"

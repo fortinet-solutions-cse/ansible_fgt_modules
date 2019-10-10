@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Autonomous System (AS) path lists.
+    fortios_router_aspath_list:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_aspath_list:
+        name: "default_name_3"
+        rule:
+         -
+            action: "deny"
+            id:  "6"
+            regexp: "<your_own_value>"

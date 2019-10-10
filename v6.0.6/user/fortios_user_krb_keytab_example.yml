@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Kerberos keytab entries.
+    fortios_user_krb_keytab:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_krb_keytab:
+        keytab: "<your_own_value>"
+        ldap_server: "<your_own_value> (source user.ldap.name)"
+        name: "default_name_5"
+        principal: "<your_own_value>"

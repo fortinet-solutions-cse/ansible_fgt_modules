@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure firewall application groups.
+    fortios_application_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      application_group:
+        application:
+         -
+            id:  "4"
+        category:
+         -
+            id:  "6"
+        comment: "Comment"
+        name: "default_name_8"
+        type: "application"

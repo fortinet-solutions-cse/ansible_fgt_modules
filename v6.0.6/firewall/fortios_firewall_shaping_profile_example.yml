@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure shaping profiles.
+    fortios_firewall_shaping_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_shaping_profile:
+        comment: "Comment."
+        default_class_id: "4"
+        profile_name: "<your_own_value>"
+        shaping_entries:
+         -
+            class_id: "7"
+            guaranteed_bandwidth_percentage: "8"
+            id:  "9"
+            maximum_bandwidth_percentage: "10"
+            priority: "high"

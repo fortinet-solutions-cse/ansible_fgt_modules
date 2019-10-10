@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Onetime schedule configuration.
+    fortios_firewall_schedule_onetime:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_schedule_onetime:
+        color: "3"
+        end: "<your_own_value>"
+        expiration_days: "5"
+        name: "default_name_6"
+        start: "<your_own_value>"

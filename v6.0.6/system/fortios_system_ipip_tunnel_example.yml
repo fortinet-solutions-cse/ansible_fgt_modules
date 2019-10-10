@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IP in IP Tunneling.
+    fortios_system_ipip_tunnel:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_ipip_tunnel:
+        interface: "<your_own_value> (source system.interface.name)"
+        local_gw: "<your_own_value>"
+        name: "default_name_5"
+        remote_gw: "<your_own_value>"

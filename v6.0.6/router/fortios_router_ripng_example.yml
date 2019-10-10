@@ -1,0 +1,71 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure RIPng.
+    fortios_router_ripng:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      router_ripng:
+        aggregate_address:
+         -
+            id:  "4"
+            prefix6: "<your_own_value>"
+        default_information_originate: "enable"
+        default_metric: "7"
+        distance:
+         -
+            access_list6: "<your_own_value> (source router.access-list6.name)"
+            distance: "10"
+            id:  "11"
+            prefix6: "<your_own_value>"
+        distribute_list:
+         -
+            direction: "in"
+            id:  "15"
+            interface: "<your_own_value> (source system.interface.name)"
+            listname: "<your_own_value> (source router.access-list6.name router.prefix-list6.name)"
+            status: "enable"
+        garbage_timer: "19"
+        interface:
+         -
+            flags: "21"
+            name: "default_name_22 (source system.interface.name)"
+            split_horizon: "poisoned"
+            split_horizon_status: "enable"
+        max_out_metric: "25"
+        neighbor:
+         -
+            id:  "27"
+            interface: "<your_own_value> (source system.interface.name)"
+            ip6: "<your_own_value>"
+        network:
+         -
+            id:  "31"
+            prefix: "<your_own_value>"
+        offset_list:
+         -
+            access_list6: "<your_own_value> (source router.access-list6.name)"
+            direction: "in"
+            id:  "36"
+            interface: "<your_own_value> (source system.interface.name)"
+            offset: "38"
+            status: "enable"
+        passive_interface:
+         -
+            name: "default_name_41 (source system.interface.name)"
+        redistribute:
+         -
+            metric: "43"
+            name: "default_name_44"
+            routemap: "<your_own_value> (source router.route-map.name)"
+            status: "enable"
+        timeout_timer: "47"
+        update_timer: "48"

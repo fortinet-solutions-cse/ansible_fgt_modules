@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure VXLAN devices.
+    fortios_system_vxlan:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_vxlan:
+        dstport: "3"
+        interface: "<your_own_value> (source system.interface.name)"
+        ip_version: "ipv4-unicast"
+        multicast_ttl: "6"
+        name: "default_name_7"
+        remote_ip:
+         -
+            ip: "<your_own_value>"
+        remote_ip6:
+         -
+            ip6: "<your_own_value>"
+        vni: "12"

@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure resource limits.
+    fortios_system_resource_limits:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_resource_limits:
+        custom_service: "3"
+        dialup_tunnel: "4"
+        firewall_address: "5"
+        firewall_addrgrp: "6"
+        firewall_policy: "7"
+        ipsec_phase1: "8"
+        ipsec_phase1_interface: "9"
+        ipsec_phase2: "10"
+        ipsec_phase2_interface: "11"
+        log_disk_quota: "12"
+        onetime_schedule: "13"
+        proxy: "14"
+        recurring_schedule: "15"
+        service_group: "16"
+        session: "17"
+        sslvpn: "18"
+        user: "19"
+        user_group: "20"

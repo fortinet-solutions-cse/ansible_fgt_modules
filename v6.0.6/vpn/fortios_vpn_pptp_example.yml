@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure PPTP.
+    fortios_vpn_pptp:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      vpn_pptp:
+        eip: "<your_own_value>"
+        ip_mode: "range"
+        local_ip: "<your_own_value>"
+        sip: "<your_own_value>"
+        status: "enable"
+        usrgrp: "<your_own_value> (source user.group.name)"

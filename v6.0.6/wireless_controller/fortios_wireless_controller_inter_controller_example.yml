@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure inter wireless controller operation.
+    fortios_wireless_controller_inter_controller:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wireless_controller_inter_controller:
+        fast_failover_max: "3"
+        fast_failover_wait: "4"
+        inter_controller_key: "<your_own_value>"
+        inter_controller_mode: "disable"
+        inter_controller_peer:
+         -
+            id:  "8"
+            peer_ip: "<your_own_value>"
+            peer_port: "10"
+            peer_priority: "primary"
+        inter_controller_pri: "primary"

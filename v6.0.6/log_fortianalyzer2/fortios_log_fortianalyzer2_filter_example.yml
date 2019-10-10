@@ -1,0 +1,31 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Filters for FortiAnalyzer.
+    fortios_log_fortianalyzer2_filter:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_fortianalyzer2_filter:
+        anomaly: "enable"
+        dlp_archive: "enable"
+        dns: "enable"
+        filter: "<your_own_value>"
+        filter_type: "include"
+        forward_traffic: "enable"
+        gtp: "enable"
+        local_traffic: "enable"
+        multicast_traffic: "enable"
+        netscan_discovery: "<your_own_value>"
+        netscan_vulnerability: "<your_own_value>"
+        severity: "emergency"
+        sniffer_traffic: "enable"
+        ssh: "enable"
+        voip: "enable"

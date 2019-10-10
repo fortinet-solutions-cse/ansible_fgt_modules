@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: SSH filter profile.
+    fortios_ssh_filter_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      ssh_filter_profile:
+        block: "x11"
+        default_command_log: "enable"
+        log: "x11"
+        name: "default_name_6"
+        shell_commands:
+         -
+            action: "block"
+            alert: "enable"
+            id:  "10"
+            log: "enable"
+            pattern: "<your_own_value>"
+            severity: "low"
+            type: "simple"

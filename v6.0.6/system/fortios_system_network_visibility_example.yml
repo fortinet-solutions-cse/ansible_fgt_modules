@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure network visibility settings.
+    fortios_system_network_visibility:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_network_visibility:
+        destination_hostname_visibility: "disable"
+        destination_location: "disable"
+        destination_visibility: "disable"
+        hostname_limit: "6"
+        hostname_ttl: "7"
+        source_location: "disable"

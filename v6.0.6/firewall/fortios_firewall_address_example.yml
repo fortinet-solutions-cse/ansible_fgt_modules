@@ -1,0 +1,52 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv4 addresses.
+    fortios_firewall_address:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_address:
+        allow_routing: "enable"
+        associated_interface: "<your_own_value> (source system.interface.name system.zone.name)"
+        cache_ttl: "5"
+        color: "6"
+        comment: "Comment."
+        country: "<your_own_value>"
+        end_ip: "<your_own_value>"
+        epg_name: "<your_own_value>"
+        filter: "<your_own_value>"
+        fqdn: "<your_own_value>"
+        list:
+         -
+            ip: "<your_own_value>"
+        name: "default_name_15"
+        obj_id: "<your_own_value>"
+        organization: "<your_own_value>"
+        policy_group: "<your_own_value>"
+        sdn: "aci"
+        sdn_tag: "<your_own_value>"
+        start_ip: "<your_own_value>"
+        subnet: "<your_own_value>"
+        subnet_name: "<your_own_value>"
+        tagging:
+         -
+            category: "<your_own_value> (source system.object-tagging.category)"
+            name: "default_name_26"
+            tags:
+             -
+                name: "default_name_28 (source system.object-tagging.tags.name)"
+        tenant: "<your_own_value>"
+        type: "ipmask"
+        uuid: "<your_own_value>"
+        visibility: "enable"
+        wildcard: "<your_own_value>"
+        wildcard_fqdn: "<your_own_value>"

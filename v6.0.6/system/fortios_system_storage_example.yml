@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure logical storage.
+    fortios_system_storage:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_storage:
+        device: "<your_own_value>"
+        media_status: "enable"
+        name: "default_name_5"
+        order: "6"
+        partition: "<your_own_value>"
+        size: "8"
+        status: "enable"
+        usage: "log"
+        wanopt_mode: "mix"

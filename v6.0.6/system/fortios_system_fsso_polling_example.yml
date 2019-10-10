@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Fortinet Single Sign On (FSSO) server.
+    fortios_system_fsso_polling:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_fsso_polling:
+        auth_password: "<your_own_value>"
+        authentication: "enable"
+        listening_port: "5"
+        status: "enable"

@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure FortiSwitch global settings.
+    fortios_switch_controller_global:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      switch_controller_global:
+        allow_multiple_interfaces: "enable"
+        default_virtual_switch_vlan: "<your_own_value> (source system.interface.name)"
+        disable_discovery:
+         -
+            name: "default_name_6"
+        https_image_push: "enable"
+        log_mac_limit_violations: "enable"
+        mac_aging_interval: "9"
+        mac_retention_period: "10"
+        mac_violation_timer: "11"

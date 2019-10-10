@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure URL filter lists.
+    fortios_webfilter_urlfilter:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      webfilter_urlfilter:
+        comment: "Optional comments."
+        entries:
+         -
+            action: "exempt"
+            dns_address_family: "ipv4"
+            exempt: "av"
+            id:  "8"
+            referrer_host: "myhostname"
+            status: "enable"
+            type: "simple"
+            url: "myurl.com"
+            web_proxy_profile: "<your_own_value> (source web-proxy.profile.name)"
+        id:  "14"
+        ip_addr_block: "enable"
+        name: "default_name_16"
+        one_arm_ips_urlfilter: "enable"

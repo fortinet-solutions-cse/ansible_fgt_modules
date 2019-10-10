@@ -1,0 +1,22 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: POP3 server entry configuration.
+    fortios_user_pop3:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_pop3:
+        name: "default_name_3"
+        port: "4"
+        secure: "none"
+        server: "192.168.100.40"
+        ssl_min_proto_version: "default"

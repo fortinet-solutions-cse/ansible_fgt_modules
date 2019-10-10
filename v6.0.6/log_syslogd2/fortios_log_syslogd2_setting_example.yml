@@ -1,0 +1,31 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Global settings for remote syslog server.
+    fortios_log_syslogd2_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      log_syslogd2_setting:
+        certificate: "<your_own_value> (source certificate.local.name)"
+        custom_field_name:
+         -
+            custom: "<your_own_value>"
+            id:  "6"
+            name: "default_name_7"
+        enc_algorithm: "high-medium"
+        facility: "kernel"
+        format: "default"
+        mode: "udp"
+        port: "12"
+        server: "192.168.100.40"
+        source_ip: "84.230.14.43"
+        ssl_min_proto_version: "default"
+        status: "enable"

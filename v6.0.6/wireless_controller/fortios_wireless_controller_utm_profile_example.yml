@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure UTM (Unified Threat Management) profile.
+    fortios_wireless_controller_utm_profile:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_utm_profile:
+        antivirus_profile: "<your_own_value> (source antivirus.profile.name)"
+        application_list: "<your_own_value> (source application.list.name)"
+        comment: "Comment."
+        ips_sensor: "<your_own_value> (source ips.sensor.name)"
+        name: "default_name_7"
+        scan_botnet_connections: "disable"
+        utm_log: "enable"
+        webfilter_profile: "<your_own_value> (source webfilter.profile.name)"

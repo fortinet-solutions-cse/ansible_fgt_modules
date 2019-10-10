@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure file patterns used by DLP blocking.
+    fortios_dlp_filepattern:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      dlp_filepattern:
+        comment: "Optional comments."
+        entries:
+         -
+            file_type: "7z"
+            filter_type: "pattern"
+            pattern: "<your_own_value>"
+        id:  "8"
+        name: "default_name_9"

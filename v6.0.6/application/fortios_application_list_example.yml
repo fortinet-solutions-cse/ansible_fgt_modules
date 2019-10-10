@@ -1,0 +1,67 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure application control lists.
+    fortios_application_list:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      application_list:
+        app_replacemsg: "disable"
+        comment: "comments"
+        deep_app_inspection: "disable"
+        entries:
+         -
+            action: "pass"
+            application:
+             -
+                id:  "9"
+            behavior: "<your_own_value>"
+            category:
+             -
+                id:  "12"
+            id:  "13"
+            log: "disable"
+            log_packet: "disable"
+            parameters:
+             -
+                id:  "17"
+                value: "<your_own_value>"
+            per_ip_shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
+            popularity: "1"
+            protocols: "<your_own_value>"
+            quarantine: "none"
+            quarantine_expiry: "<your_own_value>"
+            quarantine_log: "disable"
+            rate_count: "25"
+            rate_duration: "26"
+            rate_mode: "periodical"
+            rate_track: "none"
+            risk:
+             -
+                level: "30"
+            session_ttl: "31"
+            shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+            shaper_reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+            sub_category:
+             -
+                id:  "35"
+            technology: "<your_own_value>"
+            vendor: "<your_own_value>"
+        extended_log: "enable"
+        name: "default_name_39"
+        options: "allow-dns"
+        other_application_action: "pass"
+        other_application_log: "disable"
+        p2p_black_list: "skype"
+        replacemsg_group: "<your_own_value> (source system.replacemsg-group.name)"
+        unknown_application_action: "pass"
+        unknown_application_log: "disable"

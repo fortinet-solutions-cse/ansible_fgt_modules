@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: VDOM wireless controller configuration.
+    fortios_wireless_controller_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      wireless_controller_setting:
+        account_id: "<your_own_value>"
+        country: "NA"
+        duplicate_ssid: "enable"
+        fapc_compatibility: "enable"

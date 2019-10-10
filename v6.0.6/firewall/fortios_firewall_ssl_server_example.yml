@@ -1,0 +1,31 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure SSL servers.
+    fortios_firewall_ssl_server:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_ssl_server:
+        add_header_x_forwarded_proto: "enable"
+        ip: "<your_own_value>"
+        mapped_port: "5"
+        name: "default_name_6"
+        port: "7"
+        ssl_algorithm: "high"
+        ssl_cert: "<your_own_value> (source vpn.certificate.local.name)"
+        ssl_client_renegotiation: "allow"
+        ssl_dh_bits: "768"
+        ssl_max_version: "tls-1.0"
+        ssl_min_version: "tls-1.0"
+        ssl_mode: "half"
+        ssl_send_empty_frags: "enable"
+        url_rewrite: "enable"

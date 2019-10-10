@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Automation stitches.
+    fortios_system_automation_stitch:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_automation_stitch:
+        action:
+         -
+            name: "default_name_4 (source system.automation-action.name)"
+        destination:
+         -
+            name: "default_name_6 (source system.automation-destination.name)"
+        name: "default_name_7"
+        status: "enable"
+        trigger: "<your_own_value> (source system.automation-trigger.name)"

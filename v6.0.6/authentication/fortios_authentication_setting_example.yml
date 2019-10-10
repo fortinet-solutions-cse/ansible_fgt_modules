@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure authentication setting.
+    fortios_authentication_setting:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      authentication_setting:
+        active_auth_scheme: "<your_own_value> (source authentication.scheme.name)"
+        captive_portal: "<your_own_value> (source firewall.address.name)"
+        captive_portal_ip: "<your_own_value>"
+        captive_portal_ip6: "<your_own_value>"
+        captive_portal_port: "7"
+        captive_portal_type: "fqdn"
+        captive_portal6: "<your_own_value> (source firewall.address6.name)"
+        sso_auth_scheme: "<your_own_value> (source authentication.scheme.name)"

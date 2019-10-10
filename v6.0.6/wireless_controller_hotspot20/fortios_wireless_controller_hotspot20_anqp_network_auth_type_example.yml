@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure network authentication type.
+    fortios_wireless_controller_hotspot20_anqp_network_auth_type:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_hotspot20_anqp_network_auth_type:
+        auth_type: "acceptance-of-terms"
+        name: "default_name_4"
+        url: "myurl.com"

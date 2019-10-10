@@ -1,0 +1,178 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv4 policies.
+    fortios_firewall_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_policy:
+        action: "accept"
+        app_category:
+         -
+            id:  "5"
+        app_group:
+         -
+            name: "default_name_7 (source application.group.name)"
+        application:
+         -
+            id:  "9"
+        application_list: "<your_own_value> (source application.list.name)"
+        auth_cert: "<your_own_value> (source vpn.certificate.local.name)"
+        auth_path: "enable"
+        auth_redirect_addr: "<your_own_value>"
+        av_profile: "<your_own_value> (source antivirus.profile.name)"
+        block_notification: "enable"
+        captive_portal_exempt: "enable"
+        capture_packet: "enable"
+        comments: "<your_own_value>"
+        custom_log_fields:
+         -
+            field_id: "<your_own_value> (source log.custom-field.id)"
+        delay_tcp_npu_session: "enable"
+        devices:
+         -
+            name: "default_name_23 (source user.device.alias user.device-group.name user.device-category.name)"
+        diffserv_forward: "enable"
+        diffserv_reverse: "enable"
+        diffservcode_forward: "<your_own_value>"
+        diffservcode_rev: "<your_own_value>"
+        disclaimer: "enable"
+        dlp_sensor: "<your_own_value> (source dlp.sensor.name)"
+        dnsfilter_profile: "<your_own_value> (source dnsfilter.profile.name)"
+        dscp_match: "enable"
+        dscp_negate: "enable"
+        dscp_value: "<your_own_value>"
+        dsri: "enable"
+        dstaddr:
+         -
+            name: "default_name_36 (source firewall.address.name firewall.addrgrp.name firewall.vip.name firewall.vipgrp.name)"
+        dstaddr_negate: "enable"
+        dstintf:
+         -
+            name: "default_name_39 (source system.interface.name system.zone.name)"
+        firewall_session_dirty: "check-all"
+        fixedport: "enable"
+        fsso: "enable"
+        fsso_agent_for_ntlm: "<your_own_value> (source user.fsso.name)"
+        global_label: "<your_own_value>"
+        groups:
+         -
+            name: "default_name_46 (source user.group.name)"
+        icap_profile: "<your_own_value> (source icap.profile.name)"
+        identity_based_route: "<your_own_value> (source firewall.identity-based-route.name)"
+        inbound: "enable"
+        internet_service: "enable"
+        internet_service_custom:
+         -
+            name: "default_name_52 (source firewall.internet-service-custom.name)"
+        internet_service_id:
+         -
+            id:  "54 (source firewall.internet-service.id)"
+        internet_service_negate: "enable"
+        internet_service_src: "enable"
+        internet_service_src_custom:
+         -
+            name: "default_name_58 (source firewall.internet-service-custom.name)"
+        internet_service_src_id:
+         -
+            id:  "60 (source firewall.internet-service.id)"
+        internet_service_src_negate: "enable"
+        ippool: "enable"
+        ips_sensor: "<your_own_value> (source ips.sensor.name)"
+        label: "<your_own_value>"
+        learning_mode: "enable"
+        logtraffic: "all"
+        logtraffic_start: "enable"
+        match_vip: "enable"
+        name: "default_name_69"
+        nat: "enable"
+        natinbound: "enable"
+        natip: "<your_own_value>"
+        natoutbound: "enable"
+        ntlm: "enable"
+        ntlm_enabled_browsers:
+         -
+            user_agent_string: "<your_own_value>"
+        ntlm_guest: "enable"
+        outbound: "enable"
+        per_ip_shaper: "<your_own_value> (source firewall.shaper.per-ip-shaper.name)"
+        permit_any_host: "enable"
+        permit_stun_host: "enable"
+        policyid: "82"
+        poolname:
+         -
+            name: "default_name_84 (source firewall.ippool.name)"
+        profile_group: "<your_own_value> (source firewall.profile-group.name)"
+        profile_protocol_options: "<your_own_value> (source firewall.profile-protocol-options.name)"
+        profile_type: "single"
+        radius_mac_auth_bypass: "enable"
+        redirect_url: "<your_own_value>"
+        replacemsg_override_group: "<your_own_value> (source system.replacemsg-group.name)"
+        rsso: "enable"
+        rtp_addr:
+         -
+            name: "default_name_93 (source firewall.address.name firewall.addrgrp.name)"
+        rtp_nat: "disable"
+        scan_botnet_connections: "disable"
+        schedule: "<your_own_value> (source firewall.schedule.onetime.name firewall.schedule.recurring.name firewall.schedule.group.name)"
+        schedule_timeout: "enable"
+        send_deny_packet: "disable"
+        service:
+         -
+            name: "default_name_100 (source firewall.service.custom.name firewall.service.group.name)"
+        service_negate: "enable"
+        session_ttl: "102"
+        spamfilter_profile: "<your_own_value> (source spamfilter.profile.name)"
+        srcaddr:
+         -
+            name: "default_name_105 (source firewall.address.name firewall.addrgrp.name)"
+        srcaddr_negate: "enable"
+        srcintf:
+         -
+            name: "default_name_108 (source system.interface.name system.zone.name)"
+        ssh_filter_profile: "<your_own_value> (source ssh-filter.profile.name)"
+        ssl_mirror: "enable"
+        ssl_mirror_intf:
+         -
+            name: "default_name_112 (source system.interface.name system.zone.name)"
+        ssl_ssh_profile: "<your_own_value> (source firewall.ssl-ssh-profile.name)"
+        status: "enable"
+        tcp_mss_receiver: "115"
+        tcp_mss_sender: "116"
+        tcp_session_without_syn: "all"
+        timeout_send_rst: "enable"
+        traffic_shaper: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+        traffic_shaper_reverse: "<your_own_value> (source firewall.shaper.traffic-shaper.name)"
+        url_category:
+         -
+            id:  "122"
+        users:
+         -
+            name: "default_name_124 (source user.local.name)"
+        utm_status: "enable"
+        uuid: "<your_own_value>"
+        vlan_cos_fwd: "127"
+        vlan_cos_rev: "128"
+        vlan_filter: "<your_own_value>"
+        voip_profile: "<your_own_value> (source voip.profile.name)"
+        vpntunnel: "<your_own_value> (source vpn.ipsec.phase1.name vpn.ipsec.manualkey.name)"
+        waf_profile: "<your_own_value> (source waf.profile.name)"
+        wanopt: "enable"
+        wanopt_detection: "active"
+        wanopt_passive_opt: "default"
+        wanopt_peer: "<your_own_value> (source wanopt.peer.peer-host-id)"
+        wanopt_profile: "<your_own_value> (source wanopt.profile.name)"
+        wccp: "enable"
+        webcache: "enable"
+        webcache_https: "disable"
+        webfilter_profile: "<your_own_value> (source webfilter.profile.name)"
+        wsso: "enable"

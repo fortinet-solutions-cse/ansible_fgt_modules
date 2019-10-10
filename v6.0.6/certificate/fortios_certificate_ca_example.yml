@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: CA certificate.
+    fortios_certificate_ca:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      certificate_ca:
+        auto_update_days: "3"
+        auto_update_days_warning: "4"
+        ca: "<your_own_value>"
+        last_updated: "6"
+        name: "default_name_7"
+        range: "global"
+        scep_url: "<your_own_value>"
+        source: "factory"
+        source_ip: "84.230.14.43"
+        trusted: "enable"

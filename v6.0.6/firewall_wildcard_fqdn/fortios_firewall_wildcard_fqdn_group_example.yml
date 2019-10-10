@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Config global Wildcard FQDN address groups.
+    fortios_firewall_wildcard_fqdn_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_wildcard_fqdn_group:
+        color: "3"
+        comment: "Comment."
+        member:
+         -
+            name: "default_name_6 (source firewall.wildcard-fqdn.custom.name)"
+        name: "default_name_7"
+        uuid: "<your_own_value>"
+        visibility: "enable"

@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure AntiSpam IP trust.
+    fortios_spamfilter_iptrust:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      spamfilter_iptrust:
+        comment: "Optional comments."
+        entries:
+         -
+            addr_type: "ipv4"
+            id:  "6"
+            ip4_subnet: "<your_own_value>"
+            ip6_subnet: "<your_own_value>"
+            status: "enable"
+        id:  "10"
+        name: "default_name_11"

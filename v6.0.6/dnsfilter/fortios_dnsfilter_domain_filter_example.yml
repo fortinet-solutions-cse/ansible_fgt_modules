@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure DNS domain filters.
+    fortios_dnsfilter_domain_filter:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      dnsfilter_domain_filter:
+        comment: "Optional comments."
+        entries:
+         -
+            action: "block"
+            domain: "<your_own_value>"
+            id:  "7"
+            status: "enable"
+            type: "simple"
+        id:  "10"
+        name: "default_name_11"

@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IP address type availability.
+    fortios_wireless_controller_hotspot20_anqp_ip_address_type:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_hotspot20_anqp_ip_address_type:
+        ipv4_address_type: "not-available"
+        ipv6_address_type: "not-available"
+        name: "default_name_5"

@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure access point status (rogue | accepted | suppressed).
+    fortios_wireless_controller_ap_status:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_ap_status:
+        bssid: "<your_own_value>"
+        id:  "4"
+        ssid: "<your_own_value>"
+        status: "rogue"

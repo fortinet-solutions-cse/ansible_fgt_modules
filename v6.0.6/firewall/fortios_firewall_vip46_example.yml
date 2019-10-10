@@ -1,0 +1,50 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv4 to IPv6 virtual IPs.
+    fortios_firewall_vip46:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_vip46:
+        arp_reply: "disable"
+        color: "4"
+        comment: "Comment."
+        extip: "<your_own_value>"
+        extport: "<your_own_value>"
+        id:  "8"
+        ldb_method: "static"
+        mappedip: "<your_own_value>"
+        mappedport: "<your_own_value>"
+        monitor:
+         -
+            name: "default_name_13 (source firewall.ldb-monitor.name)"
+        name: "default_name_14"
+        portforward: "disable"
+        protocol: "tcp"
+        realservers:
+         -
+            client_ip: "<your_own_value>"
+            healthcheck: "disable"
+            holddown_interval: "20"
+            id:  "21"
+            ip: "<your_own_value>"
+            max_connections: "23"
+            monitor: "<your_own_value> (source firewall.ldb-monitor.name)"
+            port: "25"
+            status: "active"
+            weight: "27"
+        server_type: "http"
+        src_filter:
+         -
+            range: "<your_own_value>"
+        type: "static-nat"
+        uuid: "<your_own_value>"

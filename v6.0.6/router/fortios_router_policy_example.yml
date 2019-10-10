@@ -1,0 +1,47 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv4 routing policies.
+    fortios_router_policy:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_policy:
+        action: "deny"
+        comments: "<your_own_value>"
+        dst:
+         -
+            subnet: "<your_own_value>"
+        dst_negate: "enable"
+        dstaddr:
+         -
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name)"
+        end_port: "10"
+        end_source_port: "11"
+        gateway: "<your_own_value>"
+        input_device:
+         -
+            name: "default_name_14 (source system.interface.name)"
+        output_device: "<your_own_value> (source system.interface.name)"
+        protocol: "16"
+        seq_num: "17"
+        src:
+         -
+            subnet: "<your_own_value>"
+        src_negate: "enable"
+        srcaddr:
+         -
+            name: "default_name_22 (source firewall.address.name firewall.addrgrp.name)"
+        start_port: "23"
+        start_source_port: "24"
+        status: "enable"
+        tos: "<your_own_value>"
+        tos_mask: "<your_own_value>"

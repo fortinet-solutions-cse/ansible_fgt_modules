@@ -1,0 +1,26 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure WAN metrics.
+    fortios_wireless_controller_hotspot20_h2qp_wan_metric:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_hotspot20_h2qp_wan_metric:
+        downlink_load: "3"
+        downlink_speed: "4"
+        link_at_capacity: "enable"
+        link_status: "up"
+        load_measurement_duration: "7"
+        name: "default_name_8"
+        symmetric_wan_link: "symmetric"
+        uplink_load: "10"
+        uplink_speed: "11"

@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Authentication Schemes.
+    fortios_authentication_scheme:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      authentication_scheme:
+        domain_controller: "<your_own_value> (source user.domain-controller.name)"
+        fsso_agent_for_ntlm: "<your_own_value> (source user.fsso.name)"
+        fsso_guest: "enable"
+        kerberos_keytab: "<your_own_value> (source user.krb-keytab.name)"
+        method: "ntlm"
+        name: "default_name_8"
+        negotiate_ntlm: "enable"
+        require_tfa: "enable"
+        ssh_ca: "<your_own_value> (source firewall.ssh.local-ca.name)"
+        user_database:
+         -
+            name: "default_name_13 (source system.datasource.name user.radius.name user.tacacs+.name user.ldap.name user.group.name)"

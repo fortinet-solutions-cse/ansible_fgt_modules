@@ -1,0 +1,87 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure DHCP servers.
+    fortios_system_dhcp_server:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_dhcp_server:
+        auto_configuration: "disable"
+        conflicted_ip_timeout: "4"
+        ddns_auth: "disable"
+        ddns_key: "<your_own_value>"
+        ddns_keyname: "<your_own_value>"
+        ddns_server_ip: "<your_own_value>"
+        ddns_ttl: "9"
+        ddns_update: "disable"
+        ddns_update_override: "disable"
+        ddns_zone: "<your_own_value>"
+        default_gateway: "<your_own_value>"
+        dns_server1: "<your_own_value>"
+        dns_server2: "<your_own_value>"
+        dns_server3: "<your_own_value>"
+        dns_service: "local"
+        domain: "<your_own_value>"
+        exclude_range:
+         -
+            end_ip: "<your_own_value>"
+            id:  "21"
+            start_ip: "<your_own_value>"
+        filename: "<your_own_value>"
+        forticlient_on_net_status: "disable"
+        id:  "25"
+        interface: "<your_own_value> (source system.interface.name)"
+        ip_mode: "range"
+        ip_range:
+         -
+            end_ip: "<your_own_value>"
+            id:  "30"
+            start_ip: "<your_own_value>"
+        ipsec_lease_hold: "32"
+        lease_time: "33"
+        mac_acl_default_action: "assign"
+        netmask: "<your_own_value>"
+        next_server: "<your_own_value>"
+        ntp_server1: "<your_own_value>"
+        ntp_server2: "<your_own_value>"
+        ntp_server3: "<your_own_value>"
+        ntp_service: "local"
+        options:
+         -
+            code: "42"
+            id:  "43"
+            ip: "<your_own_value>"
+            type: "hex"
+            value: "<your_own_value>"
+        reserved_address:
+         -
+            action: "assign"
+            description: "<your_own_value>"
+            id:  "50"
+            ip: "<your_own_value>"
+            mac: "<your_own_value>"
+        server_type: "regular"
+        status: "disable"
+        tftp_server:
+         -
+            tftp_server: "<your_own_value>"
+        timezone: "01"
+        timezone_option: "disable"
+        vci_match: "disable"
+        vci_string:
+         -
+            vci_string: "<your_own_value>"
+        wifi_ac1: "<your_own_value>"
+        wifi_ac2: "<your_own_value>"
+        wifi_ac3: "<your_own_value>"
+        wins_server1: "<your_own_value>"
+        wins_server2: "<your_own_value>"

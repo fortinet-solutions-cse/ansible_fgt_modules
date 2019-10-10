@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure packet redistribution.
+    fortios_system_affinity_packet_redistribution:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_affinity_packet_redistribution:
+        affinity_cpumask: "<your_own_value>"
+        id:  "4"
+        interface: "<your_own_value> (source system.interface.name)"
+        rxqid: "6"

@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure identity based routing.
+    fortios_firewall_identity_based_route:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_identity_based_route:
+        comments: "<your_own_value>"
+        name: "default_name_4"
+        rule:
+         -
+            device: "<your_own_value> (source system.interface.name)"
+            gateway: "<your_own_value>"
+            groups:
+             -
+                name: "default_name_9 (source user.group.name)"
+            id:  "10"

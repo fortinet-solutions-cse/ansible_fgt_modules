@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure peer users.
+    fortios_user_peer:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_peer:
+        ca: "<your_own_value> (source vpn.certificate.ca.name)"
+        cn: "<your_own_value>"
+        cn_type: "string"
+        ldap_mode: "password"
+        ldap_password: "<your_own_value>"
+        ldap_server: "<your_own_value> (source user.ldap.name)"
+        ldap_username: "<your_own_value>"
+        mandatory_ca_verify: "enable"
+        name: "default_name_11"
+        ocsp_override_server: "<your_own_value> (source vpn.certificate.ocsp-server.name)"
+        passwd: "<your_own_value>"
+        subject: "<your_own_value>"
+        two_factor: "enable"

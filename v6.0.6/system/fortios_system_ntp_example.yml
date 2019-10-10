@@ -1,0 +1,33 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure system NTP information.
+    fortios_system_ntp:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_ntp:
+        interface:
+         -
+            interface_name: "<your_own_value> (source system.interface.name)"
+        ntpserver:
+         -
+            authentication: "enable"
+            id:  "7"
+            key: "<your_own_value>"
+            key_id: "9"
+            ntpv3: "enable"
+            server: "192.168.100.40"
+        ntpsync: "enable"
+        server_mode: "enable"
+        source_ip: "84.230.14.43"
+        source_ip6: "<your_own_value>"
+        syncinterval: "16"
+        type: "fortiguard"

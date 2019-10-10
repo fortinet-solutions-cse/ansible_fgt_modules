@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Automation destinations.
+    fortios_system_automation_destination:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_automation_destination:
+        destination:
+         -
+            name: "default_name_4"
+        ha_group_id: "5"
+        name: "default_name_6"
+        type: "fortigate"

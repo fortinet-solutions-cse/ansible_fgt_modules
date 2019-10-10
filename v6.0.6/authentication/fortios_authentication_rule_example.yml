@@ -1,0 +1,32 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Authentication Rules.
+    fortios_authentication_rule:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      authentication_rule:
+        active_auth_method: "<your_own_value> (source authentication.scheme.name)"
+        comments: "<your_own_value>"
+        ip_based: "enable"
+        name: "default_name_6"
+        protocol: "http"
+        srcaddr:
+         -
+            name: "default_name_9 (source firewall.address.name firewall.addrgrp.name firewall.proxy-address.name firewall.proxy-addrgrp.name)"
+        srcaddr6:
+         -
+            name: "default_name_11 (source firewall.address6.name firewall.addrgrp6.name)"
+        sso_auth_method: "<your_own_value> (source authentication.scheme.name)"
+        status: "enable"
+        transaction_based: "enable"
+        web_auth_cookie: "enable"

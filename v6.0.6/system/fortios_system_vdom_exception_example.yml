@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Global configuration objects that can be configured independently for all VDOMs or for the defined VDOM scope.
+    fortios_system_vdom_exception:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_vdom_exception:
+        id:  "3"
+        object: "log.fortianalyzer.setting"
+        oid: "5"
+        scope: "all"
+        vdom:
+         -
+            name: "default_name_8 (source system.vdom.name)"

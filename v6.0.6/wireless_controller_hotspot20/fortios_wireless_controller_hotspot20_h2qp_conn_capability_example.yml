@@ -1,0 +1,29 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure connection capability.
+    fortios_wireless_controller_hotspot20_h2qp_conn_capability:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      wireless_controller_hotspot20_h2qp_conn_capability:
+        esp_port: "closed"
+        ftp_port: "closed"
+        http_port: "closed"
+        icmp_port: "closed"
+        ikev2_port: "closed"
+        ikev2_xx_port: "closed"
+        name: "default_name_9"
+        pptp_vpn_port: "closed"
+        ssh_port: "closed"
+        tls_port: "closed"
+        voip_tcp_port: "closed"
+        voip_udp_port: "closed"

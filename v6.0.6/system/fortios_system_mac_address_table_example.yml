@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure MAC address tables.
+    fortios_system_mac_address_table:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_mac_address_table:
+        interface: "<your_own_value> (source system.interface.name)"
+        mac: "<your_own_value>"
+        reply_substitute: "<your_own_value>"

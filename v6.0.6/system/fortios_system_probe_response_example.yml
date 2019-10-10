@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure system probe response.
+    fortios_system_probe_response:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_probe_response:
+        http_probe_value: "<your_own_value>"
+        mode: "none"
+        password: "<your_own_value>"
+        port: "6"
+        security_mode: "none"
+        timeout: "8"
+        ttl_mode: "reinit"

@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv6 neighbor cache table.
+    fortios_system_ipv6_neighbor_cache:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_ipv6_neighbor_cache:
+        id:  "3"
+        interface: "<your_own_value> (source system.interface.name)"
+        ipv6: "<your_own_value>"
+        mac: "<your_own_value>"

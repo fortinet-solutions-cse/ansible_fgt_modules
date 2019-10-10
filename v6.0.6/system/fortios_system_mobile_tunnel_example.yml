@@ -1,0 +1,36 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure Mobile tunnels, an implementation of Network Mobility (NEMO) extensions for Mobile IPv4 RFC5177.
+    fortios_system_mobile_tunnel:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_mobile_tunnel:
+        hash_algorithm: "hmac-md5"
+        home_address: "<your_own_value>"
+        home_agent: "<your_own_value>"
+        lifetime: "6"
+        n_mhae_key: "<your_own_value>"
+        n_mhae_key_type: "ascii"
+        n_mhae_spi: "9"
+        name: "default_name_10"
+        network:
+         -
+            id:  "12"
+            interface: "<your_own_value> (source system.interface.name)"
+            prefix: "<your_own_value>"
+        reg_interval: "15"
+        reg_retry: "16"
+        renew_interval: "17"
+        roaming_interface: "<your_own_value> (source system.interface.name)"
+        status: "disable"
+        tunnel_mode: "gre"

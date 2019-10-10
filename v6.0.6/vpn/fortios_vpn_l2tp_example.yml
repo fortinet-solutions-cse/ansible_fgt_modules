@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure L2TP.
+    fortios_vpn_l2tp:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      vpn_l2tp:
+        eip: "<your_own_value>"
+        enforce_ipsec: "enable"
+        sip: "<your_own_value>"
+        status: "enable"
+        usrgrp: "<your_own_value> (source user.group.name)"

@@ -1,0 +1,23 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure endpoint control client lists.
+    fortios_endpoint_control_client:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      endpoint_control_client:
+        ad_groups: "<your_own_value>"
+        ftcl_uid: "<your_own_value>"
+        id:  "5"
+        info: "<your_own_value>"
+        src_ip: "<your_own_value>"
+        src_mac: "<your_own_value>"

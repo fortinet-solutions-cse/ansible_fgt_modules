@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure interrupt affinity.
+    fortios_system_affinity_interrupt:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      system_affinity_interrupt:
+        affinity_cpumask: "<your_own_value>"
+        id:  "4"
+        interrupt: "<your_own_value>"

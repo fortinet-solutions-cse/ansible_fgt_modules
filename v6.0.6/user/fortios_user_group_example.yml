@@ -1,0 +1,57 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure user groups.
+    fortios_user_group:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_group:
+        auth_concurrent_override: "enable"
+        auth_concurrent_value: "4"
+        authtimeout: "5"
+        company: "optional"
+        email: "disable"
+        expire: "8"
+        expire_type: "immediately"
+        group_type: "firewall"
+        guest:
+         -
+            comment: "Comment."
+            company: "<your_own_value>"
+            email: "<your_own_value>"
+            expiration: "<your_own_value>"
+            mobile_phone: "<your_own_value>"
+            name: "default_name_17"
+            password: "<your_own_value>"
+            sponsor: "<your_own_value>"
+            user_id: "<your_own_value>"
+        http_digest_realm: "<your_own_value>"
+        id:  "22"
+        match:
+         -
+            group_name: "<your_own_value>"
+            id:  "25"
+            server_name: "<your_own_value> (source user.radius.name user.ldap.name user.tacacs+.name)"
+        max_accounts: "27"
+        member:
+         -
+            name: "default_name_29 (source user.peer.name user.local.name user.radius.name user.tacacs+.name user.ldap.name user.adgrp.name user.pop3.name)"
+        mobile_phone: "disable"
+        multiple_guest_add: "disable"
+        name: "default_name_32"
+        password: "auto-generate"
+        sms_custom_server: "<your_own_value> (source system.sms-server.name)"
+        sms_server: "fortiguard"
+        sponsor: "optional"
+        sso_attribute_value: "<your_own_value>"
+        user_id: "email"
+        user_name: "disable"

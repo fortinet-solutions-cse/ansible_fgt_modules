@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: SSH proxy host public keys.
+    fortios_firewall_ssh_host_key:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      firewall_ssh_host_key:
+        hostname: "myhostname"
+        ip: "<your_own_value>"
+        name: "default_name_5"
+        nid: "256"
+        port: "7"
+        public_key: "<your_own_value>"
+        status: "trusted"
+        type: "RSA"

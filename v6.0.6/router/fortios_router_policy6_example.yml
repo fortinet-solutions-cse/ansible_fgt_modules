@@ -1,0 +1,30 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPv6 routing policies.
+    fortios_router_policy6:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_policy6:
+        comments: "<your_own_value>"
+        dst: "<your_own_value>"
+        end_port: "5"
+        gateway: "<your_own_value>"
+        input_device: "<your_own_value> (source system.interface.name)"
+        output_device: "<your_own_value> (source system.interface.name)"
+        protocol: "9"
+        seq_num: "10"
+        src: "<your_own_value>"
+        start_port: "12"
+        status: "enable"
+        tos: "<your_own_value>"
+        tos_mask: "<your_own_value>"

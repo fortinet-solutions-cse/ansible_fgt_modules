@@ -1,0 +1,31 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure IPsec manual keys.
+    fortios_vpn_ipsec_manualkey_interface:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      vpn_ipsec_manualkey_interface:
+        addr_type: "4"
+        auth_alg: "null"
+        auth_key: "<your_own_value>"
+        enc_alg: "null"
+        enc_key: "<your_own_value>"
+        interface: "<your_own_value> (source system.interface.name)"
+        ip_version: "4"
+        local_gw: "<your_own_value>"
+        local_gw6: "<your_own_value>"
+        local_spi: "<your_own_value>"
+        name: "default_name_13"
+        remote_gw: "<your_own_value>"
+        remote_gw6: "<your_own_value>"
+        remote_spi: "<your_own_value>"

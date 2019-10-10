@@ -1,0 +1,25 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure community lists.
+    fortios_router_community_list:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_community_list:
+        name: "default_name_3"
+        rule:
+         -
+            action: "deny"
+            id:  "6"
+            match: "<your_own_value>"
+            regexp: "<your_own_value>"
+        type: "standard"

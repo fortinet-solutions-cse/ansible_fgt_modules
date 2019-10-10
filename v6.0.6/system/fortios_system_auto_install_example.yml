@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure USB auto installation.
+    fortios_system_auto_install:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      system_auto_install:
+        auto_install_config: "enable"
+        auto_install_image: "enable"
+        default_config_file: "<your_own_value>"
+        default_image_file: "<your_own_value>"

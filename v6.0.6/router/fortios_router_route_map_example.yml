@@ -1,0 +1,71 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure route maps.
+    fortios_router_route_map:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      router_route_map:
+        comments: "<your_own_value>"
+        name: "default_name_4"
+        rule:
+         -
+            action: "permit"
+            id:  "7"
+            match_as_path: "<your_own_value> (source router.aspath-list.name)"
+            match_community: "<your_own_value> (source router.community-list.name)"
+            match_community_exact: "enable"
+            match_flags: "11"
+            match_interface: "<your_own_value> (source system.interface.name)"
+            match_ip_address: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
+            match_ip_nexthop: "<your_own_value> (source router.access-list.name router.prefix-list.name)"
+            match_ip6_address: "<your_own_value> (source router.access-list6.name router.prefix-list6.name)"
+            match_ip6_nexthop: "<your_own_value> (source router.access-list6.name router.prefix-list6.name)"
+            match_metric: "17"
+            match_origin: "none"
+            match_route_type: "1"
+            match_tag: "20"
+            set_aggregator_as: "21"
+            set_aggregator_ip: "<your_own_value>"
+            set_aspath:
+             -
+                as: "<your_own_value>"
+            set_aspath_action: "prepend"
+            set_atomic_aggregate: "enable"
+            set_community:
+             -
+                community: "<your_own_value>"
+            set_community_additive: "enable"
+            set_community_delete: "<your_own_value> (source router.community-list.name)"
+            set_dampening_max_suppress: "31"
+            set_dampening_reachability_half_life: "32"
+            set_dampening_reuse: "33"
+            set_dampening_suppress: "34"
+            set_dampening_unreachability_half_life: "35"
+            set_extcommunity_rt:
+             -
+                community: "<your_own_value>"
+            set_extcommunity_soo:
+             -
+                community: "<your_own_value>"
+            set_flags: "40"
+            set_ip_nexthop: "<your_own_value>"
+            set_ip6_nexthop: "<your_own_value>"
+            set_ip6_nexthop_local: "<your_own_value>"
+            set_local_preference: "44"
+            set_metric: "45"
+            set_metric_type: "1"
+            set_origin: "none"
+            set_originator_id: "<your_own_value>"
+            set_route_tag: "49"
+            set_tag: "50"
+            set_weight: "51"

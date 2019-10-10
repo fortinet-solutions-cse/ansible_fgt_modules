@@ -1,0 +1,27 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure FortiGuard Web Filter service.
+    fortios_webfilter_fortiguard:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      webfilter_fortiguard:
+        cache_mem_percent: "3"
+        cache_mode: "ttl"
+        cache_prefix_match: "enable"
+        close_ports: "enable"
+        ovrd_auth_https: "enable"
+        ovrd_auth_port: "8"
+        ovrd_auth_port_http: "9"
+        ovrd_auth_port_https: "10"
+        ovrd_auth_port_warning: "11"
+        request_packet_size_limit: "12"
+        warn_auth_https: "enable"

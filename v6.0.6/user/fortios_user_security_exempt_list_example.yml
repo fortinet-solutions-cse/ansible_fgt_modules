@@ -1,0 +1,34 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure security exemption list.
+    fortios_user_security_exempt_list:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      user_security_exempt_list:
+        description: "<your_own_value>"
+        name: "default_name_4"
+        rule:
+         -
+            devices:
+             -
+                name: "default_name_7 (source user.device.alias user.device-group.name user.device-category.name)"
+            dstaddr:
+             -
+                name: "default_name_9 (source firewall.address.name firewall.addrgrp.name)"
+            id:  "10"
+            service:
+             -
+                name: "default_name_12 (source firewall.service.custom.name firewall.service.group.name)"
+            srcaddr:
+             -
+                name: "default_name_14 (source firewall.address.name firewall.addrgrp.name)"

@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Create self-explanatory DLP sensitivity levels to be used when setting sensitivity under config fp-doc-source.
+    fortios_dlp_fp_sensitivity:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      state: "present"
+      dlp_fp_sensitivity:
+        name: "default_name_3"

@@ -1,0 +1,21 @@
+- hosts: localhost
+  vars:
+   host: "192.168.122.40"
+   username: "admin"
+   password: ""
+   vdom: "root"
+   ssl_verify: "False"
+  tasks:
+  - name: Configure FortiSwitch LLDP settings.
+    fortios_switch_controller_lldp_settings:
+      host:  "{{ host }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+      vdom:  "{{ vdom }}"
+      https: "False"
+      switch_controller_lldp_settings:
+        fast_start_interval: "3"
+        management_interface: "internal"
+        status: "enable"
+        tx_hold: "6"
+        tx_interval: "7"
